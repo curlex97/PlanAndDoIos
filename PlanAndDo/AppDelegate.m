@@ -7,20 +7,41 @@
 //
 
 #import "AppDelegate.h"
+#import "AASideBarViewController.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
-
+@property AASideBarViewController *sideBarViewController;
 @end
 
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+                                                             bundle: nil];
+    ViewController *yourController = (ViewController*)[mainStoryboard
+                                                                instantiateViewControllerWithIdentifier:@"ViewController"];
+    ViewController *yourController2 = (ViewController*)[mainStoryboard
+                                                       instantiateViewControllerWithIdentifier:@"ViewController"];
+    application.statusBarStyle = UIStatusBarStyleLightContent;
+    yourController.view.backgroundColor = [UIColor redColor];
+    yourController2.view.backgroundColor = [UIColor blueColor];
+    
+      _sideBarViewController = [AASideBarViewController sideBarWithFrontVC:yourController andBackVC:yourController2];
+    
+    UINavigationController* navC = [[UINavigationController alloc] initWithRootViewController:_sideBarViewController];
+    
+    self.window.rootViewController = navC;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-
+ 
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {

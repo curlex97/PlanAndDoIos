@@ -23,6 +23,7 @@
 		28A36BBD1D81887B0092FEFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28A36BBC1D81887B0092FEFD /* Assets.xcassets */; };
 		28A36BC01D81887B0092FEFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28A36BBE1D81887B0092FEFD /* LaunchScreen.storyboard */; };
 		28A36BCB1D81887B0092FEFD /* PlanAndDoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BCA1D81887B0092FEFD /* PlanAndDoTests.m */; };
+		28A36BD71D818D5A0092FEFD /* AASideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BD61D818D5A0092FEFD /* AASideBarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		28A36BC61D81887B0092FEFD /* PlanAndDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanAndDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A36BCA1D81887B0092FEFD /* PlanAndDoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlanAndDoTests.m; sourceTree = "<group>"; };
 		28A36BCC1D81887B0092FEFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28A36BD51D818D5A0092FEFD /* AASideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASideBarViewController.h; sourceTree = "<group>"; };
+		28A36BD61D818D5A0092FEFD /* AASideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AASideBarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +152,8 @@
 				28A36BB01D81887B0092FEFD /* AppDelegate.h */,
 				28A36BB11D81887B0092FEFD /* AppDelegate.m */,
 				28A36BB31D81887B0092FEFD /* ViewController.h */,
+				28A36BD51D818D5A0092FEFD /* AASideBarViewController.h */,
+				28A36BD61D818D5A0092FEFD /* AASideBarViewController.m */,
 				28A36BB41D81887B0092FEFD /* ViewController.m */,
 				28A36BB61D81887B0092FEFD /* Main.storyboard */,
 				28A36BBC1D81887B0092FEFD /* Assets.xcassets */,
