@@ -29,12 +29,11 @@
     application.statusBarStyle = UIStatusBarStyleLightContent;
     yourController.view.backgroundColor = [UIColor redColor];
     yourController2.view.backgroundColor = [UIColor blueColor];
+    UINavigationController* navC = [[UINavigationController alloc] initWithRootViewController:yourController];
+      _sideBarViewController = [AASideBarViewController sideBarWithFrontVC:navC andBackVC:yourController2];
     
-      _sideBarViewController = [AASideBarViewController sideBarWithFrontVC:yourController andBackVC:yourController2];
     
-    UINavigationController* navC = [[UINavigationController alloc] initWithRootViewController:_sideBarViewController];
-    
-    self.window.rootViewController = navC;
+    self.window.rootViewController = _sideBarViewController;
     [self.window makeKeyAndVisible];
     
     return YES;
