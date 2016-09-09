@@ -11,10 +11,10 @@ typedef NS_ENUM(NSUInteger, SideDirection) {
     SideDirectionRight=0,
     SideDirectionLeft
 };
-@interface AASideBarViewController : UIViewController
+@interface AMSideBarViewController : UIViewController
 
 
-+(AASideBarViewController *)sideBarWithFrontVC:(UIViewController *)frontVC andBackVC:(UIViewController *)backVC;
++(AMSideBarViewController *)sideBarWithFrontVC:(UIViewController *)frontVC andBackVC:(UIViewController *)backVC;
 
 @property (nonatomic)UIViewController * backViewController;
 @property (nonatomic)UIViewController * frontViewController;

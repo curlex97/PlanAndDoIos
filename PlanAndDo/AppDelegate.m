@@ -7,11 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import "AASideBarViewController.h"
+#import "AMSideBarViewController.h"
 #import "ViewController.h"
 
 @interface AppDelegate ()
-@property AASideBarViewController *sideBarViewController;
+@property AMSideBarViewController *sideBarViewController;
 @end
 
 @implementation AppDelegate
@@ -30,7 +30,7 @@
     yourController.view.backgroundColor = [UIColor redColor];
     yourController2.view.backgroundColor = [UIColor blueColor];
     UINavigationController* navC = [[UINavigationController alloc] initWithRootViewController:yourController];
-      _sideBarViewController = [AASideBarViewController sideBarWithFrontVC:navC andBackVC:yourController2];
+      _sideBarViewController = [AMSideBarViewController sideBarWithFrontVC:navC andBackVC:yourController2];
     
     
     self.window.rootViewController = _sideBarViewController;

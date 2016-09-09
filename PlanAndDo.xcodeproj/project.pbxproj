@@ -15,6 +15,7 @@
 		27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0FF1D81A20400D47FCD /* BaseTask.m */; };
 		27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A1021D81A3CB00D47FCD /* KSTask.m */; };
 		27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A1051D81A61300D47FCD /* KSTaskCollection.m */; };
+		282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282C28C51D829A600061761E /* AMSideBarViewController.m */; };
 		28A36BAF1D81887B0092FEFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BAE1D81887B0092FEFD /* main.m */; };
 		28A36BB21D81887B0092FEFD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BB11D81887B0092FEFD /* AppDelegate.m */; };
 		28A36BB51D81887B0092FEFD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BB41D81887B0092FEFD /* ViewController.m */; };
@@ -23,7 +24,6 @@
 		28A36BBD1D81887B0092FEFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28A36BBC1D81887B0092FEFD /* Assets.xcassets */; };
 		28A36BC01D81887B0092FEFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28A36BBE1D81887B0092FEFD /* LaunchScreen.storyboard */; };
 		28A36BCB1D81887B0092FEFD /* PlanAndDoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BCA1D81887B0092FEFD /* PlanAndDoTests.m */; };
-		28A36BD71D818D5A0092FEFD /* AASideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BD61D818D5A0092FEFD /* AASideBarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +53,8 @@
 		27B1A1021D81A3CB00D47FCD /* KSTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSTask.m; sourceTree = "<group>"; };
 		27B1A1041D81A61300D47FCD /* KSTaskCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSTaskCollection.h; sourceTree = "<group>"; };
 		27B1A1051D81A61300D47FCD /* KSTaskCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSTaskCollection.m; sourceTree = "<group>"; };
+		282C28C41D829A600061761E /* AMSideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSideBarViewController.h; sourceTree = "<group>"; };
+		282C28C51D829A600061761E /* AMSideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSideBarViewController.m; sourceTree = "<group>"; };
 		28A36BAA1D81887B0092FEFD /* PlanAndDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanAndDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A36BAE1D81887B0092FEFD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28A36BB01D81887B0092FEFD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -67,8 +69,6 @@
 		28A36BC61D81887B0092FEFD /* PlanAndDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanAndDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A36BCA1D81887B0092FEFD /* PlanAndDoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlanAndDoTests.m; sourceTree = "<group>"; };
 		28A36BCC1D81887B0092FEFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		28A36BD51D818D5A0092FEFD /* AASideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AASideBarViewController.h; sourceTree = "<group>"; };
-		28A36BD61D818D5A0092FEFD /* AASideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AASideBarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,10 +92,9 @@
 		27B1A0F01D818C9900D47FCD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				282C28CA1D829C610061761E /* KSObject */,
 				27B1A1081D81A98100D47FCD /* TaskModels */,
 				27B1A1071D81A96F00D47FCD /* UserModels */,
-				27B1A0ED1D818C5B00D47FCD /* KSObject.h */,
-				27B1A0EE1D818C5B00D47FCD /* KSObject.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -128,6 +127,59 @@
 			name = TaskModels;
 			sourceTree = "<group>";
 		};
+		282C28C71D829C1F0061761E /* AMSideBarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				282C28C41D829A600061761E /* AMSideBarViewController.h */,
+				282C28C51D829A600061761E /* AMSideBarViewController.m */,
+			);
+			name = AMSideBarViewController;
+			sourceTree = "<group>";
+		};
+		282C28C81D829C320061761E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				282C28C91D829C4F0061761E /* ViewController */,
+				282C28C71D829C1F0061761E /* AMSideBarViewController */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		282C28C91D829C4F0061761E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				28A36BB31D81887B0092FEFD /* ViewController.h */,
+				28A36BB41D81887B0092FEFD /* ViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		282C28CA1D829C610061761E /* KSObject */ = {
+			isa = PBXGroup;
+			children = (
+				27B1A0ED1D818C5B00D47FCD /* KSObject.h */,
+				27B1A0EE1D818C5B00D47FCD /* KSObject.m */,
+			);
+			name = KSObject;
+			sourceTree = "<group>";
+		};
+		282C28CB1D829C9C0061761E /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				28A36BB61D81887B0092FEFD /* Main.storyboard */,
+				28A36BBE1D81887B0092FEFD /* LaunchScreen.storyboard */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		282C28CC1D829CAC0061761E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				28A36BB91D81887B0092FEFD /* PlanAndDo.xcdatamodeld */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		28A36BA11D81887B0092FEFD = {
 			isa = PBXGroup;
 			children = (
@@ -151,16 +203,12 @@
 			children = (
 				28A36BB01D81887B0092FEFD /* AppDelegate.h */,
 				28A36BB11D81887B0092FEFD /* AppDelegate.m */,
-				28A36BB31D81887B0092FEFD /* ViewController.h */,
-				28A36BD51D818D5A0092FEFD /* AASideBarViewController.h */,
-				28A36BD61D818D5A0092FEFD /* AASideBarViewController.m */,
-				28A36BB41D81887B0092FEFD /* ViewController.m */,
-				28A36BB61D81887B0092FEFD /* Main.storyboard */,
-				28A36BBC1D81887B0092FEFD /* Assets.xcassets */,
-				28A36BBE1D81887B0092FEFD /* LaunchScreen.storyboard */,
-				28A36BC11D81887B0092FEFD /* Info.plist */,
-				28A36BB91D81887B0092FEFD /* PlanAndDo.xcdatamodeld */,
 				27B1A0F01D818C9900D47FCD /* Models */,
+				282C28C81D829C320061761E /* ViewControllers */,
+				282C28CB1D829C9C0061761E /* UI */,
+				28A36BBC1D81887B0092FEFD /* Assets.xcassets */,
+				28A36BC11D81887B0092FEFD /* Info.plist */,
+				282C28CC1D829CAC0061761E /* CoreData */,
 				28A36BAD1D81887B0092FEFD /* Supporting Files */,
 			);
 			path = PlanAndDo;
@@ -296,6 +344,7 @@
 				27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
 				27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */,
+				282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */,
 				28A36BBB1D81887B0092FEFD /* PlanAndDo.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
