@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0EE1D818C5B00D47FCD /* KSObject.m */; };
+		27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F21D818D0600D47FCD /* KSUserInfo.m */; };
+		27B1A0F71D81933000D47FCD /* KSAuthorisedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F61D81933000D47FCD /* KSAuthorisedUser.m */; };
+		27B1A0FA1D8195A800D47FCD /* UserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F91D8195A800D47FCD /* UserSettings.m */; };
+		27B1A0FD1D81A12A00D47FCD /* KSShortTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0FC1D81A12A00D47FCD /* KSShortTask.m */; };
+		27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0FF1D81A20400D47FCD /* BaseTask.m */; };
+		27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A1021D81A3CB00D47FCD /* KSTask.m */; };
+		27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A1051D81A61300D47FCD /* KSTaskCollection.m */; };
 		28A36BAF1D81887B0092FEFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BAE1D81887B0092FEFD /* main.m */; };
 		28A36BB21D81887B0092FEFD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BB11D81887B0092FEFD /* AppDelegate.m */; };
 		28A36BB51D81887B0092FEFD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BB41D81887B0092FEFD /* ViewController.m */; };
@@ -29,6 +37,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27B1A0ED1D818C5B00D47FCD /* KSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSObject.h; sourceTree = "<group>"; };
+		27B1A0EE1D818C5B00D47FCD /* KSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSObject.m; sourceTree = "<group>"; };
+		27B1A0F11D818D0600D47FCD /* KSUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSUserInfo.h; sourceTree = "<group>"; };
+		27B1A0F21D818D0600D47FCD /* KSUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSUserInfo.m; sourceTree = "<group>"; };
+		27B1A0F51D81933000D47FCD /* KSAuthorisedUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSAuthorisedUser.h; sourceTree = "<group>"; };
+		27B1A0F61D81933000D47FCD /* KSAuthorisedUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSAuthorisedUser.m; sourceTree = "<group>"; };
+		27B1A0F81D8195A800D47FCD /* UserSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettings.h; sourceTree = "<group>"; };
+		27B1A0F91D8195A800D47FCD /* UserSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettings.m; sourceTree = "<group>"; };
+		27B1A0FB1D81A12A00D47FCD /* KSShortTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSShortTask.h; sourceTree = "<group>"; };
+		27B1A0FC1D81A12A00D47FCD /* KSShortTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSShortTask.m; sourceTree = "<group>"; };
+		27B1A0FE1D81A20400D47FCD /* BaseTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTask.h; sourceTree = "<group>"; };
+		27B1A0FF1D81A20400D47FCD /* BaseTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTask.m; sourceTree = "<group>"; };
+		27B1A1011D81A3CB00D47FCD /* KSTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSTask.h; sourceTree = "<group>"; };
+		27B1A1021D81A3CB00D47FCD /* KSTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSTask.m; sourceTree = "<group>"; };
+		27B1A1041D81A61300D47FCD /* KSTaskCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSTaskCollection.h; sourceTree = "<group>"; };
+		27B1A1051D81A61300D47FCD /* KSTaskCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSTaskCollection.m; sourceTree = "<group>"; };
 		28A36BAA1D81887B0092FEFD /* PlanAndDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanAndDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A36BAE1D81887B0092FEFD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28A36BB01D81887B0092FEFD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -65,6 +89,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27B1A0F01D818C9900D47FCD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				27B1A1081D81A98100D47FCD /* TaskModels */,
+				27B1A1071D81A96F00D47FCD /* UserModels */,
+				27B1A0ED1D818C5B00D47FCD /* KSObject.h */,
+				27B1A0EE1D818C5B00D47FCD /* KSObject.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		27B1A1071D81A96F00D47FCD /* UserModels */ = {
+			isa = PBXGroup;
+			children = (
+				27B1A0F11D818D0600D47FCD /* KSUserInfo.h */,
+				27B1A0F21D818D0600D47FCD /* KSUserInfo.m */,
+				27B1A0F51D81933000D47FCD /* KSAuthorisedUser.h */,
+				27B1A0F61D81933000D47FCD /* KSAuthorisedUser.m */,
+				27B1A0F81D8195A800D47FCD /* UserSettings.h */,
+				27B1A0F91D8195A800D47FCD /* UserSettings.m */,
+			);
+			name = UserModels;
+			sourceTree = "<group>";
+		};
+		27B1A1081D81A98100D47FCD /* TaskModels */ = {
+			isa = PBXGroup;
+			children = (
+				27B1A0FB1D81A12A00D47FCD /* KSShortTask.h */,
+				27B1A0FC1D81A12A00D47FCD /* KSShortTask.m */,
+				27B1A0FE1D81A20400D47FCD /* BaseTask.h */,
+				27B1A0FF1D81A20400D47FCD /* BaseTask.m */,
+				27B1A1011D81A3CB00D47FCD /* KSTask.h */,
+				27B1A1021D81A3CB00D47FCD /* KSTask.m */,
+				27B1A1041D81A61300D47FCD /* KSTaskCollection.h */,
+				27B1A1051D81A61300D47FCD /* KSTaskCollection.m */,
+			);
+			name = TaskModels;
+			sourceTree = "<group>";
+		};
 		28A36BA11D81887B0092FEFD = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +160,7 @@
 				28A36BBE1D81887B0092FEFD /* LaunchScreen.storyboard */,
 				28A36BC11D81887B0092FEFD /* Info.plist */,
 				28A36BB91D81887B0092FEFD /* PlanAndDo.xcdatamodeld */,
+				27B1A0F01D818C9900D47FCD /* Models */,
 				28A36BAD1D81887B0092FEFD /* Supporting Files */,
 			);
 			path = PlanAndDo;
@@ -221,10 +285,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27B1A0F71D81933000D47FCD /* KSAuthorisedUser.m in Sources */,
+				27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */,
+				27B1A0FA1D8195A800D47FCD /* UserSettings.m in Sources */,
+				27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */,
 				28A36BB51D81887B0092FEFD /* ViewController.m in Sources */,
+				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
+				27B1A0FD1D81A12A00D47FCD /* KSShortTask.m in Sources */,
 				28A36BB21D81887B0092FEFD /* AppDelegate.m in Sources */,
+				27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
-				28A36BD71D818D5A0092FEFD /* AASideBarViewController.m in Sources */,
+				27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */,
 				28A36BBB1D81887B0092FEFD /* PlanAndDo.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
