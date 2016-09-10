@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "AMSideBarViewController.h"
+#import "AMAndroidSideBarViewController.h"
+
 #import "ViewController.h"
 
 @interface AppDelegate ()
@@ -19,7 +21,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
                                                              bundle: nil];
     ViewController *yourController = (ViewController*)[mainStoryboard
@@ -29,11 +30,13 @@
     application.statusBarStyle = UIStatusBarStyleLightContent;
     yourController.view.backgroundColor = [UIColor redColor];
     yourController2.view.backgroundColor = [UIColor blueColor];
-    UINavigationController* navC = [[UINavigationController alloc] initWithRootViewController:yourController];
-      _sideBarViewController = [AMSideBarViewController sideBarWithFrontVC:navC andBackVC:yourController2];
+    
+    AMAndroidSideBarViewController * androidSider=[AMAndroidSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:yourController] andBackVC:[[UINavigationController alloc] initWithRootViewController:yourController2]];
+    //    UINavigationController* navC = [[UINavigationController alloc] initWithRootViewController:yourController];
+      //_sideBarViewController = [AMSideBarViewController sideBarWithFrontVC:navC andBackVC:yourController2];
     
     
-    self.window.rootViewController = _sideBarViewController;
+    self.window.rootViewController = androidSider;
     [self.window makeKeyAndVisible];
     
     return YES;

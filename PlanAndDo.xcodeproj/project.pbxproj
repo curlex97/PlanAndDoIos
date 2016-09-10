@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E01D83E217004D3681 /* AMAndroidSideBarViewController.m */; };
 		27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0EE1D818C5B00D47FCD /* KSObject.m */; };
 		27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F21D818D0600D47FCD /* KSUserInfo.m */; };
 		27B1A0F71D81933000D47FCD /* KSAuthorisedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F61D81933000D47FCD /* KSAuthorisedUser.m */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		270DF9DF1D83E217004D3681 /* AMAndroidSideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAndroidSideBarViewController.h; sourceTree = "<group>"; };
+		270DF9E01D83E217004D3681 /* AMAndroidSideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAndroidSideBarViewController.m; sourceTree = "<group>"; };
 		27B1A0ED1D818C5B00D47FCD /* KSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSObject.h; sourceTree = "<group>"; };
 		27B1A0EE1D818C5B00D47FCD /* KSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSObject.m; sourceTree = "<group>"; };
 		27B1A0F11D818D0600D47FCD /* KSUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSUserInfo.h; sourceTree = "<group>"; };
@@ -141,6 +144,8 @@
 			children = (
 				282C28C91D829C4F0061761E /* ViewController */,
 				282C28C71D829C1F0061761E /* AMSideBarViewController */,
+				270DF9DF1D83E217004D3681 /* AMAndroidSideBarViewController.h */,
+				270DF9E01D83E217004D3681 /* AMAndroidSideBarViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -343,6 +348,7 @@
 				28A36BB21D81887B0092FEFD /* AppDelegate.m in Sources */,
 				27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
+				270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */,
 				27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */,
 				282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */,
 				28A36BBB1D81887B0092FEFD /* PlanAndDo.xcdatamodeld in Sources */,
