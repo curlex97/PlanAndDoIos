@@ -30,6 +30,31 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
+-(void)todayDidTap
+{
+
+}
+
+-(void)tomorrowDidTap
+{
+    
+}
+
+-(void)weekDidTap
+{
+    
+}
+
+-(void)backLogDidTap
+{
+    
+}
+
+-(void)archiveDidTap
+{
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -42,53 +67,30 @@
     self.view.opaque=YES;
     self.view.clearsContextBeforeDrawing=YES;
     
+    self.navigationController.toolbarHidden=NO;
+    
     self.navigationController.toolbar.clipsToBounds=YES;
     self.navigationController.toolbar.autoresizesSubviews=YES;
-//    CAGradientLayer * gradient=[KSApplicatipnColor sharedColor].rootGradient;
-//    gradient.frame=self.navigationController.navigationBar.frame;
-//    [self.navigationController.navigationBar.layer insertSublayer:gradient atIndex:0];
+    self.navigationController.toolbar.opaque=YES;
+    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
     
-//    self.searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
-//    self.searchBar.backgroundColor=[UIColor blackColor];
-//    self.searchBar.barStyle=UIBarStyleBlackTranslucent;
-//    self.tableView.tableHeaderView=self.searchBar;
-    
-//    self.loadContentView=[[UIView alloc] initWithFrame:self.view.bounds];
-//    self.loadContentView.backgroundColor=[UIColor colorWithWhite:0.0 alpha:0.5];
-    
-//    UIView * searchView=[[UIView alloc] initWithFrame:CGRectMake(self.loadContentView.bounds.size.width/2-65.0, self.loadContentView.bounds.size.height/3, 130.0, 80.0)];
-//    searchView.backgroundColor=[UIColor SeparatorColor];
-//    searchView.layer.cornerRadius=8.0;
-    
-//    UILabel * searchLabel=[[UILabel alloc] initWithFrame:CGRectMake(0.0, 50.0, 130.0, 30.0)];
-//    searchLabel.text=@"Loading...";
-//    searchLabel.adjustsFontSizeToFitWidth=YES;
-//    searchLabel.textAlignment=NSTextAlignmentCenter;
-//    searchLabel.textColor=[UIColor GitHubColor];
-    
-//    UIActivityIndicatorView * activityInd=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(40.0, 10.0, 50.0, 50.0)];
-//    activityInd.activityIndicatorViewStyle=UIActivityIndicatorViewStyleWhiteLarge;
-//    activityInd.color=[UIColor GitHubColor];
-//    activityInd.hidesWhenStopped=YES;
-//    [activityInd startAnimating];
-    
-//    [searchView addSubview:searchLabel];
-//    [searchView addSubview:activityInd];
-//    [self.loadContentView addSubview:searchView];
-    
-//    self.noResultView=[[UIView alloc] initWithFrame:self.view.bounds];
-//    self.noResultView.backgroundColor=[UIColor SeparatorColor];
-    
-//    UILabel * info=[[UILabel alloc] initWithFrame:CGRectMake(self.noResultView.bounds.size.width/2-100, self.noResultView.bounds.size.height/2+30, 200.0, 80.0)];
-//    info.text=@"No results";
-//    info.textAlignment=NSTextAlignmentCenter;
-//    info.numberOfLines=1;
-//    
-//    UIImageView * imageView=[[UIImageView alloc] initWithFrame:CGRectMake(self.noResultView.bounds.size.width/2-105, self.noResultView.bounds.size.height/2-160, 210.0, 180.0)];
-//    imageView.image=[UIImage imageNamed:@"github-cat"];
-    
-//    [self.noResultView addSubview:imageView];
-//    [self.noResultView addSubview:info];
+    UIBarButtonItem * today=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Today"] style:UIBarButtonItemStylePlain target:self action:@selector(todayDidTap)];
+    today.width=50;
+    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
+    UIBarButtonItem * tomorrow=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Tomorrow"] style:UIBarButtonItemStyleDone target:self action:@selector(tomorrowDidTap)];
+    tomorrow.width=50;
+    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
+    UIBarButtonItem * week=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Week"] style:UIBarButtonItemStyleDone target:self action:@selector(weekDidTap)];
+    week.width=50;
+    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
+    UIBarButtonItem * backLog=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Backlog"] style:UIBarButtonItemStyleDone target:self action:@selector(backLogDidTap)];
+    backLog.width=50;
+    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
+    UIBarButtonItem * archive=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Archive"] style:UIBarButtonItemStyleDone target:self action:@selector(tomorrowDidTap)];
+    archive.width=50;
+    NSLog(@"%f",today.width);
+    self.toolbarItems=[NSArray arrayWithObjects:today,tomorrow,week,backLog,archive, nil];
+    NSLog(@"%@",self.navigationController.toolbar.items);
     
     self.refresh=[[UIRefreshControl alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-15, 0, 40, 40)];
     [self.tableView addSubview:self.refresh];

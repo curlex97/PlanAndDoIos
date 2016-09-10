@@ -106,8 +106,6 @@
 				27B1A1071D81A96F00D47FCD /* UserModels */,
 				270DF9E21D83F0B0004D3681 /* KSApplicatipnColor.h */,
 				270DF9E31D83F0B0004D3681 /* KSApplicatipnColor.m */,
-				270DF9E51D83F56E004D3681 /* BaseViewController.h */,
-				270DF9E61D83F56E004D3681 /* BaseViewController.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -218,6 +216,8 @@
 			children = (
 				28A36BB01D81887B0092FEFD /* AppDelegate.h */,
 				28A36BB11D81887B0092FEFD /* AppDelegate.m */,
+				270DF9E51D83F56E004D3681 /* BaseViewController.h */,
+				270DF9E61D83F56E004D3681 /* BaseViewController.m */,
 				27B1A0F01D818C9900D47FCD /* Models */,
 				282C28C81D829C320061761E /* ViewControllers */,
 				282C28CB1D829C9C0061761E /* UI */,

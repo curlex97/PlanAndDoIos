@@ -9,16 +9,20 @@
         <!--Navigation Controller-->
         <scene sceneID="FTo-hv-tVP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XL3-vm-lsa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="9KO-ny-I2H" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lI9-Vm-DOn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="4nu-iP-SrL">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="4UW-hT-51b"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XL3-vm-lsa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="748" y="-140"/>
         </scene>
