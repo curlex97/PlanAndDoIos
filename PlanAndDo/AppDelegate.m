@@ -9,7 +9,8 @@
 #import "AppDelegate.h"
 #import "AMSideBarViewController.h"
 #import "AMAndroidSideBarViewController.h"
-
+#import "BaseViewController.h"
+#import "KSApplicatipnColor.h"
 #import "ViewController.h"
 
 @interface AppDelegate ()
@@ -21,22 +22,28 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
-                                                             bundle: nil];
-    ViewController *yourController = (ViewController*)[mainStoryboard
-                                                                instantiateViewControllerWithIdentifier:@"ViewController"];
-    ViewController *yourController2 = (ViewController*)[mainStoryboard
-                                                       instantiateViewControllerWithIdentifier:@"ViewController"];
-    application.statusBarStyle = UIStatusBarStyleLightContent;
-    yourController.view.backgroundColor = [UIColor redColor];
-    yourController2.view.backgroundColor = [UIColor blueColor];
+//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+//                                                             bundle: nil];
+//    ViewController *yourController = (ViewController*)[mainStoryboard
+//                                                                instantiateViewControllerWithIdentifier:@"ViewController"];
+//    ViewController *yourController2 = (ViewController*)[mainStoryboard
+//                                                       instantiateViewControllerWithIdentifier:@"ViewController"];
     
-    AMAndroidSideBarViewController * androidSider=[AMAndroidSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:yourController] andBackVC:[[UINavigationController alloc] initWithRootViewController:yourController2]];
+    application.statusBarStyle = UIStatusBarStyleLightContent;
+    UIView *statusBar = [[application valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    CAGradientLayer * gradient2 =[KSApplicatipnColor sharedColor].rootGradient;
+    gradient2.frame = statusBar.bounds;
+    [statusBar.layer insertSublayer:gradient2 atIndex:0];
+    
+//    yourController.view.backgroundColor = [UIColor redColor];
+//    yourController2.view.backgroundColor = [UIColor blueColor];
+//    
+//    AMAndroidSideBarViewController * androidSider=[AMAndroidSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:yourController] andBackVC:[[UINavigationController alloc] initWithRootViewController:yourController2]];
     //    UINavigationController* navC = [[UINavigationController alloc] initWithRootViewController:yourController];
       //_sideBarViewController = [AMSideBarViewController sideBarWithFrontVC:navC andBackVC:yourController2];
     
-    
-    self.window.rootViewController = androidSider;
+    BaseViewController * base=[[BaseViewController alloc] init];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:base];
     [self.window makeKeyAndVisible];
     
     return YES;

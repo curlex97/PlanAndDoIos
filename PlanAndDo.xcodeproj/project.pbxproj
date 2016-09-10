@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E01D83E217004D3681 /* AMAndroidSideBarViewController.m */; };
+		270DF9E41D83F0B0004D3681 /* KSApplicatipnColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E31D83F0B0004D3681 /* KSApplicatipnColor.m */; };
+		270DF9E71D83F56E004D3681 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E61D83F56E004D3681 /* BaseViewController.m */; };
 		27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0EE1D818C5B00D47FCD /* KSObject.m */; };
 		27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F21D818D0600D47FCD /* KSUserInfo.m */; };
 		27B1A0F71D81933000D47FCD /* KSAuthorisedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F61D81933000D47FCD /* KSAuthorisedUser.m */; };
@@ -40,6 +42,10 @@
 /* Begin PBXFileReference section */
 		270DF9DF1D83E217004D3681 /* AMAndroidSideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAndroidSideBarViewController.h; sourceTree = "<group>"; };
 		270DF9E01D83E217004D3681 /* AMAndroidSideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAndroidSideBarViewController.m; sourceTree = "<group>"; };
+		270DF9E21D83F0B0004D3681 /* KSApplicatipnColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSApplicatipnColor.h; sourceTree = "<group>"; };
+		270DF9E31D83F0B0004D3681 /* KSApplicatipnColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSApplicatipnColor.m; sourceTree = "<group>"; };
+		270DF9E51D83F56E004D3681 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		270DF9E61D83F56E004D3681 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		27B1A0ED1D818C5B00D47FCD /* KSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSObject.h; sourceTree = "<group>"; };
 		27B1A0EE1D818C5B00D47FCD /* KSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSObject.m; sourceTree = "<group>"; };
 		27B1A0F11D818D0600D47FCD /* KSUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSUserInfo.h; sourceTree = "<group>"; };
@@ -98,6 +104,10 @@
 				282C28CA1D829C610061761E /* KSObject */,
 				27B1A1081D81A98100D47FCD /* TaskModels */,
 				27B1A1071D81A96F00D47FCD /* UserModels */,
+				270DF9E21D83F0B0004D3681 /* KSApplicatipnColor.h */,
+				270DF9E31D83F0B0004D3681 /* KSApplicatipnColor.m */,
+				270DF9E51D83F56E004D3681 /* BaseViewController.h */,
+				270DF9E61D83F56E004D3681 /* BaseViewController.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -338,6 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				270DF9E41D83F0B0004D3681 /* KSApplicatipnColor.m in Sources */,
 				27B1A0F71D81933000D47FCD /* KSAuthorisedUser.m in Sources */,
 				27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */,
 				27B1A0FA1D8195A800D47FCD /* UserSettings.m in Sources */,
@@ -346,6 +357,7 @@
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
 				27B1A0FD1D81A12A00D47FCD /* KSShortTask.m in Sources */,
 				28A36BB21D81887B0092FEFD /* AppDelegate.m in Sources */,
+				270DF9E71D83F56E004D3681 /* BaseViewController.m in Sources */,
 				27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
 				270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */,
