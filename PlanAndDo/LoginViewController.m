@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "KSApplicatipnColor.h"
 #import "CreateAccountViewController.h"
+#import "NewPasswordViewController.h"
 
 #define TEXTFIELD_PADDING_LEFT 10
 
@@ -52,6 +53,15 @@
         [self.navigationController pushViewController:cavc animated:YES];
     }
     
+}
+- (IBAction)newPasswordTapped:(id)sender {
+    NewPasswordViewController* cavc = [self.storyboard instantiateViewControllerWithIdentifier:@"NewPasswordViewController"];
+    
+    if(cavc)
+    {
+        cavc.navigationItem.title = @"New password";
+        [self.navigationController pushViewController:cavc animated:YES];
+    }
 }
 
 @end
