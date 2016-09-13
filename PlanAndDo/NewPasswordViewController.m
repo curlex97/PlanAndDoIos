@@ -9,6 +9,7 @@
 #import "NewPasswordViewController.h"
 #import "KSApplicatipnColor.h"
 #import "ChangeEmailViewController.h"
+#import "SettingsViewController.h"
 
 #define TEXTFIELD_PADDING_LEFT 10
 
@@ -43,6 +44,15 @@
 //        cavc.navigationItem.title = @"Change email";
 //        [self.navigationController pushViewController:cavc animated:YES];
 //    }
+    
+    
+    SettingsViewController * tableTaskViewController=[[SettingsViewController alloc] init];
+    
+    if(tableTaskViewController)
+    {
+        tableTaskViewController.title=@"Settings";
+        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:tableTaskViewController] animated:YES completion:nil];
+    }
     
 }
 
