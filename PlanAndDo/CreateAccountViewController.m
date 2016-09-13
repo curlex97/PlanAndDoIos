@@ -21,6 +21,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = @"Create account";
+
     CAGradientLayer * gradient=[KSApplicatipnColor sharedColor].rootGradient;
     gradient.frame=self.view.bounds;
     [self.tableView removeFromSuperview];
@@ -41,10 +44,18 @@
     
     UIView *reenterPasswordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXTFIELD_PADDING_LEFT, 0)];
     self.reenterPasswordTextField.leftView = reenterPasswordPaddingView;
-    self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.reenterPasswordTextField.leftViewMode = UITextFieldViewModeAlways;
     
 
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.title = @"Create account";
+
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

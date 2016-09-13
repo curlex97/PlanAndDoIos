@@ -164,9 +164,9 @@
 				270DF9DF1D83E217004D3681 /* AMAndroidSideBarViewController.h */,
 				270DF9E01D83E217004D3681 /* AMAndroidSideBarViewController.m */,
 				2786E7AB1D881507009BDB2A /* LoginViewController.h */,
+				2786E7AC1D881507009BDB2A /* LoginViewController.m */,
 				28797F721D88202C00AEDE0A /* CreateAccountViewController.h */,
 				28797F731D88202C00AEDE0A /* CreateAccountViewController.m */,
-				2786E7AC1D881507009BDB2A /* LoginViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
