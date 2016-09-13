@@ -1,20 +1,22 @@
 //
-//  NewPasswordViewController.m
+//  ChangeEmailViewController.m
 //  PlanAndDo
 //
 //  Created by Arthur Chistyak on 13.09.16.
 //  Copyright © 2016 TodoTeamGroup. All rights reserved.
 //
 
-#import "NewPasswordViewController.h"
-#import "KSApplicatipnColor.h"
 #import "ChangeEmailViewController.h"
+#import "KSApplicatipnColor.h"
 
 #define TEXTFIELD_PADDING_LEFT 10
 
 
+@interface ChangeEmailViewController ()
 
-@implementation NewPasswordViewController
+@end
+
+@implementation ChangeEmailViewController
 
 - (void)viewDidLoad
 {
@@ -26,29 +28,19 @@
     self.view.backgroundColor=[UIColor whiteColor];
     [self.view.layer insertSublayer:gradient atIndex:0];
     
+    UIView *oldEmailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXTFIELD_PADDING_LEFT, 0)];
+    self.oldEmailTextField.leftView = oldEmailPaddingView;
+    self.oldEmailTextField.leftViewMode = UITextFieldViewModeAlways;
+    
     UIView *emailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXTFIELD_PADDING_LEFT, 0)];
     self.emailTextField.leftView = emailPaddingView;
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
     
-
-    
-    
-}
-- (IBAction)sendNewPasswordTapped:(id)sender {
-    
-//    ChangeEmailViewController* cavc = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangeEmailViewController"];
-//    
-//    if(cavc)
-//    {
-//        cavc.navigationItem.title = @"Change email";
-//        [self.navigationController pushViewController:cavc animated:YES];
-//    }
-    
+    UIView *reenterEmailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXTFIELD_PADDING_LEFT, 0)];
+    self.reenterEmailTextField.leftView = reenterEmailPaddingView;
+    self.reenterEmailTextField.leftViewMode = UITextFieldViewModeAlways;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end
