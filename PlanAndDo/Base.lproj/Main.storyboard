@@ -117,7 +117,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dV3-ek-zSp">
-                                <rect key="frame" x="0.0" y="189" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="145" width="600" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="g94-1B-Wp8"/>
@@ -126,7 +126,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fdH-IE-NVE">
-                                <rect key="frame" x="0.0" y="234" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="190" width="600" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Yxs-Tk-Kcv"/>
@@ -135,7 +135,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="re-enter password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A8u-7m-IVI">
-                                <rect key="frame" x="0.0" y="279" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="235" width="600" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="XrO-sb-mth"/>
@@ -144,7 +144,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FvR-vr-P6Q">
-                                <rect key="frame" x="0.0" y="144" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="100" width="600" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="8zb-kl-8Ls"/>
@@ -153,7 +153,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnJ-P5-x8O">
-                                <rect key="frame" x="275.5" y="331" width="49" height="30"/>
+                                <rect key="frame" x="275.5" y="287" width="49" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="D5m-6Y-Lnv"/>
                                 </constraints>
@@ -167,7 +167,7 @@
                             <constraint firstItem="fdH-IE-NVE" firstAttribute="top" secondItem="dV3-ek-zSp" secondAttribute="bottom" constant="1" id="10X-fi-OWP"/>
                             <constraint firstAttribute="trailing" secondItem="FvR-vr-P6Q" secondAttribute="trailing" id="7DC-YQ-OpM"/>
                             <constraint firstItem="dV3-ek-zSp" firstAttribute="top" secondItem="FvR-vr-P6Q" secondAttribute="bottom" constant="1" id="BYf-eY-7b3"/>
-                            <constraint firstItem="FvR-vr-P6Q" firstAttribute="top" secondItem="V82-ny-xp1" secondAttribute="bottom" constant="124" id="HxP-cU-lVJ"/>
+                            <constraint firstItem="FvR-vr-P6Q" firstAttribute="top" secondItem="V82-ny-xp1" secondAttribute="bottom" constant="80" id="HxP-cU-lVJ"/>
                             <constraint firstItem="A8u-7m-IVI" firstAttribute="top" secondItem="fdH-IE-NVE" secondAttribute="bottom" constant="1" id="INu-nO-DHn"/>
                             <constraint firstAttribute="trailing" secondItem="fdH-IE-NVE" secondAttribute="trailing" id="MdL-66-FIA"/>
                             <constraint firstItem="KnJ-P5-x8O" firstAttribute="top" secondItem="A8u-7m-IVI" secondAttribute="bottom" constant="8" id="ZG4-hV-6yZ"/>
@@ -205,7 +205,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w36-n3-A6X">
-                                <rect key="frame" x="282.5" y="196" width="36" height="30"/>
+                                <rect key="frame" x="282.5" y="152" width="36" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="SA2-jq-sgI"/>
                                 </constraints>
@@ -214,7 +214,7 @@
                                 </state>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nia-eU-HSp">
-                                <rect key="frame" x="0.0" y="144" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="100" width="600" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="4Ve-1f-btd"/>
@@ -228,7 +228,7 @@
                             <constraint firstItem="Nia-eU-HSp" firstAttribute="leading" secondItem="3t4-M1-atM" secondAttribute="leading" id="0fR-JB-sRO"/>
                             <constraint firstAttribute="trailing" secondItem="Nia-eU-HSp" secondAttribute="trailing" id="31R-DI-q8R"/>
                             <constraint firstItem="w36-n3-A6X" firstAttribute="centerX" secondItem="3t4-M1-atM" secondAttribute="centerX" id="84G-B3-chf"/>
-                            <constraint firstItem="Nia-eU-HSp" firstAttribute="top" secondItem="ut8-TT-sgk" secondAttribute="bottom" constant="124" id="8Ga-q6-RF6"/>
+                            <constraint firstItem="Nia-eU-HSp" firstAttribute="top" secondItem="ut8-TT-sgk" secondAttribute="bottom" constant="80" id="8Ga-q6-RF6"/>
                             <constraint firstItem="w36-n3-A6X" firstAttribute="top" secondItem="Nia-eU-HSp" secondAttribute="bottom" constant="8" id="q2v-39-7B2"/>
                         </constraints>
                     </view>
