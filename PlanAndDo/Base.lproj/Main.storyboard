@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -47,10 +48,8 @@
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dY-so-UdE">
-                                <rect key="frame" x="231" y="241" width="138" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="B1v-R9-tKx"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="296" width="114" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="Create new account">
                                     <color key="titleColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -59,10 +58,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYj-Qw-eVt">
-                                <rect key="frame" x="225" y="279" width="150" height="30"/>
+                                <rect key="frame" x="457" y="296" width="123" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="6PC-lh-egx"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="Forgot your password">
                                     <color key="titleColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -79,20 +79,46 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pp2-7V-Fna">
+                                <rect key="frame" x="258" y="241" width="85" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="03S-LF-08F"/>
+                                    <constraint firstAttribute="width" constant="85" id="gHL-VL-82N"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Sign in">
+                                    <color key="titleColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createNewAccountTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EO4-1f-f8g"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.2036231124" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="4dY-so-UdE" firstAttribute="top" secondItem="hmX-lB-ZC1" secondAttribute="bottom" constant="8" id="16A-pj-mmC"/>
+                            <constraint firstItem="4dY-so-UdE" firstAttribute="top" secondItem="hmX-lB-ZC1" secondAttribute="bottom" constant="63" id="16A-pj-mmC"/>
+                            <constraint firstItem="vYj-Qw-eVt" firstAttribute="top" secondItem="hmX-lB-ZC1" secondAttribute="bottom" constant="63" id="F8V-BE-kb4"/>
                             <constraint firstAttribute="trailing" secondItem="hmX-lB-ZC1" secondAttribute="trailing" id="Gwa-6a-LO3"/>
+                            <constraint firstItem="Pp2-7V-Fna" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Gz6-SE-Wg3"/>
                             <constraint firstItem="4dY-so-UdE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="II7-dP-zSp"/>
+                            <constraint firstItem="vYj-Qw-eVt" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="LsG-AD-7Rg"/>
                             <constraint firstItem="vYj-Qw-eVt" firstAttribute="top" secondItem="4dY-so-UdE" secondAttribute="bottom" constant="8" id="MHl-Vb-dn2"/>
                             <constraint firstItem="DUb-sN-Ykg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Rr5-fk-she"/>
                             <constraint firstItem="DUb-sN-Ykg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="Snd-6h-no9"/>
+                            <constraint firstItem="4dY-so-UdE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="gcb-gu-xWB"/>
                             <constraint firstItem="hmX-lB-ZC1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lnr-O2-eyE"/>
                             <constraint firstItem="vYj-Qw-eVt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nGq-r1-ZTw"/>
+                            <constraint firstItem="Pp2-7V-Fna" firstAttribute="top" secondItem="hmX-lB-ZC1" secondAttribute="bottom" constant="8" id="nWU-vJ-g7a"/>
                             <constraint firstItem="hmX-lB-ZC1" firstAttribute="top" secondItem="DUb-sN-Ykg" secondAttribute="bottom" constant="1" id="rEJ-KX-3c1"/>
                             <constraint firstAttribute="trailing" secondItem="DUb-sN-Ykg" secondAttribute="trailing" id="sx7-iv-zLo"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="II7-dP-zSp"/>
+                                <exclude reference="MHl-Vb-dn2"/>
+                                <exclude reference="nGq-r1-ZTw"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="Vdg-W0-uXJ"/>
                     <connections>
