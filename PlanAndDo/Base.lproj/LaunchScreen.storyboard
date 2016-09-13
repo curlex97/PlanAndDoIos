@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,7 +17,27 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchBack" translatesAutoresizingMaskIntoConstraints="NO" id="Mdp-Qo-YUV">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2222" translatesAutoresizingMaskIntoConstraints="NO" id="dA2-1t-KGn">
+                                <rect key="frame" x="220" y="139.5" width="160" height="321"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="Uhf-Jg-UKm"/>
+                                    <constraint firstAttribute="width" secondItem="dA2-1t-KGn" secondAttribute="height" multiplier="1:2" id="ZV3-Jz-OkS"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Mdp-Qo-YUV" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="0wK-dt-xH5"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Mdp-Qo-YUV" secondAttribute="bottom" id="SVe-8O-G5V"/>
+                            <constraint firstItem="Mdp-Qo-YUV" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="SYo-wG-Ofu"/>
+                            <constraint firstAttribute="trailing" secondItem="Mdp-Qo-YUV" secondAttribute="trailing" id="WrG-tD-DAH"/>
+                            <constraint firstItem="dA2-1t-KGn" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="rGc-r6-Bj3"/>
+                            <constraint firstItem="dA2-1t-KGn" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="u7Q-kg-kcT"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +45,8 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="2222" width="345" height="794"/>
+        <image name="launchBack" width="1080" height="1920"/>
+    </resources>
 </document>
