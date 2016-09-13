@@ -29,8 +29,15 @@
     
     CAGradientLayer * gradient=[KSApplicatipnColor sharedColor].rootGradient;
     gradient.frame=self.navigationController.navigationBar.bounds;
-    [self.navigationController.navigationBar.layer insertSublayer:gradient atIndex:1];
-    NSLog(@"%@",self.navigationController.navigationBar.layer.sublayers);
+    UIGraphicsBeginImageContext([gradient frame].size);
+    
+    [gradient renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    [self.navigationController.navigationBar setBackgroundImage:outputImage forBarMetrics:UIBarMetricsDefault];
+    //[self.navigationController.navigationBar.layer insertSublayer:gradient atIndex:1];
+   // NSLog(@"%@",self.navigationController.navigationBar.layer.sublayers);
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
@@ -81,21 +88,22 @@
     self.tableView=[[UITableView alloc] initWithFrame:self.view.bounds];
     
     [self.view addSubview:self.tableView];
-    
+
     self.view.clipsToBounds=YES;
     self.view.autoresizesSubviews=YES;
     self.view.opaque=YES;
     self.view.clearsContextBeforeDrawing=YES;
     
-    self.navigationController.toolbarHidden=NO;
-    
+    self.navigationController.toolbarHidden=YES;
     self.navigationController.toolbar.clipsToBounds=YES;
     self.navigationController.toolbar.autoresizesSubviews=YES;
     self.navigationController.toolbar.opaque=YES;
     self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
     self.navigationController.toolbar.backgroundColor=[UIColor whiteColor];
     self.navigationController.toolbar.barTintColor=[UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
+    NSLog(@"%@",self.navigationController.navigationBar.layer.sublayers);
     //    CGRect pathRect=self.navigationController.toolbar.bounds;
     //    pathRect.size=self.navigationController.toolbar.frame.size;
     //    self.navigationController.toolbar.layer.shadowColor=[UIColor blackColor].CGColor;
