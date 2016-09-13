@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9KO-ny-I2H">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9KO-ny-I2H">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -46,15 +46,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYj-Qw-eVt">
-                                <rect key="frame" x="225" y="279" width="150" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="6PC-lh-egx"/>
-                                </constraints>
-                                <state key="normal" title="Forgot your password">
-                                    <color key="titleColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dY-so-UdE">
                                 <rect key="frame" x="231" y="241" width="138" height="30"/>
                                 <constraints>
@@ -113,7 +104,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dV3-ek-zSp">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dV3-ek-zSp">
                                 <rect key="frame" x="0.0" y="189" width="600" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -122,7 +113,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fdH-IE-NVE">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fdH-IE-NVE">
                                 <rect key="frame" x="0.0" y="234" width="600" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -131,7 +122,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="re-enter password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A8u-7m-IVI">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="re-enter password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A8u-7m-IVI">
                                 <rect key="frame" x="0.0" y="279" width="600" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -140,7 +131,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FvR-vr-P6Q">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FvR-vr-P6Q">
                                 <rect key="frame" x="0.0" y="144" width="600" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -149,7 +140,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnJ-P5-x8O">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnJ-P5-x8O">
                                 <rect key="frame" x="275.5" y="331" width="49" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="D5m-6Y-Lnv"/>
@@ -164,7 +155,7 @@
                             <constraint firstItem="fdH-IE-NVE" firstAttribute="top" secondItem="dV3-ek-zSp" secondAttribute="bottom" constant="1" id="10X-fi-OWP"/>
                             <constraint firstAttribute="trailing" secondItem="FvR-vr-P6Q" secondAttribute="trailing" id="7DC-YQ-OpM"/>
                             <constraint firstItem="dV3-ek-zSp" firstAttribute="top" secondItem="FvR-vr-P6Q" secondAttribute="bottom" constant="1" id="BYf-eY-7b3"/>
-                            <constraint firstItem="FvR-vr-P6Q" firstAttribute="top" secondItem="V82-ny-xp1" secondAttribute="bottom" constant="80" id="HxP-cU-lVJ"/>
+                            <constraint firstItem="FvR-vr-P6Q" firstAttribute="top" secondItem="V82-ny-xp1" secondAttribute="bottom" constant="124" id="HxP-cU-lVJ"/>
                             <constraint firstItem="A8u-7m-IVI" firstAttribute="top" secondItem="fdH-IE-NVE" secondAttribute="bottom" constant="1" id="INu-nO-DHn"/>
                             <constraint firstAttribute="trailing" secondItem="fdH-IE-NVE" secondAttribute="trailing" id="MdL-66-FIA"/>
                             <constraint firstItem="KnJ-P5-x8O" firstAttribute="top" secondItem="A8u-7m-IVI" secondAttribute="bottom" constant="8" id="ZG4-hV-6yZ"/>
@@ -187,7 +178,56 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LiI-7j-7Op" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1482" y="650"/>
+            <point key="canvasLocation" x="1386" y="650"/>
+        </scene>
+        <!--NewPassword-->
+        <scene sceneID="ZEs-7b-EKI">
+            <objects>
+                <viewController storyboardIdentifier="NewPasswordViewController" id="6xS-PT-5gY" userLabel="NewPassword" customClass="NewPasswordViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ut8-TT-sgk"/>
+                        <viewControllerLayoutGuide type="bottom" id="rjz-Og-6LP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3t4-M1-atM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w36-n3-A6X">
+                                <rect key="frame" x="282.5" y="196" width="36" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="SA2-jq-sgI"/>
+                                </constraints>
+                                <state key="normal" title="Send">
+                                    <color key="titleColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nia-eU-HSp">
+                                <rect key="frame" x="0.0" y="144" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="4Ve-1f-btd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="0.2036231124" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Nia-eU-HSp" firstAttribute="leading" secondItem="3t4-M1-atM" secondAttribute="leading" id="0fR-JB-sRO"/>
+                            <constraint firstAttribute="trailing" secondItem="Nia-eU-HSp" secondAttribute="trailing" id="31R-DI-q8R"/>
+                            <constraint firstItem="w36-n3-A6X" firstAttribute="centerX" secondItem="3t4-M1-atM" secondAttribute="centerX" id="84G-B3-chf"/>
+                            <constraint firstItem="Nia-eU-HSp" firstAttribute="top" secondItem="ut8-TT-sgk" secondAttribute="bottom" constant="124" id="8Ga-q6-RF6"/>
+                            <constraint firstItem="w36-n3-A6X" firstAttribute="top" secondItem="Nia-eU-HSp" secondAttribute="bottom" constant="8" id="q2v-39-7B2"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Create account" id="7tZ-yD-5VL"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="Nia-eU-HSp" id="IY7-Nt-dHx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dWW-9t-nAK" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2008" y="650"/>
         </scene>
     </scenes>
 </document>
