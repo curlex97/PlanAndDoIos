@@ -39,15 +39,15 @@
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
         CALayer * gradient=self.navigationController.navigationBar.layer.sublayers[1];
-        gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, self.navigationController.navigationBar.bounds.size.height-10);
-        [self.navigationController.navigationBar.layer insertSublayer:gradient above:self.navigationController.navigationBar.layer.sublayers[1]];
+        gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, self.navigationController.navigationBar.bounds.size.height-12);
+        //[self.navigationController.navigationBar.layer insertSublayer:gradient above:self.navigationController.navigationBar.layer.sublayers[1]];
     }
     else
     {
         CALayer * gradient=self.navigationController.navigationBar.layer.sublayers[1];
-        gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, self.navigationController.navigationBar.bounds.size.height-10);
+        gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, self.navigationController.navigationBar.bounds.size.height+12);
        
-        [self.navigationController.navigationBar.layer insertSublayer:gradient above:self.navigationController.navigationBar.layer.sublayers[1]];
+        //[self.navigationController.navigationBar.layer insertSublayer:gradient above:self.navigationController.navigationBar.layer.sublayers[1]];
     }
 }
 -(void)todayDidTap
