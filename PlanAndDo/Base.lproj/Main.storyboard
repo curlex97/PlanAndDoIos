@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9KO-ny-I2H">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9KO-ny-I2H">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -75,6 +75,83 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="748" y="650"/>
+        </scene>
+        <!--CreateAccount-->
+        <scene sceneID="V6Q-ig-UH4">
+            <objects>
+                <viewController storyboardIdentifier="CreateAccountViewController" id="jh5-fX-OLH" userLabel="CreateAccount" customClass="CreateAccountViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="V82-ny-xp1"/>
+                        <viewControllerLayoutGuide type="bottom" id="Dlw-F8-ukN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dyt-0Q-OET">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dV3-ek-zSp">
+                                <rect key="frame" x="0.0" y="189" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="g94-1B-Wp8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fdH-IE-NVE">
+                                <rect key="frame" x="0.0" y="234" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Yxs-Tk-Kcv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FvR-vr-P6Q">
+                                <rect key="frame" x="0.0" y="144" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="8zb-kl-8Ls"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="re-enter password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A8u-7m-IVI">
+                                <rect key="frame" x="0.0" y="279" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="XrO-sb-mth"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fdH-IE-NVE" firstAttribute="top" secondItem="dV3-ek-zSp" secondAttribute="bottom" constant="1" id="10X-fi-OWP"/>
+                            <constraint firstAttribute="trailing" secondItem="FvR-vr-P6Q" secondAttribute="trailing" id="7DC-YQ-OpM"/>
+                            <constraint firstItem="dV3-ek-zSp" firstAttribute="top" secondItem="FvR-vr-P6Q" secondAttribute="bottom" constant="1" id="BYf-eY-7b3"/>
+                            <constraint firstItem="FvR-vr-P6Q" firstAttribute="top" secondItem="V82-ny-xp1" secondAttribute="bottom" constant="124" id="HxP-cU-lVJ"/>
+                            <constraint firstItem="A8u-7m-IVI" firstAttribute="top" secondItem="fdH-IE-NVE" secondAttribute="bottom" constant="1" id="INu-nO-DHn"/>
+                            <constraint firstAttribute="trailing" secondItem="fdH-IE-NVE" secondAttribute="trailing" id="MdL-66-FIA"/>
+                            <constraint firstItem="dV3-ek-zSp" firstAttribute="leading" secondItem="dyt-0Q-OET" secondAttribute="leading" id="bmf-Kj-5Gd"/>
+                            <constraint firstAttribute="trailing" secondItem="A8u-7m-IVI" secondAttribute="trailing" id="kmN-da-rOd"/>
+                            <constraint firstItem="fdH-IE-NVE" firstAttribute="leading" secondItem="dyt-0Q-OET" secondAttribute="leading" id="lli-Fq-PVk"/>
+                            <constraint firstAttribute="trailing" secondItem="dV3-ek-zSp" secondAttribute="trailing" id="vO8-1n-8VQ"/>
+                            <constraint firstItem="FvR-vr-P6Q" firstAttribute="leading" secondItem="dyt-0Q-OET" secondAttribute="leading" id="w2q-1N-oUj"/>
+                            <constraint firstItem="A8u-7m-IVI" firstAttribute="leading" secondItem="dyt-0Q-OET" secondAttribute="leading" id="w7T-Zw-lWm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Create account" id="O5Y-XK-fqj"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="FvR-vr-P6Q" id="GD2-2L-jvD"/>
+                        <outlet property="passwordTextField" destination="fdH-IE-NVE" id="jD2-Z8-hIm"/>
+                        <outlet property="reenterPasswordTextField" destination="A8u-7m-IVI" id="dM0-a0-sub"/>
+                        <outlet property="usernameTextField" destination="dV3-ek-zSp" id="Olu-LO-wZv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LiI-7j-7Op" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1380" y="650"/>
         </scene>
     </scenes>
 </document>
