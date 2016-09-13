@@ -36,8 +36,6 @@
     
     UIGraphicsEndImageContext();
     [self.navigationController.navigationBar setBackgroundImage:outputImage forBarMetrics:UIBarMetricsDefault];
-    //[self.navigationController.navigationBar.layer insertSublayer:gradient atIndex:1];
-   // NSLog(@"%@",self.navigationController.navigationBar.layer.sublayers);
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
@@ -47,14 +45,11 @@
     {
         CALayer * gradient=self.navigationController.navigationBar.layer.sublayers[1];
         gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, self.navigationController.navigationBar.bounds.size.height-12);
-        //[self.navigationController.navigationBar.layer insertSublayer:gradient above:self.navigationController.navigationBar.layer.sublayers[1]];
     }
     else
     {
         CALayer * gradient=self.navigationController.navigationBar.layer.sublayers[1];
         gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, self.navigationController.navigationBar.bounds.size.height+12);
-       
-        //[self.navigationController.navigationBar.layer insertSublayer:gradient above:self.navigationController.navigationBar.layer.sublayers[1]];
     }
 }
 -(void)todayDidTap
@@ -88,7 +83,6 @@
     self.tableView=[[UITableView alloc] initWithFrame:self.view.bounds];
     
     [self.view addSubview:self.tableView];
-
     self.view.clipsToBounds=YES;
     self.view.autoresizesSubviews=YES;
     self.view.opaque=YES;

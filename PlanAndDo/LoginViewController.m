@@ -10,6 +10,7 @@
 #import "KSApplicatipnColor.h"
 #import "CreateAccountViewController.h"
 #import "NewPasswordViewController.h"
+#import "TabletasksViewController.h"
 
 #define TEXTFIELD_PADDING_LEFT 10
 
@@ -61,6 +62,17 @@
     {
         cavc.navigationItem.title = @"New password";
         [self.navigationController pushViewController:cavc animated:YES];
+    }
+}
+
+- (IBAction)signInTapped:(id)sender
+{
+    TabletasksViewController * tableTaskViewController=[[TabletasksViewController alloc] init];
+    
+    if(tableTaskViewController)
+    {
+        tableTaskViewController.title=@"Today";
+        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:tableTaskViewController] animated:YES completion:nil];
     }
 }
 

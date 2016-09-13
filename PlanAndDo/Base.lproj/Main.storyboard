@@ -90,7 +90,7 @@
                                     <color key="titleColor" white="0.97999999999999998" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="createNewAccountTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EO4-1f-f8g"/>
+                                    <action selector="signInTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fCC-iN-ybC"/>
                                 </connections>
                             </button>
                         </subviews>

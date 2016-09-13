@@ -11,6 +11,7 @@
 		270DF9E41D83F0B0004D3681 /* KSApplicatipnColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E31D83F0B0004D3681 /* KSApplicatipnColor.m */; };
 		270DF9E71D83F56E004D3681 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E61D83F56E004D3681 /* BaseViewController.m */; };
 		2786E7AD1D881507009BDB2A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7AC1D881507009BDB2A /* LoginViewController.m */; };
+		2786E7B01D883692009BDB2A /* TabletasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7AF1D883692009BDB2A /* TabletasksViewController.m */; };
 		27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0EE1D818C5B00D47FCD /* KSObject.m */; };
 		27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F21D818D0600D47FCD /* KSUserInfo.m */; };
 		27B1A0F71D81933000D47FCD /* KSAuthorisedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F61D81933000D47FCD /* KSAuthorisedUser.m */; };
@@ -52,6 +53,8 @@
 		270DF9E61D83F56E004D3681 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		2786E7AB1D881507009BDB2A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		2786E7AC1D881507009BDB2A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		2786E7AE1D883692009BDB2A /* TabletasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletasksViewController.h; sourceTree = "<group>"; };
+		2786E7AF1D883692009BDB2A /* TabletasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabletasksViewController.m; sourceTree = "<group>"; };
 		27B1A0ED1D818C5B00D47FCD /* KSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSObject.h; sourceTree = "<group>"; };
 		27B1A0EE1D818C5B00D47FCD /* KSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSObject.m; sourceTree = "<group>"; };
 		27B1A0F11D818D0600D47FCD /* KSUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSUserInfo.h; sourceTree = "<group>"; };
@@ -172,6 +175,8 @@
 				28797F731D88202C00AEDE0A /* CreateAccountViewController.m */,
 				28797F751D88309200AEDE0A /* NewPasswordViewController.h */,
 				28797F761D88309200AEDE0A /* NewPasswordViewController.m */,
+				2786E7AE1D883692009BDB2A /* TabletasksViewController.h */,
+				2786E7AF1D883692009BDB2A /* TabletasksViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -375,6 +380,7 @@
 				27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */,
 				28797F711D87E24500AEDE0A /* UIImage+ACScaleImage.m in Sources */,
 				28A36BB51D81887B0092FEFD /* ViewController.m in Sources */,
+				2786E7B01D883692009BDB2A /* TabletasksViewController.m in Sources */,
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
 				28797F741D88202C00AEDE0A /* CreateAccountViewController.m in Sources */,
 				27B1A0FD1D81A12A00D47FCD /* KSShortTask.m in Sources */,
