@@ -11,6 +11,5 @@
 @interface ChangeEmailViewController : BaseViewController
 @property (weak, nonatomic) IBOutlet UITextField *oldEmailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-
 @property (weak, nonatomic) IBOutlet UITextField *reenterEmailTextField;
 @end

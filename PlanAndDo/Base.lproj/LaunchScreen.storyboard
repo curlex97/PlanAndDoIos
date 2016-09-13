@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -22,10 +22,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2222" translatesAutoresizingMaskIntoConstraints="NO" id="dA2-1t-KGn">
-                                <rect key="frame" x="220" y="139" width="160" height="321"/>
+                                <rect key="frame" x="248" y="194" width="105" height="212"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="Uhf-Jg-UKm"/>
-                                    <constraint firstAttribute="width" secondItem="dA2-1t-KGn" secondAttribute="height" multiplier="1:2" id="ZV3-Jz-OkS"/>
+                                    <constraint firstAttribute="width" constant="105" id="Uhf-Jg-UKm"/>
+                                    <constraint firstAttribute="width" secondItem="dA2-1t-KGn" secondAttribute="height" multiplier="1:2" constant="-1" id="ZV3-Jz-OkS"/>
                                 </constraints>
                             </imageView>
                         </subviews>
