@@ -8,6 +8,9 @@
 
 #import "BaseViewController.h"
 #import "KSApplicatipnColor.h"
+#import "UIImage+ACScaleImage.h"
+
+#define IMAGE_SIZE 44
 
 @interface BaseViewController ()
 @property NSLayoutConstraint *trailing;
@@ -74,28 +77,54 @@
     self.navigationController.toolbar.opaque=YES;
     self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
     
-    UIBarButtonItem * today=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Today"] style:UIBarButtonItemStylePlain target:self action:@selector(todayDidTap)];
-    today.width=50;
-    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
-    UIBarButtonItem * tomorrow=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Tomorrow"] style:UIBarButtonItemStyleDone target:self action:@selector(tomorrowDidTap)];
-    tomorrow.width=50;
-    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
-    UIBarButtonItem * week=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Week"] style:UIBarButtonItemStyleDone target:self action:@selector(weekDidTap)];
-    week.width=50;
-    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
-    UIBarButtonItem * backLog=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Backlog"] style:UIBarButtonItemStyleDone target:self action:@selector(backLogDidTap)];
-    backLog.width=50;
-    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
-    UIBarButtonItem * archive=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Archive"] style:UIBarButtonItemStyleDone target:self action:@selector(tomorrowDidTap)];
-    archive.width=50;
+    UIImage *todayImage = [UIImage imageWithImage:[UIImage imageNamed:@"Today"] scaledToSize:CGSizeMake(IMAGE_SIZE, IMAGE_SIZE)];
+    UIBarButtonItem *today = [[UIBarButtonItem alloc] initWithImage:todayImage style:UIBarButtonItemStyleDone target:self action:nil];
+    
+    UIImage *tomorrowImage = [UIImage imageWithImage:[UIImage imageNamed:@"Tomorrow"] scaledToSize:CGSizeMake(IMAGE_SIZE, IMAGE_SIZE)];
+    UIBarButtonItem *tomorrow = [[UIBarButtonItem alloc] initWithImage:tomorrowImage style:UIBarButtonItemStyleDone target:self action:nil];
+    
+    UIImage *weekImage = [UIImage imageWithImage:[UIImage imageNamed:@"Week"] scaledToSize:CGSizeMake(IMAGE_SIZE, IMAGE_SIZE)];
+    UIBarButtonItem *week = [[UIBarButtonItem alloc] initWithImage:weekImage style:UIBarButtonItemStyleDone target:self action:nil];
+    
+    UIImage *backlogImage = [UIImage imageWithImage:[UIImage imageNamed:@"Backlog"] scaledToSize:CGSizeMake(IMAGE_SIZE, IMAGE_SIZE)];
+    UIBarButtonItem *backlog = [[UIBarButtonItem alloc] initWithImage:backlogImage style:UIBarButtonItemStyleDone target:self action:nil];
+    
+    UIImage *archiveImage = [UIImage imageWithImage:[UIImage imageNamed:@"Archive"] scaledToSize:CGSizeMake(IMAGE_SIZE, IMAGE_SIZE)];
+    UIBarButtonItem *archive = [[UIBarButtonItem alloc] initWithImage:archiveImage style:UIBarButtonItemStyleDone target:self action:nil];
+    
+   
+    
+//    
+//    UIBarButtonItem * today=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Today"] style:UIBarButtonItemStylePlain target:self action:@selector(todayDidTap)];
+//    today.width=50;
+    
+//    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
+//    UIBarButtonItem * tomorrow=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Tomorrow"] style:UIBarButtonItemStyleDone target:self action:@selector(tomorrowDidTap)];
+//    tomorrow.width=50;
+//    
+//    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
+//    UIBarButtonItem * week=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Week"] style:UIBarButtonItemStyleDone target:self action:@selector(weekDidTap)];
+//    week.width=50;
+//    
+//    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
+//    UIBarButtonItem * backLog=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Backlog"] style:UIBarButtonItemStyleDone target:self action:@selector(backLogDidTap)];
+//    backLog.width=50;
+//    
+//    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
+//    UIBarButtonItem * archive=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Archive"] style:UIBarButtonItemStyleDone target:self action:@selector(tomorrowDidTap)];
+//    archive.width=50;
+    
     NSLog(@"%f",today.width);
-    self.toolbarItems=[NSArray arrayWithObjects:today,tomorrow,week,backLog,archive, nil];
+    self.toolbarItems=[NSArray arrayWithObjects:today, tomorrow, week, backlog, archive, nil];
     NSLog(@"%@",self.navigationController.toolbar.items);
     
+    
     self.refresh=[[UIRefreshControl alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-15, 0, 40, 40)];
+    
     [self.tableView addSubview:self.refresh];
     [self setConstraints];
-    // Do any additional setup after loading the view.
+
+
 }
 
 -(void)setConstraints
