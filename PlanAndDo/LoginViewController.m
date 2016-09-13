@@ -7,6 +7,10 @@
 //
 
 #import "LoginViewController.h"
+#import "KSApplicatipnColor.h"
+
+#define TEXTFIELD_PADDING_LEFT 10
+
 
 @interface LoginViewController ()
 
@@ -14,24 +18,27 @@
 
 @implementation LoginViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    CAGradientLayer * gradient=[KSApplicatipnColor sharedColor].rootGradient;
+    gradient.frame=self.view.bounds;
+    [self.tableView removeFromSuperview];
+    self.view.backgroundColor=[UIColor whiteColor];
+    [self.view.layer insertSublayer:gradient atIndex:0];
+    
+    UIView *loginPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXTFIELD_PADDING_LEFT, 0)];
+    self.loginTextField.leftView = loginPaddingView;
+    self.loginTextField.leftViewMode = UITextFieldViewModeAlways;
+    
+    UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXTFIELD_PADDING_LEFT, 0)];
+    self.passwordTextField.leftView = passwordPaddingView;
+    self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

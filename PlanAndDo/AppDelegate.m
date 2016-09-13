@@ -12,6 +12,7 @@
 #import "BaseViewController.h"
 #import "KSApplicatipnColor.h"
 #import "ViewController.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 @property AMSideBarViewController *sideBarViewController;
@@ -25,8 +26,8 @@
     
     
     
-//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
-//                                                             bundle: nil];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+                                                             bundle: nil];
 //    ViewController *yourController = (ViewController*)[mainStoryboard
 //                                                                instantiateViewControllerWithIdentifier:@"ViewController"];
 //    ViewController *yourController2 = (ViewController*)[mainStoryboard
@@ -45,8 +46,8 @@
     //    UINavigationController* navC = [[UINavigationController alloc] initWithRootViewController:yourController];
       //_sideBarViewController = [AMSideBarViewController sideBarWithFrontVC:navC andBackVC:yourController2];
     
-    BaseViewController * base=[[BaseViewController alloc] init];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:base];
+    LoginViewController * login=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:login];
     [self.window makeKeyAndVisible];
     
     return YES;

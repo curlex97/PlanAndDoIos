@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="748" y="-140"/>
         </scene>
-        <!--View Controller-->
+        <!--Login-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -36,9 +36,41 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hmX-lB-ZC1">
+                                <rect key="frame" x="0.0" y="189" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="5cb-YH-qB9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DUb-sN-Ykg">
+                                <rect key="frame" x="0.0" y="144" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="2uS-hh-9C2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="hmX-lB-ZC1" secondAttribute="trailing" id="Gwa-6a-LO3"/>
+                            <constraint firstItem="DUb-sN-Ykg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Rr5-fk-she"/>
+                            <constraint firstItem="DUb-sN-Ykg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="80" id="Snd-6h-no9"/>
+                            <constraint firstItem="hmX-lB-ZC1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lnr-O2-eyE"/>
+                            <constraint firstItem="hmX-lB-ZC1" firstAttribute="top" secondItem="DUb-sN-Ykg" secondAttribute="bottom" constant="1" id="rEJ-KX-3c1"/>
+                            <constraint firstAttribute="trailing" secondItem="DUb-sN-Ykg" secondAttribute="trailing" id="sx7-iv-zLo"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Vdg-W0-uXJ"/>
+                    <navigationItem key="navigationItem" title="Login" id="Vdg-W0-uXJ"/>
+                    <connections>
+                        <outlet property="loginTextField" destination="DUb-sN-Ykg" id="DB8-a1-Sr0"/>
+                        <outlet property="passwordTextField" destination="hmX-lB-ZC1" id="Ez3-fl-Xsf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -27,11 +27,17 @@
 {
     [super viewWillAppear:animated];
     
-    self.title=@"Allah";
+    UIView *navBorder = [[UIView alloc] initWithFrame:CGRectMake(0,self.navigationController.navigationBar.frame.size.height-1,self.navigationController.navigationBar.frame.size.width, 1)];
+    
+    [navBorder setBackgroundColor:[UIColor colorWithWhite:200.0f/255.f alpha:0.0f]];
+    [navBorder setOpaque:YES];
+    [self.navigationController.navigationBar addSubview:navBorder];
+    
+    
     CAGradientLayer * gradient=[KSApplicatipnColor sharedColor].rootGradient;
     gradient.frame=self.navigationController.navigationBar.bounds;
     [self.navigationController.navigationBar.layer insertSublayer:gradient atIndex:1];
-    
+    NSLog(@"%@",self.navigationController.navigationBar.subviews);
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
