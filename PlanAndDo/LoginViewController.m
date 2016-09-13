@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "KSApplicatipnColor.h"
+#import "CreateAccountViewController.h"
 
 #define TEXTFIELD_PADDING_LEFT 10
 
@@ -39,6 +40,18 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)createNewAccountTapped:(id)sender {
+    
+    CreateAccountViewController* cavc = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateAccountViewController"];
+    
+    if(cavc)
+    {
+        cavc.navigationItem.title = @"Create account";
+        [self.navigationController pushViewController:cavc animated:YES];
+    }
+    
 }
 
 @end
