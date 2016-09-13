@@ -12,6 +12,8 @@
 		270DF9E71D83F56E004D3681 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E61D83F56E004D3681 /* BaseViewController.m */; };
 		2786E7AD1D881507009BDB2A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7AC1D881507009BDB2A /* LoginViewController.m */; };
 		2786E7B01D883692009BDB2A /* TabletasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7AF1D883692009BDB2A /* TabletasksViewController.m */; };
+		2786E7B21D883F4D009BDB2A /* KSTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2786E7B11D883F4D009BDB2A /* KSTaskCell.xib */; };
+		2786E7B51D884421009BDB2A /* TaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7B41D884421009BDB2A /* TaskTableViewCell.m */; };
 		27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0EE1D818C5B00D47FCD /* KSObject.m */; };
 		27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F21D818D0600D47FCD /* KSUserInfo.m */; };
 		27B1A0F71D81933000D47FCD /* KSAuthorisedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F61D81933000D47FCD /* KSAuthorisedUser.m */; };
@@ -56,6 +58,9 @@
 		2786E7AC1D881507009BDB2A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		2786E7AE1D883692009BDB2A /* TabletasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletasksViewController.h; sourceTree = "<group>"; };
 		2786E7AF1D883692009BDB2A /* TabletasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabletasksViewController.m; sourceTree = "<group>"; };
+		2786E7B11D883F4D009BDB2A /* KSTaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KSTaskCell.xib; sourceTree = "<group>"; };
+		2786E7B31D884421009BDB2A /* TaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTableViewCell.h; sourceTree = "<group>"; };
+		2786E7B41D884421009BDB2A /* TaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTableViewCell.m; sourceTree = "<group>"; };
 		27B1A0ED1D818C5B00D47FCD /* KSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSObject.h; sourceTree = "<group>"; };
 		27B1A0EE1D818C5B00D47FCD /* KSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSObject.m; sourceTree = "<group>"; };
 		27B1A0F11D818D0600D47FCD /* KSUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSUserInfo.h; sourceTree = "<group>"; };
@@ -255,6 +260,9 @@
 				28A36BC11D81887B0092FEFD /* Info.plist */,
 				282C28CC1D829CAC0061761E /* CoreData */,
 				28A36BAD1D81887B0092FEFD /* Supporting Files */,
+				2786E7B11D883F4D009BDB2A /* KSTaskCell.xib */,
+				2786E7B31D884421009BDB2A /* TaskTableViewCell.h */,
+				2786E7B41D884421009BDB2A /* TaskTableViewCell.m */,
 			);
 			path = PlanAndDo;
 			sourceTree = "<group>";
@@ -358,6 +366,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2786E7B21D883F4D009BDB2A /* KSTaskCell.xib in Resources */,
 				28A36BC01D81887B0092FEFD /* LaunchScreen.storyboard in Resources */,
 				28A36BBD1D81887B0092FEFD /* Assets.xcassets in Resources */,
 				28A36BB81D81887B0092FEFD /* Main.storyboard in Resources */,
@@ -395,6 +404,7 @@
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
 				270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */,
 				2786E7AD1D881507009BDB2A /* LoginViewController.m in Sources */,
+				2786E7B51D884421009BDB2A /* TaskTableViewCell.m in Sources */,
 				27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */,
 				282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */,
 				28797F771D88309200AEDE0A /* NewPasswordViewController.m in Sources */,
