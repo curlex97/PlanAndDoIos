@@ -27,20 +27,29 @@
 {
     [super viewWillAppear:animated];
     
-    UIView *navBorder = [[UIView alloc] initWithFrame:CGRectMake(0,self.navigationController.navigationBar.frame.size.height-1,self.navigationController.navigationBar.frame.size.width, 1)];
-    
-    [navBorder setBackgroundColor:[UIColor colorWithWhite:200.0f/255.f alpha:0.0f]];
-    [navBorder setOpaque:YES];
-    [self.navigationController.navigationBar addSubview:navBorder];
-    
-    
     CAGradientLayer * gradient=[KSApplicatipnColor sharedColor].rootGradient;
     gradient.frame=self.navigationController.navigationBar.bounds;
     [self.navigationController.navigationBar.layer insertSublayer:gradient atIndex:1];
-    NSLog(@"%@",self.navigationController.navigationBar.subviews);
+    NSLog(@"%@",self.navigationController.navigationBar.layer.sublayers);
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+    {
+        CALayer * gradient=self.navigationController.navigationBar.layer.sublayers[1];
+        gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, self.navigationController.navigationBar.bounds.size.height-10);
+        [self.navigationController.navigationBar.layer insertSublayer:gradient above:self.navigationController.navigationBar.layer.sublayers[1]];
+    }
+    else
+    {
+        CALayer * gradient=self.navigationController.navigationBar.layer.sublayers[1];
+        gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, self.navigationController.navigationBar.bounds.size.height-10);
+       
+        [self.navigationController.navigationBar.layer insertSublayer:gradient above:self.navigationController.navigationBar.layer.sublayers[1]];
+    }
+}
 -(void)todayDidTap
 {
     
