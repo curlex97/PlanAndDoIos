@@ -7,15 +7,34 @@
 //
 
 #import "TabletasksViewController.h"
+#import "TaskTableViewCell.h"
 
-@interface TabletasksViewController ()
+@interface TabletasksViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
 
 @implementation TabletasksViewController
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSTaskCell"owner:self options:nil];
+    TaskTableViewCell * cell=[nib objectAtIndex:0];
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.delegate=self;
+    self.tableView.dataSource=self;
     //    UISegmentedControl * segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Completed",@"Overdue", nil]];
     //    segment.tintColor=[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
     //    [segment setSelectedSegmentIndex:0];

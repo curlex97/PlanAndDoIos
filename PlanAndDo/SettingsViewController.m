@@ -8,7 +8,7 @@
 
 #import "SettingsViewController.h"
 
-@interface SettingsViewController() <UITableViewDelegate, UITableViewDataSource>
+@interface SettingsViewController()<UITableViewDelegate, UITableViewDataSource>
 @end
 
 @implementation SettingsViewController
