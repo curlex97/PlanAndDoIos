@@ -10,7 +10,9 @@
 #import "KSApplicatipnColor.h"
 #import "UIImage+ACScaleImage.h"
 
-#define IMAGE_SIZE 44
+#define BAR_BUTTON_SIZE 50
+
+//#import "KSToolBarCustomView.h"
 
 @interface BaseViewController ()
 @property NSLayoutConstraint *trailing;
@@ -29,13 +31,13 @@
     CAGradientLayer * gradient=[KSApplicatipnColor sharedColor].rootGradient;
     gradient.frame=self.navigationController.navigationBar.bounds;
     [self.navigationController.navigationBar.layer insertSublayer:gradient atIndex:1];
-
+    
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
 
 -(void)todayDidTap
 {
-
+    
 }
 
 -(void)tomorrowDidTap
@@ -62,7 +64,7 @@
 {
     [super viewDidLoad];
     self.tableView=[[UITableView alloc] initWithFrame:self.view.bounds];
-
+    
     [self.view addSubview:self.tableView];
     
     self.view.clipsToBounds=YES;
@@ -76,94 +78,95 @@
     self.navigationController.toolbar.autoresizesSubviews=YES;
     self.navigationController.toolbar.opaque=YES;
     self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
+    self.navigationController.toolbar.backgroundColor=[UIColor whiteColor];
+    self.navigationController.toolbar.barTintColor=[UIColor whiteColor];
     
-    UIImage *todayImage = [UIImage imageWithImage:[UIImage imageNamed:@"Today"] scaledToSize:CGSizeMake(IMAGE_SIZE, IMAGE_SIZE)];
-    UIBarButtonItem *today = [[UIBarButtonItem alloc] initWithImage:todayImage style:UIBarButtonItemStyleDone target:self action:nil];
-    
-    UIImage *tomorrowImage = [UIImage imageWithImage:[UIImage imageNamed:@"Tomorrow"] scaledToSize:CGSizeMake(IMAGE_SIZE, IMAGE_SIZE)];
-    UIBarButtonItem *tomorrow = [[UIBarButtonItem alloc] initWithImage:tomorrowImage style:UIBarButtonItemStyleDone target:self action:nil];
-    
-    UIImage *weekImage = [UIImage imageWithImage:[UIImage imageNamed:@"Week"] scaledToSize:CGSizeMake(IMAGE_SIZE, IMAGE_SIZE)];
-    UIBarButtonItem *week = [[UIBarButtonItem alloc] initWithImage:weekImage style:UIBarButtonItemStyleDone target:self action:nil];
-    
-    UIImage *backlogImage = [UIImage imageWithImage:[UIImage imageNamed:@"Backlog"] scaledToSize:CGSizeMake(IMAGE_SIZE, IMAGE_SIZE)];
-    UIBarButtonItem *backlog = [[UIBarButtonItem alloc] initWithImage:backlogImage style:UIBarButtonItemStyleDone target:self action:nil];
-    
-    UIImage *archiveImage = [UIImage imageWithImage:[UIImage imageNamed:@"Archive"] scaledToSize:CGSizeMake(IMAGE_SIZE, IMAGE_SIZE)];
-    UIBarButtonItem *archive = [[UIBarButtonItem alloc] initWithImage:archiveImage style:UIBarButtonItemStyleDone target:self action:nil];
-    
-   
-    
-//    
-//    UIBarButtonItem * today=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Today"] style:UIBarButtonItemStylePlain target:self action:@selector(todayDidTap)];
-//    today.width=50;
-    
-//    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
-//    UIBarButtonItem * tomorrow=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Tomorrow"] style:UIBarButtonItemStyleDone target:self action:@selector(tomorrowDidTap)];
-//    tomorrow.width=50;
-//    
-//    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
-//    UIBarButtonItem * week=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Week"] style:UIBarButtonItemStyleDone target:self action:@selector(weekDidTap)];
-//    week.width=50;
-//    
-//    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
-//    UIBarButtonItem * backLog=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Backlog"] style:UIBarButtonItemStyleDone target:self action:@selector(backLogDidTap)];
-//    backLog.width=50;
-//    
-//    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
-//    UIBarButtonItem * archive=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Archive"] style:UIBarButtonItemStyleDone target:self action:@selector(tomorrowDidTap)];
-//    archive.width=50;
-    
-    NSLog(@"%f",today.width);
-    self.toolbarItems=[NSArray arrayWithObjects:today, tomorrow, week, backlog, archive, nil];
-    NSLog(@"%@",self.navigationController.toolbar.items);
+    //    CGRect pathRect=self.navigationController.toolbar.bounds;
+    //    pathRect.size=self.navigationController.toolbar.frame.size;
+    //    self.navigationController.toolbar.layer.shadowColor=[UIColor blackColor].CGColor;
+    //    self.navigationController.toolbar.layer.shadowPath=[UIBezierPath bezierPathWithRect:pathRect].CGPath;
+    //    self.navigationController.toolbar.layer.shadowRadius=30.0;
+    //    self.navigationController.toolbar.layer.shadowOpacity = 0.0f;
+    //    self.navigationController.toolbar.layer.rasterizationScale=[UIScreen mainScreen].scale;
+    //    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"repoCell"owner:self options:nil];
+    //    KSToolBarCustomView * view=[nib objectAtIndex:0];
+    //    view.imageView.image=[UIImage imageNamed:@"Today"];
+    //    view.title=@""
+    UIBarButtonItem * spaceItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
+    //spaceItem.width=30;
+    UIBarButtonItem * today=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Today"] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE, BAR_BUTTON_SIZE)] style:UIBarButtonItemStyleDone target:self action:@selector(todayDidTap)];
+    //today.width=45;
+    //today.possibleTitles=[today.possibleTitles setByAddingObject:@"Allah"];
+    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
+    UIBarButtonItem * tomorrow=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Tomorrow"] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE, BAR_BUTTON_SIZE)] style:UIBarButtonItemStyleDone target:self action:@selector(tomorrowDidTap)];
+    //tomorrow.width=45;
+    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
+    UIBarButtonItem * week=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Week"] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE, BAR_BUTTON_SIZE)] style:UIBarButtonItemStyleDone target:self action:@selector(weekDidTap)];
+    //week.width=45;
+    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
+    UIBarButtonItem * backLog=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Backlog"] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE, BAR_BUTTON_SIZE)] style:UIBarButtonItemStyleDone target:self action:@selector(backLogDidTap)];
+    //backLog.width=45;
+    self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
+    UIBarButtonItem * archive=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Archive"] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE, BAR_BUTTON_SIZE)] style:UIBarButtonItemStyleDone target:self action:@selector(tomorrowDidTap)];
+    //archive.width=45;
+    self.toolbarItems=[NSArray arrayWithObjects:
+                       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL],
+                       today,
+                       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL],
+                       tomorrow,
+                       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL],
+                       week,
+                       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL],
+                       backLog,
+                       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL],
+                       archive,
+                       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL],
+                       nil];
     
     
     self.refresh=[[UIRefreshControl alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-15, 0, 40, 40)];
     
     [self.tableView addSubview:self.refresh];
     [self setConstraints];
-
-
 }
 
 -(void)setConstraints
 {
     self.trailing =[NSLayoutConstraint
-                                   constraintWithItem:self.tableView
-                                   attribute:NSLayoutAttributeTrailing
-                                   relatedBy:NSLayoutRelationEqual
-                                   toItem:self.view
-                                   attribute:NSLayoutAttributeTrailing
-                                   multiplier:1.0f
-                                   constant:0.f];
+                    constraintWithItem:self.tableView
+                    attribute:NSLayoutAttributeTrailing
+                    relatedBy:NSLayoutRelationEqual
+                    toItem:self.view
+                    attribute:NSLayoutAttributeTrailing
+                    multiplier:1.0f
+                    constant:0.f];
     
     self.leading = [NSLayoutConstraint
-                                   constraintWithItem:self.tableView
-                                   attribute:NSLayoutAttributeLeading
-                                   relatedBy:NSLayoutRelationEqual
-                                   toItem:self.view
-                                   attribute:NSLayoutAttributeLeading
-                                   multiplier:1.0f
-                                   constant:0.f];
+                    constraintWithItem:self.tableView
+                    attribute:NSLayoutAttributeLeading
+                    relatedBy:NSLayoutRelationEqual
+                    toItem:self.view
+                    attribute:NSLayoutAttributeLeading
+                    multiplier:1.0f
+                    constant:0.f];
     
     self.bottom =[NSLayoutConstraint
-                                 constraintWithItem:self.tableView
-                                 attribute:NSLayoutAttributeBottom
-                                 relatedBy:NSLayoutRelationEqual
-                                 toItem:self.view
-                                 attribute:NSLayoutAttributeBottom
-                                 multiplier:1.0f
-                                 constant:0.f];
+                  constraintWithItem:self.tableView
+                  attribute:NSLayoutAttributeBottom
+                  relatedBy:NSLayoutRelationEqual
+                  toItem:self.view
+                  attribute:NSLayoutAttributeBottom
+                  multiplier:1.0f
+                  constant:0.f];
     
     self.top =[NSLayoutConstraint
-                              constraintWithItem:self.tableView
-                              attribute:NSLayoutAttributeTop
-                              relatedBy:NSLayoutRelationEqual
-                              toItem:self.view
-                              attribute:NSLayoutAttributeTop
-                              multiplier:1.0f
-                              constant:0.f];
+               constraintWithItem:self.tableView
+               attribute:NSLayoutAttributeTop
+               relatedBy:NSLayoutRelationEqual
+               toItem:self.view
+               attribute:NSLayoutAttributeTop
+               multiplier:1.0f
+               constant:0.f];
     
     self.tableView.translatesAutoresizingMaskIntoConstraints=NO;
     [self.view addConstraint:self.trailing];
