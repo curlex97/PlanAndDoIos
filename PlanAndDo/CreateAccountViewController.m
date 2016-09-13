@@ -22,8 +22,6 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Create account";
-
     CAGradientLayer * gradient=[KSApplicatipnColor sharedColor].rootGradient;
     gradient.frame=self.view.bounds;
     [self.tableView removeFromSuperview];
@@ -48,14 +46,6 @@
     
 
 }
-
--(void)viewWillAppear:(BOOL)animated
-{
-    self.title = @"Create account";
-
-}
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
