@@ -6,9 +6,9 @@
 //  Copyright © 2016 TodoTeamGroup. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BaseAuthViewController.h"
 
-@interface LoginViewController : BaseViewController
+@interface LoginViewController : BaseAuthViewController
 @property (strong, nonatomic) IBOutlet UITextField *loginTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 

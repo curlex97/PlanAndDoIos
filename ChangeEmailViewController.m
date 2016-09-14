@@ -24,7 +24,6 @@
     
     CAGradientLayer * gradient=[KSApplicatipnColor sharedColor].rootGradient;
     gradient.frame=self.view.bounds;
-    [self.tableView removeFromSuperview];
     self.view.backgroundColor=[UIColor whiteColor];
     [self.view.layer insertSublayer:gradient atIndex:0];
     

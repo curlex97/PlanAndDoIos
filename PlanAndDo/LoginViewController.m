@@ -24,12 +24,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    CAGradientLayer * gradient=[KSApplicatipnColor sharedColor].rootGradient;
-    gradient.frame=self.view.bounds;
-    [self.tableView removeFromSuperview];
-    self.view.backgroundColor=[UIColor whiteColor];
-    [self.view.layer insertSublayer:gradient atIndex:0];
-    
     UIView *loginPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXTFIELD_PADDING_LEFT, 0)];
     self.loginTextField.leftView = loginPaddingView;
     self.loginTextField.leftViewMode = UITextFieldViewModeAlways;

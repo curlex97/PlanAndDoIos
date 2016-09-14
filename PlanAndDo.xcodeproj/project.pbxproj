@@ -15,6 +15,10 @@
 		2786E7B21D883F4D009BDB2A /* KSTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2786E7B11D883F4D009BDB2A /* KSTaskCell.xib */; };
 		2786E7B51D884421009BDB2A /* TaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7B41D884421009BDB2A /* TaskTableViewCell.m */; };
 		278BAA4D1D896E30002D38CF /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278BAA4C1D896E30002D38CF /* AddTaskViewController.m */; };
+		278BAA4F1D8977E4002D38CF /* PriorityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278BAA4E1D8977E4002D38CF /* PriorityCell.xib */; };
+		278BAA521D897A36002D38CF /* PriorityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 278BAA511D897A36002D38CF /* PriorityCell.m */; };
+		278BAA551D89BA4A002D38CF /* BaseAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278BAA541D89BA4A002D38CF /* BaseAuthViewController.m */; };
+		278BAA581D89BB32002D38CF /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278BAA571D89BB32002D38CF /* BaseTableViewController.m */; };
 		27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0EE1D818C5B00D47FCD /* KSObject.m */; };
 		27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F21D818D0600D47FCD /* KSUserInfo.m */; };
 		27B1A0F71D81933000D47FCD /* KSAuthorisedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F61D81933000D47FCD /* KSAuthorisedUser.m */; };
@@ -65,6 +69,13 @@
 		2786E7B41D884421009BDB2A /* TaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTableViewCell.m; sourceTree = "<group>"; };
 		278BAA4B1D896E30002D38CF /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
 		278BAA4C1D896E30002D38CF /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
+		278BAA4E1D8977E4002D38CF /* PriorityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriorityCell.xib; sourceTree = "<group>"; };
+		278BAA501D897A36002D38CF /* PriorityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriorityCell.h; sourceTree = "<group>"; };
+		278BAA511D897A36002D38CF /* PriorityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriorityCell.m; sourceTree = "<group>"; };
+		278BAA531D89BA4A002D38CF /* BaseAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAuthViewController.h; sourceTree = "<group>"; };
+		278BAA541D89BA4A002D38CF /* BaseAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseAuthViewController.m; sourceTree = "<group>"; };
+		278BAA561D89BB32002D38CF /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
+		278BAA571D89BB32002D38CF /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 		27B1A0ED1D818C5B00D47FCD /* KSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSObject.h; sourceTree = "<group>"; };
 		27B1A0EE1D818C5B00D47FCD /* KSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSObject.m; sourceTree = "<group>"; };
 		27B1A0F11D818D0600D47FCD /* KSUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSUserInfo.h; sourceTree = "<group>"; };
@@ -261,6 +272,10 @@
 				28A36BB11D81887B0092FEFD /* AppDelegate.m */,
 				270DF9E51D83F56E004D3681 /* BaseViewController.h */,
 				270DF9E61D83F56E004D3681 /* BaseViewController.m */,
+				278BAA531D89BA4A002D38CF /* BaseAuthViewController.h */,
+				278BAA541D89BA4A002D38CF /* BaseAuthViewController.m */,
+				278BAA561D89BB32002D38CF /* BaseTableViewController.h */,
+				278BAA571D89BB32002D38CF /* BaseTableViewController.m */,
 				28797F6F1D87E24500AEDE0A /* UIImage+ACScaleImage.h */,
 				28797F701D87E24500AEDE0A /* UIImage+ACScaleImage.m */,
 				27B1A0F01D818C9900D47FCD /* Models */,
@@ -273,6 +288,9 @@
 				2786E7B11D883F4D009BDB2A /* KSTaskCell.xib */,
 				2786E7B31D884421009BDB2A /* TaskTableViewCell.h */,
 				2786E7B41D884421009BDB2A /* TaskTableViewCell.m */,
+				278BAA4E1D8977E4002D38CF /* PriorityCell.xib */,
+				278BAA501D897A36002D38CF /* PriorityCell.h */,
+				278BAA511D897A36002D38CF /* PriorityCell.m */,
 			);
 			path = PlanAndDo;
 			sourceTree = "<group>";
@@ -379,6 +397,7 @@
 				2786E7B21D883F4D009BDB2A /* KSTaskCell.xib in Resources */,
 				28A36BC01D81887B0092FEFD /* LaunchScreen.storyboard in Resources */,
 				28A36BBD1D81887B0092FEFD /* Assets.xcassets in Resources */,
+				278BAA4F1D8977E4002D38CF /* PriorityCell.xib in Resources */,
 				28A36BB81D81887B0092FEFD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,12 +419,14 @@
 				270DF9E41D83F0B0004D3681 /* KSApplicatipnColor.m in Sources */,
 				27B1A0F71D81933000D47FCD /* KSAuthorisedUser.m in Sources */,
 				27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */,
+				278BAA551D89BA4A002D38CF /* BaseAuthViewController.m in Sources */,
 				27B1A0FA1D8195A800D47FCD /* UserSettings.m in Sources */,
 				27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */,
 				28797F711D87E24500AEDE0A /* UIImage+ACScaleImage.m in Sources */,
 				28A36BB51D81887B0092FEFD /* ViewController.m in Sources */,
 				2786E7B01D883692009BDB2A /* TabletasksViewController.m in Sources */,
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
+				278BAA581D89BB32002D38CF /* BaseTableViewController.m in Sources */,
 				28797F741D88202C00AEDE0A /* CreateAccountViewController.m in Sources */,
 				27B1A0FD1D81A12A00D47FCD /* KSShortTask.m in Sources */,
 				286E26201D883FF00055A7BF /* SettingsViewController.m in Sources */,
@@ -416,6 +437,7 @@
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
 				270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */,
 				2786E7AD1D881507009BDB2A /* LoginViewController.m in Sources */,
+				278BAA521D897A36002D38CF /* PriorityCell.m in Sources */,
 				2786E7B51D884421009BDB2A /* TaskTableViewCell.m in Sources */,
 				27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */,
 				282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */,

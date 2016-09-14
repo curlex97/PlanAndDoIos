@@ -6,8 +6,8 @@
 //  Copyright © 2016 TodoTeamGroup. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BaseTableViewController.h"
 
-@interface SettingsViewController : BaseViewController
+@interface SettingsViewController : BaseTableViewController
 
 @end

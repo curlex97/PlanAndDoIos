@@ -6,9 +6,9 @@
 //  Copyright © 2016 TodoTeamGroup. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BaseAuthViewController.h"
 
-@interface NewPasswordViewController : BaseViewController
+@interface NewPasswordViewController : BaseAuthViewController
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 
 @end
