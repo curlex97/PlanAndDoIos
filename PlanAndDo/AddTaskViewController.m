@@ -70,16 +70,20 @@
     {
         self.slider.value=0.0;
         self.priorityDescLabel.text=@"low";
+        [self.slider setThumbImage:[UIImage imageNamed:@"white ball"] forState:UIControlStateNormal];
+        //self.slider.backgroundColor=[UIColor redColor];
     }
     else if(self.slider.value>=0.5 && self.slider.value<1.5)
     {
         self.slider.value=1.0;
         self.priorityDescLabel.text=@"mid";
+        [self.slider setThumbImage:[UIImage imageNamed:@"green ball"] forState:UIControlStateNormal];
     }
     else
     {
         self.slider.value=2.0;
         self.priorityDescLabel.text=@"high";
+        [self.slider setThumbImage:[UIImage imageNamed:@"red ball"] forState:UIControlStateNormal];
     }
     self.priorityDescLabel.center=[self getThumbCenter:self.slider];
     NSLog(@"%f",slider.value);
@@ -117,6 +121,7 @@
     self.slider.value=0.0;
     self.slider.minimumTrackTintColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     [self.slider addTarget:self action:@selector(sliderDidSlide:) forControlEvents:UIControlEventValueChanged];
+    [self.slider setThumbImage:[UIImage imageNamed:@"white ball"] forState:UIControlStateNormal];
     self.lastValue=self.slider.value;
     
     self.priorityDescLabel=[[UILabel alloc] initWithFrame:CGRectMake(100, 43, 23, 13)];
