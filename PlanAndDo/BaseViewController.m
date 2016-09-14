@@ -142,7 +142,7 @@
     
     
     self.refresh=[[UIRefreshControl alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-15, 0, 40, 40)];
-    
+    self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     [self.tableView addSubview:self.refresh];
     [self setConstraints];
 }

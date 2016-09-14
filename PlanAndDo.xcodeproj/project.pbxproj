@@ -14,6 +14,7 @@
 		2786E7B01D883692009BDB2A /* TabletasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7AF1D883692009BDB2A /* TabletasksViewController.m */; };
 		2786E7B21D883F4D009BDB2A /* KSTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2786E7B11D883F4D009BDB2A /* KSTaskCell.xib */; };
 		2786E7B51D884421009BDB2A /* TaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7B41D884421009BDB2A /* TaskTableViewCell.m */; };
+		278BAA4D1D896E30002D38CF /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 278BAA4C1D896E30002D38CF /* AddTaskViewController.m */; };
 		27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0EE1D818C5B00D47FCD /* KSObject.m */; };
 		27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F21D818D0600D47FCD /* KSUserInfo.m */; };
 		27B1A0F71D81933000D47FCD /* KSAuthorisedUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0F61D81933000D47FCD /* KSAuthorisedUser.m */; };
@@ -62,6 +63,8 @@
 		2786E7B11D883F4D009BDB2A /* KSTaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KSTaskCell.xib; sourceTree = "<group>"; };
 		2786E7B31D884421009BDB2A /* TaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTableViewCell.h; sourceTree = "<group>"; };
 		2786E7B41D884421009BDB2A /* TaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTableViewCell.m; sourceTree = "<group>"; };
+		278BAA4B1D896E30002D38CF /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
+		278BAA4C1D896E30002D38CF /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
 		27B1A0ED1D818C5B00D47FCD /* KSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSObject.h; sourceTree = "<group>"; };
 		27B1A0EE1D818C5B00D47FCD /* KSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSObject.m; sourceTree = "<group>"; };
 		27B1A0F11D818D0600D47FCD /* KSUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSUserInfo.h; sourceTree = "<group>"; };
@@ -192,6 +195,8 @@
 				2786E7AF1D883692009BDB2A /* TabletasksViewController.m */,
 				286E261E1D883FF00055A7BF /* SettingsViewController.h */,
 				286E261F1D883FF00055A7BF /* SettingsViewController.m */,
+				278BAA4B1D896E30002D38CF /* AddTaskViewController.h */,
+				278BAA4C1D896E30002D38CF /* AddTaskViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -407,6 +412,7 @@
 				28A36BB21D81887B0092FEFD /* AppDelegate.m in Sources */,
 				270DF9E71D83F56E004D3681 /* BaseViewController.m in Sources */,
 				27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */,
+				278BAA4D1D896E30002D38CF /* AddTaskViewController.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
 				270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */,
 				2786E7AD1D881507009BDB2A /* LoginViewController.m in Sources */,
