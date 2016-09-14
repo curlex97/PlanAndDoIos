@@ -11,14 +11,17 @@
 
 @interface AddTaskViewController ()
 @property (nonatomic)UISegmentedControl * segment;
-@property (nonatomic)UILabel * priorityLabel;
+@property (nonatomic)UILabel * priorityDescLabel;
+@property (nonatomic)UISlider * slider;
+@property (nonatomic)UIPanGestureRecognizer * pan;
+@property (nonatomic)float lastValue;
 @end
 
 @implementation AddTaskViewController
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 4;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -42,52 +45,43 @@
         case 3:
             cell.textLabel.text=@"Date & Time";
             break;
-        default:
-            priorityCell=[[[NSBundle mainBundle] loadNibNamed:@"PriorityCell"owner:self options:nil] objectAtIndex:0];
-            [priorityCell.prioritySlider addTarget:self action:@selector(sliderDidSlide:) forControlEvents:UIControlEventValueChanged];
-            self.priorityLabel=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 25, 13)];
-            self.priorityLabel.center=[self getThumbCenter:priorityCell.prioritySlider];
-            [priorityCell addSubview:self.priorityLabel];
-            cell=priorityCell;
-            break;
     }
     return cell;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 55;
-}
+//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return 55;
+//}
 
 -(CGPoint)getThumbCenter:(UISlider *)slider
 {
-    CGRect trackRect = [slider trackRectForBounds:slider.bounds];
-    CGRect thumbRect = [slider thumbRectForBounds:slider.bounds
+    CGRect trackRect = [slider trackRectForBounds:slider.frame];
+    CGRect thumbRect = [slider thumbRectForBounds:slider.frame
                                         trackRect:trackRect
                                             value:slider.value];
     
-    return CGPointMake(thumbRect.origin.x + slider.frame.origin.x, slider.frame.origin.y - 20);
+    return CGPointMake(thumbRect.origin.x+18, slider.frame.origin.y+40);
 }
 
 -(void)sliderDidSlide:(UISlider *)slider
 {
-    
-    self.priorityLabel.center =[self getThumbCenter:slider];
-    if(slider.value<0.5)
+    if(self.slider.value<0.5)
     {
-        slider.value=0.0;
-        self.priorityLabel.text=@"low";
+        self.slider.value=0.0;
+        self.priorityDescLabel.text=@"low";
     }
-    else if(slider.value>=0.5 && slider.value<1.5)
+    else if(self.slider.value>=0.5 && self.slider.value<1.5)
     {
-        slider.value=1.0;
-        self.priorityLabel.text=@"mid";
+        self.slider.value=1.0;
+        self.priorityDescLabel.text=@"mid";
     }
     else
     {
-        slider.value=2.0;
-        self.priorityLabel.text=@"high";
+        self.slider.value=2.0;
+        self.priorityDescLabel.text=@"high";
     }
+    self.priorityDescLabel.center=[self getThumbCenter:self.slider];
     NSLog(@"%f",slider.value);
 }
 
@@ -99,6 +93,10 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //self.pan=[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gesturePan)];
+    //self.pan.delegate=self;
+    
     self.title=@"Add";
    self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Task",@"List", nil]];
     self.segment.tintColor=[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
@@ -109,6 +107,27 @@
     [segmentBackgroundView addSubview:self.segment];
     self.tableView.tableHeaderView=segmentBackgroundView;
     
+    UIView * footerPriorityView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 56)];
+    UILabel * priorityLable=[[UILabel alloc] initWithFrame:CGRectMake(15, 17, 62, 21)];
+    priorityLable.text=@"Priority";
+    priorityLable.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
+    self.slider=[[UISlider alloc] initWithFrame:CGRectMake(100, 12, self.view.bounds.size.width-110, 31)];
+    self.slider.minimumValue=0.0;
+    self.slider.maximumValue=2.0;
+    self.slider.value=0.0;
+    self.slider.minimumTrackTintColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
+    [self.slider addTarget:self action:@selector(sliderDidSlide:) forControlEvents:UIControlEventValueChanged];
+    self.lastValue=self.slider.value;
+    
+    self.priorityDescLabel=[[UILabel alloc] initWithFrame:CGRectMake(100, 43, 23, 13)];
+    self.priorityDescLabel.text=@"low";
+    self.priorityDescLabel.font=[UIFont systemFontOfSize:10.0];
+    self.priorityDescLabel.center=[self getThumbCenter:self.slider];
+    self.priorityDescLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
+    [footerPriorityView addSubview:priorityLable];
+    [footerPriorityView addSubview:self.slider];
+    [footerPriorityView addSubview:self.priorityDescLabel];
+    self.tableView.tableFooterView=footerPriorityView;
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
 }

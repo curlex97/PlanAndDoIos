@@ -9,7 +9,7 @@
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
-                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                <viewController wantsFullScreenLayout="YES" id="01J-lp-oVM" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
@@ -21,7 +21,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchBack" translatesAutoresizingMaskIntoConstraints="NO" id="Mdp-Qo-YUV">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2222" translatesAutoresizingMaskIntoConstraints="NO" id="dA2-1t-KGn">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pan" translatesAutoresizingMaskIntoConstraints="NO" id="dA2-1t-KGn">
                                 <rect key="frame" x="248" y="194" width="105" height="212"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="105" id="Uhf-Jg-UKm"/>
@@ -39,14 +39,15 @@
                             <constraint firstItem="dA2-1t-KGn" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="u7Q-kg-kcT"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="55" y="370"/>
         </scene>
     </scenes>
     <resources>
-        <image name="2222" width="345" height="794"/>
+        <image name="Pan" width="345" height="794"/>
         <image name="launchBack" width="1080" height="1920"/>
     </resources>
 </document>

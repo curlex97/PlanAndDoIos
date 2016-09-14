@@ -15,6 +15,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="409" height="54.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="mid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMq-tI-piB">
+                        <rect key="frame" x="181" y="41" width="18" height="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" red="0.56862745098039214" green="0.56862745098039214" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Priority" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cA-1N-xCH">
                         <rect key="frame" x="8" y="17" width="62" height="21"/>
                         <constraints>
@@ -25,26 +31,18 @@
                         <color key="textColor" red="0.56862745098039214" green="0.56862745098039214" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="2" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CHt-ov-fxW">
-                        <rect key="frame" x="76" y="12" width="327" height="31"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="aha-At-hAN"/>
-                        </constraints>
-                        <color key="minimumTrackTintColor" red="0.56862745098039214" green="0.56862745098039214" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="thumbTintColor" red="0.96078431372549022" green="0.65098039215686276" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Rot-5P-ira">
+                        <rect key="frame" x="83" y="13" width="320" height="31"/>
                     </slider>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="CHt-ov-fxW" firstAttribute="trailing" secondItem="of4-0Q-Oet" secondAttribute="trailingMargin" id="GF7-bY-zcJ"/>
-                    <constraint firstItem="CHt-ov-fxW" firstAttribute="leading" secondItem="4cA-1N-xCH" secondAttribute="trailing" constant="8" id="GRi-1z-bir"/>
-                    <constraint firstItem="CHt-ov-fxW" firstAttribute="centerY" secondItem="4cA-1N-xCH" secondAttribute="centerY" id="JhZ-gR-Ht7"/>
                     <constraint firstItem="4cA-1N-xCH" firstAttribute="leading" secondItem="of4-0Q-Oet" secondAttribute="leadingMargin" id="VaI-z6-2IU"/>
                     <constraint firstItem="4cA-1N-xCH" firstAttribute="top" secondItem="of4-0Q-Oet" secondAttribute="topMargin" constant="9" id="gLg-u9-vJn"/>
                     <constraint firstAttribute="bottomMargin" secondItem="4cA-1N-xCH" secondAttribute="bottom" constant="8.5" id="lAb-q1-Pty"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="prioritySlider" destination="CHt-ov-fxW" id="6dC-QE-8bc"/>
+                <outlet property="sliderDecriptipnLabel" destination="hMq-tI-piB" id="b8x-0a-6Rs"/>
                 <outlet property="titleLabel" destination="4cA-1N-xCH" id="3lR-1s-ojX"/>
             </connections>
             <point key="canvasLocation" x="619.5" y="302.5"/>
