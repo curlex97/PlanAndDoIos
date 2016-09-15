@@ -46,7 +46,6 @@
 		28797F7A1D88370600AEDE0A /* ChangeEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28797F791D88370600AEDE0A /* ChangeEmailViewController.m */; };
 		28A36BAF1D81887B0092FEFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BAE1D81887B0092FEFD /* main.m */; };
 		28A36BB21D81887B0092FEFD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BB11D81887B0092FEFD /* AppDelegate.m */; };
-		28A36BB51D81887B0092FEFD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BB41D81887B0092FEFD /* ViewController.m */; };
 		28A36BB81D81887B0092FEFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28A36BB61D81887B0092FEFD /* Main.storyboard */; };
 		28A36BBB1D81887B0092FEFD /* PlanAndDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BB91D81887B0092FEFD /* PlanAndDo.xcdatamodeld */; };
 		28A36BBD1D81887B0092FEFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28A36BBC1D81887B0092FEFD /* Assets.xcassets */; };
@@ -139,8 +138,6 @@
 		28A36BAE1D81887B0092FEFD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28A36BB01D81887B0092FEFD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		28A36BB11D81887B0092FEFD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		28A36BB31D81887B0092FEFD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		28A36BB41D81887B0092FEFD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		28A36BB71D81887B0092FEFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		28A36BBA1D81887B0092FEFD /* PlanAndDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlanAndDo.xcdatamodel; sourceTree = "<group>"; };
 		28A36BBC1D81887B0092FEFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -455,6 +452,15 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		2803AFAB1D8ABDF60032ACFB /* SideBars */ = {
+			isa = PBXGroup;
+			children = (
+				282C28C71D829C1F0061761E /* AMSideBarViewController */,
+				2803AF9C1D8AB9F80032ACFB /* AndroidSideBar */,
+			);
+			name = SideBars;
+			sourceTree = "<group>";
+		};
 		282C28C71D829C1F0061761E /* AMSideBarViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -468,20 +474,9 @@
 			isa = PBXGroup;
 			children = (
 				2803AF951D8AB9A80032ACFB /* BaseViewController */,
-				282C28C91D829C4F0061761E /* ViewController */,
-				282C28C71D829C1F0061761E /* AMSideBarViewController */,
-				2803AF9C1D8AB9F80032ACFB /* AndroidSideBar */,
+				2803AFAB1D8ABDF60032ACFB /* SideBars */,
 			);
 			name = ViewControllers;
-			sourceTree = "<group>";
-		};
-		282C28C91D829C4F0061761E /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				28A36BB31D81887B0092FEFD /* ViewController.h */,
-				28A36BB41D81887B0092FEFD /* ViewController.m */,
-			);
-			name = ViewController;
 			sourceTree = "<group>";
 		};
 		282C28CA1D829C610061761E /* KSObject */ = {
@@ -677,7 +672,6 @@
 				272F91C31D8A6C0C00A0330B /* DescriptionViewController.m in Sources */,
 				27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */,
 				28797F711D87E24500AEDE0A /* UIImage+ACScaleImage.m in Sources */,
-				28A36BB51D81887B0092FEFD /* ViewController.m in Sources */,
 				2786E7B01D883692009BDB2A /* TabletasksViewController.m in Sources */,
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
 				2803AF811D8A8F190032ACFB /* KSSettingsCell.m in Sources */,
