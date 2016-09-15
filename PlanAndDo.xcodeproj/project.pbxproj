@@ -27,6 +27,8 @@
 		27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0FF1D81A20400D47FCD /* BaseTask.m */; };
 		27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A1021D81A3CB00D47FCD /* KSTask.m */; };
 		27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A1051D81A61300D47FCD /* KSTaskCollection.m */; };
+		2803AF7C1D8A8EBF0032ACFB /* KSSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2803AF7B1D8A8EBF0032ACFB /* KSSettingsCell.xib */; };
+		2803AF811D8A8F190032ACFB /* KSSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF801D8A8F190032ACFB /* KSSettingsCell.m */; };
 		282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282C28C51D829A600061761E /* AMSideBarViewController.m */; };
 		286E26201D883FF00055A7BF /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286E261F1D883FF00055A7BF /* SettingsViewController.m */; };
 		28797F711D87E24500AEDE0A /* UIImage+ACScaleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 28797F701D87E24500AEDE0A /* UIImage+ACScaleImage.m */; };
@@ -92,6 +94,9 @@
 		27B1A1021D81A3CB00D47FCD /* KSTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSTask.m; sourceTree = "<group>"; };
 		27B1A1041D81A61300D47FCD /* KSTaskCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSTaskCollection.h; sourceTree = "<group>"; };
 		27B1A1051D81A61300D47FCD /* KSTaskCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSTaskCollection.m; sourceTree = "<group>"; };
+		2803AF7B1D8A8EBF0032ACFB /* KSSettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KSSettingsCell.xib; path = ../KSSettingsCell.xib; sourceTree = "<group>"; };
+		2803AF7F1D8A8F190032ACFB /* KSSettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSSettingsCell.h; sourceTree = "<group>"; };
+		2803AF801D8A8F190032ACFB /* KSSettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSSettingsCell.m; sourceTree = "<group>"; };
 		282C28C41D829A600061761E /* AMSideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSideBarViewController.h; sourceTree = "<group>"; };
 		282C28C51D829A600061761E /* AMSideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSideBarViewController.m; sourceTree = "<group>"; };
 		286E261E1D883FF00055A7BF /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -176,6 +181,36 @@
 				27B1A1051D81A61300D47FCD /* KSTaskCollection.m */,
 			);
 			name = TaskModels;
+			sourceTree = "<group>";
+		};
+		2803AF7D1D8A8EE20032ACFB /* PriorityCell */ = {
+			isa = PBXGroup;
+			children = (
+				278BAA4E1D8977E4002D38CF /* PriorityCell.xib */,
+				278BAA501D897A36002D38CF /* PriorityCell.h */,
+				278BAA511D897A36002D38CF /* PriorityCell.m */,
+			);
+			name = PriorityCell;
+			sourceTree = "<group>";
+		};
+		2803AF7E1D8A8EE70032ACFB /* TaskTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2786E7B31D884421009BDB2A /* TaskTableViewCell.h */,
+				2786E7B11D883F4D009BDB2A /* KSTaskCell.xib */,
+				2786E7B41D884421009BDB2A /* TaskTableViewCell.m */,
+			);
+			name = TaskTableViewCell;
+			sourceTree = "<group>";
+		};
+		2803AF821D8A8F1E0032ACFB /* SettingsCell */ = {
+			isa = PBXGroup;
+			children = (
+				2803AF7B1D8A8EBF0032ACFB /* KSSettingsCell.xib */,
+				2803AF7F1D8A8F190032ACFB /* KSSettingsCell.h */,
+				2803AF801D8A8F190032ACFB /* KSSettingsCell.m */,
+			);
+			name = SettingsCell;
 			sourceTree = "<group>";
 		};
 		282C28C71D829C1F0061761E /* AMSideBarViewController */ = {
@@ -285,12 +320,9 @@
 				28A36BC11D81887B0092FEFD /* Info.plist */,
 				282C28CC1D829CAC0061761E /* CoreData */,
 				28A36BAD1D81887B0092FEFD /* Supporting Files */,
-				2786E7B11D883F4D009BDB2A /* KSTaskCell.xib */,
-				2786E7B31D884421009BDB2A /* TaskTableViewCell.h */,
-				2786E7B41D884421009BDB2A /* TaskTableViewCell.m */,
-				278BAA4E1D8977E4002D38CF /* PriorityCell.xib */,
-				278BAA501D897A36002D38CF /* PriorityCell.h */,
-				278BAA511D897A36002D38CF /* PriorityCell.m */,
+				2803AF7E1D8A8EE70032ACFB /* TaskTableViewCell */,
+				2803AF7D1D8A8EE20032ACFB /* PriorityCell */,
+				2803AF821D8A8F1E0032ACFB /* SettingsCell */,
 			);
 			path = PlanAndDo;
 			sourceTree = "<group>";
@@ -396,6 +428,7 @@
 			files = (
 				2786E7B21D883F4D009BDB2A /* KSTaskCell.xib in Resources */,
 				28A36BC01D81887B0092FEFD /* LaunchScreen.storyboard in Resources */,
+				2803AF7C1D8A8EBF0032ACFB /* KSSettingsCell.xib in Resources */,
 				28A36BBD1D81887B0092FEFD /* Assets.xcassets in Resources */,
 				278BAA4F1D8977E4002D38CF /* PriorityCell.xib in Resources */,
 				28A36BB81D81887B0092FEFD /* Main.storyboard in Resources */,
@@ -426,6 +459,7 @@
 				28A36BB51D81887B0092FEFD /* ViewController.m in Sources */,
 				2786E7B01D883692009BDB2A /* TabletasksViewController.m in Sources */,
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
+				2803AF811D8A8F190032ACFB /* KSSettingsCell.m in Sources */,
 				278BAA581D89BB32002D38CF /* BaseTableViewController.m in Sources */,
 				28797F741D88202C00AEDE0A /* CreateAccountViewController.m in Sources */,
 				27B1A0FD1D81A12A00D47FCD /* KSShortTask.m in Sources */,
