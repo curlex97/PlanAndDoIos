@@ -106,7 +106,9 @@
 
 -(void)headDidTap
 {
-    
+    UITextField * textField=[[UITextField alloc] initWithFrame:CGRectMake(8, 8, self.view.bounds.size.width-16, self.view.bounds.size.height-16)];
+    textField.backgroundColor=[UIColor redColor];
+    [[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] addSubview:textField];
 }
 
 -(void)categoryDidTap
