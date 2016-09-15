@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseTableViewController.h"
-@interface AddTaskViewController : BaseTableViewController <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
+@interface AddTaskViewController : BaseTableViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

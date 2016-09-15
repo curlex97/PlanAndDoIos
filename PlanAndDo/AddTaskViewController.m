@@ -8,6 +8,9 @@
 
 #import "AddTaskViewController.h"
 #import "PriorityCell.h"
+#import "SelectCategoryViewController.h"
+#import "DescriptionViewController.h"
+#import "TaskListViewController.h"
 
 @interface AddTaskViewController ()
 @property (nonatomic)UISegmentedControl * segment;
@@ -15,6 +18,7 @@
 @property (nonatomic)UISlider * slider;
 @property (nonatomic)UIPanGestureRecognizer * pan;
 @property (nonatomic)float lastValue;
+@property (nonatomic)NSArray * methods;
 @end
 
 @implementation AddTaskViewController
@@ -30,7 +34,6 @@
     cell.textLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     
-    PriorityCell * priorityCell;
     switch (indexPath.row)
     {
         case 0:
@@ -47,6 +50,13 @@
             break;
     }
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    SEL selector = NSSelectorFromString(self.methods[indexPath.row]);
+    ((void (*)(id, SEL))[self methodForSelector:selector])(self, selector);
 }
 
 //-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,6 +104,36 @@
     [self.tableView reloadData];
 }
 
+-(void)headDidTap
+{
+
+}
+
+-(void)categoryDidTap
+{
+    SelectCategoryViewController * categorySelect=[[SelectCategoryViewController alloc] init];
+    [self.navigationController pushViewController:categorySelect animated:YES];
+}
+
+-(void)listOrDescriptionDidTap
+{
+    if(self.segment.selectedSegmentIndex)
+    {
+        TaskListViewController * tasksViewController =[[TaskListViewController alloc] init];
+        [self.navigationController pushViewController:tasksViewController animated:YES];
+    }
+    else
+    {
+        DescriptionViewController * descController=[[DescriptionViewController alloc] init];
+        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:descController] animated:YES completion:nil];
+    }
+}
+
+-(void)dateTimeDidTap
+{
+    
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
@@ -133,7 +173,10 @@
     [footerPriorityView addSubview:self.slider];
     [footerPriorityView addSubview:self.priorityDescLabel];
     self.tableView.tableFooterView=footerPriorityView;
+    
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    
+    self.methods=[NSArray arrayWithObjects:@"headDidTap",@"categoryDidTap",@"listOrDescriptionDidTap",@"dateTimeDidTap", nil];
 }
 @end
