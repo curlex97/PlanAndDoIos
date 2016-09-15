@@ -242,6 +242,9 @@
 		2803AF951D8AB9A80032ACFB /* BaseViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2803AFA51D8ABA3E0032ACFB /* Description */,
+				2803AF961D8AB9B20032ACFB /* BaseAuthViewController */,
+				2803AF971D8AB9BC0032ACFB /* BaseTableViewController */,
 				270DF9E51D83F56E004D3681 /* BaseViewController.h */,
 				270DF9E61D83F56E004D3681 /* BaseViewController.m */,
 			);
@@ -251,6 +254,10 @@
 		2803AF961D8AB9B20032ACFB /* BaseAuthViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2803AF9D1D8ABA020032ACFB /* ChangeEmail */,
+				2803AF9E1D8ABA0B0032ACFB /* Login */,
+				2803AF9F1D8ABA100032ACFB /* CreateAccount */,
+				2803AFA01D8ABA170032ACFB /* NewPassword */,
 				278BAA531D89BA4A002D38CF /* BaseAuthViewController.h */,
 				278BAA541D89BA4A002D38CF /* BaseAuthViewController.m */,
 			);
@@ -260,6 +267,15 @@
 		2803AF971D8AB9BC0032ACFB /* BaseTableViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2803AF981D8AB9CC0032ACFB /* FormatDate */,
+				2803AF991D8AB9D40032ACFB /* StartDay */,
+				2803AF9A1D8AB9DB0032ACFB /* StartPage */,
+				2803AF9B1D8AB9E50032ACFB /* FormatTime */,
+				2803AFA11D8ABA1E0032ACFB /* TableTasks */,
+				2803AFA21D8ABA240032ACFB /* Settings */,
+				2803AFA31D8ABA290032ACFB /* AddTask */,
+				2803AFA41D8ABA2F0032ACFB /* SelectCategory */,
+				2803AFA61D8ABA470032ACFB /* TaskList */,
 				278BAA561D89BB32002D38CF /* BaseTableViewController.h */,
 				278BAA571D89BB32002D38CF /* BaseTableViewController.m */,
 			);
@@ -452,25 +468,9 @@
 			isa = PBXGroup;
 			children = (
 				2803AF951D8AB9A80032ACFB /* BaseViewController */,
-				2803AF961D8AB9B20032ACFB /* BaseAuthViewController */,
-				2803AF971D8AB9BC0032ACFB /* BaseTableViewController */,
-				2803AF981D8AB9CC0032ACFB /* FormatDate */,
-				2803AF991D8AB9D40032ACFB /* StartDay */,
-				2803AF9A1D8AB9DB0032ACFB /* StartPage */,
-				2803AF9B1D8AB9E50032ACFB /* FormatTime */,
 				282C28C91D829C4F0061761E /* ViewController */,
 				282C28C71D829C1F0061761E /* AMSideBarViewController */,
 				2803AF9C1D8AB9F80032ACFB /* AndroidSideBar */,
-				2803AF9D1D8ABA020032ACFB /* ChangeEmail */,
-				2803AF9E1D8ABA0B0032ACFB /* Login */,
-				2803AF9F1D8ABA100032ACFB /* CreateAccount */,
-				2803AFA01D8ABA170032ACFB /* NewPassword */,
-				2803AFA11D8ABA1E0032ACFB /* TableTasks */,
-				2803AFA21D8ABA240032ACFB /* Settings */,
-				2803AFA31D8ABA290032ACFB /* AddTask */,
-				2803AFA41D8ABA2F0032ACFB /* SelectCategory */,
-				2803AFA51D8ABA3E0032ACFB /* Description */,
-				2803AFA61D8ABA470032ACFB /* TaskList */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
