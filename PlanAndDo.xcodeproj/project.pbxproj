@@ -32,6 +32,12 @@
 		27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A1051D81A61300D47FCD /* KSTaskCollection.m */; };
 		2803AF7C1D8A8EBF0032ACFB /* KSSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2803AF7B1D8A8EBF0032ACFB /* KSSettingsCell.xib */; };
 		2803AF811D8A8F190032ACFB /* KSSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF801D8A8F190032ACFB /* KSSettingsCell.m */; };
+		2803AF861D8AA0AC0032ACFB /* FormatDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF851D8AA0AC0032ACFB /* FormatDateViewController.m */; };
+		2803AF881D8AA4320032ACFB /* KSCheckSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2803AF871D8AA4320032ACFB /* KSCheckSettingsTableViewCell.xib */; };
+		2803AF8B1D8AA5560032ACFB /* KSCheckSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF8A1D8AA5560032ACFB /* KSCheckSettingsTableViewCell.m */; };
+		2803AF8E1D8AA8ED0032ACFB /* FormatTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF8D1D8AA8ED0032ACFB /* FormatTimeViewController.m */; };
+		2803AF911D8AAA710032ACFB /* StartDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF901D8AAA710032ACFB /* StartDayViewController.m */; };
+		2803AF941D8AAB1D0032ACFB /* StartPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF931D8AAB1D0032ACFB /* StartPageViewController.m */; };
 		282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282C28C51D829A600061761E /* AMSideBarViewController.m */; };
 		286E26201D883FF00055A7BF /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286E261F1D883FF00055A7BF /* SettingsViewController.m */; };
 		28797F711D87E24500AEDE0A /* UIImage+ACScaleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 28797F701D87E24500AEDE0A /* UIImage+ACScaleImage.m */; };
@@ -106,6 +112,17 @@
 		2803AF7B1D8A8EBF0032ACFB /* KSSettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KSSettingsCell.xib; path = ../KSSettingsCell.xib; sourceTree = "<group>"; };
 		2803AF7F1D8A8F190032ACFB /* KSSettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSSettingsCell.h; sourceTree = "<group>"; };
 		2803AF801D8A8F190032ACFB /* KSSettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSSettingsCell.m; sourceTree = "<group>"; };
+		2803AF841D8AA0AC0032ACFB /* FormatDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FormatDateViewController.h; path = ../FormatDateViewController.h; sourceTree = "<group>"; };
+		2803AF851D8AA0AC0032ACFB /* FormatDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FormatDateViewController.m; path = ../FormatDateViewController.m; sourceTree = "<group>"; };
+		2803AF871D8AA4320032ACFB /* KSCheckSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KSCheckSettingsTableViewCell.xib; sourceTree = "<group>"; };
+		2803AF891D8AA5560032ACFB /* KSCheckSettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSCheckSettingsTableViewCell.h; sourceTree = "<group>"; };
+		2803AF8A1D8AA5560032ACFB /* KSCheckSettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSCheckSettingsTableViewCell.m; sourceTree = "<group>"; };
+		2803AF8C1D8AA8ED0032ACFB /* FormatTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatTimeViewController.h; sourceTree = "<group>"; };
+		2803AF8D1D8AA8ED0032ACFB /* FormatTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatTimeViewController.m; sourceTree = "<group>"; };
+		2803AF8F1D8AAA710032ACFB /* StartDayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartDayViewController.h; sourceTree = "<group>"; };
+		2803AF901D8AAA710032ACFB /* StartDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartDayViewController.m; sourceTree = "<group>"; };
+		2803AF921D8AAB1D0032ACFB /* StartPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewController.h; sourceTree = "<group>"; };
+		2803AF931D8AAB1D0032ACFB /* StartPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewController.m; sourceTree = "<group>"; };
 		282C28C41D829A600061761E /* AMSideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSideBarViewController.h; sourceTree = "<group>"; };
 		282C28C51D829A600061761E /* AMSideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSideBarViewController.m; sourceTree = "<group>"; };
 		286E261E1D883FF00055A7BF /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -234,6 +251,14 @@
 		282C28C81D829C320061761E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2803AF841D8AA0AC0032ACFB /* FormatDateViewController.h */,
+				2803AF851D8AA0AC0032ACFB /* FormatDateViewController.m */,
+				2803AF8F1D8AAA710032ACFB /* StartDayViewController.h */,
+				2803AF901D8AAA710032ACFB /* StartDayViewController.m */,
+				2803AF921D8AAB1D0032ACFB /* StartPageViewController.h */,
+				2803AF931D8AAB1D0032ACFB /* StartPageViewController.m */,
+				2803AF8C1D8AA8ED0032ACFB /* FormatTimeViewController.h */,
+				2803AF8D1D8AA8ED0032ACFB /* FormatTimeViewController.m */,
 				282C28C91D829C4F0061761E /* ViewController */,
 				282C28C71D829C1F0061761E /* AMSideBarViewController */,
 				270DF9DF1D83E217004D3681 /* AMAndroidSideBarViewController.h */,
@@ -333,6 +358,9 @@
 				282C28CB1D829C9C0061761E /* UI */,
 				28A36BBC1D81887B0092FEFD /* Assets.xcassets */,
 				28A36BC11D81887B0092FEFD /* Info.plist */,
+				2803AF871D8AA4320032ACFB /* KSCheckSettingsTableViewCell.xib */,
+				2803AF891D8AA5560032ACFB /* KSCheckSettingsTableViewCell.h */,
+				2803AF8A1D8AA5560032ACFB /* KSCheckSettingsTableViewCell.m */,
 				282C28CC1D829CAC0061761E /* CoreData */,
 				28A36BAD1D81887B0092FEFD /* Supporting Files */,
 				2803AF7E1D8A8EE70032ACFB /* TaskTableViewCell */,
@@ -443,6 +471,7 @@
 			files = (
 				2786E7B21D883F4D009BDB2A /* KSTaskCell.xib in Resources */,
 				28A36BC01D81887B0092FEFD /* LaunchScreen.storyboard in Resources */,
+				2803AF881D8AA4320032ACFB /* KSCheckSettingsTableViewCell.xib in Resources */,
 				2803AF7C1D8A8EBF0032ACFB /* KSSettingsCell.xib in Resources */,
 				28A36BBD1D81887B0092FEFD /* Assets.xcassets in Resources */,
 				278BAA4F1D8977E4002D38CF /* PriorityCell.xib in Resources */,
@@ -480,15 +509,20 @@
 				28797F741D88202C00AEDE0A /* CreateAccountViewController.m in Sources */,
 				272F91C61D8A704500A0330B /* TaskListViewController.m in Sources */,
 				27B1A0FD1D81A12A00D47FCD /* KSShortTask.m in Sources */,
+				2803AF861D8AA0AC0032ACFB /* FormatDateViewController.m in Sources */,
 				272F91C01D8A678800A0330B /* SelectCategoryViewController.m in Sources */,
 				286E26201D883FF00055A7BF /* SettingsViewController.m in Sources */,
 				28A36BB21D81887B0092FEFD /* AppDelegate.m in Sources */,
 				270DF9E71D83F56E004D3681 /* BaseViewController.m in Sources */,
+				2803AF8B1D8AA5560032ACFB /* KSCheckSettingsTableViewCell.m in Sources */,
 				27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */,
 				278BAA4D1D896E30002D38CF /* AddTaskViewController.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
 				270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */,
+				2803AF911D8AAA710032ACFB /* StartDayViewController.m in Sources */,
+				2803AF8E1D8AA8ED0032ACFB /* FormatTimeViewController.m in Sources */,
 				2786E7AD1D881507009BDB2A /* LoginViewController.m in Sources */,
+				2803AF941D8AAB1D0032ACFB /* StartPageViewController.m in Sources */,
 				278BAA521D897A36002D38CF /* PriorityCell.m in Sources */,
 				2786E7B51D884421009BDB2A /* TaskTableViewCell.m in Sources */,
 				27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */,

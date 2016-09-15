@@ -8,6 +8,11 @@
 
 #import "SettingsViewController.h"
 #import "KSSettingsCell.h"
+#import "FormatDateViewController.h"
+#import "FormatTimeViewController.h"
+#import "StartDayViewController.h"
+#import "StartPageViewController.h"
+
 
 @interface SettingsViewController()<UITableViewDelegate, UITableViewDataSource>
 @end
@@ -61,6 +66,30 @@
     return 50;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.row) {
+            
+        case 0:
+            [self.navigationController pushViewController:[[StartPageViewController alloc] init] animated:YES];
+            break;
+            
+        case 1:
+            [self.navigationController pushViewController:[[FormatDateViewController alloc] init] animated:YES];
+            break;
+            
+        case 2:
+            [self.navigationController pushViewController:[[FormatTimeViewController alloc] init] animated:YES];
+            break;
+            
+        case 3:
+            [self.navigationController pushViewController:[[StartDayViewController alloc] init] animated:YES];
+            break;
+            
+        default:
+            break;
+    }
+}
 
 
 @end
