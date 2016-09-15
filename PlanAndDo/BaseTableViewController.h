@@ -11,4 +11,9 @@
 @interface BaseTableViewController : BaseViewController
 @property (nonatomic)UITableView * tableView;
 @property (nonatomic)UIRefreshControl * refresh;
+
+@property NSLayoutConstraint *trailing;
+@property NSLayoutConstraint *leading;
+@property NSLayoutConstraint *bottom;
+@property NSLayoutConstraint *top;
 @end

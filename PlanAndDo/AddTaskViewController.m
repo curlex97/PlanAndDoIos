@@ -106,7 +106,7 @@
 
 -(void)headDidTap
 {
-
+    
 }
 
 -(void)categoryDidTap

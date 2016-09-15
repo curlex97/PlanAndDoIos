@@ -9,10 +9,6 @@
 #import "BaseTableViewController.h"
 
 @interface BaseTableViewController ()
-@property NSLayoutConstraint *trailing;
-@property NSLayoutConstraint *leading;
-@property NSLayoutConstraint *bottom;
-@property NSLayoutConstraint *top;
 
 @end
 
