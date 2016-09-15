@@ -11,7 +11,6 @@
 #import "AMAndroidSideBarViewController.h"
 #import "BaseViewController.h"
 #import "KSApplicatipnColor.h"
-#import "ViewController.h"
 #import "LoginViewController.h"
 
 @interface AppDelegate ()
