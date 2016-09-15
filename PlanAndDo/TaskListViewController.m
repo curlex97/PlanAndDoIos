@@ -1,10 +1,3 @@
-//
-//  TaskListViewController.m
-//  PlanAndDo
-//
-//  Created by Амин on 15.09.16.
-//  Copyright © 2016 TodoTeamGroup. All rights reserved.
-//
 
 #import "TaskListViewController.h"
 
@@ -64,6 +57,10 @@
     self.tableView.dataSource=self;
 }
 
+-(void)dealloc
+{
+    self.navigationController.toolbarHidden=YES;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
