@@ -24,6 +24,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.categories = [NSArray array];
+    
     self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Task",@"List", nil]];
     self.segment.tintColor=[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
     [self.segment setSelectedSegmentIndex:0];
@@ -63,7 +64,7 @@
                 cell.paramNameLabel.text = @"Week";
                 break;
             case 3:
-                cell.paramNameLabel.text = @"Month";
+                cell.paramNameLabel.text = @"Backlog";
                 break;
             case 4:
                 cell.paramNameLabel.text = @"Archive";
