@@ -239,6 +239,206 @@
 			name = SettingsCell;
 			sourceTree = "<group>";
 		};
+		2803AF951D8AB9A80032ACFB /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				270DF9E51D83F56E004D3681 /* BaseViewController.h */,
+				270DF9E61D83F56E004D3681 /* BaseViewController.m */,
+			);
+			name = BaseViewController;
+			sourceTree = "<group>";
+		};
+		2803AF961D8AB9B20032ACFB /* BaseAuthViewController */ = {
+			isa = PBXGroup;
+			children = (
+				278BAA531D89BA4A002D38CF /* BaseAuthViewController.h */,
+				278BAA541D89BA4A002D38CF /* BaseAuthViewController.m */,
+			);
+			name = BaseAuthViewController;
+			sourceTree = "<group>";
+		};
+		2803AF971D8AB9BC0032ACFB /* BaseTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				278BAA561D89BB32002D38CF /* BaseTableViewController.h */,
+				278BAA571D89BB32002D38CF /* BaseTableViewController.m */,
+			);
+			name = BaseTableViewController;
+			sourceTree = "<group>";
+		};
+		2803AF981D8AB9CC0032ACFB /* FormatDate */ = {
+			isa = PBXGroup;
+			children = (
+				2803AF841D8AA0AC0032ACFB /* FormatDateViewController.h */,
+				2803AF851D8AA0AC0032ACFB /* FormatDateViewController.m */,
+			);
+			name = FormatDate;
+			sourceTree = "<group>";
+		};
+		2803AF991D8AB9D40032ACFB /* StartDay */ = {
+			isa = PBXGroup;
+			children = (
+				2803AF8F1D8AAA710032ACFB /* StartDayViewController.h */,
+				2803AF901D8AAA710032ACFB /* StartDayViewController.m */,
+			);
+			name = StartDay;
+			sourceTree = "<group>";
+		};
+		2803AF9A1D8AB9DB0032ACFB /* StartPage */ = {
+			isa = PBXGroup;
+			children = (
+				2803AF921D8AAB1D0032ACFB /* StartPageViewController.h */,
+				2803AF931D8AAB1D0032ACFB /* StartPageViewController.m */,
+			);
+			name = StartPage;
+			sourceTree = "<group>";
+		};
+		2803AF9B1D8AB9E50032ACFB /* FormatTime */ = {
+			isa = PBXGroup;
+			children = (
+				2803AF8C1D8AA8ED0032ACFB /* FormatTimeViewController.h */,
+				2803AF8D1D8AA8ED0032ACFB /* FormatTimeViewController.m */,
+			);
+			name = FormatTime;
+			sourceTree = "<group>";
+		};
+		2803AF9C1D8AB9F80032ACFB /* AndroidSideBar */ = {
+			isa = PBXGroup;
+			children = (
+				270DF9DF1D83E217004D3681 /* AMAndroidSideBarViewController.h */,
+				270DF9E01D83E217004D3681 /* AMAndroidSideBarViewController.m */,
+			);
+			name = AndroidSideBar;
+			sourceTree = "<group>";
+		};
+		2803AF9D1D8ABA020032ACFB /* ChangeEmail */ = {
+			isa = PBXGroup;
+			children = (
+				28797F781D88370600AEDE0A /* ChangeEmailViewController.h */,
+				28797F791D88370600AEDE0A /* ChangeEmailViewController.m */,
+			);
+			name = ChangeEmail;
+			sourceTree = "<group>";
+		};
+		2803AF9E1D8ABA0B0032ACFB /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				2786E7AB1D881507009BDB2A /* LoginViewController.h */,
+				2786E7AC1D881507009BDB2A /* LoginViewController.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		2803AF9F1D8ABA100032ACFB /* CreateAccount */ = {
+			isa = PBXGroup;
+			children = (
+				28797F721D88202C00AEDE0A /* CreateAccountViewController.h */,
+				28797F731D88202C00AEDE0A /* CreateAccountViewController.m */,
+			);
+			name = CreateAccount;
+			sourceTree = "<group>";
+		};
+		2803AFA01D8ABA170032ACFB /* NewPassword */ = {
+			isa = PBXGroup;
+			children = (
+				28797F751D88309200AEDE0A /* NewPasswordViewController.h */,
+				28797F761D88309200AEDE0A /* NewPasswordViewController.m */,
+			);
+			name = NewPassword;
+			sourceTree = "<group>";
+		};
+		2803AFA11D8ABA1E0032ACFB /* TableTasks */ = {
+			isa = PBXGroup;
+			children = (
+				2786E7AE1D883692009BDB2A /* TabletasksViewController.h */,
+				2786E7AF1D883692009BDB2A /* TabletasksViewController.m */,
+			);
+			name = TableTasks;
+			sourceTree = "<group>";
+		};
+		2803AFA21D8ABA240032ACFB /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				286E261E1D883FF00055A7BF /* SettingsViewController.h */,
+				286E261F1D883FF00055A7BF /* SettingsViewController.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		2803AFA31D8ABA290032ACFB /* AddTask */ = {
+			isa = PBXGroup;
+			children = (
+				278BAA4B1D896E30002D38CF /* AddTaskViewController.h */,
+				278BAA4C1D896E30002D38CF /* AddTaskViewController.m */,
+			);
+			name = AddTask;
+			sourceTree = "<group>";
+		};
+		2803AFA41D8ABA2F0032ACFB /* SelectCategory */ = {
+			isa = PBXGroup;
+			children = (
+				272F91BE1D8A678800A0330B /* SelectCategoryViewController.h */,
+				272F91BF1D8A678800A0330B /* SelectCategoryViewController.m */,
+			);
+			name = SelectCategory;
+			sourceTree = "<group>";
+		};
+		2803AFA51D8ABA3E0032ACFB /* Description */ = {
+			isa = PBXGroup;
+			children = (
+				272F91C11D8A6C0C00A0330B /* DescriptionViewController.h */,
+				272F91C21D8A6C0C00A0330B /* DescriptionViewController.m */,
+			);
+			name = Description;
+			sourceTree = "<group>";
+		};
+		2803AFA61D8ABA470032ACFB /* TaskList */ = {
+			isa = PBXGroup;
+			children = (
+				272F91C41D8A704500A0330B /* TaskListViewController.h */,
+				272F91C51D8A704500A0330B /* TaskListViewController.m */,
+			);
+			name = TaskList;
+			sourceTree = "<group>";
+		};
+		2803AFA71D8ABA580032ACFB /* CheckSettingsCell */ = {
+			isa = PBXGroup;
+			children = (
+				2803AF871D8AA4320032ACFB /* KSCheckSettingsTableViewCell.xib */,
+				2803AF891D8AA5560032ACFB /* KSCheckSettingsTableViewCell.h */,
+				2803AF8A1D8AA5560032ACFB /* KSCheckSettingsTableViewCell.m */,
+			);
+			name = CheckSettingsCell;
+			sourceTree = "<group>";
+		};
+		2803AFA81D8ABA660032ACFB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2803AFA71D8ABA580032ACFB /* CheckSettingsCell */,
+				2803AF7E1D8A8EE70032ACFB /* TaskTableViewCell */,
+				2803AF7D1D8A8EE20032ACFB /* PriorityCell */,
+				2803AF821D8A8F1E0032ACFB /* SettingsCell */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		2803AFA91D8ABA8F0032ACFB /* ScaleImage */ = {
+			isa = PBXGroup;
+			children = (
+				28797F6F1D87E24500AEDE0A /* UIImage+ACScaleImage.h */,
+				28797F701D87E24500AEDE0A /* UIImage+ACScaleImage.m */,
+			);
+			name = ScaleImage;
+			sourceTree = "<group>";
+		};
+		2803AFAA1D8ABA980032ACFB /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				2803AFA91D8ABA8F0032ACFB /* ScaleImage */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		282C28C71D829C1F0061761E /* AMSideBarViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,38 +451,26 @@
 		282C28C81D829C320061761E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				2803AF841D8AA0AC0032ACFB /* FormatDateViewController.h */,
-				2803AF851D8AA0AC0032ACFB /* FormatDateViewController.m */,
-				2803AF8F1D8AAA710032ACFB /* StartDayViewController.h */,
-				2803AF901D8AAA710032ACFB /* StartDayViewController.m */,
-				2803AF921D8AAB1D0032ACFB /* StartPageViewController.h */,
-				2803AF931D8AAB1D0032ACFB /* StartPageViewController.m */,
-				2803AF8C1D8AA8ED0032ACFB /* FormatTimeViewController.h */,
-				2803AF8D1D8AA8ED0032ACFB /* FormatTimeViewController.m */,
+				2803AF951D8AB9A80032ACFB /* BaseViewController */,
+				2803AF961D8AB9B20032ACFB /* BaseAuthViewController */,
+				2803AF971D8AB9BC0032ACFB /* BaseTableViewController */,
+				2803AF981D8AB9CC0032ACFB /* FormatDate */,
+				2803AF991D8AB9D40032ACFB /* StartDay */,
+				2803AF9A1D8AB9DB0032ACFB /* StartPage */,
+				2803AF9B1D8AB9E50032ACFB /* FormatTime */,
 				282C28C91D829C4F0061761E /* ViewController */,
 				282C28C71D829C1F0061761E /* AMSideBarViewController */,
-				270DF9DF1D83E217004D3681 /* AMAndroidSideBarViewController.h */,
-				270DF9E01D83E217004D3681 /* AMAndroidSideBarViewController.m */,
-				28797F781D88370600AEDE0A /* ChangeEmailViewController.h */,
-				28797F791D88370600AEDE0A /* ChangeEmailViewController.m */,
-				2786E7AB1D881507009BDB2A /* LoginViewController.h */,
-				2786E7AC1D881507009BDB2A /* LoginViewController.m */,
-				28797F721D88202C00AEDE0A /* CreateAccountViewController.h */,
-				28797F731D88202C00AEDE0A /* CreateAccountViewController.m */,
-				28797F751D88309200AEDE0A /* NewPasswordViewController.h */,
-				28797F761D88309200AEDE0A /* NewPasswordViewController.m */,
-				2786E7AE1D883692009BDB2A /* TabletasksViewController.h */,
-				2786E7AF1D883692009BDB2A /* TabletasksViewController.m */,
-				286E261E1D883FF00055A7BF /* SettingsViewController.h */,
-				286E261F1D883FF00055A7BF /* SettingsViewController.m */,
-				278BAA4B1D896E30002D38CF /* AddTaskViewController.h */,
-				278BAA4C1D896E30002D38CF /* AddTaskViewController.m */,
-				272F91BE1D8A678800A0330B /* SelectCategoryViewController.h */,
-				272F91BF1D8A678800A0330B /* SelectCategoryViewController.m */,
-				272F91C11D8A6C0C00A0330B /* DescriptionViewController.h */,
-				272F91C21D8A6C0C00A0330B /* DescriptionViewController.m */,
-				272F91C41D8A704500A0330B /* TaskListViewController.h */,
-				272F91C51D8A704500A0330B /* TaskListViewController.m */,
+				2803AF9C1D8AB9F80032ACFB /* AndroidSideBar */,
+				2803AF9D1D8ABA020032ACFB /* ChangeEmail */,
+				2803AF9E1D8ABA0B0032ACFB /* Login */,
+				2803AF9F1D8ABA100032ACFB /* CreateAccount */,
+				2803AFA01D8ABA170032ACFB /* NewPassword */,
+				2803AFA11D8ABA1E0032ACFB /* TableTasks */,
+				2803AFA21D8ABA240032ACFB /* Settings */,
+				2803AFA31D8ABA290032ACFB /* AddTask */,
+				2803AFA41D8ABA2F0032ACFB /* SelectCategory */,
+				2803AFA51D8ABA3E0032ACFB /* Description */,
+				2803AFA61D8ABA470032ACFB /* TaskList */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -345,27 +533,15 @@
 			children = (
 				28A36BB01D81887B0092FEFD /* AppDelegate.h */,
 				28A36BB11D81887B0092FEFD /* AppDelegate.m */,
-				270DF9E51D83F56E004D3681 /* BaseViewController.h */,
-				270DF9E61D83F56E004D3681 /* BaseViewController.m */,
-				278BAA531D89BA4A002D38CF /* BaseAuthViewController.h */,
-				278BAA541D89BA4A002D38CF /* BaseAuthViewController.m */,
-				278BAA561D89BB32002D38CF /* BaseTableViewController.h */,
-				278BAA571D89BB32002D38CF /* BaseTableViewController.m */,
-				28797F6F1D87E24500AEDE0A /* UIImage+ACScaleImage.h */,
-				28797F701D87E24500AEDE0A /* UIImage+ACScaleImage.m */,
+				2803AFAA1D8ABA980032ACFB /* Categories */,
 				27B1A0F01D818C9900D47FCD /* Models */,
 				282C28C81D829C320061761E /* ViewControllers */,
 				282C28CB1D829C9C0061761E /* UI */,
 				28A36BBC1D81887B0092FEFD /* Assets.xcassets */,
 				28A36BC11D81887B0092FEFD /* Info.plist */,
-				2803AF871D8AA4320032ACFB /* KSCheckSettingsTableViewCell.xib */,
-				2803AF891D8AA5560032ACFB /* KSCheckSettingsTableViewCell.h */,
-				2803AF8A1D8AA5560032ACFB /* KSCheckSettingsTableViewCell.m */,
+				2803AFA81D8ABA660032ACFB /* Cells */,
 				282C28CC1D829CAC0061761E /* CoreData */,
 				28A36BAD1D81887B0092FEFD /* Supporting Files */,
-				2803AF7E1D8A8EE70032ACFB /* TaskTableViewCell */,
-				2803AF7D1D8A8EE20032ACFB /* PriorityCell */,
-				2803AF821D8A8F1E0032ACFB /* SettingsCell */,
 			);
 			path = PlanAndDo;
 			sourceTree = "<group>";
