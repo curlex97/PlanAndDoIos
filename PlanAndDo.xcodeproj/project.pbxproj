@@ -10,6 +10,9 @@
 		270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E01D83E217004D3681 /* AMAndroidSideBarViewController.m */; };
 		270DF9E41D83F0B0004D3681 /* KSApplicatipnColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E31D83F0B0004D3681 /* KSApplicatipnColor.m */; };
 		270DF9E71D83F56E004D3681 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E61D83F56E004D3681 /* BaseViewController.m */; };
+		272F91C01D8A678800A0330B /* SelectCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91BF1D8A678800A0330B /* SelectCategoryViewController.m */; };
+		272F91C31D8A6C0C00A0330B /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C21D8A6C0C00A0330B /* DescriptionViewController.m */; };
+		272F91C61D8A704500A0330B /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C51D8A704500A0330B /* TaskListViewController.m */; };
 		2786E7AD1D881507009BDB2A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7AC1D881507009BDB2A /* LoginViewController.m */; };
 		2786E7B01D883692009BDB2A /* TabletasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7AF1D883692009BDB2A /* TabletasksViewController.m */; };
 		2786E7B21D883F4D009BDB2A /* KSTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2786E7B11D883F4D009BDB2A /* KSTaskCell.xib */; };
@@ -60,6 +63,12 @@
 		270DF9E31D83F0B0004D3681 /* KSApplicatipnColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSApplicatipnColor.m; sourceTree = "<group>"; };
 		270DF9E51D83F56E004D3681 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		270DF9E61D83F56E004D3681 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		272F91BE1D8A678800A0330B /* SelectCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCategoryViewController.h; sourceTree = "<group>"; };
+		272F91BF1D8A678800A0330B /* SelectCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCategoryViewController.m; sourceTree = "<group>"; };
+		272F91C11D8A6C0C00A0330B /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionViewController.h; sourceTree = "<group>"; };
+		272F91C21D8A6C0C00A0330B /* DescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionViewController.m; sourceTree = "<group>"; };
+		272F91C41D8A704500A0330B /* TaskListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListViewController.h; sourceTree = "<group>"; };
+		272F91C51D8A704500A0330B /* TaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListViewController.m; sourceTree = "<group>"; };
 		2786E7AB1D881507009BDB2A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		2786E7AC1D881507009BDB2A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		2786E7AE1D883692009BDB2A /* TabletasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletasksViewController.h; sourceTree = "<group>"; };
@@ -208,6 +217,12 @@
 				286E261F1D883FF00055A7BF /* SettingsViewController.m */,
 				278BAA4B1D896E30002D38CF /* AddTaskViewController.h */,
 				278BAA4C1D896E30002D38CF /* AddTaskViewController.m */,
+				272F91BE1D8A678800A0330B /* SelectCategoryViewController.h */,
+				272F91BF1D8A678800A0330B /* SelectCategoryViewController.m */,
+				272F91C11D8A6C0C00A0330B /* DescriptionViewController.h */,
+				272F91C21D8A6C0C00A0330B /* DescriptionViewController.m */,
+				272F91C41D8A704500A0330B /* TaskListViewController.h */,
+				272F91C51D8A704500A0330B /* TaskListViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -421,6 +436,7 @@
 				27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */,
 				278BAA551D89BA4A002D38CF /* BaseAuthViewController.m in Sources */,
 				27B1A0FA1D8195A800D47FCD /* UserSettings.m in Sources */,
+				272F91C31D8A6C0C00A0330B /* DescriptionViewController.m in Sources */,
 				27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */,
 				28797F711D87E24500AEDE0A /* UIImage+ACScaleImage.m in Sources */,
 				28A36BB51D81887B0092FEFD /* ViewController.m in Sources */,
@@ -428,7 +444,9 @@
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
 				278BAA581D89BB32002D38CF /* BaseTableViewController.m in Sources */,
 				28797F741D88202C00AEDE0A /* CreateAccountViewController.m in Sources */,
+				272F91C61D8A704500A0330B /* TaskListViewController.m in Sources */,
 				27B1A0FD1D81A12A00D47FCD /* KSShortTask.m in Sources */,
+				272F91C01D8A678800A0330B /* SelectCategoryViewController.m in Sources */,
 				286E26201D883FF00055A7BF /* SettingsViewController.m in Sources */,
 				28A36BB21D81887B0092FEFD /* AppDelegate.m in Sources */,
 				270DF9E71D83F56E004D3681 /* BaseViewController.m in Sources */,

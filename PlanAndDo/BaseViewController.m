@@ -55,12 +55,13 @@
     self.view.clearsContextBeforeDrawing=YES;
     
     self.navigationController.toolbarHidden=YES;
-    self.navigationController.toolbar.clipsToBounds=YES;
-    self.navigationController.toolbar.autoresizesSubviews=YES;
+    //self.navigationController.toolbar.clipsToBounds=YES;
+    //self.navigationController.toolbar.autoresizesSubviews=YES;
     self.navigationController.toolbar.opaque=YES;
     self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
     self.navigationController.toolbar.backgroundColor=[UIColor whiteColor];
     self.navigationController.toolbar.barTintColor=[UIColor whiteColor];
+    
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
