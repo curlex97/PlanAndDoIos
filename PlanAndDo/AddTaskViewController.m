@@ -188,6 +188,72 @@
     
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    segmentBackgroundView.translatesAutoresizingMaskIntoConstraints=NO;
+    [self.view addConstraint:[NSLayoutConstraint
+                              constraintWithItem:segmentBackgroundView
+                              attribute:NSLayoutAttributeTop
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:self.view
+                              attribute:NSLayoutAttributeTop
+                              multiplier:1.0f
+                              constant:0.0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint
+                              constraintWithItem:segmentBackgroundView
+                              attribute:NSLayoutAttributeTrailing
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:self.view
+                              attribute:NSLayoutAttributeTrailing
+                              multiplier:1.0f
+                              constant:0.0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint
+                              constraintWithItem:segmentBackgroundView
+                              attribute:NSLayoutAttributeLeading
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:self.view
+                              attribute:NSLayoutAttributeLeading
+                              multiplier:1.0f
+                              constant:0.0]];
+    
+    
+    
+    self.segment.translatesAutoresizingMaskIntoConstraints=NO;
+    [segmentBackgroundView addConstraint:[NSLayoutConstraint
+                              constraintWithItem:self.segment
+                              attribute:NSLayoutAttributeTop
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:segmentBackgroundView
+                              attribute:NSLayoutAttributeTop
+                              multiplier:1.0f
+                              constant:8.0]];
+    
+    [segmentBackgroundView addConstraint:[NSLayoutConstraint
+                              constraintWithItem:self.segment
+                              attribute:NSLayoutAttributeTrailing
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:segmentBackgroundView
+                              attribute:NSLayoutAttributeTrailing
+                              multiplier:1.0f
+                              constant:-20.0]];
+    
+    [segmentBackgroundView addConstraint:[NSLayoutConstraint
+                              constraintWithItem:self.segment
+                              attribute:NSLayoutAttributeLeading
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:segmentBackgroundView
+                              attribute:NSLayoutAttributeLeading
+                              multiplier:1.0f
+                              constant:20.0]];
+    
+    [segmentBackgroundView addConstraint:[NSLayoutConstraint
+                                          constraintWithItem:self.segment
+                                          attribute:NSLayoutAttributeBottom
+                                          relatedBy:NSLayoutRelationEqual
+                                          toItem:segmentBackgroundView
+                                          attribute:NSLayoutAttributeBottom
+                                          multiplier:1.0f
+                                          constant:8.0]];
     
     self.methods=[NSArray arrayWithObjects:@"headDidTap",@"categoryDidTap",@"listOrDescriptionDidTap",@"dateTimeDidTap", nil];
 }

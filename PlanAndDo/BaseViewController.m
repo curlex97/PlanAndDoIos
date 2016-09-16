@@ -18,7 +18,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [self setBarImage];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+}
+
+-(void)setBarImage
+{
     CAGradientLayer * gradient=[KSApplicatipnColor sharedColor].rootGradient;
     gradient.frame=self.navigationController.navigationBar.bounds;
     UIGraphicsBeginImageContext([gradient frame].size);
@@ -28,21 +33,10 @@
     
     UIGraphicsEndImageContext();
     [self.navigationController.navigationBar setBackgroundImage:outputImage forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
-    {
-        CALayer * gradient=self.navigationController.navigationBar.layer.sublayers[1];
-        gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, self.navigationController.navigationBar.bounds.size.height-12);
-    }
-    else
-    {
-        CALayer * gradient=self.navigationController.navigationBar.layer.sublayers[1];
-        gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, self.navigationController.navigationBar.bounds.size.height+12);
-    }
+    [self setBarImage];
 }
 
 - (void)viewDidLoad
@@ -53,7 +47,8 @@
     self.view.autoresizesSubviews=YES;
     self.view.opaque=YES;
     self.view.clearsContextBeforeDrawing=YES;
-    
+
+    self.navigationController.navigationBar.translucent=NO;
     self.navigationController.toolbarHidden=YES;
     //self.navigationController.toolbar.clipsToBounds=YES;
     //self.navigationController.toolbar.autoresizesSubviews=YES;

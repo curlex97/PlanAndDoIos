@@ -17,8 +17,9 @@
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-        CALayer * gradient=self.view.layer.sublayers[0];
-        gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    CALayer * gradient=self.view.layer.sublayers[0];
+    gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
 }
 
 - (void)viewDidLoad {
