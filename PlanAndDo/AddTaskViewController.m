@@ -11,6 +11,7 @@
 #import "SelectCategoryViewController.h"
 #import "DescriptionViewController.h"
 #import "TaskListViewController.h"
+#import "DateAndTimeViewController.h"
 
 @interface AddTaskViewController ()
 @property (nonatomic)UISegmentedControl * segment;
@@ -50,6 +51,13 @@
             break;
     }
     return cell;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].textLabel.text=textField.text;
+    return YES;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -106,8 +114,9 @@
 
 -(void)headDidTap
 {
-    UITextField * textField=[[UITextField alloc] initWithFrame:CGRectMake(8, 8, self.view.bounds.size.width-16, self.view.bounds.size.height-16)];
-    textField.backgroundColor=[UIColor redColor];
+    UITextField * textField=[[UITextField alloc] initWithFrame:CGRectMake(8, 8, self.view.bounds.size.width-16, 31)];
+    textField.backgroundColor=[UIColor whiteColor];
+    [textField becomeFirstResponder];
     [[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] addSubview:textField];
 }
 
@@ -133,7 +142,8 @@
 
 -(void)dateTimeDidTap
 {
-    
+    DateAndTimeViewController * controller = [[DateAndTimeViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 -(void)viewDidLoad

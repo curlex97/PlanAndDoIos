@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseTableViewController.h"
-@interface AddTaskViewController : BaseTableViewController <UITableViewDelegate, UITableViewDataSource>
+@interface AddTaskViewController : BaseTableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @end

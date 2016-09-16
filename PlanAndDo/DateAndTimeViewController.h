@@ -6,8 +6,8 @@
 //  Copyright © 2016 TodoTeamGroup. All rights reserved.
 //
 
-#import "BaseTableViewController.h"
+#import "BaseViewController.h"
 
-@interface DateAndTimeViewController : BaseTableViewController
+@interface DateAndTimeViewController : BaseViewController
 
 @end
