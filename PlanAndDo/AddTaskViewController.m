@@ -39,12 +39,21 @@
     {
         case 0:
             cell.textLabel.text=@"Head";
+            cell.accessoryType=UITableViewCellAccessoryNone;
             break;
         case 1:
             cell.textLabel.text=@"Category";
             break;
         case 2:
-            cell.textLabel.text=self.segment.selectedSegmentIndex==0?@"Description":@"Edit list";
+            if(self.segment.selectedSegmentIndex==0)
+            {
+                cell.textLabel.text=@"Description";
+                cell.accessoryType=UITableViewCellAccessoryNone;
+            }
+            else
+            {
+                cell.textLabel.text=@"Edit list";
+            }
             break;
         case 3:
             cell.textLabel.text=@"Date & Time";
