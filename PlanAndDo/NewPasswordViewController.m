@@ -10,6 +10,8 @@
 #import "KSApplicatipnColor.h"
 #import "ChangeEmailViewController.h"
 #import "SettingsViewController.h"
+#import "CoreDataManager.h"
+
 
 #define TEXTFIELD_PADDING_LEFT 10
 
@@ -44,6 +46,7 @@
 //        [self.navigationController pushViewController:cavc animated:YES];
 //    }
     
+    [CoreDataManager managedObjectContext];
     
     SettingsViewController * tableTaskViewController=[[SettingsViewController alloc] init];
     
