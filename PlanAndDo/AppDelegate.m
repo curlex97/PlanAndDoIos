@@ -36,7 +36,12 @@
     UIView *statusBar = [[application valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
     CAGradientLayer * gradient2 =[KSApplicatipnColor sharedColor].rootGradient;
     gradient2.frame = statusBar.bounds;
-    [statusBar.layer insertSublayer:gradient2 atIndex:0];
+    NSLog(@"%@",statusBar.subviews);
+    
+    UIView * statusBarBackView=[[UIView alloc] initWithFrame:statusBar.frame];
+    [statusBarBackView.layer addSublayer:gradient2];
+    [statusBar.subviews[0] addSubview:statusBarBackView];
+    statusBar.subviews[0].backgroundColor=[UIColor colorWithRed:61.0/255.0 green:62.0/255.0 blue:61.0/255.0 alpha:1.0];
     
 //    yourController.view.backgroundColor = [UIColor redColor];
 //    yourController2.view.backgroundColor = [UIColor blueColor];

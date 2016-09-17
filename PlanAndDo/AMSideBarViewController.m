@@ -131,6 +131,13 @@
                self.frontViewController.view.frame.origin.y,
                self.frontViewController.view.frame.size.width,
                self.frontViewController.view.frame.size.height);
+    
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    CGRect frame=statusBar.subviews[0].subviews.lastObject.frame;
+    statusBar.subviews[0].subviews.lastObject.frame=CGRectMake(xPos,
+                                                              frame.origin.y,
+                                                              frame.size.width,
+                                                              frame.size.height);
 }
 
 -(void)gestureSwipe

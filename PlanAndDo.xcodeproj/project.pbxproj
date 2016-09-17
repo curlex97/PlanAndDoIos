@@ -14,6 +14,7 @@
 		272F91C31D8A6C0C00A0330B /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C21D8A6C0C00A0330B /* DescriptionViewController.m */; };
 		272F91C61D8A704500A0330B /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C51D8A704500A0330B /* TaskListViewController.m */; };
 		272F91C91D8B080700A0330B /* DateAndTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C81D8B080700A0330B /* DateAndTimeViewController.m */; };
+		27494DE41D8D3ECE009BFC5F /* KSMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27494DE31D8D3ECE009BFC5F /* KSMenuViewController.m */; };
 		2786E7AD1D881507009BDB2A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7AC1D881507009BDB2A /* LoginViewController.m */; };
 		2786E7B01D883692009BDB2A /* TabletasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7AF1D883692009BDB2A /* TabletasksViewController.m */; };
 		2786E7B21D883F4D009BDB2A /* KSTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2786E7B11D883F4D009BDB2A /* KSTaskCell.xib */; };
@@ -79,6 +80,8 @@
 		272F91C51D8A704500A0330B /* TaskListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListViewController.m; sourceTree = "<group>"; };
 		272F91C71D8B080700A0330B /* DateAndTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateAndTimeViewController.h; sourceTree = "<group>"; };
 		272F91C81D8B080700A0330B /* DateAndTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateAndTimeViewController.m; sourceTree = "<group>"; };
+		27494DE21D8D3ECE009BFC5F /* KSMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSMenuViewController.h; sourceTree = "<group>"; };
+		27494DE31D8D3ECE009BFC5F /* KSMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMenuViewController.m; sourceTree = "<group>"; };
 		2786E7AB1D881507009BDB2A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		2786E7AC1D881507009BDB2A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		2786E7AE1D883692009BDB2A /* TabletasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletasksViewController.h; sourceTree = "<group>"; };
@@ -278,6 +281,8 @@
 				2803AFA61D8ABA470032ACFB /* TaskList */,
 				278BAA561D89BB32002D38CF /* BaseTableViewController.h */,
 				278BAA571D89BB32002D38CF /* BaseTableViewController.m */,
+				27494DE21D8D3ECE009BFC5F /* KSMenuViewController.h */,
+				27494DE31D8D3ECE009BFC5F /* KSMenuViewController.m */,
 			);
 			name = BaseTableViewController;
 			sourceTree = "<group>";
@@ -678,6 +683,7 @@
 				27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */,
 				28797F711D87E24500AEDE0A /* UIImage+ACScaleImage.m in Sources */,
 				2786E7B01D883692009BDB2A /* TabletasksViewController.m in Sources */,
+				27494DE41D8D3ECE009BFC5F /* KSMenuViewController.m in Sources */,
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
 				2803AF811D8A8F190032ACFB /* KSSettingsCell.m in Sources */,
 				278BAA581D89BB32002D38CF /* BaseTableViewController.m in Sources */,

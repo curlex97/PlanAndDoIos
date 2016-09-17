@@ -18,6 +18,7 @@ typedef NS_ENUM(NSUInteger, SideDirection) {
 
 @property (nonatomic)UIViewController * backViewController;
 @property (nonatomic)UIViewController * frontViewController;
+@property (nonatomic)BOOL swipeStatusBarLayer;
 
 -(void)setNewFrontViewController:(UIViewController *)frontViewController;
 -(void)side;
