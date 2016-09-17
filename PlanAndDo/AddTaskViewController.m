@@ -20,6 +20,8 @@
 @property (nonatomic)UIPanGestureRecognizer * pan;
 @property (nonatomic)float lastValue;
 @property (nonatomic)NSArray * methods;
+@property (nonatomic)UITextField * textField;
+@property (nonatomic)NSString * headerText;
 @end
 
 @implementation AddTaskViewController
@@ -38,7 +40,7 @@
     switch (indexPath.row)
     {
         case 0:
-            cell.textLabel.text=@"Head";
+            cell.textLabel.text=self.headerText;
             cell.accessoryType=UITableViewCellAccessoryNone;
             break;
         case 1:
@@ -65,7 +67,16 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]].textLabel.text=textField.text;
+    if(textField.text.length)
+    {
+        self.headerText=textField.text;
+    }
+    else
+    {
+         self.headerText=@"Head";
+    }
+    [self.tableView reloadData];
+    [textField removeFromSuperview];
     return YES;
 }
 
@@ -75,11 +86,6 @@
     SEL selector = NSSelectorFromString(self.methods[indexPath.row]);
     ((void (*)(id, SEL))[self methodForSelector:selector])(self, selector);
 }
-
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 55;
-//}
 
 -(CGPoint)getThumbCenter:(UISlider *)slider
 {
@@ -123,10 +129,14 @@
 
 -(void)headDidTap
 {
-    UITextField * textField=[[UITextField alloc] initWithFrame:CGRectMake(8, 8, self.view.bounds.size.width-16, 31)];
-    textField.backgroundColor=[UIColor whiteColor];
-    [textField becomeFirstResponder];
-    [[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] addSubview:textField];
+    UITableViewCell * cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    self.textField=[[UITextField alloc] initWithFrame:CGRectMake(16, 8, self.view.bounds.size.width-32, 31)];
+    self.textField.backgroundColor=[UIColor whiteColor];
+    self.textField.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
+    self.textField.delegate=self;
+    self.textField.text=[self.headerText isEqualToString:@"Head"]?@"":self.headerText;
+    [self.textField becomeFirstResponder];
+    [cell addSubview:self.textField];
 }
 
 -(void)categoryDidTap
@@ -161,9 +171,9 @@
     
     //self.pan=[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gesturePan)];
     //self.pan.delegate=self;
-    
+    self.headerText=@"Head";
     self.title=@"Add";
-   self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Task",@"List", nil]];
+    self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Completed",@"Overdue", nil]];
     self.segment.tintColor=[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
     [self.segment setSelectedSegmentIndex:0];
     self.segment.frame=CGRectMake(20, 8, self.view.bounds.size.width-40, 30);
@@ -198,14 +208,14 @@
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     segmentBackgroundView.translatesAutoresizingMaskIntoConstraints=NO;
-    [self.view addConstraint:[NSLayoutConstraint
-                              constraintWithItem:segmentBackgroundView
-                              attribute:NSLayoutAttributeTop
-                              relatedBy:NSLayoutRelationEqual
-                              toItem:self.view
-                              attribute:NSLayoutAttributeTop
-                              multiplier:1.0f
-                              constant:0.0]];
+//    [self.view addConstraint:[NSLayoutConstraint
+//                              constraintWithItem:segmentBackgroundView
+//                              attribute:NSLayoutAttributeTop
+//                              relatedBy:NSLayoutRelationEqual
+//                              toItem:self.view
+//                              attribute:NSLayoutAttributeTop
+//                              multiplier:1.0f
+//                              constant:0.0]];
     
     [self.view addConstraint:[NSLayoutConstraint
                               constraintWithItem:segmentBackgroundView

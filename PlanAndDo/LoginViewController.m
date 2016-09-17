@@ -11,6 +11,7 @@
 #import "CreateAccountViewController.h"
 #import "NewPasswordViewController.h"
 #import "TabletasksViewController.h"
+#import "AMSideBarViewController.h"
 
 #define TEXTFIELD_PADDING_LEFT 10
 
