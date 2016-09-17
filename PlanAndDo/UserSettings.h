@@ -18,6 +18,6 @@
 -(instancetype)initWithStartPage:(NSString *)startPage
                      andPageType:(NSString *)pageType
                    andDateFormat:(NSString *)dateFormat
-                   andTimeFormat:(NSString *)timeFormat;
+                   andTimeFormat:(NSString *)timeFormat andSyncStatus:(int)syncStatus;
 
 @end

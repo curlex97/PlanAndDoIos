@@ -10,8 +10,8 @@
 
 @interface KSShortTask : KSObject
 
-@property (nonatomic)NSString * taskName;
+@property (nonatomic)NSString * name;
 @property (nonatomic)BOOL status;
 
--(instancetype)initWithTaskName:(NSString *)taskName andStatus:(BOOL)status;
+-(instancetype)initWithID:(NSUInteger)ID andName:(NSString *)name andStatus:(BOOL)status  andSyncStatus:(int)syncStatus;
 @end

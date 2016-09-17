@@ -19,6 +19,7 @@
                   andUserName:(NSString *)userName
                andEmailAdress:(NSString *)email
               andCreatedDeate:(NSDate *)date
-             andLastVisitDate:(NSDate *)visitDate;
+             andLastVisitDate:(NSDate *)visitDate
+                andSyncStatus:(int)syncStatus;
 
 @end

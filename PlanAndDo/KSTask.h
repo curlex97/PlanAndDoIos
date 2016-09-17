@@ -13,9 +13,13 @@
 
 @property (nonatomic)NSString * taskDescription;
 
--(instancetype)initWithTaskName:(NSString *)taskName
-                      andStatus:(BOOL)status
-                    andIsRemind:(BOOL)remind
-                andTaskPriority:(KSTaskPriority)priority
-                 andDescription:(NSString *)description;
+-(instancetype)initWithID:(NSUInteger)ID andName:(NSString *)name
+                andStatus:(BOOL)status
+      andTaskReminderTime:(NSDate*) taskReminderTime
+          andTaskPriority:(KSTaskPriority)priority
+            andCategoryID:(NSUInteger)categoryID
+             andCreatedAt:(NSDate*)createdAt
+        andCompletionTime:(NSDate*)completionTime
+            andSyncStatus:(int)syncStatus
+           andTaskDescription:(NSString*)taskDescription;
 @end

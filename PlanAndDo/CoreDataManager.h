@@ -9,9 +9,17 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+static NSManagedObjectContext* managedObjectContext;
+
 @interface CoreDataManager : NSObject
 
-+(NSManagedObjectContext*) managedObjectContext;
+
+-(NSArray*) fetch:(NSString*)table;
+
+-(NSManagedObjectContext*) managedObjectContext;
+
+
+-(void)getMany;
 
 @end
 

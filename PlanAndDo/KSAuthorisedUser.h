@@ -17,6 +17,7 @@
                andEmailAdress:(NSString *)email
               andCreatedDeate:(NSDate *)date
              andLastVisitDate:(NSDate *)visitDate
+                andSyncStatus:(int)syncStatus
                andAccessToken:(NSString *)token
               andUserSettings:(UserSettings *)settings;
 @end

@@ -11,4 +11,5 @@
 @interface KSObject : NSObject
 @property (nonatomic) NSDictionary * serverJSon;
 @property (nonatomic) NSUInteger ID;
+@property (nonatomic) NSUInteger syncStatus;
 @end
