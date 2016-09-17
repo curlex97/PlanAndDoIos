@@ -45,6 +45,7 @@
 		28797F741D88202C00AEDE0A /* CreateAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28797F731D88202C00AEDE0A /* CreateAccountViewController.m */; };
 		28797F771D88309200AEDE0A /* NewPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28797F761D88309200AEDE0A /* NewPasswordViewController.m */; };
 		28797F7A1D88370600AEDE0A /* ChangeEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28797F791D88370600AEDE0A /* ChangeEmailViewController.m */; };
+		2884ABFD1D8D43B700A2F7D9 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884ABFC1D8D43B700A2F7D9 /* CoreDataManager.m */; };
 		28A36BAF1D81887B0092FEFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BAE1D81887B0092FEFD /* main.m */; };
 		28A36BB21D81887B0092FEFD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BB11D81887B0092FEFD /* AppDelegate.m */; };
 		28A36BB81D81887B0092FEFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28A36BB61D81887B0092FEFD /* Main.storyboard */; };
@@ -137,6 +138,8 @@
 		28797F761D88309200AEDE0A /* NewPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPasswordViewController.m; sourceTree = "<group>"; };
 		28797F781D88370600AEDE0A /* ChangeEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangeEmailViewController.h; path = ../ChangeEmailViewController.h; sourceTree = "<group>"; };
 		28797F791D88370600AEDE0A /* ChangeEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangeEmailViewController.m; path = ../ChangeEmailViewController.m; sourceTree = "<group>"; };
+		2884ABFB1D8D43B700A2F7D9 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		2884ABFC1D8D43B700A2F7D9 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		28A36BAA1D81887B0092FEFD /* PlanAndDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanAndDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A36BAE1D81887B0092FEFD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28A36BB01D81887B0092FEFD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -510,6 +513,15 @@
 			name = CoreData;
 			sourceTree = "<group>";
 		};
+		2884ABFA1D8D437F00A2F7D9 /* CoreDataManagers */ = {
+			isa = PBXGroup;
+			children = (
+				2884ABFB1D8D43B700A2F7D9 /* CoreDataManager.h */,
+				2884ABFC1D8D43B700A2F7D9 /* CoreDataManager.m */,
+			);
+			name = CoreDataManagers;
+			sourceTree = "<group>";
+		};
 		28A36BA11D81887B0092FEFD = {
 			isa = PBXGroup;
 			children = (
@@ -533,6 +545,7 @@
 			children = (
 				28A36BB01D81887B0092FEFD /* AppDelegate.h */,
 				28A36BB11D81887B0092FEFD /* AppDelegate.m */,
+				2884ABFA1D8D437F00A2F7D9 /* CoreDataManagers */,
 				2803AFAA1D8ABA980032ACFB /* Categories */,
 				27B1A0F01D818C9900D47FCD /* Models */,
 				282C28C81D829C320061761E /* ViewControllers */,
@@ -669,6 +682,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2884ABFD1D8D43B700A2F7D9 /* CoreDataManager.m in Sources */,
 				270DF9E41D83F0B0004D3681 /* KSApplicatipnColor.m in Sources */,
 				27B1A0F71D81933000D47FCD /* KSAuthorisedUser.m in Sources */,
 				27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */,
