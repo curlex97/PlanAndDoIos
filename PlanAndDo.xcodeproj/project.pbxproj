@@ -43,7 +43,6 @@
 		282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282C28C51D829A600061761E /* AMSideBarViewController.m */; };
 		284F9C3B1D8DCFF500B0853F /* TasksCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 284F9C3A1D8DCFF500B0853F /* TasksCoreDataManager.m */; };
 		286E26201D883FF00055A7BF /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286E261F1D883FF00055A7BF /* SettingsViewController.m */; };
-		287884041D8E03BB00C17A4F /* KSSubTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 287884031D8E03BB00C17A4F /* KSSubTask.m */; };
 		287884071D8E07E600C17A4F /* KSCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 287884061D8E07E600C17A4F /* KSCategory.m */; };
 		28797F711D87E24500AEDE0A /* UIImage+ACScaleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 28797F701D87E24500AEDE0A /* UIImage+ACScaleImage.m */; };
 		28797F741D88202C00AEDE0A /* CreateAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28797F731D88202C00AEDE0A /* CreateAccountViewController.m */; };
@@ -138,8 +137,6 @@
 		284F9C3A1D8DCFF500B0853F /* TasksCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksCoreDataManager.m; sourceTree = "<group>"; };
 		286E261E1D883FF00055A7BF /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		286E261F1D883FF00055A7BF /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		287884021D8E03BB00C17A4F /* KSSubTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSSubTask.h; sourceTree = "<group>"; };
-		287884031D8E03BB00C17A4F /* KSSubTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSSubTask.m; sourceTree = "<group>"; };
 		287884051D8E07E600C17A4F /* KSCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSCategory.h; sourceTree = "<group>"; };
 		287884061D8E07E600C17A4F /* KSCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSCategory.m; sourceTree = "<group>"; };
 		28797F6F1D87E24500AEDE0A /* UIImage+ACScaleImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ACScaleImage.h"; sourceTree = "<group>"; };
@@ -216,8 +213,6 @@
 			children = (
 				27B1A0FB1D81A12A00D47FCD /* KSShortTask.h */,
 				27B1A0FC1D81A12A00D47FCD /* KSShortTask.m */,
-				287884021D8E03BB00C17A4F /* KSSubTask.h */,
-				287884031D8E03BB00C17A4F /* KSSubTask.m */,
 				27B1A0FE1D81A20400D47FCD /* BaseTask.h */,
 				27B1A0FF1D81A20400D47FCD /* BaseTask.m */,
 				27B1A1011D81A3CB00D47FCD /* KSTask.h */,
@@ -716,7 +711,6 @@
 				27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */,
 				278BAA551D89BA4A002D38CF /* BaseAuthViewController.m in Sources */,
 				27B1A0FA1D8195A800D47FCD /* UserSettings.m in Sources */,
-				287884041D8E03BB00C17A4F /* KSSubTask.m in Sources */,
 				272F91C31D8A6C0C00A0330B /* DescriptionViewController.m in Sources */,
 				27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */,
 				28797F711D87E24500AEDE0A /* UIImage+ACScaleImage.m in Sources */,

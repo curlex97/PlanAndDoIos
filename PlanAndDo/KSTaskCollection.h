@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseTask.h"
-#import "KSSubTask.h"
 
 @interface KSTaskCollection : BaseTask
 
-@property (nonatomic)NSMutableArray<KSSubTask *> * subTasks;
+@property (nonatomic)NSMutableArray<KSShortTask *> * subTasks;
 
 -(instancetype)initWithID:(NSUInteger)ID andName:(NSString *)name
                 andStatus:(BOOL)status
@@ -22,5 +21,5 @@
              andCreatedAt:(NSDate*)createdAt
         andCompletionTime:(NSDate*)completionTime
             andSyncStatus:(int)syncStatus
-              andSubTasks:(NSMutableArray<KSSubTask*>*)subTasks;
+              andSubTasks:(NSMutableArray<KSShortTask*>*)subTasks;
 @end

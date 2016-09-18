@@ -18,7 +18,7 @@
              andCreatedAt:(NSDate*)createdAt
         andCompletionTime:(NSDate*)completionTime
             andSyncStatus:(int)syncStatus
-              andSubTasks:(NSMutableArray<KSSubTask*>*)subTasks
+              andSubTasks:(NSMutableArray<KSShortTask*>*)subTasks
 {
     if(self=[super initWithID:ID andName:name andStatus:status andTaskReminderTime:taskReminderTime andTaskPriority:priority andCategoryID:categoryID andCreatedAt:createdAt andCompletionTime:completionTime andSyncStatus:syncStatus])
     {
