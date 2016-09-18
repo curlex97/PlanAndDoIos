@@ -82,6 +82,15 @@
     return tasks;
 }
 
+-(NSArray<BaseTask *> *)allTasksForCategory:(KSCategory *)category
+{
+    NSMutableArray* tasks = [NSMutableArray array];
+    
+    for(BaseTask* task in [self allTasks])
+        if([task categoryID] == [category ID]) [tasks addObject:task];
+    
+    return tasks;
+}
 
 -(NSArray<BaseTask *> *)allTasksForToday
 {

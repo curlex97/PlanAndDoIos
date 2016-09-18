@@ -10,6 +10,7 @@
 #import "BaseTask.h"
 #import "KSTask.h"
 #import "KSTaskCollection.h"
+#import "KSCategory.h"
 
 @interface TasksCoreDataManager : CoreDataManager
 
@@ -19,6 +20,8 @@
 -(NSArray<BaseTask *>*) allTasksForWeek;
 -(NSArray<BaseTask *>*) allTasksForArchive;
 -(NSArray<BaseTask *>*) allTasksForBacklog;
+-(NSArray<BaseTask *>*) allTasksForCategory:(KSCategory*)category;
+
 
 -(BaseTask*)taskWithId:(int)Id;
 
