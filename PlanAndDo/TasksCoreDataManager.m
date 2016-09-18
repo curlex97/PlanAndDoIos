@@ -241,22 +241,47 @@
             NSUInteger ID = (NSUInteger)[managedTask valueForKey:@"id"];
             if(ID == [task ID])
             {
-                [managedTask setValue:[NSNumber numberWithInteger:task.ID] forKey:@"id"];
-                [managedTask setValue:task.name forKey:@"task_name"];
-                [managedTask setValue:[NSNumber numberWithBool:task.status] forKey:@"is_completed"];
-                [managedTask setValue:task.taskReminderTime forKey:@"task_reminder_time"];
-                [managedTask setValue:[NSNumber numberWithInteger:task.priority] forKey:@"task_priority"];
-                [managedTask setValue:[NSNumber numberWithInteger:task.categoryID] forKey:@"category_id"];
-                [managedTask setValue:task.createdAt forKey:@"created_at"];
-                [managedTask setValue:task.completionTime forKey:@"task_completion_time"];
-                [managedTask setValue:[NSNumber numberWithInteger:task.syncStatus] forKey:@"task_sync_status"];
-                [managedTask setValue:[NSNumber numberWithInteger:1] forKey:@"task_type"];
-                [self.managedObjectContext save:nil];
+                if([task isKindOfClass:[KSTask class]])
+                {
+                    KSTask* realTask = (KSTask*)task;
+                    
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.ID] forKey:@"id"];
+                    [managedTask setValue:realTask.name forKey:@"task_name"];
+                    [managedTask setValue:[NSNumber numberWithBool:task.status] forKey:@"is_completed"];
+                    [managedTask setValue:realTask.taskReminderTime forKey:@"task_reminder_time"];
+                    [managedTask setValue:[NSNumber numberWithInteger:task.priority] forKey:@"task_priority"];
+                    [managedTask setValue:[NSNumber numberWithInteger:task.categoryID] forKey:@"category_id"];
+                    [managedTask setValue:realTask.createdAt forKey:@"created_at"];
+                    [managedTask setValue:realTask.completionTime forKey:@"task_completion_time"];
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:@"task_sync_status"];
+                    [managedTask setValue:realTask.taskDescription forKey:@"task_description"];
+                    [managedTask setValue:[NSNumber numberWithInteger:0] forKey:@"task_type"];
+                    [self.managedObjectContext save:nil];
+                    
+                }
+                else if([task isKindOfClass:[KSTaskCollection class]])
+                {
+                    KSTaskCollection* realTask = (KSTaskCollection*)task;
+
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.ID] forKey:@"id"];
+                    [managedTask setValue:realTask.name forKey:@"task_name"];
+                    [managedTask setValue:[NSNumber numberWithBool:realTask.status] forKey:@"is_completed"];
+                    [managedTask setValue:realTask.taskReminderTime forKey:@"task_reminder_time"];
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.priority] forKey:@"task_priority"];
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:@"category_id"];
+                    [managedTask setValue:realTask.createdAt forKey:@"created_at"];
+                    [managedTask setValue:realTask.completionTime forKey:@"task_completion_time"];
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:@"task_sync_status"];
+                    [managedTask setValue:[NSNumber numberWithInteger:1] forKey:@"task_type"];
+                    [self.managedObjectContext save:nil];
+                }
                 return;
             }
+            
         }
     }
 }
+
 
 -(void) deleteTask:(BaseTask *)task
 {
