@@ -42,6 +42,22 @@
 
 #pragma mark - Life Cycle
 
+-(void)setHiden:(BOOL)hiden
+{
+    _hiden=hiden;
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+    {
+         if(hiden)
+         {
+             [self moveFrontViewOnPosition:[UIScreen mainScreen].bounds.size.width];
+         }
+         else
+         {
+             [self moveFrontViewOnPosition:MAX_OFFSET];
+         }
+    } completion:nil];
+}
+
 -(void)setNewFrontViewController:(UIViewController *)frontViewController
 {
     CGPoint lastCoords;

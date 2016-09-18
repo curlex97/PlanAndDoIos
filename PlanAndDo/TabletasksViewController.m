@@ -9,7 +9,7 @@
 #import "TabletasksViewController.h"
 #import "TaskTableViewCell.h"
 #import "AddTaskViewController.h"
-
+#import "AMSideBarViewController.h"
 #import "UIImage+ACScaleImage.h"
 
 #define BAR_BUTTON_SIZE 50
@@ -73,7 +73,7 @@ typedef NS_ENUM(NSInteger, KSBoxType)
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -101,6 +101,9 @@ typedef NS_ENUM(NSInteger, KSBoxType)
     
     UIBarButtonItem * addButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTaskTapped)];
     self.navigationItem.rightBarButtonItem=addButton;
+    
+    UIBarButtonItem * menuButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Menu"] scaledToSize:CGSizeMake(40, 40)] style:UIBarButtonItemStyleDone target:self action:@selector(menuTapped)];
+    self.navigationItem.leftBarButtonItem=menuButton;
     
     UIBarButtonItem * today=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Today"] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE, BAR_BUTTON_SIZE)] style:UIBarButtonItemStyleDone target:self action:@selector(todayDidTap)];
 
@@ -149,6 +152,12 @@ typedef NS_ENUM(NSInteger, KSBoxType)
                        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL],
                        nil];
 
+}
+
+-(void)menuTapped
+{
+    AMSideBarViewController * sider=(AMSideBarViewController *)self.navigationController.parentViewController;
+    [sider side];
 }
 
 -(void) addSegmentControl
