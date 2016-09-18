@@ -56,6 +56,10 @@
 		28A36BBD1D81887B0092FEFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28A36BBC1D81887B0092FEFD /* Assets.xcassets */; };
 		28A36BC01D81887B0092FEFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28A36BBE1D81887B0092FEFD /* LaunchScreen.storyboard */; };
 		28A36BCB1D81887B0092FEFD /* PlanAndDoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BCA1D81887B0092FEFD /* PlanAndDoTests.m */; };
+		28AB85631D8F483D00D93AB7 /* SubTasksCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB85621D8F483D00D93AB7 /* SubTasksCoreDataManager.m */; };
+		28AB85671D8F486100D93AB7 /* UserCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB85661D8F486100D93AB7 /* UserCoreDataManager.m */; };
+		28AB856B1D8F48A100D93AB7 /* SettingsCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB856A1D8F48A100D93AB7 /* SettingsCoreDataManager.m */; };
+		28AB856F1D8F48B300D93AB7 /* CategoryCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB856E1D8F48B300D93AB7 /* CategoryCoreDataManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +165,14 @@
 		28A36BC61D81887B0092FEFD /* PlanAndDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlanAndDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A36BCA1D81887B0092FEFD /* PlanAndDoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlanAndDoTests.m; sourceTree = "<group>"; };
 		28A36BCC1D81887B0092FEFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28AB85611D8F483D00D93AB7 /* SubTasksCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubTasksCoreDataManager.h; sourceTree = "<group>"; };
+		28AB85621D8F483D00D93AB7 /* SubTasksCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubTasksCoreDataManager.m; sourceTree = "<group>"; };
+		28AB85651D8F486100D93AB7 /* UserCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCoreDataManager.h; sourceTree = "<group>"; };
+		28AB85661D8F486100D93AB7 /* UserCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCoreDataManager.m; sourceTree = "<group>"; };
+		28AB85691D8F48A100D93AB7 /* SettingsCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsCoreDataManager.h; sourceTree = "<group>"; };
+		28AB856A1D8F48A100D93AB7 /* SettingsCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsCoreDataManager.m; sourceTree = "<group>"; };
+		28AB856D1D8F48B300D93AB7 /* CategoryCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryCoreDataManager.h; sourceTree = "<group>"; };
+		28AB856E1D8F48B300D93AB7 /* CategoryCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryCoreDataManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -521,6 +533,7 @@
 		282C28CC1D829CAC0061761E /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				2884ABFA1D8D437F00A2F7D9 /* CoreDataManagers */,
 				28A36BB91D81887B0092FEFD /* PlanAndDo.xcdatamodeld */,
 			);
 			name = CoreData;
@@ -538,6 +551,10 @@
 		2884ABFA1D8D437F00A2F7D9 /* CoreDataManagers */ = {
 			isa = PBXGroup;
 			children = (
+				28AB85701D8F48B600D93AB7 /* CategoryCoreDataManager */,
+				28AB856C1D8F48A400D93AB7 /* SettingsCoreDataManager */,
+				28AB85681D8F486700D93AB7 /* UserCoreDataManager */,
+				28AB85641D8F484A00D93AB7 /* SubTasksCoreDataManager */,
 				284F9C3C1D8DCFFF00B0853F /* TasksCoreDataManager */,
 				2884ABFB1D8D43B700A2F7D9 /* CoreDataManager.h */,
 				2884ABFC1D8D43B700A2F7D9 /* CoreDataManager.m */,
@@ -568,7 +585,6 @@
 			children = (
 				28A36BB01D81887B0092FEFD /* AppDelegate.h */,
 				28A36BB11D81887B0092FEFD /* AppDelegate.m */,
-				2884ABFA1D8D437F00A2F7D9 /* CoreDataManagers */,
 				2803AFAA1D8ABA980032ACFB /* Categories */,
 				27B1A0F01D818C9900D47FCD /* Models */,
 				282C28C81D829C320061761E /* ViewControllers */,
@@ -597,6 +613,42 @@
 				28A36BCC1D81887B0092FEFD /* Info.plist */,
 			);
 			path = PlanAndDoTests;
+			sourceTree = "<group>";
+		};
+		28AB85641D8F484A00D93AB7 /* SubTasksCoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				28AB85611D8F483D00D93AB7 /* SubTasksCoreDataManager.h */,
+				28AB85621D8F483D00D93AB7 /* SubTasksCoreDataManager.m */,
+			);
+			name = SubTasksCoreDataManager;
+			sourceTree = "<group>";
+		};
+		28AB85681D8F486700D93AB7 /* UserCoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				28AB85651D8F486100D93AB7 /* UserCoreDataManager.h */,
+				28AB85661D8F486100D93AB7 /* UserCoreDataManager.m */,
+			);
+			name = UserCoreDataManager;
+			sourceTree = "<group>";
+		};
+		28AB856C1D8F48A400D93AB7 /* SettingsCoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				28AB85691D8F48A100D93AB7 /* SettingsCoreDataManager.h */,
+				28AB856A1D8F48A100D93AB7 /* SettingsCoreDataManager.m */,
+			);
+			name = SettingsCoreDataManager;
+			sourceTree = "<group>";
+		};
+		28AB85701D8F48B600D93AB7 /* CategoryCoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				28AB856D1D8F48B300D93AB7 /* CategoryCoreDataManager.h */,
+				28AB856E1D8F48B300D93AB7 /* CategoryCoreDataManager.m */,
+			);
+			name = CategoryCoreDataManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -719,6 +771,7 @@
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
 				2803AF811D8A8F190032ACFB /* KSSettingsCell.m in Sources */,
 				278BAA581D89BB32002D38CF /* BaseTableViewController.m in Sources */,
+				28AB85671D8F486100D93AB7 /* UserCoreDataManager.m in Sources */,
 				287884071D8E07E600C17A4F /* KSCategory.m in Sources */,
 				28797F741D88202C00AEDE0A /* CreateAccountViewController.m in Sources */,
 				272F91C61D8A704500A0330B /* TaskListViewController.m in Sources */,
@@ -731,17 +784,20 @@
 				2803AF8B1D8AA5560032ACFB /* KSCheckSettingsTableViewCell.m in Sources */,
 				27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */,
 				278BAA4D1D896E30002D38CF /* AddTaskViewController.m in Sources */,
+				28AB856B1D8F48A100D93AB7 /* SettingsCoreDataManager.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
 				270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */,
 				2803AF911D8AAA710032ACFB /* StartDayViewController.m in Sources */,
 				2803AF8E1D8AA8ED0032ACFB /* FormatTimeViewController.m in Sources */,
 				2786E7AD1D881507009BDB2A /* LoginViewController.m in Sources */,
 				2803AF941D8AAB1D0032ACFB /* StartPageViewController.m in Sources */,
+				28AB85631D8F483D00D93AB7 /* SubTasksCoreDataManager.m in Sources */,
 				278BAA521D897A36002D38CF /* PriorityCell.m in Sources */,
 				2786E7B51D884421009BDB2A /* TaskTableViewCell.m in Sources */,
 				27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */,
 				282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */,
 				28797F771D88309200AEDE0A /* NewPasswordViewController.m in Sources */,
+				28AB856F1D8F48B300D93AB7 /* CategoryCoreDataManager.m in Sources */,
 				28A36BBB1D81887B0092FEFD /* PlanAndDo.xcdatamodeld in Sources */,
 				284F9C3B1D8DCFF500B0853F /* TasksCoreDataManager.m in Sources */,
 				28797F7A1D88370600AEDE0A /* ChangeEmailViewController.m in Sources */,
