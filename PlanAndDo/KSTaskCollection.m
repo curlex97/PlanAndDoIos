@@ -10,13 +10,17 @@
 
 @implementation KSTaskCollection
 
--(instancetype)initWithTaskName:(NSString *)taskName
-                      andStatus:(BOOL)status
-                    andIsRemind:(BOOL)remind
-                andTaskPriority:(KSTaskPriority)priority
-                    andSubTasks:(NSArray<KSShortTask *> *)subTasks
+-(instancetype)initWithID:(NSUInteger)ID andName:(NSString *)name
+                andStatus:(BOOL)status
+      andTaskReminderTime:(NSDate*) taskReminderTime
+          andTaskPriority:(KSTaskPriority)priority
+            andCategoryID:(NSUInteger)categoryID
+             andCreatedAt:(NSDate*)createdAt
+        andCompletionTime:(NSDate*)completionTime
+            andSyncStatus:(int)syncStatus
+              andSubTasks:(NSMutableArray<KSSubTask*>*)subTasks
 {
-    if(self=[super initWithTaskName:taskName andStatus:status andIsRemind:remind andTaskPriority:priority])
+    if(self=[super initWithID:ID andName:name andStatus:status andTaskReminderTime:taskReminderTime andTaskPriority:priority andCategoryID:categoryID andCreatedAt:createdAt andCompletionTime:completionTime andSyncStatus:syncStatus])
     {
         self.subTasks= [NSMutableArray arrayWithArray:subTasks];
     }

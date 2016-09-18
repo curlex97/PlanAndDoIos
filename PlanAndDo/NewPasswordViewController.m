@@ -10,7 +10,7 @@
 #import "KSApplicatipnColor.h"
 #import "ChangeEmailViewController.h"
 #import "SettingsViewController.h"
-#import "CoreDataManager.h"
+#import "TasksCoreDataManager.h"
 
 
 #define TEXTFIELD_PADDING_LEFT 10
@@ -46,7 +46,11 @@
 //        [self.navigationController pushViewController:cavc animated:YES];
 //    }
     
-    [CoreDataManager managedObjectContext];
+   NSArray* ar = [NSArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasks]];
+    
+    KSTask* task = [[KSTask alloc] initWithID:-1 andName:@"local test 1" andStatus:NO andTaskReminderTime:[NSDate date] andTaskPriority:KSTaskDefaultPriority andCategoryID:-1 andCreatedAt:[NSDate date] andCompletionTime:[NSDate date] andSyncStatus:-1 andTaskDescription:@"local test 1"];
+    
+   // [[[TasksCoreDataManager alloc] init] addTask:task];
     
     SettingsViewController * tableTaskViewController=[[SettingsViewController alloc] init];
     

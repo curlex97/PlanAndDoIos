@@ -13,7 +13,7 @@
 -(instancetype)initWithStartPage:(NSString *)startPage
                      andPageType:(NSString *)pageType
                    andDateFormat:(NSString *)dateFormat
-                   andTimeFormat:(NSString *)timeFormat
+                   andTimeFormat:(NSString *)timeFormat andSyncStatus:(int)syncStatus
 {
     if(self=[super init])
     {
@@ -21,6 +21,7 @@
         self.pageType=pageType;
         self.dateFormat=dateFormat;
         self.timeFormat=timeFormat;
+        self.syncStatus = syncStatus;
     }
     return self;
 }

@@ -15,10 +15,11 @@
                andEmailAdress:(NSString *)email
               andCreatedDeate:(NSDate *)date
              andLastVisitDate:(NSDate *)visitDate
+                andSyncStatus:(int)syncStatus
                andAccessToken:(NSString *)token
               andUserSettings:(UserSettings *)settings
 {
-    if(self=[super initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:date andLastVisitDate:visitDate])
+    if(self=[super initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:date andLastVisitDate:visitDate andSyncStatus:syncStatus])
     {
         self.apiToken=token;
         self.settings=settings;

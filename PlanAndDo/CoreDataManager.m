@@ -10,18 +10,28 @@
 
 @implementation CoreDataManager
 
-+(NSManagedObjectContext *)managedObjectContext
+
+- (instancetype)init
 {
-    NSManagedObjectContext* managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSMainQueueConcurrencyType];
-    NSURL* modelUrl = [[NSBundle mainBundle] URLForResource:@"PlanAndDo" withExtension:@"momd"];
-    NSManagedObjectModel* mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelUrl];
-    NSPersistentStoreCoordinator* psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
-    managedObjectContext.persistentStoreCoordinator = psc;
-    NSArray* urls = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
-    NSURL* docUrl = urls[urls.count - 1];
-    NSURL* storeUrl = [docUrl URLByAppendingPathComponent:@"PlanAndDo.sqlite"];
-    [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:nil];
-    return managedObjectContext;
+    self = [super init];
+    if (self) {
+        self.managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSMainQueueConcurrencyType];
+        NSURL* modelUrl = [[NSBundle mainBundle] URLForResource:@"PlanAndDo" withExtension:@"momd"];
+        NSManagedObjectModel* mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelUrl];
+        NSPersistentStoreCoordinator* psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
+        self.managedObjectContext.persistentStoreCoordinator = psc;
+        NSArray* urls = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+        NSURL* docUrl = urls[urls.count - 1];
+        NSURL* storeUrl = [docUrl URLByAppendingPathComponent:@"PlanAndDo.sqlite"];
+        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                                 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+        [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:nil];
+    }
+    return self;
 }
+
+
+
 
 @end

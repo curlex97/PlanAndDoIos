@@ -10,15 +10,19 @@
 
 @implementation KSTask
 
--(instancetype)initWithTaskName:(NSString *)taskName
-                      andStatus:(BOOL)status
-                    andIsRemind:(BOOL)remind
-                andTaskPriority:(KSTaskPriority)priority
-                 andDescription:(NSString *)description
+-(instancetype)initWithID:(NSUInteger)ID andName:(NSString *)name
+                andStatus:(BOOL)status
+      andTaskReminderTime:(NSDate*) taskReminderTime
+          andTaskPriority:(KSTaskPriority)priority
+            andCategoryID:(NSUInteger)categoryID
+             andCreatedAt:(NSDate*)createdAt
+        andCompletionTime:(NSDate*)completionTime
+            andSyncStatus:(int)syncStatus
+       andTaskDescription:(NSString*)taskDescription
 {
-    if(self=[super initWithTaskName:taskName andStatus:status andIsRemind:remind andTaskPriority:priority])
+    if(self=[super initWithID:ID andName:name andStatus:status andTaskReminderTime:taskReminderTime andTaskPriority:priority andCategoryID:categoryID andCreatedAt:createdAt andCompletionTime:completionTime andSyncStatus:syncStatus])
     {
-        self.taskDescription=description;
+        self.taskDescription=taskDescription;
     }
     return self;
 }

@@ -18,10 +18,18 @@ typedef NS_ENUM(NSInteger, KSTaskPriority)
 @interface BaseTask : KSShortTask
 
 @property (nonatomic)BOOL isRemind;
+@property (nonatomic) NSDate* taskReminderTime;
 @property (nonatomic)KSTaskPriority priority;
+@property (nonatomic)NSUInteger categoryID;
+@property (nonatomic)NSDate* createdAt;
+@property (nonatomic)NSDate* completionTime;
 
--(instancetype)initWithTaskName:(NSString *)taskName
+-(instancetype)initWithID:(NSUInteger)ID andName:(NSString *)name
                       andStatus:(BOOL)status
-                    andIsRemind:(BOOL)remind
-                andTaskPriority:(KSTaskPriority)priority;
+            andTaskReminderTime:(NSDate*) taskReminderTime
+                andTaskPriority:(KSTaskPriority)priority
+            andCategoryID:(NSUInteger)categoryID
+             andCreatedAt:(NSDate*)createdAt
+        andCompletionTime:(NSDate*)completionTime
+                  andSyncStatus:(int)syncStatus;
 @end

@@ -10,15 +10,23 @@
 
 @implementation BaseTask
 
--(instancetype)initWithTaskName:(NSString *)taskName
-                      andStatus:(BOOL)status
-                    andIsRemind:(BOOL)remind
-                andTaskPriority:(KSTaskPriority)priority
+-(instancetype)initWithID:(NSUInteger)ID andName:(NSString *)name
+                andStatus:(BOOL)status
+      andTaskReminderTime:(NSDate*) taskReminderTime
+          andTaskPriority:(KSTaskPriority)priority
+            andCategoryID:(NSUInteger)categoryID
+             andCreatedAt:(NSDate*)createdAt
+        andCompletionTime:(NSDate*)completionTime
+            andSyncStatus:(int)syncStatus
 {
-    if(self=[super initWithTaskName:taskName andStatus:status])
+    if(self=[super initWithID:ID andName:name andStatus:status andSyncStatus:syncStatus])
     {
-        self.isRemind=remind;
+        self.isRemind = taskReminderTime ? YES : NO;
+        self.taskReminderTime = taskReminderTime;
         self.priority=priority;
+        self.categoryID = categoryID;
+        self.createdAt = createdAt;
+        self.completionTime = completionTime;
     }
     return self;
 }

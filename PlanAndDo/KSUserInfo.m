@@ -14,7 +14,7 @@
                   andUserName:(NSString *)userName
                andEmailAdress:(NSString *)email
               andCreatedDeate:(NSDate *)date
-             andLastVisitDate:(NSDate *)visitDate
+             andLastVisitDate:(NSDate *)visitDate andSyncStatus:(int)syncStatus
 {
     if(self=[super init])
     {
@@ -23,6 +23,7 @@
         self.emailAdress=email;
         self.createdAt=date;
         self.lastVisit=visitDate;
+        self.syncStatus = syncStatus;
     }
     return self;
 }

@@ -10,12 +10,14 @@
 
 @implementation KSShortTask
 
--(instancetype)initWithTaskName:(NSString *)taskName andStatus:(BOOL)status
+-(instancetype)initWithID:(NSUInteger)ID andName:(NSString *)name andStatus:(BOOL)status  andSyncStatus:(int)syncStatus
 {
     if(self=[super init])
     {
-        self.taskName=taskName;
+        self.ID = ID;
+        self.name=name;
         self.status=status;
+        self.syncStatus = syncStatus;
     }
     return self;
 }
