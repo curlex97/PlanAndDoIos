@@ -42,7 +42,7 @@
     [statusBarBackView.layer addSublayer:gradient2];
     [statusBar.subviews[0] addSubview:statusBarBackView];
     statusBar.subviews[0].backgroundColor=[UIColor colorWithRed:61.0/255.0 green:62.0/255.0 blue:61.0/255.0 alpha:1.0];
-    
+
 //    yourController.view.backgroundColor = [UIColor redColor];
 //    yourController2.view.backgroundColor = [UIColor blueColor];
 //    
