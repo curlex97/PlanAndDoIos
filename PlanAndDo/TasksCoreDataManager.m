@@ -21,6 +21,13 @@
 }
 
 
+-(BaseTask *)taskWithId:(int)Id
+{
+    for(BaseTask* task in [self allTasks])
+        if([task ID] == Id) return task;
+    return nil;
+}
+
 -(NSArray<BaseTask *> *)allTasks
 {
     NSMutableArray<BaseTask*>* tasks = [NSMutableArray array];
@@ -76,6 +83,97 @@
 }
 
 
+-(NSArray<BaseTask *> *)allTasksForToday
+{
+    NSDate* date = [NSDate date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    NSMutableArray* tasks = [NSMutableArray array];
+    
+    for(BaseTask* task in [self allTasks])
+    {
+        NSDateComponents *taskComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[task completionTime]];
+        
+        if([components year] == [taskComponents year] &&
+           [components month] == [taskComponents month] &&
+           [components day] == [taskComponents day] && ![task status]) [tasks addObject:task];
+    }
+    
+    
+    return tasks;
+}
+
+-(NSArray<BaseTask *> *)allTasksForTomorrow
+{
+    NSDate* date = [NSDate dateWithTimeInterval:(24*60*60) sinceDate:[NSDate date]];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    NSMutableArray* tasks = [NSMutableArray array];
+    
+    for(BaseTask* task in [self allTasks])
+    {
+        NSDateComponents *taskComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[task completionTime]];
+        
+        if([components year] == [taskComponents year] &&
+           [components month] == [taskComponents month] &&
+           [components day] == [taskComponents day] && ![task status]) [tasks addObject:task];
+    }
+    
+    
+    return tasks;
+}
+
+-(NSArray<BaseTask *> *)allTasksForWeek
+{
+    NSDate* date = [NSDate date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    NSMutableArray* tasks = [NSMutableArray array];
+    
+    for(BaseTask* task in [self allTasks])
+    {
+        NSDateComponents *taskComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[task completionTime]];
+        
+        if([components year] == [taskComponents year] &&
+           [components month] == [taskComponents month] &&
+           [taskComponents day] - [components day]  < 7 && ![task status]) [tasks addObject:task];
+    }
+    
+    
+    return tasks;
+
+}
+
+-(NSArray<BaseTask *> *)allTasksForArchive
+{
+    NSDate* date = [NSDate date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    NSMutableArray* tasks = [NSMutableArray array];
+    
+    for(BaseTask* task in [self allTasks])
+    {
+        NSDateComponents *taskComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[task completionTime]];
+        
+        if([components year] > [taskComponents year] ||
+           [components month] > [taskComponents month] ||
+           [components day] > [taskComponents day] ||
+           [task status]) [tasks addObject:task];
+    }
+    
+    return tasks;
+}
+
+
+-(NSArray<BaseTask *> *)allTasksForBacklog
+{
+    NSMutableArray* tasks = [NSMutableArray array];
+    
+    for(BaseTask* task in [self allTasks])
+    {
+        if([task completionTime] == nil || [task categoryID] == 0) [tasks addObject:task];
+    }
+    
+    return tasks;
+}
+
+
 -(void)addTask:(BaseTask *)task
 {
     
@@ -119,6 +217,60 @@
     }
 }
 
+
+-(void)updateTask:(BaseTask *)task
+{
+    NSError* error = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Task"];
+    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    
+    if(!error)
+    {
+        for(NSManagedObject* managedTask in results)
+        {
+            NSUInteger ID = (NSUInteger)[managedTask valueForKey:@"id"];
+            if(ID == [task ID])
+            {
+                [managedTask setValue:[NSNumber numberWithInteger:task.ID] forKey:@"id"];
+                [managedTask setValue:task.name forKey:@"task_name"];
+                [managedTask setValue:[NSNumber numberWithBool:task.status] forKey:@"is_completed"];
+                [managedTask setValue:task.taskReminderTime forKey:@"task_reminder_time"];
+                [managedTask setValue:[NSNumber numberWithInteger:task.priority] forKey:@"task_priority"];
+                [managedTask setValue:[NSNumber numberWithInteger:task.categoryID] forKey:@"category_id"];
+                [managedTask setValue:task.createdAt forKey:@"created_at"];
+                [managedTask setValue:task.completionTime forKey:@"task_completion_time"];
+                [managedTask setValue:[NSNumber numberWithInteger:task.syncStatus] forKey:@"task_sync_status"];
+                [managedTask setValue:[NSNumber numberWithInteger:1] forKey:@"task_type"];
+                [self.managedObjectContext save:nil];
+                return;
+            }
+        }
+    }
+}
+
+-(void) deleteTask:(BaseTask *)task
+{
+    NSError* error = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Task"];
+    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    
+    if(!error)
+    {
+        for(NSManagedObject* managedTask in results)
+        {
+            NSUInteger ID = (NSUInteger)[managedTask valueForKey:@"id"];
+            if(ID == [task ID])
+            {
+                [managedTask setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];
+                [self.managedObjectContext save:nil];
+                return;
+            }
+        }
+    }
+
+}
 
 
 

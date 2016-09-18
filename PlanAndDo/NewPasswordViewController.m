@@ -46,11 +46,11 @@
 //        [self.navigationController pushViewController:cavc animated:YES];
 //    }
     
-   NSArray* ar = [NSArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasks]];
+   //NSArray* ar = [NSArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasksForToday]];
     
-    KSTask* task = [[KSTask alloc] initWithID:-1 andName:@"local test 1" andStatus:NO andTaskReminderTime:[NSDate date] andTaskPriority:KSTaskDefaultPriority andCategoryID:-1 andCreatedAt:[NSDate date] andCompletionTime:[NSDate date] andSyncStatus:-1 andTaskDescription:@"local test 1"];
+   // KSTask* task = [[KSTask alloc] initWithID:-1 andName:@"local test 1" andStatus:NO andTaskReminderTime:[NSDate date] andTaskPriority:KSTaskDefaultPriority andCategoryID:-1 andCreatedAt:[NSDate date] andCompletionTime:[NSDate date] andSyncStatus:-1 andTaskDescription:@"local test 1"];
     
-   // [[[TasksCoreDataManager alloc] init] addTask:task];
+  //  [[[TasksCoreDataManager alloc] init] addTask:task];
     
     SettingsViewController * tableTaskViewController=[[SettingsViewController alloc] init];
     
