@@ -10,13 +10,14 @@
 
 @implementation UserSettings
 
--(instancetype)initWithStartPage:(NSString *)startPage
-                     andPageType:(NSString *)pageType
-                   andDateFormat:(NSString *)dateFormat
-                   andTimeFormat:(NSString *)timeFormat andSyncStatus:(int)syncStatus
+-(instancetype)initWithID:(NSUInteger)ID andStartPage:(NSString *)startPage
+              andPageType:(NSString *)pageType
+            andDateFormat:(NSString *)dateFormat
+            andTimeFormat:(NSString *)timeFormat andSyncStatus:(int)syncStatus
 {
     if(self=[super init])
     {
+        self.ID = ID;
         self.startPage=startPage;
         self.pageType=pageType;
         self.dateFormat=dateFormat;

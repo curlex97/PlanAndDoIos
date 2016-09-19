@@ -5,7 +5,6 @@
         <attribute name="category_sync_status" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="is_deleted" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="user_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="Settings" syncable="YES">
         <attribute name="date_format" optional="YES" attributeType="String" syncable="YES"/>
@@ -14,7 +13,6 @@
         <attribute name="settings_sync_status" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="start_page" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="time_format" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="user_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="Subtask" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
@@ -37,7 +35,6 @@
         <attribute name="task_reminder_time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="task_sync_status" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="task_type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="user_id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="User" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -48,10 +45,10 @@
         <attribute name="user_sync_status" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="-423" positionY="141" width="128" height="120"/>
-        <element name="Settings" positionX="-254" positionY="291" width="128" height="150"/>
+        <element name="Category" positionX="-423" positionY="141" width="128" height="105"/>
+        <element name="Settings" positionX="-254" positionY="291" width="128" height="135"/>
         <element name="Subtask" positionX="-423" positionY="279" width="128" height="135"/>
-        <element name="Task" positionX="-576" positionY="144" width="128" height="240"/>
+        <element name="Task" positionX="-576" positionY="144" width="128" height="225"/>
         <element name="User" positionX="-261" positionY="144" width="128" height="135"/>
     </elements>
 </model>

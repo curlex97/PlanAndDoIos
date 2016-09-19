@@ -13,7 +13,7 @@
 @interface SettingsCoreDataManager : CoreDataManager
 
 -(UserSettings*) settings;
-
+-(void)setSettings:(UserSettings*)settings;
 -(void)updateSettings:(UserSettings*)settings;
 
 @end

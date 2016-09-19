@@ -7,7 +7,14 @@
 //
 
 #import "CoreDataManager.h"
+#import "KSAuthorisedUser.h"
 
 @interface UserCoreDataManager : CoreDataManager
+
+-(KSAuthorisedUser*) authorisedUser;
+
+-(void)setUser:(KSAuthorisedUser*)user;
+-(void)updateUser:(KSAuthorisedUser*)user;
+
 
 @end

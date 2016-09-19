@@ -15,7 +15,7 @@
 @property (nonatomic)NSString * dateFormat;
 @property (nonatomic)NSString * timeFormat;
 
--(instancetype)initWithStartPage:(NSString *)startPage
+-(instancetype)initWithID:(NSUInteger)ID andStartPage:(NSString *)startPage
                      andPageType:(NSString *)pageType
                    andDateFormat:(NSString *)dateFormat
                    andTimeFormat:(NSString *)timeFormat andSyncStatus:(int)syncStatus;

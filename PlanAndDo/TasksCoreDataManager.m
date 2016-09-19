@@ -203,8 +203,10 @@
         [object setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:@"task_sync_status"];
         [object setValue:realTask.taskDescription forKey:@"task_description"];
         [object setValue:[NSNumber numberWithInteger:0] forKey:@"task_type"];
-        [managedObjectContext save:nil];
+        [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
         
+        [managedObjectContext save:nil];
+                
     }
     else if([task isKindOfClass:[KSTaskCollection class]])
     {
@@ -222,6 +224,8 @@
         [object setValue:realTask.completionTime forKey:@"task_completion_time"];
         [object setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:@"task_sync_status"];
         [object setValue:[NSNumber numberWithInteger:1] forKey:@"task_type"];
+        [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
+
         [managedObjectContext save:nil];
     }
 }
