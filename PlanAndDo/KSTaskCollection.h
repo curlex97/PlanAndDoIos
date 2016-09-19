@@ -17,7 +17,7 @@
                 andStatus:(BOOL)status
       andTaskReminderTime:(NSDate*) taskReminderTime
           andTaskPriority:(KSTaskPriority)priority
-            andCategoryID:(NSUInteger)categoryID
+            andCategoryID:(int)categoryID
              andCreatedAt:(NSDate*)createdAt
         andCompletionTime:(NSDate*)completionTime
             andSyncStatus:(int)syncStatus

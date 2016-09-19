@@ -21,12 +21,12 @@
     {
         for(NSManagedObject* managedSettings in results)
         {
-            NSUInteger ID = (NSUInteger)[managedSettings valueForKey:@"id"];
+            NSUInteger ID = [[managedSettings valueForKey:@"id"] integerValue];
             NSString* startPage = (NSString*)[managedSettings valueForKey:@"start_page"];
             NSString* pageType = (NSString*)[managedSettings valueForKey:@"page_type"];
             NSString* dateFormat = (NSString*)[managedSettings valueForKey:@"date_format"];
             NSString* timeFormat = (NSString*)[managedSettings valueForKey:@"time_format"];
-            int syncStatus = (int)[managedSettings valueForKey:@"settings_sync_status"];
+            int syncStatus = [[managedSettings valueForKey:@"settings_sync_status"] intValue];
             
             settings = [[UserSettings alloc] initWithID:ID andStartPage:startPage andPageType:pageType andDateFormat:dateFormat andTimeFormat:timeFormat andSyncStatus:syncStatus];
             
@@ -50,7 +50,7 @@
         {
             for(NSManagedObject* managedSettings in results)
             {
-                NSUInteger ID = (NSUInteger)[managedSettings valueForKey:@"id"];
+                NSUInteger ID = [[managedSettings valueForKey:@"id"] integerValue];
                 if(ID == [settings ID])
                 {
                     [managedSettings setValue:[NSNumber numberWithInteger:[settings ID]] forKey:@"id"];

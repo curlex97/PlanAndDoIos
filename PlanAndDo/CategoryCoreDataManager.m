@@ -24,9 +24,9 @@
     {
         for(NSManagedObject* managedCategory in results)
         {
-            NSUInteger ID = (NSUInteger)[managedCategory valueForKey:@"id"];
+            NSUInteger ID = [[managedCategory valueForKey:@"id"] integerValue];
             NSString* name = (NSString*)[managedCategory valueForKey:@"category_name"];
-            int syncStatus = (int)[managedCategory valueForKey:@"category_sync_status"];
+            int syncStatus = [[managedCategory valueForKey:@"category_sync_status"] intValue];
 
             KSCategory* category = [[KSCategory alloc] initWithID:ID andName:name andSyncStatus:syncStatus];
             
@@ -61,7 +61,7 @@
     {
         for(NSManagedObject* managedCategory in results)
         {
-            NSUInteger ID = (NSUInteger)[managedCategory valueForKey:@"id"];
+            NSUInteger ID = [[managedCategory valueForKey:@"id"] integerValue];
             if(ID == [category ID])
             {
                 [managedCategory setValue:[NSNumber numberWithInteger:category.ID] forKey:@"id"];
@@ -87,7 +87,7 @@
     {
         for(NSManagedObject* managedCategory in results)
         {
-            NSUInteger ID = (NSUInteger)[managedCategory valueForKey:@"id"];
+            NSUInteger ID = [[managedCategory valueForKey:@"id"] integerValue];
             if(ID == [category ID])
             {
                 [managedCategory setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];

@@ -14,19 +14,37 @@
 
 @interface TasksCoreDataManager : CoreDataManager
 
+// test 1 OK
 -(NSArray<BaseTask *>*) allTasks;
+
+// test 1 OK
 -(NSArray<BaseTask *>*) allTasksForToday;
+
+// test 1 OK
 -(NSArray<BaseTask *>*) allTasksForTomorrow;
+
+// test 1 OK
 -(NSArray<BaseTask *>*) allTasksForWeek;
+
+// test 1 OK
 -(NSArray<BaseTask *>*) allTasksForArchive;
+
+// test 1 OK
 -(NSArray<BaseTask *>*) allTasksForBacklog;
+
+// test 1 OK
 -(NSArray<BaseTask *>*) allTasksForCategory:(KSCategory*)category;
 
-
+// test 1 OK
 -(BaseTask*)taskWithId:(int)Id;
 
+// test 1 OK
 -(void) updateTask:(BaseTask*)task;
+
+// test 1 OK
 -(void)addTask:(BaseTask*)task;
+
+// test 1 OK
 -(void)deleteTask:(BaseTask*)task;
 
 @end

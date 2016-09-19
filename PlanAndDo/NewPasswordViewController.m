@@ -45,10 +45,10 @@
 //        cavc.navigationItem.title = @"Change email";
 //        [self.navigationController pushViewController:cavc animated:YES];
 //    }
-    
-   //NSArray* ar = [NSArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasksForToday]];
-    
-   // KSTask* task = [[KSTask alloc] initWithID:-1 andName:@"local test 1" andStatus:NO andTaskReminderTime:[NSDate date] andTaskPriority:KSTaskDefaultPriority andCategoryID:-1 andCreatedAt:[NSDate date] andCompletionTime:[NSDate date] andSyncStatus:-1 andTaskDescription:@"local test 1"];
+   // KSCategory* cat = [[KSCategory alloc] initWithID:4 andName:@"" andSyncStatus:0];
+  // NSArray* ar = [NSArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasksForCategory:cat]];
+
+    //KSTask* task = [[KSTask alloc] initWithID:3 andName:@"local test 4" andStatus:NO andTaskReminderTime:[NSDate date] andTaskPriority:KSTaskDefaultPriority andCategoryID:4 andCreatedAt:[NSDate date] andCompletionTime:[NSDate date] andSyncStatus:-1 andTaskDescription:@"local test 4"];
     
   //  [[[TasksCoreDataManager alloc] init] addTask:task];
     

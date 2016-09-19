@@ -22,12 +22,12 @@
     {
         for(NSManagedObject* managedUser in results)
         {
-            NSUInteger ID = (NSUInteger)[managedUser valueForKey:@"id"];
+            NSUInteger ID = [[managedUser valueForKey:@"id"] integerValue];
             NSString* name = (NSString*)[managedUser valueForKey:@"name"];
             NSString* email = (NSString*)[managedUser valueForKey:@"email"];
             NSDate* createDate = (NSDate*)[managedUser valueForKey:@"created_at"];
             NSDate* lastVisit = (NSDate*)[managedUser valueForKey:@"lastvisit_date"];
-            int syncStatus = (int)[managedUser valueForKey:@"user_sync_status"];
+            int syncStatus = [[managedUser valueForKey:@"user_sync_status"] intValue];
             NSString* token = @"foo";
             
             UserSettings* settings = [[[SettingsCoreDataManager alloc] init] settings];

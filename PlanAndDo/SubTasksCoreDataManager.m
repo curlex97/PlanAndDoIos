@@ -22,15 +22,15 @@
     {
         for(NSManagedObject* managedSubtask in results)
         {
-            NSUInteger taskID = (NSUInteger)[managedSubtask valueForKey:@"task_id"];
-            bool del = (bool)[managedSubtask valueForKey:@"is_deleted"];
+            NSUInteger taskID = [[managedSubtask valueForKey:@"task_id"] integerValue];
+            bool del = [[managedSubtask valueForKey:@"is_deleted"] boolValue];
 
             if(taskID == [task ID] && !del)
             {
-                NSUInteger ID = (NSUInteger)[managedSubtask valueForKey:@"id"];
+                NSUInteger ID = [[managedSubtask valueForKey:@"id"] integerValue];
                 NSString* name = (NSString*)[managedSubtask valueForKey:@"name"];
-                bool status = (bool)[managedSubtask valueForKey:@"status"];
-                int syncStatus = (int)[managedSubtask valueForKey:@"subtask_sync_status"];
+                bool status = [[managedSubtask valueForKey:@"status"] boolValue];
+                int syncStatus = [[managedSubtask valueForKey:@"subtask_sync_status"] intValue];
 
                 KSShortTask* subtask = [[KSShortTask alloc] initWithID:ID andName:name andStatus:status andSyncStatus:syncStatus];
                 [subtasks addObject:subtask];
@@ -67,8 +67,8 @@
     {
         for(NSManagedObject* managedSubtask in results)
         {
-            NSUInteger taskID = (NSUInteger)[managedSubtask valueForKey:@"task_id"];
-            NSUInteger ID = (NSUInteger)[managedSubtask valueForKey:@"id"];
+            NSUInteger taskID = [[managedSubtask valueForKey:@"task_id"] integerValue];
+            NSUInteger ID = [[managedSubtask valueForKey:@"id"] integerValue];
 
             if(taskID == [task ID] && ID == [subTask ID])
             {
@@ -95,8 +95,8 @@
     {
         for(NSManagedObject* managedSubtask in results)
         {
-            NSUInteger taskID = (NSUInteger)[managedSubtask valueForKey:@"task_id"];
-            NSUInteger ID = (NSUInteger)[managedSubtask valueForKey:@"id"];
+            NSUInteger taskID = [[managedSubtask valueForKey:@"task_id"] integerValue];
+            NSUInteger ID = [[managedSubtask valueForKey:@"id"] integerValue];
             
             if(taskID == [task ID] && ID == [subTask ID])
             {

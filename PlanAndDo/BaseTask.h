@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, KSTaskPriority)
 @property (nonatomic)BOOL isRemind;
 @property (nonatomic) NSDate* taskReminderTime;
 @property (nonatomic)KSTaskPriority priority;
-@property (nonatomic)NSUInteger categoryID;
+@property (nonatomic)int categoryID;
 @property (nonatomic)NSDate* createdAt;
 @property (nonatomic)NSDate* completionTime;
 
@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, KSTaskPriority)
                       andStatus:(BOOL)status
             andTaskReminderTime:(NSDate*) taskReminderTime
                 andTaskPriority:(KSTaskPriority)priority
-            andCategoryID:(NSUInteger)categoryID
+            andCategoryID:(int)categoryID
              andCreatedAt:(NSDate*)createdAt
         andCompletionTime:(NSDate*)completionTime
                   andSyncStatus:(int)syncStatus;

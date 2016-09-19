@@ -41,39 +41,44 @@
         for(NSManagedObject* managedTask in results)
         {
             int task_type = [[managedTask valueForKey:@"task_type"] intValue];
-            if(!task_type)
-            {
-                NSUInteger ID = (NSUInteger)[managedTask valueForKey:@"id"];
-                NSString* name = (NSString*)[managedTask valueForKey:@"task_name"];
-                BOOL status = (BOOL)[managedTask valueForKey:@"is_completed"];
-                NSDate* taskRemindeTime = (NSDate*)[managedTask valueForKey:@"task_reminder_time"];
-                KSTaskPriority priority = (int)[managedTask valueForKey:@"task_priority"];
-                NSUInteger categoryID = (NSUInteger)[managedTask valueForKey:@"category_id"];
-                NSDate* createdAt = (NSDate*)[managedTask valueForKey:@"created_at"];
-                NSDate* completionTime = (NSDate*)[managedTask valueForKey:@"task_completion_time"];
-                int syncStatus = (int)[managedTask valueForKey:@"task_sync_status"];
-                NSString* desc = (NSString*)[managedTask valueForKey:@"task_description"];
-                
-                KSTask* task = [[KSTask alloc] initWithID:ID andName:name andStatus:status andTaskReminderTime:taskRemindeTime andTaskPriority:priority andCategoryID:categoryID andCreatedAt:createdAt andCompletionTime:completionTime andSyncStatus:syncStatus andTaskDescription:desc];
-                
-                [tasks addObject:task];
-            }
+            bool del = [[managedTask valueForKey:@"is_deleted"] boolValue];
             
-            else
+            if(!del)
             {
-                NSUInteger ID = (NSUInteger)[managedTask valueForKey:@"id"];
-                NSString* name = (NSString*)[managedTask valueForKey:@"task_name"];
-                BOOL status = (BOOL)[managedTask valueForKey:@"is_completed"];
-                NSDate* taskRemindeTime = (NSDate*)[managedTask valueForKey:@"task_reminder_time"];
-                KSTaskPriority priority = (int)[managedTask valueForKey:@"task_priority"];
-                NSUInteger categoryID = (NSUInteger)[managedTask valueForKey:@"category_id"];
-                NSDate* createdAt = (NSDate*)[managedTask valueForKey:@"created_at"];
-                NSDate* completionTime = (NSDate*)[managedTask valueForKey:@"task_completion_time"];
-                int syncStatus = (int)[managedTask valueForKey:@"task_sync_status"];
+                if(!task_type)
+                {
+                    NSUInteger ID = [[managedTask valueForKey:@"id"] integerValue];
+                    NSString* name = (NSString*)[managedTask valueForKey:@"task_name"];
+                    BOOL status = [[managedTask valueForKey:@"is_completed"] boolValue];
+                    NSDate* taskRemindeTime = (NSDate*)[managedTask valueForKey:@"task_reminder_time"];
+                    KSTaskPriority priority = [[managedTask valueForKey:@"task_priority"] intValue];
+                    int categoryID = [[managedTask valueForKey:@"category_id"] intValue];
+                    NSDate* createdAt = (NSDate*)[managedTask valueForKey:@"created_at"];
+                    NSDate* completionTime = (NSDate*)[managedTask valueForKey:@"task_completion_time"];
+                    int syncStatus = [[managedTask valueForKey:@"task_sync_status"] intValue];
+                    NSString* desc = (NSString*)[managedTask valueForKey:@"task_description"];
+                    
+                    KSTask* task = [[KSTask alloc] initWithID:ID andName:name andStatus:status andTaskReminderTime:taskRemindeTime andTaskPriority:priority andCategoryID:categoryID andCreatedAt:createdAt andCompletionTime:completionTime andSyncStatus:syncStatus andTaskDescription:desc];
+                    
+                    [tasks addObject:task];
+                }
                 
-                KSTaskCollection* task = [[KSTaskCollection alloc] initWithID:ID andName:name andStatus:status andTaskReminderTime:taskRemindeTime andTaskPriority:priority andCategoryID:categoryID andCreatedAt:createdAt andCompletionTime:completionTime andSyncStatus:syncStatus andSubTasks:[NSMutableArray array]];
-                
-                [tasks addObject:task];
+                else
+                {
+                    NSUInteger ID = [[managedTask valueForKey:@"id"] integerValue];
+                    NSString* name = (NSString*)[managedTask valueForKey:@"task_name"];
+                    BOOL status = [[managedTask valueForKey:@"is_completed"] boolValue];
+                    NSDate* taskRemindeTime = (NSDate*)[managedTask valueForKey:@"task_reminder_time"];
+                    KSTaskPriority priority = [[managedTask valueForKey:@"task_priority"] intValue];
+                    int categoryID = [[managedTask valueForKey:@"category_id"] intValue];
+                    NSDate* createdAt = (NSDate*)[managedTask valueForKey:@"created_at"];
+                    NSDate* completionTime = (NSDate*)[managedTask valueForKey:@"task_completion_time"];
+                    int syncStatus = [[managedTask valueForKey:@"task_sync_status"] intValue];
+                    
+                    KSTaskCollection* task = [[KSTaskCollection alloc] initWithID:ID andName:name andStatus:status andTaskReminderTime:taskRemindeTime andTaskPriority:priority andCategoryID:categoryID andCreatedAt:createdAt andCompletionTime:completionTime andSyncStatus:syncStatus andSubTasks:[NSMutableArray array]];
+                    
+                    [tasks addObject:task];
+                }
             }
             
         }
@@ -95,7 +100,11 @@
 -(NSArray<BaseTask *> *)allTasksForToday
 {
     NSDate* date = [NSDate date];
+    
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+
+    
+    
     NSMutableArray* tasks = [NSMutableArray array];
     
     for(BaseTask* task in [self allTasks])
@@ -104,7 +113,8 @@
         
         if([components year] == [taskComponents year] &&
            [components month] == [taskComponents month] &&
-           [components day] == [taskComponents day] && ![task status]) [tasks addObject:task];
+           [components day] == [taskComponents day] && ![task status])
+            [tasks addObject:task];
     }
     
     
@@ -115,6 +125,7 @@
 {
     NSDate* date = [NSDate dateWithTimeInterval:(24*60*60) sinceDate:[NSDate date]];
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    
     NSMutableArray* tasks = [NSMutableArray array];
     
     for(BaseTask* task in [self allTasks])
@@ -134,6 +145,7 @@
 {
     NSDate* date = [NSDate date];
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    
     NSMutableArray* tasks = [NSMutableArray array];
     
     for(BaseTask* task in [self allTasks])
@@ -154,6 +166,7 @@
 {
     NSDate* date = [NSDate date];
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
+    
     NSMutableArray* tasks = [NSMutableArray array];
     
     for(BaseTask* task in [self allTasks])
@@ -176,7 +189,7 @@
     
     for(BaseTask* task in [self allTasks])
     {
-        if([task completionTime] == nil || [task categoryID] == 0) [tasks addObject:task];
+        if([task completionTime] == nil || [task categoryID] <= 0) [tasks addObject:task];
     }
     
     return tasks;
@@ -242,7 +255,7 @@
     {
         for(NSManagedObject* managedTask in results)
         {
-            NSUInteger ID = (NSUInteger)[managedTask valueForKey:@"id"];
+            NSUInteger ID = [[managedTask valueForKey:@"id"] integerValue];
             if(ID == [task ID])
             {
                 if([task isKindOfClass:[KSTask class]])
@@ -298,7 +311,7 @@
     {
         for(NSManagedObject* managedTask in results)
         {
-            NSUInteger ID = (NSUInteger)[managedTask valueForKey:@"id"];
+            NSUInteger ID = [[managedTask valueForKey:@"id"] integerValue];
             if(ID == [task ID])
             {
                 [managedTask setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];
