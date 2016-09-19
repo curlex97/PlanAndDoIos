@@ -40,6 +40,8 @@
 		2803AF8E1D8AA8ED0032ACFB /* FormatTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF8D1D8AA8ED0032ACFB /* FormatTimeViewController.m */; };
 		2803AF911D8AAA710032ACFB /* StartDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF901D8AAA710032ACFB /* StartDayViewController.m */; };
 		2803AF941D8AAB1D0032ACFB /* StartPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF931D8AAB1D0032ACFB /* StartPageViewController.m */; };
+		280539241D900F2900868ACF /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 280539201D900F2900868ACF /* MGSwipeButton.m */; };
+		280539251D900F2900868ACF /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 280539221D900F2900868ACF /* MGSwipeTableCell.m */; };
 		282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282C28C51D829A600061761E /* AMSideBarViewController.m */; };
 		284F9C3B1D8DCFF500B0853F /* TasksCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 284F9C3A1D8DCFF500B0853F /* TasksCoreDataManager.m */; };
 		286E26201D883FF00055A7BF /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286E261F1D883FF00055A7BF /* SettingsViewController.m */; };
@@ -135,6 +137,10 @@
 		2803AF901D8AAA710032ACFB /* StartDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartDayViewController.m; sourceTree = "<group>"; };
 		2803AF921D8AAB1D0032ACFB /* StartPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartPageViewController.h; sourceTree = "<group>"; };
 		2803AF931D8AAB1D0032ACFB /* StartPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartPageViewController.m; sourceTree = "<group>"; };
+		2805391F1D900F2900868ACF /* MGSwipeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeButton.h; sourceTree = "<group>"; };
+		280539201D900F2900868ACF /* MGSwipeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeButton.m; sourceTree = "<group>"; };
+		280539211D900F2900868ACF /* MGSwipeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeTableCell.h; sourceTree = "<group>"; };
+		280539221D900F2900868ACF /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
 		282C28C41D829A600061761E /* AMSideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSideBarViewController.h; sourceTree = "<group>"; };
 		282C28C51D829A600061761E /* AMSideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSideBarViewController.m; sourceTree = "<group>"; };
 		284F9C391D8DCFF500B0853F /* TasksCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksCoreDataManager.h; sourceTree = "<group>"; };
@@ -458,6 +464,7 @@
 		2803AFA81D8ABA660032ACFB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				2805391D1D900F2900868ACF /* MGSwipeTableCell */,
 				2803AFA71D8ABA580032ACFB /* CheckSettingsCell */,
 				2803AF7E1D8A8EE70032ACFB /* TaskTableViewCell */,
 				2803AF7D1D8A8EE20032ACFB /* PriorityCell */,
@@ -490,6 +497,17 @@
 				2803AF9C1D8AB9F80032ACFB /* AndroidSideBar */,
 			);
 			name = SideBars;
+			sourceTree = "<group>";
+		};
+		2805391D1D900F2900868ACF /* MGSwipeTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				2805391F1D900F2900868ACF /* MGSwipeButton.h */,
+				280539201D900F2900868ACF /* MGSwipeButton.m */,
+				280539211D900F2900868ACF /* MGSwipeTableCell.h */,
+				280539221D900F2900868ACF /* MGSwipeTableCell.m */,
+			);
+			path = MGSwipeTableCell;
 			sourceTree = "<group>";
 		};
 		282C28C71D829C1F0061761E /* AMSideBarViewController */ = {
@@ -763,6 +781,7 @@
 				27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */,
 				278BAA551D89BA4A002D38CF /* BaseAuthViewController.m in Sources */,
 				27B1A0FA1D8195A800D47FCD /* UserSettings.m in Sources */,
+				280539251D900F2900868ACF /* MGSwipeTableCell.m in Sources */,
 				272F91C31D8A6C0C00A0330B /* DescriptionViewController.m in Sources */,
 				27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */,
 				28797F711D87E24500AEDE0A /* UIImage+ACScaleImage.m in Sources */,
@@ -785,6 +804,7 @@
 				27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */,
 				278BAA4D1D896E30002D38CF /* AddTaskViewController.m in Sources */,
 				28AB856B1D8F48A100D93AB7 /* SettingsCoreDataManager.m in Sources */,
+				280539241D900F2900868ACF /* MGSwipeButton.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
 				270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */,
 				2803AF911D8AAA710032ACFB /* StartDayViewController.m in Sources */,

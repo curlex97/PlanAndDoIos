@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MGSwipeTableCell.h"
 
-@interface TaskTableViewCell : UITableViewCell
+@interface TaskTableViewCell : MGSwipeTableCell
 @property (strong, nonatomic) IBOutlet UILabel *taskHeaderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *taskPriorityLabel;
 @property (strong, nonatomic) IBOutlet UILabel *taskTimeLabel;

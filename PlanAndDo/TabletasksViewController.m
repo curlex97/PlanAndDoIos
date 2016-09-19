@@ -41,6 +41,14 @@ typedef NS_ENUM(NSInteger, KSBoxType)
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSTaskCell"owner:self options:nil];
     TaskTableViewCell * cell=[nib objectAtIndex:0];
     
+    cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"check.png"] backgroundColor:[UIColor greenColor]],
+                         [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"fav.png"] backgroundColor:[UIColor blueColor]]];
+    cell.leftSwipeSettings.transition = MGSwipeTransition3D;
+    
+    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor]],
+                          [MGSwipeButton buttonWithTitle:@"More" backgroundColor:[UIColor lightGrayColor]]];
+    cell.rightSwipeSettings.transition = MGSwipeTransition3D;
+    
     switch (self.boxType) {
             
         case KSBoxTypeToday:
