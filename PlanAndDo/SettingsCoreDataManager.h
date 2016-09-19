@@ -12,8 +12,13 @@
 
 @interface SettingsCoreDataManager : CoreDataManager
 
+// test 1 OK
 -(UserSettings*) settings;
+
+// test 1 OK
 -(void)setSettings:(UserSettings*)settings;
+
+// test 1 OK
 -(void)updateSettings:(UserSettings*)settings;
 
 @end

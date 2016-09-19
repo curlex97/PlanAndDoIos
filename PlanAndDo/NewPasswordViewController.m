@@ -13,6 +13,8 @@
 #import "TasksCoreDataManager.h"
 #import "SubTasksCoreDataManager.h"
 #import "CategoryCoreDataManager.h"
+#import "SettingsCoreDataManager.h"
+#import "UserCoreDataManager.h"
 
 #define TEXTFIELD_PADDING_LEFT 10
 
@@ -39,10 +41,7 @@
 }
 - (IBAction)sendNewPasswordTapped:(id)sender {
     
-    CategoryCoreDataManager* catman = [[CategoryCoreDataManager alloc] init];
-   NSArray* ar = [catman allCategories];
 
-    
     SettingsViewController * tableTaskViewController=[[SettingsViewController alloc] init];
     
     if(tableTaskViewController)

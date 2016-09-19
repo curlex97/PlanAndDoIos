@@ -86,7 +86,6 @@
             [object setValue:[settings dateFormat] forKey:@"date_format"];
             [object setValue:[settings timeFormat] forKey:@"time_format"];
             [object setValue:[NSNumber numberWithInteger:[settings syncStatus]] forKey:@"settings_sync_status"];
-            [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
            
             [managedObjectContext save:nil];
         }

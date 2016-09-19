@@ -11,9 +11,13 @@
 
 @interface UserCoreDataManager : CoreDataManager
 
+// test 1 OK
 -(KSAuthorisedUser*) authorisedUser;
 
+// test 1 OK
 -(void)setUser:(KSAuthorisedUser*)user;
+
+// test 1 OK
 -(void)updateUser:(KSAuthorisedUser*)user;
 
 
