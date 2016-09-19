@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, KSBoxType)
     KSBoxTypeArchive
 };
 
+int rows = 2;
 
 @interface TabletasksViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property KSBoxType boxType;
@@ -33,7 +34,7 @@ typedef NS_ENUM(NSInteger, KSBoxType)
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return rows;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -41,13 +42,30 @@ typedef NS_ENUM(NSInteger, KSBoxType)
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSTaskCell"owner:self options:nil];
     TaskTableViewCell * cell=[nib objectAtIndex:0];
     
-    cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"check.png"] backgroundColor:[UIColor greenColor]],
-                         [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"fav.png"] backgroundColor:[UIColor blueColor]]];
-    cell.leftSwipeSettings.transition = MGSwipeTransition3D;
     
-    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor]],
-                          [MGSwipeButton buttonWithTitle:@"More" backgroundColor:[UIColor lightGrayColor]]];
-    cell.rightSwipeSettings.transition = MGSwipeTransition3D;
+    cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"Complete" backgroundColor:[UIColor greenColor] callback:^BOOL(MGSwipeTableCell *sender) {
+        NSLog(@"Complete");
+        rows --;
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [tableView reloadData];
+        });
+        return YES;
+    }]];
+    cell.leftSwipeSettings.transition = MGSwipeDirectionLeftToRight;
+    
+    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
+        NSLog(@"Delete");
+        rows--;
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [tableView reloadData];
+        });
+
+        return YES;
+    }]];
+    
+    cell.rightSwipeSettings.transition = MGSwipeDirectionRightToLeft;
     
     switch (self.boxType) {
             
