@@ -11,10 +11,16 @@
 
 @interface CategoryCoreDataManager : CoreDataManager
 
+// test 1 OK
 -(NSArray<KSCategory*>*) allCategories;
 
+// test 1 OK
 -(void)addCateroty:(KSCategory*)category;
+
+// test 1 OK
 -(void)updateCateroty:(KSCategory*)category;
+
+// test 1 OK
 -(void)deleteCateroty:(KSCategory*)category;
 
 

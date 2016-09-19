@@ -24,13 +24,18 @@
     {
         for(NSManagedObject* managedCategory in results)
         {
-            NSUInteger ID = [[managedCategory valueForKey:@"id"] integerValue];
-            NSString* name = (NSString*)[managedCategory valueForKey:@"category_name"];
-            int syncStatus = [[managedCategory valueForKey:@"category_sync_status"] intValue];
-
-            KSCategory* category = [[KSCategory alloc] initWithID:ID andName:name andSyncStatus:syncStatus];
+            bool del = [[managedCategory valueForKey:@"is_deleted"] boolValue];
             
-            [categories addObject:category];
+            if(!del)
+            {
+                NSUInteger ID = [[managedCategory valueForKey:@"id"] integerValue];
+                NSString* name = (NSString*)[managedCategory valueForKey:@"category_name"];
+                int syncStatus = [[managedCategory valueForKey:@"category_sync_status"] intValue];
+                
+                KSCategory* category = [[KSCategory alloc] initWithID:ID andName:name andSyncStatus:syncStatus];
+                
+                [categories addObject:category];
+            }
         }
     }
     
