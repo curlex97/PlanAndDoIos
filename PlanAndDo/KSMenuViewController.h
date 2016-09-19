@@ -8,6 +8,12 @@
 
 #import "BaseTableViewController.h"
 
-@interface KSMenuViewController : BaseTableViewController
+typedef NS_ENUM(NSInteger, KSMenuState)
+{
+    KSMenuStateNormal,
+    KSMenuStateSearch
+};
 
+@interface KSMenuViewController : BaseTableViewController
+@property (nonatomic)KSMenuState state;
 @end

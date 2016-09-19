@@ -8,6 +8,8 @@
 
 #import "KSMenuViewController.h"
 #import "AMSideBarViewController.h"
+#import "TaskTableViewCell.h"
+#import "AddTaskViewController.h"
 
 @interface KSMenuViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (nonatomic)NSArray<NSString *> * categories;
@@ -18,28 +20,47 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(section==0)
+    NSInteger result;
+    if(self.state==KSMenuStateNormal)
     {
-        return 1;
-    }
-    else if(section==1)
-    {
-        return self.categories.count;
+        if(section==0)
+        {
+            result = 0;
+        }
+        else if(section==1)
+        {
+            result = self.categories.count;
+        }
+        else
+        {
+            result = 2;
+        }
     }
     else
     {
-        return 2;
+        result = 3;
     }
+    return result;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    NSInteger result;
+    if(self.state==KSMenuStateNormal)
+    {
+        result=3;
+    }
+    else
+    {
+        result=1;
+    }
+    return result;
 }
+
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if(section==1)
+    if(section==1 && self.state==KSMenuStateNormal)
     {
         return @"Categories";
     }
@@ -48,7 +69,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if(section==1)
+    if(section==1 && self.state==KSMenuStateNormal)
     {
         UIView * view=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 30)];
         view.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
@@ -82,11 +103,32 @@
     bgColorView.backgroundColor = [UIColor colorWithRed:57.0/255.0 green:75.0/255.0 blue:86.0/255.0 alpha:1.0];
     [cell setSelectedBackgroundView:bgColorView];
     
-    if(indexPath.row==0 && indexPath.section==0)
+    
+//    if(indexPath.row==0 && indexPath.section==0)
+//    {
+//        [cell addSubview:self.searchBar];
+//    }
+    
+    if(self.state==KSMenuStateSearch)
     {
-        [cell addSubview:self.searchBar];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSTaskCell"owner:self options:nil];
+        TaskTableViewCell * customCell=nib[0];
+        customCell.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
+        customCell.taskTimeLabel.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
+        
+        customCell.taskTimeLabel.textColor=[UIColor whiteColor];
+        customCell.taskDateLabel.textColor=[UIColor whiteColor];
+        customCell.taskHeaderLabel.textColor=[UIColor whiteColor];
+        customCell.taskPriorityLabel.textColor=[UIColor redColor];
+        customCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        
+        [customCell setSelectedBackgroundView:bgColorView];
+        return customCell;
     }
-    else if(indexPath.row<=self.categories.count && indexPath.section==1)
+    else
+    {
+        
+    if(indexPath.row<=self.categories.count && indexPath.section==1)
     {
         UILabel * label=[[UILabel alloc] initWithFrame:CGRectMake(55, 8, 100, 30)];
         label.textColor=[UIColor whiteColor];
@@ -119,7 +161,23 @@
         
         cell.backgroundColor=[UIColor colorWithRed:38.0/255.0 green:53.0/255.0 blue:61.0/255.0 alpha:1.0];
     }
+    }
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.searchBar resignFirstResponder];
+    if(self.state==KSMenuStateSearch)
+    {
+        AMSideBarViewController * sider=(AMSideBarViewController *)self.parentViewController;
+        sider.hiden=NO;
+        [sider side];
+        UINavigationController * frontNavigationViewController=(UINavigationController *)sider.frontViewController;
+        [frontNavigationViewController pushViewController:[[AddTaskViewController alloc] init] animated:YES];
+        //[self performSelector:@selector(searchBarCancelButtonClicked:) withObject:self.searchBar];
+    }
 }
 
 #pragma mark Search Bar delegate methods
@@ -137,6 +195,9 @@
     AMSideBarViewController * sider=(AMSideBarViewController *)self.parentViewController;
     sider.hiden=NO;
     searchBar.frame=CGRectMake(8, 8, 255, 30);
+    
+    self.state=KSMenuStateNormal;
+    [self.tableView reloadData];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar;
@@ -146,26 +207,30 @@
     searchBar.frame=CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, [UIScreen mainScreen].bounds.size.width-searchBar.frame.origin.x*2, searchBar.frame.size.height);
     searchBar.showsCancelButton=YES;
     
+    self.state=KSMenuStateSearch;
+    [self.tableView reloadData];
+    
     return YES;
 }
 
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-  //  if(indexPath.section==1 && indexPath.row==self.categories.count-1)
-    //{
-      //  return 90;
-    //}
-    //else
-    //{
-     //   return 45;
-    //}
-//}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(self.state==KSMenuStateSearch)
+    {
+        return 55;
+    }
+    else
+    {
+        return 45;
+    }
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    self.state=KSMenuStateNormal;
     //self.tableView.separatorColor = [UIColor clearColor];
     
     self.searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(8, 8, 255, 30)];
@@ -173,6 +238,11 @@
     self.searchBar.tintColor=[UIColor whiteColor];
     self.searchBar.barTintColor=[UIColor whiteColor];
     self.searchBar.delegate=self;
+    
+    UIView * searchBarView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 46)];
+    [searchBarView addSubview:self.searchBar];
+    
+    self.tableView.tableHeaderView=searchBarView;
     [[UITextField appearanceWhenContainedInInstancesOfClasses:[NSArray arrayWithObject:[UISearchBar class]]] setTextColor:[UIColor whiteColor]];
     [self.refresh removeFromSuperview];
     [self.tableView setSeparatorColor:[UIColor colorWithRed:163.0/255.0 green:167.0/255.0 blue:169.0/255.0 alpha:0.35]];
