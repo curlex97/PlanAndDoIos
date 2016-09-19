@@ -12,10 +12,16 @@
 
 @interface SubTasksCoreDataManager : CoreDataManager
 
+// test 1 OK
 -(NSArray<KSShortTask*>*) allSubTasksForTask:(KSTaskCollection*)task;
 
+// test 1 OK
 -(void)addSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task;
+
+// test 1 OK
 -(void)updateSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task;
+
+// test 1 OK
 -(void)deleteSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task;
 
 @end

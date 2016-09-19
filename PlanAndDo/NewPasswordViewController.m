@@ -11,7 +11,7 @@
 #import "ChangeEmailViewController.h"
 #import "SettingsViewController.h"
 #import "TasksCoreDataManager.h"
-
+#import "SubTasksCoreDataManager.h"
 
 #define TEXTFIELD_PADDING_LEFT 10
 
@@ -38,19 +38,6 @@
 }
 - (IBAction)sendNewPasswordTapped:(id)sender {
     
-//    ChangeEmailViewController* cavc = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangeEmailViewController"];
-//    
-//    if(cavc)
-//    {
-//        cavc.navigationItem.title = @"Change email";
-//        [self.navigationController pushViewController:cavc animated:YES];
-//    }
-   // KSCategory* cat = [[KSCategory alloc] initWithID:4 andName:@"" andSyncStatus:0];
-  // NSArray* ar = [NSArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasksForCategory:cat]];
-
-    //KSTask* task = [[KSTask alloc] initWithID:3 andName:@"local test 4" andStatus:NO andTaskReminderTime:[NSDate date] andTaskPriority:KSTaskDefaultPriority andCategoryID:4 andCreatedAt:[NSDate date] andCompletionTime:[NSDate date] andSyncStatus:-1 andTaskDescription:@"local test 4"];
-    
-  //  [[[TasksCoreDataManager alloc] init] addTask:task];
     
     SettingsViewController * tableTaskViewController=[[SettingsViewController alloc] init];
     

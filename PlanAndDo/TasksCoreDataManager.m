@@ -7,6 +7,7 @@
 //
 
 #import "TasksCoreDataManager.h"
+#import "SubTasksCoreDataManager.h"
 
 @implementation TasksCoreDataManager
 
@@ -74,8 +75,8 @@
                     NSDate* createdAt = (NSDate*)[managedTask valueForKey:@"created_at"];
                     NSDate* completionTime = (NSDate*)[managedTask valueForKey:@"task_completion_time"];
                     int syncStatus = [[managedTask valueForKey:@"task_sync_status"] intValue];
-                    
-                    KSTaskCollection* task = [[KSTaskCollection alloc] initWithID:ID andName:name andStatus:status andTaskReminderTime:taskRemindeTime andTaskPriority:priority andCategoryID:categoryID andCreatedAt:createdAt andCompletionTime:completionTime andSyncStatus:syncStatus andSubTasks:[NSMutableArray array]];
+                    KSTaskCollection* task = [[KSTaskCollection alloc] initWithID:ID andName:name andStatus:status andTaskReminderTime:taskRemindeTime andTaskPriority:priority andCategoryID:categoryID andCreatedAt:createdAt andCompletionTime:completionTime andSyncStatus:syncStatus andSubTasks:nil];
+                    task.subTasks = [NSMutableArray arrayWithArray:[[[SubTasksCoreDataManager alloc] init] allSubTasksForTask:task]];
                     
                     [tasks addObject:task];
                 }
