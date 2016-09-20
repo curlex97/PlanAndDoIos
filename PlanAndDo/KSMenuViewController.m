@@ -12,6 +12,7 @@
 #import "AddTaskViewController.h"
 #import "SettingsViewController.h"
 #import "CategoryTasksViewController.h"
+#import "EditTaskViewController.h"
 
 @interface KSMenuViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (nonatomic)NSArray<NSString *> * categories;
@@ -177,8 +178,8 @@
         sider.hiden=NO;
         [sider side];
         UINavigationController * frontNavigationViewController=(UINavigationController *)sider.frontViewController;
-        [frontNavigationViewController pushViewController:[[AddTaskViewController alloc] init] animated:YES];
-        //[self performSelector:@selector(searchBarCancelButtonClicked:) withObject:self.searchBar];
+        [frontNavigationViewController pushViewController:[[EditTaskViewController alloc] init] animated:YES];
+        
     }
     
     else if(indexPath.section == 1)

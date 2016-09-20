@@ -63,6 +63,7 @@
 		28AB856B1D8F48A100D93AB7 /* SettingsCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB856A1D8F48A100D93AB7 /* SettingsCoreDataManager.m */; };
 		28AB856F1D8F48B300D93AB7 /* CategoryCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB856E1D8F48B300D93AB7 /* CategoryCoreDataManager.m */; };
 		28B947861D9166F0005A8E9A /* CategoryTasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B947851D9166F0005A8E9A /* CategoryTasksViewController.m */; };
+		28B947891D918D72005A8E9A /* EditTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B947881D918D72005A8E9A /* EditTaskViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +183,8 @@
 		28AB856E1D8F48B300D93AB7 /* CategoryCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryCoreDataManager.m; sourceTree = "<group>"; };
 		28B947841D9166F0005A8E9A /* CategoryTasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTasksViewController.h; sourceTree = "<group>"; };
 		28B947851D9166F0005A8E9A /* CategoryTasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTasksViewController.m; sourceTree = "<group>"; };
+		28B947871D918D72005A8E9A /* EditTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTaskViewController.h; sourceTree = "<group>"; };
+		28B947881D918D72005A8E9A /* EditTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTaskViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +306,7 @@
 		2803AF971D8AB9BC0032ACFB /* BaseTableViewController */ = {
 			isa = PBXGroup;
 			children = (
+				28B9478A1D918D7F005A8E9A /* EditTask */,
 				28EF10171D9164EE005867C4 /* CategoryTasks */,
 				280539261D90376900868ACF /* Menu */,
 				2803AF981D8AB9CC0032ACFB /* FormatDate */,
@@ -680,6 +684,15 @@
 			name = CategoryCoreDataManager;
 			sourceTree = "<group>";
 		};
+		28B9478A1D918D7F005A8E9A /* EditTask */ = {
+			isa = PBXGroup;
+			children = (
+				28B947871D918D72005A8E9A /* EditTaskViewController.h */,
+				28B947881D918D72005A8E9A /* EditTaskViewController.m */,
+			);
+			name = EditTask;
+			sourceTree = "<group>";
+		};
 		28EF10131D915892005867C4 /* DateAndTime */ = {
 			isa = PBXGroup;
 			children = (
@@ -843,6 +856,7 @@
 				2803AF941D8AAB1D0032ACFB /* StartPageViewController.m in Sources */,
 				28AB85631D8F483D00D93AB7 /* SubTasksCoreDataManager.m in Sources */,
 				278BAA521D897A36002D38CF /* PriorityCell.m in Sources */,
+				28B947891D918D72005A8E9A /* EditTaskViewController.m in Sources */,
 				2786E7B51D884421009BDB2A /* TaskTableViewCell.m in Sources */,
 				27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */,
 				282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */,

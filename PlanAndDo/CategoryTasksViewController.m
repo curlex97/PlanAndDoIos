@@ -11,6 +11,7 @@
 #import "AddTaskViewController.h"
 #import "AMSideBarViewController.h"
 #import "UIImage+ACScaleImage.h"
+#import "EditTaskViewController.h"
 
 int rowss = 2;
 
@@ -61,7 +62,8 @@ int rowss = 2;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    EditTaskViewController * editTaskViewController=[[EditTaskViewController alloc] init];
+    [self.navigationController pushViewController:editTaskViewController animated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

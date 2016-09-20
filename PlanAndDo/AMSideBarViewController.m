@@ -7,6 +7,7 @@
 //
 
 #import "AMSideBarViewController.h"
+#import "KSMenuViewController.h"
 
 @interface AMSideBarViewController ()<UIGestureRecognizerDelegate>
 @property (nonatomic)UIPanGestureRecognizer * pan;
@@ -167,7 +168,14 @@
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
          {
              [self moveFrontViewOnPosition:MAX_OFFSET];
-         } completion:nil];
+         } completion:^(BOOL fl){
+             KSMenuViewController* con = (KSMenuViewController*)self.backViewController;
+             if(con)
+             {
+                 
+             }
+             //searchBarShouldBeginEditing
+         }];
     }
     else
     {
