@@ -88,6 +88,9 @@
     self.pan.delegate=self;
     
     [self.frontViewController.view addGestureRecognizer:self.pan];
+    self.direction = SideDirectionLeft;
+    [self gestureSwipe];
+    
 }
 
 +(AMSideBarViewController *)sideBarWithFrontVC:(UIViewController *)frontVC andBackVC:(UIViewController *)backVC

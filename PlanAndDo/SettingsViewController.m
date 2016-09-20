@@ -12,7 +12,8 @@
 #import "FormatTimeViewController.h"
 #import "StartDayViewController.h"
 #import "StartPageViewController.h"
-
+#import "UIImage+ACScaleImage.h"
+#import "AMSideBarViewController.h"
 
 @interface SettingsViewController()<UITableViewDelegate, UITableViewDataSource>
 @end
@@ -25,7 +26,15 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    
+    UIBarButtonItem * menuButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Menu"] scaledToSize:CGSizeMake(40, 40)] style:UIBarButtonItemStyleDone target:self action:@selector(menuTapped)];
+    self.navigationItem.leftBarButtonItem=menuButton;
+
+}
+
+-(void)menuTapped
+{
+    AMSideBarViewController * sider=(AMSideBarViewController *)self.navigationController.parentViewController;
+    [sider side];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

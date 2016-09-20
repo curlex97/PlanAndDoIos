@@ -42,13 +42,7 @@
 - (IBAction)sendNewPasswordTapped:(id)sender {
     
 
-    SettingsViewController * tableTaskViewController=[[SettingsViewController alloc] init];
-    
-    if(tableTaskViewController)
-    {
-        tableTaskViewController.title=@"Settings";
-        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:tableTaskViewController] animated:YES completion:nil];
-    }
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 

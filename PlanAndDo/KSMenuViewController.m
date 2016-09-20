@@ -10,6 +10,8 @@
 #import "AMSideBarViewController.h"
 #import "TaskTableViewCell.h"
 #import "AddTaskViewController.h"
+#import "SettingsViewController.h"
+#import "CategoryTasksViewController.h"
 
 @interface KSMenuViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (nonatomic)NSArray<NSString *> * categories;
@@ -177,6 +179,34 @@
         UINavigationController * frontNavigationViewController=(UINavigationController *)sider.frontViewController;
         [frontNavigationViewController pushViewController:[[AddTaskViewController alloc] init] animated:YES];
         //[self performSelector:@selector(searchBarCancelButtonClicked:) withObject:self.searchBar];
+    }
+    
+    else if(indexPath.section == 1)
+    {
+        
+        NSString* str = self.categories[indexPath.row];
+        CategoryTasksViewController * categoryTasksViewController=[[CategoryTasksViewController alloc] init];
+        
+        if(categoryTasksViewController)
+        {
+            categoryTasksViewController.title=str;
+            UINavigationController* categoryTasksNav = [[UINavigationController alloc] initWithRootViewController:categoryTasksViewController];
+            AMSideBarViewController* sideBar = (AMSideBarViewController*)self.parentViewController;
+            [sideBar setNewFrontViewController:categoryTasksNav];
+        }
+    }
+    
+    else if(indexPath.section == 2 && indexPath.row == 1)
+    {
+        SettingsViewController * settingsViewController=[[SettingsViewController alloc] init];
+        
+        if(settingsViewController)
+        {
+            settingsViewController.title=@"Settings";
+            UINavigationController* settingsNav = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
+            AMSideBarViewController* sideBar = (AMSideBarViewController*)self.parentViewController;
+            [sideBar setNewFrontViewController:settingsNav];
+        }
     }
 }
 

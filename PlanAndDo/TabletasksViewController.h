@@ -8,6 +8,19 @@
 
 #import "BaseTableViewController.h"
 
-@interface TabletasksViewController : BaseTableViewController
+typedef NS_ENUM(NSInteger, KSBoxType)
+{
+    KSBoxTypeToday,
+    KSBoxTypeTomorrow,
+    KSBoxTypeWeek,
+    KSBoxTypeBacklog,
+    KSBoxTypeArchive
+};
 
+#define BAR_BUTTON_SIZE 50
+
+
+
+@interface TabletasksViewController : BaseTableViewController
+@property KSBoxType boxType;
 @end

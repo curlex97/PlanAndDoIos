@@ -62,6 +62,7 @@
 		28AB85671D8F486100D93AB7 /* UserCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB85661D8F486100D93AB7 /* UserCoreDataManager.m */; };
 		28AB856B1D8F48A100D93AB7 /* SettingsCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB856A1D8F48A100D93AB7 /* SettingsCoreDataManager.m */; };
 		28AB856F1D8F48B300D93AB7 /* CategoryCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB856E1D8F48B300D93AB7 /* CategoryCoreDataManager.m */; };
+		28B947861D9166F0005A8E9A /* CategoryTasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B947851D9166F0005A8E9A /* CategoryTasksViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +180,8 @@
 		28AB856A1D8F48A100D93AB7 /* SettingsCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsCoreDataManager.m; sourceTree = "<group>"; };
 		28AB856D1D8F48B300D93AB7 /* CategoryCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryCoreDataManager.h; sourceTree = "<group>"; };
 		28AB856E1D8F48B300D93AB7 /* CategoryCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryCoreDataManager.m; sourceTree = "<group>"; };
+		28B947841D9166F0005A8E9A /* CategoryTasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTasksViewController.h; sourceTree = "<group>"; };
+		28B947851D9166F0005A8E9A /* CategoryTasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTasksViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +277,7 @@
 		2803AF951D8AB9A80032ACFB /* BaseViewController */ = {
 			isa = PBXGroup;
 			children = (
+				28EF10131D915892005867C4 /* DateAndTime */,
 				2803AFA51D8ABA3E0032ACFB /* Description */,
 				2803AF961D8AB9B20032ACFB /* BaseAuthViewController */,
 				2803AF971D8AB9BC0032ACFB /* BaseTableViewController */,
@@ -299,6 +303,8 @@
 		2803AF971D8AB9BC0032ACFB /* BaseTableViewController */ = {
 			isa = PBXGroup;
 			children = (
+				28EF10171D9164EE005867C4 /* CategoryTasks */,
+				280539261D90376900868ACF /* Menu */,
 				2803AF981D8AB9CC0032ACFB /* FormatDate */,
 				2803AF991D8AB9D40032ACFB /* StartDay */,
 				2803AF9A1D8AB9DB0032ACFB /* StartPage */,
@@ -310,8 +316,6 @@
 				2803AFA61D8ABA470032ACFB /* TaskList */,
 				278BAA561D89BB32002D38CF /* BaseTableViewController.h */,
 				278BAA571D89BB32002D38CF /* BaseTableViewController.m */,
-				27494DE21D8D3ECE009BFC5F /* KSMenuViewController.h */,
-				27494DE31D8D3ECE009BFC5F /* KSMenuViewController.m */,
 			);
 			name = BaseTableViewController;
 			sourceTree = "<group>";
@@ -510,6 +514,15 @@
 			path = MGSwipeTableCell;
 			sourceTree = "<group>";
 		};
+		280539261D90376900868ACF /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				27494DE21D8D3ECE009BFC5F /* KSMenuViewController.h */,
+				27494DE31D8D3ECE009BFC5F /* KSMenuViewController.m */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
 		282C28C71D829C1F0061761E /* AMSideBarViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -524,8 +537,6 @@
 			children = (
 				2803AF951D8AB9A80032ACFB /* BaseViewController */,
 				2803AFAB1D8ABDF60032ACFB /* SideBars */,
-				272F91C71D8B080700A0330B /* DateAndTimeViewController.h */,
-				272F91C81D8B080700A0330B /* DateAndTimeViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -669,6 +680,24 @@
 			name = CategoryCoreDataManager;
 			sourceTree = "<group>";
 		};
+		28EF10131D915892005867C4 /* DateAndTime */ = {
+			isa = PBXGroup;
+			children = (
+				272F91C71D8B080700A0330B /* DateAndTimeViewController.h */,
+				272F91C81D8B080700A0330B /* DateAndTimeViewController.m */,
+			);
+			name = DateAndTime;
+			sourceTree = "<group>";
+		};
+		28EF10171D9164EE005867C4 /* CategoryTasks */ = {
+			isa = PBXGroup;
+			children = (
+				28B947841D9166F0005A8E9A /* CategoryTasksViewController.h */,
+				28B947851D9166F0005A8E9A /* CategoryTasksViewController.m */,
+			);
+			name = CategoryTasks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -802,6 +831,7 @@
 				270DF9E71D83F56E004D3681 /* BaseViewController.m in Sources */,
 				2803AF8B1D8AA5560032ACFB /* KSCheckSettingsTableViewCell.m in Sources */,
 				27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */,
+				28B947861D9166F0005A8E9A /* CategoryTasksViewController.m in Sources */,
 				278BAA4D1D896E30002D38CF /* AddTaskViewController.m in Sources */,
 				28AB856B1D8F48A100D93AB7 /* SettingsCoreDataManager.m in Sources */,
 				280539241D900F2900868ACF /* MGSwipeButton.m in Sources */,

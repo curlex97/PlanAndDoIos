@@ -1,30 +1,28 @@
 //
-//  TabletasksViewController.m
+//  CategoryTasksViewController.m
 //  PlanAndDo
 //
-//  Created by Амин on 13.09.16.
+//  Created by Arthur Chistyak on 20.09.16.
 //  Copyright © 2016 TodoTeamGroup. All rights reserved.
 //
-
 #import "TabletasksViewController.h"
+#import "CategoryTasksViewController.h"
 #import "TaskTableViewCell.h"
 #import "AddTaskViewController.h"
 #import "AMSideBarViewController.h"
 #import "UIImage+ACScaleImage.h"
 
+int rowss = 2;
 
-
-int rows = 2;
-
-@interface TabletasksViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface CategoryTasksViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic)UISegmentedControl * segment;
 @end
 
-@implementation TabletasksViewController
+@implementation CategoryTasksViewController
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return rows;
+    return rowss;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -35,7 +33,7 @@ int rows = 2;
     
     cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"Complete" backgroundColor:[UIColor greenColor] callback:^BOOL(MGSwipeTableCell *sender) {
         NSLog(@"Complete");
-        rows --;
+        rowss --;
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [tableView reloadData];
@@ -46,50 +44,24 @@ int rows = 2;
     
     cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
         NSLog(@"Delete");
-        rows--;
+        rowss--;
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [tableView reloadData];
         });
-
+        
         return YES;
     }]];
     
     cell.rightSwipeSettings.transition = MGSwipeDirectionRightToLeft;
     
-    switch (self.boxType) {
-            
-        case KSBoxTypeToday:
-            cell.taskHeaderLabel.text = @"Today";
-            break;
-            
-        case KSBoxTypeTomorrow:
-            cell.taskHeaderLabel.text = @"Tomorrow";
-            break;
-            
-        case KSBoxTypeWeek:
-            cell.taskHeaderLabel.text = @"Week";
-            break;
-            
-        case KSBoxTypeBacklog:
-            cell.taskHeaderLabel.text = @"Backlog";
-            break;
-            
-        case KSBoxTypeArchive:
-            cell.taskHeaderLabel.text = @"Archive";
-            cell.taskPriorityLabel.text = self.segment.selectedSegmentIndex ? @"Overdue" : @"Completed";
-            break;
-            
-        default:
-            break;
-    }
-    
+
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -110,18 +82,6 @@ int rows = 2;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if(![self.title length])
-    {
-        self.boxType = KSBoxTypeToday;
-        self.title = @"Today";
-    }
-    
-    else
-    {
-        if(self.boxType == KSBoxTypeArchive) [self addSegmentControl];
-        else [self removeSegmentControl];
-    }
-    
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     
@@ -130,9 +90,9 @@ int rows = 2;
     
     UIBarButtonItem * menuButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Menu"] scaledToSize:CGSizeMake(40, 40)] style:UIBarButtonItemStyleDone target:self action:@selector(menuTapped)];
     self.navigationItem.leftBarButtonItem=menuButton;
-    
-    UIBarButtonItem * today=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Today"] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE, BAR_BUTTON_SIZE)] style:UIBarButtonItemStyleDone target:self action:@selector(todayDidTap)];
 
+    UIBarButtonItem * today=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Today"] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE, BAR_BUTTON_SIZE)] style:UIBarButtonItemStyleDone target:self action:@selector(todayDidTap)];
+    
     today.image = [today.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [today setTintColor:[UIColor colorWithRed:40.0/255.0 green:70.0/255.0 blue:83.0/255.0 alpha:1.0]];
     
@@ -210,47 +170,62 @@ int rows = 2;
 
 -(void)todayDidTap
 {
-    self.title = @"Today";
-    self.boxType = KSBoxTypeToday;
-    [self removeSegmentControl];
-    [self.tableView reloadData];
+    TabletasksViewController * tableTasksViewController=[[TabletasksViewController alloc] init];
+    tableTasksViewController.title=@"Today";
+    tableTasksViewController.boxType = KSBoxTypeToday;
+    UINavigationController* categoryTasksNav = [[UINavigationController alloc] initWithRootViewController:tableTasksViewController];
+    AMSideBarViewController* sideBar = (AMSideBarViewController*)self.navigationController.parentViewController;
+    [sideBar setNewFrontViewController:categoryTasksNav];
+    
 }
 
 -(void)tomorrowDidTap
 {
-    self.title = @"Tomorrow";
-    self.boxType = KSBoxTypeTomorrow;
-    [self removeSegmentControl];
-    [self.tableView reloadData];
+    TabletasksViewController * tableTasksViewController=[[TabletasksViewController alloc] init];
+    tableTasksViewController.title=@"Tomorrow";
+    tableTasksViewController.boxType = KSBoxTypeTomorrow;
+    UINavigationController* categoryTasksNav = [[UINavigationController alloc] initWithRootViewController:tableTasksViewController];
+    AMSideBarViewController* sideBar = (AMSideBarViewController*)self.navigationController.parentViewController;
+    [sideBar setNewFrontViewController:categoryTasksNav];
+    
 }
 
 -(void)weekDidTap
 {
-    self.title = @"Week";
-    self.boxType = KSBoxTypeWeek;
-    [self removeSegmentControl];
-    [self.tableView reloadData];
+    TabletasksViewController * tableTasksViewController=[[TabletasksViewController alloc] init];
+    tableTasksViewController.title=@"Week";
+    tableTasksViewController.boxType = KSBoxTypeWeek;
+    UINavigationController* categoryTasksNav = [[UINavigationController alloc] initWithRootViewController:tableTasksViewController];
+    AMSideBarViewController* sideBar = (AMSideBarViewController*)self.navigationController.parentViewController;
+    [sideBar setNewFrontViewController:categoryTasksNav];
+    
 }
 
 -(void)backLogDidTap
 {
-    self.title = @"Backlog";
-    self.boxType = KSBoxTypeBacklog;
-    [self removeSegmentControl];
-    [self.tableView reloadData];
+    TabletasksViewController * tableTasksViewController=[[TabletasksViewController alloc] init];
+    tableTasksViewController.title=@"Backlog";
+    tableTasksViewController.boxType = KSBoxTypeBacklog;
+    UINavigationController* categoryTasksNav = [[UINavigationController alloc] initWithRootViewController:tableTasksViewController];
+    AMSideBarViewController* sideBar = (AMSideBarViewController*)self.navigationController.parentViewController;
+    [sideBar setNewFrontViewController:categoryTasksNav];
+    
 }
 
 -(void)archiveDidTap
 {
-    self.title = @"Archive";
-    self.boxType = KSBoxTypeArchive;
-    [self addSegmentControl];
-    [self.tableView reloadData];
+    TabletasksViewController * tableTasksViewController=[[TabletasksViewController alloc] init];
+    tableTasksViewController.title=@"Archive";
+    tableTasksViewController.boxType = KSBoxTypeArchive;
+    UINavigationController* categoryTasksNav = [[UINavigationController alloc] initWithRootViewController:tableTasksViewController];
+    AMSideBarViewController* sideBar = (AMSideBarViewController*)self.navigationController.parentViewController;
+    [sideBar setNewFrontViewController:categoryTasksNav];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end
