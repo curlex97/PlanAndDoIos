@@ -130,7 +130,7 @@
 -(void)headDidTap
 {
     UITableViewCell * cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    self.textField=[[UITextField alloc] initWithFrame:CGRectMake(16, 8, self.view.bounds.size.width-32, 31)];
+    self.textField=[[UITextField alloc] initWithFrame:CGRectMake(15, 6, self.view.bounds.size.width-32, 31)];
     self.textField.backgroundColor=[UIColor whiteColor];
     self.textField.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     self.textField.delegate=self;
@@ -165,6 +165,25 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+-(void) addSegmentControl
+{
+    self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Task",@"List", nil]];
+    self.segment.tintColor=[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
+    [self.segment setSelectedSegmentIndex:0];
+    self.segment.frame=CGRectMake(20, 8, self.view.bounds.size.width-40, 30);
+    [self.segment addTarget:self action:@selector(segmentDidTap) forControlEvents:UIControlEventValueChanged];
+    UIView * segmentBackgroundView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 46)];
+    [segmentBackgroundView addSubview:self.segment];
+    self.tableView.tableHeaderView=segmentBackgroundView;
+}
+
+-(void) removeSegmentControl
+{
+    self.tableView.tableHeaderView = nil;
+}
+
+
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
@@ -173,14 +192,6 @@
     //self.pan.delegate=self;
     self.headerText=@"Head";
     self.title=@"Add";
-    self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Completed",@"Overdue", nil]];
-    self.segment.tintColor=[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
-    [self.segment setSelectedSegmentIndex:0];
-    self.segment.frame=CGRectMake(20, 8, self.view.bounds.size.width-40, 30);
-    [self.segment addTarget:self action:@selector(segmentDidTap) forControlEvents:UIControlEventValueChanged];
-    UIView * segmentBackgroundView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 46)];
-    [segmentBackgroundView addSubview:self.segment];
-    self.tableView.tableHeaderView=segmentBackgroundView;
     
     UIView * footerPriorityView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 56)];
     UILabel * priorityLable=[[UILabel alloc] initWithFrame:CGRectMake(15, 17, 62, 21)];
@@ -204,75 +215,9 @@
     [footerPriorityView addSubview:self.slider];
     [footerPriorityView addSubview:self.priorityDescLabel];
     self.tableView.tableFooterView=footerPriorityView;
-    
+    [self addSegmentControl];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
-    segmentBackgroundView.translatesAutoresizingMaskIntoConstraints=NO;
-//    [self.view addConstraint:[NSLayoutConstraint
-//                              constraintWithItem:segmentBackgroundView
-//                              attribute:NSLayoutAttributeTop
-//                              relatedBy:NSLayoutRelationEqual
-//                              toItem:self.view
-//                              attribute:NSLayoutAttributeTop
-//                              multiplier:1.0f
-//                              constant:0.0]];
-    
-    [self.view addConstraint:[NSLayoutConstraint
-                              constraintWithItem:segmentBackgroundView
-                              attribute:NSLayoutAttributeTrailing
-                              relatedBy:NSLayoutRelationEqual
-                              toItem:self.view
-                              attribute:NSLayoutAttributeTrailing
-                              multiplier:1.0f
-                              constant:0.0]];
-    
-    [self.view addConstraint:[NSLayoutConstraint
-                              constraintWithItem:segmentBackgroundView
-                              attribute:NSLayoutAttributeLeading
-                              relatedBy:NSLayoutRelationEqual
-                              toItem:self.view
-                              attribute:NSLayoutAttributeLeading
-                              multiplier:1.0f
-                              constant:0.0]];
-    
-    
-    
-    self.segment.translatesAutoresizingMaskIntoConstraints=NO;
-    [segmentBackgroundView addConstraint:[NSLayoutConstraint
-                              constraintWithItem:self.segment
-                              attribute:NSLayoutAttributeTop
-                              relatedBy:NSLayoutRelationEqual
-                              toItem:segmentBackgroundView
-                              attribute:NSLayoutAttributeTop
-                              multiplier:1.0f
-                              constant:8.0]];
-    
-    [segmentBackgroundView addConstraint:[NSLayoutConstraint
-                              constraintWithItem:self.segment
-                              attribute:NSLayoutAttributeTrailing
-                              relatedBy:NSLayoutRelationEqual
-                              toItem:segmentBackgroundView
-                              attribute:NSLayoutAttributeTrailing
-                              multiplier:1.0f
-                              constant:-20.0]];
-    
-    [segmentBackgroundView addConstraint:[NSLayoutConstraint
-                              constraintWithItem:self.segment
-                              attribute:NSLayoutAttributeLeading
-                              relatedBy:NSLayoutRelationEqual
-                              toItem:segmentBackgroundView
-                              attribute:NSLayoutAttributeLeading
-                              multiplier:1.0f
-                              constant:20.0]];
-    
-    [segmentBackgroundView addConstraint:[NSLayoutConstraint
-                                          constraintWithItem:self.segment
-                                          attribute:NSLayoutAttributeBottom
-                                          relatedBy:NSLayoutRelationEqual
-                                          toItem:segmentBackgroundView
-                                          attribute:NSLayoutAttributeBottom
-                                          multiplier:1.0f
-                                          constant:8.0]];
     
     self.methods=[NSArray arrayWithObjects:@"headDidTap",@"categoryDidTap",@"listOrDescriptionDidTap",@"dateTimeDidTap", nil];
 }
