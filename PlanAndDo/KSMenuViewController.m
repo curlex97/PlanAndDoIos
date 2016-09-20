@@ -175,10 +175,16 @@
     if(self.state==KSMenuStateSearch)
     {
         AMSideBarViewController * sider=(AMSideBarViewController *)self.parentViewController;
+
+        UINavigationController * frontNavigationViewController=(UINavigationController *)sider.frontViewController;
+        
+        for(UIViewController* child in [frontNavigationViewController childViewControllers])
+            [child.navigationController popViewControllerAnimated:YES];
+        
+        [frontNavigationViewController pushViewController:[[EditTaskViewController alloc] init] animated:YES];
+        
         sider.hiden=NO;
         [sider side];
-        UINavigationController * frontNavigationViewController=(UINavigationController *)sider.frontViewController;
-        [frontNavigationViewController pushViewController:[[EditTaskViewController alloc] init] animated:YES];
         
     }
     

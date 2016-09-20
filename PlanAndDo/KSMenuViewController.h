@@ -16,4 +16,5 @@ typedef NS_ENUM(NSInteger, KSMenuState)
 
 @interface KSMenuViewController : BaseTableViewController
 @property (nonatomic)KSMenuState state;
+
 @end

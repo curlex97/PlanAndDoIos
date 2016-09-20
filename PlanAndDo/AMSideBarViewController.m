@@ -172,9 +172,8 @@
              KSMenuViewController* con = (KSMenuViewController*)self.backViewController;
              if(con)
              {
-                 
+                [self setHiden:con.state == KSMenuStateSearch];
              }
-             //searchBarShouldBeginEditing
          }];
     }
     else
