@@ -11,8 +11,8 @@
 #import "TaskTableViewCell.h"
 #import "AddTaskViewController.h"
 #import "SettingsViewController.h"
-#import "CategoryTasksViewController.h"
 #import "EditTaskViewController.h"
+#import "TabletasksViewController.h"
 
 @interface KSMenuViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (nonatomic)NSArray<NSString *> * categories;
@@ -192,7 +192,7 @@
     {
         
         NSString* str = self.categories[indexPath.row];
-        CategoryTasksViewController * categoryTasksViewController=[[CategoryTasksViewController alloc] init];
+        TabletasksViewController * categoryTasksViewController=[[TabletasksViewController alloc] init];
         
         if(categoryTasksViewController)
         {
