@@ -7,6 +7,10 @@
 //
 
 #import "BaseTableViewController.h"
+#import "KSCategory.h"
+#import "KSTask.h"
+#import "KSTaskCollection.h"
+#import "TasksCoreDataManager.h"
 
 typedef NS_ENUM(NSInteger, KSBoxType)
 {
@@ -23,4 +27,6 @@ typedef NS_ENUM(NSInteger, KSBoxType)
 
 @interface TabletasksViewController : BaseTableViewController
 @property KSBoxType boxType;
+@property NSArray<BaseTask*>* tasks;
+@property KSCategory* category;
 @end

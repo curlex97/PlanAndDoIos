@@ -14,8 +14,6 @@
 #import "EditTaskViewController.h"
 
 
-int rows = 2;
-
 @interface TabletasksViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic)UISegmentedControl * segment;
 @end
@@ -24,19 +22,19 @@ int rows = 2;
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return rows;
+    return self.tasks.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSTaskCell"owner:self options:nil];
     TaskTableViewCell * cell=[nib objectAtIndex:0];
-    
+    BaseTask* task = self.tasks[indexPath.row];
     
     cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"Complete" backgroundColor:[UIColor greenColor] callback:^BOOL(MGSwipeTableCell *sender) {
         NSLog(@"Complete");
-        rows --;
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        //rows --;
+       // [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [tableView reloadData];
         });
@@ -46,8 +44,8 @@ int rows = 2;
     
     cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
         NSLog(@"Delete");
-        rows--;
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+       // rows--;
+      //  [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [tableView reloadData];
         });
@@ -56,33 +54,17 @@ int rows = 2;
     }]];
     
     cell.rightSwipeSettings.transition = MGSwipeDirectionRightToLeft;
-    
-    switch (self.boxType) {
-            
-        case KSBoxTypeToday:
-            cell.taskHeaderLabel.text = @"Today";
-            break;
-            
-        case KSBoxTypeTomorrow:
-            cell.taskHeaderLabel.text = @"Tomorrow";
-            break;
-            
-        case KSBoxTypeWeek:
-            cell.taskHeaderLabel.text = @"Week";
-            break;
-            
-        case KSBoxTypeBacklog:
-            cell.taskHeaderLabel.text = @"Backlog";
-            break;
-            
-        case KSBoxTypeArchive:
-            cell.taskHeaderLabel.text = @"Archive";
-            cell.taskPriorityLabel.text = self.segment.selectedSegmentIndex ? @"Overdue" : @"Completed";
-            break;
-            
-        default:
-            break;
+    cell.taskHeaderLabel.text = task.name;
+    switch (task.priority) {
+        case KSTaskHighPriority:cell.taskPriorityLabel.text = @"Normal priority"; break;
+        case KSTaskDefaultPriority:cell.taskPriorityLabel.text = @"Default priority"; break;
+        case KSTaskVeryHighPriority:cell.taskPriorityLabel.text = @"High priority"; break;
     }
+    
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:task.completionTime];
+    
+    cell.taskDateLabel.text = [NSString stringWithFormat:@"%li/%li/%li", [components day], [components month], [components year]];
+    cell.taskTimeLabel.text = [NSString stringWithFormat:@"%li:%li", [components hour], [components minute]];
     
     return cell;
 }
@@ -90,6 +72,7 @@ int rows = 2;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EditTaskViewController * editTaskViewController=[[EditTaskViewController alloc] init];
+    editTaskViewController.task = self.tasks[indexPath.row];
     [self.navigationController pushViewController:editTaskViewController animated:YES];
 }
 
@@ -110,6 +93,18 @@ int rows = 2;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if(!self.category)
+    {
+        switch (self.boxType) {
+            case KSBoxTypeToday: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForToday]; break;
+            case KSBoxTypeTomorrow: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForTomorrow]; break;
+            case KSBoxTypeWeek: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForWeek]; break;
+            case KSBoxTypeArchive: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForArchive]; break;
+            case KSBoxTypeBacklog: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForBacklog]; break;
+        }
+    }
+    else self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForCategory:self.category];
     
     if(![self.title length])
     {
@@ -211,6 +206,7 @@ int rows = 2;
 
 -(void)todayDidTap
 {
+    self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForToday];
     self.title = @"Today";
     self.boxType = KSBoxTypeToday;
     [self removeSegmentControl];
@@ -219,6 +215,7 @@ int rows = 2;
 
 -(void)tomorrowDidTap
 {
+    self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForTomorrow];
     self.title = @"Tomorrow";
     self.boxType = KSBoxTypeTomorrow;
     [self removeSegmentControl];
@@ -227,6 +224,7 @@ int rows = 2;
 
 -(void)weekDidTap
 {
+    self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForWeek];
     self.title = @"Week";
     self.boxType = KSBoxTypeWeek;
     [self removeSegmentControl];
@@ -235,6 +233,7 @@ int rows = 2;
 
 -(void)backLogDidTap
 {
+    self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForBacklog];
     self.title = @"Backlog";
     self.boxType = KSBoxTypeBacklog;
     [self removeSegmentControl];
@@ -243,6 +242,7 @@ int rows = 2;
 
 -(void)archiveDidTap
 {
+    self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForArchive];
     self.title = @"Archive";
     self.boxType = KSBoxTypeArchive;
     [self addSegmentControl];
@@ -251,7 +251,6 @@ int rows = 2;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
