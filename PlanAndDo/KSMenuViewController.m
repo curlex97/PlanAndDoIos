@@ -17,6 +17,9 @@
 @interface KSMenuViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (nonatomic)NSArray<NSString *> * categories;
 @property (nonatomic)UISearchBar * searchBar;
+@property (nonatomic)UITextField * addCategoryTextField;
+@property (nonatomic)UIView * addCategoryAccessoryView;
+@property (nonatomic)AMSideBarViewController * parentController;
 @end
 
 @implementation KSMenuViewController
@@ -70,6 +73,15 @@
     return nil;
 }
 
+-(void)addCategoryDidTap
+{
+    
+    UITextField * text=[[UITextField alloc] init];
+    [self.view addSubview:text];
+    [text becomeFirstResponder];
+    [self.addCategoryTextField setInputAccessoryView:self.addCategoryAccessoryView];
+}
+
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if(section==1 && self.state==KSMenuStateNormal)
@@ -87,6 +99,7 @@
         
         UIButton * addCategoryButton=[[UIButton alloc] initWithFrame:CGRectMake(233, 0, 30, 30)];
         [addCategoryButton setImage:[UIImage imageNamed:@"Add category"] forState:UIControlStateNormal];
+        [addCategoryButton addTarget:self action:@selector(addCategoryDidTap) forControlEvents:UIControlEventAllEvents];
         
         [view addSubview:addCategoryButton];
         [view addSubview:titleLabel];
@@ -174,23 +187,22 @@
     [self.searchBar resignFirstResponder];
     if(self.state==KSMenuStateSearch)
     {
-        AMSideBarViewController * sider=(AMSideBarViewController *)self.parentViewController;
 
-        UINavigationController * frontNavigationViewController=(UINavigationController *)sider.frontViewController;
+        UINavigationController * frontNavigationViewController=(UINavigationController *)self.parentController.frontViewController;
         
         for(UIViewController* child in [frontNavigationViewController childViewControllers])
             [child.navigationController popViewControllerAnimated:YES];
         
-        [frontNavigationViewController pushViewController:[[EditTaskViewController alloc] init] animated:YES];
+        //[frontNavigationViewController pushViewController:[[EditTaskViewController alloc] init] animated:NO];
+        [self.parentController setNewFrontViewController:[[UINavigationController alloc] initWithRootViewController:[[EditTaskViewController alloc] init]]];
         
-        sider.hiden=NO;
-        [sider side];
+        self.parentController.hiden=NO;
+        [self.parentController side];
         
     }
     
     else if(indexPath.section == 1)
     {
-        
         NSString* str = self.categories[indexPath.row];
         TabletasksViewController * categoryTasksViewController=[[TabletasksViewController alloc] init];
         
@@ -198,8 +210,7 @@
         {
             categoryTasksViewController.title=str;
             UINavigationController* categoryTasksNav = [[UINavigationController alloc] initWithRootViewController:categoryTasksViewController];
-            AMSideBarViewController* sideBar = (AMSideBarViewController*)self.parentViewController;
-            [sideBar setNewFrontViewController:categoryTasksNav];
+            [self.parentController setNewFrontViewController:categoryTasksNav];
         }
     }
     
@@ -211,8 +222,7 @@
         {
             settingsViewController.title=@"Settings";
             UINavigationController* settingsNav = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
-            AMSideBarViewController* sideBar = (AMSideBarViewController*)self.parentViewController;
-            [sideBar setNewFrontViewController:settingsNav];
+            [self.parentController setNewFrontViewController:settingsNav];
         }
     }
 }
@@ -229,8 +239,8 @@
     [searchBar resignFirstResponder];
     searchBar.showsCancelButton=NO;
     searchBar.clearsContextBeforeDrawing=YES;
-    AMSideBarViewController * sider=(AMSideBarViewController *)self.parentViewController;
-    sider.hiden=NO;
+
+    self.parentController.hiden=NO;
     searchBar.frame=CGRectMake(8, 8, 255, 30);
     
     self.state=KSMenuStateNormal;
@@ -239,8 +249,7 @@
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar;
 {
-    AMSideBarViewController * sider=(AMSideBarViewController *)self.parentViewController;
-    sider.hiden=YES;
+    self.parentController.hiden=YES;
     searchBar.frame=CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, [UIScreen mainScreen].bounds.size.width-searchBar.frame.origin.x*2, searchBar.frame.size.height);
     searchBar.showsCancelButton=YES;
     
@@ -267,6 +276,7 @@
     [super viewDidLoad];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    self.parentController=(AMSideBarViewController *)self.parentViewController;
     self.state=KSMenuStateNormal;
     //self.tableView.separatorColor = [UIColor clearColor];
     
@@ -275,6 +285,16 @@
     self.searchBar.tintColor=[UIColor whiteColor];
     self.searchBar.barTintColor=[UIColor whiteColor];
     self.searchBar.delegate=self;
+    
+    self.addCategoryAccessoryView=[[UIView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height-110, self.view.bounds.size.width, 44)];
+    self.addCategoryAccessoryView.backgroundColor=[UIColor whiteColor];
+    self.addCategoryTextField=[[UITextField alloc] initWithFrame:CGRectMake(16, 8, self.view.bounds.size.width-32, 24)];
+    self.addCategoryTextField.backgroundColor=[UIColor blackColor];
+    
+    NSLog(@"%@",self.parentViewController);
+    
+    [self.parentViewController.view addSubview:self.addCategoryAccessoryView];
+    [self.addCategoryAccessoryView addSubview:self.addCategoryTextField];
     
     UIView * searchBarView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 46)];
     [searchBarView addSubview:self.searchBar];
@@ -287,6 +307,7 @@
     self.view.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
     self.tableView.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
     [self.view removeConstraint:self.top];
+    
     [self.view addConstraint:[NSLayoutConstraint
                                    constraintWithItem:self.tableView
                                    attribute:NSLayoutAttributeTop
@@ -296,7 +317,96 @@
                                    multiplier:1.0f
                                    constant:20.f]];
     
-    //self.view.backgroundColor=[UIColor colorWithRed:(CGFloat) green:(CGFloat) blue:<#(CGFloat)#> alpha:<#(CGFloat)#>]
+    self.addCategoryTextField.translatesAutoresizingMaskIntoConstraints=NO;
+    [self.addCategoryAccessoryView addConstraint:[NSLayoutConstraint
+                                     constraintWithItem:self.addCategoryTextField
+                                     attribute:NSLayoutAttributeBottom
+                                     relatedBy:NSLayoutRelationEqual
+                                     toItem:self.addCategoryAccessoryView
+                                     attribute:NSLayoutAttributeBottom
+                                     multiplier:1.0f
+                                     constant:-8.0]];
+    
+    [self.addCategoryAccessoryView addConstraint:[NSLayoutConstraint
+                                     constraintWithItem:self.addCategoryTextField
+                                     attribute:NSLayoutAttributeTop
+                                     relatedBy:NSLayoutRelationEqual
+                                     toItem:self.addCategoryAccessoryView
+                                     attribute:NSLayoutAttributeTop
+                                     multiplier:1.0f
+                                     constant:8.0]];
+    
+    [self.addCategoryAccessoryView addConstraint:[NSLayoutConstraint
+                                     constraintWithItem:self.addCategoryTextField
+                                     attribute:NSLayoutAttributeTrailing
+                                     relatedBy:NSLayoutRelationEqual
+                                     toItem:self.addCategoryAccessoryView
+                                     attribute:NSLayoutAttributeTrailing
+                                     multiplier:1.0f
+                                     constant:-16.0]];
+    
+    [self.addCategoryAccessoryView addConstraint:[NSLayoutConstraint
+                                     constraintWithItem:self.addCategoryTextField
+                                     attribute:NSLayoutAttributeLeading
+                                     relatedBy:NSLayoutRelationEqual
+                                     toItem:self.addCategoryAccessoryView
+                                     attribute:NSLayoutAttributeLeading
+                                     multiplier:1.0f
+                                     constant:16.0]];
+    
+    self.addCategoryAccessoryView.translatesAutoresizingMaskIntoConstraints=NO;
+    [self.parentViewController.view addConstraint:[NSLayoutConstraint
+                              constraintWithItem:self.addCategoryAccessoryView
+                              attribute:NSLayoutAttributeBottom
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:self.parentViewController.view
+                              attribute:NSLayoutAttributeBottom
+                              multiplier:1.0f
+                              constant:0.0]];
+    
+    //    [self.toolBarView addConstraint:[NSLayoutConstraint
+    //                                     constraintWithItem:self.toolBarView
+    //                                     attribute:NSLayoutAttributeHeight
+    //                                     relatedBy:NSLayoutRelationEqual
+    //                                     toItem:self.toolBarView
+    //                                     attribute:NSLayoutAttributeHeight
+    //                                     multiplier:1.0f
+    //                                     constant:44.0]];
+    
+    [self.parentViewController.view addConstraint:[NSLayoutConstraint
+                              constraintWithItem:self.addCategoryAccessoryView
+                              attribute:NSLayoutAttributeTrailing
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:self.parentViewController.view
+                              attribute:NSLayoutAttributeTrailing
+                              multiplier:1.0f
+                              constant:0.0]];
+    
+    [self.parentViewController.view addConstraint:[NSLayoutConstraint
+                              constraintWithItem:self.addCategoryAccessoryView
+                              attribute:NSLayoutAttributeLeading
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:self.parentViewController.view
+                              attribute:NSLayoutAttributeLeading
+                              multiplier:1.0f
+                              constant:0.0]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuDidHide:) name:@"menuDidHideNotification" object:nil];
+}
+
+-(void)menuDidHide:(NSNotification*) not
+{
+    if([self.searchBar canBecomeFirstResponder])
+    {
+        [self.searchBar becomeFirstResponder];
+    }
+}
+
+-(void)keyboardWillShown:(NSNotification*) not
+{
+    NSDictionary * info=[not userInfo];
+    NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGSize keyboardSize = [aValue CGRectValue].size;
 }
 
 - (void)didReceiveMemoryWarning
