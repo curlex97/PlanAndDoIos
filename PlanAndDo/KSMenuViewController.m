@@ -14,7 +14,7 @@
 #import "EditTaskViewController.h"
 #import "TabletasksViewController.h"
 
-@interface KSMenuViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate>
+@interface KSMenuViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic)NSMutableArray<NSString *> * categories;
 @property (nonatomic)UISearchBar * searchBar;
 @property (nonatomic)UITextField * addCategoryTextField;
@@ -82,6 +82,7 @@
     [self.addCategoryTextField becomeFirstResponder];
     
 }
+
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -289,9 +290,32 @@
     CGPoint p = [gestureRecognizer locationInView:self.tableView];
     
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
-    if (indexPath != nil && gestureRecognizer.state == UIGestureRecognizerStateBegan)
+    if (indexPath != nil && gestureRecognizer.state == UIGestureRecognizerStateBegan && indexPath.section==1)
     {
-        NSLog(@"long press on table view at row %ld", indexPath.row);
+        UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Allah" message:@"Test" preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+        {
+            [self.categories removeObjectAtIndex:indexPath.row];
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+                [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            });
+
+        }];
+        
+        UIAlertAction * editAction=[UIAlertAction actionWithTitle:@"Edit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+        {
+            self.addCategoryTextField.text=self.categories[indexPath.row];
+            [self addCategoryDidTap];
+        }];
+        
+        UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+        
+        [alertController addAction:editAction];
+        [alertController addAction:deleteAction];
+        [alertController addAction:cancelAction];
+        [self.parentController presentViewController:alertController animated:YES completion:nil];
     }
 }
 
@@ -304,10 +328,11 @@
     self.state=KSMenuStateNormal;
     //self.tableView.separatorColor = [UIColor clearColor];
     
-    UILongPressGestureRecognizer * longPress=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressDidUsed)];
-    longPress.minimumPressDuration = 2.0;
-    [self.tableView addGestureRecognizer:longPress];
+    UILongPressGestureRecognizer * longPress=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressDidUsed:)];
+    longPress.minimumPressDuration=1.0;
+    longPress.delegate=self;
     
+    [self.tableView addGestureRecognizer:longPress];
     self.searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(8, 8, 255, 30)];
     self.searchBar.searchBarStyle=UISearchBarStyleMinimal;
     self.searchBar.tintColor=[UIColor whiteColor];
