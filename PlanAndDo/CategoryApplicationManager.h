@@ -21,4 +21,6 @@
 
 -(void)deleteCateroty:(KSCategory*)category;
 
+-(KSCategory*)categoryWithId:(int)Id;
+
 @end

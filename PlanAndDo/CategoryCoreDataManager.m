@@ -42,6 +42,14 @@
     return categories;
 }
 
+
+-(KSCategory *)categoryWithId:(int)Id
+{
+    for(KSCategory* category in [self allCategories])
+        if(category.ID == Id) return category;
+    return nil;
+}
+
 -(void)addCateroty:(KSCategory *)category
 {
     NSManagedObjectContext* managedObjectContext = self.managedObjectContext;

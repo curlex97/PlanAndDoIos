@@ -14,6 +14,8 @@
 // test 1 OK
 -(NSArray<KSCategory*>*) allCategories;
 
+-(KSCategory*)categoryWithId:(int)Id;
+
 // test 1 OK
 -(void)addCateroty:(KSCategory*)category;
 

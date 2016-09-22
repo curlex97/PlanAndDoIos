@@ -15,6 +15,11 @@
     return [[[CategoryCoreDataManager alloc] init] allCategories];
 }
 
+-(KSCategory *)categoryWithId:(int)Id
+{
+    return [[[CategoryCoreDataManager alloc] init] categoryWithId:Id];
+}
+
 -(void)addCateroty:(KSCategory *)category
 {
     [[[CategoryCoreDataManager alloc] init] addCateroty:category];

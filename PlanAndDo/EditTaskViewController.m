@@ -12,6 +12,9 @@
 #import "DescriptionViewController.h"
 #import "TaskListViewController.h"
 #import "DateAndTimeViewController.h"
+#import "ApplicationManager.h"
+#import "KSSettingsCell.h"
+
 
 @interface EditTaskViewController ()
 @property (nonatomic)UISegmentedControl * segment;
@@ -31,34 +34,45 @@
     return 4;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+    
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSSettingsCell"owner:self options:nil];
+    KSSettingsCell * cell=[nib objectAtIndex:0];
+    
     cell.textLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     
     switch (indexPath.row)
     {
         case 0:
-            cell.textLabel.text=self.headerText;
+            cell.paramNameLabel.text=self.headerText;
             cell.accessoryType=UITableViewCellAccessoryNone;
             break;
         case 1:
-            cell.textLabel.text=@"Category";
+            cell.paramNameLabel.text=@"Category";
+            cell.paramValueLabel.text = [[[ApplicationManager categoryApplicationManager] categoryWithId:self.task.categoryID] name];
             break;
         case 2:
             if([self.task isKindOfClass:[KSTask class]])
             {
-                cell.textLabel.text=@"Description";
+                KSTask* realTask = (KSTask*)self.task;
+                cell.paramNameLabel.text=@"Description";
+                cell.paramValueLabel.text = realTask.taskDescription;
                 cell.accessoryType=UITableViewCellAccessoryNone;
             }
             else
             {
-                cell.textLabel.text=@"Edit list";
+                cell.paramNameLabel.text=@"Edit list";
             }
             break;
         case 3:
-            cell.textLabel.text=@"Date & Time";
+            cell.paramNameLabel.text=@"Date & Time";
             break;
     }
     return cell;
@@ -130,7 +144,7 @@
 -(void)headDidTap
 {
     UITableViewCell * cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    self.textField=[[UITextField alloc] initWithFrame:CGRectMake(15, 6, self.view.bounds.size.width-32, 31)];
+    self.textField=[[UITextField alloc] initWithFrame:CGRectMake(8, 13, self.view.bounds.size.width-32, 31)];
     self.textField.backgroundColor=[UIColor whiteColor];
     self.textField.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     self.textField.delegate=self;

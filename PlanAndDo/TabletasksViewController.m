@@ -12,7 +12,7 @@
 #import "AMSideBarViewController.h"
 #import "UIImage+ACScaleImage.h"
 #import "EditTaskViewController.h"
-
+#import "ApplicationManager.h"
 
 @interface TabletasksViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic)UISegmentedControl * segment;
@@ -96,15 +96,15 @@
     
     if(!self.category)
     {
-//        switch (self.boxType) {
-//            //case KSBoxTypeToday: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForToday]; break;
-//          //  case KSBoxTypeTomorrow: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForTomorrow]; break;
-//           // case KSBoxTypeWeek: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForWeek]; break;
-//          //  case KSBoxTypeArchive: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForArchive]; break;
-//           // case KSBoxTypeBacklog: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForBacklog]; break;
-//        }
+        switch (self.boxType) {
+            case KSBoxTypeToday: self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForToday]; break;
+            case KSBoxTypeTomorrow: self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForTomorrow]; break;
+            case KSBoxTypeWeek: self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForWeek]; break;
+            case KSBoxTypeArchive: self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForArchive]; break;
+            case KSBoxTypeBacklog: self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForBacklog]; break;
+        }
     }
-    else{} //self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForCategory:self.category];
+    else self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForCategory:self.category];
     
     if(![self.title length])
     {
@@ -206,7 +206,7 @@
 
 -(void)todayDidTap
 {
-    //self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForToday];
+    self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForToday];
     self.title = @"Today";
     self.boxType = KSBoxTypeToday;
     [self removeSegmentControl];
@@ -215,7 +215,7 @@
 
 -(void)tomorrowDidTap
 {
-    //self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForTomorrow];
+    self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForTomorrow];
     self.title = @"Tomorrow";
     self.boxType = KSBoxTypeTomorrow;
     [self removeSegmentControl];
@@ -224,7 +224,7 @@
 
 -(void)weekDidTap
 {
-   // self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForWeek];
+    self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForWeek];
     self.title = @"Week";
     self.boxType = KSBoxTypeWeek;
     [self removeSegmentControl];
@@ -233,7 +233,7 @@
 
 -(void)backLogDidTap
 {
-   // self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForBacklog];
+    self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForBacklog];
     self.title = @"Backlog";
     self.boxType = KSBoxTypeBacklog;
     [self removeSegmentControl];
@@ -242,7 +242,7 @@
 
 -(void)archiveDidTap
 {
-   // self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForArchive];
+    self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForArchive];
     self.title = @"Archive";
     self.boxType = KSBoxTypeArchive;
     [self addSegmentControl];
