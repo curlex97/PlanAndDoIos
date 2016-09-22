@@ -10,4 +10,11 @@
 
 @implementation ApiManager
 
+-(void)dataByData:(NSDictionary *)data completion:(void (^)(NSData *))completed
+{
+    [ACNetworkManager dataByUrlAsync:@"https://plan-and-do.pro/api" andHeaderDictionary:@{} andBodyDictionary:data andQueryType:@"POST" completion:^(NSData* data) {
+        completed(data);
+    }];
+}
+
 @end

@@ -18,13 +18,13 @@
 -(void)setSettings:(UserSettings *)settings
 {
     [[[SettingsCoreDataManager alloc] init] setSettings:settings];
-    [[[SettingsApiManager alloc] init] updateSettingsAsync:settings forUser:nil];
+    [[[SettingsApiManager alloc] init] updateSettingsAsync:settings forUser:nil completion:nil];
 }
 
 -(void)updateSettings:(UserSettings *)settings
 {
     [[[SettingsCoreDataManager alloc] init] updateSettings:settings];
-    [[[SettingsApiManager alloc] init] updateSettingsAsync:settings forUser:nil];
+    [[[SettingsApiManager alloc] init] updateSettingsAsync:settings forUser:nil completion:nil];
 }
 
 @end

@@ -11,6 +11,6 @@
 
 @interface SyncApiManager : ApiManager
 
--(void)syncAsyncForUser:(KSAuthorisedUser*)user;
+-(void)syncAsyncForUser:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
 
 @end

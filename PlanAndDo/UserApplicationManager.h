@@ -11,6 +11,8 @@
 #import "UserApiManager.h"
 #import "UserCoreDataManager.h"
 
+static KSAuthorisedUser* currentUser;
+
 @interface UserApplicationManager : NSObject
 
 -(KSAuthorisedUser*) authorisedUser;
@@ -18,5 +20,9 @@
 -(void)setUser:(KSAuthorisedUser*)user;
 
 -(void)updateUser:(KSAuthorisedUser*)user;
+
+-(void) loginWithEmail:(NSString*)email andPassword:(NSString*)password completion:(void (^)(bool))completed;
+
+-(void) registerAsyncWithEmail:(NSString*)email andUserName:(NSString*)userName andPassword:(NSString*)password completion:(void (^)(bool))completed;
 
 @end

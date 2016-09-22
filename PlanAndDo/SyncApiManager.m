@@ -10,7 +10,7 @@
 
 @implementation SyncApiManager
 
--(void)syncAsyncForUser:(KSAuthorisedUser *)user
+-(void)syncAsyncForUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
 {
     
 }

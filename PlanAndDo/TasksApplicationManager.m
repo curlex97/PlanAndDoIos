@@ -53,19 +53,19 @@
 -(void)addTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] addTask:task];
-    [[[TasksApiManager alloc] init] addTaskAsync:task forUser:nil];
+    [[[TasksApiManager alloc] init] addTaskAsync:task forUser:nil completion:nil];
 }
 
 -(void)updateTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] updateTask:task];
-    [[[TasksApiManager alloc] init] updateTaskAsync:task forUser:nil];
+    [[[TasksApiManager alloc] init] updateTaskAsync:task forUser:nil completion:nil];
 }
 
 -(void)deleteTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] deleteTask:task];
-    [[[TasksApiManager alloc] init] deleteTaskAsync:task forUser:nil];
+    [[[TasksApiManager alloc] init] deleteTaskAsync:task forUser:nil completion:nil];
 }
 
 @end

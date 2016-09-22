@@ -12,7 +12,7 @@
 
 -(void)sync
 {
-    [[[SyncApiManager alloc] init] syncAsyncForUser:nil];
+    [[[SyncApiManager alloc] init] syncAsyncForUser:nil completion:nil];
 }
 
 @end

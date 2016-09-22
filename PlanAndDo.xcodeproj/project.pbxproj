@@ -51,6 +51,7 @@
 		28214C9B1D93E2D60012B1C7 /* SyncApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C9A1D93E2D60012B1C7 /* SyncApplicationManager.m */; };
 		282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282C28C51D829A600061761E /* AMSideBarViewController.m */; };
 		284F9C3B1D8DCFF500B0853F /* TasksCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 284F9C3A1D8DCFF500B0853F /* TasksCoreDataManager.m */; };
+		28616D4A1D93F90D00BB2CCE /* ACNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28616D491D93F90D00BB2CCE /* ACNetworkManager.m */; };
 		286E26201D883FF00055A7BF /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286E261F1D883FF00055A7BF /* SettingsViewController.m */; };
 		287884071D8E07E600C17A4F /* KSCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 287884061D8E07E600C17A4F /* KSCategory.m */; };
 		28797F711D87E24500AEDE0A /* UIImage+ACScaleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 28797F701D87E24500AEDE0A /* UIImage+ACScaleImage.m */; };
@@ -174,6 +175,8 @@
 		282C28C51D829A600061761E /* AMSideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSideBarViewController.m; sourceTree = "<group>"; };
 		284F9C391D8DCFF500B0853F /* TasksCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksCoreDataManager.h; sourceTree = "<group>"; };
 		284F9C3A1D8DCFF500B0853F /* TasksCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksCoreDataManager.m; sourceTree = "<group>"; };
+		28616D481D93F90D00BB2CCE /* ACNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNetworkManager.h; sourceTree = "<group>"; };
+		28616D491D93F90D00BB2CCE /* ACNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNetworkManager.m; sourceTree = "<group>"; };
 		286E261E1D883FF00055A7BF /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		286E261F1D883FF00055A7BF /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		287884051D8E07E600C17A4F /* KSCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSCategory.h; sourceTree = "<group>"; };
@@ -699,6 +702,15 @@
 			name = TasksCoreDataManager;
 			sourceTree = "<group>";
 		};
+		28616D4B1D93F91400BB2CCE /* ACNetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				28616D481D93F90D00BB2CCE /* ACNetworkManager.h */,
+				28616D491D93F90D00BB2CCE /* ACNetworkManager.m */,
+			);
+			name = ACNetworkManager;
+			sourceTree = "<group>";
+		};
 		2884ABFA1D8D437F00A2F7D9 /* CoreDataManagers */ = {
 			isa = PBXGroup;
 			children = (
@@ -741,6 +753,7 @@
 		28943CF41D93017A00BC8A69 /* ApplicationManagers */ = {
 			isa = PBXGroup;
 			children = (
+				28616D4B1D93F91400BB2CCE /* ACNetworkManager */,
 				28214C7F1D93D29A0012B1C7 /* ApplicationManager */,
 				28214C841D93D3180012B1C7 /* TasksApplicationManager */,
 				28214C881D93D3290012B1C7 /* SubTasksApplicationManager */,
@@ -1047,6 +1060,7 @@
 				27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */,
 				278BAA4D1D896E30002D38CF /* AddTaskViewController.m in Sources */,
 				28943CF71D9302D500BC8A69 /* ApiManager.m in Sources */,
+				28616D4A1D93F90D00BB2CCE /* ACNetworkManager.m in Sources */,
 				28AB856B1D8F48A100D93AB7 /* SettingsCoreDataManager.m in Sources */,
 				280539241D900F2900868ACF /* MGSwipeButton.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,

@@ -14,10 +14,10 @@
 
 @interface SubTasksApiManager : ApiManager
 
--(void)addSubTaskAsync:(KSShortTask*)subTask toTask:(KSTaskCollection*)task forUser:(KSAuthorisedUser*)user;
+-(void)addSubTaskAsync:(KSShortTask*)subTask toTask:(KSTaskCollection*)task forUser:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
 
--(void)updateSubTaskAsync:(KSShortTask*)subTask inTask:(KSTaskCollection*)task forUser:(KSAuthorisedUser*)user;
+-(void)updateSubTaskAsync:(KSShortTask*)subTask inTask:(KSTaskCollection*)task forUser:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
 
--(void)deleteSubTaskAsync:(KSShortTask*)subTask fromTask:(KSTaskCollection*)task forUser:(KSAuthorisedUser*)user;
+-(void)deleteSubTaskAsync:(KSShortTask*)subTask fromTask:(KSTaskCollection*)task forUser:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
 
 @end

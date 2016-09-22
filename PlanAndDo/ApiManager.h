@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ACNetworkManager.h"
 
 @interface ApiManager : NSObject
+
+-(void)dataByData:(NSDictionary*)data completion:(void (^)(NSData*))completed;
 
 @end
