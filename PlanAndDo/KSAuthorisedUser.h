@@ -8,9 +8,13 @@
 
 #import "KSUserInfo.h"
 #import "UserSettings.h"
+
+
+
 @interface KSAuthorisedUser : KSUserInfo
 @property (nonatomic)NSString * apiToken;
 @property (nonatomic)UserSettings * settings;
+
 
 -(instancetype)initWithUserID:(NSUInteger)ID
                   andUserName:(NSString *)userName
@@ -20,4 +24,7 @@
                 andSyncStatus:(int)syncStatus
                andAccessToken:(NSString *)token
               andUserSettings:(UserSettings *)settings;
+
++(KSAuthorisedUser*) currentUser;
+
 @end

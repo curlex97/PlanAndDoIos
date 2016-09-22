@@ -9,6 +9,9 @@
 #import "CreateAccountViewController.h"
 #import "KSApplicatipnColor.h"
 #import "ApplicationManager.h"
+#import "TabletasksViewController.h"
+#import "AMSideBarViewController.h"
+#import "KSMenuViewController.h"
 
 #define TEXTFIELD_PADDING_LEFT 10
 
@@ -54,15 +57,30 @@
 
 - (IBAction)submitTapped:(id)sender {
     
-    [[ApplicationManager userApplicationManager] registerAsyncWithEmail:@"qaz12345@bb.com" andUserName:@"qaz12345" andPassword:@"qaz12345" completion:^(bool fl) {
-        
-    }];
+//    [[ApplicationManager userApplicationManager] registerAsyncWithEmail:@"qaqz12436@bb.com" andUserName:@"qaqz12643" andPassword:@"qaqz12643" completion:^(bool fl) {
+//        AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
+//        
+//        if(tableTaskViewController && fl)
+//        {
+//            tableTaskViewController.title=@"Today";
+//            [self presentViewController:tableTaskViewController animated:YES completion:nil];
+//        }
+//    }];
 
     
-//    if([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text])
-//    [[ApplicationManager userApplicationManager] registerAsyncWithEmail:self.emailTextField.text andUserName:self.usernameTextField.text andPassword:self.passwordTextField.text completion:^(bool fl) {
-//        
-//    }];
+    if([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text])
+    [[ApplicationManager userApplicationManager] registerAsyncWithEmail:self.emailTextField.text andUserName:self.usernameTextField.text andPassword:self.passwordTextField.text completion:^(bool fl) {
+        
+        AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
+        
+        if(tableTaskViewController && fl)
+        {
+            tableTaskViewController.title=@"Today";
+            dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController:tableTaskViewController animated:YES completion:nil];
+            });
+        }
+    }];
 }
 
 @end

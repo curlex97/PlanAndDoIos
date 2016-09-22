@@ -55,7 +55,6 @@
             
             [[[UserCoreDataManager alloc] init] setUser:user];
             
-            currentUser = user;
             completed(true);
         }
         completed(false);
