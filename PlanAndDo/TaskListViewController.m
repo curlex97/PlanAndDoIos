@@ -82,7 +82,7 @@
     [self.toolBarView addSubview:self.textField];
     [self.view addSubview:self.toolBarView];
     
-    self.tasks=[NSMutableArray arrayWithObjects:@"Milk",@"Bread",@"Meat",@"Allah",@"Babah",@"Allah",@"Bread",@"Meat",@"Allah",@"Babah",@"Allah", nil];
+    self.tasks=[NSMutableArray arrayWithObjects:@"Milk",@"Bread",@"Meat",@"Chery",@"Banana",@"Fish",@"Bread", nil];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.tableView.bounds=CGRectMake(self.tableView.bounds.origin.x, self.tableView.bounds.origin.y, self.tableView.bounds.size.width, self.tableView.bounds.size.height-44);
