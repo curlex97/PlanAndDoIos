@@ -47,7 +47,7 @@
             cell.textLabel.text=@"Category";
             break;
         case 2:
-            if(self.segment.selectedSegmentIndex==0)
+            if([self.task isKindOfClass:[KSTask class]])
             {
                 cell.textLabel.text=@"Description";
                 cell.accessoryType=UITableViewCellAccessoryNone;
@@ -165,22 +165,6 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
--(void) addSegmentControl
-{
-    self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Task",@"List", nil]];
-    self.segment.tintColor=[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
-    [self.segment setSelectedSegmentIndex:0];
-    self.segment.frame=CGRectMake(20, 8, self.view.bounds.size.width-40, 30);
-    [self.segment addTarget:self action:@selector(segmentDidTap) forControlEvents:UIControlEventValueChanged];
-    UIView * segmentBackgroundView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 46)];
-    [segmentBackgroundView addSubview:self.segment];
-    self.tableView.tableHeaderView=segmentBackgroundView;
-}
-
--(void) removeSegmentControl
-{
-    self.tableView.tableHeaderView = nil;
-}
 
 
 -(void)doneTapped
@@ -200,7 +184,8 @@
     
     //self.pan=[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gesturePan)];
     //self.pan.delegate=self;
-    self.headerText=@"";
+    
+    self.headerText=[self.task name];
     
     UIBarButtonItem * doneButton =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneTapped)];
     self.navigationItem.rightBarButtonItem=doneButton;
@@ -230,7 +215,6 @@
     [footerPriorityView addSubview:self.slider];
     [footerPriorityView addSubview:self.priorityDescLabel];
     self.tableView.tableFooterView=footerPriorityView;
-    [self addSegmentControl];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     

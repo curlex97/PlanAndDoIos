@@ -11,7 +11,6 @@
 @implementation UserSettings
 
 -(instancetype)initWithID:(NSUInteger)ID andStartPage:(NSString *)startPage
-              andPageType:(NSString *)pageType
             andDateFormat:(NSString *)dateFormat
             andTimeFormat:(NSString *)timeFormat andSyncStatus:(int)syncStatus
 {
@@ -19,7 +18,6 @@
     {
         self.ID = ID;
         self.startPage=startPage;
-        self.pageType=pageType;
         self.dateFormat=dateFormat;
         self.timeFormat=timeFormat;
         self.syncStatus = syncStatus;

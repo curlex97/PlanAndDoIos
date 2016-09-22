@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseTableViewController.h"
+#import "KSTask.h"
+#import "KSTaskCollection.h"
 
 @interface EditTaskViewController : BaseTableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
-
+@property BaseTask* task;
 @end

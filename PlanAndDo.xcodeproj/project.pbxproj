@@ -42,6 +42,13 @@
 		2803AF941D8AAB1D0032ACFB /* StartPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF931D8AAB1D0032ACFB /* StartPageViewController.m */; };
 		280539241D900F2900868ACF /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 280539201D900F2900868ACF /* MGSwipeButton.m */; };
 		280539251D900F2900868ACF /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 280539221D900F2900868ACF /* MGSwipeTableCell.m */; };
+		28214C831D93D30F0012B1C7 /* TasksApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C821D93D30F0012B1C7 /* TasksApplicationManager.m */; };
+		28214C871D93D3260012B1C7 /* SubTasksApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C861D93D3260012B1C7 /* SubTasksApplicationManager.m */; };
+		28214C8B1D93D33E0012B1C7 /* UserApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C8A1D93D33E0012B1C7 /* UserApplicationManager.m */; };
+		28214C8F1D93D3510012B1C7 /* SettingsApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C8E1D93D3510012B1C7 /* SettingsApplicationManager.m */; };
+		28214C931D93D36E0012B1C7 /* CategoryApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C921D93D36E0012B1C7 /* CategoryApplicationManager.m */; };
+		28214C971D93D9420012B1C7 /* SyncApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C961D93D9420012B1C7 /* SyncApiManager.m */; };
+		28214C9B1D93E2D60012B1C7 /* SyncApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C9A1D93E2D60012B1C7 /* SyncApplicationManager.m */; };
 		282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282C28C51D829A600061761E /* AMSideBarViewController.m */; };
 		284F9C3B1D8DCFF500B0853F /* TasksCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 284F9C3A1D8DCFF500B0853F /* TasksCoreDataManager.m */; };
 		286E26201D883FF00055A7BF /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286E261F1D883FF00055A7BF /* SettingsViewController.m */; };
@@ -51,6 +58,13 @@
 		28797F771D88309200AEDE0A /* NewPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28797F761D88309200AEDE0A /* NewPasswordViewController.m */; };
 		28797F7A1D88370600AEDE0A /* ChangeEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28797F791D88370600AEDE0A /* ChangeEmailViewController.m */; };
 		2884ABFD1D8D43B700A2F7D9 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884ABFC1D8D43B700A2F7D9 /* CoreDataManager.m */; };
+		28943CF71D9302D500BC8A69 /* ApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943CF61D9302D500BC8A69 /* ApiManager.m */; };
+		28943CFA1D93032000BC8A69 /* TasksApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943CF91D93032000BC8A69 /* TasksApiManager.m */; };
+		28943CFD1D93037500BC8A69 /* SubTasksApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943CFC1D93037500BC8A69 /* SubTasksApiManager.m */; };
+		28943D001D93038600BC8A69 /* UserApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943CFF1D93038600BC8A69 /* UserApiManager.m */; };
+		28943D031D93039500BC8A69 /* SettingsApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943D021D93039500BC8A69 /* SettingsApiManager.m */; };
+		28943D061D9303A800BC8A69 /* CategoryApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943D051D9303A800BC8A69 /* CategoryApiManager.m */; };
+		28943D0E1D9303EF00BC8A69 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943D0D1D9303EF00BC8A69 /* ApplicationManager.m */; };
 		28A36BAF1D81887B0092FEFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BAE1D81887B0092FEFD /* main.m */; };
 		28A36BB21D81887B0092FEFD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A36BB11D81887B0092FEFD /* AppDelegate.m */; };
 		28A36BB81D81887B0092FEFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28A36BB61D81887B0092FEFD /* Main.storyboard */; };
@@ -142,6 +156,20 @@
 		280539201D900F2900868ACF /* MGSwipeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeButton.m; sourceTree = "<group>"; };
 		280539211D900F2900868ACF /* MGSwipeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeTableCell.h; sourceTree = "<group>"; };
 		280539221D900F2900868ACF /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
+		28214C811D93D30F0012B1C7 /* TasksApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksApplicationManager.h; sourceTree = "<group>"; };
+		28214C821D93D30F0012B1C7 /* TasksApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksApplicationManager.m; sourceTree = "<group>"; };
+		28214C851D93D3260012B1C7 /* SubTasksApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubTasksApplicationManager.h; sourceTree = "<group>"; };
+		28214C861D93D3260012B1C7 /* SubTasksApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubTasksApplicationManager.m; sourceTree = "<group>"; };
+		28214C891D93D33E0012B1C7 /* UserApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserApplicationManager.h; sourceTree = "<group>"; };
+		28214C8A1D93D33E0012B1C7 /* UserApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserApplicationManager.m; sourceTree = "<group>"; };
+		28214C8D1D93D3510012B1C7 /* SettingsApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsApplicationManager.h; sourceTree = "<group>"; };
+		28214C8E1D93D3510012B1C7 /* SettingsApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsApplicationManager.m; sourceTree = "<group>"; };
+		28214C911D93D36E0012B1C7 /* CategoryApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryApplicationManager.h; sourceTree = "<group>"; };
+		28214C921D93D36E0012B1C7 /* CategoryApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryApplicationManager.m; sourceTree = "<group>"; };
+		28214C951D93D9420012B1C7 /* SyncApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncApiManager.h; sourceTree = "<group>"; };
+		28214C961D93D9420012B1C7 /* SyncApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncApiManager.m; sourceTree = "<group>"; };
+		28214C991D93E2D60012B1C7 /* SyncApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncApplicationManager.h; sourceTree = "<group>"; };
+		28214C9A1D93E2D60012B1C7 /* SyncApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncApplicationManager.m; sourceTree = "<group>"; };
 		282C28C41D829A600061761E /* AMSideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSideBarViewController.h; sourceTree = "<group>"; };
 		282C28C51D829A600061761E /* AMSideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSideBarViewController.m; sourceTree = "<group>"; };
 		284F9C391D8DCFF500B0853F /* TasksCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksCoreDataManager.h; sourceTree = "<group>"; };
@@ -160,6 +188,20 @@
 		28797F791D88370600AEDE0A /* ChangeEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangeEmailViewController.m; path = ../ChangeEmailViewController.m; sourceTree = "<group>"; };
 		2884ABFB1D8D43B700A2F7D9 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
 		2884ABFC1D8D43B700A2F7D9 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
+		28943CF51D9302D500BC8A69 /* ApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiManager.h; sourceTree = "<group>"; };
+		28943CF61D9302D500BC8A69 /* ApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiManager.m; sourceTree = "<group>"; };
+		28943CF81D93032000BC8A69 /* TasksApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksApiManager.h; sourceTree = "<group>"; };
+		28943CF91D93032000BC8A69 /* TasksApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksApiManager.m; sourceTree = "<group>"; };
+		28943CFB1D93037500BC8A69 /* SubTasksApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubTasksApiManager.h; sourceTree = "<group>"; };
+		28943CFC1D93037500BC8A69 /* SubTasksApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubTasksApiManager.m; sourceTree = "<group>"; };
+		28943CFE1D93038600BC8A69 /* UserApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserApiManager.h; sourceTree = "<group>"; };
+		28943CFF1D93038600BC8A69 /* UserApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserApiManager.m; sourceTree = "<group>"; };
+		28943D011D93039500BC8A69 /* SettingsApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsApiManager.h; sourceTree = "<group>"; };
+		28943D021D93039500BC8A69 /* SettingsApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsApiManager.m; sourceTree = "<group>"; };
+		28943D041D9303A800BC8A69 /* CategoryApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryApiManager.h; sourceTree = "<group>"; };
+		28943D051D9303A800BC8A69 /* CategoryApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryApiManager.m; sourceTree = "<group>"; };
+		28943D0C1D9303EF00BC8A69 /* ApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationManager.h; sourceTree = "<group>"; };
+		28943D0D1D9303EF00BC8A69 /* ApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationManager.m; sourceTree = "<group>"; };
 		28A36BAA1D81887B0092FEFD /* PlanAndDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlanAndDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A36BAE1D81887B0092FEFD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28A36BB01D81887B0092FEFD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -523,6 +565,87 @@
 			name = Menu;
 			sourceTree = "<group>";
 		};
+		28214C7F1D93D29A0012B1C7 /* ApplicationManager */ = {
+			isa = PBXGroup;
+			children = (
+				28943D0C1D9303EF00BC8A69 /* ApplicationManager.h */,
+				28943D0D1D9303EF00BC8A69 /* ApplicationManager.m */,
+			);
+			name = ApplicationManager;
+			sourceTree = "<group>";
+		};
+		28214C841D93D3180012B1C7 /* TasksApplicationManager */ = {
+			isa = PBXGroup;
+			children = (
+				28214C811D93D30F0012B1C7 /* TasksApplicationManager.h */,
+				28214C821D93D30F0012B1C7 /* TasksApplicationManager.m */,
+			);
+			name = TasksApplicationManager;
+			sourceTree = "<group>";
+		};
+		28214C881D93D3290012B1C7 /* SubTasksApplicationManager */ = {
+			isa = PBXGroup;
+			children = (
+				28214C851D93D3260012B1C7 /* SubTasksApplicationManager.h */,
+				28214C861D93D3260012B1C7 /* SubTasksApplicationManager.m */,
+			);
+			name = SubTasksApplicationManager;
+			sourceTree = "<group>";
+		};
+		28214C8C1D93D3410012B1C7 /* UserApplicationManager */ = {
+			isa = PBXGroup;
+			children = (
+				28214C891D93D33E0012B1C7 /* UserApplicationManager.h */,
+				28214C8A1D93D33E0012B1C7 /* UserApplicationManager.m */,
+			);
+			name = UserApplicationManager;
+			sourceTree = "<group>";
+		};
+		28214C901D93D3540012B1C7 /* SettingsApplicationManager */ = {
+			isa = PBXGroup;
+			children = (
+				28214C8D1D93D3510012B1C7 /* SettingsApplicationManager.h */,
+				28214C8E1D93D3510012B1C7 /* SettingsApplicationManager.m */,
+			);
+			name = SettingsApplicationManager;
+			sourceTree = "<group>";
+		};
+		28214C941D93D3720012B1C7 /* CategoryApplicationManager */ = {
+			isa = PBXGroup;
+			children = (
+				28214C911D93D36E0012B1C7 /* CategoryApplicationManager.h */,
+				28214C921D93D36E0012B1C7 /* CategoryApplicationManager.m */,
+			);
+			name = CategoryApplicationManager;
+			sourceTree = "<group>";
+		};
+		28214C981D93D9460012B1C7 /* SyncApiManager */ = {
+			isa = PBXGroup;
+			children = (
+				28214C951D93D9420012B1C7 /* SyncApiManager.h */,
+				28214C961D93D9420012B1C7 /* SyncApiManager.m */,
+			);
+			name = SyncApiManager;
+			sourceTree = "<group>";
+		};
+		28214C9C1D93E2DF0012B1C7 /* SyncApplicationManager */ = {
+			isa = PBXGroup;
+			children = (
+				28214C991D93E2D60012B1C7 /* SyncApplicationManager.h */,
+				28214C9A1D93E2D60012B1C7 /* SyncApplicationManager.m */,
+			);
+			name = SyncApplicationManager;
+			sourceTree = "<group>";
+		};
+		28214C9D1D93E4F10012B1C7 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				28A36BB01D81887B0092FEFD /* AppDelegate.h */,
+				28A36BB11D81887B0092FEFD /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
 		282C28C71D829C1F0061761E /* AMSideBarViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -562,7 +685,6 @@
 		282C28CC1D829CAC0061761E /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				2884ABFA1D8D437F00A2F7D9 /* CoreDataManagers */,
 				28A36BB91D81887B0092FEFD /* PlanAndDo.xcdatamodeld */,
 			);
 			name = CoreData;
@@ -591,6 +713,90 @@
 			name = CoreDataManagers;
 			sourceTree = "<group>";
 		};
+		28943CF21D93011B00BC8A69 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				28943CF41D93017A00BC8A69 /* ApplicationManagers */,
+				28943CF31D93016600BC8A69 /* ApiManagers */,
+				2884ABFA1D8D437F00A2F7D9 /* CoreDataManagers */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		28943CF31D93016600BC8A69 /* ApiManagers */ = {
+			isa = PBXGroup;
+			children = (
+				28943CF51D9302D500BC8A69 /* ApiManager.h */,
+				28943CF61D9302D500BC8A69 /* ApiManager.m */,
+				28943D0B1D9303D600BC8A69 /* TasksApiManager */,
+				28943D0A1D9303CF00BC8A69 /* SubTasksApiManager */,
+				28943D091D9303C600BC8A69 /* UserApiManager */,
+				28943D081D9303BC00BC8A69 /* SettingsApiManager */,
+				28943D071D9303B500BC8A69 /* CategoryApiManager */,
+				28214C981D93D9460012B1C7 /* SyncApiManager */,
+			);
+			name = ApiManagers;
+			sourceTree = "<group>";
+		};
+		28943CF41D93017A00BC8A69 /* ApplicationManagers */ = {
+			isa = PBXGroup;
+			children = (
+				28214C7F1D93D29A0012B1C7 /* ApplicationManager */,
+				28214C841D93D3180012B1C7 /* TasksApplicationManager */,
+				28214C881D93D3290012B1C7 /* SubTasksApplicationManager */,
+				28214C8C1D93D3410012B1C7 /* UserApplicationManager */,
+				28214C901D93D3540012B1C7 /* SettingsApplicationManager */,
+				28214C941D93D3720012B1C7 /* CategoryApplicationManager */,
+				28214C9C1D93E2DF0012B1C7 /* SyncApplicationManager */,
+			);
+			name = ApplicationManagers;
+			sourceTree = "<group>";
+		};
+		28943D071D9303B500BC8A69 /* CategoryApiManager */ = {
+			isa = PBXGroup;
+			children = (
+				28943D041D9303A800BC8A69 /* CategoryApiManager.h */,
+				28943D051D9303A800BC8A69 /* CategoryApiManager.m */,
+			);
+			name = CategoryApiManager;
+			sourceTree = "<group>";
+		};
+		28943D081D9303BC00BC8A69 /* SettingsApiManager */ = {
+			isa = PBXGroup;
+			children = (
+				28943D011D93039500BC8A69 /* SettingsApiManager.h */,
+				28943D021D93039500BC8A69 /* SettingsApiManager.m */,
+			);
+			name = SettingsApiManager;
+			sourceTree = "<group>";
+		};
+		28943D091D9303C600BC8A69 /* UserApiManager */ = {
+			isa = PBXGroup;
+			children = (
+				28943CFE1D93038600BC8A69 /* UserApiManager.h */,
+				28943CFF1D93038600BC8A69 /* UserApiManager.m */,
+			);
+			name = UserApiManager;
+			sourceTree = "<group>";
+		};
+		28943D0A1D9303CF00BC8A69 /* SubTasksApiManager */ = {
+			isa = PBXGroup;
+			children = (
+				28943CFB1D93037500BC8A69 /* SubTasksApiManager.h */,
+				28943CFC1D93037500BC8A69 /* SubTasksApiManager.m */,
+			);
+			name = SubTasksApiManager;
+			sourceTree = "<group>";
+		};
+		28943D0B1D9303D600BC8A69 /* TasksApiManager */ = {
+			isa = PBXGroup;
+			children = (
+				28943CF81D93032000BC8A69 /* TasksApiManager.h */,
+				28943CF91D93032000BC8A69 /* TasksApiManager.m */,
+			);
+			name = TasksApiManager;
+			sourceTree = "<group>";
+		};
 		28A36BA11D81887B0092FEFD = {
 			isa = PBXGroup;
 			children = (
@@ -612,16 +818,16 @@
 		28A36BAC1D81887B0092FEFD /* PlanAndDo */ = {
 			isa = PBXGroup;
 			children = (
-				28A36BB01D81887B0092FEFD /* AppDelegate.h */,
-				28A36BB11D81887B0092FEFD /* AppDelegate.m */,
+				28A36BBC1D81887B0092FEFD /* Assets.xcassets */,
+				28A36BC11D81887B0092FEFD /* Info.plist */,
+				28214C9D1D93E4F10012B1C7 /* AppDelegate */,
+				282C28CC1D829CAC0061761E /* CoreData */,
+				28943CF21D93011B00BC8A69 /* Managers */,
 				2803AFAA1D8ABA980032ACFB /* Categories */,
 				27B1A0F01D818C9900D47FCD /* Models */,
 				282C28C81D829C320061761E /* ViewControllers */,
 				282C28CB1D829C9C0061761E /* UI */,
-				28A36BBC1D81887B0092FEFD /* Assets.xcassets */,
-				28A36BC11D81887B0092FEFD /* Info.plist */,
 				2803AFA81D8ABA660032ACFB /* Cells */,
-				282C28CC1D829CAC0061761E /* CoreData */,
 				28A36BAD1D81887B0092FEFD /* Supporting Files */,
 			);
 			path = PlanAndDo;
@@ -808,36 +1014,49 @@
 				270DF9E41D83F0B0004D3681 /* KSApplicatipnColor.m in Sources */,
 				27B1A0F71D81933000D47FCD /* KSAuthorisedUser.m in Sources */,
 				27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */,
+				28943D0E1D9303EF00BC8A69 /* ApplicationManager.m in Sources */,
 				278BAA551D89BA4A002D38CF /* BaseAuthViewController.m in Sources */,
 				27B1A0FA1D8195A800D47FCD /* UserSettings.m in Sources */,
 				280539251D900F2900868ACF /* MGSwipeTableCell.m in Sources */,
+				28214C931D93D36E0012B1C7 /* CategoryApplicationManager.m in Sources */,
 				272F91C31D8A6C0C00A0330B /* DescriptionViewController.m in Sources */,
+				28943D031D93039500BC8A69 /* SettingsApiManager.m in Sources */,
 				27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */,
 				28797F711D87E24500AEDE0A /* UIImage+ACScaleImage.m in Sources */,
 				2786E7B01D883692009BDB2A /* TabletasksViewController.m in Sources */,
 				27494DE41D8D3ECE009BFC5F /* KSMenuViewController.m in Sources */,
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
+				28943CFA1D93032000BC8A69 /* TasksApiManager.m in Sources */,
+				28214C971D93D9420012B1C7 /* SyncApiManager.m in Sources */,
 				2803AF811D8A8F190032ACFB /* KSSettingsCell.m in Sources */,
 				278BAA581D89BB32002D38CF /* BaseTableViewController.m in Sources */,
 				28AB85671D8F486100D93AB7 /* UserCoreDataManager.m in Sources */,
 				287884071D8E07E600C17A4F /* KSCategory.m in Sources */,
 				28797F741D88202C00AEDE0A /* CreateAccountViewController.m in Sources */,
+				28214C8F1D93D3510012B1C7 /* SettingsApplicationManager.m in Sources */,
 				272F91C61D8A704500A0330B /* TaskListViewController.m in Sources */,
 				27B1A0FD1D81A12A00D47FCD /* KSShortTask.m in Sources */,
 				2803AF861D8AA0AC0032ACFB /* FormatDateViewController.m in Sources */,
 				272F91C01D8A678800A0330B /* SelectCategoryViewController.m in Sources */,
+				28214C831D93D30F0012B1C7 /* TasksApplicationManager.m in Sources */,
 				286E26201D883FF00055A7BF /* SettingsViewController.m in Sources */,
 				28A36BB21D81887B0092FEFD /* AppDelegate.m in Sources */,
+				28214C871D93D3260012B1C7 /* SubTasksApplicationManager.m in Sources */,
 				270DF9E71D83F56E004D3681 /* BaseViewController.m in Sources */,
 				2803AF8B1D8AA5560032ACFB /* KSCheckSettingsTableViewCell.m in Sources */,
 				27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */,
 				278BAA4D1D896E30002D38CF /* AddTaskViewController.m in Sources */,
+				28943CF71D9302D500BC8A69 /* ApiManager.m in Sources */,
 				28AB856B1D8F48A100D93AB7 /* SettingsCoreDataManager.m in Sources */,
 				280539241D900F2900868ACF /* MGSwipeButton.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
+				28943D061D9303A800BC8A69 /* CategoryApiManager.m in Sources */,
 				270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */,
+				28943CFD1D93037500BC8A69 /* SubTasksApiManager.m in Sources */,
+				28943D001D93038600BC8A69 /* UserApiManager.m in Sources */,
 				2803AF911D8AAA710032ACFB /* StartDayViewController.m in Sources */,
 				2803AF8E1D8AA8ED0032ACFB /* FormatTimeViewController.m in Sources */,
+				28214C8B1D93D33E0012B1C7 /* UserApplicationManager.m in Sources */,
 				2786E7AD1D881507009BDB2A /* LoginViewController.m in Sources */,
 				2803AF941D8AAB1D0032ACFB /* StartPageViewController.m in Sources */,
 				28AB85631D8F483D00D93AB7 /* SubTasksCoreDataManager.m in Sources */,
@@ -846,6 +1065,7 @@
 				2786E7B51D884421009BDB2A /* TaskTableViewCell.m in Sources */,
 				27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */,
 				282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */,
+				28214C9B1D93E2D60012B1C7 /* SyncApplicationManager.m in Sources */,
 				28797F771D88309200AEDE0A /* NewPasswordViewController.m in Sources */,
 				28AB856F1D8F48B300D93AB7 /* CategoryCoreDataManager.m in Sources */,
 				28A36BBB1D81887B0092FEFD /* PlanAndDo.xcdatamodeld in Sources */,
