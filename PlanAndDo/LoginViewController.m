@@ -13,6 +13,7 @@
 #import "TabletasksViewController.h"
 #import "AMSideBarViewController.h"
 #import "KSMenuViewController.h"
+#import "ApplicationManager.h"
 
 #define TEXTFIELD_PADDING_LEFT 10
 
@@ -63,13 +64,21 @@
 
 - (IBAction)signInTapped:(id)sender
 {
-    AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
     
-    if(tableTaskViewController)
-    {
-        tableTaskViewController.title=@"Today";
-        [self presentViewController:tableTaskViewController animated:YES completion:nil];
-    }
+    [[ApplicationManager userApplicationManager] loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool fl) {
+        if(fl)
+        {
+            AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
+            
+            if(tableTaskViewController)
+            {
+                tableTaskViewController.title=@"Today";
+                [self presentViewController:tableTaskViewController animated:YES completion:nil];
+            }
+        }
+    }];
+    
+    
 }
 
 @end

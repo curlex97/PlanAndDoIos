@@ -15,7 +15,7 @@
 
 -(void)updateUserAsync:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
 
--(void) loginAsyncWithEmail:(NSString*)email andPassword:(NSString*)password completion:(void (^)(bool))completed;
+-(void) loginAsyncWithEmail:(NSString*)email andPassword:(NSString*)password completion:(void (^)(NSDictionary*))completed;
 
 -(void) registerAsyncWithEmail:(NSString*)email andUserName:(NSString*)userName andPassword:(NSString*)password completion:(void (^)(NSDictionary*))completed;
 

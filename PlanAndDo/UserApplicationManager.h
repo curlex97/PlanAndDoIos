@@ -11,8 +11,6 @@
 #import "UserApiManager.h"
 #import "UserCoreDataManager.h"
 
-static KSAuthorisedUser* currentUser;
-
 @interface UserApplicationManager : NSObject
 
 -(KSAuthorisedUser*) authorisedUser;

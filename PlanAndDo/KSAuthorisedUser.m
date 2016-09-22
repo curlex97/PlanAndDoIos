@@ -8,6 +8,8 @@
 
 #import "KSAuthorisedUser.h"
 
+static KSAuthorisedUser* currentUser;
+
 @implementation KSAuthorisedUser
 
 -(instancetype)initWithUserID:(NSUInteger)ID
@@ -21,9 +23,22 @@
 {
     if(self=[super initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:date andLastVisitDate:visitDate andSyncStatus:syncStatus])
     {
-        self.apiToken=token;
-        self.settings=settings;
+        static BOOL initialized = NO;
+        if(!initialized)
+        {
+            initialized = YES;
+            self.apiToken=token;
+            self.settings=settings;
+            currentUser = self;
+        }
+      
     }
-    return self;
+    return currentUser;
 }
+
++(KSAuthorisedUser *)currentUser
+{
+    return currentUser;
+}
+
 @end
