@@ -53,7 +53,8 @@
     [object setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:@"subtask_sync_status"];
     [object setValue:[NSNumber numberWithBool:subTask.status] forKey:@"status"];
     [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
-    
+    [object setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+
     [managedObjectContext save:nil];
 }
 
@@ -78,7 +79,8 @@
                 [managedSubtask setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:@"subtask_sync_status"];
                 [managedSubtask setValue:[NSNumber numberWithBool:subTask.status] forKey:@"status"];
                 [managedSubtask setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
-                
+                [managedSubtask setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+
                 [self.managedObjectContext save:nil];
             }
         }
@@ -101,6 +103,8 @@
             if(taskID == [task ID] && ID == [subTask ID])
             {
                 [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];
+                [managedSubtask setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+
                 [self.managedObjectContext save:nil];
             }
         }

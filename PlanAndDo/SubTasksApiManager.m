@@ -10,4 +10,19 @@
 
 @implementation SubTasksApiManager
 
+-(void)addSubTaskAsync:(KSShortTask *)subTask toTask:(KSTaskCollection *)task forUser:(KSAuthorisedUser *)user
+{
+
+}
+
+-(void)updateSubTaskAsync:(KSShortTask *)subTask inTask:(KSTaskCollection *)task forUser:(KSAuthorisedUser *)user
+{
+
+}
+
+-(void)deleteSubTaskAsync:(KSShortTask *)subTask fromTask:(KSTaskCollection *)task forUser:(KSAuthorisedUser *)user
+{
+
+}
+
 @end

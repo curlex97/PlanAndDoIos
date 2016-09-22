@@ -96,13 +96,13 @@
     
     if(!self.category)
     {
-        switch (self.boxType) {
-            //case KSBoxTypeToday: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForToday]; break;
-          //  case KSBoxTypeTomorrow: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForTomorrow]; break;
-           // case KSBoxTypeWeek: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForWeek]; break;
-          //  case KSBoxTypeArchive: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForArchive]; break;
-           // case KSBoxTypeBacklog: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForBacklog]; break;
-        }
+//        switch (self.boxType) {
+//            //case KSBoxTypeToday: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForToday]; break;
+//          //  case KSBoxTypeTomorrow: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForTomorrow]; break;
+//           // case KSBoxTypeWeek: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForWeek]; break;
+//          //  case KSBoxTypeArchive: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForArchive]; break;
+//           // case KSBoxTypeBacklog: self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForBacklog]; break;
+//        }
     }
     else{} //self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForCategory:self.category];
     

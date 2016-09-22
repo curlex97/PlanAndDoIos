@@ -10,4 +10,9 @@
 
 @implementation UserApiManager
 
+-(void)updateUserAsync:(KSAuthorisedUser *)user
+{
+
+}
+
 @end

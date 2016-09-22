@@ -10,4 +10,34 @@
 
 @implementation ApplicationManager
 
++(TasksApplicationManager *)tasksApplicationManager
+{
+    return [[TasksApplicationManager alloc] init];
+}
+
++(SubTasksApplicationManager *)subTasksApplicationManager
+{
+    return [[SubTasksApplicationManager alloc] init];
+}
+
++(UserApplicationManager *)userApplicationManager
+{
+    return [[UserApplicationManager alloc] init];
+}
+
++(SettingsApplicationManager *)settingsApplicationManager
+{
+    return [[SettingsApplicationManager alloc] init];
+}
+
++(CategoryApplicationManager *)categoryApplicationManager
+{
+    return [[CategoryApplicationManager alloc] init];
+}
+
++(SyncApplicationManager *)syncApplicationManager
+{
+    return [[SyncApplicationManager alloc] init];
+}
+
 @end

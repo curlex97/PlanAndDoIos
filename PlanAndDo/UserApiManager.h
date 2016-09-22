@@ -7,7 +7,10 @@
 //
 
 #import "ApiManager.h"
+#import "KSAuthorisedUser.h"
 
 @interface UserApiManager : ApiManager
+
+-(void)updateUserAsync:(KSAuthorisedUser*)user;
 
 @end

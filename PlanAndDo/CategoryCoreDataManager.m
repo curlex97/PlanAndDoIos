@@ -51,6 +51,7 @@
     [object setValue:[category name] forKey:@"category_name"];
     [object setValue:[NSNumber numberWithInteger:category.syncStatus] forKey:@"category_sync_status"];
     [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
+    [object setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
     
     [managedObjectContext save:nil];
 }
@@ -72,6 +73,8 @@
                 [managedCategory setValue:[NSNumber numberWithInteger:category.ID] forKey:@"id"];
                 [managedCategory setValue:[category name] forKey:@"category_name"];
                 [managedCategory setValue:[NSNumber numberWithInteger:category.syncStatus] forKey:@"category_sync_status"];
+                [managedCategory setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+                
                 [self. managedObjectContext save:nil];
             }
 
@@ -96,6 +99,7 @@
             if(ID == [category ID])
             {
                 [managedCategory setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];
+                [managedCategory setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
                 [self. managedObjectContext save:nil];
             }
             

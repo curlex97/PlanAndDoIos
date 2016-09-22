@@ -57,6 +57,7 @@
             [object setValue:[user createdAt] forKey:@"created_at"];
             [object setValue:[user lastVisit] forKey:@"lastvisit_date"];
             [object setValue:[NSNumber numberWithInteger:[user syncStatus]] forKey:@"user_sync_status"];
+            [object setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
 
             [self.managedObjectContext save:nil];
         }
@@ -87,7 +88,8 @@
                 [managedUser setValue:[user createdAt] forKey:@"created_at"];
                 [managedUser setValue:[user lastVisit] forKey:@"lastvisit_date"];
                 [managedUser setValue:[NSNumber numberWithInteger:[user syncStatus]] forKey:@"user_sync_status"];
-                
+                [managedUser setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+
                 [self.managedObjectContext save:nil];
             }
         }

@@ -10,4 +10,9 @@
 
 @implementation SettingsApiManager
 
+-(void)updateSettingsAsync:(UserSettings *)settings forUser:(KSAuthorisedUser *)user
+{
+    
+}
+
 @end

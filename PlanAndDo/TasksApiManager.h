@@ -7,7 +7,16 @@
 //
 
 #import "ApiManager.h"
+#import "KSTask.h"
+#import "KSTaskCollection.h"
+#import "KSAuthorisedUser.h"
 
 @interface TasksApiManager : ApiManager
+
+-(void)addTaskAsync:(BaseTask*)task forUser:(KSAuthorisedUser*)user;
+
+-(void)updateTaskAsync:(BaseTask*)task forUser:(KSAuthorisedUser*)user;
+
+-(void)deleteTaskAsync:(BaseTask*)task forUser:(KSAuthorisedUser*)user;
 
 @end
