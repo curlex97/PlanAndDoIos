@@ -63,7 +63,27 @@
 
 -(void)loginWithEmail:(NSString *)email andPassword:(NSString *)password completion:(void (^)(bool))completed
 {
-    
+    [[[UserApiManager alloc] init] loginAsyncWithEmail:email andPassword:password completion:^(NSDictionary* dictionary){
+        
+        NSString* status = [dictionary valueForKeyPath:@"status"];
+        
+        if([status containsString:@"suc"])
+        {
+            NSUInteger ID = [[dictionary valueForKeyPath:@"data.user_id"] integerValue];
+            NSString* userName = [dictionary valueForKeyPath:@"data.user_name"];
+            NSString* token = [dictionary valueForKeyPath:@"data.token"];
+
+            [self writeTokenToFile:token];
+            
+            KSAuthorisedUser* user = [[KSAuthorisedUser alloc] initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:[NSDate date] andLastVisitDate:[NSDate date] andSyncStatus:0 andAccessToken:token andUserSettings:nil];
+            
+            [[[UserCoreDataManager alloc] init] setUser:user];
+            
+            completed(true);
+        }
+        completed(false);
+    }];
+
 }
 
 
