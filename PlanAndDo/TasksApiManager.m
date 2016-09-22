@@ -10,17 +10,17 @@
 
 @implementation TasksApiManager
 
--(void)addTaskAsync:(BaseTask *)task forUser:(KSAuthorisedUser *)user
+-(void)addTaskAsync:(BaseTask *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
 {
 
 }
 
--(void)updateTaskAsync:(BaseTask *)task forUser:(KSAuthorisedUser *)user
+-(void)updateTaskAsync:(BaseTask *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
 {
 
 }
 
--(void)deleteTaskAsync:(BaseTask *)task forUser:(KSAuthorisedUser *)user
+-(void)deleteTaskAsync:(BaseTask *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
 {
 
 }

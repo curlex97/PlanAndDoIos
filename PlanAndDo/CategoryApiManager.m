@@ -10,17 +10,17 @@
 
 @implementation CategoryApiManager
 
--(void)addCategoryAsync:(KSCategory *)category forUser:(KSAuthorisedUser *)user
+-(void)addCategoryAsync:(KSCategory *)category forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
 {
 
 }
 
--(void)updateCategoryAsync:(KSCategory *)category forUser:(KSAuthorisedUser *)user
+-(void)updateCategoryAsync:(KSCategory *)category forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
 {
     
 }
 
--(void)deleteCategoryAsync:(KSCategory *)category forUser:(KSAuthorisedUser *)user
+-(void)deleteCategoryAsync:(KSCategory *)category forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
 {
     
 }

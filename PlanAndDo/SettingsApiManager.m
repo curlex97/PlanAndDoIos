@@ -10,7 +10,7 @@
 
 @implementation SettingsApiManager
 
--(void)updateSettingsAsync:(UserSettings *)settings forUser:(KSAuthorisedUser *)user
+-(void)updateSettingsAsync:(UserSettings *)settings forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
 {
     
 }
