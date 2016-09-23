@@ -11,7 +11,8 @@
 typedef NS_ENUM(NSInteger, KSMenuState)
 {
     KSMenuStateNormal,
-    KSMenuStateSearch
+    KSMenuStateSearch,
+    KSMenuStateEdit
 };
 
 @interface KSMenuViewController : BaseTableViewController

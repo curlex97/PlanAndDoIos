@@ -24,14 +24,42 @@
 @property (nonatomic)UILongPressGestureRecognizer * longPress;
 @property NSMutableArray* allTasks;
 @property NSMutableArray* tableTasks;
+@property (nonatomic) NSIndexPath * managedIndexPath;
+@property (nonatomic) UITapGestureRecognizer * tap;
+@property (nonatomic) UIButton * addCategoryButton;
 @end
 
 @implementation KSMenuViewController
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    if(gestureRecognizer==self.tap)
+    {
+        if([self.searchBar isFirstResponder])
+        {
+            [self.searchBar resignFirstResponder];
+        }
+        
+        if([self.addCategoryTextField isFirstResponder])
+        {
+            [self.addCategoryTextField resignFirstResponder];
+            self.parentController.hiden=NO;
+            [UIView animateWithDuration:0.5 animations:^
+            {
+                self.searchBar.frame=CGRectMake(8, 8, 255, 30);
+                self.addCategoryButton.frame=CGRectMake(233, 0, 30, 30);
+            }];
+            self.addCategoryTextField.text=@"";
+        }
+    }
+    
+    return YES;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger result;
-    if(self.state==KSMenuStateNormal)
+    if(self.state!=KSMenuStateSearch)
     {
         if(section==0)
         {
@@ -56,7 +84,7 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger result;
-    if(self.state==KSMenuStateNormal)
+    if(self.state!=KSMenuStateSearch)
     {
         result=3;
     }
@@ -70,7 +98,7 @@
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if(section==1 && self.state==KSMenuStateNormal)
+    if(section==1 && self.state!=KSMenuStateSearch)
     {
         return @"Categories";
     }
@@ -79,11 +107,7 @@
 
 -(void)addCategoryDidTap
 {
-    self.parentController.hiden=YES;
-    self.searchBar.frame=CGRectMake(self.searchBar.frame.origin.x, self.searchBar.frame.origin.y, [UIScreen mainScreen].bounds.size.width-self.searchBar.frame.origin.x*2, self.searchBar.frame.size.height);
-    //[text setInputAccessoryView:self.addCategoryAccessoryView];
     [self.addCategoryTextField becomeFirstResponder];
-    
 }
 
 
@@ -102,11 +126,11 @@
         titleLabel.text=@"CATEGORY";
         titleLabel.font=[UIFont systemFontOfSize:12];
         
-        UIButton * addCategoryButton=[[UIButton alloc] initWithFrame:CGRectMake(233, 0, 30, 30)];
-        [addCategoryButton setImage:[UIImage imageNamed:@"Add category"] forState:UIControlStateNormal];
-        [addCategoryButton addTarget:self action:@selector(addCategoryDidTap) forControlEvents:UIControlEventTouchUpInside];
+        self.addCategoryButton=[[UIButton alloc] initWithFrame:CGRectMake(233, 0, 30, 30)];
+        [self.addCategoryButton setImage:[UIImage imageNamed:@"Add category"] forState:UIControlStateNormal];
+        [self.addCategoryButton addTarget:self action:@selector(addCategoryDidTap) forControlEvents:UIControlEventTouchUpInside];
         
-        [view addSubview:addCategoryButton];
+        [view addSubview:self.addCategoryButton];
         [view addSubview:titleLabel];
         [view addSubview:imageView];
         return view;
@@ -298,7 +322,11 @@
     searchBar.clearsContextBeforeDrawing=YES;
 
     self.parentController.hiden=NO;
-    searchBar.frame=CGRectMake(8, 8, 255, 30);
+    [UIView animateWithDuration:0.5 animations:^
+     {
+         searchBar.frame=CGRectMake(8, 8, 255, 30);
+         self.addCategoryButton.frame=CGRectMake(233, 0, 30, 30);
+     }];
     
     self.state=KSMenuStateNormal;
     [self.tableView reloadData];
@@ -325,8 +353,6 @@
         
     }
     else self.tableTasks = [NSMutableArray arrayWithArray:self.allTasks];
-    [self.tableView reloadData];
-    
     [self.tableView reloadData];
     
     return YES;
@@ -366,11 +392,25 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-  //  [self.categories addObject:textField.text];
-    textField.text=@"";
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.categories.count-1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+    if(self.state!=KSMenuStateEdit)
+    {
+        [self.categories addObject:[[KSCategory alloc] initWithID:2 andName:textField.text andSyncStatus:0]];
+        textField.text=@"";
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.categories.count-1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+    }
+    else
+    {
+        self.categories[self.managedIndexPath.row].name=textField.text;
+        self.state=KSMenuStateNormal;
+        [self.tableView reloadData];
+    }
     self.parentController.hiden=NO;
-    self.searchBar.frame=CGRectMake(self.searchBar.frame.origin.x, self.searchBar.frame.origin.y, 255, self.searchBar.frame.size.height);
+    [UIView animateWithDuration:0.5 animations:^
+    {
+        self.searchBar.frame=CGRectMake(self.searchBar.frame.origin.x, self.searchBar.frame.origin.y, [UIScreen mainScreen].bounds.size.width-self.searchBar.frame.origin.x*2, self.searchBar.frame.size.height);
+        self.addCategoryButton.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-self.searchBar.frame.origin.x-30, 0, 30, 30);
+    }];
+
     return YES;
 }
 
@@ -396,6 +436,8 @@
         UIAlertAction * editAction=[UIAlertAction actionWithTitle:@"Edit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
         {
             self.addCategoryTextField.text=[self.categories[indexPath.row] name];
+            self.managedIndexPath=indexPath;
+            self.state=KSMenuStateEdit;
             [self addCategoryDidTap];
         }];
         
@@ -422,6 +464,10 @@
     longPress.delegate=self;
     
     [self.tableView addGestureRecognizer:longPress];
+    
+    self.tap=[[UITapGestureRecognizer alloc] init];
+    self.tap.delegate=self;
+    
     self.searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(8, 8, 255, 30)];
     self.searchBar.searchBarStyle=UISearchBarStyleMinimal;
     self.searchBar.tintColor=[UIColor whiteColor];
@@ -448,6 +494,7 @@
     [self.tableView setSeparatorColor:[UIColor colorWithRed:163.0/255.0 green:167.0/255.0 blue:169.0/255.0 alpha:0.35]];
     
     self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    [self.categories addObject:[[KSCategory alloc] initWithID:3 andName:@"Work" andSyncStatus:10]];
     
     self.view.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
     self.tableView.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
@@ -568,6 +615,8 @@
 
 -(void)keyboardWillHide:(NSNotification*) not
 {
+    [self.view removeGestureRecognizer:self.tap];
+    
     NSDictionary * info=[not userInfo];
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGSize keyboardSize = [aValue CGRectValue].size;
@@ -596,7 +645,15 @@
 
 -(void)keyboardWillShown:(NSNotification*) not
 {
-    if(self.state==KSMenuStateNormal)
+    [self.view addGestureRecognizer:self.tap];
+    self.parentController.hiden=YES;
+    [UIView animateWithDuration:0.5 animations:^
+    {
+            self.searchBar.frame=CGRectMake(self.searchBar.frame.origin.x, self.searchBar.frame.origin.y, [UIScreen mainScreen].bounds.size.width-self.searchBar.frame.origin.x*2, self.searchBar.frame.size.height);
+            self.addCategoryButton.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-self.searchBar.frame.origin.x-30, 0, 30, 30);
+    }];
+    
+    if(self.state!=KSMenuStateSearch)
     {
     NSDictionary * info=[not userInfo];
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
