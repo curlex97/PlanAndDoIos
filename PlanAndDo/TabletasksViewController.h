@@ -27,6 +27,6 @@ typedef NS_ENUM(NSInteger, KSBoxType)
 
 @interface TabletasksViewController : BaseTableViewController
 @property KSBoxType boxType;
-@property NSArray<BaseTask*>* tasks;
+@property NSMutableArray<BaseTask*>* tasks;
 @property KSCategory* category;
 @end

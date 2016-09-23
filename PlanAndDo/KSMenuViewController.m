@@ -149,8 +149,11 @@
         
         cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"Complete" backgroundColor:[UIColor greenColor] callback:^BOOL(MGSwipeTableCell *sender) {
             NSLog(@"Complete");
-            //rows --;
-            // [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            task.status = YES;
+            [[ApplicationManager tasksApplicationManager] updateTask:task];
+            [self.allTasks removeObject:task];
+            [self.tableTasks removeObject:task];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [tableView reloadData];
             });
@@ -160,8 +163,10 @@
         
         cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
             NSLog(@"Delete");
-            // rows--;
-            //  [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+            [[ApplicationManager tasksApplicationManager] deleteTask:task];
+            [self.allTasks removeObject:task];
+            [self.tableTasks removeObject:task];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [tableView reloadData];
             });

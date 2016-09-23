@@ -31,21 +31,26 @@
     TaskTableViewCell * cell=[nib objectAtIndex:0];
     BaseTask* task = self.tasks[indexPath.row];
     
-    cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"Complete" backgroundColor:[UIColor greenColor] callback:^BOOL(MGSwipeTableCell *sender) {
-        NSLog(@"Complete");
-        //rows --;
-       // [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [tableView reloadData];
-        });
-        return YES;
-    }]];
-    cell.leftSwipeSettings.transition = MGSwipeDirectionLeftToRight;
-    
+    if(self.boxType != KSBoxTypeArchive || self.segment.selectedSegmentIndex)
+    {
+        cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"Complete" backgroundColor:[UIColor greenColor] callback:^BOOL(MGSwipeTableCell *sender) {
+            NSLog(@"Complete");
+            task.status = YES;
+            [[ApplicationManager tasksApplicationManager] updateTask:task];
+            [self.tasks removeObject:task];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [tableView reloadData];
+            });
+            return YES;
+        }]];
+        cell.leftSwipeSettings.transition = MGSwipeDirectionLeftToRight;
+    }
     cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
         NSLog(@"Delete");
-       // rows--;
-      //  [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        [[ApplicationManager tasksApplicationManager] deleteTask:task];
+        [self.tasks removeObject:task];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [tableView reloadData];
         });
@@ -98,14 +103,14 @@
     if(!self.category)
     {
         switch (self.boxType) {
-            case KSBoxTypeToday: self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForToday]; break;
-            case KSBoxTypeTomorrow: self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForTomorrow]; break;
-            case KSBoxTypeWeek: self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForWeek]; break;
-            case KSBoxTypeArchive: self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForArchive]; break;
-            case KSBoxTypeBacklog: self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForBacklog]; break;
+            case KSBoxTypeToday: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForToday]]; break;
+            case KSBoxTypeTomorrow: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForTomorrow]]; break;
+            case KSBoxTypeWeek: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForWeek]]; break;
+            case KSBoxTypeArchive: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForArchive]]; break;
+            case KSBoxTypeBacklog: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForBacklog]]; break;
         }
     }
-    else self.tasks = [[[TasksCoreDataManager alloc] init] allTasksForCategory:self.category];
+    else self.tasks = [NSMutableArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasksForCategory:self.category]];
     
     if(![self.title length])
     {
@@ -202,12 +207,15 @@
 
 -(void) segmentDidTap
 {
+    if(self.segment.selectedSegmentIndex)     self.tasks = [NSMutableArray arrayWithArray:[self overdueTasks:[[ApplicationManager tasksApplicationManager] allTasksForArchive]]];
+    else     self.tasks = [NSMutableArray arrayWithArray:[self completedTasks:[[ApplicationManager tasksApplicationManager] allTasksForArchive]]];
+
     [self.tableView reloadData];
 }
 
 -(void)todayDidTap
 {
-    self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForToday];
+    self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForToday]];;
     self.title = @"Today";
     self.boxType = KSBoxTypeToday;
     [self removeSegmentControl];
@@ -216,7 +224,7 @@
 
 -(void)tomorrowDidTap
 {
-    self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForTomorrow];
+    self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForTomorrow]];
     self.title = @"Tomorrow";
     self.boxType = KSBoxTypeTomorrow;
     [self removeSegmentControl];
@@ -225,7 +233,7 @@
 
 -(void)weekDidTap
 {
-    self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForWeek];
+    self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForWeek]];
     self.title = @"Week";
     self.boxType = KSBoxTypeWeek;
     [self removeSegmentControl];
@@ -234,7 +242,7 @@
 
 -(void)backLogDidTap
 {
-    self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForBacklog];
+    self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForBacklog]];
     self.title = @"Backlog";
     self.boxType = KSBoxTypeBacklog;
     [self removeSegmentControl];
@@ -243,11 +251,27 @@
 
 -(void)archiveDidTap
 {
-    self.tasks = [[ApplicationManager tasksApplicationManager] allTasksForArchive];
+    self.tasks = [NSMutableArray arrayWithArray:[self completedTasks:[[ApplicationManager tasksApplicationManager] allTasksForArchive]]];
     self.title = @"Archive";
     self.boxType = KSBoxTypeArchive;
     [self addSegmentControl];
     [self.tableView reloadData];
+}
+
+-(NSArray*) completedTasks:(NSArray*)array
+{
+    NSMutableArray* tasks = [NSMutableArray array];
+    for(BaseTask* t in array)
+        if(t.status) [tasks addObject:t];
+    return tasks;
+}
+
+-(NSArray*) overdueTasks:(NSArray*)array
+{
+    NSMutableArray* tasks = [NSMutableArray array];
+    for(BaseTask* t in array)
+        if(!t.status) [tasks addObject:t];
+    return tasks;
 }
 
 - (void)didReceiveMemoryWarning {
