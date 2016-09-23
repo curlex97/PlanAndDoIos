@@ -26,6 +26,7 @@
     self.navigationItem.leftBarButtonItem=cancelItem;
     self.textView=[[UITextView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.textView];
+    self.textView.text = self.text;
     
 }
 
@@ -36,6 +37,7 @@
 
 -(void)doneDidTap
 {
+    self.parentController.taskDesc = self.textView.text;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

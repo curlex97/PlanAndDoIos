@@ -7,6 +7,7 @@
 //
 
 #import "DateAndTimeViewController.h"
+#import "NSDate+LocalTime.h"
 
 @interface DateAndTimeViewController ()
 @property (nonatomic)UIDatePicker * dateTimePicker;
@@ -30,6 +31,10 @@
     self.timeLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0];
     self.timeLabel.text=@"Time";
     [self.timeLabel setTextAlignment:NSTextAlignmentRight];
+    
+    UIBarButtonItem * doneItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneDidTap)];
+    doneItem.tintColor=[UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = doneItem;
     
     self.dateTimePicker=[[UIDatePicker alloc] init];
     [self.view addSubview:self.dateTimePicker];
@@ -83,12 +88,16 @@
                               multiplier:1.0f
                               constant:16.0]];
     [self.dateTimePicker addTarget:self action:@selector(dateTimeValueChanged:) forControlEvents:UIControlEventValueChanged];
+    self.dateTimePicker.date = self.completionTime;
+    [self dateTimeValueChanged:self.dateTimePicker];
+    
 }
 
 -(void)dateTimeValueChanged:(UIDatePicker *)dateTimePicker
 {
+    NSDate* localDate = [dateTimePicker.date localDate];
     NSLog(@"%@",dateTimePicker);
-    NSString * pickerDate=[[NSString stringWithFormat:@"%@",dateTimePicker.date] substringToIndex:10];
+    NSString * pickerDate=[[NSString stringWithFormat:@"%@", localDate] substringToIndex:10];
     if([[pickerDate substringToIndex:10] isEqualToString:[[NSString stringWithFormat:@"%@",[NSDate date]] substringToIndex:10]])
     {
         self.dateLabel.text=@"Today";
@@ -104,4 +113,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)doneDidTap
+{
+    self.parentController.completionTime = self.dateTimePicker.date;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 @end

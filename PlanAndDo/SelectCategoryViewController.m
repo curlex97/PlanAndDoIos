@@ -7,16 +7,17 @@
 //
 
 #import "SelectCategoryViewController.h"
+#import "ApplicationManager.h"
 
 @interface SelectCategoryViewController ()<UITableViewDelegate, UITableViewDataSource>
-
+@property NSArray* categories;
 @end
 
 @implementation SelectCategoryViewController
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return self.categories.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -26,10 +27,18 @@
     if(!cell)
     {
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        cell.accessoryType=UITableViewCellAccessoryCheckmark;
     }
-    cell.textLabel.text=@"Today";
+    
+    KSCategory* category = self.categories[indexPath.row];
+    
+    cell.textLabel.text=[category name];
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.parentController.category = self.categories[indexPath.row];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad
@@ -37,6 +46,7 @@
     [super viewDidLoad];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    self.categories = [NSArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
 }
 
 - (void)didReceiveMemoryWarning {

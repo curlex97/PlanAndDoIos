@@ -7,7 +7,11 @@
 //
 
 #import "BaseViewController.h"
+#import "AddTaskViewController.h"
 
 @interface DescriptionViewController : BaseViewController
+
+@property AddTaskViewController* parentController;
+@property NSString* text;
 
 @end

@@ -65,9 +65,9 @@
 - (IBAction)signInTapped:(id)sender
 {
     
-    [[ApplicationManager userApplicationManager] loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool fl) {
-       // if(fl)
-        {
+//    [[ApplicationManager userApplicationManager] loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool fl) {
+//       // if(fl)
+//        {
             AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
             
             if(tableTaskViewController)
@@ -75,8 +75,8 @@
                 tableTaskViewController.title=@"Today";
                 [self presentViewController:tableTaskViewController animated:YES completion:nil];
             }
-        }
-    }];
+//        }
+//    }];
     
     
 }

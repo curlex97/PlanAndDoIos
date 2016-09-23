@@ -49,6 +49,7 @@
 		28214C931D93D36E0012B1C7 /* CategoryApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C921D93D36E0012B1C7 /* CategoryApplicationManager.m */; };
 		28214C971D93D9420012B1C7 /* SyncApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C961D93D9420012B1C7 /* SyncApiManager.m */; };
 		28214C9B1D93E2D60012B1C7 /* SyncApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C9A1D93E2D60012B1C7 /* SyncApplicationManager.m */; };
+		2822CBF71D9554CE00779984 /* NSDate+LocalTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 2822CBF61D9554CE00779984 /* NSDate+LocalTime.m */; };
 		282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282C28C51D829A600061761E /* AMSideBarViewController.m */; };
 		284F9C3B1D8DCFF500B0853F /* TasksCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 284F9C3A1D8DCFF500B0853F /* TasksCoreDataManager.m */; };
 		28616D4A1D93F90D00BB2CCE /* ACNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28616D491D93F90D00BB2CCE /* ACNetworkManager.m */; };
@@ -171,6 +172,8 @@
 		28214C961D93D9420012B1C7 /* SyncApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncApiManager.m; sourceTree = "<group>"; };
 		28214C991D93E2D60012B1C7 /* SyncApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncApplicationManager.h; sourceTree = "<group>"; };
 		28214C9A1D93E2D60012B1C7 /* SyncApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncApplicationManager.m; sourceTree = "<group>"; };
+		2822CBF51D9554CE00779984 /* NSDate+LocalTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+LocalTime.h"; sourceTree = "<group>"; };
+		2822CBF61D9554CE00779984 /* NSDate+LocalTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+LocalTime.m"; sourceTree = "<group>"; };
 		282C28C41D829A600061761E /* AMSideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSideBarViewController.h; sourceTree = "<group>"; };
 		282C28C51D829A600061761E /* AMSideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSideBarViewController.m; sourceTree = "<group>"; };
 		284F9C391D8DCFF500B0853F /* TasksCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksCoreDataManager.h; sourceTree = "<group>"; };
@@ -535,6 +538,7 @@
 			isa = PBXGroup;
 			children = (
 				2803AFA91D8ABA8F0032ACFB /* ScaleImage */,
+				2822CBF81D95550700779984 /* LocalTime */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -647,6 +651,15 @@
 				28A36BB11D81887B0092FEFD /* AppDelegate.m */,
 			);
 			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		2822CBF81D95550700779984 /* LocalTime */ = {
+			isa = PBXGroup;
+			children = (
+				2822CBF51D9554CE00779984 /* NSDate+LocalTime.h */,
+				2822CBF61D9554CE00779984 /* NSDate+LocalTime.m */,
+			);
+			name = LocalTime;
 			sourceTree = "<group>";
 		};
 		282C28C71D829C1F0061761E /* AMSideBarViewController */ = {
@@ -1072,6 +1085,7 @@
 				2803AF8E1D8AA8ED0032ACFB /* FormatTimeViewController.m in Sources */,
 				28214C8B1D93D33E0012B1C7 /* UserApplicationManager.m in Sources */,
 				2786E7AD1D881507009BDB2A /* LoginViewController.m in Sources */,
+				2822CBF71D9554CE00779984 /* NSDate+LocalTime.m in Sources */,
 				2803AF941D8AAB1D0032ACFB /* StartPageViewController.m in Sources */,
 				28AB85631D8F483D00D93AB7 /* SubTasksCoreDataManager.m in Sources */,
 				278BAA521D897A36002D38CF /* PriorityCell.m in Sources */,

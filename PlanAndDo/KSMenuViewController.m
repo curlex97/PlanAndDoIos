@@ -13,9 +13,10 @@
 #import "SettingsViewController.h"
 #import "EditTaskViewController.h"
 #import "TabletasksViewController.h"
+#import "ApplicationManager.h"
 
 @interface KSMenuViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
-@property (nonatomic)NSMutableArray<NSString *> * categories;
+@property (nonatomic)NSMutableArray<KSCategory *> * categories;
 @property (nonatomic)UISearchBar * searchBar;
 @property (nonatomic)UITextField * addCategoryTextField;
 @property (nonatomic)UIView * addCategoryAccessoryView;
@@ -150,7 +151,7 @@
     {
         UILabel * label=[[UILabel alloc] initWithFrame:CGRectMake(55, 8, 100, 30)];
         label.textColor=[UIColor whiteColor];
-        label.text=self.categories[indexPath.row];
+        label.text=[self.categories[indexPath.row] name];
         [cell addSubview:label];
         if(indexPath.row==self.categories.count-1)
         {
@@ -195,7 +196,10 @@
         for(UIViewController* child in [frontNavigationViewController childViewControllers])
             [child.navigationController popViewControllerAnimated:YES];
         
-        [frontNavigationViewController pushViewController:[[EditTaskViewController alloc] init] animated:NO];
+        EditTaskViewController* editTaskVC = [[EditTaskViewController alloc] init];
+        
+        
+        [frontNavigationViewController pushViewController:editTaskVC animated:NO];
         //[self.parentController setNewFrontViewController:[[UINavigationController alloc] initWithRootViewController:[[EditTaskViewController alloc] init]]];
         
         self.parentController.hiden=NO;
@@ -205,12 +209,13 @@
     
     else if(indexPath.section == 1)
     {
-        NSString* str = self.categories[indexPath.row];
+        KSCategory* category = self.categories[indexPath.row];
         TabletasksViewController * categoryTasksViewController=[[TabletasksViewController alloc] init];
         
         if(categoryTasksViewController)
         {
-            categoryTasksViewController.title=str;
+            categoryTasksViewController.title=[category name];
+            categoryTasksViewController.category = category;
             UINavigationController* categoryTasksNav = [[UINavigationController alloc] initWithRootViewController:categoryTasksViewController];
             [self.parentController setNewFrontViewController:categoryTasksNav];
         }
@@ -277,7 +282,7 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    [self.categories addObject:textField.text];
+  //  [self.categories addObject:textField.text];
     textField.text=@"";
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.categories.count-1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
     self.parentController.hiden=NO;
@@ -306,7 +311,7 @@
         
         UIAlertAction * editAction=[UIAlertAction actionWithTitle:@"Edit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
         {
-            self.addCategoryTextField.text=self.categories[indexPath.row];
+            self.addCategoryTextField.text=[self.categories[indexPath.row] name];
             [self addCategoryDidTap];
         }];
         
@@ -357,7 +362,9 @@
     [[UITextField appearanceWhenContainedInInstancesOfClasses:[NSArray arrayWithObject:[UISearchBar class]]] setTextColor:[UIColor whiteColor]];
     [self.refresh removeFromSuperview];
     [self.tableView setSeparatorColor:[UIColor colorWithRed:163.0/255.0 green:167.0/255.0 blue:169.0/255.0 alpha:0.35]];
-    self.categories=[NSMutableArray arrayWithObjects:@"Personal",@"Shopping",@"Working", nil];
+    
+    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    
     self.view.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
     self.tableView.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
     [self.view removeConstraint:self.top];

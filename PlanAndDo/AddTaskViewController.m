@@ -13,6 +13,7 @@
 #import "TaskListViewController.h"
 #import "DateAndTimeViewController.h"
 #import "KSSettingsCell.h"
+#import "ApplicationManager.h"
 
 @interface AddTaskViewController ()
 @property (nonatomic)UISegmentedControl * segment;
@@ -53,12 +54,12 @@
             break;
         case 1:
             cell.paramNameLabel.text=@"Category";
+            cell.paramValueLabel.text = self.category.name;
             break;
         case 2:
             if(self.segment.selectedSegmentIndex==0)
             {
                 cell.paramNameLabel.text=@"Description";
-                cell.accessoryType=UITableViewCellAccessoryNone;
             }
             else
             {
@@ -150,6 +151,7 @@
 -(void)categoryDidTap
 {
     SelectCategoryViewController * categorySelect=[[SelectCategoryViewController alloc] init];
+    categorySelect.parentController = self;
     [self.navigationController pushViewController:categorySelect animated:YES];
 }
 
@@ -163,6 +165,8 @@
     else
     {
         DescriptionViewController * descController=[[DescriptionViewController alloc] init];
+        descController.parentController = self;
+        descController.text = self.taskDesc;
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:descController] animated:YES completion:nil];
     }
 }
@@ -170,6 +174,8 @@
 -(void)dateTimeDidTap
 {
     DateAndTimeViewController * controller = [[DateAndTimeViewController alloc] init];
+    controller.completionTime = self.completionTime;
+    controller.parentController = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -200,6 +206,11 @@
     //self.pan.delegate=self;
     self.headerText=@"Head";
     self.title=@"Add";
+    if(!self.completionTime)self.completionTime = [NSDate date];
+    
+    UIBarButtonItem * doneItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneDidTap)];
+    doneItem.tintColor=[UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = doneItem;
     
     UIView * footerPriorityView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 56)];
     UILabel * priorityLable=[[UILabel alloc] initWithFrame:CGRectMake(15, 17, 62, 21)];
@@ -229,4 +240,24 @@
     
     self.methods=[NSArray arrayWithObjects:@"headDidTap",@"categoryDidTap",@"listOrDescriptionDidTap",@"dateTimeDidTap", nil];
 }
+
+-(void)doneDidTap
+{
+    if(self.segment.selectedSegmentIndex == 0)
+    {
+        KSTaskPriority priority = KSTaskDefaultPriority;
+        
+        switch ((int)self.slider.value) {
+            case 0:priority = KSTaskDefaultPriority; break;
+            case 1: priority = KSTaskHighPriority; break;
+            case 2: priority = KSTaskVeryHighPriority; break;
+        }
+        
+        KSTask* task = [[KSTask alloc] initWithID:0 andName:self.headerText andStatus:NO andTaskReminderTime:self.completionTime andTaskPriority:priority andCategoryID:(int)self.category.ID andCreatedAt:[NSDate date] andCompletionTime:self.completionTime andSyncStatus:0 andTaskDescription:self.taskDesc];
+        [[ApplicationManager tasksApplicationManager] addTask: task];
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 @end

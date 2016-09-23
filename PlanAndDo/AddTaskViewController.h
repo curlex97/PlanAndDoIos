@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseTableViewController.h"
-@interface AddTaskViewController : BaseTableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+#import "ApplicationManager.h"
 
+@interface AddTaskViewController : BaseTableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@property KSCategory* category;
+@property NSDate* completionTime;
+@property NSString* taskDesc;
 @end
