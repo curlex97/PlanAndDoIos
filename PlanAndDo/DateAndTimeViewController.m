@@ -116,7 +116,12 @@
 
 -(void)doneDidTap
 {
-    self.parentController.completionTime = self.dateTimePicker.date;
+    if([self.parentController isKindOfClass:[AddTaskViewController class]])
+    ((AddTaskViewController*)self.parentController).completionTime = self.dateTimePicker.date;
+    
+    if([self.parentController isKindOfClass:[EditTaskViewController class]])
+        ((EditTaskViewController*)self.parentController).completionTime = self.dateTimePicker.date;
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

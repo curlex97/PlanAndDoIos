@@ -8,9 +8,10 @@
 
 #import "BaseTableViewController.h"
 #import "AddTaskViewController.h"
+#import "EditTaskViewController.h"
 
 @interface SelectCategoryViewController : BaseTableViewController
 
-@property AddTaskViewController* parentController;
+@property UIViewController* parentController;
 
 @end

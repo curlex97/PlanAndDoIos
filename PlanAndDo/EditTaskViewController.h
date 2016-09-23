@@ -10,7 +10,11 @@
 #import "BaseTableViewController.h"
 #import "KSTask.h"
 #import "KSTaskCollection.h"
+#import "KSCategory.h"
 
 @interface EditTaskViewController : BaseTableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property BaseTask* task;
+@property KSCategory* category;
+@property NSDate* completionTime;
+@property NSString* taskDesc;
 @end

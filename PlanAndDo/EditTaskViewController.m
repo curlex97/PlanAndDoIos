@@ -14,7 +14,7 @@
 #import "DateAndTimeViewController.h"
 #import "ApplicationManager.h"
 #import "KSSettingsCell.h"
-
+#import "ApplicationManager.h"
 
 @interface EditTaskViewController ()
 @property (nonatomic)UISegmentedControl * segment;
@@ -56,15 +56,11 @@
             break;
         case 1:
             cell.paramNameLabel.text=@"Category";
-            cell.paramValueLabel.text = [[[ApplicationManager categoryApplicationManager] categoryWithId:self.task.categoryID] name];
             break;
         case 2:
             if([self.task isKindOfClass:[KSTask class]])
             {
-                KSTask* realTask = (KSTask*)self.task;
                 cell.paramNameLabel.text=@"Description";
-                cell.paramValueLabel.text = realTask.taskDescription;
-                cell.accessoryType=UITableViewCellAccessoryNone;
             }
             else
             {
@@ -156,6 +152,7 @@
 -(void)categoryDidTap
 {
     SelectCategoryViewController * categorySelect=[[SelectCategoryViewController alloc] init];
+    categorySelect.parentController = self;
     [self.navigationController pushViewController:categorySelect animated:YES];
 }
 
@@ -169,6 +166,8 @@
     else
     {
         DescriptionViewController * descController=[[DescriptionViewController alloc] init];
+        descController.parentController = self;
+        descController.text = self.taskDesc;
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:descController] animated:YES completion:nil];
     }
 }
@@ -176,6 +175,8 @@
 -(void)dateTimeDidTap
 {
     DateAndTimeViewController * controller = [[DateAndTimeViewController alloc] init];
+    controller.completionTime = self.completionTime;
+    controller.parentController = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -183,6 +184,27 @@
 
 -(void)doneTapped
 {
+    if([self.task isKindOfClass:[KSTask class]])
+    {
+        KSTaskPriority priority = KSTaskDefaultPriority;
+        
+        switch ((int)self.slider.value) {
+            case 0:priority = KSTaskDefaultPriority; break;
+            case 1: priority = KSTaskHighPriority; break;
+            case 2: priority = KSTaskVeryHighPriority; break;
+        }
+        
+        KSTask* realTask = (KSTask*)self.task;
+        realTask.completionTime = self.completionTime;
+        realTask.taskDescription = self.taskDesc;
+        realTask.categoryID = (int)self.category.ID;
+        realTask.priority = priority;
+        realTask.name = self.headerText;
+        
+        [[ApplicationManager tasksApplicationManager] updateTask:realTask];
+    }
+    
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -195,6 +217,18 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.completionTime = self.task.completionTime;
+    if([self.task isKindOfClass:[KSTask class]]) self.taskDesc = ((KSTask*)self.task).taskDescription;
+    self.category = [[ApplicationManager categoryApplicationManager] categoryWithId:self.task.categoryID];
+    
+    switch (self.task.priority) {
+        case KSTaskDefaultPriority: self.slider.value = 0; break;
+        case KSTaskHighPriority: self.slider.value = 1; break;
+        case KSTaskVeryHighPriority: self.slider.value = 2; break;
+    }
+    
+    self.headerText = self.task.name;
     
     //self.pan=[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gesturePan)];
     //self.pan.delegate=self;

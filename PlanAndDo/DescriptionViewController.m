@@ -37,7 +37,12 @@
 
 -(void)doneDidTap
 {
-    self.parentController.taskDesc = self.textView.text;
+    if([self.parentController isKindOfClass:[AddTaskViewController class]])
+    ((AddTaskViewController*)self.parentController).taskDesc = self.textView.text;
+    
+    if([self.parentController isKindOfClass:[EditTaskViewController class]])
+        ((EditTaskViewController*)self.parentController).taskDesc = self.textView.text;
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

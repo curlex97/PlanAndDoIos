@@ -37,7 +37,12 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.parentController.category = self.categories[indexPath.row];
+    if([self.parentController isKindOfClass:[AddTaskViewController class]])
+    ((AddTaskViewController*)self.parentController).category = self.categories[indexPath.row];
+    
+    if([self.parentController isKindOfClass:[EditTaskViewController class]])
+        ((EditTaskViewController*)self.parentController).category = self.categories[indexPath.row];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

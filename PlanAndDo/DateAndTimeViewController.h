@@ -8,10 +8,11 @@
 
 #import "BaseViewController.h"
 #import "AddTaskViewController.h"
+#import "EditTaskViewController.h"
 
 @interface DateAndTimeViewController : BaseViewController
 
 @property NSDate* completionTime;
-@property AddTaskViewController* parentController;
+@property UIViewController* parentController;
 
 @end
