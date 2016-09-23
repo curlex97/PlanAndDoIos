@@ -22,6 +22,8 @@
 @property (nonatomic)UIView * addCategoryAccessoryView;
 @property (nonatomic)AMSideBarViewController * parentController;
 @property (nonatomic)UILongPressGestureRecognizer * longPress;
+@property NSMutableArray* allTasks;
+@property NSMutableArray* tableTasks;
 @end
 
 @implementation KSMenuViewController
@@ -46,7 +48,7 @@
     }
     else
     {
-        result = 3;
+        result = self.tableTasks.count;
     }
     return result;
 }
@@ -131,18 +133,59 @@
     if(self.state==KSMenuStateSearch)
     {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSTaskCell"owner:self options:nil];
-        TaskTableViewCell * customCell=nib[0];
-        customCell.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
-        customCell.taskTimeLabel.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
+        TaskTableViewCell * cell=nib[0];
+        cell.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
+        cell.taskTimeLabel.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
         
-        customCell.taskTimeLabel.textColor=[UIColor whiteColor];
-        customCell.taskDateLabel.textColor=[UIColor whiteColor];
-        customCell.taskHeaderLabel.textColor=[UIColor whiteColor];
-        customCell.taskPriorityLabel.textColor=[UIColor redColor];
-        customCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        cell.taskTimeLabel.textColor=[UIColor whiteColor];
+        cell.taskDateLabel.textColor=[UIColor whiteColor];
+        cell.taskHeaderLabel.textColor=[UIColor whiteColor];
+        cell.taskPriorityLabel.textColor=[UIColor redColor];
+        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         
-        [customCell setSelectedBackgroundView:bgColorView];
-        return customCell;
+        [cell setSelectedBackgroundView:bgColorView];
+       
+        BaseTask* task = self.tableTasks[indexPath.row];
+        
+        cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"Complete" backgroundColor:[UIColor greenColor] callback:^BOOL(MGSwipeTableCell *sender) {
+            NSLog(@"Complete");
+            //rows --;
+            // [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [tableView reloadData];
+            });
+            return YES;
+        }]];
+        cell.leftSwipeSettings.transition = MGSwipeDirectionLeftToRight;
+        
+        cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
+            NSLog(@"Delete");
+            // rows--;
+            //  [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [tableView reloadData];
+            });
+            
+            return YES;
+        }]];
+        
+        cell.rightSwipeSettings.transition = MGSwipeDirectionRightToLeft;
+        cell.taskHeaderLabel.text = task.name;
+        switch (task.priority) {
+            case KSTaskHighPriority:cell.taskPriorityLabel.text = @"Normal priority"; break;
+            case KSTaskDefaultPriority:cell.taskPriorityLabel.text = @"Default priority"; break;
+            case KSTaskVeryHighPriority:cell.taskPriorityLabel.text = @"High priority"; break;
+        }
+        
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:task.completionTime];
+        
+        cell.taskDateLabel.text = [NSString stringWithFormat:@"%li/%li/%li", [components day], [components month], [components year]];
+        cell.taskTimeLabel.text = [NSString stringWithFormat:@"%li:%li", [components hour], [components minute]];
+        
+        return cell;
+
+        
+        
     }
     else
     {
@@ -196,9 +239,11 @@
         for(UIViewController* child in [frontNavigationViewController childViewControllers])
             [child.navigationController popViewControllerAnimated:YES];
         
+        BaseTask* task = self.tableTasks[indexPath.row];
+        
         EditTaskViewController* editTaskVC = [[EditTaskViewController alloc] init];
-        
-        
+        editTaskVC.title = @"Edit";
+        editTaskVC.task = task;
         [frontNavigationViewController pushViewController:editTaskVC animated:NO];
         //[self.parentController setNewFrontViewController:[[UINavigationController alloc] initWithRootViewController:[[EditTaskViewController alloc] init]]];
         
@@ -260,11 +305,45 @@
     self.parentController.hiden=YES;
     searchBar.frame=CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, [UIScreen mainScreen].bounds.size.width-searchBar.frame.origin.x*2, searchBar.frame.size.height);
     searchBar.showsCancelButton=YES;
+    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasks]];
     
-
+    if(searchBar.text.length > 0)
+    {
+        self.tableTasks = [NSMutableArray array];
+        for(BaseTask* task in self.allTasks)
+        {
+            if(task && ([task.name.lowercaseString containsString:searchBar.text.lowercaseString]))
+            {
+                [self.tableTasks addObject:task];
+            }
+        }
+        
+    }
+    else self.tableTasks = [NSMutableArray arrayWithArray:self.allTasks];
+    [self.tableView reloadData];
+    
     [self.tableView reloadData];
     
     return YES;
+}
+
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if(searchText.length > 0)
+    {
+        self.tableTasks = [NSMutableArray array];
+        for(BaseTask* task in self.allTasks)
+        {
+            if(task && ([task.name.lowercaseString containsString:searchText.lowercaseString]))
+            {
+                [self.tableTasks addObject:task];
+            }
+        }
+        
+    }
+    else self.tableTasks = [NSMutableArray arrayWithArray:self.allTasks];
+    [self.tableView reloadData];
+
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

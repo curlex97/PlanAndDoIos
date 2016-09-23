@@ -253,7 +253,10 @@
             case 2: priority = KSTaskVeryHighPriority; break;
         }
         
-        KSTask* task = [[KSTask alloc] initWithID:0 andName:self.headerText andStatus:NO andTaskReminderTime:self.completionTime andTaskPriority:priority andCategoryID:(int)self.category.ID andCreatedAt:[NSDate date] andCompletionTime:self.completionTime andSyncStatus:0 andTaskDescription:self.taskDesc];
+        NSDate *now = [NSDate date];
+        NSUInteger Id = now.timeIntervalSince1970;
+        
+        KSTask* task = [[KSTask alloc] initWithID:Id  andName:self.headerText andStatus:NO andTaskReminderTime:self.completionTime andTaskPriority:priority andCategoryID:(int)self.category.ID andCreatedAt:[NSDate date] andCompletionTime:self.completionTime andSyncStatus:(int)Id andTaskDescription:self.taskDesc];
         [[ApplicationManager tasksApplicationManager] addTask: task];
     }
     

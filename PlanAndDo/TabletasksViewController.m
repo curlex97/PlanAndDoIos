@@ -73,6 +73,7 @@
 {
     EditTaskViewController * editTaskViewController=[[EditTaskViewController alloc] init];
     editTaskViewController.task = self.tasks[indexPath.row];
+    editTaskViewController.title = @"Edit";
     [self.navigationController pushViewController:editTaskViewController animated:YES];
 }
 
