@@ -11,6 +11,7 @@
         <attribute name="date_format" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="local_sync" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="page_type" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="settings_sync_status" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="start_page" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="time_format" optional="YES" attributeType="String" syncable="YES"/>
@@ -50,7 +51,7 @@
     </entity>
     <elements>
         <element name="Category" positionX="-423" positionY="141" width="128" height="120"/>
-        <element name="Settings" positionX="-254" positionY="291" width="128" height="135"/>
+        <element name="Settings" positionX="-254" positionY="291" width="128" height="150"/>
         <element name="Subtask" positionX="-423" positionY="279" width="128" height="150"/>
         <element name="Task" positionX="-576" positionY="144" width="128" height="240"/>
         <element name="User" positionX="-261" positionY="144" width="128" height="150"/>
