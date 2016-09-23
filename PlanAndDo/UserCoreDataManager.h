@@ -20,5 +20,6 @@
 // test 1 OK
 -(void)updateUser:(KSAuthorisedUser*)user;
 
+-(void)cleanTable;
 
 @end

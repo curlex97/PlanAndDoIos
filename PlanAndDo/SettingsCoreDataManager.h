@@ -21,4 +21,7 @@
 // test 1 OK
 -(void)updateSettings:(UserSettings*)settings;
 
+
+-(void)cleanTable;
+
 @end

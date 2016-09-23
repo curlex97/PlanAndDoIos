@@ -38,4 +38,6 @@
 
 -(void)deleteTask:(BaseTask*)task;
 
+-(void) cleanTable;
+
 @end

@@ -38,4 +38,9 @@
     [[[CategoryApiManager alloc] init] deleteCategoryAsync:category forUser:nil completion:nil];
 }
 
+-(void) cleanTable
+{
+    return [[[CategoryCoreDataManager alloc] init] cleanTable];
+}
+
 @end

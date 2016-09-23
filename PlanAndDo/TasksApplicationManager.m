@@ -68,4 +68,9 @@
     [[[TasksApiManager alloc] init] deleteTaskAsync:task forUser:nil completion:nil];
 }
 
+-(void) cleanTable
+{
+    return [[[TasksCoreDataManager alloc] init] cleanTable];
+}
+
 @end

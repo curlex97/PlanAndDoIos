@@ -38,6 +38,8 @@
         
         if([status containsString:@"suc"])
         {
+            [ApplicationManager cleanLocalDataBase];
+            
             NSUInteger ID = [[dictionary valueForKeyPath:@"data.users.user_id"] integerValue];
             NSString* createDatestr = [dictionary valueForKeyPath:@"data.users.created_at"];
             NSString* lastVisitDatestr = [dictionary valueForKeyPath:@"data.users.lastvisit_date"];
@@ -136,6 +138,11 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *path = [documentsDirectory stringByAppendingPathComponent:@"token.txt"];
     return [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+}
+
+-(void) cleanTable
+{
+    return [[[UserCoreDataManager alloc] init] cleanTable];
 }
 
 @end

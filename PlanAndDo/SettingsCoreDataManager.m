@@ -98,4 +98,11 @@
     
 }
 
+
+-(void)cleanTable
+{
+    [super cleanTable:@"Settings"];
+}
+
+
 @end

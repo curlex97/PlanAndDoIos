@@ -22,4 +22,6 @@
 
 -(void)deleteSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task;
 
+-(void) cleanTable;
+
 @end

@@ -23,4 +23,6 @@
 
 -(KSCategory*)categoryWithId:(int)Id;
 
+-(void) cleanTable;
+
 @end

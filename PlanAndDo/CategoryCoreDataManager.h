@@ -25,5 +25,6 @@
 // test 1 OK
 -(void)deleteCateroty:(KSCategory*)category;
 
+-(void)cleanTable;
 
 @end

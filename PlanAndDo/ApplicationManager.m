@@ -40,4 +40,13 @@
     return [[SyncApplicationManager alloc] init];
 }
 
++(void)cleanLocalDataBase
+{
+    [[[CategoryApplicationManager alloc] init] cleanTable];
+    [[[SettingsApplicationManager alloc] init] cleanTable];
+    [[[UserApplicationManager alloc] init] cleanTable];
+    [[[SubTasksApplicationManager alloc] init] cleanTable];
+    [[[TasksApplicationManager alloc] init] cleanTable];
+}
+
 @end

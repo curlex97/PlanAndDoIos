@@ -32,6 +32,20 @@
 }
 
 
-
+-(void)cleanTable:(NSString *)name
+{
+    NSError* error = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:name];
+    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if(!error)
+    {
+        for(NSManagedObject* managedObject in results)
+        {
+            [self.managedObjectContext deleteObject:managedObject];
+        }
+        [self.managedObjectContext save:nil];
+    }
+}
 
 @end

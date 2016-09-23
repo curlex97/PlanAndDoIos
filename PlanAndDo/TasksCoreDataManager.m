@@ -333,6 +333,11 @@
 }
 
 
+-(void)cleanTable
+{
+    [super cleanTable:@"Task"];
+}
+
 
 /*
  let managedContext = DataController().managedObjectContext

@@ -47,4 +47,6 @@
 // test 1 OK
 -(void)deleteTask:(BaseTask*)task;
 
+-(void)cleanTable;
+
 @end

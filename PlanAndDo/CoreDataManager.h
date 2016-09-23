@@ -14,5 +14,7 @@
 
 @property NSManagedObjectContext* managedObjectContext;
 
+-(void) cleanTable:(NSString*)name;
+
 @end
 

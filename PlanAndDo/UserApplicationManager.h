@@ -23,4 +23,6 @@
 
 -(void) registerAsyncWithEmail:(NSString*)email andUserName:(NSString*)userName andPassword:(NSString*)password completion:(void (^)(bool))completed;
 
+-(void) cleanTable;
+
 @end

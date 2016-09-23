@@ -111,5 +111,9 @@
     }
 }
 
+-(void)cleanTable
+{
+    [super cleanTable:@"Subtask"];
+}
 
 @end

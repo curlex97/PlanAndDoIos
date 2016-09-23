@@ -116,5 +116,10 @@
     
 }
 
+-(void)cleanTable
+{
+    [super cleanTable:@"Category"];
+}
+
 
 @end

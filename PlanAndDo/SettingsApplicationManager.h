@@ -19,4 +19,6 @@
 
 -(void)updateSettings:(UserSettings*)settings;
 
+-(void) cleanTable;
+
 @end

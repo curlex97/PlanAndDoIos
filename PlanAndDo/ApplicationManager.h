@@ -29,4 +29,6 @@
 
 +(SyncApplicationManager*) syncApplicationManager;
 
++(void) cleanLocalDataBase;
+
 @end

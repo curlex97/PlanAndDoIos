@@ -97,4 +97,9 @@
 
 }
 
+-(void)cleanTable
+{
+    [super cleanTable:@"User"];
+}
+
 @end

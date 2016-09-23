@@ -27,4 +27,9 @@
     [[[SettingsApiManager alloc] init] updateSettingsAsync:settings forUser:nil completion:nil];
 }
 
+-(void) cleanTable
+{
+    return [[[SettingsCoreDataManager alloc] init] cleanTable];
+}
+
 @end

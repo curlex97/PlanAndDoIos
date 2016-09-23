@@ -33,4 +33,9 @@
     [[[SubTasksApiManager alloc] init] deleteSubTaskAsync:subTask fromTask:task forUser:nil completion:nil];
 }
 
+-(void) cleanTable
+{
+    return [[[SubTasksCoreDataManager alloc] init] cleanTable];
+}
+
 @end
