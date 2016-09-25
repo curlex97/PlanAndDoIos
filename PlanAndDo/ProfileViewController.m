@@ -10,7 +10,7 @@
 #import "UIImage+ACScaleImage.h"
 #import "AMSideBarViewController.h"
 #import "KSSettingsCell.h"
-
+#import "ChangeEmailViewController.h"
 @interface ProfileViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic)NSArray<NSString *> * items;
 @property (nonatomic)NSString * userName;
@@ -80,15 +80,18 @@
     }
     else if(indexPath.row==2)
     {
-
+        ChangeEmailViewController * changeEmail=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ChangeEmailViewController"];
+        
+        if(changeEmail)
+        {
+            [self.navigationController pushViewController:changeEmail animated:YES];
+        }
     }
     else if(indexPath.row==3)
     {
         //delete all tasks
         UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Delete all tasks and categories" message:@"If you remove all categories and tasks, you will be returned to factory settings. Do you want to continue?" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
-                                  {
-                                  }];
+        UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction * continueAction=[UIAlertAction actionWithTitle:@"Continue" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
         {
             UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Enter password" message:@"" preferredStyle:UIAlertControllerStyleAlert];
@@ -113,6 +116,7 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
+
 -(void)menuTapped
 {
     AMSideBarViewController * sider=(AMSideBarViewController *)self.navigationController.parentViewController;

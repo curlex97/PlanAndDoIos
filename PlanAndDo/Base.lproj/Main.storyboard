@@ -336,6 +336,9 @@
                                         <state key="normal" title="Submit">
                                             <color key="titleColor" red="0.98000001907348633" green="0.98000001907348633" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="submitDidTap:" destination="aRq-Nf-985" eventType="touchUpInside" id="3IE-Rx-HwC"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="your email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7um-Ae-LEd">
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -381,9 +384,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Create account" id="kJy-4C-t96"/>
                     <connections>
+                        <outlet property="backTextFieldView" destination="ZBC-8T-OeI" id="fPF-C8-bqN"/>
                         <outlet property="emailTextField" destination="L4K-ON-hur" id="XnT-ov-9k4"/>
                         <outlet property="oldEmailTextField" destination="7um-Ae-LEd" id="wkg-e4-j6K"/>
                         <outlet property="reenterEmailTextField" destination="CCN-cQ-LEv" id="Pj8-EY-Gtm"/>
+                        <outlet property="submitButton" destination="3JF-S6-p4U" id="zY1-9J-RIZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rXq-E7-Y4q" sceneMemberID="firstResponder"/>
