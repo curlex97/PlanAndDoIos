@@ -10,5 +10,6 @@
 
 @interface NewPasswordViewController : BaseAuthViewController
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UIView *backTextFieldView;
 
 @end
