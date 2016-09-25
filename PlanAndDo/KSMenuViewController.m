@@ -642,9 +642,10 @@
          }
      }];
 }
-
+//test
 -(void)keyboardWillShown:(NSNotification*) not
 {
+    NSLog(@"dsad");
     [self.view addGestureRecognizer:self.tap];
     self.parentController.hiden=YES;
     [UIView animateWithDuration:0.5 animations:^

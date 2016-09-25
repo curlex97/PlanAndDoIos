@@ -14,13 +14,15 @@
 
 @implementation ProfileViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    self.title=@"Profile";
     // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+    [super didReceiveMemoryWarning];//
     // Dispose of any resources that can be recreated.
 }
 
