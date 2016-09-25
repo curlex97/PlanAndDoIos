@@ -55,8 +55,10 @@
             NSString* dateFormat = [dictionary valueForKeyPath:@"data.settings.date_format"];
             NSString* timeFormat = [dictionary valueForKeyPath:@"data.settings.time_format"];
             NSString* pageType = [dictionary valueForKeyPath:@"data.settings.page_type"];
+            NSString* startDay = [dictionary valueForKeyPath:@"data.settings.start_day"];
 
-            UserSettings *settings = [[UserSettings alloc] initWithID:settingsID andStartPage:startPage andDateFormat:dateFormat andPageType:pageType andTimeFormat:timeFormat andSyncStatus:syncStatus];
+            
+            UserSettings *settings = [[UserSettings alloc] initWithID:settingsID andStartPage:startPage andDateFormat:dateFormat andPageType:pageType andTimeFormat:timeFormat andStartDay:startDay andSyncStatus:syncStatus];
             
             ///////////////////////////
             

@@ -8,8 +8,10 @@
 
 #import "StartDayViewController.h"
 #import "KSCheckSettingsTableViewCell.h"
+#import "ApplicationManager.h"
 
 @interface StartDayViewController () <UITableViewDelegate, UITableViewDataSource>
+@property UserSettings* settings;
 
 @end
 
@@ -21,6 +23,9 @@
     self.title=@"Start day";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -53,5 +58,18 @@
     return 50;
 }
 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    NSString* day = indexPath.row ? @"Sunday" : @"Monday";
+    
+    UserSettings* updatedSettings = [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.settings.startPage andDateFormat:self.settings.dateFormat andPageType:self.settings.pageType andTimeFormat:self.settings.timeFormat andStartDay:day andSyncStatus:[[NSDate date] timeIntervalSince1970]];
+    
+    [[ApplicationManager settingsApplicationManager] updateSettings:updatedSettings];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 
 @end

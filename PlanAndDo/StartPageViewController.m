@@ -72,8 +72,8 @@
 {
 
     UserSettings* updatedSettings = self.segment.selectedSegmentIndex ?
-    [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.boxes[indexPath.row] andDateFormat:self.settings.dateFormat andPageType:@"box" andTimeFormat:self.settings.timeFormat andSyncStatus:[[NSDate date] timeIntervalSince1970]] :
-    [[UserSettings alloc] initWithID:self.settings.ID andStartPage:((KSCategory*)self.categories[indexPath.row]).name andDateFormat:self.settings.dateFormat andPageType:@"category" andTimeFormat:self.settings.timeFormat andSyncStatus:[[NSDate date] timeIntervalSince1970]];
+    [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.boxes[indexPath.row] andDateFormat:self.settings.dateFormat andPageType:@"box" andTimeFormat:self.settings.timeFormat andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]] :
+    [[UserSettings alloc] initWithID:self.settings.ID andStartPage:((KSCategory*)self.categories[indexPath.row]).name andDateFormat:self.settings.dateFormat andPageType:@"category" andTimeFormat:self.settings.timeFormat andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]];
     
     [[ApplicationManager settingsApplicationManager] updateSettings:updatedSettings];
  

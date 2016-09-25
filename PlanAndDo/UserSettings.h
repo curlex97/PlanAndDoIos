@@ -14,10 +14,13 @@
 @property (nonatomic)NSString * dateFormat;
 @property (nonatomic)NSString * timeFormat;
 @property (nonatomic)NSString * pageType;
+@property (nonatomic)NSString * startDay;
 
 -(instancetype)initWithID:(NSUInteger)ID andStartPage:(NSString *)startPage
                    andDateFormat:(NSString *)dateFormat
               andPageType:(NSString*)pageType
-                   andTimeFormat:(NSString *)timeFormat andSyncStatus:(int)syncStatus;
+                   andTimeFormat:(NSString *)timeFormat
+              andStartDay:(NSString*)startDay
+andSyncStatus:(int)syncStatus;
 
 @end
