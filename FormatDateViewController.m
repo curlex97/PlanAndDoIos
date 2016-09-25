@@ -8,8 +8,10 @@
 
 #import "FormatDateViewController.h"
 #import "KSCheckSettingsTableViewCell.h"
+#import "ApplicationManager.h"
 
 @interface FormatDateViewController () <UITableViewDelegate, UITableViewDataSource>
+@property UserSettings* settings;
 
 @end
 
@@ -21,6 +23,9 @@
     self.title=@"Format date";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -50,6 +55,19 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    NSString* formatDate = indexPath.row ? @"mm/dd/yy" : @"dd/mm/yy";
+    
+    UserSettings* updatedSettings = [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.settings.startPage andDateFormat:formatDate andPageType:self.settings.pageType andTimeFormat:self.settings.timeFormat andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]];
+    
+    [[ApplicationManager settingsApplicationManager] updateSettings:updatedSettings];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 @end

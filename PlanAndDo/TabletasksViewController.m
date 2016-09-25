@@ -14,6 +14,8 @@
 #import "EditTaskViewController.h"
 #import "ApplicationManager.h"
 
+static bool firstLoad = true;
+
 @interface TabletasksViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic)UISegmentedControl * segment;
 @end
@@ -97,20 +99,56 @@
     [super viewDidAppear:animated];
     self.navigationController.toolbarHidden=NO;
 }
+
+-(void)setStartPageForLoad
+{
+    if(!firstLoad) return;
+    
+    NSString* startPage = [[[[ApplicationManager userApplicationManager] authorisedUser] settings] startPage];
+    NSArray* boxes = [[NSArray alloc] initWithObjects:@"Today", @"Tomorrow", @"Week", @"Backlog", @"Archive", nil];
+    for(NSString* box in boxes)
+    {
+        if([box isEqualToString:startPage])
+        {
+            if([startPage isEqualToString:@"Today"]) self.boxType = KSBoxTypeToday;
+            if([startPage isEqualToString:@"Tomorrow"]) self.boxType = KSBoxTypeTomorrow;
+            if([startPage isEqualToString:@"Week"]) self.boxType = KSBoxTypeWeek;
+            if([startPage isEqualToString:@"Backlog"]) self.boxType = KSBoxTypeBacklog;
+            if([startPage isEqualToString:@"Archive"]) self.boxType = KSBoxTypeArchive;
+            return;
+        }
+    }
+    
+    for(KSCategory* cat in [[ApplicationManager categoryApplicationManager] allCategories])
+    {
+        if([cat.name isEqualToString:startPage])
+        {
+            self.category = cat;
+            return;
+        }
+    }
+    firstLoad = false;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"Lets do it !");
+    
+    [self setStartPageForLoad];
+    
     if(!self.category)
     {
         switch (self.boxType) {
-            case KSBoxTypeToday: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForToday]]; break;
-            case KSBoxTypeTomorrow: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForTomorrow]]; break;
-            case KSBoxTypeWeek: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForWeek]]; break;
-            case KSBoxTypeArchive: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForArchive]]; break;
-            case KSBoxTypeBacklog: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForBacklog]]; break;
+            case KSBoxTypeToday: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForToday]]; self.title = @"Today"; break;
+            case KSBoxTypeTomorrow: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForTomorrow]]; self.title = @"Tomorrow"; break;
+            case KSBoxTypeWeek: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForWeek]]; self.title = @"Week"; break;
+            case KSBoxTypeArchive: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForArchive]]; self.title = @"Archive"; break;
+            case KSBoxTypeBacklog: self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForBacklog]]; self.title = @"Backlog"; break;
         }
     }
-    else self.tasks = [NSMutableArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasksForCategory:self.category]];
+    else {
+        self.tasks = [NSMutableArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasksForCategory:self.category]];
+        self.title = self.category.name;
+    }
     
     if(![self.title length])
     {

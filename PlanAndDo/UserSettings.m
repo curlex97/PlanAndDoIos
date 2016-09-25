@@ -13,7 +13,7 @@
 -(instancetype)initWithID:(NSUInteger)ID andStartPage:(NSString *)startPage
             andDateFormat:(NSString *)dateFormat
               andPageType:(NSString*)pageType
-            andTimeFormat:(NSString *)timeFormat andSyncStatus:(int)syncStatus
+            andTimeFormat:(NSString *)timeFormat andStartDay:(NSString*)startDay andSyncStatus:(int)syncStatus
 {
     if(self=[super init])
     {
@@ -23,6 +23,7 @@
         self.dateFormat=dateFormat;
         self.timeFormat=timeFormat;
         self.syncStatus = syncStatus;
+        self.startDay = startDay;
     }
     return self;
 }

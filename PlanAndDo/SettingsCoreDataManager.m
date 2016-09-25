@@ -25,10 +25,11 @@
             NSString* startPage = (NSString*)[managedSettings valueForKey:@"start_page"];
             NSString* pageType = (NSString*)[managedSettings valueForKey:@"page_type"];
             NSString* dateFormat = (NSString*)[managedSettings valueForKey:@"date_format"];
+            NSString* startDay = (NSString*)[managedSettings valueForKey:@"start_day"];
             NSString* timeFormat = (NSString*)[managedSettings valueForKey:@"time_format"];
             int syncStatus = [[managedSettings valueForKey:@"settings_sync_status"] intValue];
             
-            settings = [[UserSettings alloc] initWithID:ID andStartPage:startPage andDateFormat:dateFormat andPageType:pageType andTimeFormat:timeFormat andSyncStatus:syncStatus];
+            settings = [[UserSettings alloc] initWithID:ID andStartPage:startPage andDateFormat:dateFormat andPageType:pageType andTimeFormat:timeFormat andStartDay:startDay andSyncStatus:syncStatus];
             
         }
     }
@@ -60,7 +61,9 @@
                     [managedSettings setValue:[settings timeFormat] forKey:@"time_format"];
                     [managedSettings setValue:[NSNumber numberWithInteger:[settings syncStatus]] forKey:@"settings_sync_status"];
                     [managedSettings setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+                    [managedSettings setValue:[settings startDay] forKey:@"start_day"];
 
+                    
                     [self.managedObjectContext save:nil];
                 }
             }
@@ -89,6 +92,7 @@
             [object setValue:[settings timeFormat] forKey:@"time_format"];
             [object setValue:[NSNumber numberWithInteger:[settings syncStatus]] forKey:@"settings_sync_status"];
             [object setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+            [object setValue:[settings startDay] forKey:@"start_day"];
 
             [managedObjectContext save:nil];
         }

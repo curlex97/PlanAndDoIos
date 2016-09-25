@@ -984,7 +984,7 @@
 				TargetAttributes = {
 					28A36BA91D81887B0092FEFD = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = XNN93544SQ;
+						DevelopmentTeam = 6JFVNK494S;
 					};
 					28A36BC51D81887B0092FEFD = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -1241,6 +1241,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6JFVNK494S;
 				INFOPLIST_FILE = PlanAndDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = localhost.PlanAndDo;
@@ -1255,6 +1256,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6JFVNK494S;
 				INFOPLIST_FILE = PlanAndDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = localhost.PlanAndDo;
