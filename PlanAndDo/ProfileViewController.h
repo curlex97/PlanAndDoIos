@@ -7,7 +7,11 @@
 //
 
 #import "BaseTableViewController.h"
-
+typedef NS_ENUM(NSUInteger, KSProfileState)
+{
+    KSProfileStateNameChange,
+    KSProfileStateDeleteAll
+};
 @interface ProfileViewController : BaseTableViewController
 
 @end

@@ -1,17 +1,31 @@
 
 #import "TaskListViewController.h"
 
-@interface TaskListViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface TaskListViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic)NSMutableArray * tasks;
 @property (nonatomic)NSUInteger bottomOffset;
 @property (nonatomic)NSUInteger keyboardOffset;
 @property (nonatomic)UITextField * textField;
 @property (nonatomic)UIView * toolBarView;
+@property (nonatomic)UITapGestureRecognizer * tap;
 @end
 
 @implementation TaskListViewController
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    [self.textField resignFirstResponder];
+    return YES;
+}
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.tasks insertObject:textField.text atIndex:0];
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    textField.text=@"";
+    [textField resignFirstResponder];
+    return YES;
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.tasks.count;
@@ -25,6 +39,7 @@
     {
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    cell.textLabel.textColor=[UIColor colorWithRed:98.0/255.0 green:98.0/255.0 blue:98.0/255.0 alpha:1.0];
     cell.textLabel.text=[NSString stringWithFormat:@"%@",self.tasks[indexPath.row]];
     return cell;
 }
@@ -69,6 +84,10 @@
     [self setBottomConstraintToValue:-45.0 inView:self.view toView:self.tableView];
     NSLog(@"%@",self.view.constraints);
     self.title=@"Task list";
+    
+    self.tap=[[UITapGestureRecognizer alloc] init];
+    self.tap.delegate=self;
+    
     self.textField=[[UITextField alloc] initWithFrame:CGRectMake(16, 8, self.navigationController.toolbar.frame.size.width-32, 30)];
     self.textField.borderStyle=UITextBorderStyleRoundedRect;
     self.textField.backgroundColor=[UIColor colorWithRed:227.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1.0];
@@ -159,11 +178,14 @@
                                      attribute:NSLayoutAttributeLeading
                                      multiplier:1.0f
                                      constant:0.0]];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void)keyboardWillShown:(NSNotification*) not
 {
+    [self.view addGestureRecognizer:self.tap];
     NSDictionary * info=[not userInfo];
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGSize keyboardSize = [aValue CGRectValue].size;
@@ -185,6 +207,35 @@
                  [self setBottomConstraintToValue:-keyboardSize.height-45.0 inView:self.view toView:self.tableView];
 
              });
+             
+         }
+     }];
+}
+
+-(void)keyboardWillHide:(NSNotification*) not
+{
+    [self.view removeGestureRecognizer:self.tap];
+    NSDictionary * info=[not userInfo];
+    NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGSize keyboardSize = [aValue CGRectValue].size;
+    self.toolBarView.translatesAutoresizingMaskIntoConstraints = YES;
+    self.tableView.translatesAutoresizingMaskIntoConstraints = YES;
+    [UIView animateWithDuration:1 animations:^
+     {
+         self.toolBarView.frame=CGRectMake(0, self.bottomOffset, self.view.bounds.size.width, 44);
+         self.tableView.frame=CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height+keyboardSize.height);
+     } completion:^(BOOL finished)
+     {
+         if(finished)
+         {
+             dispatch_async(dispatch_get_main_queue(), ^
+                            {
+                                self.toolBarView.translatesAutoresizingMaskIntoConstraints = NO;
+                                self.tableView.translatesAutoresizingMaskIntoConstraints=NO;
+                                [self setBottomConstraintToValue:0 inView:self.view toView:self.toolBarView];
+                                [self setBottomConstraintToValue:-45.0 inView:self.view toView:self.tableView];
+                                
+                            });
              
          }
      }];

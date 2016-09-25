@@ -435,7 +435,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
     if (indexPath != nil && gestureRecognizer.state == UIGestureRecognizerStateBegan && indexPath.section==1)
     {
-        UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Allah" message:@"Test" preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertController * alertController=[UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         
         UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
         {
@@ -471,8 +471,7 @@
     self.tableView.dataSource=self;
     self.parentController=(AMSideBarViewController *)self.parentViewController;
     self.state=KSMenuStateNormal;
-    //self.tableView.separatorColor = [UIColor clearColor];
-    NSLog(@"YES");
+
     UILongPressGestureRecognizer * longPress=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressDidUsed:)];
     longPress.minimumPressDuration=1.0;
     longPress.delegate=self;

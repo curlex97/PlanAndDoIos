@@ -10,23 +10,13 @@
 #import "UIImage+ACScaleImage.h"
 #import "AMSideBarViewController.h"
 
-@interface ProfileViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface ProfileViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic)NSArray<NSString *> * items;
 @property (nonatomic)NSString * userName;
+@property (nonatomic)KSProfileState state;
 @end
 
 @implementation ProfileViewController
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [self.tableView reloadData];
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    self.userName=textField.text;
-    [self.tableView reloadData];
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -37,7 +27,7 @@
     UITableViewCell * cell=[[UITableViewCell alloc] init];
     cell.textLabel.text=self.items[indexPath.row];
     cell.textLabel.textColor=[UIColor colorWithRed:98.0/255.0 green:98.0/255.0 blue:98.0/255.0 alpha:1.0];
-    UILabel * label=[[UILabel alloc] initWithFrame:CGRectMake(cell.bounds.size.width-140, 0, 200, cell.bounds.size.height)];
+    UILabel * label=[[UILabel alloc] initWithFrame:CGRectMake(cell.bounds.size.width-140, 0, 170, cell.bounds.size.height)];
     label.textColor=[UIColor colorWithRed:98.0/255.0 green:98.0/255.0 blue:98.0/255.0 alpha:1.0];
     
 
@@ -46,6 +36,7 @@
     {
         label.text=self.userName;
         label.textAlignment=NSTextAlignmentRight;
+        cell.imageView.image=[UIImage imageNamed:@"name"];
         [cell setAccessoryView:label];
     }
     else if(indexPath.row==1)
@@ -53,6 +44,7 @@
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         label.text=@"************";
         label.textAlignment=NSTextAlignmentRight;
+        cell.imageView.image=[UIImage imageNamed:@"password"];
         [cell setAccessoryView:label];
     }
     else if(indexPath.row==2)
@@ -60,7 +52,16 @@
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         label.text=@"example@gmail.com";
         label.textAlignment=NSTextAlignmentRight;
+        cell.imageView.image=[UIImage imageNamed:@"email"];
         [cell setAccessoryView:label];
+    }
+    else if(indexPath.row==3)
+    {
+        cell.imageView.image=[UIImage imageNamed:@"delete"];
+    }
+    else
+    {
+        cell.imageView.image=[UIImage imageNamed:@"log out"];
     }
     
     return cell;
@@ -72,20 +73,11 @@
     if(indexPath.row==0)
     {
         UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Change name" message:@"Test" preferredStyle:UIAlertControllerStyleAlert];
-//        UITextField * nameField=[[UITextField alloc] initWithFrame:CGRectMake(8, 0, alertController.view.bounds.size.width-8, 30)];
-//        nameField.backgroundColor=[UIColor blackColor];
-//        [alertController.view addSubview:nameField];
-        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField)
-         {
-             textField.delegate=self;
-//             dispatch_async(dispatch_get_main_queue(), ^
-//             {
-//                 [[self.tableView cellForRowAtIndexPath:indexPath] setNeedsLayout];
-//             });
-         }];
+        [alertController addTextFieldWithConfigurationHandler:nil];
         UIAlertAction * okAction=[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
-                                      {
-                                      }];
+        {
+            self.userName=alertController.textFields.firstObject.text;
+        }];
         
         [alertController addAction:okAction];
         [self.parentViewController presentViewController:alertController animated:YES completion:nil];
@@ -101,6 +93,28 @@
     else if(indexPath.row==3)
     {
         //delete all tasks
+        UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Delete all tasks and categories" message:@"If you remove all categories and tasks, you will be returned to factory settings. Do you want to continue?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
+                                  {
+                                  }];
+        UIAlertAction * continueAction=[UIAlertAction actionWithTitle:@"Continue" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+        {
+            UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Enter password" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addTextFieldWithConfigurationHandler:nil];
+            UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+            UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+            {
+                //delete all if password correct !
+                //alertController.textFields.firstObject.text
+            }];
+            [alertController addAction:cancelAction];
+            [alertController addAction:deleteAction];
+            
+            [self.parentViewController presentViewController:alertController animated:YES completion:nil];
+        }];
+        [alertController addAction:cancelAction];
+        [alertController addAction:continueAction];
+        [self.parentViewController presentViewController:alertController animated:YES completion:nil];
     }
     else
     {
