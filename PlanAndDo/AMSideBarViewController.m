@@ -132,6 +132,10 @@
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SideRight" object:nil];
     }
+    else
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SideLeft" object:nil];
+    }
 }
 -(void)timerTick
 {

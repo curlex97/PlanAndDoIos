@@ -14,6 +14,7 @@
 #import "EditTaskViewController.h"
 #import "TabletasksViewController.h"
 #import "ApplicationManager.h"
+#import "ProfileViewController.h"
 
 @interface KSMenuViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic)NSMutableArray<KSCategory *> * categories;
@@ -224,11 +225,12 @@
         UILabel * label=[[UILabel alloc] initWithFrame:CGRectMake(55, 8, 100, 30)];
         label.textColor=[UIColor whiteColor];
         label.text=[self.categories[indexPath.row] name];
+        NSLog(@"%@",self.categories[0].name);
         [cell addSubview:label];
-        if(indexPath.row==self.categories.count-1)
-        {
-            cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
-        }
+//        if(indexPath.row==self.categories.count-1)
+//        {
+//            cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
+//        }
     }
     else if(indexPath.section==2)
     {
@@ -237,7 +239,7 @@
             UIImageView * profileImageView=[[UIImageView alloc] initWithFrame:CGRectMake(8, 8, 30, 30)];
             profileImageView.image=[UIImage imageNamed:@"Profile"];
             //[cell addSubview:profileImageView];
-            cell.textLabel.text=@"Propfile";
+            cell.textLabel.text=@"Profile";
             cell.imageView.image=[UIImage imageNamed:@"Profile"];
         }
         else
@@ -306,6 +308,16 @@
             [self.parentController setNewFrontViewController:settingsNav];
         }
     }
+    else
+    {
+        ProfileViewController * profileViewController=[[ProfileViewController alloc] init];
+        
+        if(profileViewController)
+        {
+            UINavigationController* navi = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+            [self.parentController setNewFrontViewController:navi];
+        }
+    }
 }
 
 #pragma mark Search Bar delegate methods
@@ -320,7 +332,8 @@
     [searchBar resignFirstResponder];
     searchBar.showsCancelButton=NO;
     searchBar.clearsContextBeforeDrawing=YES;
-
+    searchBar.text=@"";
+    
     self.parentController.hiden=NO;
     [UIView animateWithDuration:0.5 animations:^
      {
@@ -403,13 +416,14 @@
         self.categories[self.managedIndexPath.row].name=textField.text;
         self.state=KSMenuStateNormal;
         [self.tableView reloadData];
+        textField.text=@"";
     }
     self.parentController.hiden=NO;
     [UIView animateWithDuration:0.5 animations:^
-    {
-        self.searchBar.frame=CGRectMake(self.searchBar.frame.origin.x, self.searchBar.frame.origin.y, [UIScreen mainScreen].bounds.size.width-self.searchBar.frame.origin.x*2, self.searchBar.frame.size.height);
-        self.addCategoryButton.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-self.searchBar.frame.origin.x-30, 0, 30, 30);
-    }];
+     {
+         self.searchBar.frame=CGRectMake(8, 8, 255, 30);
+         self.addCategoryButton.frame=CGRectMake(233, 0, 30, 30);
+     }];
 
     return YES;
 }
@@ -583,9 +597,28 @@
                               multiplier:1.0f
                               constant:0.0]];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuDidHide:) name:@"menuDidHideNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuSideRight) name:@"SideRight" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuSideLeft) name:@"SideLeft" object:nil];
+}
+
+-(void)menuSideRight
+{
+    NSLog(@"Right");
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuDidHide:) name:@"menuDidHideNotification" object:nil];
+}
+
+-(void)menuSideLeft
+{
+    NSLog(@"Left");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)menuDidHide:(NSNotification*) not
@@ -616,7 +649,7 @@
 -(void)keyboardWillHide:(NSNotification*) not
 {
     [self.view removeGestureRecognizer:self.tap];
-    
+
     NSDictionary * info=[not userInfo];
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGSize keyboardSize = [aValue CGRectValue].size;
