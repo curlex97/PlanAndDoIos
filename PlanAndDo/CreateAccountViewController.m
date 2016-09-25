@@ -56,11 +56,6 @@
     self.reenterPasswordTextField.leftView = reenterPasswordPaddingView;
     self.reenterPasswordTextField.leftViewMode = UITextFieldViewModeAlways;
     
-    self.backTextFieldView.frame=CGRectMake(self.backTextFieldView.frame.origin.x,
-                                            self.view.bounds.size.height/2-self.backTextFieldView.frame.size.height/2,
-                                            self.backTextFieldView.frame.size.width,
-                                            self.backTextFieldView.frame.size.height);
-    
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
     

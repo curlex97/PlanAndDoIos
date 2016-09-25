@@ -18,11 +18,19 @@
 #define TEXTFIELD_PADDING_LEFT 10
 
 
-@interface LoginViewController ()
-
+@interface LoginViewController ()<UIGestureRecognizerDelegate>
+@property (nonatomic)UITapGestureRecognizer * tap;
 @end
 
 @implementation LoginViewController
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    NSLog(@"%f",[gestureRecognizer locationInView:self.loginTextField].y);
+        [self.passwordTextField resignFirstResponder];
+        [self.loginTextField resignFirstResponder];
+    return YES;
+}
 
 - (void)viewDidLoad
 {
@@ -34,6 +42,44 @@
     UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXTFIELD_PADDING_LEFT, 0)];
     self.passwordTextField.leftView = passwordPaddingView;
     self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
+    
+    self.tap=[[UITapGestureRecognizer alloc] init];
+    self.tap.delegate=self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];
+}
+
+-(void)keyboardWillHide:(NSNotification *)not
+{
+    [self.view removeGestureRecognizer:self.tap];
+    
+    [UIView animateWithDuration:1 animations:^
+     {
+         self.backTextFieldView.frame=CGRectMake(self.backTextFieldView.frame.origin.x,
+                                                 self.view.bounds.size.height/2-self.backTextFieldView.frame.size.height/2,
+                                                 self.backTextFieldView.frame.size.width,
+                                                 self.backTextFieldView.frame.size.height);
+     } completion:^(BOOL finished)
+     {
+     }];
+}
+
+-(void)keyboardWillShown:(NSNotification *)not
+{
+    [self.view addGestureRecognizer:self.tap];
+    NSDictionary * info=[not userInfo];
+    NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    
+    [UIView animateWithDuration:1 animations:^
+     {
+         self.backTextFieldView.frame=CGRectMake(self.backTextFieldView.frame.origin.x,
+                                                 [aValue CGRectValue].origin.y-self.backTextFieldView.frame.size.height-70,
+                                                 self.backTextFieldView.frame.size.width,
+                                                 self.backTextFieldView.frame.size.height);
+     } completion:^(BOOL finished)
+     {
+     }];
 }
 
 - (void)didReceiveMemoryWarning {
