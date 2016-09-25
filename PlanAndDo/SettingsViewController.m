@@ -48,20 +48,21 @@
     KSSettingsCell * cell=[nib objectAtIndex:0];
     
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-
+    cell.textLabel.textColor=[UIColor colorWithRed:98.0/255.0 green:98.0/255.0 blue:98.0/255.0 alpha:1.0];
     
-    switch (indexPath.row) {
+    switch (indexPath.row)
+    {
         case 0:
-            cell.paramNameLabel.text = @"Start page";
+            cell.textLabel.text = @"Start page";
             break;
         case 1:
-            cell.paramNameLabel.text = @"Format date";
+            cell.textLabel.text = @"Format date";
             break;
         case 2:
-            cell.paramNameLabel.text = @"Format time";
+            cell.textLabel.text = @"Format time";
             break;
         case 3:
-            cell.paramNameLabel.text = @"Start day";
+            cell.textLabel.text = @"Start day";
             break;
         default:
             break;

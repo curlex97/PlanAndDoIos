@@ -9,6 +9,7 @@
 #import "ProfileViewController.h"
 #import "UIImage+ACScaleImage.h"
 #import "AMSideBarViewController.h"
+#import "KSSettingsCell.h"
 
 @interface ProfileViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic)NSArray<NSString *> * items;
@@ -24,36 +25,27 @@
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell=[[UITableViewCell alloc] init];
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSSettingsCell"owner:self options:nil];
+    KSSettingsCell * cell=[nib objectAtIndex:0];
     cell.textLabel.text=self.items[indexPath.row];
     cell.textLabel.textColor=[UIColor colorWithRed:98.0/255.0 green:98.0/255.0 blue:98.0/255.0 alpha:1.0];
-    UILabel * label=[[UILabel alloc] initWithFrame:CGRectMake(cell.bounds.size.width-140, 0, 170, cell.bounds.size.height)];
-    label.textColor=[UIColor colorWithRed:98.0/255.0 green:98.0/255.0 blue:98.0/255.0 alpha:1.0];
-    
-
     
     if(indexPath.row==0)
     {
-        label.text=self.userName;
-        label.textAlignment=NSTextAlignmentRight;
+        cell.paramValueLabel.text=self.userName;
         cell.imageView.image=[UIImage imageNamed:@"name"];
-        [cell setAccessoryView:label];
     }
     else if(indexPath.row==1)
     {
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        label.text=@"************";
-        label.textAlignment=NSTextAlignmentRight;
+        cell.paramValueLabel.text=@"************";
         cell.imageView.image=[UIImage imageNamed:@"password"];
-        [cell setAccessoryView:label];
     }
     else if(indexPath.row==2)
     {
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        label.text=@"example@gmail.com";
-        label.textAlignment=NSTextAlignmentRight;
+        cell.paramValueLabel.text=@"example@gmail.com";
         cell.imageView.image=[UIImage imageNamed:@"email"];
-        [cell setAccessoryView:label];
     }
     else if(indexPath.row==3)
     {

@@ -10,7 +10,6 @@
 
 @interface KSSettingsCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *paramNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *paramValueLabel;
 
 @end

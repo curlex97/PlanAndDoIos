@@ -1,5 +1,7 @@
 
 #import "TaskListViewController.h"
+#import "MGSwipeButton.h"
+#import "MGSwipeTableCell.h"
 
 @interface TaskListViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic)NSMutableArray * tasks;
@@ -16,6 +18,23 @@
 {
     [self.textField resignFirstResponder];
     return YES;
+}
+
+-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Delete"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+    {
+        [self.tasks removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    }];
+    deleteAction.backgroundColor = [UIColor redColor];
+    return @[deleteAction];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -41,6 +60,7 @@
     }
     cell.textLabel.textColor=[UIColor colorWithRed:98.0/255.0 green:98.0/255.0 blue:98.0/255.0 alpha:1.0];
     cell.textLabel.text=[NSString stringWithFormat:@"%@",self.tasks[indexPath.row]];
+
     return cell;
 }
 

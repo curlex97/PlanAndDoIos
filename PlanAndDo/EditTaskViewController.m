@@ -51,24 +51,24 @@
     switch (indexPath.row)
     {
         case 0:
-            cell.paramNameLabel.text=self.headerText;
+            cell.textLabel.text=self.headerText;
             cell.accessoryType=UITableViewCellAccessoryNone;
             break;
         case 1:
-            cell.paramNameLabel.text=@"Category";
+            cell.textLabel.text=@"Category";
             break;
         case 2:
             if([self.task isKindOfClass:[KSTask class]])
             {
-                cell.paramNameLabel.text=@"Description";
+                cell.textLabel.text=@"Description";
             }
             else
             {
-                cell.paramNameLabel.text=@"Edit list";
+                cell.textLabel.text=@"Edit list";
             }
             break;
         case 3:
-            cell.paramNameLabel.text=@"Date & Time";
+            cell.textLabel.text=@"Date & Time";
             break;
     }
     return cell;
