@@ -79,6 +79,7 @@
 		28AB856B1D8F48A100D93AB7 /* SettingsCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB856A1D8F48A100D93AB7 /* SettingsCoreDataManager.m */; };
 		28AB856F1D8F48B300D93AB7 /* CategoryCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB856E1D8F48B300D93AB7 /* CategoryCoreDataManager.m */; };
 		28B947891D918D72005A8E9A /* EditTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B947881D918D72005A8E9A /* EditTaskViewController.m */; };
+		3F0E98291D95868600AAC625 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E98281D95868600AAC625 /* ProfileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -230,6 +231,8 @@
 		28AB856E1D8F48B300D93AB7 /* CategoryCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryCoreDataManager.m; sourceTree = "<group>"; };
 		28B947871D918D72005A8E9A /* EditTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTaskViewController.h; sourceTree = "<group>"; };
 		28B947881D918D72005A8E9A /* EditTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTaskViewController.m; sourceTree = "<group>"; };
+		3F0E98271D95868600AAC625 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		3F0E98281D95868600AAC625 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -364,6 +367,8 @@
 				2803AFA61D8ABA470032ACFB /* TaskList */,
 				278BAA561D89BB32002D38CF /* BaseTableViewController.h */,
 				278BAA571D89BB32002D38CF /* BaseTableViewController.m */,
+				3F0E98271D95868600AAC625 /* ProfileViewController.h */,
+				3F0E98281D95868600AAC625 /* ProfileViewController.m */,
 			);
 			name = BaseTableViewController;
 			sourceTree = "<group>";
@@ -1045,6 +1050,7 @@
 				27B1A0FA1D8195A800D47FCD /* UserSettings.m in Sources */,
 				280539251D900F2900868ACF /* MGSwipeTableCell.m in Sources */,
 				28214C931D93D36E0012B1C7 /* CategoryApplicationManager.m in Sources */,
+				3F0E98291D95868600AAC625 /* ProfileViewController.m in Sources */,
 				272F91C31D8A6C0C00A0330B /* DescriptionViewController.m in Sources */,
 				28943D031D93039500BC8A69 /* SettingsApiManager.m in Sources */,
 				27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */,
