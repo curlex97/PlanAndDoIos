@@ -15,7 +15,7 @@
 
 -(KSAuthorisedUser *)authorisedUser
 {
-    return [[[UserCoreDataManager alloc] init] authorisedUser];
+    return [KSAuthorisedUser currentUser] ? [KSAuthorisedUser currentUser] : [[[UserCoreDataManager alloc] init] authorisedUser];
 }
 
 -(void)setUser:(KSAuthorisedUser *)user
@@ -41,18 +41,10 @@
             [ApplicationManager cleanLocalDataBase];
             
             NSUInteger ID = [[dictionary valueForKeyPath:@"data.users.user_id"] integerValue];
-            NSString* createDatestr = [dictionary valueForKeyPath:@"data.users.created_at"];
-            NSString* lastVisitDatestr = [dictionary valueForKeyPath:@"data.users.lastvisit_date"];
             int syncStatus = [[dictionary valueForKeyPath:@"data.users.user_sync_status"] intValue];
             NSString* token = [dictionary valueForKeyPath:@"token"];
-            
-            NSDateFormatter *dateFormattercreate = [[NSDateFormatter alloc] init];
-            [dateFormattercreate setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            NSDate *createDate = [dateFormattercreate dateFromString:createDatestr];
-            
-            NSDateFormatter *dateFormatterlast = [[NSDateFormatter alloc] init];
-            [dateFormatterlast setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            NSDate *lastVisitDate = [dateFormatterlast dateFromString:lastVisitDatestr];
+            NSDate *createDate = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"data.users.created_at"] intValue]];
+            NSDate *lastVisitDate = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"data.users.lastvisit_date"] intValue]];
             
             [self writeTokenToFile:token];
             
@@ -91,7 +83,6 @@
             ///////////////////////////
 
             
-            
             completed(true);
         }
         completed(false);
@@ -111,7 +102,7 @@
             NSString* token = [dictionary valueForKeyPath:@"data.token"];
 
             [self writeTokenToFile:token];
-            
+             
             KSAuthorisedUser* user = [[KSAuthorisedUser alloc] initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:[NSDate date] andLastVisitDate:[NSDate date] andSyncStatus:0 andAccessToken:token andUserSettings:nil];
             
             [[[UserCoreDataManager alloc] init] setUser:user];
