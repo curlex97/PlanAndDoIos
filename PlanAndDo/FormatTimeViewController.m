@@ -8,8 +8,10 @@
 
 #import "FormatTimeViewController.h"
 #import "KSCheckSettingsTableViewCell.h"
+#import "ApplicationManager.h"
 
 @interface FormatTimeViewController () <UITableViewDelegate, UITableViewDataSource>
+@property UserSettings* settings;
 
 @end
 
@@ -21,6 +23,9 @@
     self.title=@"Format time";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+
+    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -51,6 +56,19 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    NSString* formatTime = indexPath.row ? @"24" : @"12";
+    
+    UserSettings* updatedSettings = [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.settings.startPage andDateFormat:self.settings.dateFormat andPageType:self.settings.pageType andTimeFormat:formatTime andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]];
+    
+    [[ApplicationManager settingsApplicationManager] updateSettings:updatedSettings];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 @end
