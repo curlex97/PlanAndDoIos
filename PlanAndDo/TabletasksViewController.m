@@ -99,7 +99,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSLog(@"Lets do it !");
     if(!self.category)
     {
         switch (self.boxType) {
