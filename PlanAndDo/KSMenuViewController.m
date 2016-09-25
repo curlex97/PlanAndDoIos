@@ -458,7 +458,7 @@
     self.parentController=(AMSideBarViewController *)self.parentViewController;
     self.state=KSMenuStateNormal;
     //self.tableView.separatorColor = [UIColor clearColor];
-    
+    NSLog(@"YES");
     UILongPressGestureRecognizer * longPress=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressDidUsed:)];
     longPress.minimumPressDuration=1.0;
     longPress.delegate=self;
