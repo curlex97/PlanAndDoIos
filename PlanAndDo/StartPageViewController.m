@@ -8,11 +8,12 @@
 
 #import "StartPageViewController.h"
 #import "KSCheckSettingsTableViewCell.h"
-
+#import "ApplicationManager.h"
 
 @interface StartPageViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic)UISegmentedControl * segment;
 @property NSArray* categories;
+@property UserSettings* settings;
 @end
 
 @implementation StartPageViewController
@@ -20,12 +21,15 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+    
     self.title=@"Start page";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.categories = [NSArray array];
+    self.categories = [NSArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
     
-    self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Task",@"List", nil]];
+    self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Category",@"Box", nil]];
     self.segment.tintColor=[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
     [self.segment setSelectedSegmentIndex:0];
     self.segment.frame=CGRectMake(20, 8, self.view.bounds.size.width-40, 30);
@@ -72,6 +76,12 @@
             default:
                 break;
         }
+    }
+    
+    else
+    {
+        KSCategory* cat = self.categories[indexPath.row];
+        cell.paramNameLabel.text = cat.name;
     }
     
     
