@@ -494,7 +494,7 @@
     [self.tableView setSeparatorColor:[UIColor colorWithRed:163.0/255.0 green:167.0/255.0 blue:169.0/255.0 alpha:0.35]];
     
     self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
-    [self.categories addObject:[[KSCategory alloc] initWithID:3 andName:@"Work" andSyncStatus:10]];
+   // [self.categories addObject:[[KSCategory alloc] initWithID:3 andName:@"Work" andSyncStatus:10]];
     
     self.view.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
     self.tableView.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
