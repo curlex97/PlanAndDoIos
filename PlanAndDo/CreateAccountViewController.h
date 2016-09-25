@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *reenterPasswordTextField;
+@property (weak, nonatomic) IBOutlet UIView *backTextFieldView;
 
 @end

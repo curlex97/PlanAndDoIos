@@ -596,7 +596,6 @@
                               multiplier:1.0f
                               constant:0.0]];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuDidHide:) name:@"menuDidHideNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuSideRight) name:@"SideRight" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuSideLeft) name:@"SideLeft" object:nil];
 }

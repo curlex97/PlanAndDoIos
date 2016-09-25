@@ -87,6 +87,8 @@
                               attribute:NSLayoutAttributeTop
                               multiplier:1.0f
                               constant:16.0]];
+
+    self.dateTimePicker.timeZone=[NSTimeZone localTimeZone];
     [self.dateTimePicker addTarget:self action:@selector(dateTimeValueChanged:) forControlEvents:UIControlEventValueChanged];
     self.dateTimePicker.date = self.completionTime;
     [self dateTimeValueChanged:self.dateTimePicker];
