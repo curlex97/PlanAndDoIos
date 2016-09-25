@@ -200,6 +200,7 @@
         realTask.categoryID = (int)self.category.ID;
         realTask.priority = priority;
         realTask.name = self.headerText;
+        realTask.syncStatus = [[NSDate date] timeIntervalSince1970];
         
         [[ApplicationManager tasksApplicationManager] updateTask:realTask];
     }

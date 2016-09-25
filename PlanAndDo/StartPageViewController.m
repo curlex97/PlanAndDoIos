@@ -13,6 +13,7 @@
 @interface StartPageViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic)UISegmentedControl * segment;
 @property NSArray* categories;
+@property NSArray* boxes;
 @property UserSettings* settings;
 @end
 
@@ -27,7 +28,9 @@
     self.title=@"Start page";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
     self.categories = [NSArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    self.boxes = [[NSArray alloc] initWithObjects:@"Today", @"Tomorrow", @"Week", @"Backlog", @"Archive", nil];
     
     self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Category",@"Box", nil]];
     self.segment.tintColor=[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
@@ -47,44 +50,15 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.segment.selectedSegmentIndex  ? 5 : self.categories.count;
+    return self.segment.selectedSegmentIndex  ? self.boxes.count : self.categories.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSCheckSettingsTableViewCell"owner:self options:nil];
     KSCheckSettingsTableViewCell * cell=[nib objectAtIndex:0];
-    
-    if(self.segment.selectedSegmentIndex)
-    {
-        switch (indexPath.row) {
-            case 0:
-                cell.paramNameLabel.text = @"Today";
-                break;
-            case 1:
-                cell.paramNameLabel.text = @"Tomorrow";
-                break;
-            case 2:
-                cell.paramNameLabel.text = @"Week";
-                break;
-            case 3:
-                cell.paramNameLabel.text = @"Backlog";
-                break;
-            case 4:
-                cell.paramNameLabel.text = @"Archive";
-                break;
-            default:
-                break;
-        }
-    }
-    
-    else
-    {
-        KSCategory* cat = self.categories[indexPath.row];
-        cell.paramNameLabel.text = cat.name;
-    }
-    
-    
+
+    cell.paramNameLabel.text = self.segment.selectedSegmentIndex ? self.boxes[indexPath.row] : ((KSCategory*)self.categories[indexPath.row]).name;
     
     return cell;
 }
@@ -92,6 +66,19 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+    UserSettings* updatedSettings = self.segment.selectedSegmentIndex ?
+    [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.boxes[indexPath.row] andDateFormat:self.settings.dateFormat andPageType:@"box" andTimeFormat:self.settings.timeFormat andSyncStatus:[[NSDate date] timeIntervalSince1970]] :
+    [[UserSettings alloc] initWithID:self.settings.ID andStartPage:((KSCategory*)self.categories[indexPath.row]).name andDateFormat:self.settings.dateFormat andPageType:@"category" andTimeFormat:self.settings.timeFormat andSyncStatus:[[NSDate date] timeIntervalSince1970]];
+    
+    [[ApplicationManager settingsApplicationManager] updateSettings:updatedSettings];
+ 
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 @end
