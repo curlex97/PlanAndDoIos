@@ -21,8 +21,8 @@ typedef NS_ENUM(NSInteger, KSBoxType)
     KSBoxTypeArchive
 };
 
-#define BAR_BUTTON_SIZE 50
-
+#define BAR_BUTTON_SIZE_WIDTH 30
+#define BAR_BUTTON_SIZE_HEIGHT 41
 
 
 @interface TabletasksViewController : BaseTableViewController

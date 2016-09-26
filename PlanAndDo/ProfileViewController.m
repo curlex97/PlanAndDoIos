@@ -67,16 +67,17 @@
         UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Change name" message:@"Test" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addTextFieldWithConfigurationHandler:nil];
         UIAlertAction * okAction=[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
-        {
-            self.userName=alertController.textFields.firstObject.text;
-        }];
+                                  {
+                                      self.userName=alertController.textFields.firstObject.text;
+                                      [self.tableView reloadData];
+                                  }];
         
         [alertController addAction:okAction];
         [self.parentViewController presentViewController:alertController animated:YES completion:nil];
     }
     else if(indexPath.row==1)
     {
-
+        
     }
     else if(indexPath.row==2)
     {
@@ -93,20 +94,20 @@
         UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Delete all tasks and categories" message:@"If you remove all categories and tasks, you will be returned to factory settings. Do you want to continue?" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction * continueAction=[UIAlertAction actionWithTitle:@"Continue" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
-        {
-            UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Enter password" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addTextFieldWithConfigurationHandler:nil];
-            UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-            UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
-            {
-                //delete all if password correct !
-                //alertController.textFields.firstObject.text
-            }];
-            [alertController addAction:cancelAction];
-            [alertController addAction:deleteAction];
-            
-            [self.parentViewController presentViewController:alertController animated:YES completion:nil];
-        }];
+                                        {
+                                            UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Enter password" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+                                            [alertController addTextFieldWithConfigurationHandler:nil];
+                                            UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+                                            UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+                                                                          {
+                                                                              //delete all if password correct !
+                                                                              //alertController.textFields.firstObject.text
+                                                                          }];
+                                            [alertController addAction:cancelAction];
+                                            [alertController addAction:deleteAction];
+                                            
+                                            [self.parentViewController presentViewController:alertController animated:YES completion:nil];
+                                        }];
         [alertController addAction:cancelAction];
         [alertController addAction:continueAction];
         [self.parentViewController presentViewController:alertController animated:YES completion:nil];

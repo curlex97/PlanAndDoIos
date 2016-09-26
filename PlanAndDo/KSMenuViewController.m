@@ -57,10 +57,10 @@
             [self.addCategoryTextField resignFirstResponder];
             self.parentController.hiden=NO;
             [UIView animateWithDuration:0.5 animations:^
-            {
-                self.searchBar.frame=CGRectMake(8, 8, 255, 30);
-                self.addCategoryButton.frame=CGRectMake(233, 0, 30, 30);
-            }];
+             {
+                 self.searchBar.frame=CGRectMake(8, 8, 255, 30);
+                 self.addCategoryButton.frame=CGRectMake(233, 0, 30, 30);
+             }];
             self.addCategoryTextField.text=@"";
         }
     }
@@ -161,10 +161,10 @@
     [cell setSelectedBackgroundView:bgColorView];
     
     
-//    if(indexPath.row==0 && indexPath.section==0)
-//    {
-//        [cell addSubview:self.searchBar];
-//    }
+    //    if(indexPath.row==0 && indexPath.section==0)
+    //    {
+    //        [cell addSubview:self.searchBar];
+    //    }
     
     if(self.state==KSMenuStateSearch)
     {
@@ -180,7 +180,7 @@
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
         
         [cell setSelectedBackgroundView:bgColorView];
-       
+        
         BaseTask* task = self.tableTasks[indexPath.row];
         
         cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"Complete" backgroundColor:[UIColor greenColor] callback:^BOOL(MGSwipeTableCell *sender) {
@@ -224,47 +224,47 @@
         cell.taskTimeLabel.text = [NSString stringWithFormat:@"%li:%li", [components hour], [components minute]];
         
         return cell;
-
+        
         
         
     }
     else
     {
         
-    if(indexPath.row<=self.categories.count && indexPath.section==1)
-    {
-        UILabel * label=[[UILabel alloc] initWithFrame:CGRectMake(55, 8, 100, 30)];
-        label.textColor=[UIColor whiteColor];
-        label.text=[self.categories[indexPath.row] name];
-        NSLog(@"%@",self.categories[0].name);
-        [cell addSubview:label];
-//        if(indexPath.row==self.categories.count-1)
-//        {
-//            cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
-//        }
-    }
-    else if(indexPath.section==2)
-    {
-        if(indexPath.row==0)
+        if(indexPath.row<=self.categories.count && indexPath.section==1)
         {
-            UIImageView * profileImageView=[[UIImageView alloc] initWithFrame:CGRectMake(8, 8, 30, 30)];
-            profileImageView.image=[UIImage imageNamed:@"Profile"];
-            //[cell addSubview:profileImageView];
-            cell.textLabel.text=@"Profile";
-            cell.imageView.image=[UIImage imageNamed:@"Profile"];
+            UILabel * label=[[UILabel alloc] initWithFrame:CGRectMake(55, 8, 100, 30)];
+            label.textColor=[UIColor whiteColor];
+            label.text=[self.categories[indexPath.row] name];
+            NSLog(@"%@",self.categories[0].name);
+            [cell addSubview:label];
+            //        if(indexPath.row==self.categories.count-1)
+            //        {
+            //            cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
+            //        }
         }
-        else
+        else if(indexPath.section==2)
         {
-            UIImageView * profileImageView=[[UIImageView alloc] initWithFrame:CGRectMake(8, 8, 30, 30)];
-            profileImageView.image=[UIImage imageNamed:@"Settings"];
-            //[cell addSubview:profileImageView];
-            cell.textLabel.text=@"Settings";
-            cell.imageView.image=[UIImage imageNamed:@"Settings"];
-            //tableView.separatorColor=[UIColor colorWithRed:38.0/255.0 green:53.0/255.0 blue:61.0/255.0 alpha:1.0];
+            if(indexPath.row==0)
+            {
+                UIImageView * profileImageView=[[UIImageView alloc] initWithFrame:CGRectMake(8, 8, 30, 30)];
+                profileImageView.image=[UIImage imageNamed:@"Profile"];
+                //[cell addSubview:profileImageView];
+                cell.textLabel.text=@"Profile";
+                cell.imageView.image=[UIImage imageNamed:@"Profile"];
+            }
+            else
+            {
+                UIImageView * profileImageView=[[UIImageView alloc] initWithFrame:CGRectMake(8, 8, 30, 30)];
+                profileImageView.image=[UIImage imageNamed:@"Settings"];
+                //[cell addSubview:profileImageView];
+                cell.textLabel.text=@"Settings";
+                cell.imageView.image=[UIImage imageNamed:@"Settings"];
+                //tableView.separatorColor=[UIColor colorWithRed:38.0/255.0 green:53.0/255.0 blue:61.0/255.0 alpha:1.0];
+            }
+            
+            cell.backgroundColor=[UIColor colorWithRed:38.0/255.0 green:53.0/255.0 blue:61.0/255.0 alpha:1.0];
         }
-        
-        cell.backgroundColor=[UIColor colorWithRed:38.0/255.0 green:53.0/255.0 blue:61.0/255.0 alpha:1.0];
-    }
     }
     return cell;
 }
@@ -274,7 +274,7 @@
     [self.searchBar resignFirstResponder];
     if(self.state==KSMenuStateSearch)
     {
-
+        
         UINavigationController * frontNavigationViewController=(UINavigationController *)self.parentController.frontViewController;
         
         for(UIViewController* child in [frontNavigationViewController childViewControllers])
@@ -397,7 +397,7 @@
     }
     else self.tableTasks = [NSMutableArray arrayWithArray:self.allTasks];
     [self.tableView reloadData];
-
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -434,7 +434,7 @@
          self.searchBar.frame=CGRectMake(8, 8, 255, 30);
          self.addCategoryButton.frame=CGRectMake(233, 0, 30, 30);
      }];
-
+    
     return YES;
 }
 
@@ -448,22 +448,22 @@
         UIAlertController * alertController=[UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         
         UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
-        {
-            [self.categories removeObjectAtIndex:indexPath.row];
-            dispatch_async(dispatch_get_main_queue(), ^
-            {
-                [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-            });
-
-        }];
+                                      {
+                                          [self.categories removeObjectAtIndex:indexPath.row];
+                                          dispatch_async(dispatch_get_main_queue(), ^
+                                                         {
+                                                             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                                                         });
+                                          
+                                      }];
         
         UIAlertAction * editAction=[UIAlertAction actionWithTitle:@"Edit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-        {
-            self.addCategoryTextField.text=[self.categories[indexPath.row] name];
-            self.managedIndexPath=indexPath;
-            self.state=KSMenuStateEdit;
-            [self addCategoryDidTap];
-        }];
+                                    {
+                                        self.addCategoryTextField.text=[self.categories[indexPath.row] name];
+                                        self.managedIndexPath=indexPath;
+                                        self.state=KSMenuStateEdit;
+                                        [self addCategoryDidTap];
+                                    }];
         
         UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
         
@@ -481,7 +481,7 @@
     self.tableView.dataSource=self;
     self.parentController=(AMSideBarViewController *)self.parentViewController;
     self.state=KSMenuStateNormal;
-
+    
     UILongPressGestureRecognizer * longPress=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressDidUsed:)];
     longPress.minimumPressDuration=1.0;
     longPress.delegate=self;
@@ -504,9 +504,9 @@
     self.addCategoryTextField.backgroundColor=[UIColor colorWithRed:227.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1.0];
     self.addCategoryTextField.delegate=self;
     [self.addCategoryAccessoryView addSubview:self.addCategoryTextField];
-
+    
     [self.view addSubview:self.addCategoryAccessoryView];
-
+    
     
     UIView * searchBarView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 46)];
     [searchBarView addSubview:self.searchBar];
@@ -517,57 +517,57 @@
     [self.tableView setSeparatorColor:[UIColor colorWithRed:163.0/255.0 green:167.0/255.0 blue:169.0/255.0 alpha:0.35]];
     
     self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
-   // [self.categories addObject:[[KSCategory alloc] initWithID:3 andName:@"Work" andSyncStatus:10]];
+    // [self.categories addObject:[[KSCategory alloc] initWithID:3 andName:@"Work" andSyncStatus:10]];
     
     self.view.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
     self.tableView.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
     [self.view removeConstraint:self.top];
     
     [self.view addConstraint:[NSLayoutConstraint
-                                   constraintWithItem:self.tableView
-                                   attribute:NSLayoutAttributeTop
-                                   relatedBy:NSLayoutRelationEqual
-                                   toItem:self.view
-                                   attribute:NSLayoutAttributeTop
-                                   multiplier:1.0f
-                                   constant:20.f]];
+                              constraintWithItem:self.tableView
+                              attribute:NSLayoutAttributeTop
+                              relatedBy:NSLayoutRelationEqual
+                              toItem:self.view
+                              attribute:NSLayoutAttributeTop
+                              multiplier:1.0f
+                              constant:20.f]];
     
     self.addCategoryTextField.translatesAutoresizingMaskIntoConstraints=NO;
     [self.addCategoryAccessoryView addConstraint:[NSLayoutConstraint
-                                     constraintWithItem:self.addCategoryTextField
-                                     attribute:NSLayoutAttributeBottom
-                                     relatedBy:NSLayoutRelationEqual
-                                     toItem:self.addCategoryAccessoryView
-                                     attribute:NSLayoutAttributeBottom
-                                     multiplier:1.0f
-                                     constant:-8.0]];
+                                                  constraintWithItem:self.addCategoryTextField
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                  toItem:self.addCategoryAccessoryView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  multiplier:1.0f
+                                                  constant:-8.0]];
     
     [self.addCategoryAccessoryView addConstraint:[NSLayoutConstraint
-                                     constraintWithItem:self.addCategoryTextField
-                                     attribute:NSLayoutAttributeTop
-                                     relatedBy:NSLayoutRelationEqual
-                                     toItem:self.addCategoryAccessoryView
-                                     attribute:NSLayoutAttributeTop
-                                     multiplier:1.0f
-                                     constant:8.0]];
+                                                  constraintWithItem:self.addCategoryTextField
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                  toItem:self.addCategoryAccessoryView
+                                                  attribute:NSLayoutAttributeTop
+                                                  multiplier:1.0f
+                                                  constant:8.0]];
     
     [self.addCategoryAccessoryView addConstraint:[NSLayoutConstraint
-                                     constraintWithItem:self.addCategoryTextField
-                                     attribute:NSLayoutAttributeTrailing
-                                     relatedBy:NSLayoutRelationEqual
-                                     toItem:self.addCategoryAccessoryView
-                                     attribute:NSLayoutAttributeTrailing
-                                     multiplier:1.0f
-                                     constant:-16.0]];
+                                                  constraintWithItem:self.addCategoryTextField
+                                                  attribute:NSLayoutAttributeTrailing
+                                                  relatedBy:NSLayoutRelationEqual
+                                                  toItem:self.addCategoryAccessoryView
+                                                  attribute:NSLayoutAttributeTrailing
+                                                  multiplier:1.0f
+                                                  constant:-16.0]];
     
     [self.addCategoryAccessoryView addConstraint:[NSLayoutConstraint
-                                     constraintWithItem:self.addCategoryTextField
-                                     attribute:NSLayoutAttributeLeading
-                                     relatedBy:NSLayoutRelationEqual
-                                     toItem:self.addCategoryAccessoryView
-                                     attribute:NSLayoutAttributeLeading
-                                     multiplier:1.0f
-                                     constant:16.0]];
+                                                  constraintWithItem:self.addCategoryTextField
+                                                  attribute:NSLayoutAttributeLeading
+                                                  relatedBy:NSLayoutRelationEqual
+                                                  toItem:self.addCategoryAccessoryView
+                                                  attribute:NSLayoutAttributeLeading
+                                                  multiplier:1.0f
+                                                  constant:16.0]];
     
     self.addCategoryAccessoryView.translatesAutoresizingMaskIntoConstraints=NO;
     [self.view addConstraint:[NSLayoutConstraint
@@ -631,7 +631,7 @@
 
 -(void)menuDidHide:(NSNotification*) not
 {
- 
+    
 }
 
 -(void)setBottomConstraintToValue:(float)value inView:(UIView*)view toView:(UIView *)targetView
@@ -657,7 +657,7 @@
 -(void)keyboardWillHide:(NSNotification*) not
 {
     [self.view removeGestureRecognizer:self.tap];
-
+    
     NSDictionary * info=[not userInfo];
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGSize keyboardSize = [aValue CGRectValue].size;
@@ -689,37 +689,36 @@
     [self.view addGestureRecognizer:self.tap];
     self.parentController.hiden=YES;
     [UIView animateWithDuration:0.5 animations:^
-    {
-            self.searchBar.frame=CGRectMake(self.searchBar.frame.origin.x, self.searchBar.frame.origin.y, [UIScreen mainScreen].bounds.size.width-self.searchBar.frame.origin.x*2, self.searchBar.frame.size.height);
-            self.addCategoryButton.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-self.searchBar.frame.origin.x-30, 0, 30, 30);
-    }];
+     {
+         self.searchBar.frame=CGRectMake(self.searchBar.frame.origin.x, self.searchBar.frame.origin.y, [UIScreen mainScreen].bounds.size.width-self.searchBar.frame.origin.x*2, self.searchBar.frame.size.height);
+         self.addCategoryButton.frame=CGRectMake([UIScreen mainScreen].bounds.size.width-self.searchBar.frame.origin.x-30, 0, 30, 30);
+     }];
     
     if(self.state!=KSMenuStateSearch)
     {
-    NSDictionary * info=[not userInfo];
-    NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGSize keyboardSize = [aValue CGRectValue].size;
-    self.addCategoryAccessoryView.translatesAutoresizingMaskIntoConstraints = YES;
-    self.tableView.translatesAutoresizingMaskIntoConstraints=YES;
-    NSLog(@"%@",info);
-    [UIView animateWithDuration:1 animations:^
-     {
-         self.addCategoryAccessoryView.frame=CGRectMake(0, [aValue CGRectValue].origin.y-45, self.view.bounds.size.width, 44);
-         self.tableView.frame=CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height-keyboardSize.height);
-     } completion:^(BOOL finished)
-     {
-         if(finished)
+        NSDictionary * info=[not userInfo];
+        NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+        CGSize keyboardSize = [aValue CGRectValue].size;
+        self.addCategoryAccessoryView.translatesAutoresizingMaskIntoConstraints = YES;
+        self.tableView.translatesAutoresizingMaskIntoConstraints=YES;
+        NSLog(@"%@",info);
+        [UIView animateWithDuration:1 animations:^
          {
-             dispatch_async(dispatch_get_main_queue(), ^
-                            {
-                                self.addCategoryAccessoryView.translatesAutoresizingMaskIntoConstraints = NO;
-                                self.tableView.translatesAutoresizingMaskIntoConstraints=NO;
-                                [self setBottomConstraintToValue:-keyboardSize.height inView:self.view toView:self.addCategoryAccessoryView];
-                                [self setBottomConstraintToValue:-keyboardSize.height-45.0 inView:self.view toView:self.tableView];
-                            });
-             
-         }
-     }];
+             self.addCategoryAccessoryView.frame=CGRectMake(0, [aValue CGRectValue].origin.y-45, self.view.bounds.size.width, 44);
+             self.tableView.frame=CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height-keyboardSize.height);
+         } completion:^(BOOL finished)
+         {
+             if(finished)
+             {
+                 dispatch_async(dispatch_get_main_queue(), ^
+                                {
+                                    self.addCategoryAccessoryView.translatesAutoresizingMaskIntoConstraints = NO;
+                                    self.tableView.translatesAutoresizingMaskIntoConstraints=NO;
+                                    [self setBottomConstraintToValue:-keyboardSize.height inView:self.view toView:self.addCategoryAccessoryView];
+                                    [self setBottomConstraintToValue:-keyboardSize.height-45.0 inView:self.view toView:self.tableView];
+                                });
+             }
+         }];
     }
 }
 

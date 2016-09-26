@@ -56,6 +56,7 @@
             break;
         case 1:
             cell.textLabel.text=@"Category";
+            cell.paramValueLabel.text=self.category.name;
             break;
         case 2:
             if([self.task isKindOfClass:[KSTask class]])
@@ -223,12 +224,6 @@
     if([self.task isKindOfClass:[KSTask class]]) self.taskDesc = ((KSTask*)self.task).taskDescription;
     self.category = [[ApplicationManager categoryApplicationManager] categoryWithId:self.task.categoryID];
     
-    switch (self.task.priority) {
-        case KSTaskDefaultPriority: self.slider.value = 0; break;
-        case KSTaskHighPriority: self.slider.value = 1; break;
-        case KSTaskVeryHighPriority: self.slider.value = 2; break;
-    }
-    
     self.headerText = self.task.name;
     
     //self.pan=[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gesturePan)];
@@ -266,6 +261,14 @@
     self.tableView.tableFooterView=footerPriorityView;
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    
+    switch (self.task.priority)
+    {
+        case KSTaskDefaultPriority: self.slider.value = 0; break;
+        case KSTaskHighPriority: self.slider.value = 1; break;
+        case KSTaskVeryHighPriority: self.slider.value = 2; break;
+    }
+    [self sliderDidSlide:self.slider];
     
     self.methods=[NSArray arrayWithObjects:@"headDidTap",@"categoryDidTap",@"listOrDescriptionDidTap",@"dateTimeDidTap", nil];
 }
