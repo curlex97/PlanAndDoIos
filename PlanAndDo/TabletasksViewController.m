@@ -64,9 +64,18 @@ static bool firstLoad = true;
     cell.rightSwipeSettings.transition = MGSwipeDirectionRightToLeft;
     cell.taskHeaderLabel.text = task.name;
     switch (task.priority) {
-        case KSTaskHighPriority:cell.taskPriorityLabel.text = @"Normal priority"; break;
-        case KSTaskDefaultPriority:cell.taskPriorityLabel.text = @"Default priority"; break;
-        case KSTaskVeryHighPriority:cell.taskPriorityLabel.text = @"High priority"; break;
+        case KSTaskHighPriority:
+            cell.taskPriorityLabel.text = @"Low priority";
+            cell.taskPriorityLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0];
+            break;
+        case KSTaskDefaultPriority:
+            cell.taskPriorityLabel.text = @"Mid priority";
+            cell.taskPriorityLabel.textColor=[UIColor colorWithRed:245.0/255.0 green:166.0/255.0 blue:35.0/255.0 alpha:1.0];
+            break;
+        case KSTaskVeryHighPriority:
+            cell.taskPriorityLabel.text = @"High priority";
+            cell.taskPriorityLabel.textColor=[UIColor colorWithRed:241.0/255.0 green:17.0/255.0 blue:44.0/255.0 alpha:1.0];
+            break;
     }
     
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:task.completionTime];
@@ -250,9 +259,12 @@ static bool firstLoad = true;
 
 -(void)addNewTask:(NSNotification *)not
 {
-    BaseTask * task=[not object];
-    [self.tasks addObject:task];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.tasks.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    //как то проверить что категория добавленного таска такаяя же как и категорию текущая и добавить этот таск в массив если не такаяже оставить и не трогать !
+    
+    [self.tableView reloadData];
+//    BaseTask * task=[not object];
+//    [self.tasks addObject:task];
+//    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.tasks.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 -(void)menuTapped
@@ -293,6 +305,7 @@ static bool firstLoad = true;
     self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForToday]];;
     self.title = @"Today";
     self.boxType = KSBoxTypeToday;
+    self.category=nil;
     [self removeSegmentControl];
     [self.currentBoxItem setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
     self.currentBoxItem=self.toolbarItems[1];
@@ -310,6 +323,7 @@ static bool firstLoad = true;
     self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForTomorrow]];
     self.title = @"Tomorrow";
     self.boxType = KSBoxTypeTomorrow;
+    self.category=nil;
     [self removeSegmentControl];
     [self.currentBoxItem setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
     self.currentBoxItem=self.toolbarItems[3];
@@ -326,6 +340,7 @@ static bool firstLoad = true;
 {
     self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForWeek]];
     self.title = @"Week";
+    self.category=nil;
     self.boxType = KSBoxTypeWeek;
     [self removeSegmentControl];
     [self.currentBoxItem setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
@@ -343,6 +358,7 @@ static bool firstLoad = true;
 {
     self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForBacklog]];
     self.title = @"Backlog";
+    self.category=nil;
     self.boxType = KSBoxTypeBacklog;
     [self removeSegmentControl];
     [self.currentBoxItem setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
@@ -360,6 +376,7 @@ static bool firstLoad = true;
 {
     self.tasks = [NSMutableArray arrayWithArray:[self completedTasks:[[ApplicationManager tasksApplicationManager] allTasksForArchive]]];
     self.title = @"Archive";
+    self.category=nil;
     self.boxType = KSBoxTypeArchive;
     [self addSegmentControl];
     [self.currentBoxItem setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
