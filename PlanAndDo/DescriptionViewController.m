@@ -10,6 +10,7 @@
 
 @interface DescriptionViewController ()
 @property (nonatomic)UITextView * textView;
+
 @end
 
 @implementation DescriptionViewController
@@ -28,6 +29,28 @@
     [self.view addSubview:self.textView];
     self.textView.text = self.text;
     
+    self.view.backgroundColor=[UIColor whiteColor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];
+}
+
+-(void)keyboardWillShown:(NSNotification*) not
+{
+    
+    NSDictionary * info=[not userInfo];
+    NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGSize keyboardSize = [aValue CGRectValue].size;
+    
+    [UIView animateWithDuration:1 animations:^
+     {
+         self.textView.frame=CGRectMake(self.textView.frame.origin.x,
+                                        self.textView.frame.origin.y,
+                                        self.textView.frame.size.width,
+                                        [aValue CGRectValue].origin.y-70);
+         self.textView.bounds=CGRectMake(self.textView.frame.origin.x,
+                                        self.textView.frame.origin.y,
+                                        self.textView.frame.size.width,
+                                        [aValue CGRectValue].origin.y-70);
+     } completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
