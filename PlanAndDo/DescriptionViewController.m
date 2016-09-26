@@ -38,7 +38,6 @@
     
     NSDictionary * info=[not userInfo];
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGSize keyboardSize = [aValue CGRectValue].size;
     
     [UIView animateWithDuration:1 animations:^
      {
