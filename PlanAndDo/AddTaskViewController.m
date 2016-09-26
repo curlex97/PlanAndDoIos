@@ -271,7 +271,7 @@
         
         KSTask* task = [[KSTask alloc] initWithID:Id  andName:self.headerText andStatus:NO andTaskReminderTime:self.completionTime andTaskPriority:priority andCategoryID:(int)self.category.ID andCreatedAt:[NSDate date] andCompletionTime:self.completionTime andSyncStatus:(int)Id andTaskDescription:self.taskDesc];
         [[ApplicationManager tasksApplicationManager] addTask: task];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"TaskAdd" object:task];
+        //[[NSNotificationCenter defaultCenter] postNotificationName:@"TaskAdd" object:task];
     }
     
     [self.navigationController popViewControllerAnimated:YES];
