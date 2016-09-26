@@ -38,7 +38,18 @@
     {
         if([self.searchBar isFirstResponder])
         {
-            [self.searchBar resignFirstResponder];
+            CGPoint point=[gestureRecognizer locationInView:self.tableView];
+            NSIndexPath * indexPath=[self.tableView indexPathForRowAtPoint:point];
+            
+            if(indexPath==nil)
+            {
+                [self.searchBar resignFirstResponder];
+            }
+            else
+            {
+                [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+                [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+            }
         }
         
         if([self.addCategoryTextField isFirstResponder])
@@ -260,7 +271,6 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.searchBar resignFirstResponder];
     if(self.state==KSMenuStateSearch)
     {
@@ -673,10 +683,9 @@
          }
      }];
 }
-//test
+
 -(void)keyboardWillShown:(NSNotification*) not
 {
-    NSLog(@"ds");
     [self.view addGestureRecognizer:self.tap];
     self.parentController.hiden=YES;
     [UIView animateWithDuration:0.5 animations:^

@@ -10,7 +10,7 @@
 #import "ApplicationManager.h"
 
 @interface SelectCategoryViewController ()<UITableViewDelegate, UITableViewDataSource>
-@property NSArray* categories;
+@property NSArray<KSCategory *> * categories;
 @end
 
 @implementation SelectCategoryViewController
@@ -29,6 +29,14 @@
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
+    if([self.categories[indexPath.row].name isEqualToString:self.selectedCategory.name])
+    {
+        cell.accessoryType=UITableViewCellAccessoryCheckmark;
+    }
+    else
+    {
+        cell.accessoryType=UITableViewCellAccessoryNone;
+    }
     KSCategory* category = self.categories[indexPath.row];
     
     cell.textLabel.text=[category name];
@@ -37,6 +45,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    self.selectedCategory=self.categories[indexPath.row];
+    [self.tableView reloadData];
+    
     if([self.parentController isKindOfClass:[AddTaskViewController class]])
     ((AddTaskViewController*)self.parentController).category = self.categories[indexPath.row];
     

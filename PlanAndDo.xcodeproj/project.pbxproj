@@ -354,6 +354,7 @@
 		2803AF971D8AB9BC0032ACFB /* BaseTableViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3FCD89411D994D1D00A00377 /* Profile */,
 				28B9478A1D918D7F005A8E9A /* EditTask */,
 				280539261D90376900868ACF /* Menu */,
 				2803AF981D8AB9CC0032ACFB /* FormatDate */,
@@ -367,8 +368,6 @@
 				2803AFA61D8ABA470032ACFB /* TaskList */,
 				278BAA561D89BB32002D38CF /* BaseTableViewController.h */,
 				278BAA571D89BB32002D38CF /* BaseTableViewController.m */,
-				3F0E98271D95868600AAC625 /* ProfileViewController.h */,
-				3F0E98281D95868600AAC625 /* ProfileViewController.m */,
 			);
 			name = BaseTableViewController;
 			sourceTree = "<group>";
@@ -933,6 +932,15 @@
 				272F91C81D8B080700A0330B /* DateAndTimeViewController.m */,
 			);
 			name = DateAndTime;
+			sourceTree = "<group>";
+		};
+		3FCD89411D994D1D00A00377 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				3F0E98271D95868600AAC625 /* ProfileViewController.h */,
+				3F0E98281D95868600AAC625 /* ProfileViewController.m */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

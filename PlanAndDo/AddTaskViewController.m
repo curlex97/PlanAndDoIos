@@ -28,6 +28,14 @@
 
 @implementation AddTaskViewController
 
+-(instancetype)initWithCategory:(KSCategory *)category
+{
+    if(self=[super init])
+    {
+        self.category=category;
+    }
+    return self;
+}
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 4;
@@ -152,6 +160,7 @@
 {
     SelectCategoryViewController * categorySelect=[[SelectCategoryViewController alloc] init];
     categorySelect.parentController = self;
+    categorySelect.selectedCategory=self.category;
     [self.navigationController pushViewController:categorySelect animated:YES];
 }
 
@@ -262,6 +271,7 @@
         
         KSTask* task = [[KSTask alloc] initWithID:Id  andName:self.headerText andStatus:NO andTaskReminderTime:self.completionTime andTaskPriority:priority andCategoryID:(int)self.category.ID andCreatedAt:[NSDate date] andCompletionTime:self.completionTime andSyncStatus:(int)Id andTaskDescription:self.taskDesc];
         [[ApplicationManager tasksApplicationManager] addTask: task];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TaskAdd" object:task];
     }
     
     [self.navigationController popViewControllerAnimated:YES];

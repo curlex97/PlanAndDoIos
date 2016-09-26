@@ -78,6 +78,7 @@ static bool firstLoad = true;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     EditTaskViewController * editTaskViewController=[[EditTaskViewController alloc] init];
     editTaskViewController.task = self.tasks[indexPath.row];
     editTaskViewController.title = @"Edit";
@@ -91,7 +92,7 @@ static bool firstLoad = true;
 
 -(void)addTaskTapped
 {
-    [self.navigationController pushViewController:[[AddTaskViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[AddTaskViewController alloc] initWithCategory:self.category] animated:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -218,6 +219,13 @@ static bool firstLoad = true;
                        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL],
                        nil];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addNewTask:) name:@"TaskAdd" object:nil];
+}
+
+-(void)addNewTask:(BaseTask *)task
+{
+    [self.tasks addObject:task];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.tasks.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 -(void)menuTapped

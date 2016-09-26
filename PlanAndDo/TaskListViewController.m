@@ -2,9 +2,10 @@
 #import "TaskListViewController.h"
 #import "MGSwipeButton.h"
 #import "MGSwipeTableCell.h"
+#import "KSShortTask.h"
 
 @interface TaskListViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIGestureRecognizerDelegate>
-@property (nonatomic)NSMutableArray * tasks;
+@property (nonatomic)NSMutableArray<KSShortTask *> * tasks;
 @property (nonatomic)NSUInteger bottomOffset;
 @property (nonatomic)NSUInteger keyboardOffset;
 @property (nonatomic)UITextField * textField;
@@ -39,7 +40,7 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self.tasks insertObject:textField.text atIndex:0];
+    [self.tasks insertObject:[[KSShortTask alloc] initWithID:0 andName:textField.text andStatus:NO andSyncStatus:0] atIndex:0];
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     textField.text=@"";
     [textField resignFirstResponder];
@@ -59,7 +60,7 @@
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     cell.textLabel.textColor=[UIColor colorWithRed:98.0/255.0 green:98.0/255.0 blue:98.0/255.0 alpha:1.0];
-    cell.textLabel.text=[NSString stringWithFormat:@"%@",self.tasks[indexPath.row]];
+    cell.textLabel.text=self.tasks[indexPath.row].name;
 
     return cell;
 }
@@ -69,11 +70,13 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if([tableView cellForRowAtIndexPath:indexPath].accessoryType==UITableViewCellAccessoryNone)
     {
+        self.tasks[indexPath.row].status=YES;
         [tableView cellForRowAtIndexPath:indexPath].accessoryType=UITableViewCellAccessoryCheckmark;
     }
     else
     {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType=UITableViewCellAccessoryNone;
+        self.tasks[indexPath.row].status=NO;
     }
 }
 
@@ -121,7 +124,7 @@
     [self.toolBarView addSubview:self.textField];
     [self.view addSubview:self.toolBarView];
     
-    self.tasks=[NSMutableArray arrayWithObjects:@"Milk",@"Bread",@"Meat",@"Chery",@"Banana",@"Fish",@"Bread", nil];
+    self.tasks=[NSMutableArray array];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.tableView.bounds=CGRectMake(self.tableView.bounds.origin.x, self.tableView.bounds.origin.y, self.tableView.bounds.size.width, self.tableView.bounds.size.height-44);
@@ -171,15 +174,6 @@
                                      attribute:NSLayoutAttributeBottom
                                      multiplier:1.0f
                                      constant:0.0]];
-    
-//    [self.toolBarView addConstraint:[NSLayoutConstraint
-//                                     constraintWithItem:self.toolBarView
-//                                     attribute:NSLayoutAttributeHeight
-//                                     relatedBy:NSLayoutRelationEqual
-//                                     toItem:self.toolBarView
-//                                     attribute:NSLayoutAttributeHeight
-//                                     multiplier:1.0f
-//                                     constant:44.0]];
     
     [self.view addConstraint:[NSLayoutConstraint
                                      constraintWithItem:self.toolBarView

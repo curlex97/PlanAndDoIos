@@ -13,5 +13,5 @@
 @interface SelectCategoryViewController : BaseTableViewController
 
 @property UIViewController* parentController;
-
+@property (nonatomic)KSCategory * selectedCategory;
 @end
