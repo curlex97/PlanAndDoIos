@@ -11,6 +11,7 @@
 @property (nonatomic)UITextField * textField;
 @property (nonatomic)UIView * toolBarView;
 @property (nonatomic)UITapGestureRecognizer * tap;
+@property (nonatomic)NSLayoutConstraint * bottomContraint;
 @end
 
 @implementation TaskListViewController
@@ -80,32 +81,12 @@
     }
 }
 
--(void)setBottomConstraintToValue:(float)value inView:(UIView*)view toView:(UIView *)targetView
-{
-    for(NSLayoutConstraint * constraint in view.constraints)
-    {
-        if(constraint.firstAttribute==NSLayoutAttributeBottom)
-        {
-            [view removeConstraint:constraint];
-            break;
-        }
-    }
-    [view addConstraint:[NSLayoutConstraint
-                         constraintWithItem:targetView
-                         attribute:NSLayoutAttributeBottom
-                         relatedBy:NSLayoutRelationEqual
-                         toItem:view
-                         attribute:NSLayoutAttributeBottom
-                         multiplier:1.0f
-                         constant:value]];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
-    [self setBottomConstraintToValue:-45.0 inView:self.view toView:self.tableView];
-    NSLog(@"%@",self.view.constraints);
+    self.bottom.constant=-45;
+    [self.view layoutIfNeeded];
     self.title=@"Task list";
     
     self.tap=[[UITapGestureRecognizer alloc] init];
@@ -166,14 +147,15 @@
                                    constant:16.0]];
     
     self.toolBarView.translatesAutoresizingMaskIntoConstraints=NO;
-    [self.view addConstraint:[NSLayoutConstraint
-                                     constraintWithItem:self.toolBarView
-                                     attribute:NSLayoutAttributeBottom
-                                     relatedBy:NSLayoutRelationEqual
-                                     toItem:self.view
-                                     attribute:NSLayoutAttributeBottom
-                                     multiplier:1.0f
-                                     constant:0.0]];
+    self.bottomContraint=[NSLayoutConstraint
+                          constraintWithItem:self.toolBarView
+                          attribute:NSLayoutAttributeBottom
+                          relatedBy:NSLayoutRelationEqual
+                          toItem:self.view
+                          attribute:NSLayoutAttributeBottom
+                          multiplier:1.0f
+                          constant:0.0];
+    [self.view addConstraint:self.bottomContraint];
     
     [self.view addConstraint:[NSLayoutConstraint
                                      constraintWithItem:self.toolBarView
@@ -203,56 +185,26 @@
     NSDictionary * info=[not userInfo];
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGSize keyboardSize = [aValue CGRectValue].size;
-    self.toolBarView.translatesAutoresizingMaskIntoConstraints = YES;
-    self.tableView.translatesAutoresizingMaskIntoConstraints=YES;
+    
+    self.bottomContraint.constant=-keyboardSize.height;
+    self.bottom.constant=-keyboardSize.height-45.0;
+    
     [UIView animateWithDuration:1 animations:^
      {
-         self.toolBarView.frame=CGRectMake(0, self.bottomOffset-keyboardSize.height, self.view.bounds.size.width, 44);
-         self.tableView.frame=CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height-keyboardSize.height);
-     } completion:^(BOOL finished)
-     {
-         if(finished)
-         {
-             dispatch_async(dispatch_get_main_queue(), ^
-             {
-                 self.toolBarView.translatesAutoresizingMaskIntoConstraints = NO;
-                 self.tableView.translatesAutoresizingMaskIntoConstraints=NO;
-                 [self setBottomConstraintToValue:-keyboardSize.height inView:self.view toView:self.toolBarView];
-                 [self setBottomConstraintToValue:-keyboardSize.height-45.0 inView:self.view toView:self.tableView];
-
-             });
-             
-         }
-     }];
+         [self.view layoutIfNeeded];
+     } completion:nil];
 }
 
 -(void)keyboardWillHide:(NSNotification*) not
 {
     [self.view removeGestureRecognizer:self.tap];
-    NSDictionary * info=[not userInfo];
-    NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGSize keyboardSize = [aValue CGRectValue].size;
-    self.toolBarView.translatesAutoresizingMaskIntoConstraints = YES;
-    self.tableView.translatesAutoresizingMaskIntoConstraints = YES;
+
+    self.bottomContraint.constant=0;
+    self.bottom.constant=-45;
     [UIView animateWithDuration:1 animations:^
      {
-         self.toolBarView.frame=CGRectMake(0, self.bottomOffset, self.view.bounds.size.width, 44);
-         self.tableView.frame=CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height+keyboardSize.height);
-     } completion:^(BOOL finished)
-     {
-         if(finished)
-         {
-             dispatch_async(dispatch_get_main_queue(), ^
-                            {
-                                self.toolBarView.translatesAutoresizingMaskIntoConstraints = NO;
-                                self.tableView.translatesAutoresizingMaskIntoConstraints=NO;
-                                [self setBottomConstraintToValue:0 inView:self.view toView:self.toolBarView];
-                                [self setBottomConstraintToValue:-45.0 inView:self.view toView:self.tableView];
-                                
-                            });
-             
-         }
-     }];
+         [self.view layoutIfNeeded];
+     } completion:nil];
 }
 
 -(void)dealloc

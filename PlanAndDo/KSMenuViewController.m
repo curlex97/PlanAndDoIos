@@ -28,6 +28,7 @@
 @property (nonatomic) NSIndexPath * managedIndexPath;
 @property (nonatomic) UITapGestureRecognizer * tap;
 @property (nonatomic) UIButton * addCategoryButton;
+@property (nonatomic)NSLayoutConstraint * accessoryBottom;
 @end
 
 @implementation KSMenuViewController
@@ -570,14 +571,16 @@
                                                   constant:16.0]];
     
     self.addCategoryAccessoryView.translatesAutoresizingMaskIntoConstraints=NO;
-    [self.view addConstraint:[NSLayoutConstraint
-                              constraintWithItem:self.addCategoryAccessoryView
-                              attribute:NSLayoutAttributeBottom
-                              relatedBy:NSLayoutRelationEqual
-                              toItem:self.view
-                              attribute:NSLayoutAttributeBottom
-                              multiplier:1.0f
-                              constant:44.0]];
+    
+    self.accessoryBottom=[NSLayoutConstraint
+                          constraintWithItem:self.addCategoryAccessoryView
+                          attribute:NSLayoutAttributeBottom
+                          relatedBy:NSLayoutRelationEqual
+                          toItem:self.view
+                          attribute:NSLayoutAttributeBottom
+                          multiplier:1.0f
+                          constant:44.0];
+    [self.view addConstraint:self.accessoryBottom];
     
     //    [self.toolBarView addConstraint:[NSLayoutConstraint
     //                                     constraintWithItem:self.toolBarView
@@ -634,54 +637,16 @@
     
 }
 
--(void)setBottomConstraintToValue:(float)value inView:(UIView*)view toView:(UIView *)targetView
-{
-    for(NSLayoutConstraint * constraint in view.constraints)
-    {
-        if(constraint.firstAttribute==NSLayoutAttributeBottom)
-        {
-            [view removeConstraint:constraint];
-            break;
-        }
-    }
-    [view addConstraint:[NSLayoutConstraint
-                         constraintWithItem:targetView
-                         attribute:NSLayoutAttributeBottom
-                         relatedBy:NSLayoutRelationEqual
-                         toItem:view
-                         attribute:NSLayoutAttributeBottom
-                         multiplier:1.0f
-                         constant:value]];
-}
-
 -(void)keyboardWillHide:(NSNotification*) not
 {
     [self.view removeGestureRecognizer:self.tap];
     
-    NSDictionary * info=[not userInfo];
-    NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGSize keyboardSize = [aValue CGRectValue].size;
-    self.addCategoryAccessoryView.translatesAutoresizingMaskIntoConstraints = YES;
-    self.tableView.translatesAutoresizingMaskIntoConstraints=YES;
-    
+    self.bottom.constant=0.0;
+    self.accessoryBottom.constant=45.0;
     [UIView animateWithDuration:1 animations:^
      {
-         self.addCategoryAccessoryView.frame=CGRectMake(0, [aValue CGRectValue].origin.y+44, self.view.bounds.size.width, 44);
-         self.tableView.frame=CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height+keyboardSize.height);
-     } completion:^(BOOL finished)
-     {
-         if(finished)
-         {
-             dispatch_async(dispatch_get_main_queue(), ^
-                            {
-                                self.addCategoryAccessoryView.translatesAutoresizingMaskIntoConstraints = NO;
-                                self.tableView.translatesAutoresizingMaskIntoConstraints=NO;
-                                [self setBottomConstraintToValue:44 inView:self.view toView:self.addCategoryAccessoryView];
-                                [self setBottomConstraintToValue:0 inView:self.view toView:self.tableView];
-                            });
-             
-         }
-     }];
+         [self.view layoutIfNeeded];
+     } completion:nil];
 }
 
 -(void)keyboardWillShown:(NSNotification*) not
@@ -699,26 +664,13 @@
         NSDictionary * info=[not userInfo];
         NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
         CGSize keyboardSize = [aValue CGRectValue].size;
-        self.addCategoryAccessoryView.translatesAutoresizingMaskIntoConstraints = YES;
-        self.tableView.translatesAutoresizingMaskIntoConstraints=YES;
-        NSLog(@"%@",info);
+
+        self.accessoryBottom.constant=-keyboardSize.height;
+        self.bottom.constant=-keyboardSize.height;
         [UIView animateWithDuration:1 animations:^
          {
-             self.addCategoryAccessoryView.frame=CGRectMake(0, [aValue CGRectValue].origin.y-45, self.view.bounds.size.width, 44);
-             self.tableView.frame=CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, self.tableView.frame.size.height-keyboardSize.height);
-         } completion:^(BOOL finished)
-         {
-             if(finished)
-             {
-                 dispatch_async(dispatch_get_main_queue(), ^
-                                {
-                                    self.addCategoryAccessoryView.translatesAutoresizingMaskIntoConstraints = NO;
-                                    self.tableView.translatesAutoresizingMaskIntoConstraints=NO;
-                                    [self setBottomConstraintToValue:-keyboardSize.height inView:self.view toView:self.addCategoryAccessoryView];
-                                    [self setBottomConstraintToValue:-keyboardSize.height-45.0 inView:self.view toView:self.tableView];
-                                });
-             }
-         }];
+             [self.view layoutIfNeeded];
+         } completion:nil];
     }
 }
 
