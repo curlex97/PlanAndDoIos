@@ -24,10 +24,30 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    [self.emailTextField resignFirstResponder];
-    [self.passwordTextField resignFirstResponder];
-    [self.usernameTextField resignFirstResponder];
-    [self.reenterPasswordTextField resignFirstResponder];
+    if([gestureRecognizer locationInView:self.emailTextField].y>=0 && [gestureRecognizer locationInView:self.emailTextField].y<44*4)
+    {
+
+    }
+    else
+    {
+        if(self.passwordTextField.isFirstResponder)
+        {
+            [self.passwordTextField resignFirstResponder];
+        }
+        else if(self.emailTextField.isFirstResponder)
+        {
+            [self.emailTextField resignFirstResponder];
+        }
+        else if(self.usernameTextField.isFirstResponder)
+        {
+            [self.usernameTextField resignFirstResponder];
+        }
+        else
+        {
+            [self.reenterPasswordTextField resignFirstResponder];
+        }
+    }
+
     return YES;
 }
 
@@ -58,45 +78,37 @@
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
+    [self.view addGestureRecognizer:self.tap];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];
 }
+
 -(void)keyboardWillHide:(NSNotification *)not
 {
-    [self.view removeGestureRecognizer:self.tap];
-    
+    self.tap.enabled=NO;
+    self.centerConstraint.constant=0.0;
     [UIView animateWithDuration:1 animations:^
      {
-         self.backTextFieldView.frame=CGRectMake(self.backTextFieldView.frame.origin.x,
-                                                 self.view.bounds.size.height/2-self.backTextFieldView.frame.size.height/2,
-                                                 self.backTextFieldView.frame.size.width,
-                                                 self.backTextFieldView.frame.size.height);
-     } completion:^(BOOL finished)
-     {
-     }];
+         [self.view layoutIfNeeded];
+     } completion:nil];
 }
 
 -(void)keyboardWillShown:(NSNotification *)not
 {
-    [self.view addGestureRecognizer:self.tap];
+    self.tap.enabled=YES;
     NSDictionary * info=[not userInfo];
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-    
+    self.centerConstraint.constant-=self.backTextFieldView.frame.origin.y+self.backTextFieldView.frame.size.height-(self.view.bounds.size.height-[aValue CGRectValue].size.height);
     [UIView animateWithDuration:1 animations:^
      {
-         self.backTextFieldView.frame=CGRectMake(self.backTextFieldView.frame.origin.x,
-                                                 [aValue CGRectValue].origin.y-self.backTextFieldView.frame.size.height-60,
-                                                 self.backTextFieldView.frame.size.width,
-                                                 self.backTextFieldView.frame.size.height);
-     } completion:^(BOOL finished)
-     {
-     }];
+         [self.view layoutIfNeeded];
+     } completion:nil];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)submitTapped:(id)sender {

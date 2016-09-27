@@ -26,9 +26,22 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    NSLog(@"%f",[gestureRecognizer locationInView:self.loginTextField].y);
-        [self.passwordTextField resignFirstResponder];
-        [self.loginTextField resignFirstResponder];
+
+    if([gestureRecognizer locationInView:self.loginTextField].y>=0 && [gestureRecognizer locationInView:self.loginTextField].y<88)
+    {
+        NSLog(@"%f",[gestureRecognizer locationInView:self.loginTextField].y);
+    }
+    else
+    {
+        if(self.passwordTextField.isFirstResponder)
+        {
+            [self.passwordTextField resignFirstResponder];
+        }
+        else
+        {
+            [self.loginTextField resignFirstResponder];
+        }
+    }
     return YES;
 }
 
@@ -45,6 +58,7 @@
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
+    [self.view addGestureRecognizer:self.tap];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];
@@ -52,42 +66,28 @@
 
 -(void)keyboardWillHide:(NSNotification *)not
 {
-    [self.view removeGestureRecognizer:self.tap];
-    
-    [UIView animateWithDuration:1 animations:^
+    self.tap.enabled=NO;
+    self.centerConstraint.constant=-29.0;
+    [UIView animateWithDuration:5 animations:^
      {
-         self.backTextFieldView.frame=CGRectMake(self.backTextFieldView.frame.origin.x,
-                                                 self.view.bounds.size.height/2-self.backTextFieldView.frame.size.height/2,
-                                                 self.backTextFieldView.frame.size.width,
-                                                 self.backTextFieldView.frame.size.height);
-     } completion:^(BOOL finished)
-     {
-     }];
+         [self.view layoutIfNeeded];
+     } completion:nil];
 }
 
 -(void)keyboardWillShown:(NSNotification *)not
 {
-    [self.view addGestureRecognizer:self.tap];
+    self.tap.enabled=YES;
     NSDictionary * info=[not userInfo];
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-    
+    self.centerConstraint.constant-=self.backTextFieldView.frame.origin.y+self.backTextFieldView.frame.size.height-(self.view.bounds.size.height-[aValue CGRectValue].size.height);
     [UIView animateWithDuration:1 animations:^
      {
-         self.backTextFieldView.frame=CGRectMake(self.backTextFieldView.frame.origin.x,
-                                                 [aValue CGRectValue].origin.y-self.backTextFieldView.frame.size.height-70,
-                                                 self.backTextFieldView.frame.size.width,
-                                                 self.backTextFieldView.frame.size.height);
-     } completion:^(BOOL finished)
-     {
-     }];
+         [self.view layoutIfNeeded];
+     } completion:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)createNewAccountTapped:(id)sender {
+- (IBAction)createNewAccountTapped:(id)sender
+{
     
     CreateAccountViewController* cavc = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateAccountViewController"];
     
@@ -110,10 +110,6 @@
 
 - (IBAction)signInTapped:(id)sender
 {
-    
-//    [[ApplicationManager userApplicationManager] loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool fl) {
-//       // if(fl)
-//        {
             AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
             
             if(tableTaskViewController)
@@ -121,10 +117,6 @@
                 tableTaskViewController.title=@"Today";
                 [self presentViewController:tableTaskViewController animated:YES completion:nil];
             }
-//        }
-//    }];
-    
-    
 }
 
 -(void)dealloc

@@ -118,12 +118,13 @@
                             <constraint firstItem="PFe-ck-rIr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="UgS-2U-XHJ"/>
                             <constraint firstAttribute="trailing" secondItem="PFe-ck-rIr" secondAttribute="trailing" id="Xc5-Cf-boU"/>
                             <constraint firstItem="PFe-ck-rIr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZAj-AT-xFW"/>
-                            <constraint firstItem="PFe-ck-rIr" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="w1r-Hl-2AX"/>
+                            <constraint firstItem="PFe-ck-rIr" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-29" id="w1r-Hl-2AX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="Vdg-W0-uXJ"/>
                     <connections>
                         <outlet property="backTextFieldView" destination="PFe-ck-rIr" id="fj0-zq-RK0"/>
+                        <outlet property="centerConstraint" destination="w1r-Hl-2AX" id="qIR-jQ-Xsd"/>
                         <outlet property="loginTextField" destination="DUb-sN-Ykg" id="DB8-a1-Sr0"/>
                         <outlet property="passwordTextField" destination="hmX-lB-ZC1" id="Ez3-fl-Xsf"/>
                     </connections>
@@ -222,6 +223,7 @@
                     <navigationItem key="navigationItem" title="Create account" id="O5Y-XK-fqj"/>
                     <connections>
                         <outlet property="backTextFieldView" destination="R0j-v9-yBM" id="iBB-ZC-FKf"/>
+                        <outlet property="centerConstraint" destination="l5K-c3-5CG" id="WPz-KC-BA2"/>
                         <outlet property="emailTextField" destination="FvR-vr-P6Q" id="GD2-2L-jvD"/>
                         <outlet property="passwordTextField" destination="fdH-IE-NVE" id="jD2-Z8-hIm"/>
                         <outlet property="reenterPasswordTextField" destination="A8u-7m-IVI" id="dM0-a0-sub"/>
@@ -283,7 +285,7 @@
                         <color key="backgroundColor" red="0.20362311601638794" green="0.20362311601638794" blue="0.20362311601638794" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="x8v-Gf-Wfc" firstAttribute="centerX" secondItem="3t4-M1-atM" secondAttribute="centerX" id="2qh-RF-x5i"/>
-                            <constraint firstItem="x8v-Gf-Wfc" firstAttribute="centerY" secondItem="3t4-M1-atM" secondAttribute="centerY" id="OoC-Od-xY5"/>
+                            <constraint firstItem="x8v-Gf-Wfc" firstAttribute="centerY" secondItem="3t4-M1-atM" secondAttribute="centerY" constant="-74.5" id="OoC-Od-xY5"/>
                             <constraint firstItem="x8v-Gf-Wfc" firstAttribute="leading" secondItem="3t4-M1-atM" secondAttribute="leading" id="YXv-FL-bBa"/>
                             <constraint firstAttribute="trailing" secondItem="x8v-Gf-Wfc" secondAttribute="trailing" id="ikN-8e-StZ"/>
                         </constraints>
@@ -291,6 +293,7 @@
                     <navigationItem key="navigationItem" title="Create account" id="7tZ-yD-5VL"/>
                     <connections>
                         <outlet property="backTextFieldView" destination="x8v-Gf-Wfc" id="J4A-Dn-q0S"/>
+                        <outlet property="centerConstraint" destination="OoC-Od-xY5" id="gsv-AU-SCM"/>
                         <outlet property="emailTextField" destination="Nia-eU-HSp" id="IY7-Nt-dHx"/>
                     </connections>
                 </viewController>
@@ -385,6 +388,7 @@
                     <navigationItem key="navigationItem" title="Create account" id="kJy-4C-t96"/>
                     <connections>
                         <outlet property="backTextFieldView" destination="ZBC-8T-OeI" id="fPF-C8-bqN"/>
+                        <outlet property="centerConstraint" destination="Mnw-SD-vaY" id="ha5-xX-RXP"/>
                         <outlet property="emailTextField" destination="L4K-ON-hur" id="XnT-ov-9k4"/>
                         <outlet property="oldEmailTextField" destination="7um-Ae-LEd" id="wkg-e4-j6K"/>
                         <outlet property="reenterEmailTextField" destination="CCN-cQ-LEv" id="Pj8-EY-Gtm"/>

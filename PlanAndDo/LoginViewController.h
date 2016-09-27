@@ -12,5 +12,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *loginTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIView *backTextFieldView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerConstraint;
 
 @end

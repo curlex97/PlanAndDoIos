@@ -46,40 +46,42 @@
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
+    [self.view addGestureRecognizer:self.tap];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];
 }
 -(void)keyboardWillHide:(NSNotification *)not
 {
-    [self.view removeGestureRecognizer:self.tap];
+    self.tap.enabled=NO;
     
-    [UIView animateWithDuration:1 animations:^
-     {
-         self.backTextFieldView.frame=CGRectMake(self.backTextFieldView.frame.origin.x,
-                                                 self.view.bounds.size.height/2-self.backTextFieldView.frame.size.height/2,
-                                                 self.backTextFieldView.frame.size.width,
-                                                 self.backTextFieldView.frame.size.height);
-     } completion:^(BOOL finished)
-     {
-     }];
+//    [UIView animateWithDuration:1 animations:^
+//     {
+//         self.backTextFieldView.frame=CGRectMake(self.backTextFieldView.frame.origin.x,
+//                                                 self.view.bounds.size.height/2-self.backTextFieldView.frame.size.height/2,
+//                                                 self.backTextFieldView.frame.size.width,
+//                                                 self.backTextFieldView.frame.size.height);
+//     } completion:^(BOOL finished)
+//     {
+//     }];
 }
 
 -(void)keyboardWillShown:(NSNotification *)not
 {
-    [self.view addGestureRecognizer:self.tap];
-    NSDictionary * info=[not userInfo];
-    NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+    self.tap.enabled=YES;
     
-    [UIView animateWithDuration:1 animations:^
-     {
-         self.backTextFieldView.frame=CGRectMake(self.backTextFieldView.frame.origin.x,
-                                                 [aValue CGRectValue].origin.y-self.backTextFieldView.frame.size.height-70,
-                                                 self.backTextFieldView.frame.size.width,
-                                                 self.backTextFieldView.frame.size.height);
-     } completion:^(BOOL finished)
-     {
-     }];
+//    NSDictionary * info=[not userInfo];
+//    NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
+//    
+//    [UIView animateWithDuration:1 animations:^
+//     {
+//         self.backTextFieldView.frame=CGRectMake(self.backTextFieldView.frame.origin.x,
+//                                                 [aValue CGRectValue].origin.y-self.backTextFieldView.frame.size.height-70,
+//                                                 self.backTextFieldView.frame.size.width,
+//                                                 self.backTextFieldView.frame.size.height);
+//     } completion:^(BOOL finished)
+//     {
+//     }];
 }
 
 - (IBAction)sendNewPasswordTapped:(id)sender {
@@ -87,11 +89,6 @@
 
     [self.navigationController popViewControllerAnimated:YES];
     
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)dealloc

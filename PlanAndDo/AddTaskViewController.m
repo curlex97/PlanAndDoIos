@@ -147,7 +147,7 @@
 -(void)headDidTap
 {
     UITableViewCell * cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    self.textField=[[UITextField alloc] initWithFrame:CGRectMake(8, 13, self.view.bounds.size.width-32, 31)];
+    self.textField=[[UITextField alloc] initWithFrame:cell.textLabel.frame];
     self.textField.backgroundColor=[UIColor whiteColor];
     self.textField.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     self.textField.delegate=self;
