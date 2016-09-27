@@ -44,7 +44,7 @@
     [self.tasks insertObject:[[KSShortTask alloc] initWithID:0 andName:textField.text andStatus:NO andSyncStatus:0] atIndex:0];
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     textField.text=@"";
-    [textField resignFirstResponder];
+
     return YES;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -91,6 +91,7 @@
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
+    [self.view addGestureRecognizer:self.tap];
     
     self.textField=[[UITextField alloc] initWithFrame:CGRectMake(16, 8, self.navigationController.toolbar.frame.size.width-32, 30)];
     self.textField.borderStyle=UITextBorderStyleRoundedRect;
@@ -181,7 +182,7 @@
 
 -(void)keyboardWillShown:(NSNotification*) not
 {
-    [self.view addGestureRecognizer:self.tap];
+    self.tap.enabled=YES;
     NSDictionary * info=[not userInfo];
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGSize keyboardSize = [aValue CGRectValue].size;
@@ -197,7 +198,7 @@
 
 -(void)keyboardWillHide:(NSNotification*) not
 {
-    [self.view removeGestureRecognizer:self.tap];
+    self.tap.enabled=NO;
 
     self.bottomContraint.constant=0;
     self.bottom.constant=-45;
