@@ -23,4 +23,10 @@
 -(void)cleanTable;
 
 
+// SYNC
+
+-(void)syncSetUser:(KSAuthorisedUser*)user;
+
+-(void)syncUpdateUser:(KSAuthorisedUser*)user;
+
 @end

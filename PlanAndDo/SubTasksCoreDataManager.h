@@ -26,4 +26,13 @@
 
 -(void)cleanTable;
 
+// SYNC
+
+-(void)syncAddSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task;
+
+-(void)syncUpdateSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task;
+
+-(void)syncDeleteSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task;
+
+
 @end

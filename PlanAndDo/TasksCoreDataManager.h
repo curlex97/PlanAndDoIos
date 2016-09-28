@@ -49,4 +49,13 @@
 
 -(void)cleanTable;
 
+// SYNC
+
+-(void) syncUpdateTask:(BaseTask*)task;
+
+-(void)syncAddTask:(BaseTask*)task;
+
+-(void)syncDeleteTask:(BaseTask*)task;
+
+
 @end

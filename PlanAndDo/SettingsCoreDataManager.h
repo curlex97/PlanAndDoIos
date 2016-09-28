@@ -24,4 +24,11 @@
 
 -(void)cleanTable;
 
+// SYNC
+
+-(void)syncSetSettings:(UserSettings*)settings;
+
+-(void)syncUpdateSettings:(UserSettings*)settings;
+
+
 @end
