@@ -135,7 +135,7 @@ static bool firstLoad = true;
         if([cat.name isEqualToString:startPage])
         {
             self.category = cat;
-            return;
+            break;
         }
     }
     firstLoad = false;
