@@ -364,41 +364,52 @@
     searchBar.showsCancelButton=YES;
     self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasks]];
     
-    if(searchBar.text.length > 0)
-    {
-        self.tableTasks = [NSMutableArray array];
-        for(BaseTask* task in self.allTasks)
-        {
-            if(task && ([task.name.lowercaseString containsString:searchBar.text.lowercaseString]))
-            {
-                [self.tableTasks addObject:task];
-            }
-        }
-        
-    }
-    else self.tableTasks = [NSMutableArray arrayWithArray:self.allTasks];
-    [self.tableView reloadData];
+    [self refreshSearch];
     
     return YES;
 }
 
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    if(searchText.length > 0)
+    [self refreshSearch];
+    
+}
+
+
+-(void) refreshSearch
+{
+    if(self.searchBar.text.length > 0)
     {
         self.tableTasks = [NSMutableArray array];
         for(BaseTask* task in self.allTasks)
         {
-            if(task && ([task.name.lowercaseString containsString:searchText.lowercaseString]))
+            if([task isKindOfClass:[KSTask class]])
             {
-                [self.tableTasks addObject:task];
+                KSTask* realTask = (KSTask*)task;
+                if([realTask.name.lowercaseString containsString:self.searchBar.text.lowercaseString] ||
+                   [realTask.taskDescription.lowercaseString containsString:self.searchBar.text.lowercaseString])
+                    [self.tableTasks addObject:task];
             }
+            
+
+            else if([task isKindOfClass:[KSTaskCollection class]])
+            {
+                KSTaskCollection* realTask = (KSTaskCollection*)task;
+                for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask])
+                {
+                    if([subTask.name.lowercaseString containsString:self.searchBar.text.lowercaseString])
+                    {
+                        [self.tableTasks addObject:task];
+                        break;
+                    }
+                }
+            }
+            
         }
         
     }
     else self.tableTasks = [NSMutableArray arrayWithArray:self.allTasks];
     [self.tableView reloadData];
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
