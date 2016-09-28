@@ -84,18 +84,16 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    if(textField.text.length)
-    {
-        self.headerText=textField.text;
-    }
-    else
-    {
-         self.headerText=@"Head";
-    }
     [self.tableView reloadData];
     [textField removeFromSuperview];
     return YES;
 }
+
+- (void)headTextFieldDidChange:(id)sender
+{
+    self.headerText=self.textField.text.length ? self.textField.text : @"Head";
+}
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -151,6 +149,7 @@
     self.textField.backgroundColor=[UIColor whiteColor];
     self.textField.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     self.textField.delegate=self;
+    [self.textField addTarget:self action:@selector(headTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     self.textField.text=[self.headerText isEqualToString:@"Head"]?@"":self.headerText;
     [self.textField becomeFirstResponder];
     [cell addSubview:self.textField];
