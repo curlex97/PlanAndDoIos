@@ -58,7 +58,7 @@
             cell.textLabel.text=@"Category";
             cell.paramValueLabel.text=self.category.name;
             break;
-        case 2:
+        case 3:
             if([self.task isKindOfClass:[KSTask class]])
             {
                 cell.textLabel.text=@"Description";
@@ -70,7 +70,7 @@
                 cell.paramValueLabel.text = [NSString stringWithFormat:@"%lu tasks", (unsigned long)self.subTasks.count];
             }
             break;
-        case 3:
+        case 2:
             cell.textLabel.text=@"Date & Time";
             cell.paramValueLabel.text = self.completionTime.description;
             break;
@@ -316,7 +316,7 @@
     }
     [self sliderDidSlide:self.slider];
     
-    self.methods=[NSArray arrayWithObjects:@"headDidTap",@"categoryDidTap",@"listOrDescriptionDidTap",@"dateTimeDidTap", nil];
+    self.methods=[NSArray arrayWithObjects:@"headDidTap",@"categoryDidTap",@"dateTimeDidTap",@"listOrDescriptionDidTap", nil];
 }
 
 
