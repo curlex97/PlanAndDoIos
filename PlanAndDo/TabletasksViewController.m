@@ -55,7 +55,7 @@ static bool firstLoad = true;
         [[ApplicationManager tasksApplicationManager] deleteTask:task];
         [self.tasks removeObject:task];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
-        if(!self.tasks.count)
+        if(!self.tasks.count && self.boxType!=KSBoxTypeArchive)
         {
             self.tableView.tableHeaderView=self.emptyTableHeader;
         }
@@ -158,6 +158,15 @@ static bool firstLoad = true;
     firstLoad = false;
 }
 
+-(void)refreshDidTap
+{
+    [self.tasks removeAllObjects];
+    
+    [self reloadCoreData];
+    [self.tableView reloadData];
+    [self.refresh endRefreshing];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -165,6 +174,8 @@ static bool firstLoad = true;
     
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    
+    [self.refresh addTarget:self action:@selector(refreshDidTap) forControlEvents:UIControlEventValueChanged];
     
     UIBarButtonItem * addButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTaskTapped)];
     self.navigationItem.rightBarButtonItem=addButton;

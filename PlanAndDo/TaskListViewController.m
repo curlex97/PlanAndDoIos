@@ -4,7 +4,7 @@
 #import "MGSwipeTableCell.h"
 #import "KSShortTask.h"
 #import "SubTaskTableViewCell.h"
-
+#import "ApplicationManager.h"
 @interface TaskListViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIGestureRecognizerDelegate>
 @property (nonatomic)NSUInteger bottomOffset;
 @property (nonatomic)NSUInteger keyboardOffset;
@@ -95,12 +95,23 @@
     }
 }
 
+-(void)refreshDidTap
+{
+    [self.subTasks removeAllObjects];
+    
+    self.subTasks=[NSMutableArray arrayWithArray:[[ApplicationManager subTasksApplicationManager] allSubTasksForTask:self.task]];
+    [self.tableView reloadData];
+    [self.refresh endRefreshing];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     //self.subTasks = [NSMutableArray arrayWithArray:[[ApplicationManager subTasksApplicationManager] allSubTasksForTask:self.task]];
     if(!self.subTasks)  self.subTasks = [NSMutableArray array];
+    
+    [self.refresh addTarget:self action:@selector(refreshDidTap) forControlEvents:UIControlEventValueChanged];
     
     self.view.backgroundColor=[UIColor whiteColor];
     self.bottom.constant=-45;
@@ -124,6 +135,10 @@
     [self.toolBarView addSubview:self.textField];
     [self.view addSubview:self.toolBarView];
     
+    if([self.parentController isKindOfClass:[AddTaskViewController class]])
+    {
+        [self.refresh removeFromSuperview];
+    }
     
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
