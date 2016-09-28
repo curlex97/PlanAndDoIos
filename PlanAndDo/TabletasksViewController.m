@@ -49,12 +49,18 @@ static bool firstLoad = true;
         }]];
         cell.leftSwipeSettings.transition = MGSwipeDirectionLeftToRight;
     }
-    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
+    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender)
+    {
         NSLog(@"Delete");
         [[ApplicationManager tasksApplicationManager] deleteTask:task];
         [self.tasks removeObject:task];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if(!self.tasks.count)
+        {
+            self.tableView.tableHeaderView=self.emptyTableHeader;
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+        {
             [tableView reloadData];
         });
         
@@ -102,7 +108,18 @@ static bool firstLoad = true;
 
 -(void)addTaskTapped
 {
-    [self.navigationController pushViewController:[[AddTaskViewController alloc] initWithCategory:self.category] animated:YES];
+    NSDate * addTaskDate;
+    switch (self.boxType)
+    {
+            
+        case KSBoxTypeTomorrow:
+            addTaskDate=[NSDate dateWithTimeIntervalSince1970:[NSDate date].timeIntervalSince1970+86400];
+            break;
+        default:
+            addTaskDate=[NSDate date];
+            break;
+    }
+    [self.navigationController pushViewController:[[AddTaskViewController alloc] initWithCategory:self.category andDate:addTaskDate] animated:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -273,7 +290,15 @@ static bool firstLoad = true;
         if(self.boxType == KSBoxTypeArchive) [self addSegmentControl];
         else [self removeSegmentControl];
     }
-
+    
+    if(!self.tasks.count)
+    {
+        self.tableView.tableHeaderView=self.emptyTableHeader;
+    }
+    else
+    {
+        [self.emptyTableHeader removeFromSuperview];
+    }
 }
 
 -(void)refreshData:(NSNotification *)not
@@ -331,6 +356,14 @@ static bool firstLoad = true;
         self.navigationItem.rightBarButtonItem=addButton;
     }
     [self.tableView reloadData];
+    if(!self.tasks.count)
+    {
+        self.tableView.tableHeaderView=self.emptyTableHeader;
+    }
+    else
+    {
+        [self.emptyTableHeader removeFromSuperview];
+    }
 }
 
 -(void)tomorrowDidTap
@@ -349,6 +382,14 @@ static bool firstLoad = true;
         self.navigationItem.rightBarButtonItem=addButton;
     }
     [self.tableView reloadData];
+    if(!self.tasks.count)
+    {
+        self.tableView.tableHeaderView=self.emptyTableHeader;
+    }
+    else
+    {
+        [self.emptyTableHeader removeFromSuperview];
+    }
 }
 
 -(void)weekDidTap
@@ -367,6 +408,14 @@ static bool firstLoad = true;
         self.navigationItem.rightBarButtonItem=addButton;
     }
     [self.tableView reloadData];
+    if(!self.tasks.count)
+    {
+        self.tableView.tableHeaderView=self.emptyTableHeader;
+    }
+    else
+    {
+        [self.emptyTableHeader removeFromSuperview];
+    }
 }
 
 -(void)backLogDidTap
@@ -385,6 +434,14 @@ static bool firstLoad = true;
         self.navigationItem.rightBarButtonItem=addButton;
     }
     [self.tableView reloadData];
+    if(!self.tasks.count)
+    {
+        self.tableView.tableHeaderView=self.emptyTableHeader;
+    }
+    else
+    {
+        [self.emptyTableHeader removeFromSuperview];
+    }
 }
 
 -(void)archiveDidTap

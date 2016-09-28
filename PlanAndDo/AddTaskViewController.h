@@ -11,7 +11,7 @@
 #import "ApplicationManager.h"
 
 @interface AddTaskViewController : BaseTableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
--(instancetype)initWithCategory:(KSCategory *)category;
+-(instancetype)initWithCategory:(KSCategory *)category andDate:(NSDate *)date;
 @property KSCategory* category;
 @property NSDate* completionTime;
 @property NSString* taskDesc;

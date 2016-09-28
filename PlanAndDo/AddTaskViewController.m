@@ -29,11 +29,12 @@
 
 @implementation AddTaskViewController
 
--(instancetype)initWithCategory:(KSCategory *)category
+-(instancetype)initWithCategory:(KSCategory *)category andDate:(NSDate *)date
 {
     if(self=[super init])
     {
         self.category=category;
+        self.completionTime=date;
     }
     return self;
 }
