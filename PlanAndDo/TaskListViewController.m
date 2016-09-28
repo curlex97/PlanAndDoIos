@@ -99,8 +99,8 @@
 {
     [super viewDidLoad];
     
-    self.subTasks = [NSMutableArray arrayWithArray:[[ApplicationManager subTasksApplicationManager] allSubTasksForTask:self.task]];
-
+    //self.subTasks = [NSMutableArray arrayWithArray:[[ApplicationManager subTasksApplicationManager] allSubTasksForTask:self.task]];
+    if(!self.subTasks)  self.subTasks = [NSMutableArray array];
     
     self.view.backgroundColor=[UIColor whiteColor];
     self.bottom.constant=-45;
@@ -245,11 +245,15 @@
 {
     [super viewWillDisappear:YES];
     
-    if([self.parentController isKindOfClass:[AddTaskViewController class]])
+    if([self.parentController isKindOfClass:[AddTaskViewController class]]){
         ((AddTaskViewController*)self.parentController).subTasks = [NSMutableArray arrayWithArray:self.subTasks];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"AddSubTasksChanged" object:nil];
+    }
     
-    if([self.parentController isKindOfClass:[EditTaskViewController class]])
+    if([self.parentController isKindOfClass:[EditTaskViewController class]]){
         ((EditTaskViewController*)self.parentController).subTasks = [NSMutableArray arrayWithArray:self.subTasks];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditSubTasksChanged" object:nil];
+    }
 }
 
 
