@@ -418,13 +418,18 @@
     [textField resignFirstResponder];
     if(self.state!=KSMenuStateEdit)
     {
-        [self.categories addObject:[[KSCategory alloc] initWithID:2 andName:textField.text andSyncStatus:0]];
+        [[ApplicationManager categoryApplicationManager] addCateroty:[[KSCategory alloc] initWithID:2 andName:textField.text andSyncStatus:0]];
+        self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
         textField.text=@"";
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.categories.count-1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
     }
     else
     {
-        self.categories[self.managedIndexPath.row].name=textField.text;
+        KSCategory* cat = self.categories[self.managedIndexPath.row];
+        cat.name=textField.text;
+        [[ApplicationManager categoryApplicationManager] updateCateroty:cat];
+        self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+
         self.state=KSMenuStateNormal;
         [self.tableView reloadData];
         textField.text=@"";
@@ -450,10 +455,16 @@
         
         UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
                                       {
-                                          [self.categories removeObjectAtIndex:indexPath.row];
                                           dispatch_async(dispatch_get_main_queue(), ^
                                                          {
+                                                             KSCategory* cat = self.categories[indexPath.row];
+                                                             [[ApplicationManager categoryApplicationManager] deleteCateroty:cat];
+                                                             self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
                                                              [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                                                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                                 [self.tableView reloadData];
+                                                             });
+                                                             
                                                          });
                                           
                                       }];
