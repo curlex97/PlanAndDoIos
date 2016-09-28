@@ -79,7 +79,7 @@
             break;
         case 2:
             cell.textLabel.text=@"Date & Time";
-            cell.paramValueLabel.text = self.completionTime.description;
+            cell.paramValueLabel.text = [self.completionTime.description substringToIndex:[self.completionTime.description rangeOfString:@":" ].location + 3];
             break;
     }
     return cell;
