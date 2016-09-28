@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SyncApiManager.h"
+#import "UserApiManager.h"
+#import "SettingsApiManager.h"
+#import "CategoryApiManager.h"
+#import "TasksApiManager.h"
+#import "SubTasksApiManager.h"
 
 
 @interface SyncApplicationManager : NSObject
