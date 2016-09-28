@@ -66,6 +66,7 @@
             KSAuthorisedUser* user = [[KSAuthorisedUser alloc] initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:createDate andLastVisitDate:lastVisitDate andSyncStatus:syncStatus andAccessToken:token andUserSettings:settings];
             
             [[[UserCoreDataManager alloc] init] setUser:user];
+            [[[SettingsCoreDataManager alloc] init] setSettings:settings];
             
             
             ///////Categories//////////

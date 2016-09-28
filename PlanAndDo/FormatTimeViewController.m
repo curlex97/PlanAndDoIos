@@ -61,7 +61,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString* formatTime = indexPath.row ? @"24" : @"12";
+    NSString* formatTime = indexPath.row ? @"12" : @"24";
     
     UserSettings* updatedSettings = [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.settings.startPage andDateFormat:self.settings.dateFormat andPageType:self.settings.pageType andTimeFormat:formatTime andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]];
     

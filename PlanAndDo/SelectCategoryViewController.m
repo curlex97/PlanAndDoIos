@@ -62,6 +62,7 @@
     [super viewDidLoad];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    self.title = @"Category";
     self.categories = [NSArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
 }
 

@@ -14,8 +14,10 @@
 #import "StartPageViewController.h"
 #import "UIImage+ACScaleImage.h"
 #import "AMSideBarViewController.h"
+#import "ApplicationManager.h"
 
 @interface SettingsViewController()<UITableViewDelegate, UITableViewDataSource>
+@property UserSettings* settings;
 @end
 
 @implementation SettingsViewController
@@ -29,6 +31,18 @@
     UIBarButtonItem * menuButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Menu"] scaledToSize:CGSizeMake(40, 40)] style:UIBarButtonItemStyleDone target:self action:@selector(menuTapped)];
     self.navigationItem.leftBarButtonItem=menuButton;
 
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.settings = [[ApplicationManager settingsApplicationManager] settings];
+    
+    KSAuthorisedUser* user = [[ApplicationManager userApplicationManager] authorisedUser];
+    user.settings = self.settings;
+    [[ApplicationManager userApplicationManager] updateUser:user];
+    
+    [self.tableView reloadData];
 }
 
 -(void)menuTapped
@@ -47,6 +61,7 @@
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSSettingsCell"owner:self options:nil];
     KSSettingsCell * cell=[nib objectAtIndex:0];
     
+    
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.textColor=[UIColor colorWithRed:98.0/255.0 green:98.0/255.0 blue:98.0/255.0 alpha:1.0];
     
@@ -54,15 +69,23 @@
     {
         case 0:
             cell.textLabel.text = @"Start page";
+            cell.paramValueLabel.text = self.settings.startPage.capitalizedString;
+            
             break;
         case 1:
             cell.textLabel.text = @"Format date";
+            cell.paramValueLabel.text = self.settings.dateFormat.uppercaseString;
+
             break;
         case 2:
             cell.textLabel.text = @"Format time";
+            cell.paramValueLabel.text = [NSString stringWithFormat:@"%@H", self.settings.timeFormat];
+
             break;
         case 3:
             cell.textLabel.text = @"Start day";
+            cell.paramValueLabel.text = self.settings.startDay.capitalizedString;
+
             break;
         default:
             break;
