@@ -97,18 +97,10 @@
 
 -(void)dateTimeValueChanged:(UIDatePicker *)dateTimePicker
 {
-    NSDate* localDate = [dateTimePicker.date localDate];
-    NSLog(@"%@",dateTimePicker);
-    NSString * pickerDate=[[NSString stringWithFormat:@"%@", localDate] substringToIndex:10];
-    if([[pickerDate substringToIndex:10] isEqualToString:[[NSString stringWithFormat:@"%@",[NSDate date]] substringToIndex:10]])
-    {
-        self.dateLabel.text=@"Today";
-    }
-    else
-    {
-        self.dateLabel.text=[pickerDate substringToIndex:10];
-    }
-    self.timeLabel.text=[[[NSString stringWithFormat:@"%@",dateTimePicker.date] substringFromIndex:10] substringToIndex:6];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:dateTimePicker.date];
+    
+    self.dateLabel.text = [NSString stringWithFormat:@"%li/%li/%li", [components day], [components month], [components year]];
+    self.timeLabel.text = [NSString stringWithFormat:@"%li:%li", [components hour], [components minute]];
 }
 
 - (void)didReceiveMemoryWarning {
