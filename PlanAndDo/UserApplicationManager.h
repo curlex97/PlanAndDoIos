@@ -25,4 +25,6 @@
 
 -(void) cleanTable;
 
+-(void) logout;
+
 @end

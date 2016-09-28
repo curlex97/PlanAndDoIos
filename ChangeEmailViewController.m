@@ -8,6 +8,7 @@
 
 #import "ChangeEmailViewController.h"
 #import "KSApplicatipnColor.h"
+#import "ApplicationManager.h"
 
 #define TEXTFIELD_PADDING_LEFT 10
 
@@ -95,6 +96,13 @@
 }
 - (IBAction)submitDidTap:(UIButton *)sender
 {
+    KSAuthorisedUser* user = [[ApplicationManager userApplicationManager] authorisedUser];
+    if([self.oldEmailTextField.text isEqualToString:user.emailAdress] && [self.emailTextField.text isEqualToString:self.reenterEmailTextField.text])
+    {
+        user.emailAdress = self.emailTextField.text;
+        [[ApplicationManager userApplicationManager] updateUser:user];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"EmailChanged" object:user];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

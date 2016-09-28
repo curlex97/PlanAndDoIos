@@ -19,4 +19,6 @@
 
 -(void) registerAsyncWithEmail:(NSString*)email andUserName:(NSString*)userName andPassword:(NSString*)password completion:(void (^)(NSDictionary*))completed;
 
+-(void) logout;
+
 @end

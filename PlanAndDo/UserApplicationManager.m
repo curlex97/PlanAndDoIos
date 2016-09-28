@@ -138,4 +138,10 @@
     return [[[UserCoreDataManager alloc] init] cleanTable];
 }
 
+-(void)logout
+{
+    [ApplicationManager cleanLocalDataBase];
+    [[[UserApiManager alloc] init] logout];		
+}
+
 @end

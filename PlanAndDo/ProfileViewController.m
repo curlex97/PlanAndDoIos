@@ -11,9 +11,11 @@
 #import "AMSideBarViewController.h"
 #import "KSSettingsCell.h"
 #import "ChangeEmailViewController.h"
+#import "ApplicationManager.h"
+
 @interface ProfileViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic)NSArray<NSString *> * items;
-@property (nonatomic)NSString * userName;
+@property (nonatomic)KSAuthorisedUser * user;
 @property (nonatomic)KSProfileState state;
 @end
 
@@ -32,7 +34,7 @@
     
     if(indexPath.row==0)
     {
-        cell.paramValueLabel.text=self.userName;
+        cell.paramValueLabel.text=self.user.userName;
         cell.imageView.image=[UIImage imageNamed:@"name"];
     }
     else if(indexPath.row==1)
@@ -44,7 +46,7 @@
     else if(indexPath.row==2)
     {
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        cell.paramValueLabel.text=@"example@gmail.com";
+        cell.paramValueLabel.text=self.user.emailAdress;
         cell.imageView.image=[UIImage imageNamed:@"email"];
     }
     else if(indexPath.row==3)
@@ -68,7 +70,8 @@
         [alertController addTextFieldWithConfigurationHandler:nil];
         UIAlertAction * okAction=[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
                                   {
-                                      self.userName=alertController.textFields.firstObject.text;
+                                      self.user.userName=alertController.textFields.firstObject.text;
+                                      [[ApplicationManager userApplicationManager] updateUser:self.user];
                                       [self.tableView reloadData];
                                   }];
         
@@ -100,8 +103,12 @@
                                             UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
                                             UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
                                                                           {
-                                                                              //delete all if password correct !
-                                                                              //alertController.textFields.firstObject.text
+                                                                              if(/* DISABLES CODE */ (NO))
+                                                                              {
+                                                                                  [ApplicationManager cleanLocalDataBase];
+                                                                                  [self.tableView reloadData];
+                                                                              }
+                                                                                  
                                                                           }];
                                             [alertController addAction:cancelAction];
                                             [alertController addAction:deleteAction];
@@ -114,8 +121,14 @@
     }
     else
     {
+        [[ApplicationManager userApplicationManager] logout];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+-(void) refreshData:(NSNotification*)not
+{
+    [self.tableView reloadData];
 }
 
 -(void)menuTapped
@@ -129,7 +142,9 @@
     [super viewDidLoad];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
-    self.userName=@"John Doe";
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:@"EmailChanged" object:nil];
+
+    self.user = [[ApplicationManager userApplicationManager] authorisedUser];
     UIBarButtonItem * menuButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Menu"] scaledToSize:CGSizeMake(40, 40)] style:UIBarButtonItemStyleDone target:self action:@selector(menuTapped)];
     self.navigationItem.leftBarButtonItem=menuButton;
     

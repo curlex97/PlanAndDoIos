@@ -102,4 +102,5 @@
     [super cleanTable:@"User"];
 }
 
+
 @end
