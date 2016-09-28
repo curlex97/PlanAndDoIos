@@ -41,9 +41,11 @@
     switch (indexPath.row) {
         case 0:
             cell.paramNameLabel.text = @"DD/MM/YY";
+            cell.accessoryType=[self.settings.dateFormat.lowercaseString isEqualToString:@"DD/MM/YY".lowercaseString] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         case 1:
             cell.paramNameLabel.text = @"MM/DD/YY";
+            cell.accessoryType=[self.settings.dateFormat.lowercaseString isEqualToString:@"MM/DD/YY".lowercaseString] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         default:
             break;

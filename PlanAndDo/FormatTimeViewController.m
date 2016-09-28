@@ -42,9 +42,11 @@
     switch (indexPath.row) {
         case 0:
             cell.paramNameLabel.text = @"24H";
+            cell.accessoryType=[self.settings.timeFormat.lowercaseString containsString:@"24"] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         case 1:
             cell.paramNameLabel.text = @"12H";
+            cell.accessoryType=[self.settings.timeFormat.lowercaseString containsString:@"12"] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         default:
             break;

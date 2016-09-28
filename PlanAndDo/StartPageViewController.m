@@ -59,6 +59,8 @@
     KSCheckSettingsTableViewCell * cell=[nib objectAtIndex:0];
 
     cell.paramNameLabel.text = self.segment.selectedSegmentIndex ? self.boxes[indexPath.row] : ((KSCategory*)self.categories[indexPath.row]).name;
+    cell.accessoryType=[self.settings.startPage.lowercaseString isEqualToString:cell.paramNameLabel.text.lowercaseString] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+    
     
     return cell;
 }

@@ -42,9 +42,11 @@
     switch (indexPath.row) {
         case 0:
             cell.paramNameLabel.text = @"Monday";
+            cell.accessoryType=[self.settings.startDay.lowercaseString isEqualToString:@"Monday".lowercaseString] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         case 1:
             cell.paramNameLabel.text = @"Sunday";
+            cell.accessoryType=[self.settings.startDay.lowercaseString isEqualToString:@"Sunday".lowercaseString] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         default:
             break;
