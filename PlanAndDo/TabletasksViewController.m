@@ -201,6 +201,18 @@ static bool firstLoad = true;
                        archive,
                        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL],
                        nil];
+    
+    [self reloadCoreData];
+  
+    [self.currentBoxItem setTintColor:[UIColor colorWithRed:39.0/255.0 green:70.0/255.0 blue:83.0/255.0 alpha:1.0]];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addNewTask:) name:@"TaskAdd" object:nil];
+}
+
+
+-(void)reloadCoreData
+{
     if(!self.category)
     {
         switch (self.boxType)
@@ -208,27 +220,27 @@ static bool firstLoad = true;
             case KSBoxTypeToday:
                 self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForToday]];
                 self.title = @"Today";
-                self.currentBoxItem=today;
+                self.currentBoxItem=self.toolbarItems[1];
                 break;
             case KSBoxTypeTomorrow:
                 self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForTomorrow]];
                 self.title = @"Tomorrow";
-                self.currentBoxItem=tomorrow;
+                self.currentBoxItem=self.toolbarItems[3];
                 break;
             case KSBoxTypeWeek:
                 self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForWeek]];
-                self.currentBoxItem=week;
+                self.currentBoxItem=self.toolbarItems[5];
                 self.title = @"Week";
                 break;
             case KSBoxTypeArchive:
                 self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForArchive]];
-                self.currentBoxItem=archive;
+                self.currentBoxItem=self.toolbarItems[7];
                 self.title = @"Archive";
                 self.navigationItem.rightBarButtonItem=nil;
                 break;
             case KSBoxTypeBacklog:
                 self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForBacklog]];
-                self.currentBoxItem=backLog;
+                self.currentBoxItem=self.toolbarItems[9];
                 self.title = @"Backlog";
                 break;
         }
@@ -243,7 +255,7 @@ static bool firstLoad = true;
     {
         self.boxType = KSBoxTypeToday;
         self.title = @"Today";
-        self.currentBoxItem=today;
+        self.currentBoxItem=self.toolbarItems[1];
     }
     
     else
@@ -251,16 +263,14 @@ static bool firstLoad = true;
         if(self.boxType == KSBoxTypeArchive) [self addSegmentControl];
         else [self removeSegmentControl];
     }
-    [self.currentBoxItem setTintColor:[UIColor colorWithRed:39.0/255.0 green:70.0/255.0 blue:83.0/255.0 alpha:1.0]];
-    
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addNewTask:) name:@"TaskAdd" object:nil];
+
 }
 
 -(void)addNewTask:(NSNotification *)not
 {
     //как то проверить что категория добавленного таска такаяя же как и категорию текущая и добавить этот таск в массив если не такаяже оставить и не трогать !
-    
+    [self reloadCoreData];
+
     [self.tableView reloadData];
 //    BaseTask * task=[not object];
 //    [self.tasks addObject:task];
