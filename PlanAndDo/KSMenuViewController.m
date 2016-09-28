@@ -35,22 +35,13 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
+    
+    
     if(gestureRecognizer==self.tap)
     {
         if([self.searchBar isFirstResponder])
         {
-            CGPoint point=[gestureRecognizer locationInView:self.tableView];
-            NSIndexPath * indexPath=[self.tableView indexPathForRowAtPoint:point];
-            
-            if(indexPath==nil)
-            {
-                [self.searchBar resignFirstResponder];
-            }
-            else
-            {
-                [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-                [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
-            }
+            [self.searchBar resignFirstResponder];
         }
         
         if([self.addCategoryTextField isFirstResponder])
@@ -65,6 +56,7 @@
             self.addCategoryTextField.text=@"";
         }
     }
+    
     
     return YES;
 }
