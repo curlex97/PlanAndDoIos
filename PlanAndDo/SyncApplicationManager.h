@@ -12,6 +12,17 @@
 
 @interface SyncApplicationManager : NSObject
 
--(void)sync;
+-(void)syncWithCompletion:(void (^)(bool))completed;
+
+
+-(void) syncUserWithCompletion:(void (^)(bool))completed;
+
+-(void) syncSettingsWithCompletion:(void (^)(bool))completed;
+
+-(void) syncCategoriesWithCompletion:(void (^)(bool))completed;
+
+-(void) syncTasksWithCompletion:(void (^)(bool))completed;
+
+-(void) syncSubTasksWithCompletion:(void (^)(bool))completed;
 
 @end

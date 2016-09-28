@@ -21,4 +21,7 @@
 
 -(void) logout;
 
+-(void) syncUserWithCompletion:(void (^)(bool))completed;
+
+
 @end
