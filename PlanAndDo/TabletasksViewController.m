@@ -207,7 +207,10 @@ static bool firstLoad = true;
     [self.currentBoxItem setTintColor:[UIColor colorWithRed:39.0/255.0 green:70.0/255.0 blue:83.0/255.0 alpha:1.0]];
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addNewTask:) name:@"TaskAdd" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:@"TaskAdd" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:@"TaskEdit" object:nil];
+
+    
 }
 
 
@@ -266,15 +269,10 @@ static bool firstLoad = true;
 
 }
 
--(void)addNewTask:(NSNotification *)not
+-(void)refreshData:(NSNotification *)not
 {
-    //как то проверить что категория добавленного таска такаяя же как и категорию текущая и добавить этот таск в массив если не такаяже оставить и не трогать !
     [self reloadCoreData];
-
     [self.tableView reloadData];
-//    BaseTask * task=[not object];
-//    [self.tasks addObject:task];
-//    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.tasks.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 -(void)menuTapped

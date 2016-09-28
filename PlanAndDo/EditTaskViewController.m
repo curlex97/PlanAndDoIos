@@ -204,6 +204,8 @@
         realTask.syncStatus = [[NSDate date] timeIntervalSince1970];
         
         [[ApplicationManager tasksApplicationManager] updateTask:realTask];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TaskEdit" object:realTask];
+        
     }
     
     
