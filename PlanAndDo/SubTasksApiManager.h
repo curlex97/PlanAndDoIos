@@ -20,4 +20,6 @@
 
 -(void)deleteSubTaskAsync:(KSShortTask*)subTask fromTask:(KSTaskCollection*)task forUser:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
 
+-(void) syncSubTasksWithCompletion:(void (^)(bool))completed;
+
 @end

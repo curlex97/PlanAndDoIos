@@ -47,7 +47,6 @@
 		28214C8B1D93D33E0012B1C7 /* UserApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C8A1D93D33E0012B1C7 /* UserApplicationManager.m */; };
 		28214C8F1D93D3510012B1C7 /* SettingsApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C8E1D93D3510012B1C7 /* SettingsApplicationManager.m */; };
 		28214C931D93D36E0012B1C7 /* CategoryApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C921D93D36E0012B1C7 /* CategoryApplicationManager.m */; };
-		28214C971D93D9420012B1C7 /* SyncApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C961D93D9420012B1C7 /* SyncApiManager.m */; };
 		28214C9B1D93E2D60012B1C7 /* SyncApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28214C9A1D93E2D60012B1C7 /* SyncApplicationManager.m */; };
 		2822CBF71D9554CE00779984 /* NSDate+LocalTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 2822CBF61D9554CE00779984 /* NSDate+LocalTime.m */; };
 		282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282C28C51D829A600061761E /* AMSideBarViewController.m */; };
@@ -170,8 +169,6 @@
 		28214C8E1D93D3510012B1C7 /* SettingsApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsApplicationManager.m; sourceTree = "<group>"; };
 		28214C911D93D36E0012B1C7 /* CategoryApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryApplicationManager.h; sourceTree = "<group>"; };
 		28214C921D93D36E0012B1C7 /* CategoryApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryApplicationManager.m; sourceTree = "<group>"; };
-		28214C951D93D9420012B1C7 /* SyncApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncApiManager.h; sourceTree = "<group>"; };
-		28214C961D93D9420012B1C7 /* SyncApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncApiManager.m; sourceTree = "<group>"; };
 		28214C991D93E2D60012B1C7 /* SyncApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncApplicationManager.h; sourceTree = "<group>"; };
 		28214C9A1D93E2D60012B1C7 /* SyncApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncApplicationManager.m; sourceTree = "<group>"; };
 		2822CBF51D9554CE00779984 /* NSDate+LocalTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+LocalTime.h"; sourceTree = "<group>"; };
@@ -634,15 +631,6 @@
 			name = CategoryApplicationManager;
 			sourceTree = "<group>";
 		};
-		28214C981D93D9460012B1C7 /* SyncApiManager */ = {
-			isa = PBXGroup;
-			children = (
-				28214C951D93D9420012B1C7 /* SyncApiManager.h */,
-				28214C961D93D9420012B1C7 /* SyncApiManager.m */,
-			);
-			name = SyncApiManager;
-			sourceTree = "<group>";
-		};
 		28214C9C1D93E2DF0012B1C7 /* SyncApplicationManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -766,7 +754,6 @@
 				28943D091D9303C600BC8A69 /* UserApiManager */,
 				28943D081D9303BC00BC8A69 /* SettingsApiManager */,
 				28943D071D9303B500BC8A69 /* CategoryApiManager */,
-				28214C981D93D9460012B1C7 /* SyncApiManager */,
 			);
 			name = ApiManagers;
 			sourceTree = "<group>";
@@ -1081,7 +1068,6 @@
 				27494DE41D8D3ECE009BFC5F /* KSMenuViewController.m in Sources */,
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
 				28943CFA1D93032000BC8A69 /* TasksApiManager.m in Sources */,
-				28214C971D93D9420012B1C7 /* SyncApiManager.m in Sources */,
 				2803AF811D8A8F190032ACFB /* KSSettingsCell.m in Sources */,
 				278BAA581D89BB32002D38CF /* BaseTableViewController.m in Sources */,
 				28AB85671D8F486100D93AB7 /* UserCoreDataManager.m in Sources */,
