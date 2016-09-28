@@ -213,6 +213,12 @@ static bool firstLoad = true;
     
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [self refreshData:nil];
+}
+
 
 -(void)reloadCoreData
 {
