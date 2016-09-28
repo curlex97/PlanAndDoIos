@@ -102,5 +102,67 @@
     [super cleanTable:@"User"];
 }
 
+// SYNC
+
+-(void)syncSetUser:(KSAuthorisedUser *)user
+{
+    NSError* error = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"User"];
+    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if(!error)
+    {
+        if(![results count])
+        {
+            NSEntityDescription* entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:self.managedObjectContext];
+            NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
+            [object setValue:[NSNumber numberWithInteger:[user ID]] forKey:@"id"];
+            [object setValue:[user userName] forKey:@"name"];
+            [object setValue:[user emailAdress] forKey:@"email"];
+            [object setValue:[user createdAt] forKey:@"created_at"];
+            [object setValue:[user lastVisit] forKey:@"lastvisit_date"];
+            [object setValue:[NSNumber numberWithInteger:[user syncStatus]] forKey:@"user_sync_status"];
+            [object setValue:[NSNumber numberWithBool:YES] forKey:@"local_sync"];
+            
+            [self.managedObjectContext save:nil];
+        }
+        else
+        {
+            [self syncUpdateUser:user];
+        }
+    }
+}
+
+-(void)syncUpdateUser:(KSAuthorisedUser *)user
+{
+    NSError* error = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"User"];
+    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if(!error)
+    {
+        if(![results count]) [self syncSetUser:user];
+        
+        else
+        {
+            for(NSManagedObject* managedUser in results)
+            {
+                [managedUser setValue:[NSNumber numberWithInteger:[user ID]] forKey:@"id"];
+                [managedUser setValue:[user userName] forKey:@"name"];
+                [managedUser setValue:[user emailAdress] forKey:@"email"];
+                [managedUser setValue:[user createdAt] forKey:@"created_at"];
+                [managedUser setValue:[user lastVisit] forKey:@"lastvisit_date"];
+                [managedUser setValue:[NSNumber numberWithInteger:[user syncStatus]] forKey:@"user_sync_status"];
+                [managedUser setValue:[NSNumber numberWithBool:YES] forKey:@"local_sync"];
+                
+                [self.managedObjectContext save:nil];
+            }
+        }
+    }
+    
+}
+
+
+
 
 @end

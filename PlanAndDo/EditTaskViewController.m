@@ -164,6 +164,7 @@
     {
         TaskListViewController * tasksViewController =[[TaskListViewController alloc] init];
         KSTaskCollection* realTask = (KSTaskCollection*)self.task;
+        tasksViewController.subTasks = [NSMutableArray arrayWithArray:self.subTasks];
         tasksViewController.task = realTask;
         tasksViewController.parentController = self;
         [self.navigationController pushViewController:tasksViewController animated:YES];
@@ -256,9 +257,20 @@
 }
 
 
+-(void)subTasksChanged:(NSNotification*)not
+{
+    KSTaskCollection* realTask = (KSTaskCollection*)self.task;
+    
+    for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask]) [[ApplicationManager subTasksApplicationManager] deleteSubTask:subTask forTask:realTask];
+    
+    for(KSShortTask* subTask in self.subTasks) [[ApplicationManager subTasksApplicationManager] addSubTask:subTask forTask:realTask];
+    
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subTasksChanged:) name:@"EditSubTasksChanged" object:nil];
     
     self.completionTime = self.task.completionTime;
     if([self.task isKindOfClass:[KSTask class]]) self.taskDesc = ((KSTask*)self.task).taskDescription;

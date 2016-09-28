@@ -33,7 +33,7 @@
 
 @implementation KSMenuViewController
 
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     if(gestureRecognizer==self.tap)
     {
@@ -66,7 +66,7 @@
         }
     }
     
-    return YES;
+    return ![touch.view isDescendantOfView:self.tableView];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

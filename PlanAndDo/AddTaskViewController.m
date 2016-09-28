@@ -175,6 +175,7 @@
         TaskListViewController * tasksViewController =[[TaskListViewController alloc] init];
         KSTaskCollection* realTask = [[KSTaskCollection alloc] init];
         realTask.ID = self.Id;
+        tasksViewController.subTasks = [NSMutableArray arrayWithArray:self.subTasks];
         tasksViewController.task = realTask;
         tasksViewController.parentController = self;
         [self.navigationController pushViewController:tasksViewController animated:YES];
@@ -221,10 +222,22 @@
     [self.tableView reloadData];
 }
 
+-(void)subTasksChanged:(NSNotification*)not
+{
+    KSTaskCollection* realTask = [[KSTaskCollection alloc] init];
+    realTask.ID = self.Id;
+    
+    for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask]) [[ApplicationManager subTasksApplicationManager] deleteSubTask:subTask forTask:realTask];
+    
+    for(KSShortTask* subTask in self.subTasks) [[ApplicationManager subTasksApplicationManager] addSubTask:subTask forTask:realTask];
+    
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subTasksChanged:) name:@"AddSubTasksChanged" object:nil];
+
     //self.pan=[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gesturePan)];
     //self.pan.delegate=self;
     self.headerText=@"Head";

@@ -27,4 +27,14 @@
 
 -(void)cleanTable;
 
+
+// SYNC
+
+-(void)syncAddCateroty:(KSCategory *)category;
+
+-(void)syncUpdateCateroty:(KSCategory*)category;
+
+-(void)syncDeleteCateroty:(KSCategory*)category;
+
+
 @end
