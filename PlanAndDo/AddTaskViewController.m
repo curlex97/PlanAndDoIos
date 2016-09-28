@@ -24,6 +24,7 @@
 @property (nonatomic)NSArray * methods;
 @property (nonatomic)UITextField * textField;
 @property (nonatomic)NSString * headerText;
+@property NSUInteger Id;
 @end
 
 @implementation AddTaskViewController
@@ -68,14 +69,17 @@
             if(self.segment.selectedSegmentIndex==0)
             {
                 cell.textLabel.text=@"Description";
+                cell.paramValueLabel.text = self.taskDesc;
             }
             else
             {
                 cell.textLabel.text=@"Edit list";
+                cell.paramValueLabel.text = [NSString stringWithFormat:@"%lu tasks", (unsigned long)self.subTasks.count];
             }
             break;
         case 3:
             cell.textLabel.text=@"Date & Time";
+            cell.paramValueLabel.text = self.completionTime.description;
             break;
     }
     return cell;
@@ -168,6 +172,10 @@
     if(self.segment.selectedSegmentIndex)
     {
         TaskListViewController * tasksViewController =[[TaskListViewController alloc] init];
+        KSTaskCollection* realTask = [[KSTaskCollection alloc] init];
+        realTask.ID = self.Id;
+        tasksViewController.task = realTask;
+        tasksViewController.parentController = self;
         [self.navigationController pushViewController:tasksViewController animated:YES];
     }
     else
@@ -207,6 +215,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    NSDate *now = [NSDate date];
+    self.Id = now.timeIntervalSince1970;
     [self.tableView reloadData];
 }
 
@@ -265,10 +275,32 @@
             case 2: priority = KSTaskVeryHighPriority; break;
         }
         
-        NSDate *now = [NSDate date];
-        NSUInteger Id = now.timeIntervalSince1970;
         
-        KSTask* task = [[KSTask alloc] initWithID:Id  andName:self.headerText andStatus:NO andTaskReminderTime:self.completionTime andTaskPriority:priority andCategoryID:(int)self.category.ID andCreatedAt:[NSDate date] andCompletionTime:self.completionTime andSyncStatus:(int)Id andTaskDescription:self.taskDesc];
+        KSTask* task = [[KSTask alloc] initWithID:self.Id  andName:self.headerText andStatus:NO andTaskReminderTime:self.completionTime andTaskPriority:priority andCategoryID:(int)self.category.ID andCreatedAt:[NSDate date] andCompletionTime:self.completionTime andSyncStatus:(int)self.Id andTaskDescription:self.taskDesc];
+        [[ApplicationManager tasksApplicationManager] addTask: task];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TaskAdd" object:task];
+    }
+    
+    
+    else
+    {
+        KSTaskPriority priority = KSTaskDefaultPriority;
+        
+        switch ((int)self.slider.value) {
+            case 0:priority = KSTaskDefaultPriority; break;
+            case 1: priority = KSTaskHighPriority; break;
+            case 2: priority = KSTaskVeryHighPriority; break;
+        }
+        
+
+        
+        KSTaskCollection* task = [[KSTaskCollection alloc] initWithID:self.Id andName:self.headerText andStatus:NO andTaskReminderTime:self.completionTime andTaskPriority:priority andCategoryID:(int)self.category.ID andCreatedAt:[NSDate date] andCompletionTime:self.completionTime andSyncStatus:(int)self.Id andSubTasks:[NSMutableArray arrayWithArray:self.subTasks]];
+        
+        
+        for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:task]) [[ApplicationManager subTasksApplicationManager] deleteSubTask:subTask forTask:task];
+        
+        for(KSShortTask* subTask in self.subTasks) [[ApplicationManager subTasksApplicationManager] addSubTask:subTask forTask:task];
+        
         [[ApplicationManager tasksApplicationManager] addTask: task];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TaskAdd" object:task];
     }

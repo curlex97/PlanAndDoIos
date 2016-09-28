@@ -17,4 +17,5 @@
 @property KSCategory* category;
 @property NSDate* completionTime;
 @property NSString* taskDesc;
+@property NSMutableArray* subTasks;
 @end

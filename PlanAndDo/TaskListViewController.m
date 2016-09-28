@@ -3,9 +3,9 @@
 #import "MGSwipeButton.h"
 #import "MGSwipeTableCell.h"
 #import "KSShortTask.h"
+#import "SubTaskTableViewCell.h"
 
 @interface TaskListViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIGestureRecognizerDelegate>
-@property (nonatomic)NSMutableArray<KSShortTask *> * tasks;
 @property (nonatomic)NSUInteger bottomOffset;
 @property (nonatomic)NSUInteger keyboardOffset;
 @property (nonatomic)UITextField * textField;
@@ -16,53 +16,65 @@
 
 @implementation TaskListViewController
 
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    [self.textField resignFirstResponder];
-    return YES;
+     [self.textField resignFirstResponder];
+    return ![touch.view isDescendantOfView:self.tableView];
 }
 
--(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Delete"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-    {
-        [self.tasks removeObjectAtIndex:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-    }];
-    deleteAction.backgroundColor = [UIColor redColor];
-    return @[deleteAction];
-}
+//-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    
+//    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Delete"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+//    {
+//        [self.subTasks removeObjectAtIndex:indexPath.row];
+//        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+//    }];
+//    deleteAction.backgroundColor = [UIColor redColor];
+//    return @[deleteAction];
+//}
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self.tasks insertObject:[[KSShortTask alloc] initWithID:0 andName:textField.text andStatus:NO andSyncStatus:0] atIndex:0];
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.subTasks insertObject:[[KSShortTask alloc] initWithID:0 andName:textField.text andStatus:NO andSyncStatus:0] atIndex:0];
+    [self.tableView reloadData];
     textField.text=@"";
 
     return YES;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.tasks.count;
+    return self.subTasks.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * identifier = @"reuseble cell";
-    UITableViewCell * cell=[tableView dequeueReusableCellWithIdentifier:identifier];
+    SubTaskTableViewCell * cell=[tableView dequeueReusableCellWithIdentifier:identifier];
     if(!cell)
     {
-        cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell=[[SubTaskTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    KSShortTask* subTask = self.subTasks[indexPath.row];
+    
     cell.textLabel.textColor=[UIColor colorWithRed:98.0/255.0 green:98.0/255.0 blue:98.0/255.0 alpha:1.0];
-    cell.textLabel.text=self.tasks[indexPath.row].name;
+    cell.textLabel.text=self.subTasks[indexPath.row].name;
+    cell.accessoryType = subTask.status ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 
+    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
+        [self.subTasks removeObject:subTask];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [tableView reloadData];
+        });
+        
+        return YES;
+    }]];
+    
+    cell.rightSwipeSettings.transition = MGSwipeDirectionRightToLeft;
+    
+    
     return cell;
 }
 
@@ -71,19 +83,25 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if([tableView cellForRowAtIndexPath:indexPath].accessoryType==UITableViewCellAccessoryNone)
     {
-        self.tasks[indexPath.row].status=YES;
         [tableView cellForRowAtIndexPath:indexPath].accessoryType=UITableViewCellAccessoryCheckmark;
+        KSShortTask* subTask = self.subTasks[indexPath.row];
+        subTask.status = YES;
     }
     else
     {
         [tableView cellForRowAtIndexPath:indexPath].accessoryType=UITableViewCellAccessoryNone;
-        self.tasks[indexPath.row].status=NO;
+        KSShortTask* subTask = self.subTasks[indexPath.row];
+        subTask.status = NO;
     }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.subTasks = [NSMutableArray arrayWithArray:[[ApplicationManager subTasksApplicationManager] allSubTasksForTask:self.task]];
+
+    
     self.view.backgroundColor=[UIColor whiteColor];
     self.bottom.constant=-45;
     [self.view layoutIfNeeded];
@@ -91,7 +109,7 @@
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
-    [self.view addGestureRecognizer:self.tap];
+    [self.tableView addGestureRecognizer:self.tap];
     
     self.textField=[[UITextField alloc] initWithFrame:CGRectMake(16, 8, self.navigationController.toolbar.frame.size.width-32, 30)];
     self.textField.borderStyle=UITextBorderStyleRoundedRect;
@@ -106,9 +124,10 @@
     [self.toolBarView addSubview:self.textField];
     [self.view addSubview:self.toolBarView];
     
-    self.tasks=[NSMutableArray array];
+    
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
+    
     self.tableView.bounds=CGRectMake(self.tableView.bounds.origin.x, self.tableView.bounds.origin.y, self.tableView.bounds.size.width, self.tableView.bounds.size.height-44);
     self.textField.translatesAutoresizingMaskIntoConstraints=NO;
     [self.toolBarView addConstraint:[NSLayoutConstraint
@@ -178,6 +197,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+     [self.tableView reloadData];
+    
 }
 
 -(void)keyboardWillShown:(NSNotification*) not
@@ -217,6 +239,17 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    
+    if([self.parentController isKindOfClass:[AddTaskViewController class]])
+        ((AddTaskViewController*)self.parentController).subTasks = [NSMutableArray arrayWithArray:self.subTasks];
+    
+    if([self.parentController isKindOfClass:[EditTaskViewController class]])
+        ((EditTaskViewController*)self.parentController).subTasks = [NSMutableArray arrayWithArray:self.subTasks];
 }
 
 

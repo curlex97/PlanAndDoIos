@@ -80,6 +80,7 @@
 		28AB856F1D8F48B300D93AB7 /* CategoryCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB856E1D8F48B300D93AB7 /* CategoryCoreDataManager.m */; };
 		28B947891D918D72005A8E9A /* EditTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B947881D918D72005A8E9A /* EditTaskViewController.m */; };
 		3F0E98291D95868600AAC625 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E98281D95868600AAC625 /* ProfileViewController.m */; };
+		3F6B255C1D9BCBA3007A7D70 /* SubTaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6B255B1D9BCBA3007A7D70 /* SubTaskTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -233,6 +234,8 @@
 		28B947881D918D72005A8E9A /* EditTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTaskViewController.m; sourceTree = "<group>"; };
 		3F0E98271D95868600AAC625 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		3F0E98281D95868600AAC625 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		3F6B255A1D9BCBA3007A7D70 /* SubTaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubTaskTableViewCell.h; sourceTree = "<group>"; };
+		3F6B255B1D9BCBA3007A7D70 /* SubTaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubTaskTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -525,6 +528,7 @@
 				2803AF7E1D8A8EE70032ACFB /* TaskTableViewCell */,
 				2803AF7D1D8A8EE20032ACFB /* PriorityCell */,
 				2803AF821D8A8F1E0032ACFB /* SettingsCell */,
+				3F6B255D1D9BCBA7007A7D70 /* SubTaskTableViewCell */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -934,6 +938,15 @@
 			name = DateAndTime;
 			sourceTree = "<group>";
 		};
+		3F6B255D1D9BCBA7007A7D70 /* SubTaskTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				3F6B255A1D9BCBA3007A7D70 /* SubTaskTableViewCell.h */,
+				3F6B255B1D9BCBA3007A7D70 /* SubTaskTableViewCell.m */,
+			);
+			name = SubTaskTableViewCell;
+			sourceTree = "<group>";
+		};
 		3FCD89411D994D1D00A00377 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -1056,6 +1069,7 @@
 				28943D0E1D9303EF00BC8A69 /* ApplicationManager.m in Sources */,
 				278BAA551D89BA4A002D38CF /* BaseAuthViewController.m in Sources */,
 				27B1A0FA1D8195A800D47FCD /* UserSettings.m in Sources */,
+				3F6B255C1D9BCBA3007A7D70 /* SubTaskTableViewCell.m in Sources */,
 				280539251D900F2900868ACF /* MGSwipeTableCell.m in Sources */,
 				28214C931D93D36E0012B1C7 /* CategoryApplicationManager.m in Sources */,
 				3F0E98291D95868600AAC625 /* ProfileViewController.m in Sources */,

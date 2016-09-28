@@ -64,11 +64,11 @@ static bool firstLoad = true;
     cell.rightSwipeSettings.transition = MGSwipeDirectionRightToLeft;
     cell.taskHeaderLabel.text = task.name;
     switch (task.priority) {
-        case KSTaskHighPriority:
+        case KSTaskDefaultPriority:
             cell.taskPriorityLabel.text = @"Low priority";
             cell.taskPriorityLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0];
             break;
-        case KSTaskDefaultPriority:
+        case KSTaskHighPriority:
             cell.taskPriorityLabel.text = @"Mid priority";
             cell.taskPriorityLabel.textColor=[UIColor colorWithRed:245.0/255.0 green:166.0/255.0 blue:35.0/255.0 alpha:1.0];
             break;

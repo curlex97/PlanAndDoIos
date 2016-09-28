@@ -62,14 +62,17 @@
             if([self.task isKindOfClass:[KSTask class]])
             {
                 cell.textLabel.text=@"Description";
+                cell.paramValueLabel.text = self.taskDesc;
             }
             else
             {
                 cell.textLabel.text=@"Edit list";
+                cell.paramValueLabel.text = [NSString stringWithFormat:@"%lu tasks", (unsigned long)self.subTasks.count];
             }
             break;
         case 3:
             cell.textLabel.text=@"Date & Time";
+            cell.paramValueLabel.text = self.completionTime.description;
             break;
     }
     return cell;
@@ -157,12 +160,15 @@
 
 -(void)listOrDescriptionDidTap
 {
-    if(self.segment.selectedSegmentIndex)
+    if([self.task isKindOfClass:[KSTaskCollection class]])
     {
         TaskListViewController * tasksViewController =[[TaskListViewController alloc] init];
+        KSTaskCollection* realTask = (KSTaskCollection*)self.task;
+        tasksViewController.task = realTask;
+        tasksViewController.parentController = self;
         [self.navigationController pushViewController:tasksViewController animated:YES];
     }
-    else
+    else if([self.task isKindOfClass:[KSTask class]])
     {
         DescriptionViewController * descController=[[DescriptionViewController alloc] init];
         descController.parentController = self;
@@ -177,6 +183,12 @@
     controller.completionTime = self.completionTime;
     controller.parentController = self;
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 
@@ -207,6 +219,34 @@
     }
     
     
+    else if([self.task isKindOfClass:[KSTaskCollection class]])
+    {
+        KSTaskPriority priority = KSTaskDefaultPriority;
+        
+        switch ((int)self.slider.value) {
+            case 0:priority = KSTaskDefaultPriority; break;
+            case 1: priority = KSTaskHighPriority; break;
+            case 2: priority = KSTaskVeryHighPriority; break;
+        }
+        
+        KSTaskCollection* realTask = (KSTaskCollection*)self.task;
+        realTask.completionTime = self.completionTime;
+        realTask.subTasks = [NSMutableArray arrayWithArray:self.subTasks];
+        realTask.categoryID = (int)self.category.ID;
+        realTask.priority = priority;
+        realTask.name = self.headerText;
+        realTask.syncStatus = [[NSDate date] timeIntervalSince1970];
+        
+        for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask]) [[ApplicationManager subTasksApplicationManager] deleteSubTask:subTask forTask:realTask];
+        
+        for(KSShortTask* subTask in self.subTasks) [[ApplicationManager subTasksApplicationManager] addSubTask:subTask forTask:realTask];
+        
+        
+        [[ApplicationManager tasksApplicationManager] updateTask:realTask];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TaskEdit" object:realTask];
+    }
+    
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -223,6 +263,12 @@
     self.completionTime = self.task.completionTime;
     if([self.task isKindOfClass:[KSTask class]]) self.taskDesc = ((KSTask*)self.task).taskDescription;
     self.category = [[ApplicationManager categoryApplicationManager] categoryWithId:self.task.categoryID];
+    
+    if([self.task isKindOfClass:[KSTaskCollection class]])
+    {
+        KSTaskCollection* realTask = (KSTaskCollection*)self.task;
+        self.subTasks = [NSMutableArray arrayWithArray:[[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask]];
+    }
     
     self.headerText = self.task.name;
     
