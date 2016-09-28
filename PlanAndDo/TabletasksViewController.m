@@ -252,6 +252,7 @@ static bool firstLoad = true;
                 self.currentBoxItem=self.toolbarItems[9];
                 self.title = @"Backlog";
                 break;
+                
         }
     }
     else
