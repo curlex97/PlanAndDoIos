@@ -16,7 +16,7 @@
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
-    NSLog(@"LT");
+    NSLog(@"LTG");
 }
 
 @end
