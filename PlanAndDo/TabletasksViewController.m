@@ -111,15 +111,11 @@ static bool firstLoad = true;
     NSDate * addTaskDate;
     switch (self.boxType)
     {
-            
-        case KSBoxTypeTomorrow:
-            addTaskDate=[NSDate dateWithTimeIntervalSince1970:[NSDate date].timeIntervalSince1970+86400];
-            break;
-        default:
-            addTaskDate=[NSDate date];
-            break;
+        case KSBoxTypeTomorrow: addTaskDate=[NSDate dateWithTimeIntervalSince1970:[NSDate date].timeIntervalSince1970+86400]; break;
+        default:  addTaskDate=[NSDate date]; break;
     }
-    [self.navigationController pushViewController:[[AddTaskViewController alloc] initWithCategory:self.category andDate:addTaskDate] animated:YES];
+    
+   // [self.navigationController pushViewController:[[AddTaskViewController alloc] initWithCategory:self.category andDate:addTaskDate] animated:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated
