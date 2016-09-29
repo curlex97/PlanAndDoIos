@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-#import "KSApplicatipnColor.h"
+#import "KSApplicationColor.h"
 
 @interface BaseViewController ()
 
@@ -24,7 +24,7 @@
 
 -(void)setBarImage
 {
-    CAGradientLayer * gradient=[KSApplicatipnColor sharedColor].rootGradient;
+    CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
     gradient.frame=self.navigationController.navigationBar.bounds;
     UIGraphicsBeginImageContext([gradient frame].size);
     

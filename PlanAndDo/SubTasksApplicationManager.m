@@ -7,6 +7,7 @@
 //
 
 #import "SubTasksApplicationManager.h"
+#import "ApplicationManager.h"
 
 @implementation SubTasksApplicationManager
 
@@ -18,19 +19,19 @@
 -(void)addSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
     [[[SubTasksCoreDataManager alloc] init] addSubTask:subTask forTask:task];
-    [[[SubTasksApiManager alloc] init] addSubTaskAsync:subTask toTask:task forUser:nil completion:nil];
+    [[[SubTasksApiManager alloc] init] addSubTaskAsync:subTask toTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
 }
 
 -(void)updateSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
     [[[SubTasksCoreDataManager alloc] init] updateSubTask:subTask forTask:task];
-    [[[SubTasksApiManager alloc] init] updateSubTaskAsync:subTask inTask:task forUser:nil completion:nil];
+    [[[SubTasksApiManager alloc] init] updateSubTaskAsync:subTask inTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
 }
 
 -(void)deleteSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
     [[[SubTasksCoreDataManager alloc] init] deleteSubTask:subTask forTask:task];
-    [[[SubTasksApiManager alloc] init] deleteSubTaskAsync:subTask fromTask:task forUser:nil completion:nil];
+    [[[SubTasksApiManager alloc] init] deleteSubTaskAsync:subTask fromTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
 }
 
 -(void) cleanTable

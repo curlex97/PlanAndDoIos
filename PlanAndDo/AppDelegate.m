@@ -10,7 +10,7 @@
 #import "AMSideBarViewController.h"
 #import "AMAndroidSideBarViewController.h"
 #import "BaseViewController.h"
-#import "KSApplicatipnColor.h"
+#import "KSApplicationColor.h"
 #import "LoginViewController.h"
 
 @interface AppDelegate ()
@@ -34,7 +34,7 @@
     
     application.statusBarStyle = UIStatusBarStyleLightContent;
     UIView *statusBar = [[application valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-    CAGradientLayer * gradient2 =[KSApplicatipnColor sharedColor].rootGradient;
+    CAGradientLayer * gradient2 =[KSApplicationColor sharedColor].rootGradient;
     gradient2.frame = statusBar.bounds;
     NSLog(@"%@",statusBar.subviews);
     

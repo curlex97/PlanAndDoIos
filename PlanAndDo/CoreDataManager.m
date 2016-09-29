@@ -7,6 +7,7 @@
 //
 
 #import "CoreDataManager.h"
+#import "ApplicationDefines.h"
 
 @implementation CoreDataManager
 
@@ -16,13 +17,13 @@
     self = [super init];
     if (self) {
         self.managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSMainQueueConcurrencyType];
-        NSURL* modelUrl = [[NSBundle mainBundle] URLForResource:@"PlanAndDo" withExtension:@"momd"];
+        NSURL* modelUrl = [[NSBundle mainBundle] URLForResource:CD_DATABASE_NAME withExtension:CD_DATABASE_EXT];
         NSManagedObjectModel* mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelUrl];
         NSPersistentStoreCoordinator* psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
         self.managedObjectContext.persistentStoreCoordinator = psc;
         NSArray* urls = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
         NSURL* docUrl = urls[urls.count - 1];
-        NSURL* storeUrl = [docUrl URLByAppendingPathComponent:@"PlanAndDo.sqlite"];
+        NSURL* storeUrl = [docUrl URLByAppendingPathComponent:CD_DATABASE_SQLITE];
         NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
                                  [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
                                  [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];

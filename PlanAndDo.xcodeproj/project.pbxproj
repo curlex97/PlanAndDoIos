@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E01D83E217004D3681 /* AMAndroidSideBarViewController.m */; };
-		270DF9E41D83F0B0004D3681 /* KSApplicatipnColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E31D83F0B0004D3681 /* KSApplicatipnColor.m */; };
+		270DF9E41D83F0B0004D3681 /* KSApplicationColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E31D83F0B0004D3681 /* KSApplicationColor.m */; };
 		270DF9E71D83F56E004D3681 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E61D83F56E004D3681 /* BaseViewController.m */; };
 		272F91C01D8A678800A0330B /* SelectCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91BF1D8A678800A0330B /* SelectCategoryViewController.m */; };
 		272F91C31D8A6C0C00A0330B /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C21D8A6C0C00A0330B /* DescriptionViewController.m */; };
@@ -95,8 +95,8 @@
 /* Begin PBXFileReference section */
 		270DF9DF1D83E217004D3681 /* AMAndroidSideBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAndroidSideBarViewController.h; sourceTree = "<group>"; };
 		270DF9E01D83E217004D3681 /* AMAndroidSideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAndroidSideBarViewController.m; sourceTree = "<group>"; };
-		270DF9E21D83F0B0004D3681 /* KSApplicatipnColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSApplicatipnColor.h; sourceTree = "<group>"; };
-		270DF9E31D83F0B0004D3681 /* KSApplicatipnColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSApplicatipnColor.m; sourceTree = "<group>"; };
+		270DF9E21D83F0B0004D3681 /* KSApplicationColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSApplicationColor.h; sourceTree = "<group>"; };
+		270DF9E31D83F0B0004D3681 /* KSApplicationColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSApplicationColor.m; sourceTree = "<group>"; };
 		270DF9E51D83F56E004D3681 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		270DF9E61D83F56E004D3681 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		272F91BE1D8A678800A0330B /* SelectCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCategoryViewController.h; sourceTree = "<group>"; };
@@ -260,8 +260,7 @@
 				282C28CA1D829C610061761E /* KSObject */,
 				27B1A1081D81A98100D47FCD /* TaskModels */,
 				27B1A1071D81A96F00D47FCD /* UserModels */,
-				270DF9E21D83F0B0004D3681 /* KSApplicatipnColor.h */,
-				270DF9E31D83F0B0004D3681 /* KSApplicatipnColor.m */,
+				28AF3EF41D9D1D1C000467EC /* ApplicationColor */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -909,6 +908,15 @@
 			name = CategoryCoreDataManager;
 			sourceTree = "<group>";
 		};
+		28AF3EF41D9D1D1C000467EC /* ApplicationColor */ = {
+			isa = PBXGroup;
+			children = (
+				270DF9E21D83F0B0004D3681 /* KSApplicationColor.h */,
+				270DF9E31D83F0B0004D3681 /* KSApplicationColor.m */,
+			);
+			name = ApplicationColor;
+			sourceTree = "<group>";
+		};
 		28B9478A1D918D7F005A8E9A /* EditTask */ = {
 			isa = PBXGroup;
 			children = (
@@ -1052,7 +1060,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2884ABFD1D8D43B700A2F7D9 /* CoreDataManager.m in Sources */,
-				270DF9E41D83F0B0004D3681 /* KSApplicatipnColor.m in Sources */,
+				270DF9E41D83F0B0004D3681 /* KSApplicationColor.m in Sources */,
 				27B1A0F71D81933000D47FCD /* KSAuthorisedUser.m in Sources */,
 				27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */,
 				28943D0E1D9303EF00BC8A69 /* ApplicationManager.m in Sources */,

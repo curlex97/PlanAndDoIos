@@ -7,12 +7,13 @@
 //
 
 #import "ApiManager.h"
+#import "ApplicationDefines.h"
 
 @implementation ApiManager
 
 -(void)dataByData:(NSDictionary *)data completion:(void (^)(NSData *))completed
 {
-    [ACNetworkManager dataByUrlAsync:@"https://plan-and-do.pro/api" andHeaderDictionary:@{} andBodyDictionary:data andQueryType:@"POST" completion:^(NSData* data) {
+    [ACNetworkManager dataByUrlAsync:URL_API andHeaderDictionary:@{} andBodyDictionary:data andQueryType:URL_SENDTYPE completion:^(NSData* data) {
         completed(data);
     }];
 }

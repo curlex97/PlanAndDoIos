@@ -15,8 +15,8 @@
 //    SideDirectionLeft
 //};
 
-@interface KSApplicatipnColor : NSObject
-+(KSApplicatipnColor *)sharedColor;
+@interface KSApplicationColor : NSObject
++(KSApplicationColor *)sharedColor;
 
 @property (nonatomic)UIColor * menuTextColor;
 @property (nonatomic)UIColor * menuBackgroundColor;

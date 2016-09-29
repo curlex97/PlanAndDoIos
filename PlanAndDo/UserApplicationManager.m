@@ -122,7 +122,7 @@
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"token.txt"];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:FS_TOKEN];
     [token writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
@@ -130,7 +130,7 @@
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"token.txt"];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:FS_TOKEN];
     return [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
 }
 

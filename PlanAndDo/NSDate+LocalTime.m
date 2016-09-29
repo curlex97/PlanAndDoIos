@@ -7,12 +7,13 @@
 //
 
 #import "NSDate+LocalTime.h"
+#import "ApplicationDefines.h"
 
 @implementation NSDate (LocalTime)
 
 -(NSDate*) localDate
 {
-    NSTimeZone* sourceTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
+    NSTimeZone* sourceTimeZone = [NSTimeZone timeZoneWithAbbreviation:DT_ABBREVIATION_ZONE];
     NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
     
     NSInteger sourceGMTOffset = [sourceTimeZone secondsFromGMTForDate:self];

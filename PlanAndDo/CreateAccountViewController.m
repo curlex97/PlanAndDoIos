@@ -7,7 +7,7 @@
 //
 
 #import "CreateAccountViewController.h"
-#import "KSApplicatipnColor.h"
+#import "KSApplicationColor.h"
 #import "ApplicationManager.h"
 #import "TabletasksViewController.h"
 #import "AMSideBarViewController.h"
@@ -55,7 +55,7 @@
 {
     [super viewDidLoad];
     
-    CAGradientLayer * gradient=[KSApplicatipnColor sharedColor].rootGradient;
+    CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
     gradient.frame=self.view.bounds;
     self.view.backgroundColor=[UIColor whiteColor];
     [self.view.layer insertSublayer:gradient atIndex:0];

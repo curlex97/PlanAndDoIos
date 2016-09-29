@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-#import "KSApplicatipnColor.h"
+#import "KSApplicationColor.h"
 #import "CreateAccountViewController.h"
 #import "NewPasswordViewController.h"
 #import "TabletasksViewController.h"

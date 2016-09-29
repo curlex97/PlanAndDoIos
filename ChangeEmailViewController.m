@@ -7,7 +7,7 @@
 //
 
 #import "ChangeEmailViewController.h"
-#import "KSApplicatipnColor.h"
+#import "KSApplicationColor.h"
 #import "ApplicationManager.h"
 
 #define TEXTFIELD_PADDING_LEFT 10
@@ -48,7 +48,7 @@
     [super viewDidLoad];
     
     self.title=@"Change Email";
-    CAGradientLayer * gradient=[KSApplicatipnColor sharedColor].rootGradient;
+    CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
     gradient.frame=self.view.bounds;
     self.view.backgroundColor=[UIColor whiteColor];
     [self.view.layer insertSublayer:gradient atIndex:0];

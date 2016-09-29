@@ -7,6 +7,7 @@
 //
 
 #import "CategoryApplicationManager.h"
+#import "ApplicationManager.h"
 
 @implementation CategoryApplicationManager
 
@@ -23,19 +24,19 @@
 -(void)addCateroty:(KSCategory *)category
 {
     [[[CategoryCoreDataManager alloc] init] addCateroty:category];
-    [[[CategoryApiManager alloc] init] addCategoryAsync:category forUser:nil completion:nil];
+    [[[CategoryApiManager alloc] init] addCategoryAsync:category forUser:[[ApplicationManager userApplicationManager] authorisedUser] completion:nil];
 }
 
 -(void)updateCateroty:(KSCategory *)category
 {
     [[[CategoryCoreDataManager alloc] init] updateCateroty:category];
-    [[[CategoryApiManager alloc] init] updateCategoryAsync:category forUser:nil completion:nil];
+    [[[CategoryApiManager alloc] init] updateCategoryAsync:category forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
 }
 
 -(void)deleteCateroty:(KSCategory *)category
 {
     [[[CategoryCoreDataManager alloc] init] deleteCateroty:category];
-    [[[CategoryApiManager alloc] init] deleteCategoryAsync:category forUser:nil completion:nil];
+    [[[CategoryApiManager alloc] init] deleteCategoryAsync:category forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
 }
 
 -(void) cleanTable
