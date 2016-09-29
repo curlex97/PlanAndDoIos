@@ -66,7 +66,7 @@
 #define NM_EDIT_LIST @"Edit list"
 #define NM_START_DAY @"Start day"
 #define NM_START_PAGE @"Start page"
-
+#define NM_TASK_LIST @"Task list"
 
 #define NM_BOX @"Box"
 #define NM_CATEGORY @"Category"
@@ -97,6 +97,7 @@
 #define TL_PROFILE_DELETE_MSG @"If you remove all categories and tasks, you will be returned to factory settings. Do you want to continue?"
 #define TL_PROFILE_CHANGE_NAME_TITLE @"Change name"
 #define TL_PROFILE_CHANGE_NAME_MSG @""
+#define TL_ENTER_YOUR_TEXT @"Enter your text..."
 
 #define TL_CANCEL @"Cancel"
 #define TL_CONTINUE @"Continue"

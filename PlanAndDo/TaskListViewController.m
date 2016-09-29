@@ -62,7 +62,7 @@
     cell.textLabel.text=self.subTasks[indexPath.row].name;
     cell.accessoryType = subTask.status ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
 
-    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
+    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:TL_DELETE backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
         [self.subTasks removeObject:subTask];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -116,7 +116,7 @@
     self.view.backgroundColor=[UIColor whiteColor];
     self.bottom.constant=-45;
     [self.view layoutIfNeeded];
-    self.title=@"Task list";
+    self.title=NM_TASK_LIST;
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
@@ -125,7 +125,7 @@
     self.textField=[[UITextField alloc] initWithFrame:CGRectMake(16, 8, self.navigationController.toolbar.frame.size.width-32, 30)];
     self.textField.borderStyle=UITextBorderStyleRoundedRect;
     self.textField.backgroundColor=[UIColor colorWithRed:227.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1.0];
-    self.textField.placeholder=@"Enter your text...";
+    self.textField.placeholder=TL_ENTER_YOUR_TEXT;
     self.textField.delegate=self;
     self.bottomOffset=[UIScreen mainScreen].bounds.size.height-110;
     
@@ -151,7 +151,7 @@
                                    relatedBy:NSLayoutRelationEqual
                                    toItem:self.toolBarView
                                    attribute:NSLayoutAttributeBottom
-                                   multiplier:1.0f
+                                   multiplier:CO_MULTIPLER
                                    constant:-8.0]];
     
     [self.toolBarView addConstraint:[NSLayoutConstraint
@@ -160,7 +160,7 @@
                                    relatedBy:NSLayoutRelationEqual
                                    toItem:self.toolBarView
                                    attribute:NSLayoutAttributeTop
-                                   multiplier:1.0f
+                                   multiplier:CO_MULTIPLER
                                    constant:8.0]];
     
     [self.toolBarView addConstraint:[NSLayoutConstraint
@@ -169,7 +169,7 @@
                                    relatedBy:NSLayoutRelationEqual
                                    toItem:self.toolBarView
                                    attribute:NSLayoutAttributeTrailing
-                                   multiplier:1.0f
+                                   multiplier:CO_MULTIPLER
                                    constant:-16.0]];
     
     [self.toolBarView addConstraint:[NSLayoutConstraint
@@ -178,7 +178,7 @@
                                    relatedBy:NSLayoutRelationEqual
                                    toItem:self.toolBarView
                                    attribute:NSLayoutAttributeLeading
-                                   multiplier:1.0f
+                                   multiplier:CO_MULTIPLER
                                    constant:16.0]];
     
     self.toolBarView.translatesAutoresizingMaskIntoConstraints=NO;
@@ -188,7 +188,7 @@
                           relatedBy:NSLayoutRelationEqual
                           toItem:self.view
                           attribute:NSLayoutAttributeBottom
-                          multiplier:1.0f
+                          multiplier:CO_MULTIPLER
                           constant:0.0];
     [self.view addConstraint:self.bottomContraint];
     
@@ -198,7 +198,7 @@
                                      relatedBy:NSLayoutRelationEqual
                                      toItem:self.view
                                      attribute:NSLayoutAttributeTrailing
-                                     multiplier:1.0f
+                                     multiplier:CO_MULTIPLER
                                      constant:0.0]];
     
     [self.view addConstraint:[NSLayoutConstraint
@@ -207,7 +207,7 @@
                                      relatedBy:NSLayoutRelationEqual
                                      toItem:self.view
                                      attribute:NSLayoutAttributeLeading
-                                     multiplier:1.0f
+                                     multiplier:CO_MULTIPLER
                                      constant:0.0]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];
