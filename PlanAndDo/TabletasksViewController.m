@@ -115,7 +115,7 @@ static bool firstLoad = true;
         default:  addTaskDate=[NSDate date]; break;
     }
     
-   // [self.navigationController pushViewController:[[AddTaskViewController alloc] initWithCategory:self.category andDate:addTaskDate] animated:YES];
+    [self.navigationController pushViewController:[[AddTaskViewController alloc] initWithCategory:self.category andDate:addTaskDate] animated:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated
