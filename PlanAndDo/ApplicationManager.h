@@ -14,6 +14,9 @@
 #import "SettingsApplicationManager.h"
 #import "CategoryApplicationManager.h"
 #import "SyncApplicationManager.h"
+#import "ApplicationDefines.h"
+
+
 
 @interface ApplicationManager : NSObject
 

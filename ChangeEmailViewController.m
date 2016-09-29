@@ -101,7 +101,7 @@
     {
         user.emailAdress = self.emailTextField.text;
         [[ApplicationManager userApplicationManager] updateUser:user];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"EmailChanged" object:user];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NC_EMAIL_CHANGED object:user];
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

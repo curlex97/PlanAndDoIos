@@ -177,6 +177,7 @@
 		282C28C51D829A600061761E /* AMSideBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSideBarViewController.m; sourceTree = "<group>"; };
 		284F9C391D8DCFF500B0853F /* TasksCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksCoreDataManager.h; sourceTree = "<group>"; };
 		284F9C3A1D8DCFF500B0853F /* TasksCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksCoreDataManager.m; sourceTree = "<group>"; };
+		2855F2BD1D9D109B007766F0 /* ApplicationDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationDefines.h; sourceTree = "<group>"; };
 		28616D481D93F90D00BB2CCE /* ACNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACNetworkManager.h; sourceTree = "<group>"; };
 		28616D491D93F90D00BB2CCE /* ACNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACNetworkManager.m; sourceTree = "<group>"; };
 		286E261E1D883FF00055A7BF /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -769,6 +770,7 @@
 				28214C901D93D3540012B1C7 /* SettingsApplicationManager */,
 				28214C941D93D3720012B1C7 /* CategoryApplicationManager */,
 				28214C9C1D93E2DF0012B1C7 /* SyncApplicationManager */,
+				2855F2BD1D9D109B007766F0 /* ApplicationDefines.h */,
 			);
 			name = ApplicationManagers;
 			sourceTree = "<group>";

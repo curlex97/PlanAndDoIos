@@ -8,6 +8,7 @@
 
 #import "AMSideBarViewController.h"
 #import "KSMenuViewController.h"
+#import "ApplicationManager.h"
 
 @interface AMSideBarViewController ()<UIGestureRecognizerDelegate>
 @property (nonatomic)UIPanGestureRecognizer * pan;
@@ -130,11 +131,11 @@
     _direction=direction;
     if(_direction==SideDirectionRight)
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SideRight" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NC_SIDE_RIGHT object:nil];
     }
     else
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"SideLeft" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NC_SIDE_LEFT object:nil];
     }
 }
 -(void)timerTick
@@ -168,7 +169,7 @@
 {
     if(self.direction==SideDirectionRight)
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"BackViewControllerWillApeared" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NC_BACK_CONTROLLER_APPEARED object:nil];
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
          {
              [self moveFrontViewOnPosition:MAX_OFFSET];
@@ -182,7 +183,7 @@
     }
     else
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"FrontViewControllerWillApeared" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NC_FRONT_CONTROLLER_APPEARED object:nil];
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
          {
              [self moveFrontViewOnPosition:0.0];

@@ -222,21 +222,21 @@
     [self.tableView reloadData];
 }
 
--(void)subTasksChanged:(NSNotification*)not
-{
-    KSTaskCollection* realTask = [[KSTaskCollection alloc] init];
-    realTask.ID = self.Id;
-    
-    for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask]) [[ApplicationManager subTasksApplicationManager] deleteSubTask:subTask forTask:realTask];
-    
-    for(KSShortTask* subTask in self.subTasks) [[ApplicationManager subTasksApplicationManager] addSubTask:subTask forTask:realTask];
-    
-}
+//-(void)subTasksChanged:(NSNotification*)not
+//{
+//    KSTaskCollection* realTask = [[KSTaskCollection alloc] init];
+//    realTask.ID = self.Id;
+//    
+//    for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask]) [[ApplicationManager subTasksApplicationManager] deleteSubTask:subTask forTask:realTask];
+//    
+//    for(KSShortTask* subTask in self.subTasks) [[ApplicationManager subTasksApplicationManager] addSubTask:subTask forTask:realTask];
+//    
+//}
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subTasksChanged:) name:@"AddSubTasksChanged" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subTasksChanged:) name:@"AddSubTasksChanged" object:nil];
 
     //self.pan=[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gesturePan)];
     //self.pan.delegate=self;
@@ -292,7 +292,7 @@
         
         KSTask* task = [[KSTask alloc] initWithID:self.Id  andName:self.headerText andStatus:NO andTaskReminderTime:self.completionTime andTaskPriority:priority andCategoryID:(int)self.category.ID andCreatedAt:[NSDate date] andCompletionTime:self.completionTime andSyncStatus:(int)self.Id andTaskDescription:self.taskDesc];
         [[ApplicationManager tasksApplicationManager] addTask: task];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"TaskAdd" object:task];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_ADD object:task];
     }
     
     
@@ -316,7 +316,7 @@
         for(KSShortTask* subTask in self.subTasks) [[ApplicationManager subTasksApplicationManager] addSubTask:subTask forTask:task];
         
         [[ApplicationManager tasksApplicationManager] addTask: task];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"TaskAdd" object:task];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_ADD object:task];
     }
     
     [self.navigationController popViewControllerAnimated:YES];

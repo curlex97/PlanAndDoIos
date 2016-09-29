@@ -262,12 +262,10 @@
     
     if([self.parentController isKindOfClass:[AddTaskViewController class]]){
         ((AddTaskViewController*)self.parentController).subTasks = [NSMutableArray arrayWithArray:self.subTasks];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"AddSubTasksChanged" object:nil];
     }
     
     if([self.parentController isKindOfClass:[EditTaskViewController class]]){
         ((EditTaskViewController*)self.parentController).subTasks = [NSMutableArray arrayWithArray:self.subTasks];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditSubTasksChanged" object:nil];
     }
 }
 
