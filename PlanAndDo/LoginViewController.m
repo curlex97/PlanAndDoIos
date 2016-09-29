@@ -15,8 +15,6 @@
 #import "KSMenuViewController.h"
 #import "ApplicationManager.h"
 
-#define TEXTFIELD_PADDING_LEFT 10
-
 
 @interface LoginViewController ()<UIGestureRecognizerDelegate>
 @property (nonatomic)UITapGestureRecognizer * tap;
@@ -48,11 +46,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIView *loginPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXTFIELD_PADDING_LEFT, 0)];
+    UIView *loginPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.loginTextField.leftView = loginPaddingView;
     self.loginTextField.leftViewMode = UITextFieldViewModeAlways;
     
-    UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXTFIELD_PADDING_LEFT, 0)];
+    UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.passwordTextField.leftView = passwordPaddingView;
     self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
     

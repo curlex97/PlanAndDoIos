@@ -20,7 +20,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title=@"Start day";
+    self.title= NM_START_DAY;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     

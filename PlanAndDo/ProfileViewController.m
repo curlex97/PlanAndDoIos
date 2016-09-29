@@ -30,7 +30,7 @@
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSSettingsCell"owner:self options:nil];
     KSSettingsCell * cell=[nib objectAtIndex:0];
     cell.textLabel.text=self.items[indexPath.row];
-    cell.textLabel.textColor=[UIColor colorWithRed:98.0/255.0 green:98.0/255.0 blue:98.0/255.0 alpha:1.0];
+    cell.textLabel.textColor=[UIColor colorWithRed:CLR_PROFILE_TEXTLABEL green:CLR_PROFILE_TEXTLABEL blue:CLR_PROFILE_TEXTLABEL alpha:CLR_PROFILE_TEXTLABEL_ALPHA];
     
     if(indexPath.row==0)
     {
@@ -66,9 +66,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.row==0)
     {
-        UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Change name" message:@"Test" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController * alertController=[UIAlertController alertControllerWithTitle:TL_PROFILE_CHANGE_NAME_TITLE message:TL_PROFILE_CHANGE_NAME_MSG preferredStyle:UIAlertControllerStyleAlert];
         [alertController addTextFieldWithConfigurationHandler:nil];
-        UIAlertAction * okAction=[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
+        UIAlertAction * okAction=[UIAlertAction actionWithTitle:TL_OK style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
                                   {
                                       self.user.userName=alertController.textFields.firstObject.text;
                                       [[ApplicationManager userApplicationManager] updateUser:self.user];
@@ -94,14 +94,14 @@
     else if(indexPath.row==3)
     {
         //delete all tasks
-        UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Delete all tasks and categories" message:@"If you remove all categories and tasks, you will be returned to factory settings. Do you want to continue?" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-        UIAlertAction * continueAction=[UIAlertAction actionWithTitle:@"Continue" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+        UIAlertController * alertController=[UIAlertController alertControllerWithTitle:TL_PROFILE_DELETE_TITLE message:TL_PROFILE_DELETE_MSG preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:TL_CANCEL style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction * continueAction=[UIAlertAction actionWithTitle:TL_CONTINUE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
                                         {
-                                            UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Enter password" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+                                            UIAlertController * alertController=[UIAlertController alertControllerWithTitle:TL_ENTER_PASSWORD message:@"" preferredStyle:UIAlertControllerStyleAlert];
                                             [alertController addTextFieldWithConfigurationHandler:nil];
-                                            UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-                                            UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+                                            UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:TL_CANCEL style:UIAlertActionStyleCancel handler:nil];
+                                            UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:TL_DELETE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
                                                                           {
                                                                               if(/* DISABLES CODE */ (NO))
                                                                               {
@@ -148,7 +148,7 @@
     UIBarButtonItem * menuButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Menu"] scaledToSize:CGSizeMake(40, 40)] style:UIBarButtonItemStyleDone target:self action:@selector(menuTapped)];
     self.navigationItem.leftBarButtonItem=menuButton;
     
-    self.title=@"Profile";
+    self.title=NM_PROFILE;
     self.items=[NSArray arrayWithObjects:@"Name",@"Password",@"Email",@"Delete all tasks and categories",@"Log out", nil];
     
 }

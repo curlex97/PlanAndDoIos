@@ -46,14 +46,60 @@
 #define NM_DATE_AND_TIME @"Date & Time"
 #define NM_CREATE_ACCOUNT @"Create Account"
 #define NM_NEW_PASSWORD @"New Password"
+#define NM_DDMMYY @"DD/MM/YY"
+#define NM_MMDDYY @"MM/DD/YY"
+
 #define NM_TODAY @"Today"
 #define NM_TOMORROW @"Tomorrow"
 #define NM_WEEK @"Week"
 #define NM_ARCHIVE @"Archive"
 #define NM_BACKLOG @"Backlog"
 
+#define NM_PROFILE @"Profile"
+#define NM_SETTINGS @"Settings"
+#define NM_FORMAT_DATE @"Format date"
+#define NM_EDIT_LIST @"Edit list"
+#define NM_START_DAY @"Start day"
+
+#define NM_CATEGORY @"Category"
+#define NM_CATEGORIES @"Categories"
+#define NM_CATEGORY_ADD @"Add category"
+
+#define NM_TASK_HEAD @"Task"
+
+#define NM_PRIORITY_SHORT_LOW @"low"
+#define NM_PRIORITY_SHORT_MID @"mid"
+#define NM_PRIORITY_SHORT_HIGH @"high"
+#define NM_PRIORITY_LONG_LOW @"Default priority"
+#define NM_PRIORITY_LONG_MID @"Normal priority"
+#define NM_PRIORITY_LONG_HIGH @"High priority"
+#define NM_PRIORITY @"Priority"
+
 //===================================================================================================================================
 
+
+
+
+
+// TITLES
+//===================================================================================================================================
+
+#define TL_PROFILE_DELETE_TITLE @"Delete all tasks and categories"
+#define TL_PROFILE_DELETE_MSG @"If you remove all categories and tasks, you will be returned to factory settings. Do you want to continue?"
+#define TL_PROFILE_CHANGE_NAME_TITLE @"Change name"
+#define TL_PROFILE_CHANGE_NAME_MSG @""
+
+#define TL_CANCEL @"Cancel"
+#define TL_CONTINUE @"Continue"
+#define TL_ENTER_PASSWORD @"Enter password"
+#define TL_DELETE @"Delete"
+#define TL_OK @"OK"
+#define TL_COMPLETE @"Complete"
+#define TL_EDIT @"Edit"
+#define TL_RIGHT @"Right"
+#define TL_LEFT @"Left"
+
+//===================================================================================================================================
 
 
 
@@ -103,13 +149,16 @@
 #define CLR_ROOT_GRADIENT_RIGHT_BLUE (183.0/255.0)
 #define CLR_ROOT_GRADIENT_RIGHT_ALPHA (1.0)
 
-#define CLR_ROOT_GRADIENT_START_POINT_X 0.0
-#define CLR_ROOT_GRADIENT_START_POINT_Y 0.5
-#define CLR_ROOT_GRADIENT_END_POINT_X 1.0
-#define CLR_ROOT_GRADIENT_END_POINT_Y 0.5
+#define CLR_ROOT_GRADIENT_START_POINT_X (0.0)
+#define CLR_ROOT_GRADIENT_START_POINT_Y (0.5)
+#define CLR_ROOT_GRADIENT_END_POINT_X (1.0)
+#define CLR_ROOT_GRADIENT_END_POINT_Y (0.5)
 
 #define CLR_DATELABEL (145.0/255.0)
 #define CLR_DATELABEL_ALPHA (1.0)
+
+#define CLR_PROFILE_TEXTLABEL (98.0/255.0)
+#define CLR_PROFILE_TEXTLABEL_ALPHA (1.0)
 
 //===================================================================================================================================
 

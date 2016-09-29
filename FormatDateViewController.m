@@ -20,7 +20,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title=@"Format date";
+    self.title= NM_FORMAT_DATE;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -40,12 +40,12 @@
     
     switch (indexPath.row) {
         case 0:
-            cell.paramNameLabel.text = @"DD/MM/YY";
-            cell.accessoryType=[self.settings.dateFormat.lowercaseString isEqualToString:@"DD/MM/YY".lowercaseString] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+            cell.paramNameLabel.text = NM_DDMMYY;
+            cell.accessoryType=[self.settings.dateFormat.lowercaseString isEqualToString:NM_DDMMYY.lowercaseString] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         case 1:
-            cell.paramNameLabel.text = @"MM/DD/YY";
-            cell.accessoryType=[self.settings.dateFormat.lowercaseString isEqualToString:@"MM/DD/YY".lowercaseString] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+            cell.paramNameLabel.text = NM_MMDDYY;
+            cell.accessoryType=[self.settings.dateFormat.lowercaseString isEqualToString:NM_MMDDYY.lowercaseString] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         default:
             break;
@@ -62,7 +62,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString* formatDate = indexPath.row ? @"mm/dd/yy" : @"dd/mm/yy";
+    NSString* formatDate = indexPath.row ? NM_MMDDYY.lowercaseString : NM_DDMMYY.lowercaseString;
     
     UserSettings* updatedSettings = [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.settings.startPage andDateFormat:formatDate andPageType:self.settings.pageType andTimeFormat:self.settings.timeFormat andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]];
     

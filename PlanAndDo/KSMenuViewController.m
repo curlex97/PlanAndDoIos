@@ -105,7 +105,7 @@
 {
     if(section==1 && self.state!=KSMenuStateSearch)
     {
-        return @"Categories";
+        return NM_CATEGORIES;
     }
     return nil;
 }
@@ -124,15 +124,15 @@
         view.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
         
         UIImageView * imageView=[[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 10, 10)];
-        imageView.image=[UIImage imageNamed:@"Category"];
+        imageView.image=[UIImage imageNamed:NM_CATEGORY];
         
         UILabel * titleLabel=[[UILabel alloc] initWithFrame:CGRectMake(25, 0, 100, 30)];
         titleLabel.textColor=[UIColor colorWithRed:163.0/255.0 green:167.0/255.0 blue:169.0/255.0 alpha:0.35];
-        titleLabel.text=@"CATEGORY";
+        titleLabel.text=NM_CATEGORY;
         titleLabel.font=[UIFont systemFontOfSize:12];
         
         self.addCategoryButton=[[UIButton alloc] initWithFrame:CGRectMake(233, 0, 30, 30)];
-        [self.addCategoryButton setImage:[UIImage imageNamed:@"Add category"] forState:UIControlStateNormal];
+        [self.addCategoryButton setImage:[UIImage imageNamed:NM_CATEGORY_ADD] forState:UIControlStateNormal];
         [self.addCategoryButton addTarget:self action:@selector(addCategoryDidTap) forControlEvents:UIControlEventTouchUpInside];
         
         [view addSubview:self.addCategoryButton];
@@ -176,8 +176,8 @@
         
         BaseTask* task = self.tableTasks[indexPath.row];
         
-        cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"Complete" backgroundColor:[UIColor greenColor] callback:^BOOL(MGSwipeTableCell *sender) {
-            NSLog(@"Complete");
+        cell.leftButtons = @[[MGSwipeButton buttonWithTitle:TL_COMPLETE backgroundColor:[UIColor greenColor] callback:^BOOL(MGSwipeTableCell *sender) {
+            NSLog(TL_COMPLETE);
             task.status = YES;
             [[ApplicationManager tasksApplicationManager] updateTask:task];
             [self.allTasks removeObject:task];
@@ -190,8 +190,8 @@
         }]];
         cell.leftSwipeSettings.transition = MGSwipeDirectionLeftToRight;
         
-        cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
-            NSLog(@"Delete");
+        cell.rightButtons = @[[MGSwipeButton buttonWithTitle:TL_DELETE backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
+            NSLog(TL_DELETE);
             [[ApplicationManager tasksApplicationManager] deleteTask:task];
             [self.allTasks removeObject:task];
             [self.tableTasks removeObject:task];
@@ -206,9 +206,9 @@
         cell.rightSwipeSettings.transition = MGSwipeDirectionRightToLeft;
         cell.taskHeaderLabel.text = task.name;
         switch (task.priority) {
-            case KSTaskHighPriority:cell.taskPriorityLabel.text = @"Normal priority"; break;
-            case KSTaskDefaultPriority:cell.taskPriorityLabel.text = @"Default priority"; break;
-            case KSTaskVeryHighPriority:cell.taskPriorityLabel.text = @"High priority"; break;
+            case KSTaskHighPriority:cell.taskPriorityLabel.text = NM_PRIORITY_LONG_MID; break;
+            case KSTaskDefaultPriority:cell.taskPriorityLabel.text = NM_PRIORITY_LONG_LOW; break;
+            case KSTaskVeryHighPriority:cell.taskPriorityLabel.text = NM_PRIORITY_LONG_HIGH; break;
         }
         
         NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:task.completionTime];
@@ -241,18 +241,18 @@
             if(indexPath.row==0)
             {
                 UIImageView * profileImageView=[[UIImageView alloc] initWithFrame:CGRectMake(8, 8, 30, 30)];
-                profileImageView.image=[UIImage imageNamed:@"Profile"];
+                profileImageView.image=[UIImage imageNamed:NM_PROFILE];
                 //[cell addSubview:profileImageView];
-                cell.textLabel.text=@"Profile";
-                cell.imageView.image=[UIImage imageNamed:@"Profile"];
+                cell.textLabel.text=NM_PROFILE;
+                cell.imageView.image=[UIImage imageNamed:NM_PROFILE];
             }
             else
             {
                 UIImageView * profileImageView=[[UIImageView alloc] initWithFrame:CGRectMake(8, 8, 30, 30)];
-                profileImageView.image=[UIImage imageNamed:@"Settings"];
+                profileImageView.image=[UIImage imageNamed:NM_SETTINGS];
                 //[cell addSubview:profileImageView];
-                cell.textLabel.text=@"Settings";
-                cell.imageView.image=[UIImage imageNamed:@"Settings"];
+                cell.textLabel.text=NM_SETTINGS;
+                cell.imageView.image=[UIImage imageNamed:NM_SETTINGS];
                 //tableView.separatorColor=[UIColor colorWithRed:38.0/255.0 green:53.0/255.0 blue:61.0/255.0 alpha:1.0];
             }
             
@@ -276,7 +276,7 @@
         BaseTask* task = self.tableTasks[indexPath.row];
         
         EditTaskViewController* editTaskVC = [[EditTaskViewController alloc] init];
-        editTaskVC.title = @"Edit";
+        editTaskVC.title = TL_EDIT;
         editTaskVC.task = task;
         [frontNavigationViewController pushViewController:editTaskVC animated:NO];
         //[self.parentController setNewFrontViewController:[[UINavigationController alloc] initWithRootViewController:[[EditTaskViewController alloc] init]]];
@@ -306,7 +306,7 @@
         
         if(settingsViewController)
         {
-            settingsViewController.title=@"Settings";
+            settingsViewController.title=NM_SETTINGS;
             UINavigationController* settingsNav = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
             [self.parentController setNewFrontViewController:settingsNav];
         }
@@ -456,7 +456,7 @@
     {
         UIAlertController * alertController=[UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         
-        UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+        UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:TL_DELETE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
                                       {
                                           dispatch_async(dispatch_get_main_queue(), ^
                                                          {
@@ -472,7 +472,7 @@
                                           
                                       }];
         
-        UIAlertAction * editAction=[UIAlertAction actionWithTitle:@"Edit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+        UIAlertAction * editAction=[UIAlertAction actionWithTitle:TL_EDIT style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
                                     {
                                         self.addCategoryTextField.text=[self.categories[indexPath.row] name];
                                         self.managedIndexPath=indexPath;
@@ -480,7 +480,7 @@
                                         [self addCategoryDidTap];
                                     }];
         
-        UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:TL_CANCEL style:UIAlertActionStyleCancel handler:nil];
         
         [alertController addAction:editAction];
         [alertController addAction:deleteAction];
@@ -623,20 +623,20 @@
                               multiplier:1.0f
                               constant:0.0]];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuSideRight) name:@"SideRight" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuSideLeft) name:@"SideLeft" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuSideRight) name:NC_SIDE_RIGHT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuSideLeft) name:NC_SIDE_LEFT object:nil];
 }
 
 -(void)menuSideRight
 {
-    NSLog(@"Right");
+    NSLog(TL_RIGHT);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];
 }
 
 -(void)menuSideLeft
 {
-    NSLog(@"Left");
+    NSLog(TL_LEFT);
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 }

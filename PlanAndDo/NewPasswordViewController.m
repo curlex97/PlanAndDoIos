@@ -15,8 +15,7 @@
 #import "CategoryCoreDataManager.h"
 #import "SettingsCoreDataManager.h"
 #import "UserCoreDataManager.h"
-
-#define TEXTFIELD_PADDING_LEFT 10
+#import "ApplicationManager.h"
 
 @interface NewPasswordViewController ()<UIGestureRecognizerDelegate>
 @property (nonatomic)UITapGestureRecognizer * tap;
@@ -40,7 +39,7 @@
     self.view.backgroundColor=[UIColor whiteColor];
     [self.view.layer insertSublayer:gradient atIndex:0];
     
-    UIView *emailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXTFIELD_PADDING_LEFT, 0)];
+    UIView *emailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.emailTextField.leftView = emailPaddingView;
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
     

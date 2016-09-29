@@ -55,23 +55,23 @@
             cell.accessoryType=UITableViewCellAccessoryNone;
             break;
         case 1:
-            cell.textLabel.text=@"Category";
+            cell.textLabel.text=NM_CATEGORY;
             cell.paramValueLabel.text=self.category.name;
             break;
         case 3:
             if([self.task isKindOfClass:[KSTask class]])
             {
-                cell.textLabel.text=@"Description";
+                cell.textLabel.text=NM_DESCRIPTION;
                 cell.paramValueLabel.text = self.taskDesc;
             }
             else
             {
-                cell.textLabel.text=@"Edit list";
+                cell.textLabel.text=NM_EDIT_LIST;
                 cell.paramValueLabel.text = [NSString stringWithFormat:@"%lu tasks", (unsigned long)self.subTasks.count];
             }
             break;
         case 2:
-            cell.textLabel.text=@"Date & Time";
+            cell.textLabel.text=NM_DATE_AND_TIME;
             cell.paramValueLabel.text = [self.completionTime.description substringToIndex:[self.completionTime.description rangeOfString:@":" ].location + 3];
             break;
     }
@@ -88,7 +88,7 @@
 
 - (void)headTextFieldDidChange:(id)sender
 {
-    self.headerText=self.textField.text.length ? self.textField.text : @"Head";
+    self.headerText=self.textField.text.length ? self.textField.text : NM_TASK_HEAD;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,20 +113,20 @@
     if(self.slider.value<0.5)
     {
         self.slider.value=0.0;
-        self.priorityDescLabel.text=@"low";
+        self.priorityDescLabel.text=NM_PRIORITY_SHORT_LOW;
         [self.slider setThumbImage:[UIImage imageNamed:@"white ball"] forState:UIControlStateNormal];
         //self.slider.backgroundColor=[UIColor redColor];
     }
     else if(self.slider.value>=0.5 && self.slider.value<1.5)
     {
         self.slider.value=1.0;
-        self.priorityDescLabel.text=@"mid";
+        self.priorityDescLabel.text=NM_PRIORITY_SHORT_MID;
         [self.slider setThumbImage:[UIImage imageNamed:@"green ball"] forState:UIControlStateNormal];
     }
     else
     {
         self.slider.value=2.0;
-        self.priorityDescLabel.text=@"high";
+        self.priorityDescLabel.text=NM_PRIORITY_SHORT_HIGH;
         [self.slider setThumbImage:[UIImage imageNamed:@"red ball"] forState:UIControlStateNormal];
     }
     self.priorityDescLabel.center=[self getThumbCenter:self.slider];
@@ -146,7 +146,7 @@
     self.textField.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     self.textField.delegate=self;
     [self.textField addTarget:self action:@selector(headTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    self.textField.text=[self.headerText isEqualToString:@"Head"]?@"":self.headerText;
+    self.textField.text=[self.headerText isEqualToString:NM_TASK_HEAD]?@"":self.headerText;
     [self.textField becomeFirstResponder];
     [cell addSubview:self.textField];
 }
@@ -297,7 +297,7 @@
     
     UIView * footerPriorityView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 56)];
     UILabel * priorityLable=[[UILabel alloc] initWithFrame:CGRectMake(15, 17, 62, 21)];
-    priorityLable.text=@"Priority";
+    priorityLable.text=NM_PRIORITY;
     priorityLable.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     self.slider=[[UISlider alloc] initWithFrame:CGRectMake(100, 12, self.view.bounds.size.width-110, 31)];
     self.slider.minimumValue=0.0;
@@ -309,7 +309,7 @@
     self.lastValue=self.slider.value;
     
     self.priorityDescLabel=[[UILabel alloc] initWithFrame:CGRectMake(100, 43, 23, 13)];
-    self.priorityDescLabel.text=@"low";
+    self.priorityDescLabel.text=NM_PRIORITY_SHORT_LOW;
     self.priorityDescLabel.font=[UIFont systemFontOfSize:10.0];
     self.priorityDescLabel.center=[self getThumbCenter:self.slider];
     self.priorityDescLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
