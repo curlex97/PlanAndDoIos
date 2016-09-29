@@ -36,8 +36,8 @@ static bool firstLoad = true;
     
     if(self.boxType != KSBoxTypeArchive || self.segment.selectedSegmentIndex)
     {
-        cell.leftButtons = @[[MGSwipeButton buttonWithTitle:@"Complete" backgroundColor:[UIColor greenColor] callback:^BOOL(MGSwipeTableCell *sender) {
-            NSLog(@"Complete");
+        cell.leftButtons = @[[MGSwipeButton buttonWithTitle:TL_COMPLETE backgroundColor:[UIColor greenColor] callback:^BOOL(MGSwipeTableCell *sender) {
+            NSLog(TL_COMPLETE);
             task.status = YES;
             [[ApplicationManager tasksApplicationManager] updateTask:task];
             [self.tasks removeObject:task];
@@ -49,9 +49,9 @@ static bool firstLoad = true;
         }]];
         cell.leftSwipeSettings.transition = MGSwipeDirectionLeftToRight;
     }
-    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:@"Delete" backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender)
+    cell.rightButtons = @[[MGSwipeButton buttonWithTitle:TL_DELETE backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender)
     {
-        NSLog(@"Delete");
+        NSLog(TL_DELETE);
         [[ApplicationManager tasksApplicationManager] deleteTask:task];
         [self.tasks removeObject:task];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
@@ -71,15 +71,15 @@ static bool firstLoad = true;
     cell.taskHeaderLabel.text = task.name;
     switch (task.priority) {
         case KSTaskDefaultPriority:
-            cell.taskPriorityLabel.text = @"Low priority";
+            cell.taskPriorityLabel.text = NM_PRIORITY_LONG_LOW;
             cell.taskPriorityLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0];
             break;
         case KSTaskHighPriority:
-            cell.taskPriorityLabel.text = @"Mid priority";
+            cell.taskPriorityLabel.text = NM_PRIORITY_LONG_MID;
             cell.taskPriorityLabel.textColor=[UIColor colorWithRed:245.0/255.0 green:166.0/255.0 blue:35.0/255.0 alpha:1.0];
             break;
         case KSTaskVeryHighPriority:
-            cell.taskPriorityLabel.text = @"High priority";
+            cell.taskPriorityLabel.text = NM_PRIORITY_LONG_HIGH;
             cell.taskPriorityLabel.textColor=[UIColor colorWithRed:241.0/255.0 green:17.0/255.0 blue:44.0/255.0 alpha:1.0];
             break;
     }
@@ -97,7 +97,7 @@ static bool firstLoad = true;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     EditTaskViewController * editTaskViewController=[[EditTaskViewController alloc] init];
     editTaskViewController.task = self.tasks[indexPath.row];
-    editTaskViewController.title = @"Edit";
+    editTaskViewController.title = TL_EDIT;
     [self.navigationController pushViewController:editTaskViewController animated:YES];
 }
 
@@ -129,16 +129,16 @@ static bool firstLoad = true;
     if(!firstLoad) return;
     
     NSString* startPage = [[[[ApplicationManager userApplicationManager] authorisedUser] settings] startPage];
-    NSArray* boxes = [[NSArray alloc] initWithObjects:@"Today", @"Tomorrow", @"Week", @"Backlog", @"Archive", nil];
+    NSArray* boxes = [[NSArray alloc] initWithObjects:NM_TODAY, NM_TOMORROW, NM_WEEK, NM_BACKLOG, NM_ARCHIVE, nil];
     for(NSString* box in boxes)
     {
         if([box isEqualToString:startPage])
         {
-            if([startPage isEqualToString:@"Today"]) self.boxType = KSBoxTypeToday;
-            if([startPage isEqualToString:@"Tomorrow"]) self.boxType = KSBoxTypeTomorrow;
-            if([startPage isEqualToString:@"Week"]) self.boxType = KSBoxTypeWeek;
-            if([startPage isEqualToString:@"Backlog"]) self.boxType = KSBoxTypeBacklog;
-            if([startPage isEqualToString:@"Archive"]) self.boxType = KSBoxTypeArchive;
+            if([startPage isEqualToString:NM_TODAY]) self.boxType = KSBoxTypeToday;
+            if([startPage isEqualToString:NM_TOMORROW]) self.boxType = KSBoxTypeTomorrow;
+            if([startPage isEqualToString:NM_WEEK]) self.boxType = KSBoxTypeWeek;
+            if([startPage isEqualToString:NM_BACKLOG]) self.boxType = KSBoxTypeBacklog;
+            if([startPage isEqualToString:NM_ARCHIVE]) self.boxType = KSBoxTypeArchive;
             return;
         }
     }
@@ -176,38 +176,38 @@ static bool firstLoad = true;
     UIBarButtonItem * addButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTaskTapped)];
     self.navigationItem.rightBarButtonItem=addButton;
     
-    UIBarButtonItem * menuButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Menu"] scaledToSize:CGSizeMake(40, 40)] style:UIBarButtonItemStylePlain target:self action:@selector(menuTapped)];
+    UIBarButtonItem * menuButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:TL_MENU] scaledToSize:CGSizeMake(40, 40)] style:UIBarButtonItemStylePlain target:self action:@selector(menuTapped)];
     self.navigationItem.leftBarButtonItem=menuButton;
     
-    UIBarButtonItem * today=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Today"] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH, BAR_BUTTON_SIZE_HEIGHT)] style:UIBarButtonItemStyleDone target:self action:@selector(todayDidTap)];
+    UIBarButtonItem * today=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:NM_TODAY] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH, BAR_BUTTON_SIZE_HEIGHT)] style:UIBarButtonItemStyleDone target:self action:@selector(todayDidTap)];
     
     today.image = [today.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [today setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
     
     self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
     
-    UIBarButtonItem * tomorrow=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Tomorrow"] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH+10, BAR_BUTTON_SIZE_HEIGHT)] style:UIBarButtonItemStyleDone target:self action:@selector(tomorrowDidTap)];
+    UIBarButtonItem * tomorrow=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:NM_TOMORROW] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH+10, BAR_BUTTON_SIZE_HEIGHT)] style:UIBarButtonItemStyleDone target:self action:@selector(tomorrowDidTap)];
     
     tomorrow.image = [tomorrow.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [tomorrow setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
     
     self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
     
-    UIBarButtonItem * week=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Week"] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH, BAR_BUTTON_SIZE_HEIGHT)] style:UIBarButtonItemStyleDone target:self action:@selector(weekDidTap)];
+    UIBarButtonItem * week=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:NM_WEEK] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH, BAR_BUTTON_SIZE_HEIGHT)] style:UIBarButtonItemStyleDone target:self action:@selector(weekDidTap)];
     
     week.image = [week.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [week setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
     
     self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
     
-    UIBarButtonItem * backLog=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Backlog"] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH, BAR_BUTTON_SIZE_HEIGHT)] style:UIBarButtonItemStyleDone target:self action:@selector(backLogDidTap)];
+    UIBarButtonItem * backLog=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:NM_BACKLOG] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH, BAR_BUTTON_SIZE_HEIGHT)] style:UIBarButtonItemStyleDone target:self action:@selector(backLogDidTap)];
     
     backLog.image = [backLog.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [backLog setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
     
     self.navigationController.toolbar.clearsContextBeforeDrawing=YES;
     
-    UIBarButtonItem * archive=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Archive"] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH, BAR_BUTTON_SIZE_HEIGHT)] style:UIBarButtonItemStyleDone target:self action:@selector(archiveDidTap)];
+    UIBarButtonItem * archive=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:NM_ARCHIVE] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH, BAR_BUTTON_SIZE_HEIGHT)] style:UIBarButtonItemStyleDone target:self action:@selector(archiveDidTap)];
     
     archive.image = [archive.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [archive setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
@@ -231,8 +231,8 @@ static bool firstLoad = true;
     [self.currentBoxItem setTintColor:[UIColor colorWithRed:39.0/255.0 green:70.0/255.0 blue:83.0/255.0 alpha:1.0]];
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:@"TaskAdd" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:@"TaskEdit" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NC_TASK_ADD object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NC_TASK_EDIT object:nil];
 
     
 }
@@ -252,29 +252,29 @@ static bool firstLoad = true;
         {
             case KSBoxTypeToday:
                 self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForToday]];
-                self.title = @"Today";
+                self.title = NM_TODAY;
                 self.currentBoxItem=self.toolbarItems[1];
                 break;
             case KSBoxTypeTomorrow:
                 self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForTomorrow]];
-                self.title = @"Tomorrow";
+                self.title = NM_TOMORROW;
                 self.currentBoxItem=self.toolbarItems[3];
                 break;
             case KSBoxTypeWeek:
                 self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForWeek]];
                 self.currentBoxItem=self.toolbarItems[5];
-                self.title = @"Week";
+                self.title = NM_WEEK;
                 break;
             case KSBoxTypeArchive:
                 self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForArchive]];
                 self.currentBoxItem=self.toolbarItems[7];
-                self.title = @"Archive";
+                self.title = NM_ARCHIVE;
                 self.navigationItem.rightBarButtonItem=nil;
                 break;
             case KSBoxTypeBacklog:
                 self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForBacklog]];
                 self.currentBoxItem=self.toolbarItems[9];
-                self.title = @"Backlog";
+                self.title = NM_BACKLOG;
                 break;
                 
         }
@@ -288,7 +288,7 @@ static bool firstLoad = true;
     if(![self.title length])
     {
         self.boxType = KSBoxTypeToday;
-        self.title = @"Today";
+        self.title = NM_TODAY;
         self.currentBoxItem=self.toolbarItems[1];
     }
     
@@ -322,7 +322,7 @@ static bool firstLoad = true;
 
 -(void) addSegmentControl
 {
-    self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Completed",@"Overdue", nil]];
+    self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:TL_COMPLETED,TL_OVERDUE, nil]];
     self.segment.tintColor=[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
     [self.segment setSelectedSegmentIndex:0];
     self.segment.frame=CGRectMake(20, 8, self.view.bounds.size.width-40, 30);
@@ -350,11 +350,11 @@ static bool firstLoad = true;
 -(void)todayDidTap
 {
     self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForToday]];;
-    self.title = @"Today";
+    self.title = NM_TODAY;
     self.boxType = KSBoxTypeToday;
     self.category=nil;
     [self removeSegmentControl];
-    [self.currentBoxItem setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
+    [self.currentBoxItem setTintColor:[UIColor colorWithRed:CLR_DATELABEL green:CLR_DATELABEL blue:CLR_DATELABEL alpha:CLR_DATELABEL_ALPHA]];
     self.currentBoxItem=self.toolbarItems[1];
     [self.currentBoxItem setTintColor:[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0]];
     if(!self.navigationItem.rightBarButtonItem)
@@ -376,11 +376,11 @@ static bool firstLoad = true;
 -(void)tomorrowDidTap
 {
     self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForTomorrow]];
-    self.title = @"Tomorrow";
+    self.title = NM_TOMORROW;
     self.boxType = KSBoxTypeTomorrow;
     self.category=nil;
     [self removeSegmentControl];
-    [self.currentBoxItem setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
+    [self.currentBoxItem setTintColor:[UIColor colorWithRed:CLR_DATELABEL green:CLR_DATELABEL blue:CLR_DATELABEL alpha:CLR_DATELABEL_ALPHA]];
     self.currentBoxItem=self.toolbarItems[3];
     [self.currentBoxItem setTintColor:[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0]];
     if(!self.navigationItem.rightBarButtonItem)
@@ -402,11 +402,11 @@ static bool firstLoad = true;
 -(void)weekDidTap
 {
     self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForWeek]];
-    self.title = @"Week";
+    self.title = NM_WEEK;
     self.category=nil;
     self.boxType = KSBoxTypeWeek;
     [self removeSegmentControl];
-    [self.currentBoxItem setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
+    [self.currentBoxItem setTintColor:[UIColor colorWithRed:CLR_DATELABEL green:CLR_DATELABEL blue:CLR_DATELABEL alpha:CLR_DATELABEL_ALPHA]];
     self.currentBoxItem=self.toolbarItems[5];
     [self.currentBoxItem setTintColor:[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0]];
     if(!self.navigationItem.rightBarButtonItem)
@@ -428,11 +428,11 @@ static bool firstLoad = true;
 -(void)backLogDidTap
 {
     self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForBacklog]];
-    self.title = @"Backlog";
+    self.title = NM_BACKLOG;
     self.category=nil;
     self.boxType = KSBoxTypeBacklog;
     [self removeSegmentControl];
-    [self.currentBoxItem setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
+    [self.currentBoxItem setTintColor:[UIColor colorWithRed:CLR_DATELABEL green:CLR_DATELABEL blue:CLR_DATELABEL alpha:CLR_DATELABEL_ALPHA]];
     self.currentBoxItem=self.toolbarItems[7];
     [self.currentBoxItem setTintColor:[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0]];
     if(!self.navigationItem.rightBarButtonItem)
@@ -454,11 +454,11 @@ static bool firstLoad = true;
 -(void)archiveDidTap
 {
     self.tasks = [NSMutableArray arrayWithArray:[self completedTasks:[[ApplicationManager tasksApplicationManager] allTasksForArchive]]];
-    self.title = @"Archive";
+    self.title = NM_ARCHIVE;
     self.category=nil;
     self.boxType = KSBoxTypeArchive;
     [self addSegmentControl];
-    [self.currentBoxItem setTintColor:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0]];
+    [self.currentBoxItem setTintColor:[UIColor colorWithRed:CLR_DATELABEL green:CLR_DATELABEL blue:CLR_DATELABEL alpha:CLR_DATELABEL_ALPHA]];
     self.currentBoxItem=self.toolbarItems[9];
     [self.currentBoxItem setTintColor:[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0]];
     if(self.navigationItem.rightBarButtonItem)

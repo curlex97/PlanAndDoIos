@@ -20,7 +20,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title=@"Format time";
+    self.title=NM_FORMAT_TIME;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
@@ -41,12 +41,12 @@
     
     switch (indexPath.row) {
         case 0:
-            cell.paramNameLabel.text = @"24H";
-            cell.accessoryType=[self.settings.timeFormat.lowercaseString containsString:@"24"] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+            cell.paramNameLabel.text = NM_24H;
+            cell.accessoryType=[self.settings.timeFormat.lowercaseString containsString:NM_24] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         case 1:
-            cell.paramNameLabel.text = @"12H";
-            cell.accessoryType=[self.settings.timeFormat.lowercaseString containsString:@"12"] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+            cell.paramNameLabel.text = NM_12H;
+            cell.accessoryType=[self.settings.timeFormat.lowercaseString containsString:NM_12] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         default:
             break;
@@ -63,7 +63,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString* formatTime = indexPath.row ? @"12" : @"24";
+    NSString* formatTime = indexPath.row ? NM_12 : NM_24;
     
     UserSettings* updatedSettings = [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.settings.startPage andDateFormat:self.settings.dateFormat andPageType:self.settings.pageType andTimeFormat:formatTime andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]];
     

@@ -41,12 +41,12 @@
     
     switch (indexPath.row) {
         case 0:
-            cell.paramNameLabel.text = @"Monday";
-            cell.accessoryType=[self.settings.startDay.lowercaseString isEqualToString:@"Monday".lowercaseString] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+            cell.paramNameLabel.text = TL_MONDAY;
+            cell.accessoryType=[self.settings.startDay.lowercaseString isEqualToString:TL_MONDAY.lowercaseString] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         case 1:
-            cell.paramNameLabel.text = @"Sunday";
-            cell.accessoryType=[self.settings.startDay.lowercaseString isEqualToString:@"Sunday".lowercaseString] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+            cell.paramNameLabel.text = TL_SUNDAY;
+            cell.accessoryType=[self.settings.startDay.lowercaseString isEqualToString:TL_SUNDAY.lowercaseString] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         default:
             break;
@@ -64,7 +64,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString* day = indexPath.row ? @"sunday" : @"monday";
+    NSString* day = indexPath.row ? TL_SUNDAY.lowercaseString : TL_MONDAY.lowercaseString;
     
     UserSettings* updatedSettings = [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.settings.startPage andDateFormat:self.settings.dateFormat andPageType:self.settings.pageType andTimeFormat:self.settings.timeFormat andStartDay:day andSyncStatus:[[NSDate date] timeIntervalSince1970]];
     

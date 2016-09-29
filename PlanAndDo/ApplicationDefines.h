@@ -48,6 +48,10 @@
 #define NM_NEW_PASSWORD @"New Password"
 #define NM_DDMMYY @"DD/MM/YY"
 #define NM_MMDDYY @"MM/DD/YY"
+#define NM_12H @"12H"
+#define NM_24H @"24H"
+#define NM_12 @"12"
+#define NM_24 @"24"
 
 #define NM_TODAY @"Today"
 #define NM_TOMORROW @"Tomorrow"
@@ -58,9 +62,13 @@
 #define NM_PROFILE @"Profile"
 #define NM_SETTINGS @"Settings"
 #define NM_FORMAT_DATE @"Format date"
+#define NM_FORMAT_TIME @"Format time"
 #define NM_EDIT_LIST @"Edit list"
 #define NM_START_DAY @"Start day"
+#define NM_START_PAGE @"Start page"
 
+
+#define NM_BOX @"Box"
 #define NM_CATEGORY @"Category"
 #define NM_CATEGORIES @"Categories"
 #define NM_CATEGORY_ADD @"Add category"
@@ -98,6 +106,11 @@
 #define TL_EDIT @"Edit"
 #define TL_RIGHT @"Right"
 #define TL_LEFT @"Left"
+#define TL_SUNDAY @"Sunday"
+#define TL_MONDAY @"Monday"
+#define TL_MENU @"Menu"
+#define TL_COMPLETED @"Completed"
+#define TL_OVERDUE @"Overdue"
 
 //===================================================================================================================================
 

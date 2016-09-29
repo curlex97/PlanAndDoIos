@@ -25,14 +25,14 @@
     
     self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
     
-    self.title=@"Start page";
+    self.title=NM_START_PAGE;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
     self.categories = [NSArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
-    self.boxes = [[NSArray alloc] initWithObjects:@"Today", @"Tomorrow", @"Week", @"Backlog", @"Archive", nil];
+    self.boxes = [[NSArray alloc] initWithObjects:NM_TODAY, NM_TOMORROW, NM_WEEK, NM_BACKLOG, NM_ARCHIVE, nil];
     
-    self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Category",@"Box", nil]];
+    self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:NM_CATEGORY,NM_BOX, nil]];
     self.segment.tintColor=[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
     [self.segment setSelectedSegmentIndex:0];
     self.segment.frame=CGRectMake(20, 8, self.view.bounds.size.width-40, 30);
@@ -74,8 +74,8 @@
 {
 
     UserSettings* updatedSettings = self.segment.selectedSegmentIndex ?
-    [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.boxes[indexPath.row] andDateFormat:self.settings.dateFormat andPageType:@"box" andTimeFormat:self.settings.timeFormat andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]] :
-    [[UserSettings alloc] initWithID:self.settings.ID andStartPage:((KSCategory*)self.categories[indexPath.row]).name andDateFormat:self.settings.dateFormat andPageType:@"category" andTimeFormat:self.settings.timeFormat andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]];
+    [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.boxes[indexPath.row] andDateFormat:self.settings.dateFormat andPageType:NM_BOX.lowercaseString andTimeFormat:self.settings.timeFormat andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]] :
+    [[UserSettings alloc] initWithID:self.settings.ID andStartPage:((KSCategory*)self.categories[indexPath.row]).name andDateFormat:self.settings.dateFormat andPageType:NM_CATEGORY.lowercaseString andTimeFormat:self.settings.timeFormat andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]];
     
     [[ApplicationManager settingsApplicationManager] updateSettings:updatedSettings];
  

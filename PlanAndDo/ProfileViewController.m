@@ -142,7 +142,7 @@
     [super viewDidLoad];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:@"EmailChanged" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NC_EMAIL_CHANGED object:nil];
 
     self.user = [[ApplicationManager userApplicationManager] authorisedUser];
     UIBarButtonItem * menuButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Menu"] scaledToSize:CGSizeMake(40, 40)] style:UIBarButtonItemStyleDone target:self action:@selector(menuTapped)];
