@@ -34,6 +34,7 @@ static bool firstLoad = true;
     TaskTableViewCell * cell=[nib objectAtIndex:0];
     BaseTask* task = self.tasks[indexPath.row];
     
+    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     if(self.boxType != KSBoxTypeArchive || self.segment.selectedSegmentIndex)
     {
         cell.leftButtons = @[[MGSwipeButton buttonWithTitle:TL_COMPLETE backgroundColor:[UIColor greenColor] callback:^BOOL(MGSwipeTableCell *sender) {
@@ -57,7 +58,7 @@ static bool firstLoad = true;
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
         if(!self.tasks.count && self.boxType!=KSBoxTypeArchive)
         {
-            self.tableView.tableHeaderView=self.emptyTableHeader;
+            [self emptyHeaderAnimationsShow];
         }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
         {
@@ -300,7 +301,7 @@ static bool firstLoad = true;
     
     if(!self.tasks.count)
     {
-        self.tableView.tableHeaderView=self.emptyTableHeader;
+        [self emptyHeaderAnimationsShow];
     }
     else
     {
@@ -365,7 +366,7 @@ static bool firstLoad = true;
     [self.tableView reloadData];
     if(!self.tasks.count)
     {
-        self.tableView.tableHeaderView=self.emptyTableHeader;
+        [self emptyHeaderAnimationsShow];
     }
     else
     {
@@ -391,7 +392,7 @@ static bool firstLoad = true;
     [self.tableView reloadData];
     if(!self.tasks.count)
     {
-        self.tableView.tableHeaderView=self.emptyTableHeader;
+        [self emptyHeaderAnimationsShow];
     }
     else
     {
@@ -417,12 +418,28 @@ static bool firstLoad = true;
     [self.tableView reloadData];
     if(!self.tasks.count)
     {
-        self.tableView.tableHeaderView=self.emptyTableHeader;
+        [self emptyHeaderAnimationsShow];
     }
     else
     {
         [self.emptyTableHeader removeFromSuperview];
     }
+}
+
+-(void)emptyHeaderAnimationsShow
+{
+    self.tableView.tableHeaderView=self.emptyTableHeader;
+    UIImageView * imageView=self.emptyTableHeader.subviews.firstObject;
+    [UIView animateWithDuration:0.5 animations:^
+     {
+         imageView.transform=CGAffineTransformScale(CGAffineTransformIdentity, 1.5, 1.5);
+     } completion:^(BOOL finished)
+     {
+         [UIView animateWithDuration:0.5 animations:^
+          {
+              imageView.transform=CGAffineTransformScale(CGAffineTransformIdentity, 1.3, 1.3);
+          }];
+     }];
 }
 
 -(void)backLogDidTap
@@ -443,7 +460,27 @@ static bool firstLoad = true;
     [self.tableView reloadData];
     if(!self.tasks.count)
     {
-        self.tableView.tableHeaderView=self.emptyTableHeader;
+        [self emptyHeaderAnimationsShow];
+
+//        NSThread * thread=[[NSThread alloc] initWithBlock:^
+//        {
+//            __block float width=100.0;
+//            __block float height=100.0;
+//            
+//            while (width<=200.0)
+//            {
+//                width+=10;
+//                height+=10;
+//                imageView.image=[UIImage imageWithImage:[UIImage imageNamed:@"You free"] scaledToSize:CGSizeMake(width, height)];
+//                dispatch_async(dispatch_get_main_queue(), ^
+//                {
+//                    [self.emptyTableHeader layoutIfNeeded];
+//                });
+//            }
+//        }];
+//        thread.threadPriority=0.5;
+//        [thread start];
+        
     }
     else
     {

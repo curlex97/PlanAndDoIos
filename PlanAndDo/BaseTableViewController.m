@@ -7,7 +7,7 @@
 //
 
 #import "BaseTableViewController.h"
-
+#import "UIImage+ACScaleImage.h"
 @interface BaseTableViewController ()
 
 @end
@@ -23,12 +23,11 @@
     [self.tableView addSubview:self.refresh];
     [self.view addSubview:self.tableView];
     
-    self.emptyTableHeader=[[UIView alloc] initWithFrame:self.view.bounds];
+    self.emptyTableHeader=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, [UIScreen mainScreen].bounds.size.height-100)];
     self.emptyTableHeader.backgroundColor=[UIColor whiteColor];
-    
-    UIImageView * imageView=[[UIImageView alloc] initWithFrame:CGRectMake(self.emptyTableHeader.bounds.size.width/2-105, self.emptyTableHeader.bounds.size.height/2-150, 210.0, 210.0)];
-    imageView.image=[UIImage imageNamed:@"You free"];
-    
+    UIImageView * imageView=[[UIImageView alloc] init];
+    imageView.image=[UIImage imageWithImage:[UIImage imageNamed:@"You free"] scaledToSize:CGSizeMake(180.0, 180.0)];
+    imageView.translatesAutoresizingMaskIntoConstraints=NO;
     [self.emptyTableHeader addSubview:imageView];
     
     [self.emptyTableHeader addConstraint:[NSLayoutConstraint
@@ -52,6 +51,22 @@
     [self setConstraints];
 }
 
+-(UIView *)emptyTableHeader
+{
+    if(_emptyTableHeader.constraints.count==2)
+    {
+//        UIImageView * view=self.emptyTableHeader.subviews.firstObject;
+//        [UIView animateWithDuration:1 animations:^
+//        {
+//            view.frame=CGRectMake(0, 0, view.bounds.size.width/2, view.bounds.size.height/2);
+//        }];
+    }
+    else
+    {
+        
+    }
+    return _emptyTableHeader;
+}
 -(void)setConstraints
 {
     self.trailing =[NSLayoutConstraint
