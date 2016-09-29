@@ -38,6 +38,58 @@
 
 
 
+// NAMES
+//===================================================================================================================================
+
+#define NM_CHANGE_EMAIL @"Change Email"
+#define NM_DESCRIPTION @"Description"
+#define NM_DATE_AND_TIME @"Date & Time"
+#define NM_CREATE_ACCOUNT @"Create Account"
+#define NM_NEW_PASSWORD @"New Password"
+#define NM_TODAY @"Today"
+#define NM_TOMORROW @"Tomorrow"
+#define NM_WEEK @"Week"
+#define NM_ARCHIVE @"Archive"
+#define NM_BACKLOG @"Backlog"
+
+//===================================================================================================================================
+
+
+
+
+
+// COORDINATES AND SIZES
+//===================================================================================================================================
+
+#define CS_DATELABEL_X 8
+#define CS_DATELABEL_Y 0
+#define CS_DATELABEL_WIDTH 120
+#define CS_DATELABEL_HEIGHT 50
+
+#define CS_TIMELABEL_Y 0
+#define CS_TIMELABEL_WIDTH 92
+#define CS_TIMELABEL_HEIGHT 50
+
+#define CS_TEXTFIELD_PADDING_LEFT 10
+
+#define CS_LOGIN_GESTURE_MIN 0
+#define CS_LOGIN_GESTURE_MAX 88
+#define CS_CHANGE_EMAIL_GESTURE_MIN 0
+#define CS_CHANGE_EMAIL_GESTURE_MAX 132
+
+
+//===================================================================================================================================
+
+
+// CONSTRAINTS
+//===================================================================================================================================
+
+#define CO_MULTIPLER 1.0f 
+
+//===================================================================================================================================
+
+
+
 // COLORS
 //===================================================================================================================================
 
@@ -55,6 +107,9 @@
 #define CLR_ROOT_GRADIENT_START_POINT_Y 0.5
 #define CLR_ROOT_GRADIENT_END_POINT_X 1.0
 #define CLR_ROOT_GRADIENT_END_POINT_Y 0.5
+
+#define CLR_DATELABEL (145.0/255.0)
+#define CLR_DATELABEL_ALPHA (1.0)
 
 //===================================================================================================================================
 

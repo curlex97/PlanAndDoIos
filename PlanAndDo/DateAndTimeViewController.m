@@ -20,15 +20,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title=@"Date & Time";
+    self.title=NM_DATE_AND_TIME;
     self.view.backgroundColor=[UIColor whiteColor];
     
-    self.dateLabel=[[UILabel alloc] initWithFrame:CGRectMake(8, 0, 120, 50)];
-    self.dateLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0];
+    self.dateLabel=[[UILabel alloc] initWithFrame:CGRectMake(CS_DATELABEL_X, CS_DATELABEL_Y, CS_DATELABEL_WIDTH, CS_DATELABEL_HEIGHT)];
+    self.dateLabel.textColor=[UIColor colorWithRed:CLR_DATELABEL green:CLR_DATELABEL blue:CLR_DATELABEL alpha:CLR_DATELABEL_ALPHA];
     self.dateLabel.text=@"Date";
     
-    self.timeLabel=[[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-100, 0, 92, 50)];
-    self.timeLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0];
+    self.timeLabel=[[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width-100, CS_TIMELABEL_Y, CS_TIMELABEL_WIDTH, CS_TIMELABEL_HEIGHT)];
+    self.timeLabel.textColor=[UIColor colorWithRed:CLR_DATELABEL green:CLR_DATELABEL blue:CLR_DATELABEL alpha:CLR_DATELABEL_ALPHA];
     self.timeLabel.text=@"Time";
     [self.timeLabel setTextAlignment:NSTextAlignmentRight];
     
@@ -48,7 +48,7 @@
                               relatedBy:NSLayoutRelationEqual
                               toItem:self.view
                               attribute:NSLayoutAttributeBottom
-                              multiplier:1.0f
+                              multiplier:CO_MULTIPLER
                               constant:0.0]];
     
     [self.view addConstraint:[NSLayoutConstraint
@@ -57,7 +57,7 @@
                               relatedBy:NSLayoutRelationEqual
                               toItem:self.view
                               attribute:NSLayoutAttributeTrailing
-                              multiplier:1.0f
+                              multiplier:CO_MULTIPLER
                               constant:0.0]];
     
     [self.view addConstraint:[NSLayoutConstraint
@@ -66,7 +66,7 @@
                               relatedBy:NSLayoutRelationEqual
                               toItem:self.view
                               attribute:NSLayoutAttributeLeading
-                              multiplier:1.0f
+                              multiplier:CO_MULTIPLER
                               constant:0.0]];
     
     self.timeLabel.translatesAutoresizingMaskIntoConstraints=NO;
@@ -76,7 +76,7 @@
                               relatedBy:NSLayoutRelationEqual
                               toItem:self.view
                               attribute:NSLayoutAttributeTrailing
-                              multiplier:1.0f
+                              multiplier:CO_MULTIPLER
                               constant:-8.0]];
     
     [self.view addConstraint:[NSLayoutConstraint
@@ -85,7 +85,7 @@
                               relatedBy:NSLayoutRelationEqual
                               toItem:self.view
                               attribute:NSLayoutAttributeTop
-                              multiplier:1.0f
+                              multiplier:CO_MULTIPLER
                               constant:16.0]];
 
     self.dateTimePicker.timeZone=[NSTimeZone localTimeZone];

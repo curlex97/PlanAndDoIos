@@ -27,7 +27,7 @@
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
 
-    if([gestureRecognizer locationInView:self.loginTextField].y>=0 && [gestureRecognizer locationInView:self.loginTextField].y<88)
+    if([gestureRecognizer locationInView:self.loginTextField].y>=CS_LOGIN_GESTURE_MIN && [gestureRecognizer locationInView:self.loginTextField].y<CS_LOGIN_GESTURE_MAX)
     {
         NSLog(@"%f",[gestureRecognizer locationInView:self.loginTextField].y);
     }
@@ -93,7 +93,7 @@
     
     if(cavc)
     {
-        cavc.navigationItem.title = @"Create account";
+        cavc.navigationItem.title = NM_CREATE_ACCOUNT;
         [self.navigationController pushViewController:cavc animated:YES];
     }
     
@@ -103,7 +103,7 @@
     
     if(cavc)
     {
-        cavc.navigationItem.title = @"New password";
+        cavc.navigationItem.title = NM_NEW_PASSWORD;
         [self.navigationController pushViewController:cavc animated:YES];
     }
 }
@@ -114,7 +114,7 @@
             
             if(tableTaskViewController)
             {
-                tableTaskViewController.title=@"Today";
+                tableTaskViewController.title=NM_TODAY;
                 [self presentViewController:tableTaskViewController animated:YES completion:nil];
             }
 }

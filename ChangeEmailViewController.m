@@ -10,7 +10,7 @@
 #import "KSApplicationColor.h"
 #import "ApplicationManager.h"
 
-#define TEXTFIELD_PADDING_LEFT 10
+
 
 
 @interface ChangeEmailViewController ()<UIGestureRecognizerDelegate>
@@ -21,7 +21,7 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    if([gestureRecognizer locationInView:self.oldEmailTextField].y>=0 && [gestureRecognizer locationInView:self.oldEmailTextField].y<44*3)
+    if([gestureRecognizer locationInView:self.oldEmailTextField].y>=CS_CHANGE_EMAIL_GESTURE_MIN && [gestureRecognizer locationInView:self.oldEmailTextField].y<CS_CHANGE_EMAIL_GESTURE_MAX)
     {
         
     }
@@ -47,21 +47,21 @@
 {
     [super viewDidLoad];
     
-    self.title=@"Change Email";
+    self.title=NM_CHANGE_EMAIL;
     CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
     gradient.frame=self.view.bounds;
     self.view.backgroundColor=[UIColor whiteColor];
     [self.view.layer insertSublayer:gradient atIndex:0];
     
-    UIView *oldEmailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXTFIELD_PADDING_LEFT, 0)];
+    UIView *oldEmailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.oldEmailTextField.leftView = oldEmailPaddingView;
     self.oldEmailTextField.leftViewMode = UITextFieldViewModeAlways;
     
-    UIView *emailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXTFIELD_PADDING_LEFT, 0)];
+    UIView *emailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.emailTextField.leftView = emailPaddingView;
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
     
-    UIView *reenterEmailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, TEXTFIELD_PADDING_LEFT, 0)];
+    UIView *reenterEmailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.reenterEmailTextField.leftView = reenterEmailPaddingView;
     self.reenterEmailTextField.leftViewMode = UITextFieldViewModeAlways;
     

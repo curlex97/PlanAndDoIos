@@ -131,7 +131,7 @@
         
         if(tableTaskViewController && fl)
         {
-            tableTaskViewController.title=@"Today";
+            tableTaskViewController.title=NM_TODAY;
             dispatch_async(dispatch_get_main_queue(), ^{
             [self presentViewController:tableTaskViewController animated:YES completion:nil];
             });
