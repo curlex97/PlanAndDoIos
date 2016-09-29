@@ -28,7 +28,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    UIBarButtonItem * menuButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Menu"] scaledToSize:CGSizeMake(40, 40)] style:UIBarButtonItemStyleDone target:self action:@selector(menuTapped)];
+    UIBarButtonItem * menuButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:TL_MENU] scaledToSize:CGSizeMake(40, 40)] style:UIBarButtonItemStyleDone target:self action:@selector(menuTapped)];
     self.navigationItem.leftBarButtonItem=menuButton;
 
 }
@@ -68,22 +68,22 @@
     switch (indexPath.row)
     {
         case 0:
-            cell.textLabel.text = @"Start page";
+            cell.textLabel.text = NM_START_PAGE;
             cell.paramValueLabel.text = self.settings.startPage.capitalizedString;
             
             break;
         case 1:
-            cell.textLabel.text = @"Format date";
+            cell.textLabel.text = NM_FORMAT_DATE;
             cell.paramValueLabel.text = self.settings.dateFormat.uppercaseString;
 
             break;
         case 2:
-            cell.textLabel.text = @"Format time";
+            cell.textLabel.text = NM_FORMAT_TIME;
             cell.paramValueLabel.text = [NSString stringWithFormat:@"%@H", self.settings.timeFormat];
 
             break;
         case 3:
-            cell.textLabel.text = @"Start day";
+            cell.textLabel.text = NM_START_DAY;
             cell.paramValueLabel.text = self.settings.startDay.capitalizedString;
 
             break;

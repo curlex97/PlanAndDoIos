@@ -240,7 +240,7 @@
 
     //self.pan=[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gesturePan)];
     //self.pan.delegate=self;
-    self.headerText=@"Head";
+    self.headerText=NM_TASK_HEAD;
     self.title=@"Add";
     if(!self.completionTime)self.completionTime = [NSDate date];
     
