@@ -74,6 +74,7 @@
 #define NM_CATEGORY_ADD @"Add category"
 
 #define NM_TASK_HEAD @"Task"
+#define NM_ADD_TASK @"Add"
 
 #define NM_PRIORITY_SHORT_LOW @"low"
 #define NM_PRIORITY_SHORT_MID @"mid"

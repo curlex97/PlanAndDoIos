@@ -241,7 +241,7 @@
     //self.pan=[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gesturePan)];
     //self.pan.delegate=self;
     self.headerText=NM_TASK_HEAD;
-    self.title=@"Add";
+    self.title=NM_ADD_TASK;
     if(!self.completionTime)self.completionTime = [NSDate date];
     
     UIBarButtonItem * doneItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneDidTap)];
@@ -250,7 +250,7 @@
     
     UIView * footerPriorityView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 56)];
     UILabel * priorityLable=[[UILabel alloc] initWithFrame:CGRectMake(15, 17, 62, 21)];
-    priorityLable.text=@"Priority";
+    priorityLable.text=NM_PRIORITY;
     priorityLable.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     self.slider=[[UISlider alloc] initWithFrame:CGRectMake(100, 12, self.view.bounds.size.width-110, 31)];
     self.slider.minimumValue=0.0;
@@ -262,7 +262,7 @@
     self.lastValue=self.slider.value;
     
     self.priorityDescLabel=[[UILabel alloc] initWithFrame:CGRectMake(100, 43, 23, 13)];
-    self.priorityDescLabel.text=@"low";
+    self.priorityDescLabel.text=NM_PRIORITY_SHORT_LOW;
     self.priorityDescLabel.font=[UIFont systemFontOfSize:10.0];
     self.priorityDescLabel.center=[self getThumbCenter:self.slider];
     self.priorityDescLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
