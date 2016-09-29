@@ -428,9 +428,9 @@
     }
     else
     {
-        KSCategory* cat = self.categories[self.managedIndexPath.row];
-        cat.name=textField.text;
-        [[ApplicationManager categoryApplicationManager] updateCateroty:cat];
+        //KSCategory* cat = self.categories[self.managedIndexPath.row];
+        //cat.name=textField.text;
+        [[ApplicationManager categoryApplicationManager] allCategories][self.managedIndexPath.row].name=textField.text;
         self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
 
         self.state=KSMenuStateNormal;
@@ -462,11 +462,11 @@
                                                          {
                                                              KSCategory* cat = self.categories[indexPath.row];
                                                              [[ApplicationManager categoryApplicationManager] deleteCateroty:cat];
-                                                             self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+                                                             [self.categories removeObjectAtIndex:indexPath.row];
                                                              [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-                                                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                                                 [self.tableView reloadData];
-                                                             });
+//                                                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                                                                 [self.tableView reloadData];
+//                                                             });
                                                              
                                                          });
                                           
