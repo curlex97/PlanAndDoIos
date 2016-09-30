@@ -12,7 +12,7 @@
 #import "CategoryApiManager.h"
 #import "TasksApiManager.h"
 #import "SubTasksApiManager.h"
-
+#import "SyncApiManager.h"
 
 @interface SyncApplicationManager : NSObject
 
@@ -28,5 +28,7 @@
 -(void) syncTasksWithCompletion:(void (^)(bool))completed;
 
 -(void) syncSubTasksWithCompletion:(void (^)(bool))completed;
+
+
 
 @end

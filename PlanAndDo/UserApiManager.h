@@ -21,7 +21,7 @@
 
 -(void) logout;
 
--(void) syncUserWithCompletion:(void (^)(bool))completed;
+-(void) syncUserWithCompletion:(void (^)(NSDictionary*))completed;
 
 
 @end

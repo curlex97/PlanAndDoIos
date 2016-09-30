@@ -15,7 +15,7 @@
 -(void)updateSettingsAsync:(UserSettings*)settings forUser:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
 
 
--(void) syncSettingsWithCompletion:(void (^)(bool))completed;
+-(void) syncSettingsWithCompletion:(void (^)(NSDictionary*))completed;
 
 
 @end

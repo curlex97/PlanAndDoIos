@@ -21,6 +21,7 @@
 #define NC_SYNC_CATEGORIES @"SyncCategories"
 #define NC_SYNC_TASKS @"SyncTasks"
 #define NC_SYNC_SUBTASKS @"SyncSubTasks"
+#define NC_SYNC_STATUS @"SyncStatus"
 
 #define NC_TASK_ADD @"TaskAdd"
 #define NC_TASK_EDIT @"TaskEdit"
@@ -198,6 +199,7 @@
 //===================================================================================================================================
 
 #define FS_TOKEN @"token.txt"
+#define FS_LAST_SYNC_TIME @"lst.txt"
 
 //===================================================================================================================================
 

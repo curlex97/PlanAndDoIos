@@ -33,6 +33,7 @@
 		27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A1021D81A3CB00D47FCD /* KSTask.m */; };
 		27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A1051D81A61300D47FCD /* KSTaskCollection.m */; };
 		2801D1901D9E927B00A4D1FD /* SyncApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2801D18F1D9E927B00A4D1FD /* SyncApiManager.m */; };
+		2801D1941D9E97DA00A4D1FD /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2801D1931D9E97DA00A4D1FD /* FileManager.m */; };
 		2803AF7C1D8A8EBF0032ACFB /* KSSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2803AF7B1D8A8EBF0032ACFB /* KSSettingsCell.xib */; };
 		2803AF811D8A8F190032ACFB /* KSSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF801D8A8F190032ACFB /* KSSettingsCell.m */; };
 		2803AF861D8AA0AC0032ACFB /* FormatDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF851D8AA0AC0032ACFB /* FormatDateViewController.m */; };
@@ -144,6 +145,8 @@
 		27B1A1051D81A61300D47FCD /* KSTaskCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSTaskCollection.m; sourceTree = "<group>"; };
 		2801D18E1D9E927B00A4D1FD /* SyncApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncApiManager.h; sourceTree = "<group>"; };
 		2801D18F1D9E927B00A4D1FD /* SyncApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncApiManager.m; sourceTree = "<group>"; };
+		2801D1921D9E97DA00A4D1FD /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
+		2801D1931D9E97DA00A4D1FD /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		2803AF7B1D8A8EBF0032ACFB /* KSSettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KSSettingsCell.xib; path = ../KSSettingsCell.xib; sourceTree = "<group>"; };
 		2803AF7F1D8A8F190032ACFB /* KSSettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSSettingsCell.h; sourceTree = "<group>"; };
 		2803AF801D8A8F190032ACFB /* KSSettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSSettingsCell.m; sourceTree = "<group>"; };
@@ -296,6 +299,24 @@
 				27B1A1051D81A61300D47FCD /* KSTaskCollection.m */,
 			);
 			name = TaskModels;
+			sourceTree = "<group>";
+		};
+		2801D1911D9E935600A4D1FD /* SyncApiManager */ = {
+			isa = PBXGroup;
+			children = (
+				2801D18E1D9E927B00A4D1FD /* SyncApiManager.h */,
+				2801D18F1D9E927B00A4D1FD /* SyncApiManager.m */,
+			);
+			name = SyncApiManager;
+			sourceTree = "<group>";
+		};
+		2801D1951D9E9C1E00A4D1FD /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				2801D1921D9E97DA00A4D1FD /* FileManager.h */,
+				2801D1931D9E97DA00A4D1FD /* FileManager.m */,
+			);
+			name = FileManager;
 			sourceTree = "<group>";
 		};
 		2803AF7D1D8A8EE20032ACFB /* PriorityCell */ = {
@@ -757,8 +778,7 @@
 				28943D091D9303C600BC8A69 /* UserApiManager */,
 				28943D081D9303BC00BC8A69 /* SettingsApiManager */,
 				28943D071D9303B500BC8A69 /* CategoryApiManager */,
-				2801D18E1D9E927B00A4D1FD /* SyncApiManager.h */,
-				2801D18F1D9E927B00A4D1FD /* SyncApiManager.m */,
+				2801D1911D9E935600A4D1FD /* SyncApiManager */,
 			);
 			name = ApiManagers;
 			sourceTree = "<group>";
@@ -766,6 +786,7 @@
 		28943CF41D93017A00BC8A69 /* ApplicationManagers */ = {
 			isa = PBXGroup;
 			children = (
+				2801D1951D9E9C1E00A4D1FD /* FileManager */,
 				28616D4B1D93F91400BB2CCE /* ACNetworkManager */,
 				28214C7F1D93D29A0012B1C7 /* ApplicationManager */,
 				28214C841D93D3180012B1C7 /* TasksApplicationManager */,
@@ -1107,6 +1128,7 @@
 				28AB856B1D8F48A100D93AB7 /* SettingsCoreDataManager.m in Sources */,
 				280539241D900F2900868ACF /* MGSwipeButton.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
+				2801D1941D9E97DA00A4D1FD /* FileManager.m in Sources */,
 				28943D061D9303A800BC8A69 /* CategoryApiManager.m in Sources */,
 				270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */,
 				28943CFD1D93037500BC8A69 /* SubTasksApiManager.m in Sources */,

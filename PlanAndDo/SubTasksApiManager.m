@@ -26,10 +26,10 @@
 }
 
 
--(void)syncSubTasksWithCompletion:(void (^)(bool))completed
+-(void)syncSubTasksWithCompletion:(void (^)(NSDictionary*))completed
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        completed(true);
+        completed(nil);
     });
 }
 

@@ -10,6 +10,7 @@
 #import "UserSettings.h"
 #import "ApplicationManager.h"
 #import "KSCategory.h"
+#import "FileManager.h"
 
 @implementation UserApplicationManager
 
@@ -46,7 +47,7 @@
             NSDate *createDate = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"data.users.created_at"] intValue]];
             NSDate *lastVisitDate = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"data.users.lastvisit_date"] intValue]];
             
-            [self writeTokenToFile:token];
+            [FileManager writeTokenToFile:token];
             
               ///////Settings/////////
             
@@ -64,7 +65,8 @@
             
             
             KSAuthorisedUser* user = [[KSAuthorisedUser alloc] initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:createDate andLastVisitDate:lastVisitDate andSyncStatus:syncStatus andAccessToken:token andUserSettings:settings];
-            
+            user.apiToken = token;
+
             [[[UserCoreDataManager alloc] init] setUser:user];
             [[[SettingsCoreDataManager alloc] init] setSettings:settings];
             
@@ -104,7 +106,7 @@
             NSString* userName = [dictionary valueForKeyPath:@"data.user_name"];
             NSString* token = [dictionary valueForKeyPath:@"data.token"];
 
-            [self writeTokenToFile:token];
+            [FileManager writeTokenToFile:token];
              
             KSAuthorisedUser* user = [[KSAuthorisedUser alloc] initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:[NSDate date] andLastVisitDate:[NSDate date] andSyncStatus:0 andAccessToken:token andUserSettings:nil];
             
@@ -118,21 +120,7 @@
 }
 
 
--(void) writeTokenToFile:(NSString*)token
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *path = [documentsDirectory stringByAppendingPathComponent:FS_TOKEN];
-    [token writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
-}
 
--(NSString*) readTokenFromFile
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *path = [documentsDirectory stringByAppendingPathComponent:FS_TOKEN];
-    return [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-}
 
 -(void) cleanTable
 {

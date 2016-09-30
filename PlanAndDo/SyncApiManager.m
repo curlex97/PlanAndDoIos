@@ -7,14 +7,36 @@
 //
 
 #import "SyncApiManager.h"
+#import "ApplicationDefines.h"
+#import "FileManager.h"
 
 @implementation SyncApiManager
 
--(void)syncStatusWithCompletion:(void (^)(bool))completed
+-(void) syncStatusWithUser:(KSAuthorisedUser*)user andCompletion:(void (^)(NSDictionary*))completed
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        completed(true);
-    });
+    
+    NSMutableDictionary* puser = [NSMutableDictionary dictionary];
+    NSMutableDictionary* inData = [NSMutableDictionary dictionary];
+    
+    NSNumber *number = [NSNumber numberWithInteger:[[FileManager readLastSyncTimeFromFile] intValue]];
+    
+    [inData setValue:number forKey:@"lst"];
+    
+    [puser setValue:[NSNumber numberWithInteger:user.ID] forKey:@"user_id"];
+    [puser setValue:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"device_id"];
+    [puser setValue:[FileManager readTokenFromFile] forKey:@"token"];
+    [puser setValue:@"user" forKey:@"class"];
+    [puser setValue:@"register" forKey:@"method"];
+    
+    [puser setValue:inData forKey:@"data"];
+    
+    [self dataByData:puser completion:^(NSData * data) {
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        completed(json);
+    }];
+    
+    
 }
+
 
 @end

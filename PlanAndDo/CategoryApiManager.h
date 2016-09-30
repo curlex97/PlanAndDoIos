@@ -18,6 +18,6 @@
 
 -(void) deleteCategoryAsync:(KSCategory*)category forUser:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
 
--(void) syncCategoriesWithCompletion:(void (^)(bool))completed;
+-(void) syncCategoriesWithCompletion:(void (^)(NSDictionary*))completed;
 
 @end

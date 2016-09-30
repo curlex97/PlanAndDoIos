@@ -19,6 +19,6 @@
 
 -(void)deleteTaskAsync:(BaseTask*)task forUser:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
 
--(void) syncTasksWithCompletion:(void (^)(bool))completed;
+-(void) syncTasksWithCompletion:(void (^)(NSDictionary*))completed;
 
 @end

@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ApiManager.h"
+#import "KSAuthorisedUser.h"
+#import <UIKit/UIKit.h>
 
-@interface SyncApiManager : NSObject
+@interface SyncApiManager : ApiManager
 
--(void) syncStatusWithCompletion:(void (^)(bool))completed;
+-(void) syncStatusWithUser:(KSAuthorisedUser*)user andCompletion:(void (^)(NSDictionary*))completed;
 
 
 @end

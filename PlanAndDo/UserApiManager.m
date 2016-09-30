@@ -40,18 +40,18 @@
 -(void) registerAsyncWithEmail:(NSString*)email andUserName:(NSString*)userName andPassword:(NSString*)password completion:(void (^)(NSDictionary*))completed
 {
     NSMutableDictionary* user = [NSMutableDictionary dictionary];
-    NSMutableDictionary* data = [NSMutableDictionary dictionary];
+    NSMutableDictionary* inputData = [NSMutableDictionary dictionary];
     
-    [data setValue:userName forKey:@"name"];
-    [data setValue:email forKey:@"email"];
-    [data setValue:password forKey:@"password"];
+    [inputData setValue:userName forKey:@"name"];
+    [inputData setValue:email forKey:@"email"];
+    [inputData setValue:password forKey:@"password"];
     
     [user setValue:@"" forKey:@"user_id"];
     [user setValue:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"device_id"];
     [user setValue:@"" forKey:@"token"];
     [user setValue:@"user" forKey:@"class"];
     [user setValue:@"register" forKey:@"method"];
-    [user setValue:data forKey:@"data"];
+    [user setValue:inputData forKey:@"data"];
     
     [self dataByData:user completion:^(NSData * data) {
         
@@ -65,10 +65,10 @@
     
 }
 
--(void)syncUserWithCompletion:(void (^)(bool))completed
+-(void)syncUserWithCompletion:(void (^)(NSDictionary*))completed
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        completed(true);
+        completed(nil);
     });
 }
 
