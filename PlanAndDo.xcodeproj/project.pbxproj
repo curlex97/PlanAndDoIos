@@ -32,6 +32,7 @@
 		27B1A1001D81A20400D47FCD /* BaseTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A0FF1D81A20400D47FCD /* BaseTask.m */; };
 		27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A1021D81A3CB00D47FCD /* KSTask.m */; };
 		27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A1051D81A61300D47FCD /* KSTaskCollection.m */; };
+		2801D1901D9E927B00A4D1FD /* SyncApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2801D18F1D9E927B00A4D1FD /* SyncApiManager.m */; };
 		2803AF7C1D8A8EBF0032ACFB /* KSSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2803AF7B1D8A8EBF0032ACFB /* KSSettingsCell.xib */; };
 		2803AF811D8A8F190032ACFB /* KSSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF801D8A8F190032ACFB /* KSSettingsCell.m */; };
 		2803AF861D8AA0AC0032ACFB /* FormatDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF851D8AA0AC0032ACFB /* FormatDateViewController.m */; };
@@ -141,6 +142,8 @@
 		27B1A1021D81A3CB00D47FCD /* KSTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSTask.m; sourceTree = "<group>"; };
 		27B1A1041D81A61300D47FCD /* KSTaskCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSTaskCollection.h; sourceTree = "<group>"; };
 		27B1A1051D81A61300D47FCD /* KSTaskCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSTaskCollection.m; sourceTree = "<group>"; };
+		2801D18E1D9E927B00A4D1FD /* SyncApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncApiManager.h; sourceTree = "<group>"; };
+		2801D18F1D9E927B00A4D1FD /* SyncApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncApiManager.m; sourceTree = "<group>"; };
 		2803AF7B1D8A8EBF0032ACFB /* KSSettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KSSettingsCell.xib; path = ../KSSettingsCell.xib; sourceTree = "<group>"; };
 		2803AF7F1D8A8F190032ACFB /* KSSettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSSettingsCell.h; sourceTree = "<group>"; };
 		2803AF801D8A8F190032ACFB /* KSSettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSSettingsCell.m; sourceTree = "<group>"; };
@@ -754,6 +757,8 @@
 				28943D091D9303C600BC8A69 /* UserApiManager */,
 				28943D081D9303BC00BC8A69 /* SettingsApiManager */,
 				28943D071D9303B500BC8A69 /* CategoryApiManager */,
+				2801D18E1D9E927B00A4D1FD /* SyncApiManager.h */,
+				2801D18F1D9E927B00A4D1FD /* SyncApiManager.m */,
 			);
 			name = ApiManagers;
 			sourceTree = "<group>";
@@ -1074,6 +1079,7 @@
 				28943D031D93039500BC8A69 /* SettingsApiManager.m in Sources */,
 				27B1A0F31D818D0600D47FCD /* KSUserInfo.m in Sources */,
 				28797F711D87E24500AEDE0A /* UIImage+ACScaleImage.m in Sources */,
+				2801D1901D9E927B00A4D1FD /* SyncApiManager.m in Sources */,
 				2786E7B01D883692009BDB2A /* TabletasksViewController.m in Sources */,
 				27494DE41D8D3ECE009BFC5F /* KSMenuViewController.m in Sources */,
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
