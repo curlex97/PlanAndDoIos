@@ -99,8 +99,8 @@
 {
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:dateTimePicker.date];
     
-    self.dateLabel.text = [NSString stringWithFormat:@"%li/%li/%li", [components day], [components month], [components year]];
-    self.timeLabel.text = [NSString stringWithFormat:@"%li:%li", [components hour], [components minute]];
+    self.dateLabel.text = [NSString stringWithFormat:@"%li/%li/%li", (long)[components day], [components month], [components year]];
+    self.timeLabel.text = [NSString stringWithFormat:@"%li:%li", (long)[components hour], [components minute]];
 }
 
 - (void)didReceiveMemoryWarning {

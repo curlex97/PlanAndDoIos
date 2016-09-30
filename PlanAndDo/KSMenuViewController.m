@@ -213,8 +213,8 @@
         
         NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:task.completionTime];
         
-        cell.taskDateLabel.text = [NSString stringWithFormat:@"%li/%li/%li", [components day], [components month], [components year]];
-        cell.taskTimeLabel.text = [NSString stringWithFormat:@"%li:%li", [components hour], [components minute]];
+        cell.taskDateLabel.text = [NSString stringWithFormat:@"%li/%li/%li", (long)[components day], [components month], (long)[components year]];
+        cell.taskTimeLabel.text = [NSString stringWithFormat:@"%li:%li", [components hour], (long)[components minute]];
         
         return cell;
         

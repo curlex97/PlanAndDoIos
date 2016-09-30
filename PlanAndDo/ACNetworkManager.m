@@ -43,7 +43,7 @@
         NSData *postdata = [NSJSONSerialization dataWithJSONObject:bodyDictionary options:0 error:nil];
         [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setValue:[NSString stringWithFormat:@"%lu", [postdata length]] forHTTPHeaderField:@"Content-Length"];
+        [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[postdata length]] forHTTPHeaderField:@"Content-Length"];
         [request setHTTPBody: postdata];
     }
     else if(![queryType  isEqual: @"GET"])
