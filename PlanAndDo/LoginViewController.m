@@ -108,13 +108,17 @@
 
 - (IBAction)signInTapped:(id)sender
 {
-            AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
-            
-            if(tableTaskViewController)
-            {
-                tableTaskViewController.title=NM_TODAY;
-                [self presentViewController:tableTaskViewController animated:YES completion:nil];
-            }
+    
+    [[ApplicationManager syncApplicationManager] syncWithCompletion:^(bool status) {
+        AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
+        
+        if(tableTaskViewController)
+        {
+            tableTaskViewController.title=NM_TODAY;
+            [self presentViewController:tableTaskViewController animated:YES completion:nil];
+        }
+    }];
+    
 }
 
 -(void)dealloc

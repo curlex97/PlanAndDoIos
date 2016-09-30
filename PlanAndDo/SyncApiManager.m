@@ -25,8 +25,8 @@
     [puser setValue:[NSNumber numberWithInteger:user.ID] forKey:@"user_id"];
     [puser setValue:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"device_id"];
     [puser setValue:[FileManager readTokenFromFile] forKey:@"token"];
-    [puser setValue:@"user" forKey:@"class"];
-    [puser setValue:@"register" forKey:@"method"];
+    [puser setValue:@"sync" forKey:@"class"];
+    [puser setValue:@"startSync" forKey:@"method"];
     
     [puser setValue:inData forKey:@"data"];
     
