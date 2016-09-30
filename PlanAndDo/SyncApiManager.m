@@ -9,11 +9,15 @@
 #import "SyncApiManager.h"
 #import "ApplicationDefines.h"
 #import "FileManager.h"
+#import "UserApplicationManager.h"
 
 @implementation SyncApiManager
 
--(void) syncStatusWithUser:(KSAuthorisedUser*)user andCompletion:(void (^)(NSDictionary*))completed
+-(void) syncStatusWithCompletion:(void (^)(NSDictionary*))completed
 {
+    
+    KSAuthorisedUser* user = [[[UserApplicationManager alloc] init] authorisedUser];
+
     
     NSMutableDictionary* puser = [NSMutableDictionary dictionary];
     NSMutableDictionary* inData = [NSMutableDictionary dictionary];

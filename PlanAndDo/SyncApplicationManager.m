@@ -74,11 +74,11 @@
 -(void) syncStatusWithCompletion:(void (^)(bool))completed
 {
     
-    [[[SyncApiManager alloc] init] syncStatusWithUser:[[[UserApplicationManager alloc] init] authorisedUser] andCompletion:^(NSDictionary * json)
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_STATUS object:nil];
-        completed(YES);
-    }];
+    [[[SyncApiManager alloc] init] syncStatusWithCompletion:^(NSDictionary * json)
+     {
+         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_STATUS object:nil];
+         completed(YES);
+     }];
 }
 
 

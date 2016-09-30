@@ -13,7 +13,6 @@
 
 @interface SyncApiManager : ApiManager
 
--(void) syncStatusWithUser:(KSAuthorisedUser*)user andCompletion:(void (^)(NSDictionary*))completed;
-
+-(void) syncStatusWithCompletion:(void (^)(NSDictionary*))completed;
 
 @end
