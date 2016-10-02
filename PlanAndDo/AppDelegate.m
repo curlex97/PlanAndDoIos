@@ -42,7 +42,19 @@
     [statusBarBackView.layer addSublayer:gradient2];
     [statusBar.subviews[0] addSubview:statusBarBackView];
     statusBar.subviews[0].backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
-
+    
+    UIView * shadowView=[[UIView alloc] initWithFrame:CGRectMake(-40.0, 0, 40, statusBar.frame.size.height)];
+    //shadowView.backgroundColor=[UIColor whiteColor];
+    CAGradientLayer * shadowGradient=[CAGradientLayer layer];
+    shadowGradient.frame=shadowView.bounds;
+    UIColor *leftColor = [UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
+    UIColor *rightColor = [UIColor blackColor];
+    shadowGradient.colors = @[ (__bridge id)leftColor.CGColor,
+                         (__bridge id)rightColor.CGColor ];
+    shadowGradient.startPoint = CGPointMake(0.55, 0.5);
+    shadowGradient.endPoint = CGPointMake(1.7, 0.5);
+    [shadowView.layer addSublayer:shadowGradient];
+    [statusBarBackView addSubview:shadowView];
 //    yourController.view.backgroundColor = [UIColor redColor];
 //    yourController2.view.backgroundColor = [UIColor blueColor];
 //    
