@@ -492,11 +492,20 @@
                                                                       {
                                                                           dispatch_async(dispatch_get_main_queue(), ^
                                                                                          {
-                                                                                             NSLog(@"%@",self.categories);
+                                                                                             UINavigationController * frontNVC=(UINavigationController *)self.parentController.frontViewController;
+                                                                                             TabletasksViewController * frontVC=frontNVC.viewControllers.firstObject;
+                                                                                             
                                                                                              [[ApplicationManager categoryApplicationManager] deleteCateroty:self.categories[indexPath.row]];
+                                                                                             
+                                                                                             if(self.categories[indexPath.row].ID==frontVC.category.ID)
+                                                                                             {
+                                                                                                 SEL selector = NSSelectorFromString(@"todayDidTap");
+                                                                                                 ((void (*)(id, SEL))[frontVC methodForSelector:selector])(frontVC, selector);
+                                                                                             }
+                                                                                             
                                                                                              self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
-                                                                                             NSLog(@"%@",self.categories);
                                                                                              [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+
                                                                                              
                                                                                              if(self.categories.count==0)
                                                                                              {

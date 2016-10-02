@@ -37,6 +37,11 @@
 {
     [[[CategoryCoreDataManager alloc] init] deleteCateroty:category];
     [[[CategoryApiManager alloc] init] deleteCategoryAsync:category forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
+    NSArray * tasks=[[ApplicationManager tasksApplicationManager] allTasksForCategory:category];
+    for (BaseTask * task in tasks)
+    {
+            [[ApplicationManager tasksApplicationManager] deleteTask:task];
+    }
 }
 
 -(void) cleanTable
