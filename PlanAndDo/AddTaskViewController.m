@@ -14,6 +14,7 @@
 #import "DateAndTimeViewController.h"
 #import "KSSettingsCell.h"
 #import "ApplicationManager.h"
+#import "UIImage+ACScaleImage.h"
 
 @interface AddTaskViewController ()
 @property (nonatomic)UISegmentedControl * segment;
@@ -28,6 +29,9 @@
 @end
 
 @implementation AddTaskViewController
+
+#define THUMB_WIDTH 40
+#define THUMB_HEIGHT 41
 
 -(instancetype)initWithCategory:(KSCategory *)category andDate:(NSDate *)date
 {
@@ -80,7 +84,8 @@
             break;
         case 2:
             cell.textLabel.text=@"Date & Time";
-            cell.paramValueLabel.text = [self.completionTime.description substringToIndex:[self.completionTime.description rangeOfString:@":" ].location + 3];
+            NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:self.completionTime];
+            cell.paramValueLabel.text = [NSString stringWithFormat:@"%li/%li/%li %li:%li",[components day], [components month], [components year],[components hour], [components minute]];
             break;
     }
     return cell;
@@ -123,20 +128,21 @@
     {
         self.slider.value=0.0;
         self.priorityDescLabel.text=@"low";
-        [self.slider setThumbImage:[UIImage imageNamed:@"white ball"] forState:UIControlStateNormal];
+        UIImage * image=[UIImage imageNamed:@"white ball"];
+        [self.slider setThumbImage:[UIImage imageWithImage:image scaledToSize:CGSizeMake(THUMB_WIDTH, THUMB_HEIGHT)] forState:UIControlStateNormal];
         //self.slider.backgroundColor=[UIColor redColor];
     }
     else if(self.slider.value>=0.5 && self.slider.value<1.5)
     {
         self.slider.value=1.0;
         self.priorityDescLabel.text=@"mid";
-        [self.slider setThumbImage:[UIImage imageNamed:@"green ball"] forState:UIControlStateNormal];
+        [self.slider setThumbImage:[UIImage imageWithImage:[UIImage imageNamed:@"green ball"] scaledToSize:CGSizeMake(THUMB_WIDTH, THUMB_HEIGHT)] forState:UIControlStateNormal];
     }
     else
     {
         self.slider.value=2.0;
         self.priorityDescLabel.text=@"high";
-        [self.slider setThumbImage:[UIImage imageNamed:@"red ball"] forState:UIControlStateNormal];
+        [self.slider setThumbImage:[UIImage imageWithImage:[UIImage imageNamed:@"red ball"] scaledToSize:CGSizeMake(THUMB_WIDTH, THUMB_HEIGHT)] forState:UIControlStateNormal];
     }
     self.priorityDescLabel.center=[self getThumbCenter:self.slider];
     NSLog(@"%f",slider.value);
@@ -258,7 +264,7 @@
     self.slider.value=0.0;
     self.slider.minimumTrackTintColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     [self.slider addTarget:self action:@selector(sliderDidSlide:) forControlEvents:UIControlEventValueChanged];
-    [self.slider setThumbImage:[UIImage imageNamed:@"white ball"] forState:UIControlStateNormal];
+    [self.slider setThumbImage:[UIImage imageWithImage:[UIImage imageNamed:@"white ball"] scaledToSize:CGSizeMake(THUMB_WIDTH, THUMB_HEIGHT)] forState:UIControlStateNormal];
     self.lastValue=self.slider.value;
     
     self.priorityDescLabel=[[UILabel alloc] initWithFrame:CGRectMake(100, 43, 23, 13)];
@@ -266,6 +272,7 @@
     self.priorityDescLabel.font=[UIFont systemFontOfSize:10.0];
     self.priorityDescLabel.center=[self getThumbCenter:self.slider];
     self.priorityDescLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
+    self.priorityDescLabel.textAlignment=NSTextAlignmentCenter;
     [footerPriorityView addSubview:priorityLable];
     [footerPriorityView addSubview:self.slider];
     [footerPriorityView addSubview:self.priorityDescLabel];

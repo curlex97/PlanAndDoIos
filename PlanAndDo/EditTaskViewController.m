@@ -72,7 +72,8 @@
             break;
         case 2:
             cell.textLabel.text=NM_DATE_AND_TIME;
-            cell.paramValueLabel.text = [self.completionTime.description substringToIndex:[self.completionTime.description rangeOfString:@":" ].location + 3];
+            NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:self.completionTime];
+            cell.paramValueLabel.text = [NSString stringWithFormat:@"%li/%li/%li %li:%li",[components day], [components month], [components year],[components hour], [components minute]];
             break;
     }
     return cell;
