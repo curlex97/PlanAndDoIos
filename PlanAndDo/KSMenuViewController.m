@@ -486,23 +486,32 @@
         
         UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:TL_DELETE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
                                       {
-                                          dispatch_async(dispatch_get_main_queue(), ^
-                                                         {
-                                                             NSLog(@"%@",self.categories);
-                                                             [[ApplicationManager categoryApplicationManager] deleteCateroty:self.categories[indexPath.row]];
-                                                             self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
-                                                             NSLog(@"%@",self.categories);
-                                                             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-                                                             
-                                                             if(self.categories.count==0)
-                                                             {
-                                                                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
-                                                                            {
-                                                                                [self.tableView reloadData];
-                                                                            });
-                                                             }
-                                                         });
-                                      }];
+                                          UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Delete Category" message:@"If you delete a category, delete all the tasks and lists that are in it" preferredStyle:UIAlertControllerStyleAlert];
+                                          UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:TL_CANCEL style:UIAlertActionStyleCancel handler:nil];
+                                          UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:TL_DELETE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+                                                                      {
+                                                                          dispatch_async(dispatch_get_main_queue(), ^
+                                                                                         {
+                                                                                             NSLog(@"%@",self.categories);
+                                                                                             [[ApplicationManager categoryApplicationManager] deleteCateroty:self.categories[indexPath.row]];
+                                                                                             self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
+                                                                                             NSLog(@"%@",self.categories);
+                                                                                             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                                                                                             
+                                                                                             if(self.categories.count==0)
+                                                                                             {
+                                                                                                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
+                                                                                                                {
+                                                                                                                    [self.tableView reloadData];
+                                                                                                                });
+                                                                                             }
+                                                                                         });
+
+                                                                      }];
+                                          [alertController addAction:cancelAction];
+                                          [alertController addAction:deleteAction];
+                                          [self.parentController presentViewController:alertController animated:YES completion:nil];
+                                    }];
         
         UIAlertAction * editAction=[UIAlertAction actionWithTitle:TL_EDIT style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
                                     {
