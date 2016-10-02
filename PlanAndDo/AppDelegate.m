@@ -27,10 +27,6 @@
     
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
                                                              bundle: nil];
-//    ViewController *yourController = (ViewController*)[mainStoryboard
-//                                                                instantiateViewControllerWithIdentifier:@"ViewController"];
-//    ViewController *yourController2 = (ViewController*)[mainStoryboard
-//                                                       instantiateViewControllerWithIdentifier:@"ViewController"];
     
     application.statusBarStyle = UIStatusBarStyleLightContent;
     UIView *statusBar = [[application valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
@@ -55,12 +51,6 @@
     shadowGradient.endPoint = CGPointMake(1.7, 0.5);
     [shadowView.layer addSublayer:shadowGradient];
     [statusBarBackView addSubview:shadowView];
-//    yourController.view.backgroundColor = [UIColor redColor];
-//    yourController2.view.backgroundColor = [UIColor blueColor];
-//    
-//    AMAndroidSideBarViewController * androidSider=[AMAndroidSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:yourController] andBackVC:[[UINavigationController alloc] initWithRootViewController:yourController2]];
-    //    UINavigationController* navC = [[UINavigationController alloc] initWithRootViewController:yourController];
-      //_sideBarViewController = [AMSideBarViewController sideBarWithFrontVC:navC andBackVC:yourController2];
     
     LoginViewController * login=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:login];

@@ -107,6 +107,10 @@
     {
         return NM_CATEGORIES;
     }
+    else if(section==2 && self.state!=KSMenuStateSearch && self.categories.count>0)
+    {
+        return @"aaa";
+    }
     return nil;
 }
 
@@ -120,7 +124,7 @@
 {
     if(section==1 && self.state==KSMenuStateNormal)
     {
-        UIView * view=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 30)];
+        UIView * view=[[UIView alloc] init];
         view.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
         
         UIImageView * imageView=[[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 10, 10)];
@@ -140,7 +144,30 @@
         [view addSubview:imageView];
         return view;
     }
+    else if(section==2 && self.state==KSMenuStateNormal)
+    {
+        UIView * view=[[UIView alloc] init];
+        view.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
+        
+        return view;
+    }
     return nil;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if(section==2 && self.state!=KSMenuStateSearch && self.categories.count>0)
+    {
+        return 45.0;
+    }
+    else if(section==1 && self.state!=KSMenuStateSearch)
+    {
+        return 30.0;
+    }
+    else
+    {
+        return  0;
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -421,7 +448,7 @@
     [textField resignFirstResponder];
     if(self.state!=KSMenuStateEdit)
     {
-        [[ApplicationManager categoryApplicationManager] addCateroty:[[KSCategory alloc] initWithID:2 andName:textField.text andSyncStatus:0]];
+        [[ApplicationManager categoryApplicationManager] addCateroty:[[KSCategory alloc] initWithID:self.categories.lastObject.ID+1 andName:textField.text andSyncStatus:0]];
         self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
         textField.text=@"";
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.categories.count-1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
@@ -430,7 +457,8 @@
     {
         //KSCategory* cat = self.categories[self.managedIndexPath.row];
         //cat.name=textField.text;
-        [[ApplicationManager categoryApplicationManager] allCategories][self.managedIndexPath.row].name=textField.text;
+        self.categories[self.managedIndexPath.row].name=textField.text;
+        [[ApplicationManager categoryApplicationManager] updateCateroty:self.categories[self.managedIndexPath.row]];
         self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
 
         self.state=KSMenuStateNormal;
@@ -460,16 +488,20 @@
                                       {
                                           dispatch_async(dispatch_get_main_queue(), ^
                                                          {
-                                                             KSCategory* cat = self.categories[indexPath.row];
-                                                             [[ApplicationManager categoryApplicationManager] deleteCateroty:cat];
-                                                             [self.categories removeObjectAtIndex:indexPath.row];
+                                                             NSLog(@"%@",self.categories);
+                                                             [[ApplicationManager categoryApplicationManager] deleteCateroty:self.categories[indexPath.row]];
+                                                             self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
+                                                             NSLog(@"%@",self.categories);
                                                              [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-//                                                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                                                                 [self.tableView reloadData];
-//                                                             });
                                                              
+                                                             if(self.categories.count==0)
+                                                             {
+                                                                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
+                                                                            {
+                                                                                [self.tableView reloadData];
+                                                                            });
+                                                             }
                                                          });
-                                          
                                       }];
         
         UIAlertAction * editAction=[UIAlertAction actionWithTitle:TL_EDIT style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
