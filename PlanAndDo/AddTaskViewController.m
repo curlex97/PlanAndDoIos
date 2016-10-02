@@ -85,7 +85,24 @@
         case 2:
             cell.textLabel.text=@"Date & Time";
             NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:self.completionTime];
-            cell.paramValueLabel.text = [NSString stringWithFormat:@"%li/%li/%li %li:%li",[components day], [components month], [components year],[components hour], [components minute]];
+            NSDateComponents *currentComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:[NSDate date]];
+            NSDateComponents *tomorrowComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:[NSDate dateWithTimeIntervalSince1970:[NSDate date].timeIntervalSince1970 + 86400]];
+            
+            NSString * date;
+            
+            if(currentComponents.day==components.day&&currentComponents.month==components.month&&currentComponents.year==components.year)
+            {
+                date=@"Today";
+            }
+            else if(tomorrowComponents.day==components.day&&tomorrowComponents.month==components.month&&tomorrowComponents.year==components.year)
+            {
+                date=@"Tomorrow";
+            }
+            else
+            {
+                date=[NSString stringWithFormat:@"%li/%li/%li", components.day,components.month,components.year];
+            }
+            cell.paramValueLabel.text = [NSString stringWithFormat:@"%@ %li:%li", date, [components hour], [components minute]];
             break;
     }
     return cell;

@@ -86,8 +86,24 @@ static bool firstLoad = true;
     }
     
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:task.completionTime];
+    NSDateComponents *currentComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:[NSDate date]];
+    NSDateComponents *tomorrowComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:[NSDate dateWithTimeIntervalSince1970:[NSDate date].timeIntervalSince1970 + 86400]];
     
-    cell.taskDateLabel.text = [NSString stringWithFormat:@"%li/%li/%li", (long)[components day], [components month], (long)[components year]];
+    NSString * date;
+    
+    if(currentComponents.day==components.day&&currentComponents.month==components.month&&currentComponents.year==components.year)
+    {
+        date=@"Today";
+    }
+    else if(tomorrowComponents.day==components.day&&tomorrowComponents.month==components.month&&tomorrowComponents.year==components.year)
+    {
+        date=@"Tomorrow";
+    }
+    else
+    {
+        date=[NSString stringWithFormat:@"%li/%li/%li", components.day,components.month,components.year];
+    }
+    cell.taskDateLabel.text = date;
     cell.taskTimeLabel.text = [NSString stringWithFormat:@"%li:%li", [components hour], (long)[components minute]];
     
     return cell;
