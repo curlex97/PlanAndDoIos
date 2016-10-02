@@ -80,7 +80,7 @@
 #define NM_PRIORITY_SHORT_LOW @"low"
 #define NM_PRIORITY_SHORT_MID @"mid"
 #define NM_PRIORITY_SHORT_HIGH @"high"
-#define NM_PRIORITY_LONG_LOW @"Default priority"
+#define NM_PRIORITY_LONG_LOW @"Low priority"
 #define NM_PRIORITY_LONG_MID @"Normal priority"
 #define NM_PRIORITY_LONG_HIGH @"High priority"
 #define NM_PRIORITY @"Priority"

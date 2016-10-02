@@ -232,11 +232,23 @@
         
         cell.rightSwipeSettings.transition = MGSwipeDirectionRightToLeft;
         cell.taskHeaderLabel.text = task.name;
-        switch (task.priority) {
-            case KSTaskHighPriority:cell.taskPriorityLabel.text = NM_PRIORITY_LONG_MID; break;
-            case KSTaskDefaultPriority:cell.taskPriorityLabel.text = NM_PRIORITY_LONG_LOW; break;
-            case KSTaskVeryHighPriority:cell.taskPriorityLabel.text = NM_PRIORITY_LONG_HIGH; break;
+        
+        switch (task.priority)
+        {
+            case KSTaskDefaultPriority:
+                cell.taskPriorityLabel.text = NM_PRIORITY_LONG_LOW;
+                cell.taskPriorityLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0];
+                break;
+            case KSTaskHighPriority:
+                cell.taskPriorityLabel.text = NM_PRIORITY_LONG_MID;
+                cell.taskPriorityLabel.textColor=[UIColor colorWithRed:245.0/255.0 green:166.0/255.0 blue:35.0/255.0 alpha:1.0];
+                break;
+            case KSTaskVeryHighPriority:
+                cell.taskPriorityLabel.text = NM_PRIORITY_LONG_HIGH;
+                cell.taskPriorityLabel.textColor=[UIColor colorWithRed:241.0/255.0 green:17.0/255.0 blue:44.0/255.0 alpha:1.0];
+                break;
         }
+        
         
         NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:task.completionTime];
         

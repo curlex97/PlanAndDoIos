@@ -273,6 +273,7 @@
     self.priorityDescLabel.center=[self getThumbCenter:self.slider];
     self.priorityDescLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     self.priorityDescLabel.textAlignment=NSTextAlignmentCenter;
+    
     [footerPriorityView addSubview:priorityLable];
     [footerPriorityView addSubview:self.slider];
     [footerPriorityView addSubview:self.priorityDescLabel];
