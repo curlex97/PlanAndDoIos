@@ -37,7 +37,8 @@ static bool firstLoad = true;
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     if(self.boxType != KSBoxTypeArchive || self.segment.selectedSegmentIndex)
     {
-        cell.leftButtons = @[[MGSwipeButton buttonWithTitle:TL_COMPLETE backgroundColor:[UIColor greenColor] callback:^BOOL(MGSwipeTableCell *sender) {
+        cell.leftButtons = @[[MGSwipeButton buttonWithTitle:TL_COMPLETE backgroundColor:[UIColor colorWithRed:39.0/255.0 green:174.0/255.0 blue:97.0/255.0 alpha:1.0] callback:^BOOL(MGSwipeTableCell *sender)
+        {
             NSLog(TL_COMPLETE);
             task.status = YES;
             [[ApplicationManager tasksApplicationManager] updateTask:task];

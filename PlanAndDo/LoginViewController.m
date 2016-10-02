@@ -109,7 +109,10 @@
 - (IBAction)signInTapped:(id)sender
 {
     
-    [[ApplicationManager syncApplicationManager] syncWithCompletion:^(bool status) {
+    [[ApplicationManager syncApplicationManager] syncWithCompletion:^(bool status)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
         AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
         
         if(tableTaskViewController)
@@ -117,6 +120,7 @@
             tableTaskViewController.title=NM_TODAY;
             [self presentViewController:tableTaskViewController animated:YES completion:nil];
         }
+        });
     }];
     
 }

@@ -57,7 +57,7 @@
 {
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSCheckSettingsTableViewCell"owner:self options:nil];
     KSCheckSettingsTableViewCell * cell=[nib objectAtIndex:0];
-
+    cell.tintColor=[UIColor colorWithRed:40.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
     cell.paramNameLabel.text = self.segment.selectedSegmentIndex ? self.boxes[indexPath.row] : ((KSCategory*)self.categories[indexPath.row]).name;
     cell.accessoryType=[self.settings.startPage.lowercaseString isEqualToString:cell.paramNameLabel.text.lowercaseString] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
     

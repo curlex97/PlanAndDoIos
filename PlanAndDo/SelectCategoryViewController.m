@@ -28,7 +28,7 @@
     {
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-    
+    cell.tintColor=[UIColor colorWithRed:40.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
     if([self.categories[indexPath.row].name isEqualToString:self.selectedCategory.name])
     {
         cell.accessoryType=UITableViewCellAccessoryCheckmark;

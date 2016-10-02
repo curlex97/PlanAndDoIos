@@ -61,7 +61,7 @@
     cell.textLabel.textColor=[UIColor colorWithRed:98.0/255.0 green:98.0/255.0 blue:98.0/255.0 alpha:1.0];
     cell.textLabel.text=self.subTasks[indexPath.row].name;
     cell.accessoryType = subTask.status ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
-
+    cell.tintColor=[UIColor colorWithRed:40.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
     cell.rightButtons = @[[MGSwipeButton buttonWithTitle:TL_DELETE backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
         [self.subTasks removeObject:subTask];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
