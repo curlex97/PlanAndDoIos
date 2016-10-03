@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PlanAndDo/TasksApiManager.m"
-            timestampString = "496935216.266154"
+            filePath = "PlanAndDo/SubTasksApiManager.m"
+            timestampString = "496935310.520557"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "-syncTasksWithCompletion:"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "-syncSubTasksWithCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PlanAndDo/SubTasksApiManager.m"
-            timestampString = "496935310.520557"
+            filePath = "PlanAndDo/SyncApplicationManager.m"
+            timestampString = "497180052.032669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "-syncSubTasksWithCompletion:"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "-syncUserWithCompletion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
