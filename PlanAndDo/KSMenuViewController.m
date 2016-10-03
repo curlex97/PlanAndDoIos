@@ -269,7 +269,7 @@
             date=[NSString stringWithFormat:@"%li/%li/%li", components.day,components.month,components.year];
         }
         cell.taskDateLabel.text = date;
-        cell.taskTimeLabel.text = [NSString stringWithFormat:@"%li:%li", [components hour], (long)[components minute]];
+        cell.taskTimeLabel.text = [NSString stringWithFormat:@"%li:%@%li", (long)[components hour],[components minute]<10?@"0":@"", [components minute]];;
         
         return cell;
     }
@@ -583,8 +583,11 @@
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
+    self.tap.enabled=NO;
+    
     self.pan=[[UIPanGestureRecognizer alloc] init];
     self.pan.delegate=self;
+    self.pan.enabled=NO;
     
     [self.view addGestureRecognizer:self.pan];
     [self.view addGestureRecognizer:self.tap];

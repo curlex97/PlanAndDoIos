@@ -105,7 +105,7 @@ static bool firstLoad = true;
         date=[NSString stringWithFormat:@"%li/%li/%li", components.day,components.month,components.year];
     }
     cell.taskDateLabel.text = date;
-    cell.taskTimeLabel.text = [NSString stringWithFormat:@"%li:%li", [components hour], (long)[components minute]];
+    cell.taskTimeLabel.text = [NSString stringWithFormat:@"%li:%@%li", (long)[components hour],[components minute]<10?@"0":@"", [components minute]];;
     
     return cell;
 }

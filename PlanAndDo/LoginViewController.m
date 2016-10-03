@@ -16,11 +16,25 @@
 #import "ApplicationManager.h"
 
 
-@interface LoginViewController ()<UIGestureRecognizerDelegate>
+@interface LoginViewController ()<UIGestureRecognizerDelegate, UITextFieldDelegate>
 @property (nonatomic)UITapGestureRecognizer * tap;
 @end
 
 @implementation LoginViewController
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if(self.passwordTextField.isFirstResponder)
+    {
+        [self signInTapped:nil];
+    }
+    else
+    {
+        [self.passwordTextField becomeFirstResponder];
+    }
+
+    return YES;
+}
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
@@ -62,10 +76,12 @@
     UIView *loginPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.loginTextField.leftView = loginPaddingView;
     self.loginTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.loginTextField.delegate=self;
     
     UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.passwordTextField.leftView = passwordPaddingView;
     self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.passwordTextField.delegate=self;
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
@@ -99,7 +115,6 @@
 
 - (IBAction)createNewAccountTapped:(id)sender
 {
-    
     CreateAccountViewController* cavc = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateAccountViewController"];
     
     if(cavc)
@@ -107,7 +122,6 @@
         cavc.navigationItem.title = NM_CREATE_ACCOUNT;
         [self.navigationController pushViewController:cavc animated:YES];
     }
-    
 }
 - (IBAction)newPasswordTapped:(id)sender {
     NewPasswordViewController* cavc = [self.storyboard instantiateViewControllerWithIdentifier:@"NewPasswordViewController"];
