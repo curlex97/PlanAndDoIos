@@ -181,10 +181,19 @@ static bool firstLoad = true;
     [self.refresh endRefreshing];
 }
 
+-(void)refreshTasksInTable:(NSNotification*)not
+{
+    [self.tasks removeAllObjects];
+    [self reloadCoreData];
+    [self.tableView reloadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setStartPageForLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTasksInTable:) name:NC_SYNC_TASKS object:nil];
     
     self.tableView.delegate=self;
     self.tableView.dataSource=self;

@@ -10,6 +10,16 @@
 
 @implementation SubTasksCoreDataManager
 
+-(KSShortTask *)subTaskWithId:(int)Id andTaskId:(int)taskId
+{
+    KSTaskCollection *col = [[KSTaskCollection alloc] init];
+    col.ID = taskId;
+    for(KSShortTask* sub in [self allSubTasksForTask:col])
+        if([sub ID] == Id) return sub;
+    return nil;
+
+}
+
 -(NSArray<KSShortTask *> *)allSubTasksForTask:(KSTaskCollection *)task
 {
     NSMutableArray* subtasks = [NSMutableArray array];

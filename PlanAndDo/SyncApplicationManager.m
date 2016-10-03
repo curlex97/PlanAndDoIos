@@ -17,14 +17,24 @@
 
 @implementation SyncApplicationManager
 
+
+-(void) updateLastSyncTime:(int)lst
+{
+    self.lst = lst > self.lst ? lst : self.lst;
+}
+
+
 -(void)syncWithCompletion:(void (^)(bool))completed
 {
+    self.lst = [[FileManager readLastSyncTimeFromFile] intValue];
+    
     [self syncStatusWithCompletion:^(bool status) {
         [self syncUserWithCompletion:^(bool status) {
             [self syncSettingsWithCompletion:^(bool status) {
                 [self syncCategoriesWithCompletion:^(bool status) {
                     [self syncTasksWithCompletion:^(bool status) {
                         [self syncSubTasksWithCompletion:^(bool status) {
+                            [FileManager writeLastSyncTimeToFile:[NSString stringWithFormat:@"%i", self.lst]];
                             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_COMPLETED object:nil];
                             if(completed) completed(true);
                         }];
@@ -49,7 +59,9 @@
             NSString* email = [dictionary valueForKeyPath:@"data.email"];
             NSDate *createDate = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"data.created_at"] intValue]];
             NSDate *lastVisitDate = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"data.lastvisit_date"] intValue]];
-
+            
+            [self updateLastSyncTime:syncStatus];
+            
             KSAuthorisedUser* user = [[KSAuthorisedUser alloc] initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:createDate andLastVisitDate:lastVisitDate andSyncStatus:syncStatus andAccessToken:[FileManager readTokenFromFile] andUserSettings:nil];
             
             KSAuthorisedUser* localUser = [[[UserCoreDataManager alloc] init] authorisedUser];
@@ -82,6 +94,9 @@
             NSString* startDay = [dictionary valueForKeyPath:@"data.start_day"];
             int syncStatus = [[dictionary valueForKeyPath:@"data.settings_sync_status"] intValue];
             
+            [self updateLastSyncTime:syncStatus];
+
+            
             UserSettings *settings = [[UserSettings alloc] initWithID:settingsID andStartPage:startPage andDateFormat:dateFormat andPageType:pageType andTimeFormat:timeFormat andStartDay:startDay andSyncStatus:syncStatus];
             
             UserSettings* localSettings = [[[SettingsCoreDataManager alloc] init] settings];
@@ -113,11 +128,13 @@
             {
                 NSUInteger catID = [[defaultCategory valueForKeyPath:@"id"] integerValue];
                 NSString* catName = [defaultCategory valueForKeyPath:@"category_name"];
-                int catSyncStatus = [[defaultCategory valueForKeyPath:@"category_sync_status"] intValue];
+                int syncStatus = [[defaultCategory valueForKeyPath:@"category_sync_status"] intValue];
                 
                 bool isDeleted = [[defaultCategory valueForKeyPath:@"is_deleted"] intValue] > 0;
                 
-                KSCategory* category = [[KSCategory alloc] initWithID:catID andName:catName andSyncStatus:catSyncStatus];
+                [self updateLastSyncTime:syncStatus];
+                
+                KSCategory* category = [[KSCategory alloc] initWithID:catID andName:catName andSyncStatus:syncStatus];
                 
                 KSCategory* localCategory = [[[CategoryCoreDataManager alloc] init] categoryWithId:(int)category.ID];
                 
@@ -169,6 +186,7 @@
                 int syncStatus = [[jsonTask valueForKeyPath:@"task_sync_status"] intValue];
                 bool isDeleted = [[jsonTask valueForKeyPath:@"is_deleted"] intValue] > 0;
 
+                [self updateLastSyncTime:syncStatus];
                 
                 BaseTask* task = !taskType ? [[KSTask alloc] initWithID:taskID andName:name andStatus:status andTaskReminderTime:reminderTime andTaskPriority:taskPriority andCategoryID:(int)categoryID andCreatedAt:createDate andCompletionTime:completionTime andSyncStatus:syncStatus andTaskDescription:desc] :
                 [[KSTaskCollection alloc] initWithID:taskID andName:name andStatus:status andTaskReminderTime:reminderTime andTaskPriority:taskPriority andCategoryID:(int)categoryID andCreatedAt:createDate andCompletionTime:completionTime andSyncStatus:syncStatus andSubTasks:nil];
@@ -197,7 +215,46 @@
 {
     [[[SubTasksApiManager alloc] init] syncSubTasksWithCompletion:^(NSDictionary* dictionary) {
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
-        if(completed) completed(YES);
+        NSString* status = [dictionary valueForKeyPath:@"status"];
+        
+        if([status containsString:@"suc"])
+        {
+            
+            NSArray* subs = (NSArray*)[dictionary valueForKeyPath:@"data"];
+            
+            for(NSDictionary* jsonSub in subs)
+            {
+                NSUInteger subID = [[jsonSub valueForKeyPath:@"id"] integerValue];
+                NSUInteger taskID = [[jsonSub valueForKeyPath:@"task_id"] integerValue];
+                NSString* subName = [jsonSub valueForKeyPath:@"name"];
+                int syncStatus = [[jsonSub valueForKeyPath:@"subtask_sync_status"] intValue];
+                bool isCompleted = [[jsonSub valueForKeyPath:@"is_completed"] integerValue] > 0;
+                bool isDeleted = [[jsonSub valueForKeyPath:@"is_deleted"] intValue] > 0;
+                
+                [self updateLastSyncTime:syncStatus];
+                
+                KSShortTask* sub = [[KSShortTask alloc] initWithID:subID andName:subName andStatus:isCompleted andSyncStatus:syncStatus];
+                KSShortTask* localSub = [[[SubTasksCoreDataManager alloc] init] subTaskWithId:(int)subID andTaskId:(int)taskID];
+                KSTaskCollection* col = [[KSTaskCollection alloc] init];
+                col.ID = taskID;
+                
+                if(!isDeleted)
+                {
+                    if(!localSub)
+                       [[[SubTasksCoreDataManager alloc] init] syncAddSubTask:sub forTask:col];
+                    else if(localSub.syncStatus < sub.syncStatus)
+                        [[[SubTasksCoreDataManager alloc] init] syncUpdateSubTask:sub forTask:col];
+                }
+                else
+                    [[[SubTasksCoreDataManager alloc] init] syncDeleteSubTask:sub forTask:col];
+
+                
+                
+            }
+            if(completed) completed(true);
+        }
+        if(completed) completed(false);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
     }];
 }
 

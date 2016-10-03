@@ -15,6 +15,7 @@
 #import "SyncApiManager.h"
 
 @interface SyncApplicationManager : NSObject
+@property int lst;
 
 -(void)syncWithCompletion:(void (^)(bool))completed;
 

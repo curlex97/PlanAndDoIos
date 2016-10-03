@@ -15,6 +15,8 @@
 // test 1 OK
 -(NSArray<KSShortTask*>*) allSubTasksForTask:(KSTaskCollection*)task;
 
+-(KSShortTask*)subTaskWithId:(int)Id andTaskId:(int)taskId;
+
 // test 1 OK
 -(void)addSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task;
 
