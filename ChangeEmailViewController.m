@@ -13,11 +13,29 @@
 
 
 
-@interface ChangeEmailViewController ()<UIGestureRecognizerDelegate>
+@interface ChangeEmailViewController ()<UIGestureRecognizerDelegate, UITextFieldDelegate>
 @property (nonatomic)UITapGestureRecognizer * tap;
 @end
 
 @implementation ChangeEmailViewController
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if(self.emailTextField.isFirstResponder)
+    {
+        [self.reenterEmailTextField becomeFirstResponder];
+    }
+    else if(self.oldEmailTextField.isFirstResponder)
+    {
+        [self.emailTextField becomeFirstResponder];
+    }
+    else
+    {
+        [self submitDidTap:nil];
+    }
+    
+    return YES;
+}
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
@@ -56,14 +74,17 @@
     UIView *oldEmailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.oldEmailTextField.leftView = oldEmailPaddingView;
     self.oldEmailTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.oldEmailTextField.delegate=self;
     
     UIView *emailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.emailTextField.leftView = emailPaddingView;
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.emailTextField.delegate=self;
     
     UIView *reenterEmailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.reenterEmailTextField.leftView = reenterEmailPaddingView;
     self.reenterEmailTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.reenterEmailTextField.delegate=self;
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
