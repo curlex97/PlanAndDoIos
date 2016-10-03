@@ -59,7 +59,7 @@
                     [managedSettings setValue:[settings dateFormat] forKey:@"date_format"];
                     [managedSettings setValue:[settings pageType] forKey:@"page_type"];
                     [managedSettings setValue:[settings timeFormat] forKey:@"time_format"];
-                    [managedSettings setValue:[NSNumber numberWithInteger:[settings syncStatus]] forKey:@"settings_sync_status"];
+                    [managedSettings setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"settings_sync_status"];
                     [managedSettings setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
                     [managedSettings setValue:[settings startDay] forKey:@"start_day"];
 

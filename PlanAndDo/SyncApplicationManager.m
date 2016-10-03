@@ -12,6 +12,8 @@
 #import "FileManager.h"
 #import "SettingsApplicationManager.h"
 #import "CategoryApplicationManager.h"
+#import "TasksApplicationManager.h"
+#import "SubTasksApplicationManager.h"
 
 @implementation SyncApplicationManager
 
@@ -50,13 +52,15 @@
 
             KSAuthorisedUser* user = [[KSAuthorisedUser alloc] initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:createDate andLastVisitDate:lastVisitDate andSyncStatus:syncStatus andAccessToken:[FileManager readTokenFromFile] andUserSettings:nil];
             
-            [[[UserCoreDataManager alloc] init] syncSetUser:user];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_USER object:nil];
-
+            KSAuthorisedUser* localUser = [[[UserCoreDataManager alloc] init] authorisedUser];
+            
+            if(!localUser)[[[UserCoreDataManager alloc] init] syncSetUser:user];
+            else if(localUser.syncStatus < user.syncStatus) [[[UserCoreDataManager alloc] init] syncUpdateUser:user];
+            
             if(completed) completed(true);
         }
         if(completed) completed(false);
-
+        [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_USER object:nil];
     
     }];
 }
@@ -79,12 +83,16 @@
             int syncStatus = [[dictionary valueForKeyPath:@"data.settings_sync_status"] intValue];
             
             UserSettings *settings = [[UserSettings alloc] initWithID:settingsID andStartPage:startPage andDateFormat:dateFormat andPageType:pageType andTimeFormat:timeFormat andStartDay:startDay andSyncStatus:syncStatus];
-            [[[SettingsCoreDataManager alloc] init] syncSetSettings:settings];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
+            
+            UserSettings* localSettings = [[[SettingsCoreDataManager alloc] init] settings];
+            
+            if(!localSettings) [[[SettingsCoreDataManager alloc] init] syncSetSettings:settings];
+            else if(localSettings.syncStatus < settings.syncStatus) [[[SettingsCoreDataManager alloc] init] syncUpdateSettings:settings];
+            
             if(completed) completed(true);
         }
         if(completed) completed(false);
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
     }];
 }
 
@@ -105,19 +113,29 @@
                 NSString* catName = [defaultCategory valueForKeyPath:@"category_name"];
                 int catSyncStatus = [[defaultCategory valueForKeyPath:@"category_sync_status"] intValue];
                 
+                bool isDeleted = [[defaultCategory valueForKeyPath:@"is_deleted"] intValue] > 0;
+                
                 KSCategory* category = [[KSCategory alloc] initWithID:catID andName:catName andSyncStatus:catSyncStatus];
                 
-                if(![[[CategoryCoreDataManager alloc] init] categoryWithId:(int)category.ID])
-                    [[[CategoryCoreDataManager alloc] init] syncAddCateroty:category];
-                else
-                    [[[CategoryCoreDataManager alloc] init] syncUpdateCateroty:category];
+                KSCategory* localCategory = [[[CategoryCoreDataManager alloc] init] categoryWithId:(int)category.ID];
+                
+                
+                if(!isDeleted)
+                {
+                    if(!localCategory)
+                        [[[CategoryCoreDataManager alloc] init] syncAddCateroty:category];
+        
+                    else if(localCategory.syncStatus < category.syncStatus)
+                            [[[CategoryCoreDataManager alloc] init] syncUpdateCateroty:category];
+                }
+                else [[[CategoryCoreDataManager alloc] init] syncDeleteCateroty:category];
+                
+                
             }
-            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
             if(completed) completed(true);
         }
         if(completed) completed(false);
-        
-        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
     }];
 }
 
@@ -125,7 +143,51 @@
 {
     [[[TasksApiManager alloc] init] syncTasksWithCompletion:^(NSDictionary* dictionary) {
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
-        if(completed) completed(YES);
+        NSString* status = [dictionary valueForKeyPath:@"status"];
+        
+        if([status containsString:@"suc"])
+        {
+            
+            NSArray* tasks = (NSArray*)[dictionary valueForKeyPath:@"data"];
+            
+            for(NSDictionary* jsonTask in tasks)
+            {
+                NSUInteger taskID = [[jsonTask valueForKeyPath:@"id"] integerValue];
+                NSUInteger categoryID = 0;
+                if(![[jsonTask valueForKeyPath:@"category_id"] isKindOfClass:[NSNull class]])
+                    categoryID = [[jsonTask valueForKeyPath:@"category_id"] integerValue];
+                bool taskType = [[jsonTask valueForKeyPath:@"task_type"] integerValue] > 0;
+                NSString* name = [jsonTask valueForKeyPath:@"task_name"];
+                NSString* desc = [jsonTask valueForKeyPath:@"task_description"];
+                NSDate *createDate = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"created_at"] intValue]];
+                NSDate *reminderTime = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"task_reminder_time"] intValue]];
+                NSUInteger taskPriority = [[jsonTask valueForKeyPath:@"task_priority"] integerValue];
+                bool status = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"created_at"] intValue]] > 0;
+                NSDate *completionTime = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"task_completion_time"] intValue]];
+                int syncStatus = [[jsonTask valueForKeyPath:@"task_sync_status"] intValue];
+                bool isDeleted = [[jsonTask valueForKeyPath:@"is_deleted"] intValue] > 0;
+
+                
+                BaseTask* task = !taskType ? [[KSTask alloc] initWithID:taskID andName:name andStatus:status andTaskReminderTime:reminderTime andTaskPriority:taskPriority andCategoryID:(int)categoryID andCreatedAt:createDate andCompletionTime:completionTime andSyncStatus:syncStatus andTaskDescription:desc] :
+                [[KSTaskCollection alloc] initWithID:taskID andName:name andStatus:status andTaskReminderTime:reminderTime andTaskPriority:taskPriority andCategoryID:(int)categoryID andCreatedAt:createDate andCompletionTime:completionTime andSyncStatus:syncStatus andSubTasks:nil];
+
+                BaseTask* localTask = [[[TasksCoreDataManager alloc] init] taskWithId:(int)taskID];
+                
+                if(!isDeleted)
+                {
+                    if(!localTask)
+                        [[[TasksCoreDataManager alloc] init] syncAddTask:task];
+                    
+                    else if(localTask.syncStatus < task.syncStatus)
+                            [[[TasksCoreDataManager alloc] init] syncUpdateTask:task];
+                }
+                else [[[TasksCoreDataManager alloc] init] syncDeleteTask:task];
+                
+            }
+            if(completed) completed(true);
+        }
+        if(completed) completed(false);
+        [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
     }];
 }
 
@@ -141,7 +203,7 @@
 -(void) syncStatusWithCompletion:(void (^)(bool))completed
 {
     
-    [[[SyncApiManager alloc] init] syncStatusWithCompletion:^(NSDictionary * json)
+    [[[SyncApiManager alloc] init] syncStatusWithCompletion:^(NSDictionary * dictionary)
      {
          [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_STATUS object:nil];
          if(completed) completed(YES);

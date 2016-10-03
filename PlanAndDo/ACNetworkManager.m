@@ -57,7 +57,7 @@
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:
                                   ^(NSData *data, NSURLResponse *response, NSError *error) {
-                                      if(!error){ if(completed) completed(data);}
+                                      if(!error && data){ if(completed) completed(data);}
                                       else {if(completed) completed(nil);}
                                   }];
     

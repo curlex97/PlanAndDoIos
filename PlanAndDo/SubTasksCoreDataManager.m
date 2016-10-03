@@ -50,7 +50,7 @@
     [object setValue:[NSNumber numberWithInteger:task.ID] forKey:@"task_id"];
     [object setValue:[NSNumber numberWithInteger:subTask.ID] forKey:@"id"];
     [object setValue:[subTask name] forKey:@"name"];
-    [object setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:@"subtask_sync_status"];
+    [object setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"subtask_sync_status"];
     [object setValue:[NSNumber numberWithBool:subTask.status] forKey:@"status"];
     [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
     [object setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
@@ -77,7 +77,7 @@
                 [managedSubtask setValue:[NSNumber numberWithInteger:subTask.ID] forKey:@"id"];
                 [managedSubtask setValue:[subTask name] forKey:@"name"];
                 [managedSubtask setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:@"subtask_sync_status"];
-                [managedSubtask setValue:[NSNumber numberWithBool:subTask.status] forKey:@"status"];
+                [managedSubtask setValue:[NSNumber numberWithBool:[[NSDate date] timeIntervalSince1970]] forKey:@"status"];
                 [managedSubtask setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
                 [managedSubtask setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
 
@@ -104,6 +104,7 @@
             {
                 [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];
                 [managedSubtask setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+                [managedSubtask setValue:[NSNumber numberWithBool:[[NSDate date] timeIntervalSince1970]] forKey:@"status"];
 
                 [self.managedObjectContext save:nil];
             }
@@ -183,6 +184,7 @@
             {
                 [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];
                 [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:@"local_sync"];
+                [managedSubtask setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:@"subtask_sync_status"];
                 
                 [self.managedObjectContext save:nil];
             }
