@@ -43,9 +43,22 @@
     return YES;
 }
 
+-(void)showMainWindow:(NSNotification*)not
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
+        tableTaskViewController.title=NM_TODAY;
+        [self presentViewController:tableTaskViewController animated:YES completion:nil];
+    });
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMainWindow:) name:NC_SYNC_SETTINGS object:nil];
+
+    
     UIView *loginPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.loginTextField.leftView = loginPaddingView;
     self.loginTextField.leftViewMode = UITextFieldViewModeAlways;
@@ -109,18 +122,8 @@
 - (IBAction)signInTapped:(id)sender
 {
     
-    [[ApplicationManager syncApplicationManager] syncWithCompletion:^(bool status)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^
-        {
-        AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
-        
-        if(tableTaskViewController)
-        {
-            tableTaskViewController.title=NM_TODAY;
-            [self presentViewController:tableTaskViewController animated:YES completion:nil];
-        }
-        });
+    [[ApplicationManager userApplicationManager] loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool status) {
+        if(status) [[ApplicationManager syncApplicationManager] syncWithCompletion:nil];
     }];
     
 }

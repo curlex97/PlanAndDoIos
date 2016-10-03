@@ -24,7 +24,7 @@
                     [self syncTasksWithCompletion:^(bool status) {
                         [self syncSubTasksWithCompletion:^(bool status) {
                             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_COMPLETED object:nil];
-                            completed(true);
+                            if(completed) completed(true);
                         }];
                     }];
                 }];
@@ -53,9 +53,9 @@
             [[[UserCoreDataManager alloc] init] syncSetUser:user];
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_USER object:nil];
 
-            completed(true);
+            if(completed) completed(true);
         }
-        completed(false);
+        if(completed) completed(false);
 
     
     }];
@@ -81,9 +81,9 @@
             UserSettings *settings = [[UserSettings alloc] initWithID:settingsID andStartPage:startPage andDateFormat:dateFormat andPageType:pageType andTimeFormat:timeFormat andStartDay:startDay andSyncStatus:syncStatus];
             [[[SettingsCoreDataManager alloc] init] syncSetSettings:settings];
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
-            completed(true);
+            if(completed) completed(true);
         }
-        completed(false);
+        if(completed) completed(false);
         
     }];
 }
@@ -113,9 +113,9 @@
                     [[[CategoryCoreDataManager alloc] init] syncUpdateCateroty:category];
             }
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
-            completed(true);
+            if(completed) completed(true);
         }
-        completed(false);
+        if(completed) completed(false);
         
         
     }];
@@ -125,7 +125,7 @@
 {
     [[[TasksApiManager alloc] init] syncTasksWithCompletion:^(NSDictionary* dictionary) {
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
-        completed(YES);
+        if(completed) completed(YES);
     }];
 }
 
@@ -133,7 +133,7 @@
 {
     [[[SubTasksApiManager alloc] init] syncSubTasksWithCompletion:^(NSDictionary* dictionary) {
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
-        completed(YES);
+        if(completed) completed(YES);
     }];
 }
 
@@ -144,7 +144,7 @@
     [[[SyncApiManager alloc] init] syncStatusWithCompletion:^(NSDictionary * json)
      {
          [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_STATUS object:nil];
-         completed(YES);
+         if(completed) completed(YES);
      }];
 }
 
