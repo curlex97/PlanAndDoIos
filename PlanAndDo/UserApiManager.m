@@ -35,7 +35,7 @@
     [self dataByData:user completion:^(NSData * data) {
         
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        completed(json);
+        if(completed) completed(json);
     }];
 }
 
@@ -58,7 +58,7 @@
     [self dataByData:user completion:^(NSData * data) {
         
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        completed(json);
+        if(completed) completed(json);
     }];
 }
 
@@ -88,7 +88,7 @@
     
     [self dataByData:puser completion:^(NSData * data) {
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        completed(json);
+        if(completed) completed(json);
     }];
 }
 

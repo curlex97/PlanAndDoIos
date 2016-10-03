@@ -214,7 +214,7 @@
         [object setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:@"category_id"];
         [object setValue:realTask.createdAt forKey:@"created_at"];
         [object setValue:realTask.completionTime forKey:@"task_completion_time"];
-        [object setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:@"task_sync_status"];
+        [object setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"task_sync_status"];
         [object setValue:realTask.taskDescription forKey:@"task_description"];
         [object setValue:[NSNumber numberWithInteger:0] forKey:@"task_type"];
         [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
@@ -237,7 +237,7 @@
         [object setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:@"category_id"];
         [object setValue:realTask.createdAt forKey:@"created_at"];
         [object setValue:realTask.completionTime forKey:@"task_completion_time"];
-        [object setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:@"task_sync_status"];
+        [object setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"task_sync_status"];
         [object setValue:[NSNumber numberWithInteger:1] forKey:@"task_type"];
         [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
         [object setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
@@ -273,7 +273,7 @@
                     [managedTask setValue:[NSNumber numberWithInteger:task.categoryID] forKey:@"category_id"];
                     [managedTask setValue:realTask.createdAt forKey:@"created_at"];
                     [managedTask setValue:realTask.completionTime forKey:@"task_completion_time"];
-                    [managedTask setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:@"task_sync_status"];
+                    [managedTask setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"task_sync_status"];
                     [managedTask setValue:realTask.taskDescription forKey:@"task_description"];
                     [managedTask setValue:[NSNumber numberWithInteger:0] forKey:@"task_type"];
                     [managedTask setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
@@ -293,7 +293,7 @@
                     [managedTask setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:@"category_id"];
                     [managedTask setValue:realTask.createdAt forKey:@"created_at"];
                     [managedTask setValue:realTask.completionTime forKey:@"task_completion_time"];
-                    [managedTask setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:@"task_sync_status"];
+                    [managedTask setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"task_sync_status"];
                     [managedTask setValue:[NSNumber numberWithInteger:1] forKey:@"task_type"];
                     [managedTask setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
 
@@ -323,6 +323,7 @@
             {
                 [managedTask setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];
                 [managedTask setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+                [managedTask setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"task_sync_status"];
 
                 [self.managedObjectContext save:nil];
                 return;
@@ -466,6 +467,7 @@
             {
                 [managedTask setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];
                 [managedTask setValue:[NSNumber numberWithBool:YES] forKey:@"local_sync"];
+                [managedTask setValue:[NSNumber numberWithInteger:task.syncStatus] forKey:@"task_sync_status"];
                 
                 [self.managedObjectContext save:nil];
                 return;

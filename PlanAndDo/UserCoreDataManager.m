@@ -87,7 +87,7 @@
                 [managedUser setValue:[user emailAdress] forKey:@"email"];
                 [managedUser setValue:[user createdAt] forKey:@"created_at"];
                 [managedUser setValue:[user lastVisit] forKey:@"lastvisit_date"];
-                [managedUser setValue:[NSNumber numberWithInteger:[user syncStatus]] forKey:@"user_sync_status"];
+                [managedUser setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"user_sync_status"];
                 [managedUser setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
 
                 [self.managedObjectContext save:nil];

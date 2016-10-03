@@ -57,7 +57,7 @@
     NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
     [object setValue:[NSNumber numberWithInteger:category.ID] forKey:@"id"];
     [object setValue:[category name] forKey:@"category_name"];
-    [object setValue:[NSNumber numberWithInteger:category.syncStatus] forKey:@"category_sync_status"];
+    [object setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"category_sync_status"];
     [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
     [object setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
     
@@ -80,7 +80,7 @@
             {
                 [managedCategory setValue:[NSNumber numberWithInteger:category.ID] forKey:@"id"];
                 [managedCategory setValue:[category name] forKey:@"category_name"];
-                [managedCategory setValue:[NSNumber numberWithInteger:category.syncStatus] forKey:@"category_sync_status"];
+                [managedCategory setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"category_sync_status"];
                 [managedCategory setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
                 
                 [self. managedObjectContext save:nil];
@@ -108,6 +108,7 @@
             {
                 [managedCategory setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];
                 [managedCategory setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+                [managedCategory setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"category_sync_status"];
                 [self. managedObjectContext save:nil];
             }
             
@@ -179,6 +180,7 @@
             {
                 [managedCategory setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];
                 [managedCategory setValue:[NSNumber numberWithBool:YES] forKey:@"local_sync"];
+                [managedCategory setValue:[NSNumber numberWithInteger:category.syncStatus] forKey:@"category_sync_status"];
                 [self. managedObjectContext save:nil];
             }
             
