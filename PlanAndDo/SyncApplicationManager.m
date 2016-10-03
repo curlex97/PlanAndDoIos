@@ -11,6 +11,7 @@
 #import "UserApplicationManager.h"
 #import "FileManager.h"
 #import "SettingsApplicationManager.h"
+#import "CategoryApplicationManager.h"
 
 @implementation SyncApplicationManager
 
@@ -80,23 +81,49 @@
             UserSettings *settings = [[UserSettings alloc] initWithID:settingsID andStartPage:startPage andDateFormat:dateFormat andPageType:pageType andTimeFormat:timeFormat andStartDay:startDay andSyncStatus:syncStatus];
             [[[SettingsCoreDataManager alloc] init] syncSetSettings:settings];
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
+            completed(true);
         }
-        
+        completed(false);
         
     }];
 }
 
 -(void)syncCategoriesWithCompletion:(void (^)(bool))completed
 {
-    [[[CategoryApiManager alloc] init] syncCategoriesWithCompletion:^(NSDictionary* status) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
-        completed(YES);
+    [[[CategoryApiManager alloc] init] syncCategoriesWithCompletion:^(NSDictionary* dictionary) {
+        
+        NSString* status = [dictionary valueForKeyPath:@"status"];
+        
+        if([status containsString:@"suc"])
+        {
+        
+            NSArray* defCats = (NSArray*)[dictionary valueForKeyPath:@"data"];
+            
+            for(NSDictionary* defaultCategory in defCats)
+            {
+                NSUInteger catID = [[defaultCategory valueForKeyPath:@"id"] integerValue];
+                NSString* catName = [defaultCategory valueForKeyPath:@"category_name"];
+                int catSyncStatus = [[defaultCategory valueForKeyPath:@"category_sync_status"] intValue];
+                
+                KSCategory* category = [[KSCategory alloc] initWithID:catID andName:catName andSyncStatus:catSyncStatus];
+                
+                if(![[[CategoryCoreDataManager alloc] init] categoryWithId:(int)category.ID])
+                    [[[CategoryCoreDataManager alloc] init] syncAddCateroty:category];
+                else
+                    [[[CategoryCoreDataManager alloc] init] syncUpdateCateroty:category];
+            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
+            completed(true);
+        }
+        completed(false);
+        
+        
     }];
 }
 
 -(void)syncTasksWithCompletion:(void (^)(bool))completed
 {
-    [[[TasksApiManager alloc] init] syncTasksWithCompletion:^(NSDictionary* status) {
+    [[[TasksApiManager alloc] init] syncTasksWithCompletion:^(NSDictionary* dictionary) {
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
         completed(YES);
     }];
@@ -104,7 +131,7 @@
 
 -(void)syncSubTasksWithCompletion:(void (^)(bool))completed
 {
-    [[[SubTasksApiManager alloc] init] syncSubTasksWithCompletion:^(NSDictionary* status) {
+    [[[SubTasksApiManager alloc] init] syncSubTasksWithCompletion:^(NSDictionary* dictionary) {
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
         completed(YES);
     }];
