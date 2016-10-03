@@ -26,6 +26,7 @@
 @property NSMutableArray* allTasks;
 @property NSMutableArray* tableTasks;
 @property (nonatomic) NSIndexPath * managedIndexPath;
+@property (nonatomic) UIPanGestureRecognizer * pan;
 @property (nonatomic) UITapGestureRecognizer * tap;
 @property (nonatomic) UIButton * addCategoryButton;
 @property (nonatomic)NSLayoutConstraint * accessoryBottom;
@@ -35,13 +36,20 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    
-    
-    if(gestureRecognizer==self.tap)
-    {
         if([self.searchBar isFirstResponder])
         {
             [self.searchBar resignFirstResponder];
+            for (UIView *view in self.searchBar.subviews)
+            {
+                for (id subview in view.subviews)
+                {
+                    if ( [subview isKindOfClass:[UIButton class]] )
+                    {
+                        [subview setEnabled:YES];
+                        return YES;
+                    }
+                }
+            }
         }
         
         if([self.addCategoryTextField isFirstResponder])
@@ -55,9 +63,6 @@
              }];
             self.addCategoryTextField.text=@"";
         }
-    }
-    
-    
     return YES;
 }
 
@@ -179,12 +184,6 @@
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.backgroundColor = [UIColor colorWithRed:57.0/255.0 green:75.0/255.0 blue:86.0/255.0 alpha:1.0];
     [cell setSelectedBackgroundView:bgColorView];
-    
-    
-    //    if(indexPath.row==0 && indexPath.section==0)
-    //    {
-    //        [cell addSubview:self.searchBar];
-    //    }
     
     if(self.state==KSMenuStateSearch)
     {
@@ -584,6 +583,11 @@
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
+    self.pan=[[UIPanGestureRecognizer alloc] init];
+    self.pan.delegate=self;
+    
+    [self.view addGestureRecognizer:self.pan];
+    [self.view addGestureRecognizer:self.tap];
     
     self.searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(8, 8, 255, 30)];
     self.searchBar.searchBarStyle=UISearchBarStyleMinimal;
@@ -675,15 +679,6 @@
                           constant:44.0];
     [self.view addConstraint:self.accessoryBottom];
     
-    //    [self.toolBarView addConstraint:[NSLayoutConstraint
-    //                                     constraintWithItem:self.toolBarView
-    //                                     attribute:NSLayoutAttributeHeight
-    //                                     relatedBy:NSLayoutRelationEqual
-    //                                     toItem:self.toolBarView
-    //                                     attribute:NSLayoutAttributeHeight
-    //                                     multiplier:1.0f
-    //                                     constant:44.0]];
-    
     [self.view addConstraint:[NSLayoutConstraint
                               constraintWithItem:self.addCategoryAccessoryView
                               attribute:NSLayoutAttributeTrailing
@@ -732,8 +727,8 @@
 
 -(void)keyboardWillHide:(NSNotification*) not
 {
-    [self.view removeGestureRecognizer:self.tap];
-    
+    self.tap.enabled=NO;
+    self.pan.enabled=NO;
     self.bottom.constant=0.0;
     self.accessoryBottom.constant=45.0;
     [UIView animateWithDuration:1 animations:^
@@ -744,7 +739,8 @@
 
 -(void)keyboardWillShown:(NSNotification*) not
 {
-    [self.view addGestureRecognizer:self.tap];
+    self.tap.enabled=YES;
+    self.pan.enabled=YES;
     self.parentController.hiden=YES;
     [UIView animateWithDuration:0.5 animations:^
      {
