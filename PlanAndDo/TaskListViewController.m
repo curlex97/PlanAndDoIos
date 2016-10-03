@@ -69,11 +69,16 @@
         NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:cell.textLabel.text attributes:attributes];
         cell.textLabel.attributedText = attrText;
         cell.accessoryType=UITableViewCellAccessoryCheckmark;
+        UILabel * label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 30)];
+        label.textColor=[UIColor colorWithRed:39.0/255.0 green:174.0/255.0 blue:97.0/255.0 alpha:1.0];
+        label.text=@"Complete";
+        cell.accessoryView=label;
     }
     else
     {
         NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:cell.textLabel.text attributes:@{}];
         cell.textLabel.attributedText = attrText;
+        cell.accessoryView=nil;
         cell.accessoryType=UITableViewCellAccessoryNone;
     }
     cell.tintColor=[UIColor colorWithRed:40.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
@@ -106,6 +111,10 @@
         NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:cell.textLabel.text attributes:attributes];
         cell.textLabel.attributedText = attrText;
         cell.accessoryType=UITableViewCellAccessoryCheckmark;
+        UILabel * label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 30)];
+        label.textColor=[UIColor colorWithRed:39.0/255.0 green:174.0/255.0 blue:97.0/255.0 alpha:1.0];
+        label.text=@"Complete";
+        cell.accessoryView=label;
         KSShortTask* subTask = self.subTasks[indexPath.row];
         subTask.status = YES;
     }
@@ -114,6 +123,7 @@
         UITableViewCell * cell=[tableView cellForRowAtIndexPath:indexPath];
         NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:cell.textLabel.text attributes:@{}];
         cell.textLabel.attributedText = attrText;
+        cell.accessoryView=nil;
         cell.accessoryType=UITableViewCellAccessoryNone;
         KSShortTask* subTask = self.subTasks[indexPath.row];
         subTask.status = NO;

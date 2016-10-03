@@ -122,7 +122,8 @@
 - (IBAction)signInTapped:(id)sender
 {
     
-    [[ApplicationManager userApplicationManager] loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool status) {
+    [[ApplicationManager userApplicationManager] loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool status)
+    {
         if(status) [[ApplicationManager syncApplicationManager] syncWithCompletion:nil];
     }];
     
