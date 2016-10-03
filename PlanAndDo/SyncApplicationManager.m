@@ -89,6 +89,8 @@
             if(!localSettings) [[[SettingsCoreDataManager alloc] init] syncSetSettings:settings];
             else if(localSettings.syncStatus < settings.syncStatus) [[[SettingsCoreDataManager alloc] init] syncUpdateSettings:settings];
             
+            if([KSAuthorisedUser currentUser]) KSAuthorisedUser.currentUser.settings = [[[SettingsCoreDataManager alloc] init] settings];
+            
             if(completed) completed(true);
         }
         if(completed) completed(false);
