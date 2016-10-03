@@ -88,9 +88,9 @@
             ///////////////////////////
 
             
-            completed(true);
+            if(completed) completed(true);
         }
-        completed(false);
+        if(completed) completed(false);
     }];
 }
 
@@ -112,9 +112,9 @@
             
             [[[UserCoreDataManager alloc] init] setUser:user];
             
-            completed(true);
+            if(completed) completed(true);
         }
-        completed(false);
+        if(completed) completed(false);
     }];
 
 }

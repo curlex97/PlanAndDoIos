@@ -14,7 +14,7 @@
 -(void)dataByData:(NSDictionary *)data completion:(void (^)(NSData *))completed
 {
     [ACNetworkManager dataByUrlAsync:URL_API andHeaderDictionary:@{} andBodyDictionary:data andQueryType:URL_SENDTYPE completion:^(NSData* data) {
-        completed(data);
+        if(completed) completed(data);
     }];
 }
 

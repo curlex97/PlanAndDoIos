@@ -39,7 +39,7 @@
     
     [self dataByData:puser completion:^(NSData * data) {
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        completed(json);
+        if(completed) completed(json);
     }];
 }
 
