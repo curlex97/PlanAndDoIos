@@ -59,9 +59,13 @@
 
 -(void)showMainWindow:(NSNotification*)not
 {
-
+    dispatch_async(dispatch_get_main_queue(), ^{
         AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
         tableTaskViewController.title=NM_TODAY;
+<<<<<<< HEAD
+        [self presentViewController:tableTaskViewController animated:YES completion:nil];
+    });
+=======
         [self presentViewController:tableTaskViewController animated:YES completion:^
          {
              dispatch_async(dispatch_get_main_queue(), ^
@@ -70,6 +74,7 @@
                                 self.passwordTextField.text=@"";
                             });
          }];
+>>>>>>> 7f767f425d6d44d4861e1819077843ee6b1c3b1d
 }
 
 - (void)viewDidLoad
