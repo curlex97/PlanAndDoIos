@@ -58,7 +58,7 @@
     
     [[[TasksCoreDataManager alloc] init] addTask:task];
     [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
-        [[[TasksApiManager alloc] init] addTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+        [[[TasksApiManager alloc] init] addTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncAdd] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
         }];
     }];
@@ -69,7 +69,7 @@
 {
     [[[TasksCoreDataManager alloc] init] updateTask:task];
     [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
-       [[[TasksApiManager alloc] init] updateTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+       [[[TasksApiManager alloc] init] updateTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncUpdate] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
        }];
     }];
@@ -79,7 +79,7 @@
 {
     [[[TasksCoreDataManager alloc] init] deleteTask:task];
     [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
-        [[[TasksApiManager alloc] init] deleteTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+        [[[TasksApiManager alloc] init] deleteTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncDelete] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
         }];
     }];

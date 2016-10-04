@@ -36,7 +36,12 @@
 
 -(void)syncDeleteSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task;
 
--(NSArray<KSShortTask*>*) allSubTasksForSync;
+-(NSArray<KSShortTask*>*) allSubTasksForSyncAdd;
+
+-(NSArray<KSShortTask*>*) allSubTasksForSyncUpdate;
+
+-(NSArray<KSShortTask*>*) allSubTasksForSyncDelete;
+
 
 
 @end

@@ -43,7 +43,8 @@
     return categories;
 }
 
--(NSArray<KSCategory *> *)allCategoriesForSync
+
+-(NSArray<KSCategory *> *)allCategoriesForSyncAdd
 {
     NSMutableArray* categories = [NSMutableArray array];
     
@@ -57,10 +58,71 @@
         for(NSManagedObject* managedCategory in results)
         {
             bool localSync = [[managedCategory valueForKey:CD_ROW_LOCAL_SYNC] boolValue];
-            
-            if(!localSync)
+            bool del = [[managedCategory valueForKey:CD_ROW_IS_DELETED] boolValue];
+            int ID = [[managedCategory valueForKey:CD_ROW_ID] intValue];
+
+            if(!localSync && !del && ID < 0)
             {
-                int ID = [[managedCategory valueForKey:CD_ROW_ID] intValue];
+                NSString* name = (NSString*)[managedCategory valueForKey:CD_ROW_CATEGORY_NAME];
+                int syncStatus = [[managedCategory valueForKey:CD_ROW_CATEGORY_SYNC_STATUS] intValue];
+                
+                KSCategory* category = [[KSCategory alloc] initWithID:ID andName:name andSyncStatus:syncStatus];
+                [categories addObject:category];
+            }
+        }
+    }
+    return categories;
+}
+
+-(NSArray<KSCategory *> *)allCategoriesForSyncUpdate
+{
+    NSMutableArray* categories = [NSMutableArray array];
+    
+    NSError* error = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_CATEGORY];
+    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    
+    if(!error)
+    {
+        for(NSManagedObject* managedCategory in results)
+        {
+            bool localSync = [[managedCategory valueForKey:CD_ROW_LOCAL_SYNC] boolValue];
+            bool del = [[managedCategory valueForKey:CD_ROW_IS_DELETED] boolValue];
+            int ID = [[managedCategory valueForKey:CD_ROW_ID] intValue];
+            
+            if(!localSync && !del && ID >= 0)
+            {
+                NSString* name = (NSString*)[managedCategory valueForKey:CD_ROW_CATEGORY_NAME];
+                int syncStatus = [[managedCategory valueForKey:CD_ROW_CATEGORY_SYNC_STATUS] intValue];
+                
+                KSCategory* category = [[KSCategory alloc] initWithID:ID andName:name andSyncStatus:syncStatus];
+                [categories addObject:category];
+            }
+        }
+    }
+    return categories;
+}
+
+-(NSArray<KSCategory *> *)allCategoriesForSyncDelete
+{
+    NSMutableArray* categories = [NSMutableArray array];
+    
+    NSError* error = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_CATEGORY];
+    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    
+    if(!error)
+    {
+        for(NSManagedObject* managedCategory in results)
+        {
+            bool localSync = [[managedCategory valueForKey:CD_ROW_LOCAL_SYNC] boolValue];
+            bool del = [[managedCategory valueForKey:CD_ROW_IS_DELETED] boolValue];
+            int ID = [[managedCategory valueForKey:CD_ROW_ID] intValue];
+            
+            if(!localSync && del)
+            {
                 NSString* name = (NSString*)[managedCategory valueForKey:CD_ROW_CATEGORY_NAME];
                 int syncStatus = [[managedCategory valueForKey:CD_ROW_CATEGORY_SYNC_STATUS] intValue];
                 

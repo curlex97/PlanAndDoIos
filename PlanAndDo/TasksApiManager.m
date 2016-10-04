@@ -21,27 +21,26 @@
     
     for(BaseTask* task in tasks)
     {
-
-        NSMutableDictionary* dataTask = [NSMutableDictionary dictionary];
-        
-        NSNumber* catID = task.categoryID > 0 ? [NSNumber numberWithInt:task.categoryID] : nil;
-        NSNumber* taskType = [task isKindOfClass:[KSTask class]] ? [NSNumber numberWithInt:0] : [NSNumber numberWithInt:1];
-        NSString* taskDesc = [task isKindOfClass:[KSTask class]] ? ((KSTask*)task).taskDescription : nil;
-        
-        [dataTask setValue:[NSNumber numberWithInteger:user.ID] forKey:@"user_id"];
-        [dataTask setValue:catID forKey:@"category_id"];
-        [dataTask setValue:taskType forKey:@"task_type"];
-        [dataTask setValue:task.name forKey:@"task_name"];
-        [dataTask setValue:taskDesc forKey:@"task_description"];
-        [dataTask setValue:[NSNumber numberWithDouble:task.createdAt.timeIntervalSince1970] forKey:@"created_at"];
-        [dataTask setValue:[NSNumber numberWithDouble:task.taskReminderTime.timeIntervalSince1970] forKey:@"task_reminder_time"];
-        [dataTask setValue:[NSNumber numberWithInt:task.priority] forKey:@"task_priority"];
-        [dataTask setValue:[NSNumber numberWithBool:task.status] forKey:@"is_completed"];
-        [dataTask setValue:[NSNumber numberWithDouble:task.completionTime.timeIntervalSince1970] forKey:@"task_completion_time"];
-        [dataTask setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
-        [dataTask setValue:[NSNumber numberWithInt:(int)task.syncStatus] forKey:@"task_sync_status"];
-        
-        [data addObject:dataTask];
+            NSMutableDictionary* dataTask = [NSMutableDictionary dictionary];
+            
+            NSNumber* catID = task.categoryID > 0 ? [NSNumber numberWithInt:task.categoryID] : nil;
+            NSNumber* taskType = [task isKindOfClass:[KSTask class]] ? [NSNumber numberWithInt:0] : [NSNumber numberWithInt:1];
+            NSString* taskDesc = [task isKindOfClass:[KSTask class]] ? ((KSTask*)task).taskDescription : nil;
+            
+            [dataTask setValue:[NSNumber numberWithInteger:user.ID] forKey:@"user_id"];
+            [dataTask setValue:catID forKey:@"category_id"];
+            [dataTask setValue:taskType forKey:@"task_type"];
+            [dataTask setValue:task.name forKey:@"task_name"];
+            [dataTask setValue:taskDesc forKey:@"task_description"];
+            [dataTask setValue:[NSNumber numberWithDouble:task.createdAt.timeIntervalSince1970] forKey:@"created_at"];
+            [dataTask setValue:[NSNumber numberWithDouble:task.taskReminderTime.timeIntervalSince1970] forKey:@"task_reminder_time"];
+            [dataTask setValue:[NSNumber numberWithInt:task.priority] forKey:@"task_priority"];
+            [dataTask setValue:[NSNumber numberWithBool:task.status] forKey:@"is_completed"];
+            [dataTask setValue:[NSNumber numberWithDouble:task.completionTime.timeIntervalSince1970] forKey:@"task_completion_time"];
+            [dataTask setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
+            [dataTask setValue:[NSNumber numberWithInt:(int)task.syncStatus] forKey:@"task_sync_status"];
+            
+            [data addObject:dataTask];
     }
     
     [dic setValue:[NSNumber numberWithInteger:user.ID] forKey:@"user_id"];
@@ -60,7 +59,7 @@
 
 -(void)updateTasksAsync:(NSArray *)tasks forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
-
+    
 }
 
 -(void)deleteTasksAsync:(NSArray *)tasks forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed

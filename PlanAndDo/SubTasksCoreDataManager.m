@@ -52,7 +52,8 @@
     return subtasks;
 }
 
--(NSArray<KSShortTask *> *)allSubTasksForSync
+
+-(NSArray<KSShortTask *> *)allSubTasksForSyncAdd
 {
     NSMutableArray* subtasks = [NSMutableArray array];
     
@@ -65,9 +66,11 @@
         for(NSManagedObject* managedSubtask in results)
         {
             bool localSync = [[managedSubtask valueForKey:CD_ROW_LOCAL_SYNC] boolValue];
-            if(!localSync)
+            bool del = [[managedSubtask valueForKey:CD_ROW_IS_DELETED] boolValue];
+            int ID = [[managedSubtask valueForKey:CD_ROW_ID] intValue];
+            
+            if(!localSync && !del && ID < 0)
             {
-                int ID = [[managedSubtask valueForKey:CD_ROW_ID] intValue];
                 NSString* name = (NSString*)[managedSubtask valueForKey:CD_ROW_NAME];
                 bool status = [[managedSubtask valueForKey:CD_ROW_STATUS] boolValue];
                 int syncStatus = [[managedSubtask valueForKey:CD_SUBTASK_SYNC_STATUS] intValue];
@@ -80,6 +83,69 @@
     
     return subtasks;
 }
+
+-(NSArray<KSShortTask *> *)allSubTasksForSyncUpdate
+{
+    NSMutableArray* subtasks = [NSMutableArray array];
+    
+    NSError* error = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SUBTASK];
+    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if(!error)
+    {
+        for(NSManagedObject* managedSubtask in results)
+        {
+            bool localSync = [[managedSubtask valueForKey:CD_ROW_LOCAL_SYNC] boolValue];
+            bool del = [[managedSubtask valueForKey:CD_ROW_IS_DELETED] boolValue];
+            int ID = [[managedSubtask valueForKey:CD_ROW_ID] intValue];
+            
+            if(!localSync && !del && ID >= 0)
+            {
+                NSString* name = (NSString*)[managedSubtask valueForKey:CD_ROW_NAME];
+                bool status = [[managedSubtask valueForKey:CD_ROW_STATUS] boolValue];
+                int syncStatus = [[managedSubtask valueForKey:CD_SUBTASK_SYNC_STATUS] intValue];
+                
+                KSShortTask* subtask = [[KSShortTask alloc] initWithID:ID andName:name andStatus:status andSyncStatus:syncStatus];
+                [subtasks addObject:subtask];
+            }
+        }
+    }
+    
+    return subtasks;
+}
+
+-(NSArray<KSShortTask *> *)allSubTasksForSyncDelete
+{
+    NSMutableArray* subtasks = [NSMutableArray array];
+    
+    NSError* error = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SUBTASK];
+    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if(!error)
+    {
+        for(NSManagedObject* managedSubtask in results)
+        {
+            bool localSync = [[managedSubtask valueForKey:CD_ROW_LOCAL_SYNC] boolValue];
+            bool del = [[managedSubtask valueForKey:CD_ROW_IS_DELETED] boolValue];
+            int ID = [[managedSubtask valueForKey:CD_ROW_ID] intValue];
+            
+            if(!localSync && del)
+            {
+                NSString* name = (NSString*)[managedSubtask valueForKey:CD_ROW_NAME];
+                bool status = [[managedSubtask valueForKey:CD_ROW_STATUS] boolValue];
+                int syncStatus = [[managedSubtask valueForKey:CD_SUBTASK_SYNC_STATUS] intValue];
+                
+                KSShortTask* subtask = [[KSShortTask alloc] initWithID:ID andName:name andStatus:status andSyncStatus:syncStatus];
+                [subtasks addObject:subtask];
+            }
+        }
+    }
+    
+    return subtasks;
+}
+
 
 -(void)addSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {

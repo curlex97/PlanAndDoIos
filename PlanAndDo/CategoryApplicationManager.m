@@ -28,7 +28,7 @@
     
     [[[CategoryCoreDataManager alloc] init] addCateroty:category];
     [[[SyncApplicationManager alloc] init] syncCategoriesWithCompletion:^(bool status) {
-        [[[CategoryApiManager alloc] init] addCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser] completion:^(NSDictionary* dictionary){
+        [[[CategoryApiManager alloc] init] addCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncAdd] forUser:[[ApplicationManager userApplicationManager] authorisedUser] completion:^(NSDictionary* dictionary){
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
         }];
     }];
@@ -38,7 +38,7 @@
 {
     [[[CategoryCoreDataManager alloc] init] updateCateroty:category];
     [[[SyncApplicationManager alloc] init] syncCategoriesWithCompletion:^(bool status) {
-        [[[CategoryApiManager alloc] init] updateCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+        [[[CategoryApiManager alloc] init] updateCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncUpdate] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
         }];
     }];
@@ -49,7 +49,7 @@
     [[[CategoryCoreDataManager alloc] init] deleteCateroty:category];
     
     [[[SyncApplicationManager alloc] init] syncCategoriesWithCompletion:^(bool status) {
-        [[[CategoryApiManager alloc] init] deleteCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+        [[[CategoryApiManager alloc] init] deleteCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncDelete] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
         }];
     }];

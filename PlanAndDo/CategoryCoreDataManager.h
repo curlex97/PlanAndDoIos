@@ -37,6 +37,10 @@
 
 -(void)syncDeleteCateroty:(KSCategory*)category;
 
--(NSArray<KSCategory *> *)allCategoriesForSync;
+-(NSArray<KSCategory *> *)allCategoriesForSyncAdd;
+
+-(NSArray<KSCategory *> *)allCategoriesForSyncUpdate;
+
+-(NSArray<KSCategory *> *)allCategoriesForSyncDelete;
 
 @end
