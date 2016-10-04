@@ -7,6 +7,7 @@
 //
 
 #import "SubTasksCoreDataManager.h"
+#import "ApplicationDefines.h"
 
 @implementation SubTasksCoreDataManager
 
@@ -25,7 +26,7 @@
     NSMutableArray* subtasks = [NSMutableArray array];
     
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Subtask"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SUBTASK];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
@@ -56,7 +57,7 @@
     NSMutableArray* subtasks = [NSMutableArray array];
     
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Subtask"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SUBTASK];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
@@ -83,7 +84,7 @@
 -(void)addSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
     NSManagedObjectContext* managedObjectContext = self.managedObjectContext;
-    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Subtask" inManagedObjectContext:managedObjectContext];
+    NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_SUBTASK inManagedObjectContext:managedObjectContext];
     NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
     
     [object setValue:[NSNumber numberWithInteger:task.ID] forKey:@"task_id"];
@@ -100,7 +101,7 @@
 -(void)updateSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Subtask"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SUBTASK];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
@@ -129,7 +130,7 @@
 -(void)deleteSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Subtask"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SUBTASK];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
@@ -153,7 +154,7 @@
 
 -(void)cleanTable
 {
-    [super cleanTable:@"Subtask"];
+    [super cleanTable:CD_TABLE_SUBTASK];
 }
 
 
@@ -163,7 +164,7 @@
 -(void)syncAddSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
     NSManagedObjectContext* managedObjectContext = self.managedObjectContext;
-    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Subtask" inManagedObjectContext:managedObjectContext];
+    NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_SUBTASK inManagedObjectContext:managedObjectContext];
     NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
     
     [object setValue:[NSNumber numberWithInteger:task.ID] forKey:@"task_id"];
@@ -180,7 +181,7 @@
 -(void)syncUpdateSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Subtask"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SUBTASK];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
@@ -209,7 +210,7 @@
 -(void)syncDeleteSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Subtask"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SUBTASK];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)

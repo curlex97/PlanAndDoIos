@@ -189,6 +189,12 @@
 #define CD_DATABASE_EXT @"momd"
 #define CD_DATABASE_SQLITE @"PlanAndDo.sqlite"
 
+#define CD_TABLE_TASK @"Task"
+#define CD_TABLE_CATEGORY @"Category"
+#define CD_TABLE_SUBTASK @"Subtask"
+#define CD_TABLE_USER @"User"
+#define CD_TABLE_SETTINGS @"Settings"
+
 //===================================================================================================================================
 
 

@@ -8,6 +8,7 @@
 
 #import "TasksCoreDataManager.h"
 #import "SubTasksCoreDataManager.h"
+#import "ApplicationDefines.h"
 
 @implementation TasksCoreDataManager
 
@@ -33,7 +34,7 @@
 {
     NSMutableArray<BaseTask*>* tasks = [NSMutableArray array];
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Task"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_TASK];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
 
     
@@ -92,7 +93,7 @@
 {
     NSMutableArray<BaseTask*>* tasks = [NSMutableArray array];
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Task"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_TASK];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     
@@ -263,7 +264,7 @@
     {
         NSManagedObjectContext* managedObjectContext = self.managedObjectContext;
         KSTask* realTask = (KSTask*)task;
-        NSEntityDescription* entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
+        NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_TASK inManagedObjectContext:managedObjectContext];
         NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
         [object setValue:[NSNumber numberWithInteger:realTask.ID] forKey:@"id"];
         [object setValue:realTask.name forKey:@"task_name"];
@@ -286,7 +287,7 @@
     {
         NSManagedObjectContext* managedObjectContext = self.managedObjectContext;
         KSTaskCollection* realTask = (KSTaskCollection*)task;
-        NSEntityDescription* entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
+        NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_TASK inManagedObjectContext:managedObjectContext];
         NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
         [object setValue:[NSNumber numberWithInteger:realTask.ID] forKey:@"id"];
         [object setValue:realTask.name forKey:@"task_name"];
@@ -309,7 +310,7 @@
 -(void)updateTask:(BaseTask *)task
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Task"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_TASK];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     
@@ -369,7 +370,7 @@
 -(void) deleteTask:(BaseTask *)task
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Task"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_TASK];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     
@@ -395,7 +396,7 @@
 
 -(void)cleanTable
 {
-    [super cleanTable:@"Task"];
+    [super cleanTable:CD_TABLE_TASK];
 }
 
 // SYNC
@@ -407,7 +408,7 @@
     {
         NSManagedObjectContext* managedObjectContext = self.managedObjectContext;
         KSTask* realTask = (KSTask*)task;
-        NSEntityDescription* entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
+        NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_TASK inManagedObjectContext:managedObjectContext];
         NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
         [object setValue:[NSNumber numberWithInteger:realTask.ID] forKey:@"id"];
         [object setValue:realTask.name forKey:@"task_name"];
@@ -430,7 +431,7 @@
     {
         NSManagedObjectContext* managedObjectContext = self.managedObjectContext;
         KSTaskCollection* realTask = (KSTaskCollection*)task;
-        NSEntityDescription* entity = [NSEntityDescription entityForName:@"Task" inManagedObjectContext:managedObjectContext];
+        NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_TASK inManagedObjectContext:managedObjectContext];
         NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
         [object setValue:[NSNumber numberWithInteger:realTask.ID] forKey:@"id"];
         [object setValue:realTask.name forKey:@"task_name"];
@@ -453,7 +454,7 @@
 -(void)syncUpdateTask:(BaseTask *)task
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Task"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_TASK];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     
@@ -513,7 +514,7 @@
 -(void)syncDeleteTask:(BaseTask *)task
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Task"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_TASK];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     

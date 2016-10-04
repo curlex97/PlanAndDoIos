@@ -7,6 +7,7 @@
 //
 
 #import "CategoryCoreDataManager.h"
+#import "ApplicationDefines.h"
 
 @implementation CategoryCoreDataManager
 
@@ -16,7 +17,7 @@
     NSMutableArray* categories = [NSMutableArray array];
     
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Category"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_CATEGORY];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     
@@ -47,7 +48,7 @@
     NSMutableArray* categories = [NSMutableArray array];
     
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Category"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_CATEGORY];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     
@@ -82,7 +83,7 @@
 -(void)addCateroty:(KSCategory *)category
 {
     NSManagedObjectContext* managedObjectContext = self.managedObjectContext;
-    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Category" inManagedObjectContext:managedObjectContext];
+    NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_CATEGORY inManagedObjectContext:managedObjectContext];
     NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
     [object setValue:[NSNumber numberWithInteger:category.ID] forKey:@"id"];
     [object setValue:[category name] forKey:@"category_name"];
@@ -96,7 +97,7 @@
 -(void)updateCateroty:(KSCategory *)category
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Category"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_CATEGORY];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     
@@ -124,7 +125,7 @@
 -(void)deleteCateroty:(KSCategory *)category
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Category"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_CATEGORY];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     
@@ -154,7 +155,7 @@
 -(void)syncAddCateroty:(KSCategory *)category
 {
     NSManagedObjectContext* managedObjectContext = self.managedObjectContext;
-    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Category" inManagedObjectContext:managedObjectContext];
+    NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_CATEGORY inManagedObjectContext:managedObjectContext];
     NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
     [object setValue:[NSNumber numberWithInteger:category.ID] forKey:@"id"];
     [object setValue:[category name] forKey:@"category_name"];
@@ -168,7 +169,7 @@
 -(void)syncUpdateCateroty:(KSCategory *)category
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Category"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_CATEGORY];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     
@@ -196,7 +197,7 @@
 -(void)syncDeleteCateroty:(KSCategory *)category
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Category"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_CATEGORY];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     
@@ -221,7 +222,7 @@
 
 -(void)cleanTable
 {
-    [super cleanTable:@"Category"];
+    [super cleanTable:CD_TABLE_CATEGORY];
 }
 
 

@@ -7,6 +7,7 @@
 //
 
 #import "SettingsCoreDataManager.h"
+#import "ApplicationDefines.h"
 
 @implementation SettingsCoreDataManager
 
@@ -14,7 +15,7 @@
 {
     UserSettings* settings = nil;
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Settings"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SETTINGS];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
@@ -41,7 +42,7 @@
 {
     UserSettings* settings = nil;
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Settings"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SETTINGS];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
@@ -72,7 +73,7 @@
 -(void)updateSettings:(UserSettings *)settings
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Settings"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SETTINGS];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
@@ -107,7 +108,7 @@
 {
     
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Settings"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SETTINGS];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
@@ -115,7 +116,7 @@
         if(![results count])
         {
             NSManagedObjectContext* managedObjectContext = self.managedObjectContext;
-            NSEntityDescription* entity = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:managedObjectContext];
+            NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_SETTINGS inManagedObjectContext:managedObjectContext];
             NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
             [object setValue:[NSNumber numberWithInteger:[settings ID]] forKey:@"id"];
             [object setValue:[settings startPage] forKey:@"start_page"];
@@ -137,7 +138,7 @@
 
 -(void)cleanTable
 {
-    [super cleanTable:@"Settings"];
+    [super cleanTable:CD_TABLE_SETTINGS];
 }
 
 
@@ -148,7 +149,7 @@
 -(void)syncUpdateSettings:(UserSettings *)settings
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Settings"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SETTINGS];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
@@ -183,7 +184,7 @@
 {
     
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Settings"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SETTINGS];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
@@ -191,7 +192,7 @@
         if(![results count])
         {
             NSManagedObjectContext* managedObjectContext = self.managedObjectContext;
-            NSEntityDescription* entity = [NSEntityDescription entityForName:@"Settings" inManagedObjectContext:managedObjectContext];
+            NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_SETTINGS inManagedObjectContext:managedObjectContext];
             NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
             [object setValue:[NSNumber numberWithInteger:[settings ID]] forKey:@"id"];
             [object setValue:[settings startPage] forKey:@"start_page"];

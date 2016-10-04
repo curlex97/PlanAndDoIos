@@ -67,7 +67,7 @@
             cell.accessoryType=UITableViewCellAccessoryNone;
             break;
         case 1:
-            cell.textLabel.text=@"Category";
+            cell.textLabel.text=NM_CATEGORY;
             cell.paramValueLabel.text = self.category.name;
             break;
         case 3:
@@ -118,7 +118,7 @@
 
 - (void)headTextFieldDidChange:(id)sender
 {
-    self.headerText=self.textField.text.length ? self.textField.text : @"Task";
+    self.headerText=self.textField.text.length ? self.textField.text : NM_TASK_HEAD;
 }
 
 
@@ -178,7 +178,7 @@
     self.textField.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     self.textField.delegate=self;
     [self.textField addTarget:self action:@selector(headTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    self.textField.text=[self.headerText isEqualToString:@"Task"]?@"":self.headerText;
+    self.textField.text=[self.headerText isEqualToString:NM_TASK_HEAD]?@"":self.headerText;
     [self.textField becomeFirstResponder];
     [cell addSubview:self.textField];
 }
@@ -222,7 +222,7 @@
 
 -(void) addSegmentControl
 {
-    self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Task",@"List", nil]];
+    self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:NM_TASK_HEAD,NM_TASK_LIST, nil]];
     self.segment.tintColor=[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
     [self.segment setSelectedSegmentIndex:0];
     self.segment.frame=CGRectMake(20, 8, self.view.bounds.size.width-40, 30);

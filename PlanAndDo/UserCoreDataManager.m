@@ -9,6 +9,7 @@
 #import "UserCoreDataManager.h"
 #import "SettingsCoreDataManager.h"
 #import "FileManager.h"
+#import "ApplicationDefines.h"
 
 @implementation UserCoreDataManager
 
@@ -16,7 +17,7 @@
 {
     KSAuthorisedUser* user = nil;
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"User"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_USER];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
@@ -44,7 +45,7 @@
 {
     KSAuthorisedUser* user = nil;
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"User"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_USER];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
@@ -75,14 +76,14 @@
 -(void)setUser:(KSAuthorisedUser *)user
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"User"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_USER];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
     {
         if(![results count])
         {
-            NSEntityDescription* entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:self.managedObjectContext];
+            NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_USER inManagedObjectContext:self.managedObjectContext];
             NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
             [object setValue:[NSNumber numberWithInteger:[user ID]] forKey:@"id"];
             [object setValue:[user userName] forKey:@"name"];
@@ -104,7 +105,7 @@
 -(void)updateUser:(KSAuthorisedUser *)user
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"User"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_USER];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
@@ -132,7 +133,7 @@
 
 -(void)cleanTable
 {
-    [super cleanTable:@"User"];
+    [super cleanTable:CD_TABLE_USER];
 }
 
 // SYNC
@@ -140,14 +141,14 @@
 -(void)syncSetUser:(KSAuthorisedUser *)user
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"User"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_USER];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
     {
         if(![results count])
         {
-            NSEntityDescription* entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:self.managedObjectContext];
+            NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_USER inManagedObjectContext:self.managedObjectContext];
             NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
             [object setValue:[NSNumber numberWithInteger:[user ID]] forKey:@"id"];
             [object setValue:[user userName] forKey:@"name"];
@@ -169,7 +170,7 @@
 -(void)syncUpdateUser:(KSAuthorisedUser *)user
 {
     NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"User"];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_USER];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if(!error)
