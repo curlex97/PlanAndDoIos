@@ -191,9 +191,9 @@ static bool firstLoad = true;
 
 -(void)refreshTasksInTable:(NSNotification*)not
 {
-    [self.tasks removeAllObjects];
-    [self reloadCoreData];
-    [self.tableView reloadData];
+   // [self.tasks removeAllObjects];
+    //[self reloadCoreData];
+    //[self.tableView reloadData];
 }
 
 - (void)viewDidLoad {

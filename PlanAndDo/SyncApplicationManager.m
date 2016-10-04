@@ -71,7 +71,8 @@
             
             if(completed) completed(true);
         }
-        if(completed) completed(false);
+        else if(completed)
+            completed(false);
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_USER object:nil];
     
     }];
@@ -108,7 +109,8 @@
             
             if(completed) completed(true);
         }
-        if(completed) completed(false);
+        else if(completed)
+            completed(false);
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
     }];
 }
@@ -153,7 +155,9 @@
             }
             if(completed) completed(true);
         }
-        if(completed) completed(false);
+        else
+            if(completed)
+                completed(false);
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
     }];
 }
@@ -161,7 +165,6 @@
 -(void)syncTasksWithCompletion:(void (^)(bool))completed
 {
     [[[TasksApiManager alloc] init] syncTasksWithCompletion:^(NSDictionary* dictionary) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
         NSString* status = [dictionary valueForKeyPath:@"status"];
         
         if([status containsString:@"suc"])
@@ -206,7 +209,8 @@
             }
             if(completed) completed(true);
         }
-        if(completed) completed(false);
+        else if(completed)
+            completed(false);
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
     }];
 }
@@ -253,7 +257,8 @@
             }
             if(completed) completed(true);
         }
-        if(completed) completed(false);
+        else if(completed)
+            completed(false);
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
     }];
 }
