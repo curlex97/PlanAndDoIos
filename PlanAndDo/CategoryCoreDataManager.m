@@ -42,6 +42,35 @@
     return categories;
 }
 
+-(NSArray<KSCategory *> *)allCategoriesForSync
+{
+    NSMutableArray* categories = [NSMutableArray array];
+    
+    NSError* error = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Category"];
+    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    
+    if(!error)
+    {
+        for(NSManagedObject* managedCategory in results)
+        {
+            bool localSync = [[managedCategory valueForKey:@"local_sync"] boolValue];
+            
+            if(!localSync)
+            {
+                NSUInteger ID = [[managedCategory valueForKey:@"id"] integerValue];
+                NSString* name = (NSString*)[managedCategory valueForKey:@"category_name"];
+                int syncStatus = [[managedCategory valueForKey:@"category_sync_status"] intValue];
+                
+                KSCategory* category = [[KSCategory alloc] initWithID:ID andName:name andSyncStatus:syncStatus];
+                [categories addObject:category];
+            }
+        }
+    }
+    return categories;
+}
+
 
 -(KSCategory *)categoryWithId:(int)Id
 {

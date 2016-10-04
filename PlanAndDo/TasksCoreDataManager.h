@@ -57,5 +57,6 @@
 
 -(void)syncDeleteTask:(BaseTask*)task;
 
+-(NSArray<BaseTask *>*) allTasksForSync;
 
 @end

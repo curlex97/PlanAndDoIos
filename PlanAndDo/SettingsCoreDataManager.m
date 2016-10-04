@@ -37,6 +37,38 @@
     return settings;
 }
 
+-(UserSettings *)settingsForSync
+{
+    UserSettings* settings = nil;
+    NSError* error = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Settings"];
+    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if(!error)
+    {
+        for(NSManagedObject* managedSettings in results)
+        {
+            
+            bool localSync = [[managedSettings valueForKey:@"local_sync"] boolValue];
+            if(!localSync)
+            {
+                NSUInteger ID = [[managedSettings valueForKey:@"id"] integerValue];
+                NSString* startPage = (NSString*)[managedSettings valueForKey:@"start_page"];
+                NSString* pageType = (NSString*)[managedSettings valueForKey:@"page_type"];
+                NSString* dateFormat = (NSString*)[managedSettings valueForKey:@"date_format"];
+                NSString* startDay = (NSString*)[managedSettings valueForKey:@"start_day"];
+                NSString* timeFormat = (NSString*)[managedSettings valueForKey:@"time_format"];
+                int syncStatus = [[managedSettings valueForKey:@"settings_sync_status"] intValue];
+                
+                settings = [[UserSettings alloc] initWithID:ID andStartPage:startPage andDateFormat:dateFormat andPageType:pageType andTimeFormat:timeFormat andStartDay:startDay andSyncStatus:syncStatus];
+            }
+            
+        }
+    }
+    
+    return settings;
+}
+
 -(void)updateSettings:(UserSettings *)settings
 {
     NSError* error = nil;

@@ -8,6 +8,7 @@
 
 #import "UserCoreDataManager.h"
 #import "SettingsCoreDataManager.h"
+#import "FileManager.h"
 
 @implementation UserCoreDataManager
 
@@ -28,12 +29,44 @@
             NSDate* createDate = (NSDate*)[managedUser valueForKey:@"created_at"];
             NSDate* lastVisit = (NSDate*)[managedUser valueForKey:@"lastvisit_date"];
             int syncStatus = [[managedUser valueForKey:@"user_sync_status"] intValue];
-            NSString* token = @"foo";
+            NSString* token = [FileManager readTokenFromFile];
             
             UserSettings* settings = [[[SettingsCoreDataManager alloc] init] settings];
 
             user = [[KSAuthorisedUser alloc] initWithUserID:ID andUserName:name andEmailAdress:email andCreatedDeate:createDate andLastVisitDate:lastVisit andSyncStatus:syncStatus andAccessToken:token andUserSettings:settings];
             
+        }
+    }
+    return user;
+}
+
+-(KSAuthorisedUser *)authorisedUserForSync
+{
+    KSAuthorisedUser* user = nil;
+    NSError* error = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"User"];
+    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if(!error)
+    {
+        for(NSManagedObject* managedUser in results)
+        {
+            bool localSync = [[managedUser valueForKey:@"local_sync"] boolValue];
+            if(!localSync)
+            {
+                NSUInteger ID = [[managedUser valueForKey:@"id"] integerValue];
+                NSString* name = (NSString*)[managedUser valueForKey:@"name"];
+                NSString* email = (NSString*)[managedUser valueForKey:@"email"];
+                NSDate* createDate = (NSDate*)[managedUser valueForKey:@"created_at"];
+                NSDate* lastVisit = (NSDate*)[managedUser valueForKey:@"lastvisit_date"];
+                int syncStatus = [[managedUser valueForKey:@"user_sync_status"] intValue];
+                NSString* token = [FileManager readTokenFromFile];
+                
+                UserSettings* settings = [[[SettingsCoreDataManager alloc] init] settings];
+                
+                user = [[KSAuthorisedUser alloc] initWithUserID:ID andUserName:name andEmailAdress:email andCreatedDeate:createDate andLastVisitDate:lastVisit andSyncStatus:syncStatus andAccessToken:token andUserSettings:settings];
+            }
+ 
         }
     }
     return user;

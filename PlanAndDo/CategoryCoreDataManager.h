@@ -14,6 +14,7 @@
 // test 1 OK
 -(NSArray<KSCategory*>*) allCategories;
 
+// test 1 OK
 -(KSCategory*)categoryWithId:(int)Id;
 
 // test 1 OK
@@ -36,5 +37,6 @@
 
 -(void)syncDeleteCateroty:(KSCategory*)category;
 
+-(NSArray<KSCategory *> *)allCategoriesForSync;
 
 @end

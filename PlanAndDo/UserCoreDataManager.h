@@ -29,4 +29,6 @@
 
 -(void)syncUpdateUser:(KSAuthorisedUser*)user;
 
+-(KSAuthorisedUser*) authorisedUserForSync;
+
 @end

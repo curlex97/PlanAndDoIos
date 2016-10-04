@@ -51,6 +51,35 @@
     return subtasks;
 }
 
+-(NSArray<KSShortTask *> *)allSubTasksForSync
+{
+    NSMutableArray* subtasks = [NSMutableArray array];
+    
+    NSError* error = nil;
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Subtask"];
+    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if(!error)
+    {
+        for(NSManagedObject* managedSubtask in results)
+        {
+            bool localSync = [[managedSubtask valueForKey:@"local_sync"] boolValue];
+            if(!localSync)
+            {
+                NSUInteger ID = [[managedSubtask valueForKey:@"id"] integerValue];
+                NSString* name = (NSString*)[managedSubtask valueForKey:@"name"];
+                bool status = [[managedSubtask valueForKey:@"status"] boolValue];
+                int syncStatus = [[managedSubtask valueForKey:@"subtask_sync_status"] intValue];
+                
+                KSShortTask* subtask = [[KSShortTask alloc] initWithID:ID andName:name andStatus:status andSyncStatus:syncStatus];
+                [subtasks addObject:subtask];
+            }
+        }
+    }
+    
+    return subtasks;
+}
+
 -(void)addSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
     NSManagedObjectContext* managedObjectContext = self.managedObjectContext;
