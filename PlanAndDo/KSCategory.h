@@ -12,7 +12,7 @@
 
 @property NSString* name;
 
--(instancetype)initWithID:(NSUInteger)ID andName:(NSString *)name andSyncStatus:(int)syncStatus;
+-(instancetype)initWithID:(int)ID andName:(NSString *)name andSyncStatus:(int)syncStatus;
 
 
 @end

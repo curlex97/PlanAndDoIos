@@ -10,7 +10,7 @@
 
 @implementation KSUserInfo
 
--(instancetype)initWithUserID:(NSUInteger)ID
+-(instancetype)initWithUserID:(int)ID
                   andUserName:(NSString *)userName
                andEmailAdress:(NSString *)email
               andCreatedDeate:(NSDate *)date

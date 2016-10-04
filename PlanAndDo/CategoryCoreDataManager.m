@@ -29,7 +29,7 @@
             
             if(!del)
             {
-                NSUInteger ID = [[managedCategory valueForKey:CD_ROW_ID] integerValue];
+                int ID = [[managedCategory valueForKey:CD_ROW_ID] intValue];
                 NSString* name = (NSString*)[managedCategory valueForKey:CD_ROW_CATEGORY_NAME];
                 int syncStatus = [[managedCategory valueForKey:CD_ROW_CATEGORY_SYNC_STATUS] intValue];
                 
@@ -60,7 +60,7 @@
             
             if(!localSync)
             {
-                NSUInteger ID = [[managedCategory valueForKey:CD_ROW_ID] integerValue];
+                int ID = [[managedCategory valueForKey:CD_ROW_ID] intValue];
                 NSString* name = (NSString*)[managedCategory valueForKey:CD_ROW_CATEGORY_NAME];
                 int syncStatus = [[managedCategory valueForKey:CD_ROW_CATEGORY_SYNC_STATUS] intValue];
                 

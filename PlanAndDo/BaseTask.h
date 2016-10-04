@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, KSTaskPriority)
 @property (nonatomic)NSDate* createdAt;
 @property (nonatomic)NSDate* completionTime;
 
--(instancetype)initWithID:(NSUInteger)ID andName:(NSString *)name
+-(instancetype)initWithID:(int)ID andName:(NSString *)name
                       andStatus:(BOOL)status
             andTaskReminderTime:(NSDate*) taskReminderTime
                 andTaskPriority:(KSTaskPriority)priority

@@ -38,7 +38,7 @@
 
             if(taskID == [task ID] && !del)
             {
-                NSUInteger ID = [[managedSubtask valueForKey:CD_ROW_ID] integerValue];
+                int ID = [[managedSubtask valueForKey:CD_ROW_ID] intValue];
                 NSString* name = (NSString*)[managedSubtask valueForKey:CD_ROW_NAME];
                 bool status = [[managedSubtask valueForKey:CD_ROW_STATUS] boolValue];
                 int syncStatus = [[managedSubtask valueForKey:CD_SUBTASK_SYNC_STATUS] intValue];
@@ -67,7 +67,7 @@
             bool localSync = [[managedSubtask valueForKey:CD_ROW_LOCAL_SYNC] boolValue];
             if(!localSync)
             {
-                NSUInteger ID = [[managedSubtask valueForKey:CD_ROW_ID] integerValue];
+                int ID = [[managedSubtask valueForKey:CD_ROW_ID] intValue];
                 NSString* name = (NSString*)[managedSubtask valueForKey:CD_ROW_NAME];
                 bool status = [[managedSubtask valueForKey:CD_ROW_STATUS] boolValue];
                 int syncStatus = [[managedSubtask valueForKey:CD_SUBTASK_SYNC_STATUS] intValue];

@@ -22,7 +22,7 @@
     {
         for(NSManagedObject* managedSettings in results)
         {
-            NSUInteger ID = [[managedSettings valueForKey:CD_ROW_ID] integerValue];
+            int ID = [[managedSettings valueForKey:CD_ROW_ID] intValue];
             NSString* startPage = (NSString*)[managedSettings valueForKey:CD_ROW_START_PAGE];
             NSString* pageType = (NSString*)[managedSettings valueForKey:CD_ROW_PAGE_TYPE];
             NSString* dateFormat = (NSString*)[managedSettings valueForKey:CD_ROW_DATE_FORMAT];
@@ -53,7 +53,7 @@
             bool localSync = [[managedSettings valueForKey:CD_ROW_LOCAL_SYNC] boolValue];
             if(!localSync)
             {
-                NSUInteger ID = [[managedSettings valueForKey:CD_ROW_ID] integerValue];
+                int ID = [[managedSettings valueForKey:CD_ROW_ID] intValue];
                 NSString* startPage = (NSString*)[managedSettings valueForKey:CD_ROW_START_PAGE];
                 NSString* pageType = (NSString*)[managedSettings valueForKey:CD_ROW_PAGE_TYPE];
                 NSString* dateFormat = (NSString*)[managedSettings valueForKey:CD_ROW_DATE_FORMAT];

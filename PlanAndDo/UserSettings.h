@@ -16,7 +16,7 @@
 @property (nonatomic)NSString * pageType;
 @property (nonatomic)NSString * startDay;
 
--(instancetype)initWithID:(NSUInteger)ID andStartPage:(NSString *)startPage
+-(instancetype)initWithID:(int)ID andStartPage:(NSString *)startPage
                    andDateFormat:(NSString *)dateFormat
               andPageType:(NSString*)pageType
                    andTimeFormat:(NSString *)timeFormat

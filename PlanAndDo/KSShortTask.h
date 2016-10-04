@@ -13,5 +13,5 @@
 @property (nonatomic)NSString * name;
 @property (nonatomic)BOOL status;
 
--(instancetype)initWithID:(NSUInteger)ID andName:(NSString *)name andStatus:(BOOL)status  andSyncStatus:(int)syncStatus;
+-(instancetype)initWithID:(int)ID andName:(NSString *)name andStatus:(BOOL)status  andSyncStatus:(int)syncStatus;
 @end

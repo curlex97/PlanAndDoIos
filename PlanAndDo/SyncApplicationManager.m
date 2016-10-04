@@ -53,7 +53,7 @@
         
         if([status containsString:@"suc"])
         {
-            NSUInteger ID = [[dictionary valueForKeyPath:@"data.id"] integerValue];
+            int ID = [[dictionary valueForKeyPath:@"data.id"] intValue];
             NSString* userName = [dictionary valueForKeyPath:@"data.name"];
             int syncStatus = [[dictionary valueForKeyPath:@"data.user_sync_status"] intValue];
             NSString* email = [dictionary valueForKeyPath:@"data.email"];
@@ -87,7 +87,7 @@
         if([status containsString:@"suc"])
         {
         
-            NSUInteger settingsID = [[dictionary valueForKeyPath:@"data.id"] integerValue];
+            int settingsID = [[dictionary valueForKeyPath:@"data.id"] intValue];
             NSString* startPage = [dictionary valueForKeyPath:@"data.start_page"];
             NSString* dateFormat = [dictionary valueForKeyPath:@"data.date_format"];
             NSString* timeFormat = [dictionary valueForKeyPath:@"data.time_format"];
@@ -129,7 +129,7 @@
             
             for(NSDictionary* defaultCategory in defCats)
             {
-                NSUInteger catID = [[defaultCategory valueForKeyPath:@"id"] integerValue];
+                int catID = [[defaultCategory valueForKeyPath:@"id"] intValue];
                 NSString* catName = [defaultCategory valueForKeyPath:@"category_name"];
                 int syncStatus = [[defaultCategory valueForKeyPath:@"category_sync_status"] intValue];
                 
@@ -175,7 +175,7 @@
             
             for(NSDictionary* jsonTask in tasks)
             {
-                NSUInteger taskID = [[jsonTask valueForKeyPath:@"id"] integerValue];
+                int taskID = [[jsonTask valueForKeyPath:@"id"] intValue];
                 NSUInteger categoryID = 0;
                 if(![[jsonTask valueForKeyPath:@"category_id"] isKindOfClass:[NSNull class]])
                     categoryID = [[jsonTask valueForKeyPath:@"category_id"] integerValue];
@@ -229,8 +229,8 @@
             
             for(NSDictionary* jsonSub in subs)
             {
-                NSUInteger subID = [[jsonSub valueForKeyPath:@"id"] integerValue];
-                NSUInteger taskID = [[jsonSub valueForKeyPath:@"task_id"] integerValue];
+                int subID = [[jsonSub valueForKeyPath:@"id"] intValue];
+                int taskID = [[jsonSub valueForKeyPath:@"task_id"] intValue];
                 NSString* subName = [jsonSub valueForKeyPath:@"name"];
                 int syncStatus = [[jsonSub valueForKeyPath:@"subtask_sync_status"] intValue];
                 bool isCompleted = [[jsonSub valueForKeyPath:@"is_completed"] integerValue] > 0;

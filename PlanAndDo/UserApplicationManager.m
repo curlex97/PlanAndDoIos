@@ -52,7 +52,7 @@
         {
             [ApplicationManager cleanLocalDataBase];
             
-            NSUInteger ID = [[dictionary valueForKeyPath:@"data.users.user_id"] integerValue];
+            int ID = [[dictionary valueForKeyPath:@"data.users.user_id"] intValue];
             int syncStatus = [[dictionary valueForKeyPath:@"data.users.user_sync_status"] intValue];
             NSString* token = [dictionary valueForKeyPath:@"token"];
             NSDate *createDate = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"data.users.created_at"] intValue]];
@@ -63,7 +63,7 @@
             [FileManager writePassToFile:password];
               ///////Settings/////////
             
-            NSUInteger settingsID = [[dictionary valueForKeyPath:@"data.settings.id"] integerValue];
+            int settingsID = [[dictionary valueForKeyPath:@"data.settings.id"] intValue];
             NSString* startPage = [dictionary valueForKeyPath:@"data.settings.start_page"];
             NSString* dateFormat = [dictionary valueForKeyPath:@"data.settings.date_format"];
             NSString* timeFormat = [dictionary valueForKeyPath:@"data.settings.time_format"];
@@ -89,7 +89,7 @@
             
             for(NSDictionary* defaultCategory in defCats)
             {
-                NSUInteger catID = [[defaultCategory valueForKeyPath:@"id"] integerValue];
+                int catID = [[defaultCategory valueForKeyPath:@"id"] intValue];
                 NSString* catName = [defaultCategory valueForKeyPath:@"category_name"];
                 int catSyncStatus = [[defaultCategory valueForKeyPath:@"data.users.user_sync_status"] intValue];
 
@@ -114,7 +114,7 @@
         
         if([status containsString:@"succsess"])
         {
-            NSUInteger ID = [[dictionary valueForKeyPath:@"data.user_id"] integerValue];
+            int ID = [[dictionary valueForKeyPath:@"data.user_id"] intValue];
             NSString* userName = [dictionary valueForKeyPath:@"data.user_name"];
             NSString* token = [dictionary valueForKeyPath:@"data.token"];
 

@@ -15,7 +15,7 @@
 @property (nonatomic)NSDate * createdAt;
 @property (nonatomic)NSDate * lastVisit;
 
--(instancetype)initWithUserID:(NSUInteger)ID
+-(instancetype)initWithUserID:(int)ID
                   andUserName:(NSString *)userName
                andEmailAdress:(NSString *)email
               andCreatedDeate:(NSDate *)date

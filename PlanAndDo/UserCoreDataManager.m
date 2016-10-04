@@ -24,7 +24,7 @@
     {
         for(NSManagedObject* managedUser in results)
         {
-            NSUInteger ID = [[managedUser valueForKey:CD_ROW_ID] integerValue];
+            int ID = [[managedUser valueForKey:CD_ROW_ID] intValue];
             NSString* name = (NSString*)[managedUser valueForKey:CD_ROW_NAME];
             NSString* email = (NSString*)[managedUser valueForKey:CD_ROW_EMAIL];
             NSDate* createDate = (NSDate*)[managedUser valueForKey:CD_ROW_CREATED_AT];
@@ -55,7 +55,7 @@
             bool localSync = [[managedUser valueForKey:CD_ROW_LOCAL_SYNC] boolValue];
             if(!localSync)
             {
-                NSUInteger ID = [[managedUser valueForKey:CD_ROW_ID] integerValue];
+                int ID = [[managedUser valueForKey:CD_ROW_ID] intValue];
                 NSString* name = (NSString*)[managedUser valueForKey:CD_ROW_NAME];
                 NSString* email = (NSString*)[managedUser valueForKey:CD_ROW_EMAIL];
                 NSDate* createDate = (NSDate*)[managedUser valueForKey:CD_ROW_CREATED_AT];

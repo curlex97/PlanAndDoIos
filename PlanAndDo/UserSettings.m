@@ -10,7 +10,7 @@
 
 @implementation UserSettings
 
--(instancetype)initWithID:(NSUInteger)ID andStartPage:(NSString *)startPage
+-(instancetype)initWithID:(int)ID andStartPage:(NSString *)startPage
             andDateFormat:(NSString *)dateFormat
               andPageType:(NSString*)pageType
             andTimeFormat:(NSString *)timeFormat andStartDay:(NSString*)startDay andSyncStatus:(int)syncStatus

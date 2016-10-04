@@ -25,7 +25,7 @@
 @property (nonatomic)NSArray * methods;
 @property (nonatomic)UITextField * textField;
 @property (nonatomic)NSString * headerText;
-@property NSUInteger Id;
+@property int Id;
 @end
 
 @implementation AddTaskViewController
