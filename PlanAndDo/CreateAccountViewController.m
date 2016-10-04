@@ -14,15 +14,37 @@
 #import "KSMenuViewController.h"
 
 
-@interface CreateAccountViewController () <UIGestureRecognizerDelegate>
+@interface CreateAccountViewController () <UIGestureRecognizerDelegate, UITextFieldDelegate>
 @property (nonatomic)UITapGestureRecognizer * tap;
 @end
 
 @implementation CreateAccountViewController
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if(self.passwordTextField.isFirstResponder)
+    {
+        [self.reenterPasswordTextField becomeFirstResponder];
+    }
+    else if(self.emailTextField.isFirstResponder)
+    {
+        [self.passwordTextField becomeFirstResponder];
+    }
+    else if(self.usernameTextField.isFirstResponder)
+    {
+        [self.emailTextField becomeFirstResponder];
+    }
+    else
+    {
+        [self submitTapped:nil];
+    }
+    
+    return YES;
+}
+
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    if([gestureRecognizer locationInView:self.emailTextField].y>=0 && [gestureRecognizer locationInView:self.emailTextField].y<44*4)
+    if([gestureRecognizer locationInView:self.usernameTextField].y>=0 && [gestureRecognizer locationInView:self.usernameTextField].y<44*4)
     {
 
     }
@@ -61,18 +83,22 @@
     UIView *emailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.emailTextField.leftView = emailPaddingView;
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.emailTextField.delegate=self;
     
     UIView *usernamePaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.usernameTextField.leftView = usernamePaddingView;
     self.usernameTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.usernameTextField.delegate=self;
     
     UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.passwordTextField.leftView = passwordPaddingView;
     self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.passwordTextField.delegate=self;
     
     UIView *reenterPasswordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.reenterPasswordTextField.leftView = reenterPasswordPaddingView;
     self.reenterPasswordTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.reenterPasswordTextField.delegate=self;
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
@@ -109,7 +135,8 @@
     [super didReceiveMemoryWarning];
 }
 
-- (IBAction)submitTapped:(id)sender {
+- (IBAction)submitTapped:(id)sender
+{
     
 //    [[ApplicationManager userApplicationManager] registerAsyncWithEmail:@"qaqz12436@bb.com" andUserName:@"qaqz12643" andPassword:@"qaqz12643" completion:^(bool fl) {
 //        AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];

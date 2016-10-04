@@ -12,6 +12,7 @@
 #import "BaseViewController.h"
 #import "KSApplicationColor.h"
 #import "LoginViewController.h"
+#import "FileManager.h"
 
 @interface AppDelegate ()
 @property AMSideBarViewController *sideBarViewController;
@@ -20,40 +21,22 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    
-    
-    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
                                                              bundle: nil];
     
-    application.statusBarStyle = UIStatusBarStyleLightContent;
-    UIView *statusBar = [[application valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-    CAGradientLayer * gradient2 =[KSApplicationColor sharedColor].rootGradient;
-    gradient2.frame = statusBar.bounds;
-    NSLog(@"%@",statusBar.subviews);
-    
-    UIView * statusBarBackView=[[UIView alloc] initWithFrame:statusBar.frame];
-    [statusBarBackView.layer addSublayer:gradient2];
-    [statusBar.subviews[0] addSubview:statusBarBackView];
-    statusBar.subviews[0].backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
-    
-    UIView * shadowView=[[UIView alloc] initWithFrame:CGRectMake(-40.0, 0, 40, statusBar.frame.size.height)];
-    //shadowView.backgroundColor=[UIColor whiteColor];
-    CAGradientLayer * shadowGradient=[CAGradientLayer layer];
-    shadowGradient.frame=shadowView.bounds;
-    UIColor *leftColor = [UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
-    UIColor *rightColor = [UIColor blackColor];
-    shadowGradient.colors = @[ (__bridge id)leftColor.CGColor,
-                         (__bridge id)rightColor.CGColor ];
-    shadowGradient.startPoint = CGPointMake(0.55, 0.5);
-    shadowGradient.endPoint = CGPointMake(1.7, 0.5);
-    [shadowView.layer addSublayer:shadowGradient];
-    [statusBarBackView addSubview:shadowView];
-    
-    LoginViewController * login=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:login];
+    NSString * userToken=[FileManager readTokenFromFile];
+    if(userToken.length>0)
+    {
+        
+    }
+    else
+    {
+        LoginViewController * login=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:login];
+    }
+
     [self.window makeKeyAndVisible];
     
     return YES;

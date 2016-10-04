@@ -17,11 +17,18 @@
 #import "UserCoreDataManager.h"
 #import "ApplicationManager.h"
 
-@interface NewPasswordViewController ()<UIGestureRecognizerDelegate>
+@interface NewPasswordViewController ()<UIGestureRecognizerDelegate, UITextFieldDelegate>
 @property (nonatomic)UITapGestureRecognizer * tap;
 @end
 
 @implementation NewPasswordViewController
+
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self sendNewPasswordTapped:nil];
+    return YES;
+}
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
@@ -42,6 +49,7 @@
     UIView *emailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.emailTextField.leftView = emailPaddingView;
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.emailTextField.delegate=self;
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
@@ -83,11 +91,9 @@
 //     }];
 }
 
-- (IBAction)sendNewPasswordTapped:(id)sender {
-    
-
+- (IBAction)sendNewPasswordTapped:(id)sender
+{
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
 
 -(void)dealloc
