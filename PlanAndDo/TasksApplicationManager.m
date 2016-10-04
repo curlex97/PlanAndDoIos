@@ -8,6 +8,7 @@
 
 #import "TasksApplicationManager.h"
 #import "ApplicationManager.h"
+#import "SyncApplicationManager.h"
 
 @implementation TasksApplicationManager
 
@@ -54,19 +55,23 @@
 -(void)addTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] addTask:task];
-    [[[TasksApiManager alloc] init] addTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
+    [[[TasksApiManager alloc] init] addTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+        [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
+            
+        }];
+    }];
 }
 
 -(void)updateTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] updateTask:task];
-    [[[TasksApiManager alloc] init] updateTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
+    [[[TasksApiManager alloc] init] updateTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){}];
 }
 
 -(void)deleteTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] deleteTask:task];
-    [[[TasksApiManager alloc] init] deleteTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
+    [[[TasksApiManager alloc] init] deleteTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){}];
 }
 
 -(void) cleanTable

@@ -11,6 +11,7 @@
 #import "ApplicationManager.h"
 #import "KSCategory.h"
 #import "FileManager.h"
+#import "SyncApplicationManager.h"
 
 @implementation UserApplicationManager
 
@@ -22,13 +23,13 @@
 -(void)setUser:(KSAuthorisedUser *)user
 {
     [[[UserCoreDataManager alloc] init] setUser:user];
-    [[[UserApiManager alloc] init] updateUserAsync:user completion:nil];
+    [[[UserApiManager alloc] init] updateUserAsync:user completion:^(bool status){}];
 }
 
 -(void)updateUser:(KSAuthorisedUser *)user
 {
     [[[UserCoreDataManager alloc] init] updateUser:user];
-    [[[UserApiManager alloc] init] updateUserAsync:user completion:nil];
+    [[[UserApiManager alloc] init] updateUserAsync:user completion:^(bool status){}];
 }
 
 -(void)registerAsyncWithEmail:(NSString *)email andUserName:(NSString *)userName andPassword:(NSString *)password completion:(void (^)(bool))completed
