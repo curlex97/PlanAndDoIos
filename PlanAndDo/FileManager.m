@@ -46,4 +46,43 @@
     return [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
 }
 
++(void) writePassToFile:(NSString*)token
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:FS_PASS];
+    [token writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
+}
+
++(NSString*) readPassFromFile
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:FS_PASS];
+    return [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+}
+
++(void) writeUserEmailToFile:(NSString*)token
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:FS_EMAIL];
+    [token writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
+}
+
++(NSString*) readUserEmailFromFile
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:FS_EMAIL];
+    return [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+}
+
++(void)clearLocalData
+{
+    [FileManager writePassToFile:@""];
+    [FileManager writeTokenToFile:@""];
+    [FileManager writeUserEmailToFile:@""];
+    [FileManager writeLastSyncTimeToFile:@""];
+}
 @end

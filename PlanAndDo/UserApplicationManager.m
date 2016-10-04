@@ -48,8 +48,7 @@
      [[[UserApiManager alloc] init] registerAsyncWithEmail:email andUserName:userName andPassword:password completion:^(NSDictionary* dictionary){
        
         NSString* status = [dictionary valueForKeyPath:@"status"];
-        
-        if([status containsString:@"suc"])
+        if([status containsString:@"succsess"])
         {
             [ApplicationManager cleanLocalDataBase];
             
@@ -60,7 +59,8 @@
             NSDate *lastVisitDate = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"data.users.lastvisit_date"] intValue]];
             
             [FileManager writeTokenToFile:token];
-            
+            [FileManager writeUserEmailToFile:email];
+            [FileManager writePassToFile:password];
               ///////Settings/////////
             
             NSUInteger settingsID = [[dictionary valueForKeyPath:@"data.settings.id"] integerValue];
@@ -112,7 +112,7 @@
         
         NSString* status = [dictionary valueForKeyPath:@"status"];
         
-        if([status containsString:@"suc"])
+        if([status containsString:@"succsess"])
         {
             NSUInteger ID = [[dictionary valueForKeyPath:@"data.user_id"] integerValue];
             NSString* userName = [dictionary valueForKeyPath:@"data.user_name"];
@@ -121,7 +121,7 @@
             [FileManager writeTokenToFile:token];
              
             KSAuthorisedUser* user = [[KSAuthorisedUser alloc] initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:[NSDate date] andLastVisitDate:[NSDate date] andSyncStatus:0 andAccessToken:token andUserSettings:nil];
-            
+
             [[[UserCoreDataManager alloc] init] setUser:user];
             
             if(completed)

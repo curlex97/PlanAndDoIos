@@ -10,11 +10,15 @@
 
 @interface FileManager : NSObject
 
-+(void) writeLastSyncTimeToFile:(NSString*)token;
-
 +(NSString*) readLastSyncTimeFromFile;
 +(NSString*) readTokenFromFile;
++(NSString*) readPassFromFile;
++(NSString*) readUserEmailFromFile;
 
 +(void) writeTokenToFile:(NSString*)token;
++(void) writeLastSyncTimeToFile:(NSString*)token;
++(void) writePassToFile:(NSString*)token;
++(void) writeUserEmailToFile:(NSString*)token;
 
++(void)clearLocalData;
 @end

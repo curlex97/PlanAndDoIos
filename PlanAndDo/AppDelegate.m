@@ -13,9 +13,13 @@
 #import "KSApplicationColor.h"
 #import "LoginViewController.h"
 #import "FileManager.h"
+#import "ApplicationManager.h"
+#import "TabletasksViewController.h"
+#import "KSMenuViewController.h"
 
 @interface AppDelegate ()
 @property AMSideBarViewController *sideBarViewController;
+@property (nonatomic)BOOL isLoad;
 @end
 
 @implementation AppDelegate
@@ -23,22 +27,48 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
-                                                             bundle: nil];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    self.isLoad=NO;
     
-    NSString * userToken=[FileManager readTokenFromFile];
+    
+    //нуждаеться в доработке займусь этим завтра !
+    NSString * userToken=[FileManager readUserEmailFromFile];
     if(userToken.length>0)
     {
-        
+            [[ApplicationManager userApplicationManager] loginWithEmail:[FileManager readUserEmailFromFile] andPassword:[FileManager readPassFromFile] completion:^(bool status)
+             {
+                 if(status)
+                 {
+                     [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
+                      {
+                          LoginViewController * login=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+                          self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:login];
+                          
+                          TabletasksViewController * tasks=[[TabletasksViewController alloc] init];
+                          tasks.boxType=KSBoxTypeToday;
+                          
+                          AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:tasks] andBackVC:[[KSMenuViewController alloc] init]];
+                          tableTaskViewController.title=NM_TODAY;
+                          [login presentViewController:tableTaskViewController animated:YES completion:^
+                           {
+                               dispatch_async(dispatch_get_main_queue(), ^
+                                              {
+                                                  [self.window makeKeyAndVisible];
+                                                  self.isLoad=YES;
+                                              });
+                           }];
+                      }];
+                 }
+             }];
     }
     else
     {
         LoginViewController * login=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:login];
+        [self.window makeKeyAndVisible];
+        self.isLoad=YES;
     }
 
-    [self.window makeKeyAndVisible];
-    
     return YES;
 }
 

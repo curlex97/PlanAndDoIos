@@ -163,7 +163,9 @@
 - (IBAction)submitTapped:(id)sender
 {
     if([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text])
-    [[ApplicationManager userApplicationManager] registerAsyncWithEmail:self.emailTextField.text andUserName:self.usernameTextField.text andPassword:self.passwordTextField.text completion:^(bool fl) {
+    {
+        [[ApplicationManager userApplicationManager] registerAsyncWithEmail:self.emailTextField.text andUserName:self.usernameTextField.text andPassword:self.passwordTextField.text completion:^(bool fl)
+        {
     dispatch_async(dispatch_get_main_queue(), ^
     {
         AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
@@ -180,6 +182,7 @@
         }
     });
     }];
+    }
 }
 
 -(void)dealloc

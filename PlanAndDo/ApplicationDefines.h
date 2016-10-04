@@ -238,6 +238,8 @@
 #define FS_TOKEN @"token.txt"
 #define FS_LAST_SYNC_TIME @"lst.txt"
 
+#define FS_PASS @"userPass.txt"
+#define FS_EMAIL @"userEmail.txt"
 //===================================================================================================================================
 
 
