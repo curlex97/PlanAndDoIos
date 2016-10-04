@@ -112,12 +112,6 @@
         else if(completed)
             completed(false);
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
-       
-        if(completed) completed(false);
-        dispatch_async(dispatch_get_main_queue(), ^
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
-        });
         
     }];
 }
