@@ -55,23 +55,33 @@
 -(void)addTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] addTask:task];
-    [[[TasksApiManager alloc] init] addTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
-        [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
-            
+    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
+        [[[TasksApiManager alloc] init] addTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
         }];
     }];
+    
 }
 
 -(void)updateTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] updateTask:task];
-    [[[TasksApiManager alloc] init] updateTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){}];
+    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
+       [[[TasksApiManager alloc] init] updateTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+           [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
+       }];
+    }];
 }
 
 -(void)deleteTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] deleteTask:task];
-    [[[TasksApiManager alloc] init] deleteTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){}];
+    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
+        [[[TasksApiManager alloc] init] deleteTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
+        }];
+    }];
+
 }
 
 -(void) cleanTable

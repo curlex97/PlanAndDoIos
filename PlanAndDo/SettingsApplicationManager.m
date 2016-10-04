@@ -20,13 +20,21 @@
 -(void)setSettings:(UserSettings *)settings
 {
     [[[SettingsCoreDataManager alloc] init] setSettings:settings];
-    [[[SettingsApiManager alloc] init] updateSettingsAsync:settings forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){}];
+    [[[SyncApplicationManager alloc] init] syncSettingsWithCompletion:^(bool status) {
+        [[[SettingsApiManager alloc] init] updateSettingsAsync:settings forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
+        }];
+    }];
 }
 
 -(void)updateSettings:(UserSettings *)settings
 {
     [[[SettingsCoreDataManager alloc] init] updateSettings:settings];
-    [[[SettingsApiManager alloc] init] updateSettingsAsync:settings forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){}];
+    [[[SyncApplicationManager alloc] init] syncSettingsWithCompletion:^(bool status) {
+        [[[SettingsApiManager alloc] init] updateSettingsAsync:settings forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
+        }];
+    }];
 }
 
 -(void) cleanTable

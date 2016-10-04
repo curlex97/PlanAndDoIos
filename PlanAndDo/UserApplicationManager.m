@@ -23,13 +23,22 @@
 -(void)setUser:(KSAuthorisedUser *)user
 {
     [[[UserCoreDataManager alloc] init] setUser:user];
-    [[[UserApiManager alloc] init] updateUserAsync:user completion:^(bool status){}];
+    [[[SyncApplicationManager alloc] init] syncUserWithCompletion:^(bool status) {
+        [[[UserApiManager alloc] init] updateUserAsync:user completion:^(bool status){
+           [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_USER object:nil];
+        }];
+    }];
 }
 
 -(void)updateUser:(KSAuthorisedUser *)user
 {
     [[[UserCoreDataManager alloc] init] updateUser:user];
-    [[[UserApiManager alloc] init] updateUserAsync:user completion:^(bool status){}];
+    [[[SyncApplicationManager alloc] init] syncUserWithCompletion:^(bool status) {
+        [[[UserApiManager alloc] init] updateUserAsync:user completion:^(bool status){
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_USER object:nil];
+        }];
+    }];
+    
 }
 
 -(void)registerAsyncWithEmail:(NSString *)email andUserName:(NSString *)userName andPassword:(NSString *)password completion:(void (^)(bool))completed

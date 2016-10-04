@@ -25,19 +25,33 @@
 -(void)addCateroty:(KSCategory *)category
 {
     [[[CategoryCoreDataManager alloc] init] addCateroty:category];
-    [[[CategoryApiManager alloc] init] addCategoryAsync:category forUser:[[ApplicationManager userApplicationManager] authorisedUser] completion:^(bool status){}];
+    [[[SyncApplicationManager alloc] init] syncCategoriesWithCompletion:^(bool status) {
+        [[[CategoryApiManager alloc] init] addCategoryAsync:category forUser:[[ApplicationManager userApplicationManager] authorisedUser] completion:^(bool status){
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
+        }];
+    }];
 }
 
 -(void)updateCateroty:(KSCategory *)category
 {
     [[[CategoryCoreDataManager alloc] init] updateCateroty:category];
-    [[[CategoryApiManager alloc] init] updateCategoryAsync:category forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){}];
+    [[[SyncApplicationManager alloc] init] syncCategoriesWithCompletion:^(bool status) {
+        [[[CategoryApiManager alloc] init] updateCategoryAsync:category forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
+        }];
+    }];
 }
 
 -(void)deleteCateroty:(KSCategory *)category
 {
     [[[CategoryCoreDataManager alloc] init] deleteCateroty:category];
-    [[[CategoryApiManager alloc] init] deleteCategoryAsync:category forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){}];
+    
+    [[[SyncApplicationManager alloc] init] syncCategoriesWithCompletion:^(bool status) {
+        [[[CategoryApiManager alloc] init] deleteCategoryAsync:category forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
+        }];
+    }];
+    
     NSArray * tasks=[[ApplicationManager tasksApplicationManager] allTasksForCategory:category];
     for (BaseTask * task in tasks)
     {
