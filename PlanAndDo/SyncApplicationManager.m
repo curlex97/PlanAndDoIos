@@ -109,7 +109,11 @@
             if(completed) completed(true);
         }
         if(completed) completed(false);
-        [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
+        });
+        
     }];
 }
 

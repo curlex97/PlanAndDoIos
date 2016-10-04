@@ -120,8 +120,6 @@
 }
 
 
-
-
 -(void) cleanTable
 {
     return [[[UserCoreDataManager alloc] init] cleanTable];

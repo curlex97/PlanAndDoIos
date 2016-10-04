@@ -25,7 +25,9 @@
 -(void)setBarImage
 {
     CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
-    gradient.frame=self.navigationController.navigationBar.bounds;
+    gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 45);
+    
+    NSLog(@"%@", NSStringFromCGRect(gradient.frame));
     UIGraphicsBeginImageContext([gradient frame].size);
     
     [gradient renderInContext:UIGraphicsGetCurrentContext()];
