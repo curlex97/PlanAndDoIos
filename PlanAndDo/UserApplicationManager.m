@@ -119,7 +119,9 @@
             NSString* token = [dictionary valueForKeyPath:@"data.token"];
 
             [FileManager writeTokenToFile:token];
-             
+            [FileManager writePassToFile:password];
+            [FileManager writeUserEmailToFile:email];
+            
             KSAuthorisedUser* user = [[KSAuthorisedUser alloc] initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:[NSDate date] andLastVisitDate:[NSDate date] andSyncStatus:0 andAccessToken:token andUserSettings:nil];
 
             [[[UserCoreDataManager alloc] init] setUser:user];
