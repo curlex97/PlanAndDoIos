@@ -54,6 +54,14 @@ static bool firstLoad = true;
     cell.rightButtons = @[[MGSwipeButton buttonWithTitle:TL_DELETE backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender)
     {
         NSLog(TL_DELETE);
+        
+        if([task isKindOfClass:[KSTaskCollection class]])
+        {
+            KSTaskCollection* col = (KSTaskCollection*)task;
+            for(KSShortTask* sub in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:col])
+                [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:col];
+        }
+        
         [[ApplicationManager tasksApplicationManager] deleteTask:task];
         [self.tasks removeObject:task];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];

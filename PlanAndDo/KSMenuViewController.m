@@ -219,6 +219,16 @@
         
         cell.rightButtons = @[[MGSwipeButton buttonWithTitle:TL_DELETE backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
             NSLog(TL_DELETE);
+            
+            
+            if([task isKindOfClass:[KSTaskCollection class]])
+            {
+                KSTaskCollection* col = (KSTaskCollection*)task;
+                for(KSShortTask* sub in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:col])
+                    [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:col];
+            }
+            
+            
             [[ApplicationManager tasksApplicationManager] deleteTask:task];
             [self.allTasks removeObject:task];
             [self.tableTasks removeObject:task];
@@ -510,42 +520,48 @@
         UIAlertController * alertController=[UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         
         UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:TL_DELETE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
-                                      {
-                                          UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Delete Category" message:@"If you delete a category, delete all the tasks and lists that are in it" preferredStyle:UIAlertControllerStyleAlert];
-                                          UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:TL_CANCEL style:UIAlertActionStyleCancel handler:nil];
-                                          UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:TL_DELETE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
-                                                                      {
-                                                                          dispatch_async(dispatch_get_main_queue(), ^
-                                                                                         {
-                                                                                             UINavigationController * frontNVC=(UINavigationController *)self.parentController.frontViewController;
-                                                                                             TabletasksViewController * frontVC=frontNVC.viewControllers.firstObject;
-                                                                                             
-                                                                                             [[ApplicationManager categoryApplicationManager] deleteCateroty:self.categories[indexPath.row]];
-                                                                                             
-                                                                                             if(self.categories[indexPath.row].ID==frontVC.category.ID)
-                                                                                             {
-                                                                                                 SEL selector = NSSelectorFromString(@"todayDidTap");
-                                                                                                 ((void (*)(id, SEL))[frontVC methodForSelector:selector])(frontVC, selector);
-                                                                                             }
-                                                                                             
-                                                                                             self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
-                                                                                             [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                {
+                  UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Delete Category" message:@"If you delete a category, delete all the tasks and lists that are in it" preferredStyle:UIAlertControllerStyleAlert];
+                  UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:TL_CANCEL style:UIAlertActionStyleCancel handler:nil];
+                  UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:TL_DELETE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+                  {
+                      dispatch_async(dispatch_get_main_queue(), ^
+                     {
+                         UINavigationController * frontNVC=(UINavigationController *)self.parentController.frontViewController;
+                         TabletasksViewController * frontVC=frontNVC.viewControllers.firstObject;
+                         
+                         
+                         for(BaseTask* task in [[ApplicationManager tasksApplicationManager] allTasksForCategory:self.categories[indexPath.row]])
+                         {
+                             [[ApplicationManager tasksApplicationManager] deleteTask:task];
+                         }
+                         
+                         [[ApplicationManager categoryApplicationManager] deleteCateroty:self.categories[indexPath.row]];
+                         
+                         if(self.categories[indexPath.row].ID==frontVC.category.ID)
+                         {
+                             SEL selector = NSSelectorFromString(@"todayDidTap");
+                             ((void (*)(id, SEL))[frontVC methodForSelector:selector])(frontVC, selector);
+                         }
+                         
+                         self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
+                         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 
-                                                                                             
-                                                                                             if(self.categories.count==0)
-                                                                                             {
-                                                                                                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
-                                                                                                                {
-                                                                                                                    [self.tableView reloadData];
-                                                                                                                });
-                                                                                             }
-                                                                                         });
+                         
+                         if(self.categories.count==0)
+                         {
+                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
+                                            {
+                                                [self.tableView reloadData];
+                                            });
+                                         }
+                                     });
 
-                                                                      }];
-                                          [alertController addAction:cancelAction];
-                                          [alertController addAction:deleteAction];
-                                          [self.parentController presentViewController:alertController animated:YES completion:nil];
-                                    }];
+                                              }];
+                  [alertController addAction:cancelAction];
+                  [alertController addAction:deleteAction];
+                  [self.parentController presentViewController:alertController animated:YES completion:nil];
+            }];
         
         UIAlertAction * editAction=[UIAlertAction actionWithTitle:TL_EDIT style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
                                     {
