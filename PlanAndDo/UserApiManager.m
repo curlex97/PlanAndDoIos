@@ -12,7 +12,7 @@
 
 @implementation UserApiManager
 
--(void)updateUserAsync:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
+-(void)updateUserAsync:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
 
 }

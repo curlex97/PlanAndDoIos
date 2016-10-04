@@ -13,7 +13,7 @@
 
 @implementation TasksApiManager
 
--(void)addTasksAsync:(NSArray *)tasks forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
+-(void)addTasksAsync:(NSArray *)tasks forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
     
     NSMutableArray* data = [NSMutableArray array];
@@ -58,12 +58,12 @@
     
 }
 
--(void)updateTasksAsync:(NSArray *)tasks forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
+-(void)updateTasksAsync:(NSArray *)tasks forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
 
 }
 
--(void)deleteTasksAsync:(NSArray *)tasks forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
+-(void)deleteTasksAsync:(NSArray *)tasks forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
 
 }

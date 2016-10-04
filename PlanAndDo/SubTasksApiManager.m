@@ -13,17 +13,17 @@
 
 @implementation SubTasksApiManager
 
--(void)addSubTasksAsync:(NSArray *)subTasks toTask:(KSTaskCollection *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
+-(void)addSubTasksAsync:(NSArray *)subTasks toTask:(KSTaskCollection *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
 
 }
 
--(void)updateSubTasksAsync:(NSArray *)subTasks inTask:(KSTaskCollection *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
+-(void)updateSubTasksAsync:(NSArray *)subTasks inTask:(KSTaskCollection *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
 
 }
 
--(void)deleteSubTasksAsync:(NSArray *)subTasks fromTask:(KSTaskCollection *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
+-(void)deleteSubTasksAsync:(NSArray *)subTasks fromTask:(KSTaskCollection *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
 
 }

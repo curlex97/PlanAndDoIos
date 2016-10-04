@@ -13,7 +13,7 @@
 
 @interface UserApiManager : ApiManager
 
--(void)updateUserAsync:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
+-(void)updateUserAsync:(KSAuthorisedUser*)user completion:(void (^)(NSDictionary*))completed;
 
 -(void) loginAsyncWithEmail:(NSString*)email andPassword:(NSString*)password completion:(void (^)(NSDictionary*))completed;
 

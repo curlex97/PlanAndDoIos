@@ -12,7 +12,7 @@
 
 @interface SettingsApiManager : ApiManager
 
--(void)updateSettingsAsync:(UserSettings*)settings forUser:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
+-(void)updateSettingsAsync:(UserSettings*)settings forUser:(KSAuthorisedUser*)user completion:(void (^)(NSDictionary*))completed;
 
 
 -(void) syncSettingsWithCompletion:(void (^)(NSDictionary*))completed;

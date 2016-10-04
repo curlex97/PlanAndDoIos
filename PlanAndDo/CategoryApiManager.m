@@ -12,17 +12,17 @@
 
 @implementation CategoryApiManager
 
--(void)addCategoriesAsync:(NSArray *)categories forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
+-(void)addCategoriesAsync:(NSArray *)categories forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
 
 }
 
--(void)updateCategoriesAsync:(NSArray *)categories forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
+-(void)updateCategoriesAsync:(NSArray *)categories forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
     
 }
 
--(void)deleteCategoriesAsync:(NSArray *)categories forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
+-(void)deleteCategoriesAsync:(NSArray *)categories forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
     
 }
