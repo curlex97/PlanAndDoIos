@@ -143,9 +143,11 @@
 {
     [[ApplicationManager userApplicationManager] loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool status)
     {
-        if(status) [[ApplicationManager syncApplicationManager] syncWithCompletion:nil];
+        if(status)
+        {
+            [[ApplicationManager syncApplicationManager] syncWithCompletion:nil];
+        }
     }];
-    
 }
 
 -(void)dealloc

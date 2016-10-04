@@ -124,7 +124,14 @@
             
             [[[UserCoreDataManager alloc] init] setUser:user];
             
-            if(completed) completed(true);
+            if(completed)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^
+                {
+                        completed(true);
+                });
+
+            }
         }
         if(completed) completed(false);
     }];
