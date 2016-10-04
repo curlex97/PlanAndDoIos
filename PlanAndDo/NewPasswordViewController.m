@@ -26,7 +26,14 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self sendNewPasswordTapped:nil];
+    if(self.sendButton.isEnabled)
+    {
+        [self sendNewPasswordTapped:nil];
+    }
+    else
+    {
+        [self.emailTextField resignFirstResponder];
+    }
     return YES;
 }
 
@@ -36,6 +43,20 @@
     return YES;
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(self.emailTextField.text.length>1)
+    {
+        self.sendButton.enabled=YES;
+        [self.sendButton setHighlighted:NO];
+    }
+    else
+    {
+        [self.sendButton setHighlighted:YES];
+        self.sendButton.enabled=NO;
+    }
+    return YES;
+}
 
 - (void)viewDidLoad
 {
@@ -54,6 +75,9 @@
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
     [self.view addGestureRecognizer:self.tap];
+    
+    [self.sendButton setHighlighted:YES];
+    self.sendButton.enabled=NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];

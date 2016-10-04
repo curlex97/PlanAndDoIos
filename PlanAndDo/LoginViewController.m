@@ -26,13 +26,35 @@
 {
     if(self.passwordTextField.isFirstResponder)
     {
-        [self signInTapped:nil];
+        if(self.signInButton.isEnabled)
+        {
+            [self signInTapped:nil];
+        }
+        else
+        {
+            [self.passwordTextField resignFirstResponder];
+        }
     }
     else
     {
         [self.passwordTextField becomeFirstResponder];
     }
 
+    return YES;
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(self.loginTextField.text.length>1 && self.passwordTextField.text.length>1)
+    {
+        self.signInButton.enabled=YES;
+        [self.signInButton setHighlighted:NO];
+    }
+    else
+    {
+        [self.signInButton setHighlighted:YES];
+        self.signInButton.enabled=NO;
+    }
     return YES;
 }
 
@@ -59,22 +81,17 @@
 
 -(void)showMainWindow:(NSNotification*)not
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
         AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
         tableTaskViewController.title=NM_TODAY;
-<<<<<<< HEAD
-        [self presentViewController:tableTaskViewController animated:YES completion:nil];
-    });
-=======
+
         [self presentViewController:tableTaskViewController animated:YES completion:^
          {
-             dispatch_async(dispatch_get_main_queue(), ^
-                            {
-                                self.loginTextField.text=@"";
-                                self.passwordTextField.text=@"";
-                            });
+             self.loginTextField.text=@"";
+             self.passwordTextField.text=@"";
          }];
->>>>>>> 7f767f425d6d44d4861e1819077843ee6b1c3b1d
+    });
 }
 
 - (void)viewDidLoad
@@ -97,6 +114,9 @@
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
     [self.view addGestureRecognizer:self.tap];
+    
+    [self.signInButton setHighlighted:YES];
+    self.signInButton.enabled=NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];

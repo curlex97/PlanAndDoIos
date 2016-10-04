@@ -128,6 +128,7 @@
                         <outlet property="centerConstraint" destination="w1r-Hl-2AX" id="qIR-jQ-Xsd"/>
                         <outlet property="loginTextField" destination="DUb-sN-Ykg" id="DB8-a1-Sr0"/>
                         <outlet property="passwordTextField" destination="hmX-lB-ZC1" id="Ez3-fl-Xsf"/>
+                        <outlet property="signInButton" destination="Pp2-7V-Fna" id="w3m-di-Wwy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -228,6 +229,7 @@
                         <outlet property="emailTextField" destination="FvR-vr-P6Q" id="GD2-2L-jvD"/>
                         <outlet property="passwordTextField" destination="fdH-IE-NVE" id="jD2-Z8-hIm"/>
                         <outlet property="reenterPasswordTextField" destination="A8u-7m-IVI" id="dM0-a0-sub"/>
+                        <outlet property="submitButton" destination="KnJ-P5-x8O" id="7wn-HI-udp"/>
                         <outlet property="usernameTextField" destination="dV3-ek-zSp" id="Olu-LO-wZv"/>
                     </connections>
                 </viewController>
@@ -296,6 +298,7 @@
                         <outlet property="backTextFieldView" destination="x8v-Gf-Wfc" id="J4A-Dn-q0S"/>
                         <outlet property="centerConstraint" destination="OoC-Od-xY5" id="gsv-AU-SCM"/>
                         <outlet property="emailTextField" destination="Nia-eU-HSp" id="IY7-Nt-dHx"/>
+                        <outlet property="sendButton" destination="w36-n3-A6X" id="0D6-rQ-9Bf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dWW-9t-nAK" sceneMemberID="firstResponder"/>
@@ -393,7 +396,7 @@
                         <outlet property="emailTextField" destination="L4K-ON-hur" id="XnT-ov-9k4"/>
                         <outlet property="oldEmailTextField" destination="7um-Ae-LEd" id="wkg-e4-j6K"/>
                         <outlet property="reenterEmailTextField" destination="CCN-cQ-LEv" id="Pj8-EY-Gtm"/>
-                        <outlet property="submitButton" destination="3JF-S6-p4U" id="zY1-9J-RIZ"/>
+                        <outlet property="submitButton" destination="3JF-S6-p4U" id="sdo-gR-QMf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rXq-E7-Y4q" sceneMemberID="firstResponder"/>

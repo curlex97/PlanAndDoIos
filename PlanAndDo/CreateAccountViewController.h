@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *reenterPasswordTextField;
 @property (weak, nonatomic) IBOutlet UIView *backTextFieldView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *submitButton;
 
 @end

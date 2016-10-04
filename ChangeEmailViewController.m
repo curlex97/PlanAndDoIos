@@ -31,7 +31,14 @@
     }
     else
     {
-        [self submitDidTap:nil];
+        if(self.submitButton.isEnabled)
+        {
+            [self submitDidTap:nil];
+        }
+        else
+        {
+            [self.reenterEmailTextField resignFirstResponder];
+        }
     }
     
     return YES;
@@ -57,6 +64,21 @@
         {
             [self.reenterEmailTextField resignFirstResponder];
         }
+    }
+    return YES;
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(self.emailTextField.text.length>1 && self.oldEmailTextField.text.length>1 && self.reenterEmailTextField.text.length>1)
+    {
+        self.submitButton.enabled=YES;
+        [self.submitButton setHighlighted:NO];
+    }
+    else
+    {
+        [self.submitButton setHighlighted:YES];
+        self.submitButton.enabled=NO;
     }
     return YES;
 }
@@ -89,6 +111,9 @@
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
     [self.view addGestureRecognizer:self.tap];
+    
+    [self.submitButton setHighlighted:YES];
+    self.submitButton.enabled=NO;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardWillShowNotification object:nil];
