@@ -8,6 +8,7 @@
 
 #import "TasksApplicationManager.h"
 #import "ApplicationManager.h"
+#import "SyncApplicationManager.h"
 
 @implementation TasksApplicationManager
 
@@ -53,20 +54,35 @@
 
 -(void)addTask:(BaseTask *)task
 {
+    
     [[[TasksCoreDataManager alloc] init] addTask:task];
-    [[[TasksApiManager alloc] init] addTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
+    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
+        [[[TasksApiManager alloc] init] addTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
+        }];
+    }];
+    
 }
 
 -(void)updateTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] updateTask:task];
-    [[[TasksApiManager alloc] init] updateTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
+    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
+       [[[TasksApiManager alloc] init] updateTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+           [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
+       }];
+    }];
 }
 
 -(void)deleteTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] deleteTask:task];
-    [[[TasksApiManager alloc] init] deleteTaskAsync:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
+    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
+        [[[TasksApiManager alloc] init] deleteTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
+        }];
+    }];
+
 }
 
 -(void) cleanTable

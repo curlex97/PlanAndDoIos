@@ -8,6 +8,7 @@
 
 #import "SubTasksApplicationManager.h"
 #import "ApplicationManager.h"
+#import "SyncApplicationManager.h"
 
 @implementation SubTasksApplicationManager
 
@@ -18,20 +19,36 @@
 
 -(void)addSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
+    
+    
     [[[SubTasksCoreDataManager alloc] init] addSubTask:subTask forTask:task];
-    [[[SubTasksApiManager alloc] init] addSubTaskAsync:subTask toTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
+    [[[SyncApplicationManager alloc] init]syncSubTasksWithCompletion:^(bool status) {
+        [[[SubTasksApiManager alloc] init] addSubTasksAsync:[[[SubTasksCoreDataManager alloc] init] allSubTasksForSync] toTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
+        }];
+    }];
+    
 }
 
 -(void)updateSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
     [[[SubTasksCoreDataManager alloc] init] updateSubTask:subTask forTask:task];
-    [[[SubTasksApiManager alloc] init] updateSubTaskAsync:subTask inTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
+    [[[SyncApplicationManager alloc] init] syncSubTasksWithCompletion:^(bool status) {
+        [[[SubTasksApiManager alloc] init] updateSubTasksAsync:[[[SubTasksCoreDataManager alloc] init] allSubTasksForSync] inTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
+        }];
+    }];
+    
 }
 
 -(void)deleteSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
     [[[SubTasksCoreDataManager alloc] init] deleteSubTask:subTask forTask:task];
-    [[[SubTasksApiManager alloc] init] deleteSubTaskAsync:subTask fromTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:nil];
+    [[[SyncApplicationManager alloc] init] syncSubTasksWithCompletion:^(bool status) {
+        [[[SubTasksApiManager alloc] init] deleteSubTasksAsync:[[[SubTasksCoreDataManager alloc] init] allSubTasksForSync] fromTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
+        }];
+    }];
 }
 
 -(void) cleanTable

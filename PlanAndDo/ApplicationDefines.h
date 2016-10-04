@@ -189,6 +189,43 @@
 #define CD_DATABASE_EXT @"momd"
 #define CD_DATABASE_SQLITE @"PlanAndDo.sqlite"
 
+#define CD_TABLE_TASK @"Task"
+#define CD_TABLE_CATEGORY @"Category"
+#define CD_TABLE_SUBTASK @"Subtask"
+#define CD_TABLE_USER @"User"
+#define CD_TABLE_SETTINGS @"Settings"
+
+#define CD_ROW_IS_DELETED @"is_deleted"
+#define CD_ROW_ID @"id"
+
+#define CD_ROW_CATEGORY_NAME @"category_name"
+#define CD_ROW_CATEGORY_SYNC_STATUS @"category_sync_status"
+#define CD_ROW_LOCAL_SYNC @"local_sync"
+#define CD_ROW_CATEGORY_NAME @"category_name"
+#define CD_ROW_START_PAGE @"start_page"
+#define CD_ROW_PAGE_TYPE @"page_type"
+#define CD_ROW_DATE_FORMAT @"date_format"
+#define CD_ROW_TIME_FORMAT @"time_format"
+#define CD_ROW_START_DAY @"start_day"
+#define CD_ROW_SETTINGS_SYNC_STATUS @"settings_sync_status"
+#define CD_ROW_TASK_ID @"task_id"
+#define CD_ROW_NAME @"name"
+#define CD_ROW_STATUS @"status"
+#define CD_SUBTASK_SYNC_STATUS @"subtask_sync_status"
+#define CD_ROW_TASK_TYPE @"task_type"
+#define CD_ROW_TASK_NAME @"task_name"
+#define CD_ROW_IS_COMPLETED @"is_completed"
+#define CD_ROW_TASK_REMINDER_TIME @"task_reminder_time"
+#define CD_ROW_TASK_PRIORITY @"task_priority"
+#define CD_ROW_CATEGORY_ID @"category_id"
+#define CD_ROW_CREATED_AT @"created_at"
+#define CD_ROW_TASK_COMPLETION_TIME @"task_completion_time"
+#define CD_ROW_TASK_SYNC_STATUS @"task_sync_status"
+#define CD_ROW_TASK_DESCRIPTION @"task_description"
+#define CD_ROW_EMAIL @"email"
+#define CD_ROW_LAST_VISIT_DATE @"lastvisit_date"
+#define CD_ROW_USER_SYNC_STATUS @"user_sync_status"
+
 //===================================================================================================================================
 
 

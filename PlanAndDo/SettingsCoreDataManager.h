@@ -30,5 +30,6 @@
 
 -(void)syncUpdateSettings:(UserSettings*)settings;
 
+-(UserSettings*) settingsForSync;
 
 @end
