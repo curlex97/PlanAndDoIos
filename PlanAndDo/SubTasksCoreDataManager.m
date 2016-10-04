@@ -33,15 +33,15 @@
     {
         for(NSManagedObject* managedSubtask in results)
         {
-            NSUInteger taskID = [[managedSubtask valueForKey:@"task_id"] integerValue];
-            bool del = [[managedSubtask valueForKey:@"is_deleted"] boolValue];
+            NSUInteger taskID = [[managedSubtask valueForKey:CD_ROW_TASK_ID] integerValue];
+            bool del = [[managedSubtask valueForKey:CD_ROW_IS_DELETED] boolValue];
 
             if(taskID == [task ID] && !del)
             {
-                NSUInteger ID = [[managedSubtask valueForKey:@"id"] integerValue];
-                NSString* name = (NSString*)[managedSubtask valueForKey:@"name"];
-                bool status = [[managedSubtask valueForKey:@"status"] boolValue];
-                int syncStatus = [[managedSubtask valueForKey:@"subtask_sync_status"] intValue];
+                NSUInteger ID = [[managedSubtask valueForKey:CD_ROW_ID] integerValue];
+                NSString* name = (NSString*)[managedSubtask valueForKey:CD_ROW_NAME];
+                bool status = [[managedSubtask valueForKey:CD_ROW_STATUS] boolValue];
+                int syncStatus = [[managedSubtask valueForKey:CD_SUBTASK_SYNC_STATUS] intValue];
 
                 KSShortTask* subtask = [[KSShortTask alloc] initWithID:ID andName:name andStatus:status andSyncStatus:syncStatus];
                 [subtasks addObject:subtask];
@@ -64,13 +64,13 @@
     {
         for(NSManagedObject* managedSubtask in results)
         {
-            bool localSync = [[managedSubtask valueForKey:@"local_sync"] boolValue];
+            bool localSync = [[managedSubtask valueForKey:CD_ROW_LOCAL_SYNC] boolValue];
             if(!localSync)
             {
-                NSUInteger ID = [[managedSubtask valueForKey:@"id"] integerValue];
-                NSString* name = (NSString*)[managedSubtask valueForKey:@"name"];
-                bool status = [[managedSubtask valueForKey:@"status"] boolValue];
-                int syncStatus = [[managedSubtask valueForKey:@"subtask_sync_status"] intValue];
+                NSUInteger ID = [[managedSubtask valueForKey:CD_ROW_ID] integerValue];
+                NSString* name = (NSString*)[managedSubtask valueForKey:CD_ROW_NAME];
+                bool status = [[managedSubtask valueForKey:CD_ROW_STATUS] boolValue];
+                int syncStatus = [[managedSubtask valueForKey:CD_SUBTASK_SYNC_STATUS] intValue];
                 
                 KSShortTask* subtask = [[KSShortTask alloc] initWithID:ID andName:name andStatus:status andSyncStatus:syncStatus];
                 [subtasks addObject:subtask];
@@ -87,13 +87,13 @@
     NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_SUBTASK inManagedObjectContext:managedObjectContext];
     NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
     
-    [object setValue:[NSNumber numberWithInteger:task.ID] forKey:@"task_id"];
-    [object setValue:[NSNumber numberWithInteger:subTask.ID] forKey:@"id"];
-    [object setValue:[subTask name] forKey:@"name"];
-    [object setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"subtask_sync_status"];
-    [object setValue:[NSNumber numberWithBool:subTask.status] forKey:@"status"];
-    [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
-    [object setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+    [object setValue:[NSNumber numberWithInteger:task.ID] forKey:CD_ROW_TASK_ID];
+    [object setValue:[NSNumber numberWithInteger:subTask.ID] forKey:CD_ROW_ID];
+    [object setValue:[subTask name] forKey:CD_ROW_NAME];
+    [object setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:CD_SUBTASK_SYNC_STATUS];
+    [object setValue:[NSNumber numberWithBool:subTask.status] forKey:CD_ROW_STATUS];
+    [object setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_IS_DELETED];
+    [object setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
 
     [managedObjectContext save:nil];
 }
@@ -108,18 +108,18 @@
     {
         for(NSManagedObject* managedSubtask in results)
         {
-            NSUInteger taskID = [[managedSubtask valueForKey:@"task_id"] integerValue];
-            NSUInteger ID = [[managedSubtask valueForKey:@"id"] integerValue];
+            NSUInteger taskID = [[managedSubtask valueForKey:CD_ROW_TASK_ID] integerValue];
+            NSUInteger ID = [[managedSubtask valueForKey:CD_ROW_ID] integerValue];
 
             if(taskID == [task ID] && ID == [subTask ID])
             {
-                [managedSubtask setValue:[NSNumber numberWithInteger:task.ID] forKey:@"task_id"];
-                [managedSubtask setValue:[NSNumber numberWithInteger:subTask.ID] forKey:@"id"];
-                [managedSubtask setValue:[subTask name] forKey:@"name"];
-                [managedSubtask setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:@"subtask_sync_status"];
-                [managedSubtask setValue:[NSNumber numberWithBool:[[NSDate date] timeIntervalSince1970]] forKey:@"status"];
-                [managedSubtask setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
-                [managedSubtask setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+                [managedSubtask setValue:[NSNumber numberWithInteger:task.ID] forKey:CD_ROW_TASK_ID];
+                [managedSubtask setValue:[NSNumber numberWithInteger:subTask.ID] forKey:CD_ROW_ID];
+                [managedSubtask setValue:[subTask name] forKey:CD_ROW_NAME];
+                [managedSubtask setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:CD_SUBTASK_SYNC_STATUS];
+                [managedSubtask setValue:[NSNumber numberWithBool:[[NSDate date] timeIntervalSince1970]] forKey:CD_ROW_STATUS];
+                [managedSubtask setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_IS_DELETED];
+                [managedSubtask setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
 
                 [self.managedObjectContext save:nil];
             }
@@ -137,14 +137,14 @@
     {
         for(NSManagedObject* managedSubtask in results)
         {
-            NSUInteger taskID = [[managedSubtask valueForKey:@"task_id"] integerValue];
-            NSUInteger ID = [[managedSubtask valueForKey:@"id"] integerValue];
+            NSUInteger taskID = [[managedSubtask valueForKey:CD_ROW_TASK_ID] integerValue];
+            NSUInteger ID = [[managedSubtask valueForKey:CD_ROW_ID] integerValue];
             
             if(taskID == [task ID] && ID == [subTask ID])
             {
-                [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];
-                [managedSubtask setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
-                [managedSubtask setValue:[NSNumber numberWithBool:[[NSDate date] timeIntervalSince1970]] forKey:@"status"];
+                [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_IS_DELETED];
+                [managedSubtask setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
+                [managedSubtask setValue:[NSNumber numberWithBool:[[NSDate date] timeIntervalSince1970]] forKey:CD_ROW_STATUS];
 
                 [self.managedObjectContext save:nil];
             }
@@ -167,13 +167,13 @@
     NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_SUBTASK inManagedObjectContext:managedObjectContext];
     NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
     
-    [object setValue:[NSNumber numberWithInteger:task.ID] forKey:@"task_id"];
-    [object setValue:[NSNumber numberWithInteger:subTask.ID] forKey:@"id"];
-    [object setValue:[subTask name] forKey:@"name"];
-    [object setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:@"subtask_sync_status"];
-    [object setValue:[NSNumber numberWithBool:subTask.status] forKey:@"status"];
-    [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
-    [object setValue:[NSNumber numberWithBool:YES] forKey:@"local_sync"];
+    [object setValue:[NSNumber numberWithInteger:task.ID] forKey:CD_ROW_TASK_ID];
+    [object setValue:[NSNumber numberWithInteger:subTask.ID] forKey:CD_ROW_ID];
+    [object setValue:[subTask name] forKey:CD_ROW_NAME];
+    [object setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:CD_SUBTASK_SYNC_STATUS];
+    [object setValue:[NSNumber numberWithBool:subTask.status] forKey:CD_ROW_STATUS];
+    [object setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_IS_DELETED];
+    [object setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_LOCAL_SYNC];
     
     [managedObjectContext save:nil];
 }
@@ -188,18 +188,18 @@
     {
         for(NSManagedObject* managedSubtask in results)
         {
-            NSUInteger taskID = [[managedSubtask valueForKey:@"task_id"] integerValue];
-            NSUInteger ID = [[managedSubtask valueForKey:@"id"] integerValue];
+            NSUInteger taskID = [[managedSubtask valueForKey:CD_ROW_TASK_ID] integerValue];
+            NSUInteger ID = [[managedSubtask valueForKey:CD_ROW_ID] integerValue];
             
             if(taskID == [task ID] && ID == [subTask ID])
             {
-                [managedSubtask setValue:[NSNumber numberWithInteger:task.ID] forKey:@"task_id"];
-                [managedSubtask setValue:[NSNumber numberWithInteger:subTask.ID] forKey:@"id"];
-                [managedSubtask setValue:[subTask name] forKey:@"name"];
-                [managedSubtask setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:@"subtask_sync_status"];
-                [managedSubtask setValue:[NSNumber numberWithBool:subTask.status] forKey:@"status"];
-                [managedSubtask setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
-                [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:@"local_sync"];
+                [managedSubtask setValue:[NSNumber numberWithInteger:task.ID] forKey:CD_ROW_TASK_ID];
+                [managedSubtask setValue:[NSNumber numberWithInteger:subTask.ID] forKey:CD_ROW_ID];
+                [managedSubtask setValue:[subTask name] forKey:CD_ROW_NAME];
+                [managedSubtask setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:CD_SUBTASK_SYNC_STATUS];
+                [managedSubtask setValue:[NSNumber numberWithBool:subTask.status] forKey:CD_ROW_STATUS];
+                [managedSubtask setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_IS_DELETED];
+                [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_LOCAL_SYNC];
                 
                 [self.managedObjectContext save:nil];
             }
@@ -217,14 +217,14 @@
     {
         for(NSManagedObject* managedSubtask in results)
         {
-            NSUInteger taskID = [[managedSubtask valueForKey:@"task_id"] integerValue];
-            NSUInteger ID = [[managedSubtask valueForKey:@"id"] integerValue];
+            NSUInteger taskID = [[managedSubtask valueForKey:CD_ROW_TASK_ID] integerValue];
+            NSUInteger ID = [[managedSubtask valueForKey:CD_ROW_ID] integerValue];
             
             if(taskID == [task ID] && ID == [subTask ID])
             {
-                [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];
-                [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:@"local_sync"];
-                [managedSubtask setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:@"subtask_sync_status"];
+                [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_IS_DELETED];
+                [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_LOCAL_SYNC];
+                [managedSubtask setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:CD_SUBTASK_SYNC_STATUS];
                 
                 [self.managedObjectContext save:nil];
             }

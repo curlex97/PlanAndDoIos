@@ -24,12 +24,12 @@
     {
         for(NSManagedObject* managedUser in results)
         {
-            NSUInteger ID = [[managedUser valueForKey:@"id"] integerValue];
-            NSString* name = (NSString*)[managedUser valueForKey:@"name"];
-            NSString* email = (NSString*)[managedUser valueForKey:@"email"];
-            NSDate* createDate = (NSDate*)[managedUser valueForKey:@"created_at"];
-            NSDate* lastVisit = (NSDate*)[managedUser valueForKey:@"lastvisit_date"];
-            int syncStatus = [[managedUser valueForKey:@"user_sync_status"] intValue];
+            NSUInteger ID = [[managedUser valueForKey:CD_ROW_ID] integerValue];
+            NSString* name = (NSString*)[managedUser valueForKey:CD_ROW_NAME];
+            NSString* email = (NSString*)[managedUser valueForKey:CD_ROW_EMAIL];
+            NSDate* createDate = (NSDate*)[managedUser valueForKey:CD_ROW_CREATED_AT];
+            NSDate* lastVisit = (NSDate*)[managedUser valueForKey:CD_ROW_LAST_VISIT_DATE];
+            int syncStatus = [[managedUser valueForKey:CD_ROW_USER_SYNC_STATUS] intValue];
             NSString* token = [FileManager readTokenFromFile];
             
             UserSettings* settings = [[[SettingsCoreDataManager alloc] init] settings];
@@ -52,15 +52,15 @@
     {
         for(NSManagedObject* managedUser in results)
         {
-            bool localSync = [[managedUser valueForKey:@"local_sync"] boolValue];
+            bool localSync = [[managedUser valueForKey:CD_ROW_LOCAL_SYNC] boolValue];
             if(!localSync)
             {
-                NSUInteger ID = [[managedUser valueForKey:@"id"] integerValue];
-                NSString* name = (NSString*)[managedUser valueForKey:@"name"];
-                NSString* email = (NSString*)[managedUser valueForKey:@"email"];
-                NSDate* createDate = (NSDate*)[managedUser valueForKey:@"created_at"];
-                NSDate* lastVisit = (NSDate*)[managedUser valueForKey:@"lastvisit_date"];
-                int syncStatus = [[managedUser valueForKey:@"user_sync_status"] intValue];
+                NSUInteger ID = [[managedUser valueForKey:CD_ROW_ID] integerValue];
+                NSString* name = (NSString*)[managedUser valueForKey:CD_ROW_NAME];
+                NSString* email = (NSString*)[managedUser valueForKey:CD_ROW_EMAIL];
+                NSDate* createDate = (NSDate*)[managedUser valueForKey:CD_ROW_CREATED_AT];
+                NSDate* lastVisit = (NSDate*)[managedUser valueForKey:CD_ROW_LAST_VISIT_DATE];
+                int syncStatus = [[managedUser valueForKey:CD_ROW_USER_SYNC_STATUS] intValue];
                 NSString* token = [FileManager readTokenFromFile];
                 
                 UserSettings* settings = [[[SettingsCoreDataManager alloc] init] settings];
@@ -85,13 +85,13 @@
         {
             NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_USER inManagedObjectContext:self.managedObjectContext];
             NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
-            [object setValue:[NSNumber numberWithInteger:[user ID]] forKey:@"id"];
-            [object setValue:[user userName] forKey:@"name"];
-            [object setValue:[user emailAdress] forKey:@"email"];
-            [object setValue:[user createdAt] forKey:@"created_at"];
-            [object setValue:[user lastVisit] forKey:@"lastvisit_date"];
-            [object setValue:[NSNumber numberWithInteger:[user syncStatus]] forKey:@"user_sync_status"];
-            [object setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+            [object setValue:[NSNumber numberWithInteger:[user ID]] forKey:CD_ROW_ID];
+            [object setValue:[user userName] forKey:CD_ROW_NAME];
+            [object setValue:[user emailAdress] forKey:CD_ROW_EMAIL];
+            [object setValue:[user createdAt] forKey:CD_ROW_CREATED_AT];
+            [object setValue:[user lastVisit] forKey:CD_ROW_LAST_VISIT_DATE];
+            [object setValue:[NSNumber numberWithInteger:[user syncStatus]] forKey:CD_ROW_USER_SYNC_STATUS];
+            [object setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
 
             [self.managedObjectContext save:nil];
         }
@@ -116,13 +116,13 @@
         {
             for(NSManagedObject* managedUser in results)
             {
-                [managedUser setValue:[NSNumber numberWithInteger:[user ID]] forKey:@"id"];
-                [managedUser setValue:[user userName] forKey:@"name"];
-                [managedUser setValue:[user emailAdress] forKey:@"email"];
-                [managedUser setValue:[user createdAt] forKey:@"created_at"];
-                [managedUser setValue:[user lastVisit] forKey:@"lastvisit_date"];
-                [managedUser setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"user_sync_status"];
-                [managedUser setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+                [managedUser setValue:[NSNumber numberWithInteger:[user ID]] forKey:CD_ROW_ID];
+                [managedUser setValue:[user userName] forKey:CD_ROW_NAME];
+                [managedUser setValue:[user emailAdress] forKey:CD_ROW_EMAIL];
+                [managedUser setValue:[user createdAt] forKey:CD_ROW_CREATED_AT];
+                [managedUser setValue:[user lastVisit] forKey:CD_ROW_LAST_VISIT_DATE];
+                [managedUser setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:CD_ROW_USER_SYNC_STATUS];
+                [managedUser setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
 
                 [self.managedObjectContext save:nil];
             }
@@ -150,13 +150,13 @@
         {
             NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_USER inManagedObjectContext:self.managedObjectContext];
             NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
-            [object setValue:[NSNumber numberWithInteger:[user ID]] forKey:@"id"];
-            [object setValue:[user userName] forKey:@"name"];
-            [object setValue:[user emailAdress] forKey:@"email"];
-            [object setValue:[user createdAt] forKey:@"created_at"];
-            [object setValue:[user lastVisit] forKey:@"lastvisit_date"];
-            [object setValue:[NSNumber numberWithInteger:[user syncStatus]] forKey:@"user_sync_status"];
-            [object setValue:[NSNumber numberWithBool:YES] forKey:@"local_sync"];
+            [object setValue:[NSNumber numberWithInteger:[user ID]] forKey:CD_ROW_ID];
+            [object setValue:[user userName] forKey:CD_ROW_NAME];
+            [object setValue:[user emailAdress] forKey:CD_ROW_EMAIL];
+            [object setValue:[user createdAt] forKey:CD_ROW_CREATED_AT];
+            [object setValue:[user lastVisit] forKey:CD_ROW_LAST_VISIT_DATE];
+            [object setValue:[NSNumber numberWithInteger:[user syncStatus]] forKey:CD_ROW_USER_SYNC_STATUS];
+            [object setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_LOCAL_SYNC];
             
             [self.managedObjectContext save:nil];
         }
@@ -181,13 +181,13 @@
         {
             for(NSManagedObject* managedUser in results)
             {
-                [managedUser setValue:[NSNumber numberWithInteger:[user ID]] forKey:@"id"];
-                [managedUser setValue:[user userName] forKey:@"name"];
-                [managedUser setValue:[user emailAdress] forKey:@"email"];
-                [managedUser setValue:[user createdAt] forKey:@"created_at"];
-                [managedUser setValue:[user lastVisit] forKey:@"lastvisit_date"];
-                [managedUser setValue:[NSNumber numberWithInteger:[user syncStatus]] forKey:@"user_sync_status"];
-                [managedUser setValue:[NSNumber numberWithBool:YES] forKey:@"local_sync"];
+                [managedUser setValue:[NSNumber numberWithInteger:[user ID]] forKey:CD_ROW_ID];
+                [managedUser setValue:[user userName] forKey:CD_ROW_NAME];
+                [managedUser setValue:[user emailAdress] forKey:CD_ROW_EMAIL];
+                [managedUser setValue:[user createdAt] forKey:CD_ROW_CREATED_AT];
+                [managedUser setValue:[user lastVisit] forKey:CD_ROW_LAST_VISIT_DATE];
+                [managedUser setValue:[NSNumber numberWithInteger:[user syncStatus]] forKey:CD_ROW_USER_SYNC_STATUS];
+                [managedUser setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_LOCAL_SYNC];
                 
                 [self.managedObjectContext save:nil];
             }

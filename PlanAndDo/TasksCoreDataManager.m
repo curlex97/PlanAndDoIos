@@ -42,23 +42,23 @@
     {
         for(NSManagedObject* managedTask in results)
         {
-            int task_type = [[managedTask valueForKey:@"task_type"] intValue];
-            bool del = [[managedTask valueForKey:@"is_deleted"] boolValue];
+            int task_type = [[managedTask valueForKey:CD_ROW_TASK_TYPE] intValue];
+            bool del = [[managedTask valueForKey:CD_ROW_IS_DELETED] boolValue];
             
             if(!del)
             {
                 if(!task_type)
                 {
-                    NSUInteger ID = [[managedTask valueForKey:@"id"] integerValue];
-                    NSString* name = (NSString*)[managedTask valueForKey:@"task_name"];
-                    BOOL status = [[managedTask valueForKey:@"is_completed"] boolValue];
-                    NSDate* taskRemindeTime = (NSDate*)[managedTask valueForKey:@"task_reminder_time"];
-                    KSTaskPriority priority = [[managedTask valueForKey:@"task_priority"] intValue];
-                    int categoryID = [[managedTask valueForKey:@"category_id"] intValue];
-                    NSDate* createdAt = (NSDate*)[managedTask valueForKey:@"created_at"];
-                    NSDate* completionTime = (NSDate*)[managedTask valueForKey:@"task_completion_time"];
-                    int syncStatus = [[managedTask valueForKey:@"task_sync_status"] intValue];
-                    NSString* desc = (NSString*)[managedTask valueForKey:@"task_description"];
+                    NSUInteger ID = [[managedTask valueForKey:CD_ROW_ID] integerValue];
+                    NSString* name = (NSString*)[managedTask valueForKey:CD_ROW_TASK_NAME];
+                    BOOL status = [[managedTask valueForKey:CD_ROW_IS_COMPLETED] boolValue];
+                    NSDate* taskRemindeTime = (NSDate*)[managedTask valueForKey:CD_ROW_TASK_REMINDER_TIME];
+                    KSTaskPriority priority = [[managedTask valueForKey:CD_ROW_TASK_PRIORITY] intValue];
+                    int categoryID = [[managedTask valueForKey:CD_ROW_CATEGORY_ID] intValue];
+                    NSDate* createdAt = (NSDate*)[managedTask valueForKey:CD_ROW_CREATED_AT];
+                    NSDate* completionTime = (NSDate*)[managedTask valueForKey:CD_ROW_TASK_COMPLETION_TIME];
+                    int syncStatus = [[managedTask valueForKey:CD_ROW_TASK_SYNC_STATUS] intValue];
+                    NSString* desc = (NSString*)[managedTask valueForKey:CD_ROW_TASK_DESCRIPTION];
                     
                     KSTask* task = [[KSTask alloc] initWithID:ID andName:name andStatus:status andTaskReminderTime:taskRemindeTime andTaskPriority:priority andCategoryID:categoryID andCreatedAt:createdAt andCompletionTime:completionTime andSyncStatus:syncStatus andTaskDescription:desc];
                     
@@ -67,15 +67,15 @@
                 
                 else
                 {
-                    NSUInteger ID = [[managedTask valueForKey:@"id"] integerValue];
-                    NSString* name = (NSString*)[managedTask valueForKey:@"task_name"];
-                    BOOL status = [[managedTask valueForKey:@"is_completed"] boolValue];
-                    NSDate* taskRemindeTime = (NSDate*)[managedTask valueForKey:@"task_reminder_time"];
-                    KSTaskPriority priority = [[managedTask valueForKey:@"task_priority"] intValue];
-                    int categoryID = [[managedTask valueForKey:@"category_id"] intValue];
-                    NSDate* createdAt = (NSDate*)[managedTask valueForKey:@"created_at"];
-                    NSDate* completionTime = (NSDate*)[managedTask valueForKey:@"task_completion_time"];
-                    int syncStatus = [[managedTask valueForKey:@"task_sync_status"] intValue];
+                    NSUInteger ID = [[managedTask valueForKey:CD_ROW_ID] integerValue];
+                    NSString* name = (NSString*)[managedTask valueForKey:CD_ROW_TASK_NAME];
+                    BOOL status = [[managedTask valueForKey:CD_ROW_IS_COMPLETED] boolValue];
+                    NSDate* taskRemindeTime = (NSDate*)[managedTask valueForKey:CD_ROW_TASK_REMINDER_TIME];
+                    KSTaskPriority priority = [[managedTask valueForKey:CD_ROW_TASK_PRIORITY] intValue];
+                    int categoryID = [[managedTask valueForKey:CD_ROW_CATEGORY_ID] intValue];
+                    NSDate* createdAt = (NSDate*)[managedTask valueForKey:CD_ROW_CREATED_AT];
+                    NSDate* completionTime = (NSDate*)[managedTask valueForKey:CD_ROW_TASK_COMPLETION_TIME];
+                    int syncStatus = [[managedTask valueForKey:CD_ROW_TASK_SYNC_STATUS] intValue];
                     KSTaskCollection* task = [[KSTaskCollection alloc] initWithID:ID andName:name andStatus:status andTaskReminderTime:taskRemindeTime andTaskPriority:priority andCategoryID:categoryID andCreatedAt:createdAt andCompletionTime:completionTime andSyncStatus:syncStatus andSubTasks:nil];
                     task.subTasks = [NSMutableArray arrayWithArray:[[[SubTasksCoreDataManager alloc] init] allSubTasksForTask:task]];
                     
@@ -101,23 +101,23 @@
     {
         for(NSManagedObject* managedTask in results)
         {
-            int task_type = [[managedTask valueForKey:@"task_type"] intValue];
-            bool localSync = [[managedTask valueForKey:@"local_sync"] boolValue];
+            int task_type = [[managedTask valueForKey:CD_ROW_TASK_TYPE] intValue];
+            bool localSync = [[managedTask valueForKey:CD_ROW_LOCAL_SYNC] boolValue];
             
             if(!localSync)
             {
                 if(!task_type)
                 {
-                    NSUInteger ID = [[managedTask valueForKey:@"id"] integerValue];
-                    NSString* name = (NSString*)[managedTask valueForKey:@"task_name"];
-                    BOOL status = [[managedTask valueForKey:@"is_completed"] boolValue];
-                    NSDate* taskRemindeTime = (NSDate*)[managedTask valueForKey:@"task_reminder_time"];
-                    KSTaskPriority priority = [[managedTask valueForKey:@"task_priority"] intValue];
-                    int categoryID = [[managedTask valueForKey:@"category_id"] intValue];
-                    NSDate* createdAt = (NSDate*)[managedTask valueForKey:@"created_at"];
-                    NSDate* completionTime = (NSDate*)[managedTask valueForKey:@"task_completion_time"];
-                    int syncStatus = [[managedTask valueForKey:@"task_sync_status"] intValue];
-                    NSString* desc = (NSString*)[managedTask valueForKey:@"task_description"];
+                    NSUInteger ID = [[managedTask valueForKey:CD_ROW_ID] integerValue];
+                    NSString* name = (NSString*)[managedTask valueForKey:CD_ROW_TASK_NAME];
+                    BOOL status = [[managedTask valueForKey:CD_ROW_IS_COMPLETED] boolValue];
+                    NSDate* taskRemindeTime = (NSDate*)[managedTask valueForKey:CD_ROW_TASK_REMINDER_TIME];
+                    KSTaskPriority priority = [[managedTask valueForKey:CD_ROW_TASK_PRIORITY] intValue];
+                    int categoryID = [[managedTask valueForKey:CD_ROW_CATEGORY_ID] intValue];
+                    NSDate* createdAt = (NSDate*)[managedTask valueForKey:CD_ROW_CREATED_AT];
+                    NSDate* completionTime = (NSDate*)[managedTask valueForKey:CD_ROW_TASK_COMPLETION_TIME];
+                    int syncStatus = [[managedTask valueForKey:CD_ROW_TASK_SYNC_STATUS] intValue];
+                    NSString* desc = (NSString*)[managedTask valueForKey:CD_ROW_TASK_DESCRIPTION];
                     
                     KSTask* task = [[KSTask alloc] initWithID:ID andName:name andStatus:status andTaskReminderTime:taskRemindeTime andTaskPriority:priority andCategoryID:categoryID andCreatedAt:createdAt andCompletionTime:completionTime andSyncStatus:syncStatus andTaskDescription:desc];
                     
@@ -126,15 +126,15 @@
                 
                 else
                 {
-                    NSUInteger ID = [[managedTask valueForKey:@"id"] integerValue];
-                    NSString* name = (NSString*)[managedTask valueForKey:@"task_name"];
-                    BOOL status = [[managedTask valueForKey:@"is_completed"] boolValue];
-                    NSDate* taskRemindeTime = (NSDate*)[managedTask valueForKey:@"task_reminder_time"];
-                    KSTaskPriority priority = [[managedTask valueForKey:@"task_priority"] intValue];
-                    int categoryID = [[managedTask valueForKey:@"category_id"] intValue];
-                    NSDate* createdAt = (NSDate*)[managedTask valueForKey:@"created_at"];
-                    NSDate* completionTime = (NSDate*)[managedTask valueForKey:@"task_completion_time"];
-                    int syncStatus = [[managedTask valueForKey:@"task_sync_status"] intValue];
+                    NSUInteger ID = [[managedTask valueForKey:CD_ROW_ID] integerValue];
+                    NSString* name = (NSString*)[managedTask valueForKey:CD_ROW_TASK_NAME];
+                    BOOL status = [[managedTask valueForKey:CD_ROW_IS_COMPLETED] boolValue];
+                    NSDate* taskRemindeTime = (NSDate*)[managedTask valueForKey:CD_ROW_TASK_REMINDER_TIME];
+                    KSTaskPriority priority = [[managedTask valueForKey:CD_ROW_TASK_PRIORITY] intValue];
+                    int categoryID = [[managedTask valueForKey:CD_ROW_CATEGORY_ID] intValue];
+                    NSDate* createdAt = (NSDate*)[managedTask valueForKey:CD_ROW_CREATED_AT];
+                    NSDate* completionTime = (NSDate*)[managedTask valueForKey:CD_ROW_TASK_COMPLETION_TIME];
+                    int syncStatus = [[managedTask valueForKey:CD_ROW_TASK_SYNC_STATUS] intValue];
                     KSTaskCollection* task = [[KSTaskCollection alloc] initWithID:ID andName:name andStatus:status andTaskReminderTime:taskRemindeTime andTaskPriority:priority andCategoryID:categoryID andCreatedAt:createdAt andCompletionTime:completionTime andSyncStatus:syncStatus andSubTasks:nil];
                     task.subTasks = [NSMutableArray arrayWithArray:[[[SubTasksCoreDataManager alloc] init] allSubTasksForTask:task]];
                     
@@ -266,19 +266,19 @@
         KSTask* realTask = (KSTask*)task;
         NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_TASK inManagedObjectContext:managedObjectContext];
         NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
-        [object setValue:[NSNumber numberWithInteger:realTask.ID] forKey:@"id"];
-        [object setValue:realTask.name forKey:@"task_name"];
-        [object setValue:[NSNumber numberWithBool:realTask.status] forKey:@"is_completed"];
-        [object setValue:realTask.taskReminderTime forKey:@"task_reminder_time"];
-        [object setValue:[NSNumber numberWithInteger:realTask.priority] forKey:@"task_priority"];
-        [object setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:@"category_id"];
-        [object setValue:realTask.createdAt forKey:@"created_at"];
-        [object setValue:realTask.completionTime forKey:@"task_completion_time"];
-        [object setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"task_sync_status"];
-        [object setValue:realTask.taskDescription forKey:@"task_description"];
-        [object setValue:[NSNumber numberWithInteger:0] forKey:@"task_type"];
-        [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
-        [object setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+        [object setValue:[NSNumber numberWithInteger:realTask.ID] forKey:CD_ROW_ID];
+        [object setValue:realTask.name forKey:CD_ROW_TASK_NAME];
+        [object setValue:[NSNumber numberWithBool:realTask.status] forKey:CD_ROW_IS_COMPLETED];
+        [object setValue:realTask.taskReminderTime forKey:CD_ROW_TASK_REMINDER_TIME];
+        [object setValue:[NSNumber numberWithInteger:realTask.priority] forKey:CD_ROW_TASK_PRIORITY];
+        [object setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:CD_ROW_CATEGORY_ID];
+        [object setValue:realTask.createdAt forKey:CD_ROW_CREATED_AT];
+        [object setValue:realTask.completionTime forKey:CD_ROW_TASK_COMPLETION_TIME];
+        [object setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:CD_ROW_TASK_SYNC_STATUS];
+        [object setValue:realTask.taskDescription forKey:CD_ROW_TASK_DESCRIPTION];
+        [object setValue:[NSNumber numberWithInteger:0] forKey:CD_ROW_TASK_TYPE];
+        [object setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_IS_DELETED];
+        [object setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
 
         [managedObjectContext save:nil];
                 
@@ -289,18 +289,18 @@
         KSTaskCollection* realTask = (KSTaskCollection*)task;
         NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_TASK inManagedObjectContext:managedObjectContext];
         NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
-        [object setValue:[NSNumber numberWithInteger:realTask.ID] forKey:@"id"];
-        [object setValue:realTask.name forKey:@"task_name"];
-        [object setValue:[NSNumber numberWithBool:realTask.status] forKey:@"is_completed"];
-        [object setValue:realTask.taskReminderTime forKey:@"task_reminder_time"];
-        [object setValue:[NSNumber numberWithInteger:realTask.priority] forKey:@"task_priority"];
-        [object setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:@"category_id"];
-        [object setValue:realTask.createdAt forKey:@"created_at"];
-        [object setValue:realTask.completionTime forKey:@"task_completion_time"];
-        [object setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"task_sync_status"];
-        [object setValue:[NSNumber numberWithInteger:1] forKey:@"task_type"];
-        [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
-        [object setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+        [object setValue:[NSNumber numberWithInteger:realTask.ID] forKey:CD_ROW_ID];
+        [object setValue:realTask.name forKey:CD_ROW_TASK_NAME];
+        [object setValue:[NSNumber numberWithBool:realTask.status] forKey:CD_ROW_IS_COMPLETED];
+        [object setValue:realTask.taskReminderTime forKey:CD_ROW_TASK_REMINDER_TIME];
+        [object setValue:[NSNumber numberWithInteger:realTask.priority] forKey:CD_ROW_TASK_PRIORITY];
+        [object setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:CD_ROW_CATEGORY_ID];
+        [object setValue:realTask.createdAt forKey:CD_ROW_CREATED_AT];
+        [object setValue:realTask.completionTime forKey:CD_ROW_TASK_COMPLETION_TIME];
+        [object setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:CD_ROW_TASK_SYNC_STATUS];
+        [object setValue:[NSNumber numberWithInteger:1] forKey:CD_ROW_TASK_TYPE];
+        [object setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_IS_DELETED];
+        [object setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
 
         [managedObjectContext save:nil];
     }
@@ -318,25 +318,25 @@
     {
         for(NSManagedObject* managedTask in results)
         {
-            NSUInteger ID = [[managedTask valueForKey:@"id"] integerValue];
+            NSUInteger ID = [[managedTask valueForKey:CD_ROW_ID] integerValue];
             if(ID == [task ID])
             {
                 if([task isKindOfClass:[KSTask class]])
                 {
                     KSTask* realTask = (KSTask*)task;
                     
-                    [managedTask setValue:[NSNumber numberWithInteger:realTask.ID] forKey:@"id"];
-                    [managedTask setValue:realTask.name forKey:@"task_name"];
-                    [managedTask setValue:[NSNumber numberWithBool:task.status] forKey:@"is_completed"];
-                    [managedTask setValue:realTask.taskReminderTime forKey:@"task_reminder_time"];
-                    [managedTask setValue:[NSNumber numberWithInteger:task.priority] forKey:@"task_priority"];
-                    [managedTask setValue:[NSNumber numberWithInteger:task.categoryID] forKey:@"category_id"];
-                    [managedTask setValue:realTask.createdAt forKey:@"created_at"];
-                    [managedTask setValue:realTask.completionTime forKey:@"task_completion_time"];
-                    [managedTask setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"task_sync_status"];
-                    [managedTask setValue:realTask.taskDescription forKey:@"task_description"];
-                    [managedTask setValue:[NSNumber numberWithInteger:0] forKey:@"task_type"];
-                    [managedTask setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.ID] forKey:CD_ROW_ID];
+                    [managedTask setValue:realTask.name forKey:CD_ROW_TASK_NAME];
+                    [managedTask setValue:[NSNumber numberWithBool:task.status] forKey:CD_ROW_IS_COMPLETED];
+                    [managedTask setValue:realTask.taskReminderTime forKey:CD_ROW_TASK_REMINDER_TIME];
+                    [managedTask setValue:[NSNumber numberWithInteger:task.priority] forKey:CD_ROW_TASK_PRIORITY];
+                    [managedTask setValue:[NSNumber numberWithInteger:task.categoryID] forKey:CD_ROW_CATEGORY_ID];
+                    [managedTask setValue:realTask.createdAt forKey:CD_ROW_CREATED_AT];
+                    [managedTask setValue:realTask.completionTime forKey:CD_ROW_TASK_COMPLETION_TIME];
+                    [managedTask setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:CD_ROW_TASK_SYNC_STATUS];
+                    [managedTask setValue:realTask.taskDescription forKey:CD_ROW_TASK_DESCRIPTION];
+                    [managedTask setValue:[NSNumber numberWithInteger:0] forKey:CD_ROW_TASK_TYPE];
+                    [managedTask setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
 
                     [self.managedObjectContext save:nil];
                     
@@ -345,17 +345,17 @@
                 {
                     KSTaskCollection* realTask = (KSTaskCollection*)task;
 
-                    [managedTask setValue:[NSNumber numberWithInteger:realTask.ID] forKey:@"id"];
-                    [managedTask setValue:realTask.name forKey:@"task_name"];
-                    [managedTask setValue:[NSNumber numberWithBool:realTask.status] forKey:@"is_completed"];
-                    [managedTask setValue:realTask.taskReminderTime forKey:@"task_reminder_time"];
-                    [managedTask setValue:[NSNumber numberWithInteger:realTask.priority] forKey:@"task_priority"];
-                    [managedTask setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:@"category_id"];
-                    [managedTask setValue:realTask.createdAt forKey:@"created_at"];
-                    [managedTask setValue:realTask.completionTime forKey:@"task_completion_time"];
-                    [managedTask setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"task_sync_status"];
-                    [managedTask setValue:[NSNumber numberWithInteger:1] forKey:@"task_type"];
-                    [managedTask setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.ID] forKey:CD_ROW_ID];
+                    [managedTask setValue:realTask.name forKey:CD_ROW_TASK_NAME];
+                    [managedTask setValue:[NSNumber numberWithBool:realTask.status] forKey:CD_ROW_IS_COMPLETED];
+                    [managedTask setValue:realTask.taskReminderTime forKey:CD_ROW_TASK_REMINDER_TIME];
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.priority] forKey:CD_ROW_TASK_PRIORITY];
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:CD_ROW_CATEGORY_ID];
+                    [managedTask setValue:realTask.createdAt forKey:CD_ROW_CREATED_AT];
+                    [managedTask setValue:realTask.completionTime forKey:CD_ROW_TASK_COMPLETION_TIME];
+                    [managedTask setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:CD_ROW_TASK_SYNC_STATUS];
+                    [managedTask setValue:[NSNumber numberWithInteger:1] forKey:CD_ROW_TASK_TYPE];
+                    [managedTask setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
 
                     [self.managedObjectContext save:nil];
                 }
@@ -378,12 +378,12 @@
     {
         for(NSManagedObject* managedTask in results)
         {
-            NSUInteger ID = [[managedTask valueForKey:@"id"] integerValue];
+            NSUInteger ID = [[managedTask valueForKey:CD_ROW_ID] integerValue];
             if(ID == [task ID])
             {
-                [managedTask setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];
-                [managedTask setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
-                [managedTask setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:@"task_sync_status"];
+                [managedTask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_IS_DELETED];
+                [managedTask setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
+                [managedTask setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:CD_ROW_TASK_SYNC_STATUS];
 
                 [self.managedObjectContext save:nil];
                 return;
@@ -410,19 +410,19 @@
         KSTask* realTask = (KSTask*)task;
         NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_TASK inManagedObjectContext:managedObjectContext];
         NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
-        [object setValue:[NSNumber numberWithInteger:realTask.ID] forKey:@"id"];
-        [object setValue:realTask.name forKey:@"task_name"];
-        [object setValue:[NSNumber numberWithBool:realTask.status] forKey:@"is_completed"];
-        [object setValue:realTask.taskReminderTime forKey:@"task_reminder_time"];
-        [object setValue:[NSNumber numberWithInteger:realTask.priority] forKey:@"task_priority"];
-        [object setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:@"category_id"];
-        [object setValue:realTask.createdAt forKey:@"created_at"];
-        [object setValue:realTask.completionTime forKey:@"task_completion_time"];
-        [object setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:@"task_sync_status"];
-        [object setValue:realTask.taskDescription forKey:@"task_description"];
-        [object setValue:[NSNumber numberWithInteger:0] forKey:@"task_type"];
-        [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
-        [object setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+        [object setValue:[NSNumber numberWithInteger:realTask.ID] forKey:CD_ROW_ID];
+        [object setValue:realTask.name forKey:CD_ROW_TASK_NAME];
+        [object setValue:[NSNumber numberWithBool:realTask.status] forKey:CD_ROW_IS_COMPLETED];
+        [object setValue:realTask.taskReminderTime forKey:CD_ROW_TASK_REMINDER_TIME];
+        [object setValue:[NSNumber numberWithInteger:realTask.priority] forKey:CD_ROW_TASK_PRIORITY];
+        [object setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:CD_ROW_CATEGORY_ID];
+        [object setValue:realTask.createdAt forKey:CD_ROW_CREATED_AT];
+        [object setValue:realTask.completionTime forKey:CD_ROW_TASK_COMPLETION_TIME];
+        [object setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:CD_ROW_TASK_SYNC_STATUS];
+        [object setValue:realTask.taskDescription forKey:CD_ROW_TASK_DESCRIPTION];
+        [object setValue:[NSNumber numberWithInteger:0] forKey:CD_ROW_TASK_TYPE];
+        [object setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_IS_DELETED];
+        [object setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
         
         [managedObjectContext save:nil];
         
@@ -433,18 +433,18 @@
         KSTaskCollection* realTask = (KSTaskCollection*)task;
         NSEntityDescription* entity = [NSEntityDescription entityForName:CD_TABLE_TASK inManagedObjectContext:managedObjectContext];
         NSManagedObject* object = [[NSManagedObject alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
-        [object setValue:[NSNumber numberWithInteger:realTask.ID] forKey:@"id"];
-        [object setValue:realTask.name forKey:@"task_name"];
-        [object setValue:[NSNumber numberWithBool:realTask.status] forKey:@"is_completed"];
-        [object setValue:realTask.taskReminderTime forKey:@"task_reminder_time"];
-        [object setValue:[NSNumber numberWithInteger:realTask.priority] forKey:@"task_priority"];
-        [object setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:@"category_id"];
-        [object setValue:realTask.createdAt forKey:@"created_at"];
-        [object setValue:realTask.completionTime forKey:@"task_completion_time"];
-        [object setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:@"task_sync_status"];
-        [object setValue:[NSNumber numberWithInteger:1] forKey:@"task_type"];
-        [object setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
-        [object setValue:[NSNumber numberWithBool:NO] forKey:@"local_sync"];
+        [object setValue:[NSNumber numberWithInteger:realTask.ID] forKey:CD_ROW_ID];
+        [object setValue:realTask.name forKey:CD_ROW_TASK_NAME];
+        [object setValue:[NSNumber numberWithBool:realTask.status] forKey:CD_ROW_IS_COMPLETED];
+        [object setValue:realTask.taskReminderTime forKey:CD_ROW_TASK_REMINDER_TIME];
+        [object setValue:[NSNumber numberWithInteger:realTask.priority] forKey:CD_ROW_TASK_PRIORITY];
+        [object setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:CD_ROW_CATEGORY_ID];
+        [object setValue:realTask.createdAt forKey:CD_ROW_CREATED_AT];
+        [object setValue:realTask.completionTime forKey:CD_ROW_TASK_COMPLETION_TIME];
+        [object setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:CD_ROW_TASK_SYNC_STATUS];
+        [object setValue:[NSNumber numberWithInteger:1] forKey:CD_ROW_TASK_TYPE];
+        [object setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_IS_DELETED];
+        [object setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
         
         [managedObjectContext save:nil];
     }
@@ -462,25 +462,25 @@
     {
         for(NSManagedObject* managedTask in results)
         {
-            NSUInteger ID = [[managedTask valueForKey:@"id"] integerValue];
+            NSUInteger ID = [[managedTask valueForKey:CD_ROW_ID] integerValue];
             if(ID == [task ID])
             {
                 if([task isKindOfClass:[KSTask class]])
                 {
                     KSTask* realTask = (KSTask*)task;
                     
-                    [managedTask setValue:[NSNumber numberWithInteger:realTask.ID] forKey:@"id"];
-                    [managedTask setValue:realTask.name forKey:@"task_name"];
-                    [managedTask setValue:[NSNumber numberWithBool:task.status] forKey:@"is_completed"];
-                    [managedTask setValue:realTask.taskReminderTime forKey:@"task_reminder_time"];
-                    [managedTask setValue:[NSNumber numberWithInteger:task.priority] forKey:@"task_priority"];
-                    [managedTask setValue:[NSNumber numberWithInteger:task.categoryID] forKey:@"category_id"];
-                    [managedTask setValue:realTask.createdAt forKey:@"created_at"];
-                    [managedTask setValue:realTask.completionTime forKey:@"task_completion_time"];
-                    [managedTask setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:@"task_sync_status"];
-                    [managedTask setValue:realTask.taskDescription forKey:@"task_description"];
-                    [managedTask setValue:[NSNumber numberWithInteger:0] forKey:@"task_type"];
-                    [managedTask setValue:[NSNumber numberWithBool:YES] forKey:@"local_sync"];
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.ID] forKey:CD_ROW_ID];
+                    [managedTask setValue:realTask.name forKey:CD_ROW_TASK_NAME];
+                    [managedTask setValue:[NSNumber numberWithBool:task.status] forKey:CD_ROW_IS_COMPLETED];
+                    [managedTask setValue:realTask.taskReminderTime forKey:CD_ROW_TASK_REMINDER_TIME];
+                    [managedTask setValue:[NSNumber numberWithInteger:task.priority] forKey:CD_ROW_TASK_PRIORITY];
+                    [managedTask setValue:[NSNumber numberWithInteger:task.categoryID] forKey:CD_ROW_CATEGORY_ID];
+                    [managedTask setValue:realTask.createdAt forKey:CD_ROW_CREATED_AT];
+                    [managedTask setValue:realTask.completionTime forKey:CD_ROW_TASK_COMPLETION_TIME];
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:CD_ROW_TASK_SYNC_STATUS];
+                    [managedTask setValue:realTask.taskDescription forKey:CD_ROW_TASK_DESCRIPTION];
+                    [managedTask setValue:[NSNumber numberWithInteger:0] forKey:CD_ROW_TASK_TYPE];
+                    [managedTask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_LOCAL_SYNC];
                     
                     [self.managedObjectContext save:nil];
                     
@@ -489,17 +489,17 @@
                 {
                     KSTaskCollection* realTask = (KSTaskCollection*)task;
                     
-                    [managedTask setValue:[NSNumber numberWithInteger:realTask.ID] forKey:@"id"];
-                    [managedTask setValue:realTask.name forKey:@"task_name"];
-                    [managedTask setValue:[NSNumber numberWithBool:realTask.status] forKey:@"is_completed"];
-                    [managedTask setValue:realTask.taskReminderTime forKey:@"task_reminder_time"];
-                    [managedTask setValue:[NSNumber numberWithInteger:realTask.priority] forKey:@"task_priority"];
-                    [managedTask setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:@"category_id"];
-                    [managedTask setValue:realTask.createdAt forKey:@"created_at"];
-                    [managedTask setValue:realTask.completionTime forKey:@"task_completion_time"];
-                    [managedTask setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:@"task_sync_status"];
-                    [managedTask setValue:[NSNumber numberWithInteger:1] forKey:@"task_type"];
-                    [managedTask setValue:[NSNumber numberWithBool:YES] forKey:@"local_sync"];
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.ID] forKey:CD_ROW_ID];
+                    [managedTask setValue:realTask.name forKey:CD_ROW_TASK_NAME];
+                    [managedTask setValue:[NSNumber numberWithBool:realTask.status] forKey:CD_ROW_IS_COMPLETED];
+                    [managedTask setValue:realTask.taskReminderTime forKey:CD_ROW_TASK_REMINDER_TIME];
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.priority] forKey:CD_ROW_TASK_PRIORITY];
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.categoryID] forKey:CD_ROW_CATEGORY_ID];
+                    [managedTask setValue:realTask.createdAt forKey:CD_ROW_CREATED_AT];
+                    [managedTask setValue:realTask.completionTime forKey:CD_ROW_TASK_COMPLETION_TIME];
+                    [managedTask setValue:[NSNumber numberWithInteger:realTask.syncStatus] forKey:CD_ROW_TASK_SYNC_STATUS];
+                    [managedTask setValue:[NSNumber numberWithInteger:1] forKey:CD_ROW_TASK_TYPE];
+                    [managedTask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_LOCAL_SYNC];
                     
                     [self.managedObjectContext save:nil];
                 }
@@ -522,12 +522,12 @@
     {
         for(NSManagedObject* managedTask in results)
         {
-            NSUInteger ID = [[managedTask valueForKey:@"id"] integerValue];
+            NSUInteger ID = [[managedTask valueForKey:CD_ROW_ID] integerValue];
             if(ID == [task ID])
             {
-                [managedTask setValue:[NSNumber numberWithBool:YES] forKey:@"is_deleted"];
-                [managedTask setValue:[NSNumber numberWithBool:YES] forKey:@"local_sync"];
-                [managedTask setValue:[NSNumber numberWithInteger:task.syncStatus] forKey:@"task_sync_status"];
+                [managedTask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_IS_DELETED];
+                [managedTask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_LOCAL_SYNC];
+                [managedTask setValue:[NSNumber numberWithInteger:task.syncStatus] forKey:CD_ROW_TASK_SYNC_STATUS];
                 
                 [self.managedObjectContext save:nil];
                 return;
