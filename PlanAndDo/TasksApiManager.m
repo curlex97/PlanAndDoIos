@@ -13,17 +13,17 @@
 
 @implementation TasksApiManager
 
--(void)addTaskAsync:(BaseTask *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
+-(void)addTasksAsync:(NSArray *)tasks forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
 {
 
 }
 
--(void)updateTaskAsync:(BaseTask *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
+-(void)updateTasksAsync:(NSArray *)tasks forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
 {
 
 }
 
--(void)deleteTaskAsync:(BaseTask *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
+-(void)deleteTasksAsync:(NSArray *)tasks forUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
 {
 
 }

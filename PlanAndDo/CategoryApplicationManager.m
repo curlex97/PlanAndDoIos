@@ -26,7 +26,7 @@
 {
     [[[CategoryCoreDataManager alloc] init] addCateroty:category];
     [[[SyncApplicationManager alloc] init] syncCategoriesWithCompletion:^(bool status) {
-        [[[CategoryApiManager alloc] init] addCategoryAsync:category forUser:[[ApplicationManager userApplicationManager] authorisedUser] completion:^(bool status){
+        [[[CategoryApiManager alloc] init] addCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser] completion:^(bool status){
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
         }];
     }];
@@ -36,7 +36,7 @@
 {
     [[[CategoryCoreDataManager alloc] init] updateCateroty:category];
     [[[SyncApplicationManager alloc] init] syncCategoriesWithCompletion:^(bool status) {
-        [[[CategoryApiManager alloc] init] updateCategoryAsync:category forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+        [[[CategoryApiManager alloc] init] updateCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
         }];
     }];
@@ -47,7 +47,7 @@
     [[[CategoryCoreDataManager alloc] init] deleteCateroty:category];
     
     [[[SyncApplicationManager alloc] init] syncCategoriesWithCompletion:^(bool status) {
-        [[[CategoryApiManager alloc] init] deleteCategoryAsync:category forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
+        [[[CategoryApiManager alloc] init] deleteCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(bool status){
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
         }];
     }];
