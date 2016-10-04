@@ -7,6 +7,7 @@
 //
 
 #import "ApplicationManager.h"
+#import "FileManager.h"
 
 @implementation ApplicationManager
 
@@ -47,6 +48,8 @@
     [[[UserApplicationManager alloc] init] cleanTable];
     [[[SubTasksApplicationManager alloc] init] cleanTable];
     [[[TasksApplicationManager alloc] init] cleanTable];
+    [FileManager writeTokenToFile:@""];
+    [FileManager writeLastSyncTimeToFile:@""];
 }
 
 @end
