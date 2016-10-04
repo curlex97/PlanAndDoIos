@@ -25,41 +25,45 @@
 @implementation AppDelegate
 
 
+-(void) syncSettingsFinished:(NSNotification*)not
+{
+   
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+                    
+        LoginViewController * login=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:login];
+         
+         TabletasksViewController * tasks=[[TabletasksViewController alloc] init];
+         tasks.boxType=KSBoxTypeToday;
+         
+         AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:tasks] andBackVC:[[KSMenuViewController alloc] init]];
+         tableTaskViewController.title=NM_TODAY;
+         [login presentViewController:tableTaskViewController animated:YES completion:^
+          {
+                                 [self.window makeKeyAndVisible];
+                                 self.isLoad=YES;
+          }];
+    });
+  
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     self.isLoad=NO;
     
     
-    //нуждаеться в доработке займусь этим завтра !
-    NSString * userToken=[FileManager readUserEmailFromFile];
+    //у меня отказывается даже по паролю заходить, ничего тестить не могу, переделал
+    // ( NSString * userToken=[FileManager readUserEmailFromFile]; - Email это не токен)
+    
+    NSString * userToken=[FileManager readTokenFromFile];
     if(userToken.length>0)
     {
-            [[ApplicationManager userApplicationManager] loginWithEmail:[FileManager readUserEmailFromFile] andPassword:[FileManager readPassFromFile] completion:^(bool status)
-             {
-                 if(status)
-                 {
-                     [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
-                      {
-                          LoginViewController * login=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-                          self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:login];
-                          
-                          TabletasksViewController * tasks=[[TabletasksViewController alloc] init];
-                          tasks.boxType=KSBoxTypeToday;
-                          
-                          AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:tasks] andBackVC:[[KSMenuViewController alloc] init]];
-                          tableTaskViewController.title=NM_TODAY;
-                          [login presentViewController:tableTaskViewController animated:YES completion:^
-                           {
-                               dispatch_async(dispatch_get_main_queue(), ^
-                                              {
-                                                  [self.window makeKeyAndVisible];
-                                                  self.isLoad=YES;
-                                              });
-                           }];
-                      }];
-                 }
-             }];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncSettingsFinished:) name:NC_SYNC_SETTINGS object:nil];
+            [[ApplicationManager userApplicationManager] loginWithEmail:[FileManager readUserEmailFromFile] andPassword:[FileManager readPassFromFile] completion:^(bool status){
+                [[ApplicationManager syncApplicationManager] syncWithCompletion:nil];}];
     }
     else
     {

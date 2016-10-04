@@ -48,7 +48,7 @@
     [[[UserApiManager alloc] init] syncUserWithCompletion:^(NSDictionary* dictionary) {
         [[[UserApplicationManager alloc] init] recieveUserFromDictionary:dictionary];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_USER object:nil];
-    
+        if(completed) completed(YES);
     }];
 }
 
@@ -58,7 +58,7 @@
         
         [[[SettingsApplicationManager alloc] init] recieveSettingsFromDictionary:dictionary];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
-        
+        if(completed) completed(YES);
     }];
 }
 
@@ -67,6 +67,7 @@
     [[[CategoryApiManager alloc] init] syncCategoriesWithCompletion:^(NSDictionary* dictionary) {
         [[[CategoryApplicationManager alloc] init] recieveCategoriesFromDictionary:dictionary];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
+        if(completed) completed(YES);
     }];
 }
 
@@ -75,6 +76,7 @@
     [[[TasksApiManager alloc] init] syncTasksWithCompletion:^(NSDictionary* dictionary) {
         [[[TasksApplicationManager alloc] init] recieveTasksFromDictionary:dictionary];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
+        if(completed) completed(YES);
     }];
 }
 
@@ -83,6 +85,7 @@
     [[[SubTasksApiManager alloc] init] syncSubTasksWithCompletion:^(NSDictionary* dictionary) {
         [[[SubTasksApplicationManager alloc] init] recieveSubTasksFromDictionary:dictionary];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
+        if(completed) completed(YES);
     }];
 }
 

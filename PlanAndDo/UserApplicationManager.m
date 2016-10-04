@@ -135,7 +135,7 @@
 
             }
         }
-        if(completed) completed(false);
+        else if(completed) completed(false);
     }];
 
 }
