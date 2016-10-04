@@ -61,6 +61,45 @@
     }
 }
 
+-(void)recieveCategoriesFromDictionary:(NSDictionary *)dictionary
+{
+    NSString* status = [dictionary valueForKeyPath:@"status"];
+    
+    if([status containsString:@"suc"])
+    {
+        
+        NSArray* defCats = (NSArray*)[dictionary valueForKeyPath:@"data"];
+        
+        for(NSDictionary* defaultCategory in defCats)
+        {
+            int catID = [[defaultCategory valueForKeyPath:@"id"] intValue];
+            NSString* catName = [defaultCategory valueForKeyPath:@"category_name"];
+            int syncStatus = [[defaultCategory valueForKeyPath:@"category_sync_status"] intValue];
+            
+            bool isDeleted = [[defaultCategory valueForKeyPath:@"is_deleted"] intValue] > 0;
+            
+            [SyncApplicationManager updateLastSyncTime:syncStatus];
+            
+            KSCategory* category = [[KSCategory alloc] initWithID:catID andName:catName andSyncStatus:syncStatus];
+            
+            KSCategory* localCategory = [[[CategoryCoreDataManager alloc] init] categoryWithId:(int)category.ID];
+            
+            
+            if(!isDeleted)
+            {
+                if(!localCategory)
+                    [[[CategoryCoreDataManager alloc] init] syncAddCateroty:category];
+                
+                else if(localCategory.syncStatus < category.syncStatus)
+                    [[[CategoryCoreDataManager alloc] init] syncUpdateCateroty:category];
+            }
+            else [[[CategoryCoreDataManager alloc] init] syncDeleteCateroty:category];
+            
+            
+        }
+    }
+}
+
 -(void) cleanTable
 {
     return [[[CategoryCoreDataManager alloc] init] cleanTable];

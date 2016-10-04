@@ -51,6 +51,44 @@
     }];
 }
 
+-(void)recieveSubTasksFromDictionary:(NSDictionary *)dictionary
+{
+    NSString* status = [dictionary valueForKeyPath:@"status"];
+    
+    if([status containsString:@"suc"])
+    {
+        
+        NSArray* subs = (NSArray*)[dictionary valueForKeyPath:@"data"];
+        
+        for(NSDictionary* jsonSub in subs)
+        {
+            int subID = [[jsonSub valueForKeyPath:@"id"] intValue];
+            int taskID = [[jsonSub valueForKeyPath:@"task_id"] intValue];
+            NSString* subName = [jsonSub valueForKeyPath:@"name"];
+            int syncStatus = [[jsonSub valueForKeyPath:@"subtask_sync_status"] intValue];
+            bool isCompleted = [[jsonSub valueForKeyPath:@"is_completed"] integerValue] > 0;
+            bool isDeleted = [[jsonSub valueForKeyPath:@"is_deleted"] intValue] > 0;
+            
+            [SyncApplicationManager updateLastSyncTime:syncStatus];
+            
+            KSShortTask* sub = [[KSShortTask alloc] initWithID:subID andName:subName andStatus:isCompleted andSyncStatus:syncStatus];
+            KSShortTask* localSub = [[[SubTasksCoreDataManager alloc] init] subTaskWithId:(int)subID andTaskId:(int)taskID];
+            KSTaskCollection* col = [[KSTaskCollection alloc] init];
+            col.ID = taskID;
+            
+            if(!isDeleted)
+            {
+                if(!localSub)
+                    [[[SubTasksCoreDataManager alloc] init] syncAddSubTask:sub forTask:col];
+                else if(localSub.syncStatus < sub.syncStatus)
+                    [[[SubTasksCoreDataManager alloc] init] syncUpdateSubTask:sub forTask:col];
+            }
+            else
+                [[[SubTasksCoreDataManager alloc] init] syncDeleteSubTask:sub forTask:col];
+        }
+    }
+}
+
 -(void) cleanTable
 {
     return [[[SubTasksCoreDataManager alloc] init] cleanTable];

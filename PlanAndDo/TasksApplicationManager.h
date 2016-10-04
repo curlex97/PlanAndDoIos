@@ -40,4 +40,6 @@
 
 -(void) cleanTable;
 
+-(void) recieveTasksFromDictionary:(NSDictionary*)dictionary;
+
 @end

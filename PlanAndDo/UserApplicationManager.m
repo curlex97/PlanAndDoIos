@@ -140,6 +140,31 @@
 
 }
 
+-(void)recieveUserFromDictionary:(NSDictionary *)dictionary
+{
+    NSString* status = [dictionary valueForKeyPath:@"status"];
+    
+    if([status containsString:@"suc"])
+    {
+        int ID = [[dictionary valueForKeyPath:@"data.id"] intValue];
+        NSString* userName = [dictionary valueForKeyPath:@"data.name"];
+        int syncStatus = [[dictionary valueForKeyPath:@"data.user_sync_status"] intValue];
+        NSString* email = [dictionary valueForKeyPath:@"data.email"];
+        NSDate *createDate = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"data.created_at"] intValue]];
+        NSDate *lastVisitDate = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"data.lastvisit_date"] intValue]];
+        
+        [SyncApplicationManager updateLastSyncTime:syncStatus];
+        
+        KSAuthorisedUser* user = [[KSAuthorisedUser alloc] initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:createDate andLastVisitDate:lastVisitDate andSyncStatus:syncStatus andAccessToken:[FileManager readTokenFromFile] andUserSettings:nil];
+        
+        KSAuthorisedUser* localUser = [[[UserCoreDataManager alloc] init] authorisedUser];
+        
+        if(!localUser)[[[UserCoreDataManager alloc] init] syncSetUser:user];
+        else if(localUser.syncStatus < user.syncStatus) [[[UserCoreDataManager alloc] init] syncUpdateUser:user];
+    }
+
+}
+
 
 -(void) cleanTable
 {

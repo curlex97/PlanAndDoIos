@@ -27,4 +27,7 @@
 
 -(void) logout;
 
+-(void) recieveUserFromDictionary:(NSDictionary*)dictionary;
+
+
 @end

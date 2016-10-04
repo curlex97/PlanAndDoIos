@@ -15,7 +15,6 @@
 #import "SyncApiManager.h"
 
 @interface SyncApplicationManager : NSObject
-@property int lst;
 
 -(void)syncWithCompletion:(void (^)(bool))completed;
 
@@ -30,6 +29,6 @@
 
 -(void) syncSubTasksWithCompletion:(void (^)(bool))completed;
 
-
++(void) updateLastSyncTime:(int)lst;
 
 @end

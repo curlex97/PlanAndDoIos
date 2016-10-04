@@ -21,4 +21,7 @@
 
 -(void) cleanTable;
 
+-(void) recieveSettingsFromDictionary:(NSDictionary*)dictionary;
+
+
 @end

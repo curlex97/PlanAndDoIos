@@ -25,4 +25,6 @@
 
 -(void) cleanTable;
 
+-(void) recieveCategoriesFromDictionary:(NSDictionary*)dictionary;
+
 @end

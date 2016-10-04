@@ -24,4 +24,7 @@
 
 -(void) cleanTable;
 
+-(void) recieveSubTasksFromDictionary:(NSDictionary*)dictionary;
+
+
 @end
