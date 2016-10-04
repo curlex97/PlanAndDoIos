@@ -137,30 +137,23 @@
 
 - (IBAction)submitTapped:(id)sender
 {
-    
-//    [[ApplicationManager userApplicationManager] registerAsyncWithEmail:@"qaqz12436@bb.com" andUserName:@"qaqz12643" andPassword:@"qaqz12643" completion:^(bool fl) {
-//        AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
-//        
-//        if(tableTaskViewController && fl)
-//        {
-//            tableTaskViewController.title=@"Today";
-//            [self presentViewController:tableTaskViewController animated:YES completion:nil];
-//        }
-//    }];
-
-    
     if([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text])
     [[ApplicationManager userApplicationManager] registerAsyncWithEmail:self.emailTextField.text andUserName:self.usernameTextField.text andPassword:self.passwordTextField.text completion:^(bool fl) {
-        
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
         AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
         
         if(tableTaskViewController && fl)
         {
             tableTaskViewController.title=NM_TODAY;
-            dispatch_async(dispatch_get_main_queue(), ^{
-            [self presentViewController:tableTaskViewController animated:YES completion:nil];
-            });
+
+            [self presentViewController:tableTaskViewController animated:YES completion:^
+             {
+                 [self.navigationController popViewControllerAnimated:NO];
+             }];
+
         }
+    });
     }];
 }
 
