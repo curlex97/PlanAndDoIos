@@ -24,6 +24,8 @@
 
 -(void)addCateroty:(KSCategory *)category
 {
+    if(category.ID > 0) category.ID = -category.ID;
+    
     [[[CategoryCoreDataManager alloc] init] addCateroty:category];
     [[[SyncApplicationManager alloc] init] syncCategoriesWithCompletion:^(bool status) {
         [[[CategoryApiManager alloc] init] addCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser] completion:^(NSDictionary* dictionary){

@@ -19,7 +19,7 @@
 
 -(void)addSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
-    
+    if(subTask.ID > 0) subTask.ID = -subTask.ID;
     
     [[[SubTasksCoreDataManager alloc] init] addSubTask:subTask forTask:task];
     [[[SyncApplicationManager alloc] init]syncSubTasksWithCompletion:^(bool status) {

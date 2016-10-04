@@ -54,6 +54,7 @@
 
 -(void)addTask:(BaseTask *)task
 {
+    if(task.ID > 0) task.ID = -task.ID;
     
     [[[TasksCoreDataManager alloc] init] addTask:task];
     [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
