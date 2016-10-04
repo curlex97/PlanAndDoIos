@@ -62,7 +62,14 @@
 
         AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:[[TabletasksViewController alloc] init]] andBackVC:[[KSMenuViewController alloc] init]];
         tableTaskViewController.title=NM_TODAY;
-        [self presentViewController:tableTaskViewController animated:YES completion:nil];
+        [self presentViewController:tableTaskViewController animated:YES completion:^
+         {
+             dispatch_async(dispatch_get_main_queue(), ^
+                            {
+                                self.loginTextField.text=@"";
+                                self.passwordTextField.text=@"";
+                            });
+         }];
 }
 
 - (void)viewDidLoad
@@ -134,7 +141,6 @@
 
 - (IBAction)signInTapped:(id)sender
 {
-    
     [[ApplicationManager userApplicationManager] loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool status)
     {
         if(status) [[ApplicationManager syncApplicationManager] syncWithCompletion:nil];
