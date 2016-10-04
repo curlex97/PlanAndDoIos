@@ -50,6 +50,8 @@
     [[[TasksApplicationManager alloc] init] cleanTable];
     [FileManager writeTokenToFile:@""];
     [FileManager writeLastSyncTimeToFile:@""];
+    [FileManager writeUserEmailToFile:@""];
+    [FileManager writePassToFile:@""];
 }
 
 @end

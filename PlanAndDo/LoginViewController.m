@@ -97,8 +97,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showMainWindow:) name:NC_SYNC_SETTINGS object:nil];
 
     
     UIView *loginPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
@@ -170,7 +168,7 @@
     {
         if(status)
         {
-            [[ApplicationManager syncApplicationManager] syncWithCompletion:nil];
+            [[ApplicationManager syncApplicationManager] syncWithCompletion:^(bool status){[self showMainWindow:nil];}];
         }
     }];
 }

@@ -25,29 +25,6 @@
 @implementation AppDelegate
 
 
--(void) syncSettingsFinished:(NSNotification*)not
-{
-   
-    dispatch_async(dispatch_get_main_queue(), ^
-    {
-        UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-                    
-        LoginViewController * login=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:login];
-         
-         TabletasksViewController * tasks=[[TabletasksViewController alloc] init];
-         tasks.boxType=KSBoxTypeToday;
-         
-         AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:tasks] andBackVC:[[KSMenuViewController alloc] init]];
-         tableTaskViewController.title=NM_TODAY;
-         [login presentViewController:tableTaskViewController animated:YES completion:^
-          {
-                                 [self.window makeKeyAndVisible];
-                                 self.isLoad=YES;
-          }];
-    });
-  
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -61,9 +38,29 @@
     NSString * userToken=[FileManager readTokenFromFile];
     if(userToken.length>0)
     {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncSettingsFinished:) name:NC_SYNC_SETTINGS object:nil];
             [[ApplicationManager userApplicationManager] loginWithEmail:[FileManager readUserEmailFromFile] andPassword:[FileManager readPassFromFile] completion:^(bool status){
-                [[ApplicationManager syncApplicationManager] syncWithCompletion:nil];}];
+                [[ApplicationManager syncApplicationManager] syncWithCompletion:^(bool status)
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^
+                   {
+                       UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+                       
+                       LoginViewController * login=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+                       self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:login];
+                       
+                       TabletasksViewController * tasks=[[TabletasksViewController alloc] init];
+                       tasks.boxType=KSBoxTypeToday;
+                       
+                       AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:tasks] andBackVC:[[KSMenuViewController alloc] init]];
+                       tableTaskViewController.title=NM_TODAY;
+                       [login presentViewController:tableTaskViewController animated:YES completion:^
+                        {
+                            [self.window makeKeyAndVisible];
+                            self.isLoad=YES;
+                        }];
+                   });
+                }];
+            }];
     }
     else
     {
