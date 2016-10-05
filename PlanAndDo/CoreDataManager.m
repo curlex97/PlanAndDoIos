@@ -16,7 +16,7 @@
 {
     self = [super init];
     if (self) {
-        self.managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSMainQueueConcurrencyType];
+        self.managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSPrivateQueueConcurrencyType];
         NSURL* modelUrl = [[NSBundle mainBundle] URLForResource:CD_DATABASE_NAME withExtension:CD_DATABASE_EXT];
         NSManagedObjectModel* mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelUrl];
         NSPersistentStoreCoordinator* psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];

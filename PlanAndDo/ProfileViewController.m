@@ -12,19 +12,36 @@
 #import "KSSettingsCell.h"
 #import "ChangeEmailViewController.h"
 #import "ApplicationManager.h"
+#import "LoginViewController.h"
+#import "TabletasksViewController.h"
 
 @interface ProfileViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic)NSArray<NSString *> * items;
 @property (nonatomic)KSAuthorisedUser * user;
 @property (nonatomic)KSProfileState state;
+@property (nonatomic)BOOL isLoginPresented;
 @end
 
 @implementation ProfileViewController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if(self.isLoginPresented)
+    {
+        TabletasksViewController * tasksViewController=[[TabletasksViewController alloc] init];
+        UINavigationController * navi=[[UINavigationController alloc] initWithRootViewController:tasksViewController];
+        AMSideBarViewController * sider=(AMSideBarViewController *)self.navigationController.parentViewController;
+        [sider setNewFrontViewController:navi];
+        self.isLoginPresented=NO;
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 5;
 }
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSSettingsCell"owner:self options:nil];
@@ -122,7 +139,16 @@
     else
     {
         [[ApplicationManager userApplicationManager] logout];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        LoginViewController * login=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:YES completion:^
+         {
+             self.isLoginPresented=YES;
+         }];
+//        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:YES completion:^
+//         {
+
+        
+//         }];
     }
 }
 

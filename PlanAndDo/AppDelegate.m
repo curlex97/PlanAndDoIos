@@ -19,7 +19,6 @@
 
 @interface AppDelegate ()
 @property AMSideBarViewController *sideBarViewController;
-@property (nonatomic)BOOL isLoad;
 @end
 
 @implementation AppDelegate
@@ -28,49 +27,80 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-    self.isLoad=NO;
-    
+    dispatch_semaphore_t s=dispatch_semaphore_create(0);
     
     //у меня отказывается даже по паролю заходить, ничего тестить не могу, переделал
     // ( NSString * userToken=[FileManager readUserEmailFromFile]; - Email это не токен)
-    
-    NSString * userToken=[FileManager readTokenFromFile];
-    if(userToken.length>0)
-    {
-            [[ApplicationManager userApplicationManager] loginWithEmail:[FileManager readUserEmailFromFile] andPassword:[FileManager readPassFromFile] completion:^(bool status){
-                [[ApplicationManager syncApplicationManager] syncWithCompletion:^(bool status)
-                {
-                    dispatch_async(dispatch_get_main_queue(), ^
-                   {
-                       UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
-                       
-                       LoginViewController * login=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-                       self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:login];
-                       
-                       TabletasksViewController * tasks=[[TabletasksViewController alloc] init];
-                       tasks.boxType=KSBoxTypeToday;
-                       
-                       AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:tasks] andBackVC:[[KSMenuViewController alloc] init]];
-                       tableTaskViewController.title=NM_TODAY;
-                       [login presentViewController:tableTaskViewController animated:YES completion:^
-                        {
-                            [self.window makeKeyAndVisible];
-                            self.isLoad=YES;
-                        }];
-                   });
-                }];
-            }];
-    }
-    else
-    {
-        LoginViewController * login=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:login];
-        [self.window makeKeyAndVisible];
-        self.isLoad=YES;
-    }
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+                       {
+                           [[ApplicationManager userApplicationManager] loginWithEmail:[FileManager readUserEmailFromFile] andPassword:[FileManager readPassFromFile] completion:^(bool status)
+                            {
+                                if(status)
+                                {
+                                    [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
+                                     {
+                                         dispatch_semaphore_signal(s);
+                                     }];
+                                }
+                                else
+                                {
+                                    dispatch_semaphore_signal(s);
+                                }
+                            }];
+                       });
+        dispatch_semaphore_wait(s, DISPATCH_TIME_FOREVER);
+        
+        [self showmainPage];
+//            [[ApplicationManager userApplicationManager] loginWithEmail:[FileManager readUserEmailFromFile] andPassword:[FileManager readPassFromFile] completion:^(bool status){
+//                [[ApplicationManager syncApplicationManager] syncWithCompletion:^(bool status)
+//                {
+//                    dispatch_async(dispatch_get_main_queue(), ^
+//                   {
+//                       UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+//                       
+//                       LoginViewController * login=[mainStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+//                       self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:login];
+//                       
+//                       TabletasksViewController * tasks=[[TabletasksViewController alloc] init];
+//                       tasks.boxType=KSBoxTypeToday;
+//                       
+//                       AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:tasks] andBackVC:[[KSMenuViewController alloc] init]];
+//                       tableTaskViewController.title=NM_TODAY;
+//                       [login presentViewController:tableTaskViewController animated:YES completion:^
+//                        {
+//                            [self.window makeKeyAndVisible];
+//                            self.isLoad=YES;
+//                        }];
+//                   });
+//                }];
+//            }];
+
 
     return YES;
+}
+
+-(void)showmainPage
+{
+    TabletasksViewController * tasks=[[TabletasksViewController alloc] init];
+    tasks.boxType=KSBoxTypeToday;
+    
+    AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:[[UINavigationController alloc] initWithRootViewController:tasks] andBackVC:[[KSMenuViewController alloc] init]];
+    tableTaskViewController.title=NM_TODAY;
+    //[loginNavi addChildViewController:tableTaskViewController];
+    //[login showViewController:tableTaskViewController sender:login];
+    //[loginNavi.view addSubview:tableTaskViewController.view];
+    self.window.rootViewController = tableTaskViewController;
+    //[tableTaskViewController reloadInputViews];
+    
+    //[login presentViewController:tableTaskViewController animated:NO completion:nil];
+    //dispatch_semaphore_wait(s, DISPATCH_TIME_FOREVER);
+    //[self.window makeKeyAndVisible];
+    NSLog(@"111");
+    //    [login presentViewController:tableTaskViewController animated:NO completion:^
+    //     {
+    //         dispatch_semaphore_signal(s);
+    //     }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

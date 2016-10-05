@@ -13,6 +13,8 @@
 #import "UIImage+ACScaleImage.h"
 #import "EditTaskViewController.h"
 #import "ApplicationManager.h"
+#import "FileManager.h"
+#import "LoginViewController.h"
 
 static bool firstLoad = true;
 
@@ -22,6 +24,13 @@ static bool firstLoad = true;
 @end
 
 @implementation TabletasksViewController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.view.hidden=NO;
+    [self refreshData:nil];
+}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -196,8 +205,15 @@ static bool firstLoad = true;
     //[self.tableView reloadData];
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    if([ApplicationManager userApplicationManager].authorisedUser.emailAdress.length==0)
+    {
+        self.view.hidden=YES;
+        LoginViewController * login=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:NO completion:nil];
+    }
     
     [self setStartPageForLoad];
     
@@ -270,12 +286,6 @@ static bool firstLoad = true;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NC_TASK_EDIT object:nil];
 
     
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
-    [self refreshData:nil];
 }
 
 
