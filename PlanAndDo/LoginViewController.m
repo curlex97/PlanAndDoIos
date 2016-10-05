@@ -26,13 +26,10 @@
 {
     if(self.passwordTextField.isFirstResponder)
     {
+        [self.passwordTextField resignFirstResponder];
         if(self.signInButton.isEnabled)
         {
             [self signInTapped:nil];
-        }
-        else
-        {
-            [self.passwordTextField resignFirstResponder];
         }
     }
     else

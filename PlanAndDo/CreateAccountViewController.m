@@ -36,13 +36,10 @@
     }
     else
     {
+        [self.reenterPasswordTextField resignFirstResponder];
         if(self.submitButton.isEnabled)
         {
             [self submitTapped:nil];
-        }
-        else
-        {
-            [self.reenterPasswordTextField resignFirstResponder];
         }
     }
     

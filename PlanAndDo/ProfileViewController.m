@@ -24,19 +24,6 @@
 
 @implementation ProfileViewController
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    if(self.isLoginPresented)
-    {
-        TabletasksViewController * tasksViewController=[[TabletasksViewController alloc] init];
-        UINavigationController * navi=[[UINavigationController alloc] initWithRootViewController:tasksViewController];
-        AMSideBarViewController * sider=(AMSideBarViewController *)self.navigationController.parentViewController;
-        [sider setNewFrontViewController:navi];
-        self.isLoginPresented=NO;
-    }
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 5;
@@ -142,8 +129,12 @@
         LoginViewController * login=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:YES completion:^
          {
-             self.isLoginPresented=YES;
+             TabletasksViewController * tasksViewController=[[TabletasksViewController alloc] init];
+             UINavigationController * navi=[[UINavigationController alloc] initWithRootViewController:tasksViewController];
+             AMSideBarViewController * sider=(AMSideBarViewController *)self.navigationController.parentViewController;
+             [sider setNewFrontViewController:navi];
          }];
+
 //        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:YES completion:^
 //         {
 
