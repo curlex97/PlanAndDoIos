@@ -41,6 +41,7 @@
     if(bodyDictionary && bodyDictionary.count > 0)
     {
         NSData *postdata = [NSJSONSerialization dataWithJSONObject:bodyDictionary options:0 error:nil];
+        NSString* str = [NSString stringWithUTF8String:[postdata bytes]];
         [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[postdata length]] forHTTPHeaderField:@"Content-Length"];

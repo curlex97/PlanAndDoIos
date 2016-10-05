@@ -58,7 +58,15 @@
     
     [[[TasksCoreDataManager alloc] init] addTask:task];
     [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
-        [[[TasksApiManager alloc] init] addTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncAdd] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+        
+        NSArray* tasksForAdd = [NSArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasksForSyncAdd]];
+        
+        [[[TasksApiManager alloc] init] addTasksAsync:tasksForAdd forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+            
+            if([[dictionary valueForKeyPath:@"status"] containsString:@"suc"])
+                for(BaseTask* task in tasksForAdd)
+                    [[[TasksCoreDataManager alloc] init] syncDeleteTask:task];
+            
             [self recieveTasksFromDictionary:dictionary];
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
         }];

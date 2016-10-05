@@ -18,6 +18,7 @@
 
 -(void)syncWithCompletion:(void (^)(bool))completed;
 
+@property int syncStat;
 
 -(void) syncUserWithCompletion:(void (^)(bool))completed;
 

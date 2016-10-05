@@ -27,12 +27,44 @@
 
 -(void)syncWithCompletion:(void (^)(bool))completed
 {
+    
+    
     [self syncStatusWithCompletion:^(bool status) {
+        
+        if([[FileManager readLastSyncTimeFromFile] intValue] > self.syncStat)
+        self.syncStat = [[FileManager readLastSyncTimeFromFile] intValue];
+        [FileManager writeLastSyncTimeToFile:[NSString stringWithFormat:@"%i", 0]];
+        
         [self syncUserWithCompletion:^(bool status) {
+            
+            if([[FileManager readLastSyncTimeFromFile] intValue] > self.syncStat)
+            self.syncStat = [[FileManager readLastSyncTimeFromFile] intValue];
+            [FileManager writeLastSyncTimeToFile:[NSString stringWithFormat:@"%i", 0]];
+            
             [self syncSettingsWithCompletion:^(bool status) {
+                
+                if([[FileManager readLastSyncTimeFromFile] intValue] > self.syncStat)
+                self.syncStat = [[FileManager readLastSyncTimeFromFile] intValue];
+                [FileManager writeLastSyncTimeToFile:[NSString stringWithFormat:@"%i", 0]];
+                
                 [self syncCategoriesWithCompletion:^(bool status) {
+                    
+                    if([[FileManager readLastSyncTimeFromFile] intValue] > self.syncStat)
+                    self.syncStat = [[FileManager readLastSyncTimeFromFile] intValue];
+                    [FileManager writeLastSyncTimeToFile:[NSString stringWithFormat:@"%i", 0]];
+                    
                     [self syncTasksWithCompletion:^(bool status) {
+                        
+                        if([[FileManager readLastSyncTimeFromFile] intValue] > self.syncStat)
+                        self.syncStat = [[FileManager readLastSyncTimeFromFile] intValue];
+                        [FileManager writeLastSyncTimeToFile:[NSString stringWithFormat:@"%i", 0]];
+                        
                         [self syncSubTasksWithCompletion:^(bool status) {
+                            
+                            if([[FileManager readLastSyncTimeFromFile] intValue] > self.syncStat)
+                            self.syncStat = [[FileManager readLastSyncTimeFromFile] intValue];
+                            [FileManager writeLastSyncTimeToFile:[NSString stringWithFormat:@"%i", self.syncStat]];
+                            
                             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_COMPLETED object:nil];
                             if(completed) completed(true);
                         }];

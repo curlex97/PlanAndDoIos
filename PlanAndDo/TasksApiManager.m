@@ -26,18 +26,23 @@
         NSNumber* catID = task.categoryID > 0 ? [NSNumber numberWithInt:task.categoryID] : nil;
         NSNumber* taskType = [task isKindOfClass:[KSTask class]] ? [NSNumber numberWithInt:0] : [NSNumber numberWithInt:1];
         NSString* taskDesc = [task isKindOfClass:[KSTask class]] ? ((KSTask*)task).taskDescription : nil;
+        int createdAt = task.createdAt.timeIntervalSince1970 >= [NSDate date].timeIntervalSince1970 ? task.createdAt.timeIntervalSince1970 : [NSDate date].timeIntervalSince1970;
+        int taskRemTime = task.taskReminderTime.timeIntervalSince1970 >= [NSDate date].timeIntervalSince1970 ? task.taskReminderTime.timeIntervalSince1970 : [NSDate date].timeIntervalSince1970;
+        int compTime = task.completionTime.timeIntervalSince1970 >= [NSDate date].timeIntervalSince1970 ? task.completionTime.timeIntervalSince1970 : [NSDate date].timeIntervalSince1970;
+        int isDel = NO;
+        int isComp = task.status;
         
-        [dataTask setValue:[NSNumber numberWithInteger:user.ID] forKey:@"user_id"];
+        [dataTask setValue:[NSNumber numberWithInteger:task.ID] forKey:@"id"];
         [dataTask setValue:catID forKey:@"category_id"];
         [dataTask setValue:taskType forKey:@"task_type"];
         [dataTask setValue:task.name forKey:@"task_name"];
         [dataTask setValue:taskDesc forKey:@"task_description"];
-        [dataTask setValue:[NSNumber numberWithDouble:task.createdAt.timeIntervalSince1970] forKey:@"created_at"];
-        [dataTask setValue:[NSNumber numberWithDouble:task.taskReminderTime.timeIntervalSince1970] forKey:@"task_reminder_time"];
+        [dataTask setValue:[NSNumber numberWithInt:createdAt] forKey:@"created_at"];
+        [dataTask setValue:[NSNumber numberWithInt:taskRemTime] forKey:@"task_reminder_time"];
         [dataTask setValue:[NSNumber numberWithInt:task.priority] forKey:@"task_priority"];
-        [dataTask setValue:[NSNumber numberWithBool:task.status] forKey:@"is_completed"];
-        [dataTask setValue:[NSNumber numberWithDouble:task.completionTime.timeIntervalSince1970] forKey:@"task_completion_time"];
-        [dataTask setValue:[NSNumber numberWithBool:NO] forKey:@"is_deleted"];
+        [dataTask setValue:[NSNumber numberWithInt:isComp] forKey:@"is_completed"];
+        [dataTask setValue:[NSNumber numberWithInt:compTime] forKey:@"task_completion_time"];
+        [dataTask setValue:[NSNumber numberWithInt:isDel] forKey:@"is_deleted"];
         [dataTask setValue:[NSNumber numberWithInt:(int)task.syncStatus] forKey:@"task_sync_status"];
         
         [data addObject:dataTask];
