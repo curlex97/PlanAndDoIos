@@ -207,14 +207,14 @@ static bool firstLoad = true;
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     if([ApplicationManager userApplicationManager].authorisedUser.emailAdress.length==0)
     {
         self.view.hidden=YES;
         LoginViewController * login=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        [login loadViewIfNeeded];
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:NO completion:nil];
     }
-    
+    [super viewDidLoad];
     [self setStartPageForLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTasksInTable:) name:NC_SYNC_TASKS object:nil];

@@ -82,6 +82,7 @@
 		28B947891D918D72005A8E9A /* EditTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B947881D918D72005A8E9A /* EditTaskViewController.m */; };
 		3F0E98291D95868600AAC625 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0E98281D95868600AAC625 /* ProfileViewController.m */; };
 		3F6B255C1D9BCBA3007A7D70 /* SubTaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F6B255B1D9BCBA3007A7D70 /* SubTaskTableViewCell.m */; };
+		3FB4A4E81DA565EE00DD9FCA /* LaunchScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4A4E71DA565EE00DD9FCA /* LaunchScreenViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -240,6 +241,8 @@
 		3F0E98281D95868600AAC625 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		3F6B255A1D9BCBA3007A7D70 /* SubTaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubTaskTableViewCell.h; sourceTree = "<group>"; };
 		3F6B255B1D9BCBA3007A7D70 /* SubTaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubTaskTableViewCell.m; sourceTree = "<group>"; };
+		3FB4A4E61DA565EE00DD9FCA /* LaunchScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchScreenViewController.h; sourceTree = "<group>"; };
+		3FB4A4E71DA565EE00DD9FCA /* LaunchScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchScreenViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -696,6 +699,8 @@
 			children = (
 				2803AF951D8AB9A80032ACFB /* BaseViewController */,
 				2803AFAB1D8ABDF60032ACFB /* SideBars */,
+				3FB4A4E61DA565EE00DD9FCA /* LaunchScreenViewController.h */,
+				3FB4A4E71DA565EE00DD9FCA /* LaunchScreenViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1090,6 +1095,7 @@
 				27B1A0F71D81933000D47FCD /* KSAuthorisedUser.m in Sources */,
 				27B1A1031D81A3CB00D47FCD /* KSTask.m in Sources */,
 				28943D0E1D9303EF00BC8A69 /* ApplicationManager.m in Sources */,
+				3FB4A4E81DA565EE00DD9FCA /* LaunchScreenViewController.m in Sources */,
 				278BAA551D89BA4A002D38CF /* BaseAuthViewController.m in Sources */,
 				27B1A0FA1D8195A800D47FCD /* UserSettings.m in Sources */,
 				3F6B255C1D9BCBA3007A7D70 /* SubTaskTableViewCell.m in Sources */,
