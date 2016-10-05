@@ -28,31 +28,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    dispatch_semaphore_t s=dispatch_semaphore_create(0);
-    
-    //у меня отказывается даже по паролю заходить, ничего тестить не могу, переделал
-    // ( NSString * userToken=[FileManager readUserEmailFromFile]; - Email это не токен)
-
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-//                       {
-//                           [[ApplicationManager userApplicationManager] loginWithEmail:[FileManager readUserEmailFromFile] andPassword:[FileManager readPassFromFile] completion:^(bool status)
-//                            {
-//                                if(status)
-//                                {
-//                                    [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
-//                                     {
-//                                         dispatch_semaphore_signal(s);
-//                                     }];
-//                                }
-//                                else
-//                                {
-//                                    dispatch_semaphore_signal(s);
-//                                }
-//                            }];
-//                       });
-//        dispatch_semaphore_wait(s, DISPATCH_TIME_FOREVER);
-//        
-//        [self showmainPage];
     LaunchScreenViewController * launch=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LaunchScreenViewController"];
     self.window.rootViewController=launch;
     [self.window makeKeyAndVisible];
