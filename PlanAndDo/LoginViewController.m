@@ -22,6 +22,23 @@
 
 @implementation LoginViewController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if([ApplicationManager userApplicationManager].authorisedUser.emailAdress.length==0 && !self.isViewPresented)
+    {
+        //self.view.hidden=YES;
+        LoginViewController * login=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        login.isViewPresented=YES;
+        //[self.view addSubview:login.view];
+        //self.navigationController.toolbarHidden=YES;
+        [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:NO completion:^
+         {
+             [self.navigationController popViewControllerAnimated:NO];
+         }];
+        self.navigationItem.hidesBackButton=YES;
+    }
+}
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(self.passwordTextField.isFirstResponder)
@@ -88,7 +105,6 @@
 {
     [super viewDidLoad];
 
-    
     UIView *loginPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.loginTextField.leftView = loginPaddingView;
     self.loginTextField.leftViewMode = UITextFieldViewModeAlways;

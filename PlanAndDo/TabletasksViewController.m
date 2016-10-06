@@ -28,7 +28,7 @@ static bool firstLoad = true;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.view.hidden=NO;
+    //self.view.hidden=NO;
     [self refreshData:nil];
 }
 
@@ -205,16 +205,21 @@ static bool firstLoad = true;
     //[self.tableView reloadData];
 }
 
+
 - (void)viewDidLoad
 {
-    if([ApplicationManager userApplicationManager].authorisedUser.emailAdress.length==0)
-    {
-        self.view.hidden=YES;
-        LoginViewController * login=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
-        [login loadViewIfNeeded];
-        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:NO completion:nil];
-    }
     [super viewDidLoad];
+    
+//    if([ApplicationManager userApplicationManager].authorisedUser.emailAdress.length==0)
+//    {
+//        //self.view.hidden=YES;
+//        LoginViewController * login=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+//        [login loadViewIfNeeded];
+//        //[self.view addSubview:login.view];
+//        //self.navigationController.toolbarHidden=YES;
+//        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:NO completion:nil];
+//    }
+    
     [self setStartPageForLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTasksInTable:) name:NC_SYNC_TASKS object:nil];
