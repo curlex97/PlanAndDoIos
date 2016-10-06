@@ -22,10 +22,14 @@
     if(subTask.ID > 0) subTask.ID = -subTask.ID;
     
     [[[SubTasksCoreDataManager alloc] init] addSubTask:subTask forTask:task];
-    [[[SyncApplicationManager alloc] init]syncSubTasksWithCompletion:^(bool status) {
-        [[[SubTasksApiManager alloc] init] addSubTasksAsync:[[[SubTasksCoreDataManager alloc] init] allSubTasksForSyncAdd] toTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+    [[[SyncApplicationManager alloc] init]syncSubTasksWithCompletion:^(bool status)
+    {
+        if(status)
+        {
+            [[[SubTasksApiManager alloc] init] addSubTasksAsync:[[[SubTasksCoreDataManager alloc] init] allSubTasksForSyncAdd] toTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
-        }];
+            }];
+        }
     }];
     
 }
@@ -33,10 +37,14 @@
 -(void)updateSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
     [[[SubTasksCoreDataManager alloc] init] updateSubTask:subTask forTask:task];
-    [[[SyncApplicationManager alloc] init] syncSubTasksWithCompletion:^(bool status) {
-        [[[SubTasksApiManager alloc] init] updateSubTasksAsync:[[[SubTasksCoreDataManager alloc] init] allSubTasksForSyncUpdate] inTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
-            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
-        }];
+    [[[SyncApplicationManager alloc] init] syncSubTasksWithCompletion:^(bool status)
+     {
+         if(status)
+         {
+             [[[SubTasksApiManager alloc] init] updateSubTasksAsync:[[[SubTasksCoreDataManager alloc] init] allSubTasksForSyncUpdate] inTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+                [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
+             }];
+         }
     }];
     
 }
@@ -44,10 +52,14 @@
 -(void)deleteSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
     [[[SubTasksCoreDataManager alloc] init] deleteSubTask:subTask forTask:task];
-    [[[SyncApplicationManager alloc] init] syncSubTasksWithCompletion:^(bool status) {
-        [[[SubTasksApiManager alloc] init] deleteSubTasksAsync:[[[SubTasksCoreDataManager alloc] init] allSubTasksForSyncDelete] fromTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
-            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
-        }];
+    [[[SyncApplicationManager alloc] init] syncSubTasksWithCompletion:^(bool status)
+    {
+        if(status)
+        {
+            [[[SubTasksApiManager alloc] init] deleteSubTasksAsync:[[[SubTasksCoreDataManager alloc] init] allSubTasksForSyncDelete] fromTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+                [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
+            }];
+        }
     }];
 }
 

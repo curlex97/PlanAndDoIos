@@ -131,7 +131,13 @@
 
 -(void)syncSubTasksWithCompletion:(void (^)(bool))completed
 {
-    [[[SubTasksApiManager alloc] init] syncSubTasksWithCompletion:^(NSDictionary* dictionary) {
+    [[[SubTasksApiManager alloc] init] syncSubTasksWithCompletion:^(NSDictionary* dictionary)
+    {
+        if(!dictionary && completed)
+        {
+            completed(NO);
+            return;
+        }
         [[[SubTasksApplicationManager alloc] init] recieveSubTasksFromDictionary:dictionary];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
         if(completed) completed(YES);

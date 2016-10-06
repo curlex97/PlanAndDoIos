@@ -96,11 +96,15 @@
 -(void)deleteTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] deleteTask:task];
-    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
-        [[[TasksApiManager alloc] init] deleteTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncDelete] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status)
+    {
+        if(status)
+        {
+            [[[TasksApiManager alloc] init] deleteTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncDelete] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
             [self recieveTasksFromDictionary:dictionary];
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
-        }];
+            }];
+        }
     }];
 
 }
