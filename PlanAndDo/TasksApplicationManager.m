@@ -80,11 +80,16 @@
 -(void)updateTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] updateTask:task];
-    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
-       [[[TasksApiManager alloc] init] updateTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncUpdate] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
-           [self recieveTasksFromDictionary:dictionary];
-           [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
-       }];
+    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status)
+    {
+        if(status)
+        {
+            [[[TasksApiManager alloc] init] updateTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncUpdate] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary)
+             {
+                 [self recieveTasksFromDictionary:dictionary];
+                 [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
+             }];
+        }
     }];
 }
 
