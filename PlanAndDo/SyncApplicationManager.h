@@ -16,7 +16,7 @@
 
 @interface SyncApplicationManager : NSObject
 
--(void)syncWithCompletion:(void (^)(bool))completed;
+-(void)syncWithCompletion:(void (^)(BOOL))completed;
 
 @property int syncStat;
 

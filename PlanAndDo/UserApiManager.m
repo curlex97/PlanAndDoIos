@@ -32,8 +32,13 @@
     [user setValue:@"login" forKey:@"method"];
     [user setValue:data forKey:@"data"];
     
-    [self dataByData:user completion:^(NSData * data) {
-        
+    [self dataByData:user completion:^(NSData * data)
+    {
+        if(!data && completed)
+        {
+            completed(nil);
+            return;
+        }
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         if(completed) completed(json);
     }];

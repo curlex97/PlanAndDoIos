@@ -210,16 +210,6 @@ static bool firstLoad = true;
 {
     [super viewDidLoad];
     
-//    if([ApplicationManager userApplicationManager].authorisedUser.emailAdress.length==0)
-//    {
-//        //self.view.hidden=YES;
-//        LoginViewController * login=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
-//        [login loadViewIfNeeded];
-//        //[self.view addSubview:login.view];
-//        //self.navigationController.toolbarHidden=YES;
-//        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:NO completion:nil];
-//    }
-    
     [self setStartPageForLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTasksInTable:) name:NC_SYNC_TASKS object:nil];
@@ -510,26 +500,6 @@ static bool firstLoad = true;
     if(!self.tasks.count)
     {
         [self emptyHeaderAnimationsShow];
-
-//        NSThread * thread=[[NSThread alloc] initWithBlock:^
-//        {
-//            __block float width=100.0;
-//            __block float height=100.0;
-//            
-//            while (width<=200.0)
-//            {
-//                width+=10;
-//                height+=10;
-//                imageView.image=[UIImage imageWithImage:[UIImage imageNamed:@"You free"] scaledToSize:CGSizeMake(width, height)];
-//                dispatch_async(dispatch_get_main_queue(), ^
-//                {
-//                    [self.emptyTableHeader layoutIfNeeded];
-//                });
-//            }
-//        }];
-//        thread.threadPriority=0.5;
-//        [thread start];
-        
     }
     else
     {
