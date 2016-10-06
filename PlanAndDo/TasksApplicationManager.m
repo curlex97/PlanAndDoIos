@@ -57,8 +57,10 @@
     if(task.ID > 0) task.ID = -task.ID;
     
     [[[TasksCoreDataManager alloc] init] addTask:task];
-    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
-        
+    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status)
+    {
+        if(status)
+        {
         NSArray* tasksForAdd = [NSArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasksForSyncAdd]];
         
         [[[TasksApiManager alloc] init] addTasksAsync:tasksForAdd forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
@@ -70,7 +72,7 @@
             [self recieveTasksFromDictionary:dictionary];
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
         }];
-
+        }
     }];
     
 }
@@ -78,22 +80,31 @@
 -(void)updateTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] updateTask:task];
-    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
-       [[[TasksApiManager alloc] init] updateTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncUpdate] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
-           [self recieveTasksFromDictionary:dictionary];
-           [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
-       }];
+    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status)
+    {
+        if(status)
+        {
+            [[[TasksApiManager alloc] init] updateTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncUpdate] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary)
+             {
+                 [self recieveTasksFromDictionary:dictionary];
+                 [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
+             }];
+        }
     }];
 }
 
 -(void)deleteTask:(BaseTask *)task
 {
     [[[TasksCoreDataManager alloc] init] deleteTask:task];
-    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
-        [[[TasksApiManager alloc] init] deleteTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncDelete] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status)
+    {
+        if(status)
+        {
+            [[[TasksApiManager alloc] init] deleteTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncDelete] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
             [self recieveTasksFromDictionary:dictionary];
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
-        }];
+            }];
+        }
     }];
 
 }

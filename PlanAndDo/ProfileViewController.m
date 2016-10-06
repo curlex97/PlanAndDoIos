@@ -14,6 +14,8 @@
 #import "ApplicationManager.h"
 #import "LoginViewController.h"
 #import "TabletasksViewController.h"
+#import "FileManager.h"
+#import "NewPasswordViewController.h"
 
 @interface ProfileViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic)NSArray<NSString *> * items;
@@ -44,7 +46,13 @@
     else if(indexPath.row==1)
     {
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        cell.paramValueLabel.text=@"************";
+        NSMutableString * stars=[NSMutableString string];
+        NSString * pass=[FileManager readPassFromFile];
+        for(NSUInteger i=0;i<pass.length; ++i)
+        {
+            [stars appendFormat:@"*"];
+        }
+        cell.paramValueLabel.text=stars;
         cell.imageView.image=[UIImage imageNamed:@"password"];
     }
     else if(indexPath.row==2)
@@ -84,7 +92,11 @@
     }
     else if(indexPath.row==1)
     {
-        
+        NewPasswordViewController * newPassViewController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"NewPasswordViewController"];
+        if(newPassViewController)
+        {
+            [self.navigationController pushViewController:newPassViewController animated:YES];
+        }
     }
     else if(indexPath.row==2)
     {

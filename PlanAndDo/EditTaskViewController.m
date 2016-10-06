@@ -15,6 +15,7 @@
 #import "ApplicationManager.h"
 #import "KSSettingsCell.h"
 #import "ApplicationManager.h"
+#import "AMSideBarViewController.h"
 
 @interface EditTaskViewController ()
 @property (nonatomic)UISegmentedControl * segment;
@@ -236,8 +237,6 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_EDIT object:realTask];
         
     }
-    
-    
     else if([self.task isKindOfClass:[KSTaskCollection class]])
     {
         KSTaskPriority priority = KSTaskDefaultPriority;
@@ -265,7 +264,6 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_EDIT object:realTask];
     }
     
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -273,17 +271,6 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-
-//-(void)subTasksChanged:(NSNotification*)not
-//{
-//    KSTaskCollection* realTask = (KSTaskCollection*)self.task;
-//    
-//    for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask]) [[ApplicationManager subTasksApplicationManager] deleteSubTask:subTask forTask:realTask];
-//    
-//    for(KSShortTask* subTask in self.subTasks) [[ApplicationManager subTasksApplicationManager] addSubTask:subTask forTask:realTask];
-//    
-//}
 
 -(void)viewDidLoad
 {

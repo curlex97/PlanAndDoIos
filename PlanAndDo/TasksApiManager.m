@@ -96,7 +96,13 @@
     
     [puser setValue:inData forKey:@"data"];
     
-    [self dataByData:puser completion:^(NSData * data) {
+    [self dataByData:puser completion:^(NSData * data)
+    {
+        if(!data && completed)
+        {
+            completed(nil);
+            return;
+        }
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         if(completed) completed(json);
     }];

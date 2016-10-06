@@ -1034,6 +1034,7 @@
 					28A36BA91D81887B0092FEFD = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = H6UA3BVSV5;
+						ProvisioningStyle = Manual;
 					};
 					28A36BC51D81887B0092FEFD = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -1296,9 +1297,10 @@
 				DEVELOPMENT_TEAM = H6UA3BVSV5;
 				INFOPLIST_FILE = PlanAndDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = localhost.PlanAndDo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.keepsolid.labs.plananddo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d07a08b3-e7c9-4fd9-9dd6-2353bd200bd3";
+				PROVISIONING_PROFILE_SPECIFIER = PlanAndDoDev;
 			};
 			name = Debug;
 		};
@@ -1306,14 +1308,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = H6UA3BVSV5;
 				INFOPLIST_FILE = PlanAndDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = localhost.PlanAndDo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.keepsolid.labs.plananddo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "245329b4-bcd2-44c1-b947-78f6b249d02f";
+				PROVISIONING_PROFILE_SPECIFIER = PlanAndDoAdHoc;
 			};
 			name = Release;
 		};

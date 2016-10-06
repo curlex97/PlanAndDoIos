@@ -14,5 +14,5 @@
 @property (weak, nonatomic) IBOutlet UIView *backTextFieldView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
-
+@property (nonatomic)BOOL isViewPresented;
 @end
