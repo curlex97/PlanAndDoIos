@@ -33,6 +33,7 @@
         int isComp = task.status;
         
         [dataTask setValue:[NSNumber numberWithInteger:task.ID] forKey:@"id"];
+        [dataTask setValue:[NSNumber numberWithInteger:user.ID] forKey:@"user_id"];
         [dataTask setValue:catID forKey:@"category_id"];
         [dataTask setValue:taskType forKey:@"task_type"];
         [dataTask setValue:task.name forKey:@"task_name"];

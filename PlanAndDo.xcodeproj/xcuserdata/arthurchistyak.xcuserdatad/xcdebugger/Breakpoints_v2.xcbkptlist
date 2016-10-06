@@ -6,32 +6,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PlanAndDo/TasksApplicationManager.m"
-            timestampString = "497350384.92335"
+            filePath = "PlanAndDo/TasksCoreDataManager.m"
+            timestampString = "497439725.245"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "-recieveTasksFromDictionary:"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "-allTasksForSyncAdd"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PlanAndDo/TasksApplicationManager.m"
-            timestampString = "497350384.92335"
+            filePath = "PlanAndDo/TasksCoreDataManager.m"
+            timestampString = "497439762.209016"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
-            landmarkName = "-recieveTasksFromDictionary:"
+            startingLineNumber = "653"
+            endingLineNumber = "653"
+            landmarkName = "-syncDeleteTask:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PlanAndDo/TasksCoreDataManager.m"
+            timestampString = "497441259.637935"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "538"
+            endingLineNumber = "538"
+            landmarkName = "-syncAddTask:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

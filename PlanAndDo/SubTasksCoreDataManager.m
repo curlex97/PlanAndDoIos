@@ -291,7 +291,7 @@
                 [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_IS_DELETED];
                 [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_LOCAL_SYNC];
                 [managedSubtask setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:CD_SUBTASK_SYNC_STATUS];
-                
+                [self.managedObjectContext deleteObject:managedSubtask];
                 [self.managedObjectContext save:nil];
             }
         }
