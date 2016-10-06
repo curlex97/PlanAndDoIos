@@ -105,7 +105,13 @@
 
 -(void)syncTasksWithCompletion:(void (^)(bool))completed
 {
-    [[[TasksApiManager alloc] init] syncTasksWithCompletion:^(NSDictionary* dictionary) {
+    [[[TasksApiManager alloc] init] syncTasksWithCompletion:^(NSDictionary* dictionary)
+    {
+        if(!dictionary && completed)
+        {
+            completed(NO);
+            return;
+        }
         [[[TasksApplicationManager alloc] init] recieveTasksFromDictionary:dictionary];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
         if(completed) completed(YES);

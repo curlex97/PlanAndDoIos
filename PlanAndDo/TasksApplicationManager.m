@@ -57,8 +57,10 @@
     if(task.ID > 0) task.ID = -task.ID;
     
     [[[TasksCoreDataManager alloc] init] addTask:task];
-    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status) {
-        
+    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status)
+    {
+        if(status)
+        {
         NSArray* tasksForAdd = [NSArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasksForSyncAdd]];
         
         [[[TasksApiManager alloc] init] addTasksAsync:tasksForAdd forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
@@ -70,7 +72,7 @@
             [self recieveTasksFromDictionary:dictionary];
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
         }];
-
+        }
     }];
     
 }
