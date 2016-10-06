@@ -27,8 +27,6 @@
 
 -(void)syncWithCompletion:(void (^)(BOOL))completed
 {
-    
-    
     [self syncStatusWithCompletion:^(bool status) {
         
         if([[FileManager readLastSyncTimeFromFile] intValue] > self.syncStat)
@@ -107,7 +105,13 @@
 
 -(void)syncCategoriesWithCompletion:(void (^)(bool))completed
 {
-    [[[CategoryApiManager alloc] init] syncCategoriesWithCompletion:^(NSDictionary* dictionary) {
+    [[[CategoryApiManager alloc] init] syncCategoriesWithCompletion:^(NSDictionary* dictionary)
+    {
+        if(!dictionary && completed)
+        {
+            completed(NO);
+            return;
+        }
         [[[CategoryApplicationManager alloc] init] recieveCategoriesFromDictionary:dictionary];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
         if(completed) completed(YES);
@@ -150,6 +154,11 @@
     
     [[[SyncApiManager alloc] init] syncStatusWithCompletion:^(NSDictionary * dictionary)
      {
+         if(!dictionary && completed)
+         {
+             completed(NO);
+             return;
+         }
          [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_STATUS object:nil];
          if(completed) completed(YES);
      }];
