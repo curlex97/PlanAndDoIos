@@ -92,8 +92,13 @@
 
 -(void)syncSettingsWithCompletion:(void (^)(bool))completed
 {
-    [[[SettingsApiManager alloc] init] syncSettingsWithCompletion:^(NSDictionary* dictionary) {
-        
+    [[[SettingsApiManager alloc] init] syncSettingsWithCompletion:^(NSDictionary* dictionary)
+    {
+        if(!dictionary && completed)
+        {
+            completed(NO);
+            return;
+        }
         [[[SettingsApplicationManager alloc] init] recieveSettingsFromDictionary:dictionary];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
         if(completed) completed(YES);
