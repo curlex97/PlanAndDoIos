@@ -77,7 +77,13 @@
 
 -(void)syncUserWithCompletion:(void (^)(bool))completed
 {
-    [[[UserApiManager alloc] init] syncUserWithCompletion:^(NSDictionary* dictionary) {
+    [[[UserApiManager alloc] init] syncUserWithCompletion:^(NSDictionary* dictionary)
+    {
+        if(!dictionary && completed)
+        {
+            completed(NO);
+            return;
+        }
         [[[UserApplicationManager alloc] init] recieveUserFromDictionary:dictionary];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_USER object:nil];
         if(completed) completed(YES);
