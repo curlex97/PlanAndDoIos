@@ -12,7 +12,8 @@
 #import "ApplicationManager.h"
 
 @interface BaseTableViewController ()
-
+@property (nonatomic)BOOL currentReachStatus;
+@property (nonatomic)UIView * toolBarHideView;
 @end
 
 @implementation BaseTableViewController
@@ -26,7 +27,10 @@
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
                                                object:nil];
-    
+    if(reach.isReachableViaWiFi || reach.isReachableViaWWAN)
+    {
+        self.currentReachStatus=YES;
+    }
     [reach startNotifier];
 }
 
@@ -41,33 +45,53 @@
     
     if(reach.isReachableViaWiFi)
     {
-        [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
+        if(!self.currentReachStatus)
+        {
+            UIView * toolBarHidenView=[[UIView alloc] initWithFrame:self.navigationController.toolbar.frame];
+            NSLog(@"%@",self.navigationController);
+            toolBarHidenView.backgroundColor=[UIColor colorWithWhite:0.0 alpha:0.5];
+            [self.navigationController.toolbar addSubview:toolBarHidenView];
+            [self.navigationController.view addSubview:self.loadContentView];
+            [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
          {
              if(completed)
              {
-                 dispatch_async(dispatch_get_main_queue(), ^
+                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                  {
-                        [self reloadData];
+                     [self reloadData];
+                     [self.loadContentView removeFromSuperview];
+                     [toolBarHidenView removeFromSuperview];
+                     self.currentReachStatus=YES;
                  });
              }
          }];
+        }
     }
-    else if(reach.isReachableViaWWAN)
+    else if(reach.isReachableViaWWAN && !self.currentReachStatus)
     {
-        [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
-         {
-             if(completed)
+        if(!self.currentReachStatus)
+        {
+            
+            [self.view addSubview:self.loadContentView];
+            [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
              {
-                 dispatch_async(dispatch_get_main_queue(), ^
-                                {
-                                    [self reloadData];
-                                });
-             }
-         }];
+                 [self.view addSubview:self.loadContentView];
+                 if(completed)
+                 {
+                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+                                    {
+                                        [self reloadData];
+                                        [self.loadContentView removeFromSuperview];
+                                        self.currentReachStatus=YES;
+                                    });
+                 }
+             }];
+        }
     }
     else
     {
         //no internet
+        self.currentReachStatus=NO;
         NSLog(@"%@",reach);
     }
     
@@ -91,6 +115,29 @@
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     [self.tableView addSubview:self.refresh];
     [self.view addSubview:self.tableView];
+    
+    self.loadContentView=[[UIView alloc] initWithFrame:self.view.bounds];
+    self.loadContentView.backgroundColor=[UIColor colorWithWhite:0.0 alpha:0.5];
+    
+    UIView * searchView=[[UIView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-65.0, [UIScreen mainScreen].bounds.size.height/3, 130.0, 80.0)];
+    searchView.backgroundColor=[UIColor whiteColor];
+    searchView.layer.cornerRadius=8.0;
+    
+    UILabel * searchLabel=[[UILabel alloc] initWithFrame:CGRectMake(0.0, 50.0, 130.0, 30.0)];
+    searchLabel.text=@"Synchronize...";
+    searchLabel.adjustsFontSizeToFitWidth=YES;
+    searchLabel.textAlignment=NSTextAlignmentCenter;
+    searchLabel.textColor=[UIColor blackColor];
+    
+    UIActivityIndicatorView * activityInd=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(40.0, 10.0, 50.0, 50.0)];
+    activityInd.activityIndicatorViewStyle=UIActivityIndicatorViewStyleWhiteLarge;
+    activityInd.color=[UIColor blackColor];
+    activityInd.hidesWhenStopped=YES;
+    [activityInd startAnimating];
+    
+    [searchView addSubview:searchLabel];
+    [searchView addSubview:activityInd];
+    [self.loadContentView addSubview:searchView];
     
     self.emptyTableHeader=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, [UIScreen mainScreen].bounds.size.height-100)];
     self.emptyTableHeader.backgroundColor=[UIColor whiteColor];
