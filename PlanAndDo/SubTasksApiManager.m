@@ -23,7 +23,7 @@
     {
         NSMutableDictionary* dataSubTask = [NSMutableDictionary dictionary];
         int isDel = [method isEqualToString:@"deleteMany"];
-        int isComp = task.status;
+        int isComp = sub.status;
         
         [dataSubTask setValue:[NSNumber numberWithInt:sub.ID] forKey:@"id"];
         [dataSubTask setValue:[NSNumber numberWithInt:task.ID] forKey:@"task_id"];
