@@ -13,19 +13,60 @@
 
 @implementation SubTasksApiManager
 
+
+-(void) toServerWithMethod:(NSString*)method andSubTasks:(NSArray *)subTasks toTask:(KSTaskCollection *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
+{
+    NSMutableArray* data = [NSMutableArray array];
+    NSMutableDictionary* dic = [NSMutableDictionary dictionary];
+    
+    for(KSShortTask* sub in subTasks)
+    {
+        NSMutableDictionary* dataSubTask = [NSMutableDictionary dictionary];
+        int isDel = [method isEqualToString:@"deleteMany"];
+        int isComp = task.status;
+        
+        [dataSubTask setValue:[NSNumber numberWithInt:sub.ID] forKey:@"id"];
+        [dataSubTask setValue:[NSNumber numberWithInt:task.ID] forKey:@"task_id"];
+        [dataSubTask setValue:sub.name forKey:@"name"];
+        [dataSubTask setValue:[NSNumber numberWithInt:isComp] forKey:@"is_completed"];
+        [dataSubTask setValue:[NSNumber numberWithInt:isDel] forKey:@"is_deleted"];
+        [dataSubTask setValue:[NSNumber numberWithInteger:sub.syncStatus] forKey:@"subtask_sync_status"];
+
+        [data addObject:dataSubTask];
+    }
+    
+    [dic setValue:[NSNumber numberWithInteger:user.ID] forKey:@"user_id"];
+    [dic setValue:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"device_id"];
+    [dic setValue:[FileManager readTokenFromFile] forKey:@"token"];
+    [dic setValue:@"subtask" forKey:@"class"];
+    [dic setValue:method forKey:@"method"];
+    [dic setValue:data forKey:@"data"];
+    
+    if(task.ID >= 0)
+    {
+        
+    }
+    
+    [self dataByData:dic completion:^(NSData * data) {
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        if(completed) completed(json);
+    }];
+}
+
+
 -(void)addSubTasksAsync:(NSArray *)subTasks toTask:(KSTaskCollection *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
-
+    [self toServerWithMethod:@"addMany" andSubTasks:subTasks toTask:task forUser:user completion:completed];
 }
 
 -(void)updateSubTasksAsync:(NSArray *)subTasks inTask:(KSTaskCollection *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
-
+    [self toServerWithMethod:@"updateMany" andSubTasks:subTasks toTask:task forUser:user completion:completed];
 }
 
 -(void)deleteSubTasksAsync:(NSArray *)subTasks fromTask:(KSTaskCollection *)task forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
-
+    [self toServerWithMethod:@"deleteMany" andSubTasks:subTasks toTask:task forUser:user completion:completed];
 }
 
 

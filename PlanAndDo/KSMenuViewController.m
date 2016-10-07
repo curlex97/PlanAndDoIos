@@ -206,7 +206,7 @@
         {
             NSLog(TL_COMPLETE);
             task.status = YES;
-            [[ApplicationManager tasksApplicationManager] updateTask:task];
+            [[ApplicationManager tasksApplicationManager] updateTask:task completion:nil];
             [self.allTasks removeObject:task];
             [self.tableTasks removeObject:task];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
@@ -225,11 +225,11 @@
             {
                 KSTaskCollection* col = (KSTaskCollection*)task;
                 for(KSShortTask* sub in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:col])
-                    [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:col];
+                    [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:col completion:nil];
             }
             
             
-            [[ApplicationManager tasksApplicationManager] deleteTask:task];
+            [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
             [self.allTasks removeObject:task];
             [self.tableTasks removeObject:task];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
@@ -484,7 +484,7 @@
     [textField resignFirstResponder];
     if(self.state!=KSMenuStateEdit)
     {
-        [[ApplicationManager categoryApplicationManager] addCateroty:[[KSCategory alloc] initWithID:self.categories.lastObject.ID+1 andName:textField.text andSyncStatus:0]];
+        [[ApplicationManager categoryApplicationManager] addCateroty:[[KSCategory alloc] initWithID:self.categories.lastObject.ID+1 andName:textField.text andSyncStatus:0] completion:nil];
         self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
         textField.text=@"";
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.categories.count-1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
@@ -494,7 +494,7 @@
         //KSCategory* cat = self.categories[self.managedIndexPath.row];
         //cat.name=textField.text;
         self.categories[self.managedIndexPath.row].name=textField.text;
-        [[ApplicationManager categoryApplicationManager] updateCateroty:self.categories[self.managedIndexPath.row]];
+        [[ApplicationManager categoryApplicationManager] updateCateroty:self.categories[self.managedIndexPath.row] completion:nil];
         self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
 
         self.state=KSMenuStateNormal;
@@ -534,10 +534,10 @@
                          
                          for(BaseTask* task in [[ApplicationManager tasksApplicationManager] allTasksForCategory:self.categories[indexPath.row]])
                          {
-                             [[ApplicationManager tasksApplicationManager] deleteTask:task];
+                             [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
                          }
                          
-                         [[ApplicationManager categoryApplicationManager] deleteCateroty:self.categories[indexPath.row]];
+                         [[ApplicationManager categoryApplicationManager] deleteCateroty:self.categories[indexPath.row] completion:nil];
                          
                          if(self.categories[indexPath.row].ID==frontVC.category.ID)
                          {

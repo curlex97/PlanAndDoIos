@@ -50,7 +50,7 @@ static bool firstLoad = true;
         {
             NSLog(TL_COMPLETE);
             task.status = YES;
-            [[ApplicationManager tasksApplicationManager] updateTask:task];
+            [[ApplicationManager tasksApplicationManager] updateTask:task completion:nil];
             [self.tasks removeObject:task];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -68,10 +68,10 @@ static bool firstLoad = true;
         {
             KSTaskCollection* col = (KSTaskCollection*)task;
             for(KSShortTask* sub in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:col])
-                [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:col];
+                [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:col completion:nil];
         }
         
-        [[ApplicationManager tasksApplicationManager] deleteTask:task];
+        [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
         [self.tasks removeObject:task];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
         if(!self.tasks.count && self.boxType!=KSBoxTypeArchive)

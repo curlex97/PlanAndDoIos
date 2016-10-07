@@ -29,7 +29,7 @@
         int createdAt = task.createdAt.timeIntervalSince1970 >= [NSDate date].timeIntervalSince1970 ? task.createdAt.timeIntervalSince1970 : [NSDate date].timeIntervalSince1970;
         int taskRemTime = task.taskReminderTime.timeIntervalSince1970 >= [NSDate date].timeIntervalSince1970 ? task.taskReminderTime.timeIntervalSince1970 : [NSDate date].timeIntervalSince1970;
         int compTime = task.completionTime.timeIntervalSince1970 >= [NSDate date].timeIntervalSince1970 ? task.completionTime.timeIntervalSince1970 : [NSDate date].timeIntervalSince1970;
-        int isDel = NO;
+        int isDel = [method isEqualToString:@"deleteMany"];
         int isComp = task.status;
         
         [dataTask setValue:[NSNumber numberWithInteger:task.ID] forKey:@"id"];

@@ -37,7 +37,9 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self.subTasks insertObject:[[KSShortTask alloc] initWithID:0 andName:textField.text andStatus:NO andSyncStatus:0] atIndex:0];
+    int subID = -1*[[NSDate date] timeIntervalSince1970];
+    KSShortTask* sub = [[KSShortTask alloc] initWithID:subID andName:textField.text andStatus:NO andSyncStatus:[[NSDate date] timeIntervalSince1970]];
+    [self.subTasks insertObject:sub atIndex:0];
     [self.tableView reloadData];
     textField.text=@"";
 

@@ -67,7 +67,7 @@
     
     UserSettings* updatedSettings = [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.settings.startPage andDateFormat:self.settings.dateFormat andPageType:self.settings.pageType andTimeFormat:formatTime andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]];
     
-    [[ApplicationManager settingsApplicationManager] updateSettings:updatedSettings];
+    [[ApplicationManager settingsApplicationManager] updateSettings:updatedSettings completion:nil];
     
     [self.navigationController popViewControllerAnimated:YES];
     

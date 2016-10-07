@@ -146,7 +146,7 @@
     if([self.oldEmailTextField.text isEqualToString:user.emailAdress] && [self.emailTextField.text isEqualToString:self.reenterEmailTextField.text])
     {
         user.emailAdress = self.emailTextField.text;
-        [[ApplicationManager userApplicationManager] updateUser:user];
+        [[ApplicationManager userApplicationManager] updateUser:user completion:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_EMAIL_CHANGED object:user];
     }
     [self.navigationController popViewControllerAnimated:YES];

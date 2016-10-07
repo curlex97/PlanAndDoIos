@@ -52,7 +52,7 @@
     return [[[TasksCoreDataManager alloc] init] taskWithId:Id];
 }
 
--(void)addTask:(BaseTask *)task
+-(void)addTask:(BaseTask *)task completion:(void (^)(bool))completed
 {
     if(task.ID > 0) task.ID = -task.ID;
     
@@ -76,10 +76,10 @@
                             
                             for(KSShortTask* sub in realTaskAdd.subTasks)
                             {
-                                [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:realTaskAdd];
+                                [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:realTaskAdd completion:nil];
                                 KSTaskCollection* newRealTaskAdd = [[KSTaskCollection alloc] init];
                                 newRealTaskAdd.ID = taskAddID;
-                                [[ApplicationManager subTasksApplicationManager] addSubTask:sub forTask:newRealTaskAdd];
+                                [[ApplicationManager subTasksApplicationManager] addSubTask:sub forTask:newRealTaskAdd completion:nil];
                             }
                         }
                         
@@ -96,7 +96,7 @@
     
 }
 
--(void)updateTask:(BaseTask *)task
+-(void)updateTask:(BaseTask *)task completion:(void (^)(bool))completed
 {
     [[[TasksCoreDataManager alloc] init] updateTask:task];
     [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status)
@@ -112,7 +112,7 @@
     }];
 }
 
--(void)deleteTask:(BaseTask *)task
+-(void)deleteTask:(BaseTask *)task completion:(void (^)(bool))completed
 {
     [[[TasksCoreDataManager alloc] init] deleteTask:task];
     [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status)

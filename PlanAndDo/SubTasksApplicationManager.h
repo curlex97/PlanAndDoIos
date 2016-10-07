@@ -16,11 +16,11 @@
 
 -(NSArray<KSShortTask*>*) allSubTasksForTask:(KSTaskCollection*)task;
 
--(void)addSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task;
+-(void)addSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task completion:(void (^)(bool))completed;
 
--(void)updateSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task;
+-(void)updateSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task completion:(void (^)(bool))completed;
 
--(void)deleteSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task;
+-(void)deleteSubTask:(KSShortTask*)subTask forTask:(KSTaskCollection*)task completion:(void (^)(bool))completed;
 
 -(void) cleanTable;
 
