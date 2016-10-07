@@ -112,7 +112,8 @@
 
 -(void)loginWithEmail:(NSString *)email andPassword:(NSString *)password completion:(void (^)(bool))completed
 {
-    [[[UserApiManager alloc] init] loginAsyncWithEmail:email andPassword:password completion:^(NSDictionary* dictionary){
+    [[[UserApiManager alloc] init] loginAsyncWithEmail:email andPassword:password completion:^(NSDictionary* dictionary)
+    {
         
         NSString* status = [dictionary valueForKeyPath:@"status"];
         

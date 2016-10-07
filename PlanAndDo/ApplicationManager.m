@@ -8,6 +8,7 @@
 
 #import "ApplicationManager.h"
 #import "FileManager.h"
+#import "Reachability.h"
 
 @implementation ApplicationManager
 
@@ -39,6 +40,37 @@
 +(SyncApplicationManager *)syncApplicationManager
 {
     return [[SyncApplicationManager alloc] init];
+}
+
++(void)startInternetManaging
+{
+    Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+    
+    [reach startNotifier];
+}
+
++(void)reachabilityChanged:(NSNotification *)not
+{
+    Reachability* reach=[not object];
+    
+    if(reach.isReachableViaWiFi)
+    {
+        [[ApplicationManager syncApplicationManager] syncWithCompletion:nil];
+    }
+    else if(reach.isReachableViaWWAN)
+    {
+        [[ApplicationManager syncApplicationManager] syncWithCompletion:nil];
+    }
+    else
+    {
+        //no internet
+        NSLog(@"%@",reach);
+    }
 }
 
 +(void)cleanLocalDataBase
