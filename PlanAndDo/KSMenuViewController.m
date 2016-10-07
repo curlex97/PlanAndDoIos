@@ -36,28 +36,9 @@
 
 -(void)reloadData
 {
-    if(self.state==KSMenuStateSearch)
-    {
-        [[ApplicationManager syncApplicationManager] syncTasksWithCompletion:^(bool completed)
-         {
-            if(completed)
-            {
-                self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasks]];
-                [super reloadData];
-            }
-         }];
-    }
-    else
-    {
-        [[ApplicationManager syncApplicationManager] syncCategoriesWithCompletion:^(bool completed)
-         {
-             if(completed)
-             {
-                 self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
-                 [super reloadData];
-             }
-         }];
-    }
+    self.categories = [NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasks]];
+    [super reloadData];
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer

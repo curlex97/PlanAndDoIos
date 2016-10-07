@@ -33,14 +33,8 @@
 
 -(void)reloadData
 {
-    [[ApplicationManager syncApplicationManager] syncUserWithCompletion:^(bool completed)
-    {
-        if(completed)
-        {
-            self.user = [[ApplicationManager userApplicationManager] authorisedUser];
-            [super reloadData];
-        }
-    }];
+        self.user = [[ApplicationManager userApplicationManager] authorisedUser];
+        [super reloadData];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

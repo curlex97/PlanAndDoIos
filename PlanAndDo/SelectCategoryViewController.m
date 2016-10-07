@@ -17,14 +17,8 @@
 
 -(void)reloadData
 {
-    [[ApplicationManager syncApplicationManager] syncCategoriesWithCompletion:^(bool completed)
-     {
-         if(completed)
-         {
-             self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
-             [super reloadData];
-         }
-     }];
+    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    [super reloadData];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

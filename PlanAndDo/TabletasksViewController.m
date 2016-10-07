@@ -38,14 +38,8 @@ static bool firstLoad = true;
 
 -(void)reloadData
 {
-    [[ApplicationManager syncApplicationManager] syncTasksWithCompletion:^(bool completed)
-    {
-        if(completed)
-        {
-            [self reloadCoreData];
-            [super reloadData];
-        }
-    }];
+    [self reloadCoreData];
+    [super reloadData];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

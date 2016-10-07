@@ -41,11 +41,29 @@
     
     if(reach.isReachableViaWiFi)
     {
-        [self reloadData];
+        [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
+         {
+             if(completed)
+             {
+                 dispatch_async(dispatch_get_main_queue(), ^
+                 {
+                        [self reloadData];
+                 });
+             }
+         }];
     }
     else if(reach.isReachableViaWWAN)
     {
-        [self reloadData];
+        [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
+         {
+             if(completed)
+             {
+                 dispatch_async(dispatch_get_main_queue(), ^
+                                {
+                                    [self reloadData];
+                                });
+             }
+         }];
     }
     else
     {
