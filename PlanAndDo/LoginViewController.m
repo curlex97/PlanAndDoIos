@@ -174,7 +174,7 @@
     {
         if(status)
         {
-            [[ApplicationManager syncApplicationManager] syncWithCompletion:^(bool status){[self showMainWindow:nil];}];
+            [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL status){[self showMainWindow:nil];}];
         }
     }];
 }

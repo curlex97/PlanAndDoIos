@@ -76,7 +76,7 @@
                             
                             for(KSShortTask* sub in realTaskAdd.subTasks)
                             {
-                                [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:realTaskAdd completion:nil];
+                               // [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:realTaskAdd completion:nil];
                                 KSTaskCollection* newRealTaskAdd = [[KSTaskCollection alloc] init];
                                 newRealTaskAdd.ID = taskAddID;
                                 [[ApplicationManager subTasksApplicationManager] addSubTask:sub forTask:newRealTaskAdd completion:nil];
@@ -87,6 +87,7 @@
                     }
                     
                     [self recieveTasksFromDictionary:dictionary];
+                    if(completed) completed(YES);
                     [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
                 }];
             }
@@ -106,6 +107,7 @@
             [[[TasksApiManager alloc] init] updateTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncUpdate] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary)
              {
                  [self recieveTasksFromDictionary:dictionary];
+                 if(completed) completed(YES);
                  [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
              }];
         }
@@ -121,6 +123,7 @@
         {
             [[[TasksApiManager alloc] init] deleteTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncDelete] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
             [self recieveTasksFromDictionary:dictionary];
+                if(completed) completed(YES);
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
             }];
         }

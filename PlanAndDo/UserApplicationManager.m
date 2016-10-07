@@ -27,6 +27,7 @@
     [[[UserCoreDataManager alloc] init] setUser:user];
     [[[SyncApplicationManager alloc] init] syncUserWithCompletion:^(bool status) {
         [[[UserApiManager alloc] init] updateUserAsync:[[[UserCoreDataManager alloc] init] authorisedUserForSync] completion:^(NSDictionary* dictionary){
+            if(completed) completed(YES);
            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_USER object:nil];
         }];
     }];
@@ -40,6 +41,7 @@
         if(status)
         {
             [[[UserApiManager alloc] init] updateUserAsync:[[[UserCoreDataManager alloc] init] authorisedUserForSync] completion:^(NSDictionary* dictionary){
+                if(completed) completed(YES);
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_USER object:nil];
             }];
         }

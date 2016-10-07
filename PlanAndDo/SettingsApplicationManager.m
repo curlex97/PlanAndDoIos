@@ -22,6 +22,7 @@
     [[[SettingsCoreDataManager alloc] init] setSettings:settings];
     [[[SyncApplicationManager alloc] init] syncSettingsWithCompletion:^(bool status) {
         [[[SettingsApiManager alloc] init] updateSettingsAsync:[[[SettingsCoreDataManager alloc] init] settingsForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+            if(completed) completed(YES);
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
         }];
     }];
@@ -35,6 +36,7 @@
         if(status)
         {
             [[[SettingsApiManager alloc] init] updateSettingsAsync:[[[SettingsCoreDataManager alloc] init] settingsForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+                if(completed) completed(YES);
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
             }];
         }

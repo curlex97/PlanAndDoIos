@@ -25,7 +25,7 @@
 }
 
 
--(void)syncWithCompletion:(void (^)(BOOL))completed
+-(void)syncWithCompletion:(void (^)(bool))completed
 {
     [self syncStatusWithCompletion:^(bool status) {
         
