@@ -8,6 +8,7 @@
 
 #import "ApplicationManager.h"
 #import "FileManager.h"
+#import "Reachability.h"
 
 @implementation ApplicationManager
 

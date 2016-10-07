@@ -28,13 +28,19 @@ static bool firstLoad = true;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //self.view.hidden=NO;
+    self.navigationController.toolbarHidden=NO;
     [self refreshData:nil];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.tasks.count;
+}
+
+-(void)reloadData
+{
+    [self reloadCoreData];
+    [super reloadData];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -153,12 +159,6 @@ static bool firstLoad = true;
     [self.navigationController pushViewController:[[AddTaskViewController alloc] initWithCategory:self.category andDate:addTaskDate] animated:YES];
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    self.navigationController.toolbarHidden=NO;
-}
-
 -(void)setStartPageForLoad
 {
     if(!firstLoad) return;
@@ -209,7 +209,6 @@ static bool firstLoad = true;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     [self setStartPageForLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTasksInTable:) name:NC_SYNC_TASKS object:nil];

@@ -28,6 +28,12 @@
 
 }
 
+-(void)reloadData
+{
+        self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+        [super reloadData];
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 2;

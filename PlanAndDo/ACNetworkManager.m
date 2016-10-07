@@ -30,7 +30,7 @@
 {
     NSURL *URL = [NSURL URLWithString:url];
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:3];
     [request setHTTPMethod:queryType];
     
     for(NSString* key in headerDictionary.allKeys)
@@ -51,24 +51,19 @@
     {
         [request setValue:[NSString stringWithFormat:@"0"] forHTTPHeaderField:@"Content-Length"];
     }
-    
+    NSLog(@"%@",request);
 //    [request setValue:[NSString stringWithFormat:@"token b54ba4f473e5e467a3ab2d8bc75885a7867ed6e0"] forHTTPHeaderField:@"Authorization"];
     
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                             completionHandler:
-                                  ^(NSData *data, NSURLResponse *response, NSError *error) {
-                                      if(!error && data){ if(completed) completed(data);}
-                                      else {if(completed) completed(nil);}
-                                  }];
+                                  ^(NSData *data, NSURLResponse *response, NSError *error)
+    {
+            if(!error && data){ if(completed) completed(data);}
+            else {if(completed) completed(nil);}
+    }];
     
     [task resume];
 }
-
-
-/*
- 
-
- */
 
 @end

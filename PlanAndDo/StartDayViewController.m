@@ -17,6 +17,12 @@
 
 @implementation StartDayViewController
 
+-(void)reloadData
+{
+        self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+        [super reloadData];
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];

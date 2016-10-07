@@ -31,6 +31,12 @@
     return 5;
 }
 
+-(void)reloadData
+{
+        self.user = [[ApplicationManager userApplicationManager] authorisedUser];
+        [super reloadData];
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSSettingsCell"owner:self options:nil];

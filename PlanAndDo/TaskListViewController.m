@@ -22,19 +22,6 @@
     return ![touch.view isDescendantOfView:self.tableView];
 }
 
-//-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    
-//    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"Delete"  handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-//    {
-//        [self.subTasks removeObjectAtIndex:indexPath.row];
-//        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-//    }];
-//    deleteAction.backgroundColor = [UIColor redColor];
-//    return @[deleteAction];
-//}
-
-
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     int subID = -1*[[NSDate date] timeIntervalSince1970];

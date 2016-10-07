@@ -34,6 +34,13 @@
 
 @implementation KSMenuViewController
 
+-(void)reloadData
+{
+    self.categories = [NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasks]];
+    [super reloadData];
+}
+
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
         if([self.searchBar isFirstResponder])

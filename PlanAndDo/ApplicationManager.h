@@ -34,4 +34,6 @@
 
 +(void) cleanLocalDataBase;
 
+//+(void)startInternetManaging;
+
 @end
