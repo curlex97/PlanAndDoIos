@@ -8,11 +8,62 @@
 
 #import "BaseTableViewController.h"
 #import "UIImage+ACScaleImage.h"
+#import "Reachability.h"
+#import "ApplicationManager.h"
+
 @interface BaseTableViewController ()
 
 @end
 
 @implementation BaseTableViewController
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+    
+    [reach startNotifier];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+-(void)reachabilityChanged:(NSNotification *)not
+{
+    Reachability* reach=[not object];
+    
+    if(reach.isReachableViaWiFi)
+    {
+        [self reloadData];
+    }
+    else if(reach.isReachableViaWWAN)
+    {
+        [self reloadData];
+    }
+    else
+    {
+        //no internet
+        NSLog(@"%@",reach);
+    }
+    
+}
+
+-(void)reloadData
+{
+    [self.tableView reloadData];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad
 {

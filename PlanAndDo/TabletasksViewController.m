@@ -28,13 +28,24 @@ static bool firstLoad = true;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //self.view.hidden=NO;
     [self refreshData:nil];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.tasks.count;
+}
+
+-(void)reloadData
+{
+    [[ApplicationManager syncApplicationManager] syncTasksWithCompletion:^(bool completed)
+    {
+        if(completed)
+        {
+            [self reloadCoreData];
+            [super reloadData];
+        }
+    }];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

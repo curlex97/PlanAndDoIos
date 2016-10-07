@@ -28,6 +28,18 @@
 
 }
 
+-(void)reloadData
+{
+    [[ApplicationManager syncApplicationManager] syncSettingsWithCompletion:^(bool  completed)
+     {
+         if(completed)
+         {
+             self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+             [super reloadData];
+         }
+     }];
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 2;

@@ -17,6 +17,18 @@
 
 @implementation FormatTimeViewController
 
+-(void)reloadData
+{
+    [[ApplicationManager syncApplicationManager] syncSettingsWithCompletion:^(bool  completed)
+     {
+         if(completed)
+         {
+             self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+             [super reloadData];
+         }
+     }];
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];

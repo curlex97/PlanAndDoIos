@@ -9,6 +9,8 @@
 #import "BaseViewController.h"
 
 @interface BaseTableViewController : BaseViewController
+-(void)reloadData;
+
 @property (nonatomic)UITableView * tableView;
 @property (nonatomic)UIRefreshControl * refresh;
 @property (nonatomic)UIView * emptyTableHeader;
