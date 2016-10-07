@@ -22,7 +22,7 @@
     return [[[CategoryCoreDataManager alloc] init] categoryWithId:Id];
 }
 
--(void)addCateroty:(KSCategory *)category
+-(void)addCateroty:(KSCategory *)category completion:(void (^)(bool))completed
 {
     if(category.ID > 0) category.ID = -category.ID;
     
@@ -38,7 +38,7 @@
     }];
 }
 
--(void)updateCateroty:(KSCategory *)category
+-(void)updateCateroty:(KSCategory *)category completion:(void (^)(bool))completed
 {
     [[[CategoryCoreDataManager alloc] init] updateCateroty:category];
     [[[SyncApplicationManager alloc] init] syncCategoriesWithCompletion:^(bool status)
@@ -53,7 +53,7 @@
     }];
 }
 
--(void)deleteCateroty:(KSCategory *)category
+-(void)deleteCateroty:(KSCategory *)category completion:(void (^)(bool))completed
 {
     [[[CategoryCoreDataManager alloc] init] deleteCateroty:category];
     
@@ -71,7 +71,7 @@
     NSArray * tasks=[[ApplicationManager tasksApplicationManager] allTasksForCategory:category];
     for (BaseTask * task in tasks)
     {
-            [[ApplicationManager tasksApplicationManager] deleteTask:task];
+            [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
     }
 }
 

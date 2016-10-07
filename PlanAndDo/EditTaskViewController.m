@@ -233,7 +233,7 @@
         realTask.name = self.headerText;
         realTask.syncStatus = [[NSDate date] timeIntervalSince1970];
         
-        [[ApplicationManager tasksApplicationManager] updateTask:realTask];
+        [[ApplicationManager tasksApplicationManager] updateTask:realTask completion:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_EDIT object:realTask];
         
     }
@@ -255,12 +255,12 @@
         realTask.name = self.headerText;
         realTask.syncStatus = [[NSDate date] timeIntervalSince1970];
         
-        for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask]) [[ApplicationManager subTasksApplicationManager] deleteSubTask:subTask forTask:realTask];
+        for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask]) [[ApplicationManager subTasksApplicationManager] deleteSubTask:subTask forTask:realTask completion:nil];
         
-        for(KSShortTask* subTask in self.subTasks) [[ApplicationManager subTasksApplicationManager] addSubTask:subTask forTask:realTask];
+        for(KSShortTask* subTask in self.subTasks) [[ApplicationManager subTasksApplicationManager] addSubTask:subTask forTask:realTask completion:nil];
         
         
-        [[ApplicationManager tasksApplicationManager] updateTask:realTask];
+        [[ApplicationManager tasksApplicationManager] updateTask:realTask completion:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_EDIT object:realTask];
     }
     

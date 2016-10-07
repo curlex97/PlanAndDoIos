@@ -15,9 +15,9 @@
 
 -(KSAuthorisedUser*) authorisedUser;
 
--(void)setUser:(KSAuthorisedUser*)user;
+-(void)setUser:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
 
--(void)updateUser:(KSAuthorisedUser*)user;
+-(void)updateUser:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
 
 -(void) loginWithEmail:(NSString*)email andPassword:(NSString*)password completion:(void (^)(bool))completed;
 

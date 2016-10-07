@@ -273,6 +273,7 @@
                 [managedCategory setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_IS_DELETED];
                 [managedCategory setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_LOCAL_SYNC];
                 [managedCategory setValue:[NSNumber numberWithInteger:category.syncStatus] forKey:CD_ROW_CATEGORY_SYNC_STATUS];
+                [self.managedObjectContext deleteObject:managedCategory];
                 [self. managedObjectContext save:nil];
             }
             

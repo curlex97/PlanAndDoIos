@@ -15,11 +15,11 @@
 
 -(NSArray<KSCategory*>*) allCategories;
 
--(void)addCateroty:(KSCategory*)category;
+-(void)addCateroty:(KSCategory*)category completion:(void (^)(bool))completed;
 
--(void)updateCateroty:(KSCategory*)category;
+-(void)updateCateroty:(KSCategory*)category completion:(void (^)(bool))completed;
 
--(void)deleteCateroty:(KSCategory*)category;
+-(void)deleteCateroty:(KSCategory*)category completion:(void (^)(bool))completed;
 
 -(KSCategory*)categoryWithId:(int)Id;
 

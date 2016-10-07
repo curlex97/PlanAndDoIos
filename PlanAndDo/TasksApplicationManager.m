@@ -52,7 +52,7 @@
     return [[[TasksCoreDataManager alloc] init] taskWithId:Id];
 }
 
--(void)addTask:(BaseTask *)task
+-(void)addTask:(BaseTask *)task completion:(void (^)(bool))completed
 {
     if(task.ID > 0) task.ID = -task.ID;
     
@@ -61,23 +61,42 @@
     {
         if(status)
         {
-        NSArray* tasksForAdd = [NSArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasksForSyncAdd]];
-        
-        [[[TasksApiManager alloc] init] addTasksAsync:tasksForAdd forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+            NSArray* tasksForAdd = [NSArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasksForSyncAdd]];
             
-            if([[dictionary valueForKeyPath:@"status"] containsString:@"suc"])
-                for(BaseTask* task in tasksForAdd)
-                    [[[TasksCoreDataManager alloc] init] syncDeleteTask:task];
+            for(BaseTask* taskAdd in tasksForAdd)
+            {
+                [[[TasksApiManager alloc] init] addTasksAsync:@[taskAdd] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+                    
+                    if([[dictionary valueForKeyPath:@"status"] containsString:@"suc"])
+                    {
+                        if([taskAdd isKindOfClass:[KSTaskCollection class]])
+                        {
+                            KSTaskCollection* realTaskAdd = (KSTaskCollection*)taskAdd;
+                            int taskAddID = [[[dictionary valueForKeyPath:@"data"][0] valueForKeyPath:@"id"] intValue];
+                            
+                            for(KSShortTask* sub in realTaskAdd.subTasks)
+                            {
+                                [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:realTaskAdd completion:nil];
+                                KSTaskCollection* newRealTaskAdd = [[KSTaskCollection alloc] init];
+                                newRealTaskAdd.ID = taskAddID;
+                                [[ApplicationManager subTasksApplicationManager] addSubTask:sub forTask:newRealTaskAdd completion:nil];
+                            }
+                        }
+                        
+                        [[[TasksCoreDataManager alloc] init] syncDeleteTask:taskAdd];
+                    }
+                    
+                    [self recieveTasksFromDictionary:dictionary];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
+                }];
+            }
             
-            [self recieveTasksFromDictionary:dictionary];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
-        }];
         }
     }];
     
 }
 
--(void)updateTask:(BaseTask *)task
+-(void)updateTask:(BaseTask *)task completion:(void (^)(bool))completed
 {
     [[[TasksCoreDataManager alloc] init] updateTask:task];
     [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status)
@@ -93,7 +112,7 @@
     }];
 }
 
--(void)deleteTask:(BaseTask *)task
+-(void)deleteTask:(BaseTask *)task completion:(void (^)(bool))completed
 {
     [[[TasksCoreDataManager alloc] init] deleteTask:task];
     [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status)

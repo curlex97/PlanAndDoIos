@@ -77,7 +77,7 @@
     [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.boxes[indexPath.row] andDateFormat:self.settings.dateFormat andPageType:NM_BOX.lowercaseString andTimeFormat:self.settings.timeFormat andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]] :
     [[UserSettings alloc] initWithID:self.settings.ID andStartPage:((KSCategory*)self.categories[indexPath.row]).name andDateFormat:self.settings.dateFormat andPageType:NM_CATEGORY.lowercaseString andTimeFormat:self.settings.timeFormat andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]];
     
-    [[ApplicationManager settingsApplicationManager] updateSettings:updatedSettings];
+    [[ApplicationManager settingsApplicationManager] updateSettings:updatedSettings completion:nil];
  
     [self.navigationController popViewControllerAnimated:YES];
     

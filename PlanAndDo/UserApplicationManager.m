@@ -20,7 +20,7 @@
     return [KSAuthorisedUser currentUser] ? [KSAuthorisedUser currentUser] : [[[UserCoreDataManager alloc] init] authorisedUser];
 }
 
--(void)setUser:(KSAuthorisedUser *)user
+-(void)setUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
 {
     
     
@@ -32,7 +32,7 @@
     }];
 }
 
--(void)updateUser:(KSAuthorisedUser *)user
+-(void)updateUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
 {
     [[[UserCoreDataManager alloc] init] updateUser:user];
     [[[SyncApplicationManager alloc] init] syncUserWithCompletion:^(bool status)
@@ -97,7 +97,7 @@
                 NSString* catName = [defaultCategory valueForKeyPath:@"category_name"];
                 int catSyncStatus = [[defaultCategory valueForKeyPath:@"data.users.user_sync_status"] intValue];
 
-                [[ApplicationManager categoryApplicationManager] addCateroty:[[KSCategory alloc] initWithID:catID andName:catName andSyncStatus:catSyncStatus]];
+                [[ApplicationManager categoryApplicationManager] addCateroty:[[KSCategory alloc] initWithID:catID andName:catName andSyncStatus:catSyncStatus] completion:nil];
                 
             }
             

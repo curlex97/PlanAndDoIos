@@ -17,7 +17,7 @@
     return [[[SettingsCoreDataManager alloc] init] settings];
 }
 
--(void)setSettings:(UserSettings *)settings
+-(void)setSettings:(UserSettings *)settings completion:(void (^)(bool))completed
 {
     [[[SettingsCoreDataManager alloc] init] setSettings:settings];
     [[[SyncApplicationManager alloc] init] syncSettingsWithCompletion:^(bool status) {
@@ -27,7 +27,7 @@
     }];
 }
 
--(void)updateSettings:(UserSettings *)settings
+-(void)updateSettings:(UserSettings *)settings completion:(void (^)(bool))completed
 {
     [[[SettingsCoreDataManager alloc] init] updateSettings:settings];
     [[[SyncApplicationManager alloc] init] syncSettingsWithCompletion:^(bool status)

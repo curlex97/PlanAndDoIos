@@ -40,7 +40,7 @@
     
     KSAuthorisedUser* user = [[ApplicationManager userApplicationManager] authorisedUser];
     user.settings = self.settings;
-    [[ApplicationManager userApplicationManager] updateUser:user];
+    [[ApplicationManager userApplicationManager] updateUser:user completion:nil];
     
     [self.tableView reloadData];
 }

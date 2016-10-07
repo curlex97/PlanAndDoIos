@@ -83,7 +83,7 @@
         UIAlertAction * okAction=[UIAlertAction actionWithTitle:TL_OK style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
                                   {
                                       self.user.userName=alertController.textFields.firstObject.text;
-                                      [[ApplicationManager userApplicationManager] updateUser:self.user];
+                                      [[ApplicationManager userApplicationManager] updateUser:self.user completion:nil];
                                       [self.tableView reloadData];
                                   }];
         

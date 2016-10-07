@@ -32,11 +32,11 @@
 
 -(BaseTask*)taskWithId:(int)Id;
 
--(void) updateTask:(BaseTask*)task;
+-(void) updateTask:(BaseTask*)task completion:(void (^)(bool))completed;
 
--(void)addTask:(BaseTask*)task;
+-(void)addTask:(BaseTask*)task completion:(void (^)(bool))completed;
 
--(void)deleteTask:(BaseTask*)task;
+-(void)deleteTask:(BaseTask*)task completion:(void (^)(bool))completed;
 
 -(void) cleanTable;
 

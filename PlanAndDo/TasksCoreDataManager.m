@@ -443,7 +443,7 @@
     {
         for(NSManagedObject* managedTask in results)
         {
-            NSUInteger ID = [[managedTask valueForKey:CD_ROW_ID] integerValue];
+            int ID = [[managedTask valueForKey:CD_ROW_ID] intValue];
             if(ID == [task ID])
             {
                 if([task isKindOfClass:[KSTask class]])
@@ -503,7 +503,7 @@
     {
         for(NSManagedObject* managedTask in results)
         {
-            NSUInteger ID = [[managedTask valueForKey:CD_ROW_ID] integerValue];
+            int ID = [[managedTask valueForKey:CD_ROW_ID] intValue];
             if(ID == [task ID])
             {
                 [managedTask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_IS_DELETED];
@@ -587,7 +587,7 @@
     {
         for(NSManagedObject* managedTask in results)
         {
-            NSUInteger ID = [[managedTask valueForKey:CD_ROW_ID] integerValue];
+            int ID = [[managedTask valueForKey:CD_ROW_ID] intValue];
             if(ID == [task ID])
             {
                 if([task isKindOfClass:[KSTask class]])
@@ -647,13 +647,10 @@
     {
         for(NSManagedObject* managedTask in results)
         {
-            NSUInteger ID = [[managedTask valueForKey:CD_ROW_ID] integerValue];
+            int ID = [[managedTask valueForKey:CD_ROW_ID] intValue];
             if(ID == [task ID])
             {
-                [managedTask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_IS_DELETED];
-                [managedTask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_LOCAL_SYNC];
-                [managedTask setValue:[NSNumber numberWithInteger:task.syncStatus] forKey:CD_ROW_TASK_SYNC_STATUS];
-                
+                [self.managedObjectContext deleteObject:managedTask];
                 [self.managedObjectContext save:nil];
                 return;
             }

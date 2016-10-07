@@ -15,9 +15,9 @@
 
 -(UserSettings*) settings;
 
--(void)setSettings:(UserSettings*)settings;
+-(void)setSettings:(UserSettings*)settings completion:(void (^)(bool))completed;
 
--(void)updateSettings:(UserSettings*)settings;
+-(void)updateSettings:(UserSettings*)settings completion:(void (^)(bool))completed;
 
 -(void) cleanTable;
 
