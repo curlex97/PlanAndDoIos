@@ -26,15 +26,14 @@
     {
         if(status)
         {
-            NSArray* subTasksForAdd = [NSArray arrayWithArray:[[[SubTasksCoreDataManager alloc] init] allSubTasksForSyncAdd]];
-            [[[SubTasksApiManager alloc] init] addSubTasksAsync:subTasksForAdd toTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+            [[[SubTasksApiManager alloc] init] addSubTasksAsync:@[subTask] toTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
                 
                 if([[dictionary valueForKeyPath:@"status"] containsString:@"suc"])
-                    for(KSShortTask* sub in subTasksForAdd)
-                        [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:task completion:nil];
+                        [[ApplicationManager subTasksApplicationManager] deleteSubTask:subTask forTask:task completion:nil];
                 
                 
             [self recieveSubTasksFromDictionary:dictionary];
+                if(completed) completed(YES);
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
             }];
         }
@@ -49,9 +48,10 @@
      {
          if(status)
          {
-             [[[SubTasksApiManager alloc] init] updateSubTasksAsync:[[[SubTasksCoreDataManager alloc] init] allSubTasksForSyncUpdate] inTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+             [[[SubTasksApiManager alloc] init] updateSubTasksAsync:@[subTask] inTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
                  
                  [self recieveSubTasksFromDictionary:dictionary];
+                 if(completed) completed(YES);
                 [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
              }];
          }
@@ -66,9 +66,10 @@
     {
         if(status)
         {
-            [[[SubTasksApiManager alloc] init] deleteSubTasksAsync:[[[SubTasksCoreDataManager alloc] init] allSubTasksForSyncDelete] fromTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+            [[[SubTasksApiManager alloc] init] deleteSubTasksAsync:@[subTask] fromTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
                 
                 [self recieveSubTasksFromDictionary:dictionary];
+                if(completed) completed(YES);
                 [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SUBTASKS object:nil];
             }];
         }

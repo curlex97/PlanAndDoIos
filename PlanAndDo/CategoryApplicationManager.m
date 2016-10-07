@@ -32,6 +32,7 @@
         if(status)
         {
             [[[CategoryApiManager alloc] init] addCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncAdd] forUser:[[ApplicationManager userApplicationManager] authorisedUser] completion:^(NSDictionary* dictionary){
+                if(completed) completed(YES);
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
             }];
         }
@@ -47,6 +48,7 @@
         {
             [[[CategoryApiManager alloc] init] updateCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncUpdate] forUser:  [[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary)
             {
+                if(completed) completed(YES);
                 [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
             }];
         }
@@ -63,6 +65,7 @@
         {
             [[[CategoryApiManager alloc] init] deleteCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncDelete] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary)
             {
+                if(completed) completed(YES);
                 [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
             }];
         }
