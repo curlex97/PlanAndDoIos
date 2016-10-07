@@ -241,7 +241,7 @@
 {
     [super viewWillAppear:animated];
     NSDate *now = [NSDate date];
-    self.Id = now.timeIntervalSince1970;
+    self.Id = -1*now.timeIntervalSince1970;
     [self.tableView reloadData];
 }
 

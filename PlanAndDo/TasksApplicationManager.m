@@ -61,17 +61,36 @@
     {
         if(status)
         {
-        NSArray* tasksForAdd = [NSArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasksForSyncAdd]];
-        
-        [[[TasksApiManager alloc] init] addTasksAsync:tasksForAdd forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+            NSArray* tasksForAdd = [NSArray arrayWithArray:[[[TasksCoreDataManager alloc] init] allTasksForSyncAdd]];
             
-            if([[dictionary valueForKeyPath:@"status"] containsString:@"suc"])
-                for(BaseTask* task in tasksForAdd)
-                    [[[TasksCoreDataManager alloc] init] syncDeleteTask:task];
+            for(BaseTask* taskAdd in tasksForAdd)
+            {
+                [[[TasksApiManager alloc] init] addTasksAsync:@[taskAdd] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+                    
+                    if([[dictionary valueForKeyPath:@"status"] containsString:@"suc"])
+                    {
+                        if([taskAdd isKindOfClass:[KSTaskCollection class]])
+                        {
+                            KSTaskCollection* realTaskAdd = (KSTaskCollection*)taskAdd;
+                            int taskAddID = [[[dictionary valueForKeyPath:@"data"][0] valueForKeyPath:@"id"] intValue];
+                            
+                            for(KSShortTask* sub in realTaskAdd.subTasks)
+                            {
+                                [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:realTaskAdd];
+                                KSTaskCollection* newRealTaskAdd = [[KSTaskCollection alloc] init];
+                                newRealTaskAdd.ID = taskAddID;
+                                [[ApplicationManager subTasksApplicationManager] addSubTask:sub forTask:newRealTaskAdd];
+                            }
+                        }
+                        
+                        [[[TasksCoreDataManager alloc] init] syncDeleteTask:taskAdd];
+                    }
+                    
+                    [self recieveTasksFromDictionary:dictionary];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
+                }];
+            }
             
-            [self recieveTasksFromDictionary:dictionary];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
-        }];
         }
     }];
     
