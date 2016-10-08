@@ -125,10 +125,10 @@ static bool firstLoad = true;
     }
     else
     {
-        date=[NSString stringWithFormat:@"%li/%li/%li", components.day,components.month,components.year];
+        date=[NSString stringWithFormat:@"%li/%li/%li", (long)components.day,(long)components.month,(long)components.year];
     }
     cell.taskDateLabel.text = date;
-    cell.taskTimeLabel.text = [NSString stringWithFormat:@"%li:%@%li", (long)[components hour],[components minute]<10?@"0":@"", [components minute]];;
+    cell.taskTimeLabel.text = [NSString stringWithFormat:@"%li:%@%li", (long)[components hour],[components minute]<10?@"0":@"", (long)[components minute]];;
     
     return cell;
 }

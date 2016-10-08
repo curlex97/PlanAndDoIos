@@ -25,7 +25,7 @@
 }
 
 
--(void)syncWithCompletion:(void (^)(bool))completed
+-(void)syncWithCompletion:(void (^)(BOOL))completed
 {
     [FileManager writeLastSyncTimeToFile:[NSString stringWithFormat:@"%i", 1]];
     [self syncStatusWithCompletion:^(bool status) {
