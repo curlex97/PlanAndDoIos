@@ -42,14 +42,14 @@
     [dic setValue:method forKey:@"method"];
     [dic setValue:data forKey:@"data"];
     
-    if(task.ID >= 0)
-    {
-        
-    }
-    
     [self dataByData:dic completion:^(NSData * data) {
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         if(completed) completed(json);
+        if(!json)
+        {
+            NSString* str = [NSString stringWithUTF8String:[data bytes]];
+            str = @"";
+        }
     }];
 }
 

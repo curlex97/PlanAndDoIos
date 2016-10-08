@@ -15,7 +15,32 @@
 
 -(void)updateSettingsAsync:(UserSettings *)settings forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
+    NSMutableDictionary* dic = [NSMutableDictionary dictionary];
+    NSMutableDictionary* data = [NSMutableDictionary dictionary];
+
+    [data setValue:settings.startPage.lowercaseString forKey:@"start_page"];
+    [data setValue:settings.dateFormat.lowercaseString forKey:@"date_format"];
+    [data setValue:settings.timeFormat.lowercaseString forKey:@"time_format"];
+    [data setValue:settings.startDay.lowercaseString forKey:@"start_day"];
+    [data setValue:[NSNumber numberWithInteger:settings.syncStatus] forKey:@"settings_sync_status"];
+
+    [dic setValue:[NSNumber numberWithInteger:user.ID] forKey:@"user_id"];
+    [dic setValue:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"device_id"];
+    [dic setValue:[FileManager readTokenFromFile] forKey:@"token"];
+    [dic setValue:@"setting" forKey:@"class"];
+    [dic setValue:@"setSettings" forKey:@"method"];
+    [dic setValue:data forKey:@"data"];
     
+    [self dataByData:dic completion:^(NSData * data) {
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        if(completed) completed(json);
+        if(!json)
+        {
+            NSString* str = [NSString stringWithUTF8String:[data bytes]];
+            str = @"";
+        }
+    }];
+
 }
 
 -(void) syncSettingsWithCompletion:(void (^)(NSDictionary*))completed

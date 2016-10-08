@@ -69,7 +69,14 @@
 
 -(void)logout
 {
-    
+    KSAuthorisedUser* user = [[[UserApplicationManager alloc] init] authorisedUser];
+    NSMutableDictionary* data = [NSMutableDictionary dictionary];
+    [data setValue:[NSNumber numberWithInt:user.ID] forKey:@"user_id"];
+    [data setValue:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"device_id"];
+    [data setValue:[FileManager readTokenFromFile] forKey:@"token"];
+    [data setValue:@"user" forKey:@"class"];
+    [data setValue:@"logout" forKey:@"method"];
+    [self dataByData:data completion:nil];
 }
 
 -(void)syncUserWithCompletion:(void (^)(NSDictionary*))completed

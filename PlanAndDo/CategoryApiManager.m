@@ -12,19 +12,56 @@
 
 @implementation CategoryApiManager
 
+
+-(void)toServerWithMethod:(NSString*)method andCategories:(NSArray *)categories forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
+{
+    NSMutableArray* data = [NSMutableArray array];
+    NSMutableDictionary* dic = [NSMutableDictionary dictionary];
+    
+    for(KSCategory* category in categories)
+    {
+        NSMutableDictionary* dataCategory = [NSMutableDictionary dictionary];
+        int isDel = [method isEqualToString:@"deleteMany"];
+        
+        [dataCategory setValue:[category name] forKey:@"category_name"];
+        [dataCategory setValue:[NSNumber numberWithInteger:user.ID] forKey:@"user_id"];
+        [dataCategory setValue:[NSNumber numberWithInt:isDel] forKey:@"is_deleted"];
+        [dataCategory setValue:[NSNumber numberWithInteger:[category syncStatus]] forKey:@"category_sync_status"];
+
+        [data addObject:dataCategory];
+    }
+    
+    [dic setValue:[NSNumber numberWithInteger:user.ID] forKey:@"user_id"];
+    [dic setValue:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"device_id"];
+    [dic setValue:[FileManager readTokenFromFile] forKey:@"token"];
+    [dic setValue:@"category" forKey:@"class"];
+    [dic setValue:method forKey:@"method"];
+    [dic setValue:data forKey:@"data"];
+    
+    [self dataByData:dic completion:^(NSData * data) {
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        if(completed) completed(json);
+        if(!json)
+        {
+            NSString* str = [NSString stringWithUTF8String:[data bytes]];
+            str = @"";
+        }
+    }];
+}
+
 -(void)addCategoriesAsync:(NSArray *)categories forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
-
+    [self toServerWithMethod:@"addMany" andCategories:categories forUser:user completion:completed];
 }
 
 -(void)updateCategoriesAsync:(NSArray *)categories forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
-    
+    [self toServerWithMethod:@"updateMany" andCategories:categories forUser:user completion:completed];
 }
 
 -(void)deleteCategoriesAsync:(NSArray *)categories forUser:(KSAuthorisedUser *)user completion:(void (^)(NSDictionary*))completed
 {
-    
+    [self toServerWithMethod:@"deleteMany" andCategories:categories forUser:user completion:completed];
 }
 
 -(void)syncCategoriesWithCompletion:(void (^)(NSDictionary*))completed
