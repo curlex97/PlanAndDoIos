@@ -116,19 +116,21 @@
 
 -(void)deleteTask:(BaseTask *)task completion:(void (^)(bool))completed
 {
-    [[[TasksCoreDataManager alloc] init] deleteTask:task];
-    [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
     {
-        if(status)
-        {
-            [[[TasksApiManager alloc] init] deleteTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncDelete] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
-            [self recieveTasksFromDictionary:dictionary];
-                if(completed) completed(YES);
-            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
-            }];
-        }
-    }];
-
+        [[[TasksCoreDataManager alloc] init] deleteTask:task];
+        [[[SyncApplicationManager alloc] init] syncTasksWithCompletion:^(bool status)
+         {
+             if(status)
+             {
+                 [[[TasksApiManager alloc] init] deleteTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncDelete] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+                     [self recieveTasksFromDictionary:dictionary];
+                     if(completed) completed(YES);
+                     [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
+                 }];
+             }
+         }];
+    });
 }
 
 -(void) recieveTasksFromDictionary:(NSDictionary*)dictionary

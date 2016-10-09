@@ -61,6 +61,8 @@
 
 -(void)deleteSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task completion:(void (^)(bool))completed
 {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
     [[[SubTasksCoreDataManager alloc] init] deleteSubTask:subTask forTask:task];
     [[[SyncApplicationManager alloc] init] syncSubTasksWithCompletion:^(bool status)
     {
@@ -74,6 +76,7 @@
             }];
         }
     }];
+    });
 }
 
 -(void)recieveSubTasksFromDictionary:(NSDictionary *)dictionary
