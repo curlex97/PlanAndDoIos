@@ -41,6 +41,13 @@
     [super reloadData];
 }
 
+-(void)refreshDidSwipe
+{
+    self.categories = [NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasks]];
+    [super refreshDidSwipe];
+}
+
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
         if([self.searchBar isFirstResponder])

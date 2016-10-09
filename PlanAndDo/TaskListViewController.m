@@ -32,6 +32,8 @@
 
     return YES;
 }
+
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.subTasks.count;

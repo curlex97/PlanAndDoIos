@@ -39,6 +39,7 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 -(void)reachabilityChanged:(NSNotification *)not
 {
     Reachability* reach=[not object];
@@ -107,6 +108,26 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+-(void)refreshDidSwipe
+{
+    [self.tableView reloadData];
+    [self.refresh endRefreshing];
+}
+
+-(void)refreshDidSwipeEvent
+{
+    [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
+     {
+         if(completed)
+         {
+             dispatch_async(dispatch_get_main_queue(), ^
+             {
+                    [self refreshDidSwipe];
+             });
+         }
+     }];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -114,6 +135,7 @@
     self.refresh=[[UIRefreshControl alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-15, 0, 40, 40)];
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     [self.tableView addSubview:self.refresh];
+    [self.refresh addTarget:self action:@selector(refreshDidSwipeEvent) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:self.tableView];
     
     self.loadContentView=[[UIView alloc] initWithFrame:self.view.bounds];
@@ -167,22 +189,6 @@
     [self setConstraints];
 }
 
--(UIView *)emptyTableHeader
-{
-    if(_emptyTableHeader.constraints.count==2)
-    {
-//        UIImageView * view=self.emptyTableHeader.subviews.firstObject;
-//        [UIView animateWithDuration:1 animations:^
-//        {
-//            view.frame=CGRectMake(0, 0, view.bounds.size.width/2, view.bounds.size.height/2);
-//        }];
-    }
-    else
-    {
-        
-    }
-    return _emptyTableHeader;
-}
 -(void)setConstraints
 {
     self.trailing =[NSLayoutConstraint

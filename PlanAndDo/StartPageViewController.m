@@ -25,6 +25,12 @@
     [super reloadData];
 }
 
+-(void)refreshDidSwipe
+{
+    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+    [super refreshDidSwipe];
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];

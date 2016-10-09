@@ -10,6 +10,7 @@
 
 @interface BaseTableViewController : BaseViewController
 -(void)reloadData;
+-(void)refreshDidSwipe;
 
 @property (nonatomic)UITableView * tableView;
 @property (nonatomic)UIRefreshControl * refresh;

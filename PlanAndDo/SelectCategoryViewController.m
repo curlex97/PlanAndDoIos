@@ -17,8 +17,14 @@
 
 -(void)reloadData
 {
-    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+
     [super reloadData];
+}
+
+-(void)refreshDidSwipe
+{
+    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    [super refreshDidSwipe];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

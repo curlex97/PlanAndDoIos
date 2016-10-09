@@ -189,13 +189,12 @@ static bool firstLoad = true;
     firstLoad = false;
 }
 
--(void)refreshDidTap
+-(void)refreshDidSwipe
 {
     [self.tasks removeAllObjects];
     
     [self reloadCoreData];
-    [self.tableView reloadData];
-    [self.refresh endRefreshing];
+    [super refreshDidSwipe];
 }
 
 -(void)refreshTasksInTable:(NSNotification*)not
@@ -216,7 +215,6 @@ static bool firstLoad = true;
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     
-    [self.refresh addTarget:self action:@selector(refreshDidTap) forControlEvents:UIControlEventValueChanged];
     
     UIBarButtonItem * addButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTaskTapped)];
     self.navigationItem.rightBarButtonItem=addButton;
