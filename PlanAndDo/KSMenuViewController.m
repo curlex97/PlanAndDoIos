@@ -280,22 +280,27 @@
         NSDateComponents *tomorrowComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitHour | NSCalendarUnitMinute fromDate:[NSDate dateWithTimeIntervalSince1970:[NSDate date].timeIntervalSince1970 + 86400]];
         
         NSString * date;
-        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.locale=[NSLocale systemLocale];
         if(currentComponents.day==components.day&&currentComponents.month==components.month&&currentComponents.year==components.year)
         {
             date=@"Today";
+            cell.taskDateLabel.text = date;
         }
         else if(tomorrowComponents.day==components.day&&tomorrowComponents.month==components.month&&tomorrowComponents.year==components.year)
         {
             date=@"Tomorrow";
+            cell.taskDateLabel.text = date;
         }
         else
         {
-            date=[NSString stringWithFormat:@"%li/%li/%li", (long)components.day,(long)components.month,(long)components.year];
+            date=[ApplicationManager settingsApplicationManager].settings.dateFormat;
+            [dateFormatter setDateFormat:date];
+            cell.taskDateLabel.text = [dateFormatter stringFromDate:task.completionTime];
         }
-        cell.taskDateLabel.text = date;
-        cell.taskTimeLabel.text = [NSString stringWithFormat:@"%li:%@%li", (long)[components hour],[components minute]<10?@"0":@"", (long)[components minute]];;
         
+        [dateFormatter setDateFormat:[ApplicationManager settingsApplicationManager].settings.timeFormat];
+        cell.taskTimeLabel.text = [dateFormatter stringFromDate:task.completionTime];        
         return cell;
     }
     else

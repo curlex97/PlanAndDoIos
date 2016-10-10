@@ -251,7 +251,12 @@
     [super viewDidLoad];
     self.headerText=NM_TASK_HEAD;
     self.title=NM_ADD_TASK;
-    if(!self.completionTime)self.completionTime = [NSDate date];
+    if(!self.completionTime)
+    {
+        self.completionTime = [NSDate date];
+    }
+    
+    [self.refresh removeFromSuperview];
     
     UIBarButtonItem * doneItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneDidTap)];
     doneItem.tintColor=[UIColor whiteColor];
@@ -329,6 +334,12 @@
         [[ApplicationManager tasksApplicationManager] addTask: task completion:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_ADD object:task];
     }
+    
+//    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+//    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:3];
+//    localNotification.alertBody = @"Your alert message";
+//    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+//    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

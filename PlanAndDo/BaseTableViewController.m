@@ -49,7 +49,6 @@
         if(!self.currentReachStatus)
         {
             UIView * toolBarHidenView=[[UIView alloc] initWithFrame:self.navigationController.toolbar.frame];
-            NSLog(@"%@",self.navigationController);
             toolBarHidenView.backgroundColor=[UIColor colorWithWhite:0.0 alpha:0.5];
             [self.navigationController.toolbar addSubview:toolBarHidenView];
             [self.navigationController.view addSubview:self.loadContentView];
@@ -72,17 +71,19 @@
     {
         if(!self.currentReachStatus)
         {
-            
-            [self.view addSubview:self.loadContentView];
+            UIView * toolBarHidenView=[[UIView alloc] initWithFrame:self.navigationController.toolbar.frame];
+            toolBarHidenView.backgroundColor=[UIColor colorWithWhite:0.0 alpha:0.5];
+            [self.navigationController.toolbar addSubview:toolBarHidenView];
+            [self.navigationController.view addSubview:self.loadContentView];
             [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
              {
-                 [self.view addSubview:self.loadContentView];
                  if(completed)
                  {
                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                                     {
                                         [self reloadData];
                                         [self.loadContentView removeFromSuperview];
+                                        [toolBarHidenView removeFromSuperview];
                                         self.currentReachStatus=YES;
                                     });
                  }
