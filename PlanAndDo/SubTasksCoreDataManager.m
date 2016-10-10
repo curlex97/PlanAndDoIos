@@ -195,6 +195,8 @@
 
 -(void)deleteSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
     NSError* error = nil;
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SUBTASK];
     NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -216,6 +218,7 @@
             }
         }
     }
+    });
 }
 
 -(void)cleanTable
@@ -275,27 +278,30 @@
 
 -(void)syncDeleteSubTask:(KSShortTask *)subTask forTask:(KSTaskCollection *)task
 {
-    NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SUBTASK];
-    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
-    if(!error)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
     {
-        for(NSManagedObject* managedSubtask in results)
+        NSError* error = nil;
+        NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_SUBTASK];
+        NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        
+        if(!error)
         {
-            int taskID = [[managedSubtask valueForKey:CD_ROW_TASK_ID] intValue];
-            int ID = [[managedSubtask valueForKey:CD_ROW_ID] intValue];
-            
-            if(taskID == [task ID] && ID == [subTask ID])
+            for(NSManagedObject* managedSubtask in results)
             {
-                [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_IS_DELETED];
-                [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_LOCAL_SYNC];
-                [managedSubtask setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:CD_SUBTASK_SYNC_STATUS];
-                [self.managedObjectContext deleteObject:managedSubtask];
-                [self.managedObjectContext save:nil];
+                int taskID = [[managedSubtask valueForKey:CD_ROW_TASK_ID] intValue];
+                int ID = [[managedSubtask valueForKey:CD_ROW_ID] intValue];
+                
+                if(taskID == [task ID] && ID == [subTask ID])
+                {
+                    [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_IS_DELETED];
+                    [managedSubtask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_LOCAL_SYNC];
+                    [managedSubtask setValue:[NSNumber numberWithInteger:subTask.syncStatus] forKey:CD_SUBTASK_SYNC_STATUS];
+                    [self.managedObjectContext deleteObject:managedSubtask];
+                    [self.managedObjectContext save:nil];
+                }
             }
         }
-    }
+    });
 }
 
 

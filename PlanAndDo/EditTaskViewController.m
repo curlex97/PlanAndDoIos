@@ -287,6 +287,8 @@
         self.subTasks = [NSMutableArray arrayWithArray:[[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask]];
     }
     
+    [self.refresh removeFromSuperview];
+    
     self.headerText = self.task.name;
     
     //self.pan=[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gesturePan)];
