@@ -23,15 +23,19 @@
         [super reloadData];
 }
 
+-(void)refreshDidSwipe
+{
+    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+    [super refreshDidSwipe];
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
     self.title=NM_FORMAT_TIME;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-
     self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
-
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

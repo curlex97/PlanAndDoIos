@@ -1,4 +1,3 @@
-
 #import "TaskListViewController.h"
 #import "MGSwipeButton.h"
 #import "MGSwipeTableCell.h"
@@ -32,6 +31,8 @@
 
     return YES;
 }
+
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.subTasks.count;

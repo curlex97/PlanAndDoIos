@@ -41,6 +41,13 @@
     [super reloadData];
 }
 
+-(void)refreshDidSwipe
+{
+    self.categories = [NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasks]];
+    [super refreshDidSwipe];
+}
+
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
         if([self.searchBar isFirstResponder])
@@ -301,10 +308,6 @@
             label.text=[self.categories[indexPath.row] name];
             NSLog(@"%@",self.categories[0].name);
             [cell addSubview:label];
-            //        if(indexPath.row==self.categories.count-1)
-            //        {
-            //            cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
-            //        }
         }
         else if(indexPath.section==2)
         {
@@ -544,7 +547,17 @@
                              [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
                          }
                          
-                         [[ApplicationManager categoryApplicationManager] deleteCateroty:self.categories[indexPath.row] completion:nil];
+                         [[ApplicationManager categoryApplicationManager] deleteCateroty:self.categories[indexPath.row] completion:^(bool completed)
+                          {
+                              if(completed)
+                              {
+                                  self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
+                                  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
+                                                 {
+                                                     [self.tableView reloadData];
+                                                 });
+                              }
+                          }];
                          
                          if(self.categories[indexPath.row].ID==frontVC.category.ID)
                          {
@@ -552,20 +565,21 @@
                              ((void (*)(id, SEL))[frontVC methodForSelector:selector])(frontVC, selector);
                          }
                          
-                         self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
+                         [self.categories removeObjectAtIndex:indexPath.row];
+                         //self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
                          [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
 
                          
                          if(self.categories.count==0)
                          {
-                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
+                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
                                             {
                                                 [self.tableView reloadData];
                                             });
-                                         }
-                                     });
+                         }
+                    });
 
-                                              }];
+                }];
                   [alertController addAction:cancelAction];
                   [alertController addAction:deleteAction];
                   [self.parentController presentViewController:alertController animated:YES completion:nil];

@@ -30,8 +30,14 @@
 
 -(void)reloadData
 {
-        self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
-        [super reloadData];
+    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+    [super reloadData];
+}
+
+-(void)refreshDidSwipe
+{
+    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+    [super refreshDidSwipe];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

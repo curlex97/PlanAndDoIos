@@ -79,8 +79,6 @@
             
             UserSettings *settings = [[UserSettings alloc] initWithID:settingsID andStartPage:startPage andDateFormat:dateFormat andPageType:pageType andTimeFormat:timeFormat andStartDay:startDay andSyncStatus:syncStatus];
             
-            ///////////////////////////
-            
             
             KSAuthorisedUser* user = [[KSAuthorisedUser alloc] initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:createDate andLastVisitDate:lastVisitDate andSyncStatus:syncStatus andAccessToken:token andUserSettings:settings];
             user.apiToken = token;
@@ -176,8 +174,11 @@
 
 -(void)logout
 {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
     [ApplicationManager cleanLocalDataBase];
-    [[[UserApiManager alloc] init] logout];		
+    [[[UserApiManager alloc] init] logout];
+    });
 }
 
 @end

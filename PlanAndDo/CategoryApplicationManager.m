@@ -57,25 +57,26 @@
 
 -(void)deleteCateroty:(KSCategory *)category completion:(void (^)(bool))completed
 {
-    [[[CategoryCoreDataManager alloc] init] deleteCateroty:category];
-    
-    [[[SyncApplicationManager alloc] init] syncCategoriesWithCompletion:^(bool status)
-    {
-        if(status)
-        {
-            [[[CategoryApiManager alloc] init] deleteCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncDelete] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary)
-            {
-                if(completed) completed(YES);
-                [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
-            }];
-        }
-    }];
-    
     NSArray * tasks=[[ApplicationManager tasksApplicationManager] allTasksForCategory:category];
     for (BaseTask * task in tasks)
     {
-            [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
+        [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
     }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
+        [[[CategoryCoreDataManager alloc] init] deleteCateroty:category];
+        [[[SyncApplicationManager alloc] init] syncCategoriesWithCompletion:^(bool status)
+         {
+             if(status)
+             {
+                 [[[CategoryApiManager alloc] init] deleteCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncDelete] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary)
+                  {
+                      if(completed) completed(YES);
+                      [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
+                }];
+             }
+         }];
+    });
 }
 
 -(void)recieveCategoriesFromDictionary:(NSDictionary *)dictionary

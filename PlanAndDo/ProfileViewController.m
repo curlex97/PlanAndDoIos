@@ -33,8 +33,14 @@
 
 -(void)reloadData
 {
-        self.user = [[ApplicationManager userApplicationManager] authorisedUser];
-        [super reloadData];
+    self.user = [[ApplicationManager userApplicationManager] authorisedUser];
+    [super reloadData];
+}
+
+-(void)refreshDidSwipe
+{
+    self.user = [[ApplicationManager userApplicationManager] authorisedUser];
+    [super refreshDidSwipe];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

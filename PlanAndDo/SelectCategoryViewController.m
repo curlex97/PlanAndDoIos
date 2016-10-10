@@ -17,8 +17,14 @@
 
 -(void)reloadData
 {
-    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+
     [super reloadData];
+}
+
+-(void)refreshDidSwipe
+{
+    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    [super refreshDidSwipe];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -72,9 +78,9 @@
     self.categories = [NSArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
