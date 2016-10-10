@@ -23,5 +23,6 @@
 
 -(void) recieveSettingsFromDictionary:(NSDictionary*)dictionary;
 
+-(NSString *)timeWith:(NSDateComponents *)components;
 
 @end

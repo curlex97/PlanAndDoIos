@@ -91,7 +91,7 @@
             break;
         case 2:
             cell.textLabel.text = NM_FORMAT_TIME;
-            cell.paramValueLabel.text = [NSString stringWithFormat:@"%@H", self.settings.timeFormat];
+            cell.paramValueLabel.text = [NSString stringWithFormat:@"%@", self.settings.timeFormat];
 
             break;
         case 3:

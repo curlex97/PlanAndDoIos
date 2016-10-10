@@ -78,4 +78,18 @@
     return [[[SettingsCoreDataManager alloc] init] cleanTable];
 }
 
+-(NSString *)timeWith:(NSDateComponents *)components
+{
+    NSString * time;
+    if([self.settings.timeFormat isEqualToString:@"24H"])
+    {
+        time=[NSString stringWithFormat:@"%li:%@%li", (long)[components hour],[components minute]<10?@"0":@"", (long)[components minute]];
+    }
+    else
+    {
+        time=[NSString stringWithFormat:@"%li:%@%li", ((long)[components hour])/2,[components minute]<10?@"0":@"", (long)[components minute]];
+    }
+    return time;
+}
+
 @end

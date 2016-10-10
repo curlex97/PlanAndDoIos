@@ -74,7 +74,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString* formatDate = indexPath.row ? NM_MMDDYY.lowercaseString : NM_DDMMYY.lowercaseString;
+    NSString* formatDate = indexPath.row ? NM_MMDDYY : NM_DDMMYY;
     
     UserSettings* updatedSettings = [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.settings.startPage andDateFormat:formatDate andPageType:self.settings.pageType andTimeFormat:self.settings.timeFormat andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]];
     
