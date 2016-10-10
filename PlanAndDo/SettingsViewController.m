@@ -81,7 +81,7 @@
     {
         case 0:
             cell.textLabel.text = NM_START_PAGE;
-            cell.paramValueLabel.text = self.settings.startPage.capitalizedString;
+            cell.paramValueLabel.text = [[ApplicationManager categoryApplicationManager] categoryWithId:[[[[[ApplicationManager userApplicationManager] authorisedUser] settings] startPage] intValue]].name.capitalizedString;
             
             break;
         case 1:

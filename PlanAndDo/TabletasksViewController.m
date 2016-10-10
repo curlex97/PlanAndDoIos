@@ -163,7 +163,9 @@ static bool firstLoad = true;
 {
     if(!firstLoad) return;
     
-    NSString* startPage = [[[[ApplicationManager userApplicationManager] authorisedUser] settings] startPage];
+    int Id = [[[[[ApplicationManager userApplicationManager] authorisedUser] settings] startPage] intValue];
+    NSString* startPage = [[ApplicationManager categoryApplicationManager] categoryWithId:Id].name;
+    
     NSArray* boxes = [[NSArray alloc] initWithObjects:NM_TODAY, NM_TOMORROW, NM_WEEK, NM_BACKLOG, NM_ARCHIVE, nil];
     for(NSString* box in boxes)
     {
