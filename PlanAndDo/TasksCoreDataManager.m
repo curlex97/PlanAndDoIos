@@ -494,28 +494,30 @@
 
 -(void) deleteTask:(BaseTask *)task
 {
-    NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_TASK];
-    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
-    
-    if(!error)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
     {
-        for(NSManagedObject* managedTask in results)
+        NSError* error = nil;
+        NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_TASK];
+        NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        
+        
+        if(!error)
         {
-            int ID = [[managedTask valueForKey:CD_ROW_ID] intValue];
-            if(ID == [task ID])
+            for(NSManagedObject* managedTask in results)
             {
-                [managedTask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_IS_DELETED];
-                [managedTask setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
-                [managedTask setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:CD_ROW_TASK_SYNC_STATUS];
-
-                [self.managedObjectContext save:nil];
-                return;
+                int ID = [[managedTask valueForKey:CD_ROW_ID] intValue];
+                if(ID == [task ID])
+                {
+                    [managedTask setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_IS_DELETED];
+                    [managedTask setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
+                    [managedTask setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:CD_ROW_TASK_SYNC_STATUS];
+                    
+                    [self.managedObjectContext save:nil];
+                    return;
+                }
             }
         }
-    }
-
+    });
 }
 
 

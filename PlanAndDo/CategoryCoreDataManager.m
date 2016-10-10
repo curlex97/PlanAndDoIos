@@ -186,34 +186,30 @@
 
 -(void)deleteCateroty:(KSCategory *)category
 {
-    NSError* error = nil;
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_CATEGORY];
-    NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
-    
-    if(!error)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
     {
-        for(NSManagedObject* managedCategory in results)
+        NSError* error = nil;
+        NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:CD_TABLE_CATEGORY];
+        NSArray* results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        
+        if(!error)
         {
-            NSUInteger ID = [[managedCategory valueForKey:CD_ROW_ID] integerValue];
-            if(ID == [category ID])
+            for(NSManagedObject* managedCategory in results)
             {
-                [managedCategory setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_IS_DELETED];
-                [managedCategory setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
-                [managedCategory setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:CD_ROW_CATEGORY_SYNC_STATUS];
-                [self. managedObjectContext save:nil];
+                NSUInteger ID = [[managedCategory valueForKey:CD_ROW_ID] integerValue];
+                if(ID == [category ID])
+                {
+                    [managedCategory setValue:[NSNumber numberWithBool:YES] forKey:CD_ROW_IS_DELETED];
+                    [managedCategory setValue:[NSNumber numberWithBool:NO] forKey:CD_ROW_LOCAL_SYNC];
+                    [managedCategory setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]] forKey:CD_ROW_CATEGORY_SYNC_STATUS];
+                    [self. managedObjectContext save:nil];
+                }
+                
             }
-            
         }
-    }
-    
+    });
 }
-
-
-
 // SYNC
-
-
 -(void)syncAddCateroty:(KSCategory *)category
 {
     NSManagedObjectContext* managedObjectContext = self.managedObjectContext;
