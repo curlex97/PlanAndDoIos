@@ -54,28 +54,12 @@
     TabletasksViewController * tasks=[[TabletasksViewController alloc] init];
     UINavigationController * navi=[[UINavigationController alloc] initWithRootViewController:tasks];
     AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:navi andBackVC:[[KSMenuViewController alloc] init]];
-    tableTaskViewController.title=NM_TODAY;
-    //[loginNavi addChildViewController:tableTaskViewController];
-    //[login showViewController:tableTaskViewController sender:login];
-    //[loginNavi.view addSubview:tableTaskViewController.view];
-//    LoginViewController * login=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
     if([ApplicationManager userApplicationManager].authorisedUser.emailAdress.length==0)
     {
         LoginViewController * login=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
         [navi pushViewController:login animated:NO];
     }
     [self presentViewController:tableTaskViewController animated:NO completion:nil];
-    //[tableTaskViewController t:[[UINavigationController alloc] initWithRootViewController:login] animated:NO completion:nil];
-    //[tableTaskViewController reloadInputViews];
-    
-    //[login presentViewController:tableTaskViewController animated:NO completion:nil];
-    //dispatch_semaphore_wait(s, DISPATCH_TIME_FOREVER);
-    //[self.window makeKeyAndVisible];
-    NSLog(@"111");
-    //    [login presentViewController:tableTaskViewController animated:NO completion:^
-    //     {
-    //         dispatch_semaphore_signal(s);
-    //     }];
 }
 
 - (void)didReceiveMemoryWarning

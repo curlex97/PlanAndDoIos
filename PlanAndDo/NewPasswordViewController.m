@@ -19,6 +19,7 @@
 
 @interface NewPasswordViewController ()<UIGestureRecognizerDelegate, UITextFieldDelegate>
 @property (nonatomic)UITapGestureRecognizer * tap;
+@property (nonatomic)NSRegularExpression * regex;
 @end
 
 @implementation NewPasswordViewController
@@ -45,7 +46,7 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if(self.emailTextField.text.length>1)
+    if(self.emailTextField.text.length>1 && [self.regex matchesInString:self.emailTextField.text options:0 range:NSMakeRange(0, self.emailTextField.text.length)].count>0)
     {
         self.sendButton.enabled=YES;
         [self.sendButton setHighlighted:NO];
@@ -75,6 +76,15 @@
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
     [self.view addGestureRecognizer:self.tap];
+    
+    NSError * Error;
+    self.regex=[[NSRegularExpression alloc] initWithPattern:@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+                                                    options:NSRegularExpressionDotMatchesLineSeparators
+                                                      error:&Error];
+    if(Error)
+    {
+        NSLog(@"%@",Error.localizedDescription);
+    }
     
     [self.sendButton setHighlighted:YES];
     self.sendButton.enabled=NO;

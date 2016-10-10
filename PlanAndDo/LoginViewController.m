@@ -18,6 +18,7 @@
 
 @interface LoginViewController ()<UIGestureRecognizerDelegate, UITextFieldDelegate>
 @property (nonatomic)UITapGestureRecognizer * tap;
+@property (nonatomic)NSRegularExpression * regex;
 @end
 
 @implementation LoginViewController
@@ -27,11 +28,8 @@
     [super viewWillAppear:animated];
     if([ApplicationManager userApplicationManager].authorisedUser.emailAdress.length==0 && !self.isViewPresented)
     {
-        //self.view.hidden=YES;
         LoginViewController * login=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
         login.isViewPresented=YES;
-        //[self.view addSubview:login.view];
-        //self.navigationController.toolbarHidden=YES;
         [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:NO completion:^
          {
              [self.navigationController popViewControllerAnimated:NO];
@@ -59,7 +57,7 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if(self.loginTextField.text.length>1 && self.passwordTextField.text.length>1)
+    if(self.loginTextField.text.length>1 && self.passwordTextField.text.length>1 && [self.regex matchesInString:self.loginTextField.text options:0 range:NSMakeRange(0, self.loginTextField.text.length)].count>0)
     {
         self.signInButton.enabled=YES;
         [self.signInButton setHighlighted:NO];
@@ -74,7 +72,6 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-
     if([gestureRecognizer locationInView:self.loginTextField].y>=CS_LOGIN_GESTURE_MIN && [gestureRecognizer locationInView:self.loginTextField].y<CS_LOGIN_GESTURE_MAX)
     {
         NSLog(@"%f",[gestureRecognizer locationInView:self.loginTextField].y);
@@ -114,6 +111,15 @@
     self.passwordTextField.leftView = passwordPaddingView;
     self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
     self.passwordTextField.delegate=self;
+    
+    NSError * Error;
+    self.regex=[[NSRegularExpression alloc] initWithPattern:@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+                                                    options:NSRegularExpressionDotMatchesLineSeparators
+                                                      error:&Error];
+    if(Error)
+    {
+        NSLog(@"%@",Error.localizedDescription);
+    }
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;
