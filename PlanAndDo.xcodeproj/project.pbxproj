@@ -307,6 +307,24 @@
 			name = TaskModels;
 			sourceTree = "<group>";
 		};
+		27C7F1F41DACCCC700AFD1B0 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				274AA9401DA7C62100CB6B21 /* Reachability.h */,
+				274AA9411DA7C62100CB6B21 /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
+		27C7F1F51DACCCE800AFD1B0 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				3FB4A4E61DA565EE00DD9FCA /* LaunchScreenViewController.h */,
+				3FB4A4E71DA565EE00DD9FCA /* LaunchScreenViewController.m */,
+			);
+			name = LaunchScreen;
+			sourceTree = "<group>";
+		};
 		2801D1911D9E935600A4D1FD /* SyncApiManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -700,10 +718,9 @@
 		282C28C81D829C320061761E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				27C7F1F51DACCCE800AFD1B0 /* LaunchScreen */,
 				2803AF951D8AB9A80032ACFB /* BaseViewController */,
 				2803AFAB1D8ABDF60032ACFB /* SideBars */,
-				3FB4A4E61DA565EE00DD9FCA /* LaunchScreenViewController.h */,
-				3FB4A4E71DA565EE00DD9FCA /* LaunchScreenViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -876,8 +893,7 @@
 			children = (
 				28A36BBC1D81887B0092FEFD /* Assets.xcassets */,
 				28A36BC11D81887B0092FEFD /* Info.plist */,
-				274AA9401DA7C62100CB6B21 /* Reachability.h */,
-				274AA9411DA7C62100CB6B21 /* Reachability.m */,
+				27C7F1F41DACCCC700AFD1B0 /* Reachability */,
 				28214C9D1D93E4F10012B1C7 /* AppDelegate */,
 				282C28CC1D829CAC0061761E /* CoreData */,
 				28943CF21D93011B00BC8A69 /* Managers */,

@@ -91,7 +91,7 @@
             break;
         case 2:
             cell.textLabel.text = NM_FORMAT_TIME;
-            cell.paramValueLabel.text = [NSString stringWithFormat:@"%@", self.settings.timeFormat];
+            cell.paramValueLabel.text = [self.settings.timeFormat isEqualToString:@"hh:mm"]?@"12H":@"24H";
 
             break;
         case 3:

@@ -47,6 +47,8 @@
 #define NM_DATE_AND_TIME @"Date & Time"
 #define NM_CREATE_ACCOUNT @"Create Account"
 #define NM_NEW_PASSWORD @"New Password"
+#define NM_DDMMYY_H @"dd/mm/yyyy"
+#define NM_MMDDYY_H @"mm/dd/yyyy"
 #define NM_DDMMYY @"dd/MM/yyyy"
 #define NM_MMDDYY @"MM/dd/yyyy"
 #define NM_12H @"12H"
