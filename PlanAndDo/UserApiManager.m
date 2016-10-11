@@ -49,7 +49,7 @@
 {
     NSMutableDictionary* user = [NSMutableDictionary dictionary];
     NSMutableDictionary* inputData = [NSMutableDictionary dictionary];
-    
+//    {"user_id":"","device_id":"web","token":"","class":"user","method":"register","data":{"name":"Test User","email":"johndoe1234455@mailinator.com","password":"123456"}}
     [inputData setValue:userName forKey:@"name"];
     [inputData setValue:email forKey:@"email"];
     [inputData setValue:password forKey:@"password"];
@@ -61,9 +61,11 @@
     [user setValue:@"register" forKey:@"method"];
     [user setValue:inputData forKey:@"data"];
     
-    [self dataByData:user completion:^(NSData * data) {
-        
-        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    NSLog(@"%@",user);
+    NSLog(@"%@",inputData);
+    [self dataByData:user completion:^(NSData * data)
+    {
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
         if(completed) completed(json);
         NSLog(@"%@",json);
     }];

@@ -28,10 +28,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-   // [ApplicationManager startInternetManaging];
     LaunchScreenViewController * launch=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LaunchScreenViewController"];
     self.window.rootViewController=launch;
     [self.window makeKeyAndVisible];
+    
+    UIUserNotificationSettings * settings=[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
+    [application registerUserNotificationSettings:settings];
+    
     return YES;
 }
 
@@ -42,14 +45,16 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    NSArray * tasks=[[ApplicationManager tasksApplicationManager] allTasks];
-    for(BaseTask * task in tasks)
-    {
+//    NSArray * tasks=[[ApplicationManager tasksApplicationManager] allTasks];
+//    for(BaseTask * task in tasks)
+//    {
+    
         UILocalNotification *notification = [[UILocalNotification alloc] init];
-        notification.fireDate = task.taskReminderTime;
-        notification.alertBody = task.name;
+        notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
+        notification.alertBody = @"test";
+        notification.alertTitle = @"test";
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-    }
+//    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

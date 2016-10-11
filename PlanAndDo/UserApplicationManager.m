@@ -52,7 +52,7 @@
 -(void)registerAsyncWithEmail:(NSString *)email andUserName:(NSString *)userName andPassword:(NSString *)password completion:(void (^)(bool))completed
 {
      [[[UserApiManager alloc] init] registerAsyncWithEmail:email andUserName:userName andPassword:password completion:^(NSDictionary* dictionary){
-       
+         NSLog(@"%@",dictionary);
         NSString* status = [dictionary valueForKeyPath:@"status"];
         if([status containsString:@"succsess"])
         {
