@@ -34,6 +34,12 @@
 
 @implementation KSMenuViewController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self reloadData];
+}
+
 -(void)reloadData
 {
     self.categories = [NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];

@@ -87,7 +87,6 @@
     {
         
         NSArray* defCats = (NSArray*)[dictionary valueForKeyPath:@"data"];
-        
         for(NSDictionary* defaultCategory in defCats)
         {
             int catID = [[defaultCategory valueForKeyPath:@"id"] intValue];
@@ -106,14 +105,15 @@
             if(!isDeleted)
             {
                 if(!localCategory)
+                {
                     [[[CategoryCoreDataManager alloc] init] syncAddCateroty:category];
-                
+                }
                 else if(localCategory.syncStatus < category.syncStatus)
+                {
                     [[[CategoryCoreDataManager alloc] init] syncUpdateCateroty:category];
+                }
             }
             else [[[CategoryCoreDataManager alloc] init] syncDeleteCateroty:category];
-            
-            
         }
     }
 }

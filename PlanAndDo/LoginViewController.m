@@ -194,7 +194,10 @@
      {
          if(status)
          {
-             [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL status){[self showMainWindow:nil];}];
+             [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL status)
+             {
+                 [self showMainWindow:nil];
+             }];
          }
      }];
 }
