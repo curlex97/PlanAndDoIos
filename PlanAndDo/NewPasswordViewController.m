@@ -44,9 +44,10 @@
     return YES;
 }
 
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+-(void)validateEnteredText
 {
-    if(self.emailTextField.text.length>1 && [self.regex matchesInString:self.emailTextField.text options:0 range:NSMakeRange(0, self.emailTextField.text.length)].count>0)
+    if(self.emailTextField.text.length>1 &&
+       [self.regex matchesInString:self.emailTextField.text options:0 range:NSMakeRange(0, self.emailTextField.text.length)].count>0)
     {
         self.sendButton.enabled=YES;
         [self.sendButton setHighlighted:NO];
@@ -56,7 +57,6 @@
         [self.sendButton setHighlighted:YES];
         self.sendButton.enabled=NO;
     }
-    return YES;
 }
 
 - (void)viewDidLoad
@@ -72,6 +72,7 @@
     self.emailTextField.leftView = emailPaddingView;
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
     self.emailTextField.delegate=self;
+    [self.emailTextField addTarget:self action:@selector(validateEnteredText) forControlEvents:UIControlEventEditingChanged];
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;

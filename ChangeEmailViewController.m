@@ -69,7 +69,7 @@
     return YES;
 }
 
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+-(void)validateEnteredText
 {
     if(self.emailTextField.text.length>1 && self.oldEmailTextField.text.length>1 && self.reenterEmailTextField.text.length>1 &&
        [self.regex matchesInString:self.oldEmailTextField.text options:0 range:NSMakeRange(0, self.oldEmailTextField.text.length)].count>0 &&
@@ -84,7 +84,6 @@
         [self.submitButton setHighlighted:YES];
         self.submitButton.enabled=NO;
     }
-    return YES;
 }
 
 - (void)viewDidLoad
@@ -101,16 +100,19 @@
     self.oldEmailTextField.leftView = oldEmailPaddingView;
     self.oldEmailTextField.leftViewMode = UITextFieldViewModeAlways;
     self.oldEmailTextField.delegate=self;
+    [self.oldEmailTextField addTarget:self action:@selector(validateEnteredText) forControlEvents:UIControlEventEditingChanged];
     
     UIView *emailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.emailTextField.leftView = emailPaddingView;
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
     self.emailTextField.delegate=self;
+    [self.emailTextField addTarget:self action:@selector(validateEnteredText) forControlEvents:UIControlEventEditingChanged];
     
     UIView *reenterEmailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.reenterEmailTextField.leftView = reenterEmailPaddingView;
     self.reenterEmailTextField.leftViewMode = UITextFieldViewModeAlways;
     self.reenterEmailTextField.delegate=self;
+    [self.reenterEmailTextField addTarget:self action:@selector(validateEnteredText) forControlEvents:UIControlEventEditingChanged];
     
     NSError * Error;
     self.regex=[[NSRegularExpression alloc] initWithPattern:@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"

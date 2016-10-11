@@ -79,9 +79,16 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
+
+    return YES;
+}
+
+-(void)validateEnteredText
+{
     if(self.usernameTextField.text.length>1 &&
        [self.emailRegex matchesInString:self.emailTextField.text options:0 range:NSMakeRange(0, self.emailTextField.text.length)].count>0 &&
-    [self.passRegex matchesInString:self.passwordTextField.text options:0 range:NSMakeRange(0, self.passwordTextField.text.length)].count>0)
+       [self.passRegex matchesInString:self.passwordTextField.text options:0 range:NSMakeRange(0, self.passwordTextField.text.length)].count>0
+       && [self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text])
     {
         self.submitButton.enabled=YES;
         [self.submitButton setHighlighted:NO];
@@ -91,7 +98,6 @@
         [self.submitButton setHighlighted:YES];
         self.submitButton.enabled=NO;
     }
-    return YES;
 }
 
 - (void)viewDidLoad
@@ -107,21 +113,25 @@
     self.emailTextField.leftView = emailPaddingView;
     self.emailTextField.leftViewMode = UITextFieldViewModeAlways;
     self.emailTextField.delegate=self;
+    [self.emailTextField addTarget:self action:@selector(validateEnteredText) forControlEvents:UIControlEventEditingChanged];
     
     UIView *usernamePaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.usernameTextField.leftView = usernamePaddingView;
     self.usernameTextField.leftViewMode = UITextFieldViewModeAlways;
     self.usernameTextField.delegate=self;
+    [self.usernameTextField addTarget:self action:@selector(validateEnteredText) forControlEvents:UIControlEventEditingChanged];
     
     UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.passwordTextField.leftView = passwordPaddingView;
     self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
     self.passwordTextField.delegate=self;
+    [self.passwordTextField addTarget:self action:@selector(validateEnteredText) forControlEvents:UIControlEventEditingChanged];
     
     UIView *reenterPasswordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.reenterPasswordTextField.leftView = reenterPasswordPaddingView;
     self.reenterPasswordTextField.leftViewMode = UITextFieldViewModeAlways;
     self.reenterPasswordTextField.delegate=self;
+    [self.reenterPasswordTextField addTarget:self action:@selector(validateEnteredText) forControlEvents:UIControlEventEditingChanged];
     
     self.tap=[[UITapGestureRecognizer alloc] init];
     self.tap.delegate=self;

@@ -53,24 +53,7 @@
     {
         [self.passwordTextField becomeFirstResponder];
     }
-
-    return YES;
-}
-
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if(self.loginTextField.text.length>1 && self.passwordTextField.text.length>1 &&
-       [self.emailRegex matchesInString:self.loginTextField.text options:0 range:NSMakeRange(0, self.loginTextField.text.length)].count>0 &&
-       [self.passRegex matchesInString:self.passwordTextField.text options:0 range:NSMakeRange(0, self.passwordTextField.text.length)].count>0)
-    {
-        self.signInButton.enabled=YES;
-        [self.signInButton setHighlighted:NO];
-    }
-    else
-    {
-        [self.signInButton setHighlighted:YES];
-        self.signInButton.enabled=NO;
-    }
+    
     return YES;
 }
 
@@ -97,29 +80,47 @@
 -(void)showMainWindow:(NSNotification*)not
 {
     dispatch_async(dispatch_get_main_queue(), ^
+                   {
+                       [self dismissViewControllerAnimated:YES completion:nil];
+                   });
+}
+
+-(void)validateEnteredText
+{
+    if(self.loginTextField.text.length>1 && self.passwordTextField.text.length>1 &&
+       [self.emailRegex matchesInString:self.loginTextField.text options:0 range:NSMakeRange(0, self.loginTextField.text.length)].count>0 &&
+       [self.passRegex matchesInString:self.passwordTextField.text options:0 range:NSMakeRange(0, self.passwordTextField.text.length)].count>0)
     {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    });
+        self.signInButton.enabled=YES;
+        [self.signInButton setHighlighted:NO];
+    }
+    else
+    {
+        [self.signInButton setHighlighted:YES];
+        self.signInButton.enabled=NO;
+    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     UIView *loginPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.loginTextField.leftView = loginPaddingView;
     self.loginTextField.leftViewMode = UITextFieldViewModeAlways;
     self.loginTextField.delegate=self;
+    [self.loginTextField addTarget:self action:@selector(validateEnteredText) forControlEvents:UIControlEventEditingChanged];
     
     UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.passwordTextField.leftView = passwordPaddingView;
     self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
     self.passwordTextField.delegate=self;
+    [self.passwordTextField addTarget:self action:@selector(validateEnteredText) forControlEvents:UIControlEventEditingChanged];
     
     NSError * emailError;
     self.emailRegex=[[NSRegularExpression alloc] initWithPattern:@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
-                                                    options:NSRegularExpressionDotMatchesLineSeparators
-                                                      error:&emailError];
+                                                         options:NSRegularExpressionDotMatchesLineSeparators
+                                                           error:&emailError];
     if(emailError)
     {
         NSLog(@"%@",emailError.localizedDescription);
@@ -127,8 +128,8 @@
     
     NSError * passError;
     self.passRegex=[[NSRegularExpression alloc] initWithPattern:@"[A-Z0-9a-z]{6,32}"
-                                                         options:NSRegularExpressionDotMatchesLineSeparators
-                                                           error:&passError];
+                                                        options:NSRegularExpressionDotMatchesLineSeparators
+                                                          error:&passError];
     if(passError)
     {
         NSLog(@"%@",passError.localizedDescription);
@@ -190,12 +191,12 @@
 - (IBAction)signInTapped:(id)sender
 {
     [[ApplicationManager userApplicationManager] loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool status)
-    {
-        if(status)
-        {
-            [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL status){[self showMainWindow:nil];}];
-        }
-    }];
+     {
+         if(status)
+         {
+             [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL status){[self showMainWindow:nil];}];
+         }
+     }];
 }
 
 -(void)dealloc
