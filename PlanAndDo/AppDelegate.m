@@ -32,9 +32,6 @@
     self.window.rootViewController=launch;
     [self.window makeKeyAndVisible];
     
-    UIUserNotificationSettings * settings=[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
-    [application registerUserNotificationSettings:settings];
-    
     return YES;
 }
 
@@ -45,16 +42,16 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-//    NSArray * tasks=[[ApplicationManager tasksApplicationManager] allTasks];
-//    for(BaseTask * task in tasks)
-//    {
-    
+    NSArray * tasks=[[ApplicationManager tasksApplicationManager] allTasks];
+    for(BaseTask * task in tasks)
+    {
         UILocalNotification *notification = [[UILocalNotification alloc] init];
-        notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
-        notification.alertBody = @"test";
-        notification.alertTitle = @"test";
+        notification.fireDate = [NSDate dateWithTimeIntervalSince1970:task.taskReminderTime.timeIntervalSince1970+10800];
+        notification.alertBody = task.name;
+        notification.alertTitle = @"Reminde";
+        NSLog(@"%@",task.taskReminderTime);
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-//    }
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

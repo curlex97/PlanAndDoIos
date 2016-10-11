@@ -55,4 +55,13 @@
     [FileManager writePassToFile:@""];
 }
 
++(void)registerUserNotifications
+{
+    UIUserNotificationSettings * settings=[UIUserNotificationSettings settingsForTypes:
+                                                UIUserNotificationTypeBadge|
+                                                UIUserNotificationTypeSound|
+                                                UIUserNotificationTypeAlert
+                                                                            categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+}
 @end

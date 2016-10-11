@@ -131,11 +131,8 @@ static bool firstLoad = true;
     {
         date=[ApplicationManager settingsApplicationManager].settings.dateFormat;
         [dateFormatter setDateFormat:date];
-        NSLog(@"%@",date);
         cell.taskDateLabel.text = [dateFormatter stringFromDate:task.completionTime];
     }
-    
-    
     [dateFormatter setDateFormat:[ApplicationManager settingsApplicationManager].settings.timeFormat];
     cell.taskTimeLabel.text = [dateFormatter stringFromDate:task.completionTime];
     

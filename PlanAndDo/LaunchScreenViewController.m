@@ -59,7 +59,10 @@
         LoginViewController * login=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
         [navi pushViewController:login animated:NO];
     }
-    [self presentViewController:tableTaskViewController animated:NO completion:nil];
+    [self presentViewController:tableTaskViewController animated:NO completion:^
+     {
+         [ApplicationManager registerUserNotifications];
+     }];
 }
 
 - (void)didReceiveMemoryWarning
