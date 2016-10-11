@@ -65,6 +65,7 @@
     {
             if(!error && data){ if(completed) completed(data);}
             else {if(completed) completed(nil);}
+        NSLog(@"%@",response);
     }];
     
     [task resume];

@@ -16,7 +16,8 @@
 
 @interface CreateAccountViewController () <UIGestureRecognizerDelegate, UITextFieldDelegate>
 @property (nonatomic)UITapGestureRecognizer * tap;
-@property (nonatomic)NSRegularExpression * regex;
+@property (nonatomic)NSRegularExpression * emailRegex;
+@property (nonatomic)NSRegularExpression * passRegex;
 @end
 
 @implementation CreateAccountViewController
@@ -78,7 +79,9 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if(self.usernameTextField.text.length>1 && self.passwordTextField.text.length>1 && self.emailTextField.text.length>1 && self.reenterPasswordTextField.text.length>1 && [self.regex matchesInString:self.emailTextField.text options:0 range:NSMakeRange(0, self.emailTextField.text.length)].count>0)
+    if(self.usernameTextField.text.length>1 &&
+       [self.emailRegex matchesInString:self.emailTextField.text options:0 range:NSMakeRange(0, self.emailTextField.text.length)].count>0 &&
+    [self.passRegex matchesInString:self.passwordTextField.text options:0 range:NSMakeRange(0, self.passwordTextField.text.length)].count>0)
     {
         self.submitButton.enabled=YES;
         [self.submitButton setHighlighted:NO];
@@ -124,15 +127,24 @@
     self.tap.delegate=self;
     [self.view addGestureRecognizer:self.tap];
     
-    NSError * Error;
-    self.regex=[[NSRegularExpression alloc] initWithPattern:@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+    NSError * emailError;
+    self.emailRegex=[[NSRegularExpression alloc] initWithPattern:@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
                                                     options:NSRegularExpressionDotMatchesLineSeparators
-                                                      error:&Error];
-    if(Error)
+                                                      error:&emailError];
+    if(emailError)
     {
-        NSLog(@"%@",Error.localizedDescription);
+        NSLog(@"%@",emailError.localizedDescription);
     }
-    
+ 
+    NSError * passError;
+    self.passRegex=[[NSRegularExpression alloc] initWithPattern:@"[A-Z0-9a-z]{6,32}"
+                                                         options:NSRegularExpressionDotMatchesLineSeparators
+                                                           error:&passError];
+    if(passError)
+    {
+        NSLog(@"%@",passError.localizedDescription);
+    }
+
     [self.submitButton setHighlighted:YES];
     self.submitButton.enabled=NO;
     

@@ -40,6 +40,7 @@
             return;
         }
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        NSLog(@"%@",json);
         if(completed) completed(json);
     }];
 }
@@ -64,6 +65,7 @@
         
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         if(completed) completed(json);
+        NSLog(@"%@",json);
     }];
 }
 
