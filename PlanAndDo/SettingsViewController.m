@@ -82,22 +82,18 @@
         case 0:
             cell.textLabel.text = NM_START_PAGE;
             cell.paramValueLabel.text = [[ApplicationManager categoryApplicationManager] categoryWithId:[[[[[ApplicationManager userApplicationManager] authorisedUser] settings] startPage] intValue]].name.capitalizedString;
-            
             break;
         case 1:
             cell.textLabel.text = NM_FORMAT_DATE;
             cell.paramValueLabel.text = self.settings.dateFormat.uppercaseString;
-
             break;
         case 2:
             cell.textLabel.text = NM_FORMAT_TIME;
             cell.paramValueLabel.text = [self.settings.timeFormat isEqualToString:@"hh:mm"]?@"12H":@"24H";
-
             break;
         case 3:
             cell.textLabel.text = NM_START_DAY;
             cell.paramValueLabel.text = self.settings.startDay.capitalizedString;
-
             break;
         default:
             break;
