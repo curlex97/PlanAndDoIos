@@ -10,7 +10,7 @@
 #import "ApplicationDefines.h"
 
 @implementation ApiManager
-
+ 
 -(void)dataByData:(NSDictionary *)data completion:(void (^)(NSData *))completed
 {
     [ACNetworkManager dataByUrlAsync:URL_API andHeaderDictionary:@{} andBodyDictionary:data andQueryType:URL_SENDTYPE completion:^(NSData* data)
