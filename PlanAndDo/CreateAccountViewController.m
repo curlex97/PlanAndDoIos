@@ -195,11 +195,14 @@
     {
         [[ApplicationManager userApplicationManager] registerAsyncWithEmail:self.emailTextField.text andUserName:self.usernameTextField.text andPassword:self.passwordTextField.text completion:^(bool fl)
         {
-    dispatch_async(dispatch_get_main_queue(), ^
-    {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    });
-    }];
+            if(fl)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^
+                           {
+                               [self dismissViewControllerAnimated:YES completion:nil];
+                           });
+            }
+        }];
     }
 }
 

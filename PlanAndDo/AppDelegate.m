@@ -52,6 +52,7 @@
         NSLog(@"%@",task.taskReminderTime);
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     }
+    NSLog(@"%@",[[ApplicationManager categoryApplicationManager] allCategories]);
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
