@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PlanAndDo/SettingsApiManager.m"
-            timestampString = "497778179.426586"
+            filePath = "PlanAndDo/CategoryApiManager.m"
+            timestampString = "497967802.48273"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "-updateSettingsAsync:forUser:completion:"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "-toServerWithMethod:andCategories:forUser:completion:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
