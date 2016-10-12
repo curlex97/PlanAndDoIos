@@ -9,6 +9,7 @@
 #import "CategoryApplicationManager.h"
 #import "ApplicationManager.h"
 #import "SyncApplicationManager.h"
+#import "KSCategory.h"
 
 @implementation CategoryApplicationManager
 
@@ -24,16 +25,36 @@
 
 -(void)addCateroty:(KSCategory *)category completion:(void (^)(bool))completed
 {
-    if(category.ID > 0) category.ID = -category.ID;
+    if(category.ID > 0)
+    {
+        category.ID = -category.ID;
+    }
     
     [[[CategoryCoreDataManager alloc] init] addCateroty:category];
     [[[SyncApplicationManager alloc] init] syncCategoriesWithCompletion:^(bool status)
     {
         if(status)
         {
-            [[[CategoryApiManager alloc] init] addCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncAdd] forUser:[[ApplicationManager userApplicationManager] authorisedUser] completion:^(NSDictionary* dictionary){
-                if(completed) completed(YES);
-            [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
+            [[[CategoryApiManager alloc] init] addCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncAdd] forUser:[[ApplicationManager userApplicationManager] authorisedUser] completion:^(NSDictionary* dictionary)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^
+                {
+                    NSLog(@"%@",dictionary);
+                    NSArray * categories=[dictionary objectForKey:@"data"];
+                    for(NSDictionary * cat in categories)
+                    {
+                        int catID = [[cat valueForKeyPath:@"id"] intValue];
+                        NSString* catName = [cat valueForKeyPath:@"category_name"];
+                        int syncStatus = [[cat valueForKeyPath:@"category_sync_status"] intValue];
+                        [[[CategoryCoreDataManager alloc] init] deleteCateroty:category];
+                        [[[CategoryCoreDataManager alloc] init] syncAddCateroty:[[KSCategory alloc] initWithID:catID andName:catName andSyncStatus:syncStatus]];
+                    }
+                    if(completed)
+                    {
+                        completed(YES);
+                    }
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
+                });
             }];
         }
     }];

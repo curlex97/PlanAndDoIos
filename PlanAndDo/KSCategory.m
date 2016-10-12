@@ -18,4 +18,9 @@
     return self;
 }
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"%d   %@   %ld",self.ID, self.name, self.syncStatus];
+}
+
 @end

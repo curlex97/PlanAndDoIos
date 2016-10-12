@@ -38,7 +38,8 @@
     [dic setValue:method forKey:@"method"];
     [dic setValue:data forKey:@"data"];
     
-    [self dataByData:dic completion:^(NSData * data) {
+    [self dataByData:dic completion:^(NSData * data)
+    {
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         if(completed) completed(json);
         if(!json)

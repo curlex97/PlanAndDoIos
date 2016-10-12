@@ -505,7 +505,7 @@
     [textField resignFirstResponder];
     if(self.state!=KSMenuStateEdit)
     {
-        [[ApplicationManager categoryApplicationManager] addCateroty:[[KSCategory alloc] initWithID:self.categories.lastObject.ID+1 andName:textField.text andSyncStatus:0] completion:nil];
+        [[ApplicationManager categoryApplicationManager] addCateroty:[[KSCategory alloc] initWithID:self.categories.lastObject.ID+1 andName:textField.text andSyncStatus:[NSDate date].timeIntervalSince1970] completion:nil];
         self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
         textField.text=@"";
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.categories.count-1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];

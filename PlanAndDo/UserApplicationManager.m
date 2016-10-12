@@ -51,8 +51,8 @@
 
 -(void)registerAsyncWithEmail:(NSString *)email andUserName:(NSString *)userName andPassword:(NSString *)password completion:(void (^)(bool))completed
 {
-     [[[UserApiManager alloc] init] registerAsyncWithEmail:email andUserName:userName andPassword:password completion:^(NSDictionary* dictionary){
-         NSLog(@"%@",dictionary);
+     [[[UserApiManager alloc] init] registerAsyncWithEmail:email andUserName:userName andPassword:password completion:^(NSDictionary* dictionary)
+    {
         NSString* status = [dictionary valueForKeyPath:@"status"];
         if([status containsString:@"succsess"])
         {
@@ -96,17 +96,24 @@
                 int catID = [[defaultCategory valueForKeyPath:@"id"] intValue];
                 NSString* catName = [defaultCategory valueForKeyPath:@"category_name"];
                 int catSyncStatus = [[defaultCategory valueForKeyPath:@"data.users.user_sync_status"] intValue];
-
-                [[ApplicationManager categoryApplicationManager] addCateroty:[[KSCategory alloc] initWithID:catID andName:catName andSyncStatus:catSyncStatus] completion:nil];
+                
+                [[[CategoryCoreDataManager alloc] init] syncAddCateroty:[[KSCategory alloc] initWithID:catID andName:catName andSyncStatus:catSyncStatus]];
+                //[[ApplicationManager categoryApplicationManager] addSyncCateroty:[[KSCategory alloc] initWithID:catID andName:catName andSyncStatus:catSyncStatus] completion:nil];
                 
             }
             
             ///////////////////////////
 
             
-            if(completed) completed(true);
+            if(completed)
+            {
+                completed(true);
+            }
         }
-        if(completed) completed(false);
+        if(completed)
+        {
+            completed(false);
+        }
     }];
 }
 
@@ -133,10 +140,10 @@
             
             if(completed)
             {
-                        completed(true);
+                        completed(YES);
             }
         }
-        else if(completed) completed(false);
+        else if(completed) completed(NO);
     }];
 
 }
