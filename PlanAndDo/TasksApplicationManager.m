@@ -153,11 +153,12 @@
             NSString* desc = @"";
             if([[jsonTask valueForKeyPath:@"task_description"] isKindOfClass:[NSNull class]])
             [jsonTask valueForKeyPath:@"task_description"];
-            NSDate *createDate = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"created_at"] intValue]];
-            NSDate *reminderTime = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"task_reminder_time"] intValue]];
+            
+            NSDate *createDate = [NSDate dateWithTimeIntervalSince1970:[[jsonTask valueForKeyPath:@"created_at"] intValue]];
+            NSDate *reminderTime = [NSDate dateWithTimeIntervalSince1970:[[jsonTask valueForKeyPath:@"task_reminder_time"] intValue]];
             NSUInteger taskPriority = [[jsonTask valueForKeyPath:@"task_priority"] integerValue];
-            bool status = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"created_at"] intValue]] > 0;
-            NSDate *completionTime = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKeyPath:@"task_completion_time"] intValue]];
+            bool status = [NSDate dateWithTimeIntervalSince1970:[[jsonTask valueForKeyPath:@"created_at"] intValue]] > 0;
+            NSDate *completionTime = [NSDate dateWithTimeIntervalSince1970:[[jsonTask valueForKeyPath:@"task_completion_time"] intValue]];
             int syncStatus = [[jsonTask valueForKeyPath:@"task_sync_status"] intValue];
             bool isDeleted = [[jsonTask valueForKeyPath:@"is_deleted"] intValue] > 0;
             
