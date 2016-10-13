@@ -190,12 +190,14 @@
 
 - (IBAction)signInTapped:(id)sender
 {
+    [self.navigationController.view addSubview:self.loadContentView];
     [[ApplicationManager userApplicationManager] loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool status)
      {
          if(status)
          {
              [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL status)
              {
+                 [self.loadContentView removeFromSuperview];
                  [self showMainWindow:nil];
              }];
          }

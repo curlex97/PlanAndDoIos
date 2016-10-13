@@ -193,14 +193,16 @@
 {
     if([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text])
     {
+        [self.navigationController.view addSubview:self.loadContentView];
         [[ApplicationManager userApplicationManager] registerAsyncWithEmail:self.emailTextField.text andUserName:self.usernameTextField.text andPassword:self.passwordTextField.text completion:^(bool fl)
         {
             if(fl)
             {
-                dispatch_async(dispatch_get_main_queue(), ^
-                           {
-                               [self dismissViewControllerAnimated:YES completion:nil];
-                           });
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
+                {
+                    [self.loadContentView removeFromSuperview];
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                });
             }
         }];
     }

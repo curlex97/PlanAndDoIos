@@ -22,7 +22,8 @@
     gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
     gradient.frame=self.view.bounds;
@@ -30,7 +31,8 @@
     [self.view.layer insertSublayer:gradient atIndex:0];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
