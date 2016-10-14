@@ -8,9 +8,8 @@
 
 #import "KSSplitViewController.h"
 @interface KSSplitViewController()
-@property (nonatomic)BaseKSMenuViewController * menu;
-@property (nonatomic)UINavigationController * details;
 @end
+
 @implementation KSSplitViewController
 
 -(instancetype)initWithMenuVC:(BaseKSMenuViewController *) menuVC
@@ -25,6 +24,12 @@
         [self setPreferredDisplayMode:UISplitViewControllerDisplayModeAllVisible];
     }
     return self;
+}
+
+-(void)setDetails:(UINavigationController *)details
+{
+    _details=details;
+    self.viewControllers=@[self.menu,self.details];
 }
 
 - (void)viewDidLayoutSubviews

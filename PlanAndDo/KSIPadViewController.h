@@ -9,6 +9,11 @@
 #import "BaseKSMenuViewController.h"
 #import "ApplicationDefines.h"
 #import "UIImage+ACScaleImage.h"
+#import "EditTaskViewController.h"
+#import "KSSplitViewController.h"
+#import "TabletasksViewController.h"
+#import "SettingsViewController.h"
+#import "ProfileViewController.h"
 
 @interface KSIPadViewController : BaseKSMenuViewController
 

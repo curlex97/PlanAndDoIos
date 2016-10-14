@@ -76,7 +76,6 @@
         [self.parentController side];
         
     }
-    
     else if(indexPath.section == 1)
     {
         KSCategory* category = self.categories[indexPath.row];

@@ -31,17 +31,6 @@
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     [self gestureRecognizerAction];
-//    if([self.addCategoryTextField isFirstResponder])
-//    {
-//        [self.addCategoryTextField resignFirstResponder];
-//        self.parentController.hiden=NO;
-//        [UIView animateWithDuration:0.5 animations:^
-//         {
-//             self.searchBar.frame=CGRectMake(8, 8, 255, 30);
-//             self.addCategoryButton.frame=CGRectMake(233, 0, 30, 30);
-//         }];
-//        self.addCategoryTextField.text=@"";
-//    }
     return YES;
 }
 
@@ -168,7 +157,7 @@
             date=@"Today";
             cell.taskDateLabel.text = date;
         }
-        else if(tomorrowComponents.day==components.day&&tomorrowComponents.month==components.month&&tomorrowComponents.year==components.year)
+        else if(tomorrowComponents.day==components.day && tomorrowComponents.month==components.month && tomorrowComponents.year==components.year)
         {
             date=@"Tomorrow";
             cell.taskDateLabel.text = date;
@@ -252,6 +241,69 @@
         }
     }
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    KSSplitViewController * spliter=(KSSplitViewController *)self.parentViewController;
+    [self.searchBar resignFirstResponder];
+    if(self.state==KSBaseMenuStateSearch)
+    {
+        for(UIViewController* child in [spliter.details childViewControllers])
+            [child.navigationController popViewControllerAnimated:YES];
+        
+        BaseTask* task = self.tableTasks[indexPath.row];
+        
+        EditTaskViewController* editTaskVC = [[EditTaskViewController alloc] init];
+        editTaskVC.title = TL_EDIT;
+        editTaskVC.task = task;
+        [spliter.details pushViewController:editTaskVC animated:NO];
+    }
+    else if(indexPath.section==0)
+    {
+        TabletasksViewController * categoryTasksViewController=[[TabletasksViewController alloc] init];
+        if(categoryTasksViewController)
+        {
+            categoryTasksViewController.boxType=indexPath.row;
+            UINavigationController* categoryTasksNav = [[UINavigationController alloc] initWithRootViewController:categoryTasksViewController];
+            spliter.details=categoryTasksNav;
+        }
+    }
+    else if(indexPath.section == 1)
+    {
+        KSCategory* category = self.categories[indexPath.row];
+        TabletasksViewController * categoryTasksViewController=[[TabletasksViewController alloc] init];
+        
+        if(categoryTasksViewController)
+        {
+            categoryTasksViewController.title=[category name];
+            categoryTasksViewController.category = category;
+            UINavigationController* categoryTasksNav = [[UINavigationController alloc] initWithRootViewController:categoryTasksViewController];
+            spliter.details=categoryTasksNav;
+        }
+    }
+    
+    else if(indexPath.section == 2 && indexPath.row == 1)
+    {
+        SettingsViewController * settingsViewController=[[SettingsViewController alloc] init];
+        
+        if(settingsViewController)
+        {
+            settingsViewController.title=NM_SETTINGS;
+            UINavigationController* settingsNav = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
+            spliter.details=settingsNav;
+        }
+    }
+    else
+    {
+        ProfileViewController * profileViewController=[[ProfileViewController alloc] init];
+        
+        if(profileViewController)
+        {
+            UINavigationController* navi = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+            spliter.details=navi;
+        }
+    }
 }
 
 - (void)viewDidLoad

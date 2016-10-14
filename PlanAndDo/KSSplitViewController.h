@@ -13,4 +13,7 @@
 
 -(instancetype)initWithMenuVC:(BaseKSMenuViewController *) menuVC
                  andDetailsVC:(UINavigationController *)detailsVC;
+
+@property (nonatomic)BaseKSMenuViewController * menu;
+@property (nonatomic)UINavigationController * details;
 @end
