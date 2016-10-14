@@ -29,8 +29,7 @@
     [super viewWillAppear:animated];
     if([ApplicationManager userApplicationManager].authorisedUser.emailAdress.length==0 && !self.isViewPresented)
     {
-        NSString * name=[[UIDevice currentDevice].model isEqualToString:@"iPad"]?@"IPad":@"Main";
-        LoginViewController * login=[[UIStoryboard storyboardWithName:name bundle:[NSBundle bundleWithIdentifier:@"IPad.storyboard"]] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        LoginViewController * login=[self.baseStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
         login.isViewPresented=YES;
         [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:NO completion:^
          {
@@ -198,8 +197,11 @@
          {
              [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL status)
              {
-                 [self.loadContentView removeFromSuperview];
-                 [self showMainWindow:nil];
+                 dispatch_async(dispatch_get_main_queue(), ^
+                 {
+                     [self.loadContentView removeFromSuperview];
+                     [self showMainWindow:nil];
+                 });
              }];
          }
          else

@@ -91,10 +91,6 @@
     [super viewDidLoad];
     
     self.title=NM_CHANGE_EMAIL;
-    CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
-    gradient.frame=self.view.bounds;
-    self.view.backgroundColor=[UIColor whiteColor];
-    [self.view.layer insertSublayer:gradient atIndex:0];
     
     UIView *oldEmailPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.oldEmailTextField.leftView = oldEmailPaddingView;

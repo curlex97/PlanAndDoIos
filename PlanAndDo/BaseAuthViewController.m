@@ -14,10 +14,6 @@
 @end
 
 @implementation BaseAuthViewController
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    
-    NSLog(@"%@", NSStringFromCGRect(self.imageView.frame));
-}
 
 - (void)viewDidLoad
 {

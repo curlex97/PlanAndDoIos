@@ -10,4 +10,5 @@
 
 @interface BaseViewController : UIViewController
 @property (nonatomic)UIView * loadContentView;
+@property (nonatomic)UIStoryboard * baseStoryboard;
 @end

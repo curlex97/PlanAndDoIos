@@ -58,7 +58,7 @@
     {
         NSLog(@"%@",[UIDevice currentDevice].model);
         NSString * name=[[UIDevice currentDevice].model isEqualToString:@"iPad"]?@"IPad":@"Main";
-        LoginViewController * login=[[UIStoryboard storyboardWithName:name bundle:[NSBundle bundleWithIdentifier:@"IPad.storyboard"]] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        LoginViewController * login=[[UIStoryboard storyboardWithName:name bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
         [navi pushViewController:login animated:NO];
     }
     [self presentViewController:tableTaskViewController animated:NO completion:^

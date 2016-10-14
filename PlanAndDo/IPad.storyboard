@@ -232,5 +232,151 @@
             </objects>
             <point key="canvasLocation" x="406.25" y="44.53125"/>
         </scene>
+        <!--New Password View Controller-->
+        <scene sceneID="bYF-hZ-bAS">
+            <objects>
+                <viewController storyboardIdentifier="NewPasswordViewController" id="0c1-xs-ank" customClass="NewPasswordViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yz6-uQ-R7K"/>
+                        <viewControllerLayoutGuide type="bottom" id="TWS-tR-E9j"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BVD-9w-NGJ">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCj-xP-76o">
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1zZ-Ky-zaZ">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="LbD-gt-Z8c"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="go"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6C-dA-Hse">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="oKl-Fn-1ZT"/>
+                                            <constraint firstAttribute="width" constant="36" id="qsM-Rj-ApL"/>
+                                        </constraints>
+                                        <state key="normal" title="Send">
+                                            <color key="titleColor" red="0.98000001910000001" green="0.98000001910000001" blue="0.98000001910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.20392156859999999" green="0.20392156859999999" blue="0.20392156859999999" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="1Kc-Mh-3Cz"/>
+                                    <constraint firstItem="D6C-dA-Hse" firstAttribute="centerX" secondItem="rCj-xP-76o" secondAttribute="centerX" id="Aos-xc-nZP"/>
+                                    <constraint firstItem="1zZ-Ky-zaZ" firstAttribute="top" secondItem="rCj-xP-76o" secondAttribute="top" id="Js6-a4-UcR"/>
+                                    <constraint firstAttribute="trailing" secondItem="1zZ-Ky-zaZ" secondAttribute="trailing" id="L8C-Ky-XYB"/>
+                                    <constraint firstItem="1zZ-Ky-zaZ" firstAttribute="leading" secondItem="rCj-xP-76o" secondAttribute="leading" id="PmS-ue-kFh"/>
+                                    <constraint firstAttribute="bottom" secondItem="D6C-dA-Hse" secondAttribute="bottom" id="VkK-nB-LPk"/>
+                                    <constraint firstAttribute="height" constant="82" id="gJ4-z0-NWe"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20362311599999999" green="0.20362311599999999" blue="0.20362311599999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="rCj-xP-76o" firstAttribute="centerX" secondItem="BVD-9w-NGJ" secondAttribute="centerX" id="TwY-D5-cAe"/>
+                            <constraint firstItem="rCj-xP-76o" firstAttribute="centerY" secondItem="BVD-9w-NGJ" secondAttribute="centerY" id="j9q-n4-dQ5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backTextFieldView" destination="rCj-xP-76o" id="C3C-L4-o29"/>
+                        <outlet property="centerConstraint" destination="j9q-n4-dQ5" id="dwg-7V-ciL"/>
+                        <outlet property="emailTextField" destination="1zZ-Ky-zaZ" id="8Do-0S-3MH"/>
+                        <outlet property="sendButton" destination="D6C-dA-Hse" id="Syd-VY-Phb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mbJ-qq-XwD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1090.625" y="44.53125"/>
+        </scene>
+        <!--Change Email View Controller-->
+        <scene sceneID="Cug-9q-fVZ">
+            <objects>
+                <viewController storyboardIdentifier="ChangeEmailViewController" id="3fV-P1-2Re" customClass="ChangeEmailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rKx-bJ-KL7"/>
+                        <viewControllerLayoutGuide type="bottom" id="ukN-C4-Uet"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KiB-QX-ICA">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0R9-dA-NyF">
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="new email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yLK-8l-HvD">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="UBh-76-772"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="re-enter new email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PjL-KJ-fuF">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="S2b-ZL-Fq7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="go"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="your email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JXo-Mv-Lky">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="JBs-Ln-h5X"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oim-bT-1xK">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="kJ1-VI-Zcw"/>
+                                            <constraint firstAttribute="width" constant="49" id="uXU-q6-Ys0"/>
+                                        </constraints>
+                                        <state key="normal" title="Submit">
+                                            <color key="titleColor" red="0.98000001910000001" green="0.98000001910000001" blue="0.98000001910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.20392156859999999" green="0.20392156859999999" blue="0.20392156859999999" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="yLK-8l-HvD" firstAttribute="leading" secondItem="0R9-dA-NyF" secondAttribute="leading" id="3eW-FE-cvJ"/>
+                                    <constraint firstItem="JXo-Mv-Lky" firstAttribute="top" secondItem="0R9-dA-NyF" secondAttribute="top" id="7hC-RP-V4u"/>
+                                    <constraint firstAttribute="height" constant="192" id="GuK-JX-pKk"/>
+                                    <constraint firstItem="PjL-KJ-fuF" firstAttribute="leading" secondItem="0R9-dA-NyF" secondAttribute="leading" id="IQm-Rd-g6L"/>
+                                    <constraint firstAttribute="trailing" secondItem="JXo-Mv-Lky" secondAttribute="trailing" id="MxF-6x-WVI"/>
+                                    <constraint firstItem="yLK-8l-HvD" firstAttribute="top" secondItem="JXo-Mv-Lky" secondAttribute="bottom" constant="1" id="cjZ-nn-3Oh"/>
+                                    <constraint firstItem="JXo-Mv-Lky" firstAttribute="leading" secondItem="0R9-dA-NyF" secondAttribute="leading" id="dUb-rO-Ohx"/>
+                                    <constraint firstAttribute="bottom" secondItem="Oim-bT-1xK" secondAttribute="bottom" constant="8" id="fJM-AF-GBk"/>
+                                    <constraint firstAttribute="trailing" secondItem="PjL-KJ-fuF" secondAttribute="trailing" id="hsm-yW-l4d"/>
+                                    <constraint firstAttribute="trailing" secondItem="yLK-8l-HvD" secondAttribute="trailing" id="isL-8W-LDf"/>
+                                    <constraint firstItem="Oim-bT-1xK" firstAttribute="centerX" secondItem="0R9-dA-NyF" secondAttribute="centerX" id="m2J-6t-BEb"/>
+                                    <constraint firstAttribute="width" constant="320" id="mZt-UP-qsD"/>
+                                    <constraint firstItem="PjL-KJ-fuF" firstAttribute="top" secondItem="yLK-8l-HvD" secondAttribute="bottom" constant="1" id="thK-1q-3I9"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20362311599999999" green="0.20362311599999999" blue="0.20362311599999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="0R9-dA-NyF" firstAttribute="centerX" secondItem="KiB-QX-ICA" secondAttribute="centerX" id="JVF-Oc-8BV"/>
+                            <constraint firstItem="0R9-dA-NyF" firstAttribute="centerY" secondItem="KiB-QX-ICA" secondAttribute="centerY" id="eb0-ub-7BR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backTextFieldView" destination="0R9-dA-NyF" id="mju-UD-i4t"/>
+                        <outlet property="centerConstraint" destination="eb0-ub-7BR" id="1EF-7g-jzO"/>
+                        <outlet property="emailTextField" destination="yLK-8l-HvD" id="aN5-Mw-gYp"/>
+                        <outlet property="oldEmailTextField" destination="JXo-Mv-Lky" id="TGO-Zh-LZW"/>
+                        <outlet property="reenterEmailTextField" destination="PjL-KJ-fuF" id="F02-K8-kfJ"/>
+                        <outlet property="submitButton" destination="Oim-bT-1xK" id="eDJ-ou-9zI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q5S-ZS-tQk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1090.625" y="698.4375"/>
+        </scene>
     </scenes>
 </document>
