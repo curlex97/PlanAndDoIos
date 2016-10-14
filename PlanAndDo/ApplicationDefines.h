@@ -9,7 +9,8 @@
 #ifndef ApplicationDefines_h
 #define ApplicationDefines_h
 
-
+#define BAR_BUTTON_SIZE_WIDTH 30
+#define BAR_BUTTON_SIZE_HEIGHT 41
 
 
 // NOTIFICATION CENTER

@@ -14,6 +14,9 @@
 #import "KSMenuViewController.h"
 #import "LoginViewController.h"
 #import "KSApplicationColor.h"
+#import "KSIPhoneMenuViewController.h"
+#import "KSSplitViewController.h"
+#import "KSIPadViewController.h"
 
 @interface LaunchScreenViewController ()
 
@@ -53,16 +56,10 @@
 
 -(void)showmainPage
 {
+    
+    
     TabletasksViewController * tasks=[[TabletasksViewController alloc] init];
     UINavigationController * navi=[[UINavigationController alloc] initWithRootViewController:tasks];
-    AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:navi andBackVC:[[KSMenuViewController alloc] init]];
-    if([ApplicationManager userApplicationManager].authorisedUser.emailAdress.length==0)
-    {
-        NSLog(@"%@",[UIDevice currentDevice].model);
-        NSString * name=[[UIDevice currentDevice].model isEqualToString:@"iPad"]?@"IPad":@"Main";
-        LoginViewController * login=[[UIStoryboard storyboardWithName:name bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
-        [navi pushViewController:login animated:NO];
-    }
     
     CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
     CGFloat height = navi.navigationBar.frame.size.height+[UIApplication sharedApplication].statusBarFrame.size.height;
@@ -77,10 +74,31 @@
     outputImage = [outputImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 1) resizingMode:UIImageResizingModeStretch];
     [[UINavigationBar appearance] setBackgroundImage:outputImage forBarMetrics:UIBarMetricsDefault];
     
-    [self presentViewController:tableTaskViewController animated:NO completion:^
-     {
-         [ApplicationManager registerUserNotifications];
-     }];
+    if([ApplicationManager userApplicationManager].authorisedUser.emailAdress.length==0)
+    {
+        NSLog(@"%@",[UIDevice currentDevice].model);
+        NSString * name=[[UIDevice currentDevice].model isEqualToString:@"iPad"]?@"IPad":@"Main";
+        LoginViewController * login=[[UIStoryboard storyboardWithName:name bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        [navi pushViewController:login animated:NO];
+    }
+    
+    if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
+    {
+        KSSplitViewController * split=[[KSSplitViewController alloc] initWithMenuVC:[[KSIPadViewController alloc] init] andDetailsVC:navi];
+        [self presentViewController:split animated:NO completion:^
+         {
+             [ApplicationManager registerUserNotifications];
+         }];
+    }
+    else
+    {
+        AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:navi andBackVC:[[KSIPhoneMenuViewController alloc] init]];
+    
+        [self presentViewController:tableTaskViewController animated:NO completion:^
+         {
+             [ApplicationManager registerUserNotifications];
+         }];
+    }
 }
 
 - (void)didReceiveMemoryWarning
