@@ -13,6 +13,8 @@
 #import "AMSideBarViewController.h"
 #import "KSMenuViewController.h"
 #import "LoginViewController.h"
+#import "KSApplicationColor.h"
+
 @interface LaunchScreenViewController ()
 
 @end
@@ -61,6 +63,20 @@
         LoginViewController * login=[[UIStoryboard storyboardWithName:name bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
         [navi pushViewController:login animated:NO];
     }
+    
+    CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
+    CGFloat height = navi.navigationBar.frame.size.height+[UIApplication sharedApplication].statusBarFrame.size.height;
+    gradient.frame=CGRectMake(0, 0, [UIApplication sharedApplication].statusBarFrame.size.width, height);
+    
+    UIGraphicsBeginImageContext([gradient frame].size);
+    
+    [gradient renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    outputImage = [outputImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 1) resizingMode:UIImageResizingModeStretch];
+    [[UINavigationBar appearance] setBackgroundImage:outputImage forBarMetrics:UIBarMetricsDefault];
+    
     [self presentViewController:tableTaskViewController animated:NO completion:^
      {
          [ApplicationManager registerUserNotifications];
