@@ -132,5 +132,105 @@
             </objects>
             <point key="canvasLocation" x="-338.28125" y="44.53125"/>
         </scene>
+        <!--Create Account View Controller-->
+        <scene sceneID="xbv-eh-Xxz">
+            <objects>
+                <viewController storyboardIdentifier="CreateAccountViewController" id="t77-gm-fYH" customClass="CreateAccountViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="p4R-uI-FiY"/>
+                        <viewControllerLayoutGuide type="bottom" id="JQo-En-9SB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="V9d-6c-1fh">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0T-2t-IAW">
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UQM-uZ-MVn">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="zsL-uL-wIV"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="next"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dCU-oP-Yaa">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="rhe-nf-8C2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next" secureTextEntry="YES"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="re-enter password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CXn-mO-XFZ">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="GfV-dF-wNB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="go" secureTextEntry="YES"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Rk-ly-KeW">
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="CJw-F3-aGP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUt-U4-fqo">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="49" id="L5v-aP-22z"/>
+                                            <constraint firstAttribute="height" constant="30" id="lsg-o0-DS7"/>
+                                        </constraints>
+                                        <state key="normal" title="Submit">
+                                            <color key="titleColor" red="0.98000001910000001" green="0.98000001910000001" blue="0.98000001910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="submitTapped:" destination="t77-gm-fYH" eventType="touchUpInside" id="hAD-V0-4Po"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.20392156859999999" green="0.20392156859999999" blue="0.20392156859999999" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="230" id="1F5-UL-8xW"/>
+                                    <constraint firstAttribute="width" constant="320" id="3a3-3N-Vga"/>
+                                    <constraint firstItem="CXn-mO-XFZ" firstAttribute="leading" secondItem="N0T-2t-IAW" secondAttribute="leading" id="8O6-HZ-8XS"/>
+                                    <constraint firstItem="dCU-oP-Yaa" firstAttribute="leading" secondItem="N0T-2t-IAW" secondAttribute="leading" id="9bk-ZR-Klu"/>
+                                    <constraint firstAttribute="trailing" secondItem="CXn-mO-XFZ" secondAttribute="trailing" id="B51-Fj-PgP"/>
+                                    <constraint firstAttribute="trailing" secondItem="UQM-uZ-MVn" secondAttribute="trailing" id="BN6-oM-3Gy"/>
+                                    <constraint firstAttribute="trailing" secondItem="dCU-oP-Yaa" secondAttribute="trailing" id="EWI-mx-Ktu"/>
+                                    <constraint firstItem="UQM-uZ-MVn" firstAttribute="leading" secondItem="N0T-2t-IAW" secondAttribute="leading" id="R8v-tI-ZyT"/>
+                                    <constraint firstItem="2Rk-ly-KeW" firstAttribute="top" secondItem="UQM-uZ-MVn" secondAttribute="bottom" constant="1" id="TvL-zq-tda"/>
+                                    <constraint firstItem="UQM-uZ-MVn" firstAttribute="top" secondItem="N0T-2t-IAW" secondAttribute="top" id="V8q-Lk-TSG"/>
+                                    <constraint firstAttribute="bottom" secondItem="IUt-U4-fqo" secondAttribute="bottom" constant="8" id="X9R-1c-avg"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Rk-ly-KeW" secondAttribute="trailing" id="Znm-03-FSp"/>
+                                    <constraint firstItem="dCU-oP-Yaa" firstAttribute="top" secondItem="2Rk-ly-KeW" secondAttribute="bottom" constant="1" id="blx-h0-MNZ"/>
+                                    <constraint firstItem="2Rk-ly-KeW" firstAttribute="leading" secondItem="N0T-2t-IAW" secondAttribute="leading" id="pl5-GZ-jaL"/>
+                                    <constraint firstItem="IUt-U4-fqo" firstAttribute="centerX" secondItem="N0T-2t-IAW" secondAttribute="centerX" id="sKa-tE-4ZJ"/>
+                                    <constraint firstItem="CXn-mO-XFZ" firstAttribute="top" secondItem="dCU-oP-Yaa" secondAttribute="bottom" constant="1" id="zSZ-Qq-481"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20362311599999999" green="0.20362311599999999" blue="0.20362311599999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="N0T-2t-IAW" firstAttribute="centerX" secondItem="V9d-6c-1fh" secondAttribute="centerX" id="avG-yy-SH8"/>
+                            <constraint firstItem="N0T-2t-IAW" firstAttribute="centerY" secondItem="V9d-6c-1fh" secondAttribute="centerY" id="vPh-Cl-gss"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backTextFieldView" destination="N0T-2t-IAW" id="KWT-eC-MMW"/>
+                        <outlet property="centerConstraint" destination="vPh-Cl-gss" id="29B-s5-NUV"/>
+                        <outlet property="emailTextField" destination="2Rk-ly-KeW" id="YNe-wo-abk"/>
+                        <outlet property="passwordTextField" destination="dCU-oP-Yaa" id="OY0-W5-h7y"/>
+                        <outlet property="reenterPasswordTextField" destination="CXn-mO-XFZ" id="d8v-9y-s31"/>
+                        <outlet property="submitButton" destination="IUt-U4-fqo" id="bd9-VN-gE3"/>
+                        <outlet property="usernameTextField" destination="UQM-uZ-MVn" id="CTW-4z-pTw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m5H-fj-t5H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="406.25" y="44.53125"/>
+        </scene>
     </scenes>
 </document>

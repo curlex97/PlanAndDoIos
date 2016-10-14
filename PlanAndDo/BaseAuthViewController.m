@@ -14,22 +14,6 @@
 @end
 
 @implementation BaseAuthViewController
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-//    CALayer * gradient=self.view.layer.sublayers[0];
-//    CGFloat navigationBarHeight = self.navigationController.navigationBar.frame.size.height;
-//    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
-//    CGRect rect = CGRectMake(gradient.frame.origin.x, gradient.frame.origin.y, self.view.frame.size.height + navigationBarHeight + statusBarHeight, self.view.frame.size.width);
-//    [UIView animateWithDuration:duration animations:^{
-//        
-//        gradient.frame = rect;
-//    }];
-//    NSLog(@"rect = %@", NSStringFromCGRect(rect));
-//    NSLog(@"view = %@", NSStringFromCGRect(self.view.bounds));
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-}
-
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     
     NSLog(@"%@", NSStringFromCGRect(self.imageView.frame));
