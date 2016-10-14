@@ -10,6 +10,7 @@
 		270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E01D83E217004D3681 /* AMAndroidSideBarViewController.m */; };
 		270DF9E41D83F0B0004D3681 /* KSApplicationColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E31D83F0B0004D3681 /* KSApplicationColor.m */; };
 		270DF9E71D83F56E004D3681 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E61D83F56E004D3681 /* BaseViewController.m */; };
+		270EB9491DAFA9D500DC8953 /* IPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 270EB9481DAFA9D500DC8953 /* IPad.storyboard */; };
 		272F91C01D8A678800A0330B /* SelectCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91BF1D8A678800A0330B /* SelectCategoryViewController.m */; };
 		272F91C31D8A6C0C00A0330B /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C21D8A6C0C00A0330B /* DescriptionViewController.m */; };
 		272F91C61D8A704500A0330B /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C51D8A704500A0330B /* TaskListViewController.m */; };
@@ -103,6 +104,7 @@
 		270DF9E31D83F0B0004D3681 /* KSApplicationColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSApplicationColor.m; sourceTree = "<group>"; };
 		270DF9E51D83F56E004D3681 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		270DF9E61D83F56E004D3681 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		270EB9481DAFA9D500DC8953 /* IPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IPad.storyboard; sourceTree = "<group>"; };
 		272F91BE1D8A678800A0330B /* SelectCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCategoryViewController.h; sourceTree = "<group>"; };
 		272F91BF1D8A678800A0330B /* SelectCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCategoryViewController.m; sourceTree = "<group>"; };
 		272F91C11D8A6C0C00A0330B /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionViewController.h; sourceTree = "<group>"; };
@@ -739,6 +741,7 @@
 			children = (
 				28A36BB61D81887B0092FEFD /* Main.storyboard */,
 				28A36BBE1D81887B0092FEFD /* LaunchScreen.storyboard */,
+				270EB9481DAFA9D500DC8953 /* IPad.storyboard */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1092,6 +1095,7 @@
 				28A36BC01D81887B0092FEFD /* LaunchScreen.storyboard in Resources */,
 				2803AF881D8AA4320032ACFB /* KSCheckSettingsTableViewCell.xib in Resources */,
 				2803AF7C1D8A8EBF0032ACFB /* KSSettingsCell.xib in Resources */,
+				270EB9491DAFA9D500DC8953 /* IPad.storyboard in Resources */,
 				28A36BBD1D81887B0092FEFD /* Assets.xcassets in Resources */,
 				278BAA4F1D8977E4002D38CF /* PriorityCell.xib in Resources */,
 				28A36BB81D81887B0092FEFD /* Main.storyboard in Resources */,

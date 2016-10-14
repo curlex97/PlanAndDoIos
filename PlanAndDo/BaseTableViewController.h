@@ -15,7 +15,6 @@
 @property (nonatomic)UITableView * tableView;
 @property (nonatomic)UIRefreshControl * refresh;
 @property (nonatomic)UIView * emptyTableHeader;
-@property (nonatomic)UIView * loadContentView;
 
 @property NSLayoutConstraint *trailing;
 @property NSLayoutConstraint *leading;

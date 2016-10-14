@@ -31,8 +31,25 @@
     LaunchScreenViewController * launch=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LaunchScreenViewController"];
     self.window.rootViewController=launch;
     [self.window makeKeyAndVisible];
+    [self setupAppearence];
     
     return YES;
+}
+
+- (void)setupAppearence {
+    
+    CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
+    gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 45);
+    
+//    NSLog(@"%@", NSStringFromCGRect(gradient.frame));
+    UIGraphicsBeginImageContext([gradient frame].size);
+    
+    [gradient renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+//    [self.navigationController.navigationBar setBackgroundImage:outputImage forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:outputImage forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

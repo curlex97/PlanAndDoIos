@@ -24,28 +24,28 @@
 
 -(void)setBarImage
 {
-    CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
-    gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 45);
-    
-    NSLog(@"%@", NSStringFromCGRect(gradient.frame));
-    UIGraphicsBeginImageContext([gradient frame].size);
-    
-    [gradient renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    [self.navigationController.navigationBar setBackgroundImage:outputImage forBarMetrics:UIBarMetricsDefault];
+//    CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
+//    gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 45);
+//    
+//    NSLog(@"%@", NSStringFromCGRect(gradient.frame));
+//    UIGraphicsBeginImageContext([gradient frame].size);
+//    
+//    [gradient renderInContext:UIGraphicsGetCurrentContext()];
+//    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+//    
+//    UIGraphicsEndImageContext();
+//    [self.navigationController.navigationBar setBackgroundImage:outputImage forBarMetrics:UIBarMetricsDefault];
 }
 
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    [self setBarImage];
+//    [self setBarImage];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+//    [self setBarImage];
     self.view.clipsToBounds=YES;
     self.view.autoresizesSubviews=YES;
     self.view.opaque=YES;
