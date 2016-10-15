@@ -154,15 +154,18 @@
          {
              TabletasksViewController * tasksViewController=[[TabletasksViewController alloc] init];
              UINavigationController * navi=[[UINavigationController alloc] initWithRootViewController:tasksViewController];
-             AMSideBarViewController * sider=(AMSideBarViewController *)self.navigationController.parentViewController;
-             [sider setNewFrontViewController:navi];
+             if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
+             {
+                 KSSplitViewController * spliter=(KSSplitViewController *)self.navigationController.parentViewController;
+                 spliter.details=navi;
+             }
+             else
+             {
+                 AMSideBarViewController * sider=(AMSideBarViewController *)self.navigationController.parentViewController;
+                 [sider setNewFrontViewController:navi];
+             }
          }];
 
-//        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:YES completion:^
-//         {
-
-        
-//         }];
     }
 }
 
