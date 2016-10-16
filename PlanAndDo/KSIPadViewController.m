@@ -59,6 +59,15 @@
     return result;
 }
 
+-(void)addCategoryDidTap
+{
+    EditCategoryViewController * editController=[[EditCategoryViewController alloc] init];
+    editController.categories=self.categories;
+    
+    editController.modalPresentationStyle=UIModalPresentationFormSheet;
+    [self presentViewController:editController animated:YES completion:nil];
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];

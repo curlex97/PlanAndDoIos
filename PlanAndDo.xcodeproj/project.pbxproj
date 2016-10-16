@@ -15,6 +15,8 @@
 		270EB94F1DB0FBEF00DC8953 /* KSIPhoneMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB94E1DB0FBEF00DC8953 /* KSIPhoneMenuViewController.m */; };
 		270EB9521DB1081400DC8953 /* KSIPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB9511DB1081400DC8953 /* KSIPadViewController.m */; };
 		270EB9551DB10FC100DC8953 /* KSSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB9541DB10FC100DC8953 /* KSSplitViewController.m */; };
+		270EB9581DB3752200DC8953 /* EditCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB9571DB3752200DC8953 /* EditCategoryViewController.m */; };
+		270EB95B1DB3796500DC8953 /* EditCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB95A1DB3796500DC8953 /* EditCategoryTableViewCell.m */; };
 		272F91C01D8A678800A0330B /* SelectCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91BF1D8A678800A0330B /* SelectCategoryViewController.m */; };
 		272F91C31D8A6C0C00A0330B /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C21D8A6C0C00A0330B /* DescriptionViewController.m */; };
 		272F91C61D8A704500A0330B /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C51D8A704500A0330B /* TaskListViewController.m */; };
@@ -117,6 +119,10 @@
 		270EB9511DB1081400DC8953 /* KSIPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSIPadViewController.m; sourceTree = "<group>"; };
 		270EB9531DB10FC100DC8953 /* KSSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSSplitViewController.h; sourceTree = "<group>"; };
 		270EB9541DB10FC100DC8953 /* KSSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSSplitViewController.m; sourceTree = "<group>"; };
+		270EB9561DB3752200DC8953 /* EditCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCategoryViewController.h; sourceTree = "<group>"; };
+		270EB9571DB3752200DC8953 /* EditCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCategoryViewController.m; sourceTree = "<group>"; };
+		270EB9591DB3796500DC8953 /* EditCategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCategoryTableViewCell.h; sourceTree = "<group>"; };
+		270EB95A1DB3796500DC8953 /* EditCategoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCategoryTableViewCell.m; sourceTree = "<group>"; };
 		272F91BE1D8A678800A0330B /* SelectCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCategoryViewController.h; sourceTree = "<group>"; };
 		272F91BF1D8A678800A0330B /* SelectCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCategoryViewController.m; sourceTree = "<group>"; };
 		272F91C11D8A6C0C00A0330B /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionViewController.h; sourceTree = "<group>"; };
@@ -430,6 +436,8 @@
 				2803AFA61D8ABA470032ACFB /* TaskList */,
 				278BAA561D89BB32002D38CF /* BaseTableViewController.h */,
 				278BAA571D89BB32002D38CF /* BaseTableViewController.m */,
+				270EB9561DB3752200DC8953 /* EditCategoryViewController.h */,
+				270EB9571DB3752200DC8953 /* EditCategoryViewController.m */,
 			);
 			name = BaseTableViewController;
 			sourceTree = "<group>";
@@ -588,6 +596,8 @@
 				2803AF7D1D8A8EE20032ACFB /* PriorityCell */,
 				2803AF821D8A8F1E0032ACFB /* SettingsCell */,
 				3F6B255D1D9BCBA7007A7D70 /* SubTaskTableViewCell */,
+				270EB9591DB3796500DC8953 /* EditCategoryTableViewCell.h */,
+				270EB95A1DB3796500DC8953 /* EditCategoryTableViewCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1158,6 +1168,7 @@
 				27494DE41D8D3ECE009BFC5F /* KSMenuViewController.m in Sources */,
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
 				28943CFA1D93032000BC8A69 /* TasksApiManager.m in Sources */,
+				270EB9581DB3752200DC8953 /* EditCategoryViewController.m in Sources */,
 				2803AF811D8A8F190032ACFB /* KSSettingsCell.m in Sources */,
 				278BAA581D89BB32002D38CF /* BaseTableViewController.m in Sources */,
 				28AB85671D8F486100D93AB7 /* UserCoreDataManager.m in Sources */,
@@ -1179,6 +1190,7 @@
 				28943CF71D9302D500BC8A69 /* ApiManager.m in Sources */,
 				274AA9421DA7C62100CB6B21 /* Reachability.m in Sources */,
 				28616D4A1D93F90D00BB2CCE /* ACNetworkManager.m in Sources */,
+				270EB95B1DB3796500DC8953 /* EditCategoryTableViewCell.m in Sources */,
 				28AB856B1D8F48A100D93AB7 /* SettingsCoreDataManager.m in Sources */,
 				280539241D900F2900868ACF /* MGSwipeButton.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,

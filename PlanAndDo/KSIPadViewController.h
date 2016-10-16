@@ -14,6 +14,7 @@
 #import "TabletasksViewController.h"
 #import "SettingsViewController.h"
 #import "ProfileViewController.h"
+#import "EditCategoryViewController.h"
 
 @interface KSIPadViewController : BaseKSMenuViewController
 

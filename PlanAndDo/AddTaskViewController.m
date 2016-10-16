@@ -226,10 +226,32 @@
     self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:NM_TASK_HEAD,NM_TASK_LIST, nil]];
     self.segment.tintColor=[UIColor colorWithRed:39.0/255.0 green:69.0/255.0 blue:83.0/255.0 alpha:1.0];
     [self.segment setSelectedSegmentIndex:0];
-    self.segment.frame=CGRectMake(20, 8, self.view.bounds.size.width-40, 30);
+    self.segment.frame=CGRectMake(0, 0, 300.0, 29.0);
     [self.segment addTarget:self action:@selector(segmentDidTap) forControlEvents:UIControlEventValueChanged];
-    UIView * segmentBackgroundView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 46)];
+    
+    UIView * segmentBackgroundView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 500, 46)];
     [segmentBackgroundView addSubview:self.segment];
+    
+    //segmentBackgroundView.translatesAutoresizingMaskIntoConstraints=NO;
+    self.segment.translatesAutoresizingMaskIntoConstraints=NO;
+    [segmentBackgroundView addConstraint:[NSLayoutConstraint
+                                                  constraintWithItem:self.segment
+                                                  attribute:NSLayoutAttributeCenterX
+                                                  relatedBy:NSLayoutRelationEqual
+                                                  toItem:segmentBackgroundView
+                                                  attribute:NSLayoutAttributeCenterX
+                                                  multiplier:1.0f
+                                                  constant:0.0]];
+    
+    [segmentBackgroundView addConstraint:[NSLayoutConstraint
+                                                  constraintWithItem:self.segment
+                                                  attribute:NSLayoutAttributeCenterY
+                                                  relatedBy:NSLayoutRelationEqual
+                                                  toItem:segmentBackgroundView
+                                                  attribute:NSLayoutAttributeCenterY
+                                                  multiplier:1.0f
+                                                  constant:0.0]];
+    
     self.tableView.tableHeaderView=segmentBackgroundView;
 }
 
@@ -266,7 +288,7 @@
     UILabel * priorityLable=[[UILabel alloc] initWithFrame:CGRectMake(15, 17, 62, 21)];
     priorityLable.text=NM_PRIORITY;
     priorityLable.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
-    self.slider=[[UISlider alloc] initWithFrame:CGRectMake(100, 12, self.view.bounds.size.width-110, 31)];
+    self.slider=[[UISlider alloc] initWithFrame:CGRectMake(100, 12, self.tableView.bounds.size.width-110, 31)];
     self.slider.minimumValue=0.0;
     self.slider.maximumValue=2.0;
     self.slider.value=0.0;

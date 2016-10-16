@@ -209,12 +209,14 @@
         titleLabel.text=NM_CATEGORY;
         titleLabel.font=[UIFont systemFontOfSize:12];
         
-        self.addCategoryButton=[[UIButton alloc] initWithFrame:CGRectMake(233, 0, 30, 30)];
-        [self.addCategoryButton setImage:[UIImage imageNamed:NM_CATEGORY_ADD] forState:UIControlStateNormal];
+        self.addCategoryButton=[[UIButton alloc] initWithFrame:CGRectMake(220, 0, 30, 30)];
+        [self.addCategoryButton setTitle:@"Edit" forState:UIControlStateNormal];
+        self.addCategoryButton.titleLabel.textColor=[UIColor whiteColor];
+        self.addCategoryButton.titleLabel.font=[UIFont systemFontOfSize:12];
         [self.addCategoryButton addTarget:self action:@selector(addCategoryDidTap) forControlEvents:UIControlEventTouchUpInside];
         
-        [view addSubview:self.addCategoryButton];
         [view addSubview:titleLabel];
+        [view addSubview:self.addCategoryButton];
         [view addSubview:imageView];
         return view;
     }
@@ -251,6 +253,7 @@
 
 -(void)addCategoryDidTap
 {
+    
 }
 
 -(void) refreshCategoriesInTable:(NSNotification*)not
