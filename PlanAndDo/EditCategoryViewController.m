@@ -61,10 +61,8 @@
     UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:TL_DELETE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
                                   {
                                       dispatch_async(dispatch_get_main_queue(), ^
-                                                     {
-                                                         KSSplitViewController * spliter=(KSSplitViewController *)self.parentViewController;
-                                                         TabletasksViewController * frontVC=[spliter.details isKindOfClass:[TabletasksViewController class]]?(TabletasksViewController *)spliter.details:nil;
-                                                         
+                                                     {                                                         
+                                                         [[NSNotificationCenter defaultCenter] postNotificationName:@"CategoryIsDeleted" object:self.categories[indexPath.row]];
                                                          
                                                          for(BaseTask* task in [[ApplicationManager tasksApplicationManager] allTasksForCategory:self.categories[indexPath.row]])
                                                          {
@@ -82,12 +80,7 @@
                                                                                  });
                                                               }
                                                           }];
-                                                         
-                                                             if(self.categories[indexPath.row].ID==frontVC.category.ID)
-                                                             {
-                                                             SEL selector = NSSelectorFromString(@"todayDidTap");
-                                                             ((void (*)(id, SEL))[frontVC methodForSelector:selector])(frontVC, selector);
-                                                             }
+                                                        
                                                          
                                                          [self.categories removeObjectAtIndex:indexPath.row];
                                                          //self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
@@ -341,10 +334,7 @@
 
     NSDictionary * info=[not userInfo];
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGRect mainScrean=[UIScreen mainScreen].bounds;
     CGPoint absolutPoint=[self.view convertPoint:self.addCategoryAccessoryView.frame.origin toView:nil];
-    NSLog(@"Keyboard = %@",NSStringFromCGRect([aValue CGRectValue]));
-    NSLog(@"View = %@",NSStringFromCGPoint(mainScrean.origin));
     CGFloat delta=[aValue CGRectValue].origin.y-absolutPoint.y;
     self.accessoryBottom.constant=delta;
     self.bottom.constant=delta;

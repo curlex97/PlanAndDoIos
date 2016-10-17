@@ -288,7 +288,7 @@ static bool firstLoad = true;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NC_TASK_ADD object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NC_TASK_EDIT object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(categoryDeleted:) name:@"CategoryIsDeleted" object:nil];
     if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
     {
         self.navigationController.toolbarHidden=YES;
@@ -297,6 +297,14 @@ static bool firstLoad = true;
     
 }
 
+-(void)categoryDeleted:(NSNotification *)not
+{
+    KSCategory * deletedCategory=(KSCategory *)[not object];
+    if(self.category.ID==deletedCategory.ID)
+    {
+        [self todayDidTap];
+    }
+}
 
 -(void)reloadCoreData
 {
@@ -554,6 +562,10 @@ static bool firstLoad = true;
     return tasks;
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

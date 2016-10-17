@@ -126,8 +126,7 @@
                                   {
                                       dispatch_async(dispatch_get_main_queue(), ^
                                                      {
-                                                         UINavigationController * frontNVC=(UINavigationController *)self.parentController.frontViewController;
-                                                         TabletasksViewController * frontVC=frontNVC.viewControllers.firstObject;
+                                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"CategoryIsDeleted" object:self.categories[indexPath.row]];
                                                          
                                                          
                                                          for(BaseTask* task in [[ApplicationManager tasksApplicationManager] allTasksForCategory:self.categories[indexPath.row]])
@@ -146,12 +145,6 @@
                                                                                  });
                                                               }
                                                           }];
-                                                         
-                                                         if(self.categories[indexPath.row].ID==frontVC.category.ID)
-                                                         {
-                                                             SEL selector = NSSelectorFromString(@"todayDidTap");
-                                                             ((void (*)(id, SEL))[frontVC methodForSelector:selector])(frontVC, selector);
-                                                         }
                                                          
                                                          [self.categories removeObjectAtIndex:indexPath.row];
                                                          //self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];

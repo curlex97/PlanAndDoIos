@@ -213,7 +213,7 @@
         titleLabel.text=NM_CATEGORY;
         titleLabel.font=[UIFont systemFontOfSize:12];
         
-        self.addCategoryButton=[[UIButton alloc] initWithFrame:CGRectMake(220, 0, 30, 30)];
+        self.addCategoryButton=[[UIButton alloc] initWithFrame:CGRectMake(230, 0, 30, 30)];
         [self.addCategoryButton setTitle:@"Edit" forState:UIControlStateNormal];
         self.addCategoryButton.titleLabel.textColor=[UIColor whiteColor];
         self.addCategoryButton.titleLabel.font=[UIFont systemFontOfSize:12];
