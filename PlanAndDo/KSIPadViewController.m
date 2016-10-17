@@ -17,7 +17,6 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [super searchBarCancelButtonClicked:searchBar];
-
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar;
@@ -64,9 +63,8 @@
     EditCategoryViewController * editController=[[EditCategoryViewController alloc] init];
     editController.categories=self.categories;
     
-    UINavigationController * navi=[[UINavigationController alloc] initWithRootViewController:editController];
-    navi.modalPresentationStyle=UIModalPresentationFormSheet;
-    [self presentViewController:navi animated:YES completion:nil];
+    editController.modalPresentationStyle=UIModalPresentationFormSheet;
+    [self presentViewController:editController animated:YES completion:nil];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
