@@ -64,8 +64,9 @@
     EditCategoryViewController * editController=[[EditCategoryViewController alloc] init];
     editController.categories=self.categories;
     
-    editController.modalPresentationStyle=UIModalPresentationFormSheet;
-    [self presentViewController:editController animated:YES completion:nil];
+    UINavigationController * navi=[[UINavigationController alloc] initWithRootViewController:editController];
+    navi.modalPresentationStyle=UIModalPresentationFormSheet;
+    [self presentViewController:navi animated:YES completion:nil];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

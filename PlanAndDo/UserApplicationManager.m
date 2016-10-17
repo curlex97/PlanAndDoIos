@@ -54,7 +54,7 @@
      [[[UserApiManager alloc] init] registerAsyncWithEmail:email andUserName:userName andPassword:password completion:^(NSDictionary* dictionary)
     {
         NSString* status = [dictionary valueForKeyPath:@"status"];
-        if([status containsString:@"succsess"])
+        if([status containsString:@"suc"])
         {
             [ApplicationManager cleanLocalDataBase];
             
@@ -124,7 +124,7 @@
         
         NSString* status = [dictionary valueForKeyPath:@"status"];
         
-        if([status containsString:@"succsess"])
+        if([status containsString:@"suc"])
         {
             int ID = [[dictionary valueForKeyPath:@"data.user_id"] intValue];
             NSString* userName = [dictionary valueForKeyPath:@"data.user_name"];

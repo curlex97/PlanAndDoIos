@@ -132,7 +132,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger result;
-    if(self.state!=KSBaseMenuStateSearch)
+    if(self.state==KSBaseMenuStateNormal)
     {
         if(section==0)
         {
@@ -147,9 +147,13 @@
             result = 2;
         }
     }
-    else
+    else if(self.state==KSBaseMenuStateSearch)
     {
         result = self.tableTasks.count;
+    }
+    else
+    {
+        result = self.categories.count;
     }
     return result;
 }
@@ -169,7 +173,7 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger result;
-    if(self.state!=KSBaseMenuStateSearch)
+    if(self.state==KSBaseMenuStateNormal)
     {
         result=3;
     }
@@ -183,7 +187,7 @@
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if(section==1 && self.state!=KSBaseMenuStateSearch)
+    if(section==1 && self.state==KSBaseMenuStateNormal)
     {
         return NM_CATEGORIES;
     }
@@ -232,11 +236,11 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if(section==2 && self.state!=KSBaseMenuStateSearch && self.categories.count>0)
+    if(section==2 && self.state==KSBaseMenuStateNormal && self.categories.count>0)
     {
         return 45.0;
     }
-    else if(section==1 && self.state!=KSBaseMenuStateSearch)
+    else if(section==1 && self.state==KSBaseMenuStateNormal)
     {
         return 30.0;
     }

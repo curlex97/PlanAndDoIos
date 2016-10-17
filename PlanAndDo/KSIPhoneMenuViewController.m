@@ -13,6 +13,8 @@
 @property (nonatomic)UITextField * addCategoryTextField;
 @property (nonatomic)UIView * addCategoryAccessoryView;
 @property (nonatomic)NSLayoutConstraint * accessoryBottom;
+@property (nonatomic)UIView * editView;
+@property (nonatomic)BOOL isChangeCategory;
 @end
 
 @implementation KSIPhoneMenuViewController
@@ -32,7 +34,6 @@
 {
     [super searchBarShouldBeginEditing:searchBar];
     searchBar.frame=CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, [UIScreen mainScreen].bounds.size.width-searchBar.frame.origin.x*2, searchBar.frame.size.height);
-    self.parentController.hiden=YES;
     return YES;
 }
 
@@ -42,7 +43,7 @@
     if([self.addCategoryTextField isFirstResponder])
     {
         [self.addCategoryTextField resignFirstResponder];
-        self.parentController.hiden=NO;
+        //self.parentController.hiden=NO;
         [UIView animateWithDuration:0.5 animations:^
          {
              self.searchBar.frame=CGRectMake(8, 8, 255, 30);
@@ -75,6 +76,10 @@
         self.parentController.hiden=NO;
         [self.parentController side];
         
+    }
+    else if(self.state==KSBaseMenuStateEdit)
+    {
+
     }
     else if(indexPath.section == 1)
     {
@@ -113,15 +118,70 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Delete Category" message:@"If you delete a category, delete all the tasks and lists that are in it" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:TL_CANCEL style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:TL_DELETE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
+                                  {
+                                      dispatch_async(dispatch_get_main_queue(), ^
+                                                     {
+                                                         UINavigationController * frontNVC=(UINavigationController *)self.parentController.frontViewController;
+                                                         TabletasksViewController * frontVC=frontNVC.viewControllers.firstObject;
+                                                         
+                                                         
+                                                         for(BaseTask* task in [[ApplicationManager tasksApplicationManager] allTasksForCategory:self.categories[indexPath.row]])
+                                                         {
+                                                             [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
+                                                         }
+                                                         
+                                                         [[ApplicationManager categoryApplicationManager] deleteCateroty:self.categories[indexPath.row] completion:^(bool completed)
+                                                          {
+                                                              if(completed)
+                                                              {
+                                                                  self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
+                                                                  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
+                                                                                 {
+                                                                                     [self.tableView reloadData];
+                                                                                 });
+                                                              }
+                                                          }];
+                                                         
+                                                         if(self.categories[indexPath.row].ID==frontVC.category.ID)
+                                                         {
+                                                             SEL selector = NSSelectorFromString(@"todayDidTap");
+                                                             ((void (*)(id, SEL))[frontVC methodForSelector:selector])(frontVC, selector);
+                                                         }
+                                                         
+                                                         [self.categories removeObjectAtIndex:indexPath.row];
+                                                         //self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
+                                                         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+                                                         
+                                                         
+                                                         if(self.categories.count==0)
+                                                         {
+                                                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
+                                                                            {
+                                                                                [self.tableView reloadData];
+                                                                            });
+                                                         }
+                                                     });
+                                      
+                                  }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:deleteAction];
+    [self.parentController presentViewController:alertController animated:YES completion:nil];
+}
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    if(self.state!=KSBaseMenuStateEdit)
+    if(!self.isChangeCategory)
     {
         [[ApplicationManager categoryApplicationManager] addCateroty:[[KSCategory alloc] initWithID:self.categories.lastObject.ID+1 andName:textField.text andSyncStatus:[NSDate date].timeIntervalSince1970] completion:nil];
         self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
         textField.text=@"";
-        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.categories.count-1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.categories.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     }
     else
     {
@@ -131,11 +191,9 @@
         [[ApplicationManager categoryApplicationManager] updateCateroty:self.categories[self.managedIndexPath.row] completion:nil];
         self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
         
-        self.state=KSBaseMenuStateNormal;
         [self.tableView reloadData];
         textField.text=@"";
     }
-    self.parentController.hiden=NO;
     [UIView animateWithDuration:0.5 animations:^
      {
          self.searchBar.frame=CGRectMake(8, 8, 255, 30);
@@ -143,6 +201,18 @@
      }];
     
     return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(self.state==KSBaseMenuStateEdit)
+    {
+        return UITableViewCellEditingStyleDelete;
+    }
+    else
+    {
+        return UITableViewCellEditingStyleNone;
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -259,6 +329,11 @@
         cell.taskTimeLabel.text = [dateFormatter stringFromDate:task.completionTime];
         return cell;
     }
+    else if(self.state==KSBaseMenuStateEdit)
+    {
+        cell.textLabel.text=[self.categories[indexPath.row] name];
+        cell.textLabel.textColor=[UIColor whiteColor];
+    }
     else
     {
         
@@ -301,90 +376,77 @@
     CGPoint p = [gestureRecognizer locationInView:self.tableView];
     
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
-    if (indexPath != nil && gestureRecognizer.state == UIGestureRecognizerStateBegan && indexPath.section==1)
+    if (indexPath != nil && gestureRecognizer.state == UIGestureRecognizerStateBegan)
     {
-        UIAlertController * alertController=[UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        
-        UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:TL_DELETE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
-                                      {
-                                          UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Delete Category" message:@"If you delete a category, delete all the tasks and lists that are in it" preferredStyle:UIAlertControllerStyleAlert];
-                                          UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:TL_CANCEL style:UIAlertActionStyleCancel handler:nil];
-                                          UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:TL_DELETE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
-                                                                        {
-                                                                            dispatch_async(dispatch_get_main_queue(), ^
-                                                                                           {
-                                                                                               UINavigationController * frontNVC=(UINavigationController *)self.parentController.frontViewController;
-                                                                                               TabletasksViewController * frontVC=frontNVC.viewControllers.firstObject;
-                                                                                               
-                                                                                               
-                                                                                               for(BaseTask* task in [[ApplicationManager tasksApplicationManager] allTasksForCategory:self.categories[indexPath.row]])
-                                                                                               {
-                                                                                                   [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
-                                                                                               }
-                                                                                               
-                                                                                               [[ApplicationManager categoryApplicationManager] deleteCateroty:self.categories[indexPath.row] completion:^(bool completed)
-                                                                                                {
-                                                                                                    if(completed)
-                                                                                                    {
-                                                                                                        self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
-                                                                                                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
-                                                                                                                       {
-                                                                                                                           [self.tableView reloadData];
-                                                                                                                       });
-                                                                                                    }
-                                                                                                }];
-                                                                                               
-                                                                                               if(self.categories[indexPath.row].ID==frontVC.category.ID)
-                                                                                               {
-                                                                                                   SEL selector = NSSelectorFromString(@"todayDidTap");
-                                                                                                   ((void (*)(id, SEL))[frontVC methodForSelector:selector])(frontVC, selector);
-                                                                                               }
-                                                                                               
-                                                                                               [self.categories removeObjectAtIndex:indexPath.row];
-                                                                                               //self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
-                                                                                               [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-                                                                                               
-                                                                                               
-                                                                                               if(self.categories.count==0)
-                                                                                               {
-                                                                                                   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
-                                                                                                                  {
-                                                                                                                      [self.tableView reloadData];
-                                                                                                                  });
-                                                                                               }
-                                                                                           });
-                                                                            
-                                                                        }];
-                                          [alertController addAction:cancelAction];
-                                          [alertController addAction:deleteAction];
-                                          [self.parentController presentViewController:alertController animated:YES completion:nil];
-                                      }];
-        
-        UIAlertAction * editAction=[UIAlertAction actionWithTitle:TL_EDIT style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-                                    {
-                                        self.addCategoryTextField.text=[self.categories[indexPath.row] name];
-                                        self.managedIndexPath=indexPath;
-                                        self.state=KSBaseMenuStateEdit;
-                                        [self addCategoryDidTap];
-                                    }];
-        
-        UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:TL_CANCEL style:UIAlertActionStyleCancel handler:nil];
-        
-        [alertController addAction:editAction];
-        [alertController addAction:deleteAction];
-        [alertController addAction:cancelAction];
-        [self.parentController presentViewController:alertController animated:YES completion:nil];
+        self.isChangeCategory=YES;
+        self.addCategoryTextField.text=[self.categories[indexPath.row] name];
+        self.managedIndexPath=indexPath;
+        [self.addCategoryTextField becomeFirstResponder];
     }
 }
 
 -(void)addCategoryDidTap
 {
+    self.editView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50.0)];
+    
+    UIButton * addButton=[[UIButton alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
+    [addButton setImage:[UIImage imageNamed:NM_CATEGORY_ADD] forState:UIControlStateNormal];
+    [addButton addTarget:self action:@selector(addButtonDidTap) forControlEvents:UIControlEventTouchUpInside];
+
+    UIButton * cancelButton=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 50)];
+    [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    cancelButton.titleLabel.textColor=[UIColor whiteColor];
+    [cancelButton addTarget:self action:@selector(cancelButtonDidTap) forControlEvents:UIControlEventTouchUpInside];
+    
+    cancelButton.translatesAutoresizingMaskIntoConstraints=NO;
+    [self.editView addConstraint:[NSLayoutConstraint
+                                                  constraintWithItem:cancelButton
+                                                  attribute:NSLayoutAttributeRight
+                                                  relatedBy:NSLayoutRelationEqual
+                                                  toItem:self.editView
+                                                  attribute:NSLayoutAttributeRight
+                                                  multiplier:1.0f
+                                                  constant:-15.0]];
+    
+    [self.editView addConstraint:[NSLayoutConstraint
+                                                  constraintWithItem:cancelButton
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                  toItem:self.editView
+                                                  attribute:NSLayoutAttributeTop
+                                                  multiplier:1.0f
+                                                  constant:10.0]];
+    
+    [self.editView addSubview:addButton];
+    [self.editView addSubview:cancelButton];
+    self.state=KSBaseMenuStateEdit;
+    self.tableView.tableHeaderView=self.editView;
+    [self.tableView reloadData];
+    self.parentController.hiden=YES;
+    self.tableView.editing=YES;
+}
+
+-(void)addButtonDidTap
+{
+    self.isChangeCategory=NO;
     [self.addCategoryTextField becomeFirstResponder];
+}
+
+-(void)cancelButtonDidTap
+{
+    self.parentController.hiden=NO;
+    self.tableView.editing=NO;
+    self.state=KSBaseMenuStateNormal;
+    UIView * searchBarView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 46)];
+    [searchBarView addSubview:self.searchBar];
+    self.tableView.tableHeaderView=searchBarView;
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.addCategoryAccessoryView=[[UIView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height, self.view.bounds.size.width, 44)];
     self.addCategoryAccessoryView.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
     self.addCategoryTextField=[[UITextField alloc] initWithFrame:CGRectMake(16, 8, self.navigationController.toolbar.frame.size.width-32, 30)];

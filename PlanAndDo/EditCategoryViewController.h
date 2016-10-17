@@ -9,6 +9,7 @@
 #import "BaseTableViewController.h"
 #import "KSCategory.h"
 #import "EditCategoryTableViewCell.h"
+#import "ApplicationManager.h"
 
 @interface EditCategoryViewController : BaseTableViewController
 @property (nonatomic)NSMutableArray<KSCategory *> * categories;
