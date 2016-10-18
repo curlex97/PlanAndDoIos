@@ -6,9 +6,9 @@
 //  Copyright © 2016 TodoTeamGroup. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BaseAuthViewController.h"
 
-@interface ChangeEmailViewController : BaseViewController
+@interface ChangeEmailViewController : BaseAuthViewController
 @property (weak, nonatomic) IBOutlet UITextField *oldEmailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *reenterEmailTextField;

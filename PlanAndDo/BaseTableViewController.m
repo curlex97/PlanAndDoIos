@@ -13,7 +13,6 @@
 
 @interface BaseTableViewController ()
 @property (nonatomic)BOOL currentReachStatus;
-@property (nonatomic)UIView * toolBarHideView;
 @end
 
 @implementation BaseTableViewController
@@ -138,29 +137,6 @@
     [self.tableView addSubview:self.refresh];
     [self.refresh addTarget:self action:@selector(refreshDidSwipeEvent) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:self.tableView];
-    
-    self.loadContentView=[[UIView alloc] initWithFrame:self.view.bounds];
-    self.loadContentView.backgroundColor=[UIColor colorWithWhite:0.0 alpha:0.5];
-    
-    UIView * searchView=[[UIView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width/2-65.0, [UIScreen mainScreen].bounds.size.height/3, 130.0, 80.0)];
-    searchView.backgroundColor=[UIColor whiteColor];
-    searchView.layer.cornerRadius=8.0;
-    
-    UILabel * searchLabel=[[UILabel alloc] initWithFrame:CGRectMake(0.0, 50.0, 130.0, 30.0)];
-    searchLabel.text=@"Synchronize...";
-    searchLabel.adjustsFontSizeToFitWidth=YES;
-    searchLabel.textAlignment=NSTextAlignmentCenter;
-    searchLabel.textColor=[UIColor blackColor];
-    
-    UIActivityIndicatorView * activityInd=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(40.0, 10.0, 50.0, 50.0)];
-    activityInd.activityIndicatorViewStyle=UIActivityIndicatorViewStyleWhiteLarge;
-    activityInd.color=[UIColor blackColor];
-    activityInd.hidesWhenStopped=YES;
-    [activityInd startAnimating];
-    
-    [searchView addSubview:searchLabel];
-    [searchView addSubview:activityInd];
-    [self.loadContentView addSubview:searchView];
     
     self.emptyTableHeader=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, [UIScreen mainScreen].bounds.size.height-100)];
     self.emptyTableHeader.backgroundColor=[UIColor whiteColor];

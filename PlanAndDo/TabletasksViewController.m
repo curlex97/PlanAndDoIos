@@ -28,7 +28,11 @@ static bool firstLoad = true;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.toolbarHidden=NO;
+    
+    if(![[UIDevice currentDevice].model isEqualToString:@"iPad"])
+    {
+        self.navigationController.toolbarHidden=NO;
+    }
     [self refreshData:nil];
 }
 
@@ -284,10 +288,23 @@ static bool firstLoad = true;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NC_TASK_ADD object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NC_TASK_EDIT object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(categoryDeleted:) name:@"CategoryIsDeleted" object:nil];
+    if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
+    {
+        self.navigationController.toolbarHidden=YES;
+        self.navigationItem.leftBarButtonItem=nil;
+    }
     
 }
 
+-(void)categoryDeleted:(NSNotification *)not
+{
+    KSCategory * deletedCategory=(KSCategory *)[not object];
+    if(self.category.ID==deletedCategory.ID)
+    {
+        [self todayDidTap];
+    }
+}
 
 -(void)reloadCoreData
 {
@@ -545,6 +562,10 @@ static bool firstLoad = true;
     return tasks;
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

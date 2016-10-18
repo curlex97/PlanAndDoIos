@@ -823,7 +823,8 @@
 -(void) refreshCategoriesInTable:(NSNotification*)not
 {
     self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
         [self.tableView reloadData];
     });
 }

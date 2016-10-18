@@ -104,7 +104,7 @@
     }
     else if(indexPath.row==1)
     {
-        NewPasswordViewController * newPassViewController=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"NewPasswordViewController"];
+        NewPasswordViewController * newPassViewController=[self.baseStoryboard instantiateViewControllerWithIdentifier:@"NewPasswordViewController"];
         if(newPassViewController)
         {
             [self.navigationController pushViewController:newPassViewController animated:YES];
@@ -112,8 +112,7 @@
     }
     else if(indexPath.row==2)
     {
-        ChangeEmailViewController * changeEmail=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ChangeEmailViewController"];
-        
+        ChangeEmailViewController * changeEmail=[self.baseStoryboard instantiateViewControllerWithIdentifier:@"ChangeEmailViewController"];
         if(changeEmail)
         {
             [self.navigationController pushViewController:changeEmail animated:YES];
@@ -150,20 +149,23 @@
     else
     {
         [[ApplicationManager userApplicationManager] logout];
-        LoginViewController * login=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        LoginViewController * login=[self.baseStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:YES completion:^
          {
              TabletasksViewController * tasksViewController=[[TabletasksViewController alloc] init];
              UINavigationController * navi=[[UINavigationController alloc] initWithRootViewController:tasksViewController];
-             AMSideBarViewController * sider=(AMSideBarViewController *)self.navigationController.parentViewController;
-             [sider setNewFrontViewController:navi];
+             if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
+             {
+                 KSSplitViewController * spliter=(KSSplitViewController *)self.navigationController.parentViewController;
+                 spliter.details=navi;
+             }
+             else
+             {
+                 AMSideBarViewController * sider=(AMSideBarViewController *)self.navigationController.parentViewController;
+                 [sider setNewFrontViewController:navi];
+             }
          }];
 
-//        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:YES completion:^
-//         {
-
-        
-//         }];
     }
 }
 

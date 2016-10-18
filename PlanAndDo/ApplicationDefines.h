@@ -9,7 +9,8 @@
 #ifndef ApplicationDefines_h
 #define ApplicationDefines_h
 
-
+#define BAR_BUTTON_SIZE_WIDTH 30
+#define BAR_BUTTON_SIZE_HEIGHT 41
 
 
 // NOTIFICATION CENTER
@@ -69,7 +70,7 @@
 #define NM_EDIT_LIST @"Edit list"
 #define NM_START_DAY @"Start day"
 #define NM_START_PAGE @"Start page"
-#define NM_TASK_LIST @"Task list"
+#define NM_TASK_LIST @"List"
 
 #define NM_BOX @"Box"
 #define NM_CATEGORY @"Category"

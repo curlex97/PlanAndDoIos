@@ -10,27 +10,72 @@
 #import "KSApplicationColor.h"
 
 @interface BaseAuthViewController ()
-
+@property (nonatomic, strong) UIImageView* imageView;
 @end
 
 @implementation BaseAuthViewController
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)viewDidLoad
 {
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    CALayer * gradient=self.view.layer.sublayers[0];
-    gradient.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
-}
-
-- (void)viewDidLoad {
     [super viewDidLoad];
     CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
     gradient.frame=self.view.bounds;
-    self.view.backgroundColor=[UIColor whiteColor];
-    [self.view.layer insertSublayer:gradient atIndex:0];
+    UIGraphicsBeginImageContext([gradient frame].size);
+    
+    [gradient renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    self.imageView=[[UIImageView alloc] initWithImage:outputImage];
+    self.imageView.contentMode = UIViewContentModeScaleToFill;
+    self.imageView.frame=self.view.bounds;
+    [self.view insertSubview:self.imageView atIndex:0];
+    
+    self.imageView.translatesAutoresizingMaskIntoConstraints=NO;
+    [self.view addConstraint:[NSLayoutConstraint
+                                                  constraintWithItem:self.imageView
+                                                  attribute:NSLayoutAttributeBottom
+                                                  relatedBy:NSLayoutRelationEqual
+                                                  toItem:self.view
+                                                  attribute:NSLayoutAttributeBottom
+                                                  multiplier:1.0f
+                                                  constant:0.0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint
+                                                  constraintWithItem:self.imageView
+                                                  attribute:NSLayoutAttributeTop
+                                                  relatedBy:NSLayoutRelationEqual
+                                                  toItem:self.view
+                                                  attribute:NSLayoutAttributeTop
+                                                  multiplier:1.0f
+                                                  constant:0.0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint
+                                                  constraintWithItem:self.imageView
+                                                  attribute:NSLayoutAttributeTrailing
+                                                  relatedBy:NSLayoutRelationEqual
+                                                  toItem:self.view
+                                                  attribute:NSLayoutAttributeTrailing
+                                                  multiplier:1.0f
+                                                  constant:0.0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint
+                                                  constraintWithItem:self.imageView
+                                                  attribute:NSLayoutAttributeLeading
+                                                  relatedBy:NSLayoutRelationEqual
+                                                  toItem:self.view
+                                                  attribute:NSLayoutAttributeLeading
+                                                  multiplier:1.0f
+                                                  constant:0.0]];
+    
+//    CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
+//    gradient.frame=self.view.bounds;
+//    self.view.backgroundColor=[UIColor whiteColor];
+//    [self.view.layer insertSublayer:gradient atIndex:0];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

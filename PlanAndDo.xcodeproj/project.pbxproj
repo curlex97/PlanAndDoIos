@@ -10,6 +10,13 @@
 		270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E01D83E217004D3681 /* AMAndroidSideBarViewController.m */; };
 		270DF9E41D83F0B0004D3681 /* KSApplicationColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E31D83F0B0004D3681 /* KSApplicationColor.m */; };
 		270DF9E71D83F56E004D3681 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DF9E61D83F56E004D3681 /* BaseViewController.m */; };
+		270EB9491DAFA9D500DC8953 /* IPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 270EB9481DAFA9D500DC8953 /* IPad.storyboard */; };
+		270EB94C1DB0F69800DC8953 /* BaseKSMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB94B1DB0F69800DC8953 /* BaseKSMenuViewController.m */; };
+		270EB94F1DB0FBEF00DC8953 /* KSIPhoneMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB94E1DB0FBEF00DC8953 /* KSIPhoneMenuViewController.m */; };
+		270EB9521DB1081400DC8953 /* KSIPadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB9511DB1081400DC8953 /* KSIPadViewController.m */; };
+		270EB9551DB10FC100DC8953 /* KSSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB9541DB10FC100DC8953 /* KSSplitViewController.m */; };
+		270EB9581DB3752200DC8953 /* EditCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB9571DB3752200DC8953 /* EditCategoryViewController.m */; };
+		270EB95B1DB3796500DC8953 /* EditCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB95A1DB3796500DC8953 /* EditCategoryTableViewCell.m */; };
 		272F91C01D8A678800A0330B /* SelectCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91BF1D8A678800A0330B /* SelectCategoryViewController.m */; };
 		272F91C31D8A6C0C00A0330B /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C21D8A6C0C00A0330B /* DescriptionViewController.m */; };
 		272F91C61D8A704500A0330B /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C51D8A704500A0330B /* TaskListViewController.m */; };
@@ -103,6 +110,19 @@
 		270DF9E31D83F0B0004D3681 /* KSApplicationColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSApplicationColor.m; sourceTree = "<group>"; };
 		270DF9E51D83F56E004D3681 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		270DF9E61D83F56E004D3681 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		270EB9481DAFA9D500DC8953 /* IPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IPad.storyboard; sourceTree = "<group>"; };
+		270EB94A1DB0F69800DC8953 /* BaseKSMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseKSMenuViewController.h; sourceTree = "<group>"; };
+		270EB94B1DB0F69800DC8953 /* BaseKSMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseKSMenuViewController.m; sourceTree = "<group>"; };
+		270EB94D1DB0FBEF00DC8953 /* KSIPhoneMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSIPhoneMenuViewController.h; sourceTree = "<group>"; };
+		270EB94E1DB0FBEF00DC8953 /* KSIPhoneMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSIPhoneMenuViewController.m; sourceTree = "<group>"; };
+		270EB9501DB1081400DC8953 /* KSIPadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSIPadViewController.h; sourceTree = "<group>"; };
+		270EB9511DB1081400DC8953 /* KSIPadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSIPadViewController.m; sourceTree = "<group>"; };
+		270EB9531DB10FC100DC8953 /* KSSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSSplitViewController.h; sourceTree = "<group>"; };
+		270EB9541DB10FC100DC8953 /* KSSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSSplitViewController.m; sourceTree = "<group>"; };
+		270EB9561DB3752200DC8953 /* EditCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCategoryViewController.h; sourceTree = "<group>"; };
+		270EB9571DB3752200DC8953 /* EditCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCategoryViewController.m; sourceTree = "<group>"; };
+		270EB9591DB3796500DC8953 /* EditCategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCategoryTableViewCell.h; sourceTree = "<group>"; };
+		270EB95A1DB3796500DC8953 /* EditCategoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCategoryTableViewCell.m; sourceTree = "<group>"; };
 		272F91BE1D8A678800A0330B /* SelectCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCategoryViewController.h; sourceTree = "<group>"; };
 		272F91BF1D8A678800A0330B /* SelectCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCategoryViewController.m; sourceTree = "<group>"; };
 		272F91C11D8A6C0C00A0330B /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionViewController.h; sourceTree = "<group>"; };
@@ -416,6 +436,8 @@
 				2803AFA61D8ABA470032ACFB /* TaskList */,
 				278BAA561D89BB32002D38CF /* BaseTableViewController.h */,
 				278BAA571D89BB32002D38CF /* BaseTableViewController.m */,
+				270EB9561DB3752200DC8953 /* EditCategoryViewController.h */,
+				270EB9571DB3752200DC8953 /* EditCategoryViewController.m */,
 			);
 			name = BaseTableViewController;
 			sourceTree = "<group>";
@@ -574,6 +596,8 @@
 				2803AF7D1D8A8EE20032ACFB /* PriorityCell */,
 				2803AF821D8A8F1E0032ACFB /* SettingsCell */,
 				3F6B255D1D9BCBA7007A7D70 /* SubTaskTableViewCell */,
+				270EB9591DB3796500DC8953 /* EditCategoryTableViewCell.h */,
+				270EB95A1DB3796500DC8953 /* EditCategoryTableViewCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -621,6 +645,12 @@
 			children = (
 				27494DE21D8D3ECE009BFC5F /* KSMenuViewController.h */,
 				27494DE31D8D3ECE009BFC5F /* KSMenuViewController.m */,
+				270EB94A1DB0F69800DC8953 /* BaseKSMenuViewController.h */,
+				270EB94B1DB0F69800DC8953 /* BaseKSMenuViewController.m */,
+				270EB94D1DB0FBEF00DC8953 /* KSIPhoneMenuViewController.h */,
+				270EB94E1DB0FBEF00DC8953 /* KSIPhoneMenuViewController.m */,
+				270EB9501DB1081400DC8953 /* KSIPadViewController.h */,
+				270EB9511DB1081400DC8953 /* KSIPadViewController.m */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -721,6 +751,8 @@
 				27C7F1F51DACCCE800AFD1B0 /* LaunchScreen */,
 				2803AF951D8AB9A80032ACFB /* BaseViewController */,
 				2803AFAB1D8ABDF60032ACFB /* SideBars */,
+				270EB9531DB10FC100DC8953 /* KSSplitViewController.h */,
+				270EB9541DB10FC100DC8953 /* KSSplitViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -739,6 +771,7 @@
 			children = (
 				28A36BB61D81887B0092FEFD /* Main.storyboard */,
 				28A36BBE1D81887B0092FEFD /* LaunchScreen.storyboard */,
+				270EB9481DAFA9D500DC8953 /* IPad.storyboard */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1092,6 +1125,7 @@
 				28A36BC01D81887B0092FEFD /* LaunchScreen.storyboard in Resources */,
 				2803AF881D8AA4320032ACFB /* KSCheckSettingsTableViewCell.xib in Resources */,
 				2803AF7C1D8A8EBF0032ACFB /* KSSettingsCell.xib in Resources */,
+				270EB9491DAFA9D500DC8953 /* IPad.storyboard in Resources */,
 				28A36BBD1D81887B0092FEFD /* Assets.xcassets in Resources */,
 				278BAA4F1D8977E4002D38CF /* PriorityCell.xib in Resources */,
 				28A36BB81D81887B0092FEFD /* Main.storyboard in Resources */,
@@ -1120,6 +1154,7 @@
 				3FB4A4E81DA565EE00DD9FCA /* LaunchScreenViewController.m in Sources */,
 				278BAA551D89BA4A002D38CF /* BaseAuthViewController.m in Sources */,
 				27B1A0FA1D8195A800D47FCD /* UserSettings.m in Sources */,
+				270EB94C1DB0F69800DC8953 /* BaseKSMenuViewController.m in Sources */,
 				3F6B255C1D9BCBA3007A7D70 /* SubTaskTableViewCell.m in Sources */,
 				280539251D900F2900868ACF /* MGSwipeTableCell.m in Sources */,
 				28214C931D93D36E0012B1C7 /* CategoryApplicationManager.m in Sources */,
@@ -1133,6 +1168,7 @@
 				27494DE41D8D3ECE009BFC5F /* KSMenuViewController.m in Sources */,
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
 				28943CFA1D93032000BC8A69 /* TasksApiManager.m in Sources */,
+				270EB9581DB3752200DC8953 /* EditCategoryViewController.m in Sources */,
 				2803AF811D8A8F190032ACFB /* KSSettingsCell.m in Sources */,
 				278BAA581D89BB32002D38CF /* BaseTableViewController.m in Sources */,
 				28AB85671D8F486100D93AB7 /* UserCoreDataManager.m in Sources */,
@@ -1154,6 +1190,7 @@
 				28943CF71D9302D500BC8A69 /* ApiManager.m in Sources */,
 				274AA9421DA7C62100CB6B21 /* Reachability.m in Sources */,
 				28616D4A1D93F90D00BB2CCE /* ACNetworkManager.m in Sources */,
+				270EB95B1DB3796500DC8953 /* EditCategoryTableViewCell.m in Sources */,
 				28AB856B1D8F48A100D93AB7 /* SettingsCoreDataManager.m in Sources */,
 				280539241D900F2900868ACF /* MGSwipeButton.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
@@ -1163,8 +1200,10 @@
 				28943CFD1D93037500BC8A69 /* SubTasksApiManager.m in Sources */,
 				28943D001D93038600BC8A69 /* UserApiManager.m in Sources */,
 				2803AF911D8AAA710032ACFB /* StartDayViewController.m in Sources */,
+				270EB9521DB1081400DC8953 /* KSIPadViewController.m in Sources */,
 				2803AF8E1D8AA8ED0032ACFB /* FormatTimeViewController.m in Sources */,
 				28214C8B1D93D33E0012B1C7 /* UserApplicationManager.m in Sources */,
+				270EB9551DB10FC100DC8953 /* KSSplitViewController.m in Sources */,
 				2786E7AD1D881507009BDB2A /* LoginViewController.m in Sources */,
 				2822CBF71D9554CE00779984 /* NSDate+LocalTime.m in Sources */,
 				2803AF941D8AAB1D0032ACFB /* StartPageViewController.m in Sources */,
@@ -1173,6 +1212,7 @@
 				28B947891D918D72005A8E9A /* EditTaskViewController.m in Sources */,
 				2786E7B51D884421009BDB2A /* TaskTableViewCell.m in Sources */,
 				27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */,
+				270EB94F1DB0FBEF00DC8953 /* KSIPhoneMenuViewController.m in Sources */,
 				282C28C61D829A600061761E /* AMSideBarViewController.m in Sources */,
 				28214C9B1D93E2D60012B1C7 /* SyncApplicationManager.m in Sources */,
 				28797F771D88309200AEDE0A /* NewPasswordViewController.m in Sources */,

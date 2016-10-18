@@ -29,7 +29,7 @@
     [super viewWillAppear:animated];
     if([ApplicationManager userApplicationManager].authorisedUser.emailAdress.length==0 && !self.isViewPresented)
     {
-        LoginViewController * login=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        LoginViewController * login=[self.baseStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
         login.isViewPresented=YES;
         [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:NO completion:^
          {
@@ -190,14 +190,23 @@
 
 - (IBAction)signInTapped:(id)sender
 {
+    [self.navigationController.view addSubview:self.loadContentView];
     [[ApplicationManager userApplicationManager] loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool status)
      {
          if(status)
          {
              [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL status)
              {
-                 [self showMainWindow:nil];
+                 dispatch_async(dispatch_get_main_queue(), ^
+                 {
+                     [self.loadContentView removeFromSuperview];
+                     [self showMainWindow:nil];
+                 });
              }];
+         }
+         else
+         {
+             
          }
      }];
 }
