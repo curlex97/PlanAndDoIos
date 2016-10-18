@@ -7,7 +7,7 @@
 //
 
 #import "AMSideBarViewController.h"
-#import "KSMenuViewController.h"
+#import "BaseKSMenuViewController.h"
 #import "ApplicationManager.h"
 
 @interface AMSideBarViewController ()<UIGestureRecognizerDelegate>
@@ -24,6 +24,14 @@
 @implementation AMSideBarViewController
 
 #define MAX_OFFSET 270.0
+
+//-(void)viewDidLayoutSubviews
+//{
+//    if(self.hiden)
+//    {
+//        self.hiden=YES;
+//    }
+//}
 
 #pragma mark - Gesture delegate
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
@@ -174,10 +182,10 @@
          {
              [self moveFrontViewOnPosition:MAX_OFFSET];
          } completion:^(BOOL fl){
-             KSMenuViewController* con = (KSMenuViewController*)self.backViewController;
+             BaseKSMenuViewController* con = (BaseKSMenuViewController *)self.backViewController;
              if(con)
              {
-                [self setHiden:con.state == KSMenuStateSearch];
+                [self setHiden:con.state == KSBaseMenuStateSearch];
              }
          }];
     }

@@ -42,8 +42,6 @@
 		27B1A1061D81A61300D47FCD /* KSTaskCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 27B1A1051D81A61300D47FCD /* KSTaskCollection.m */; };
 		2801D1901D9E927B00A4D1FD /* SyncApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2801D18F1D9E927B00A4D1FD /* SyncApiManager.m */; };
 		2801D1941D9E97DA00A4D1FD /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2801D1931D9E97DA00A4D1FD /* FileManager.m */; };
-		2803AF7C1D8A8EBF0032ACFB /* KSSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2803AF7B1D8A8EBF0032ACFB /* KSSettingsCell.xib */; };
-		2803AF811D8A8F190032ACFB /* KSSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF801D8A8F190032ACFB /* KSSettingsCell.m */; };
 		2803AF861D8AA0AC0032ACFB /* FormatDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF851D8AA0AC0032ACFB /* FormatDateViewController.m */; };
 		2803AF881D8AA4320032ACFB /* KSCheckSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2803AF871D8AA4320032ACFB /* KSCheckSettingsTableViewCell.xib */; };
 		2803AF8B1D8AA5560032ACFB /* KSCheckSettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2803AF8A1D8AA5560032ACFB /* KSCheckSettingsTableViewCell.m */; };
@@ -171,9 +169,6 @@
 		2801D18F1D9E927B00A4D1FD /* SyncApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncApiManager.m; sourceTree = "<group>"; };
 		2801D1921D9E97DA00A4D1FD /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
 		2801D1931D9E97DA00A4D1FD /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
-		2803AF7B1D8A8EBF0032ACFB /* KSSettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KSSettingsCell.xib; path = ../KSSettingsCell.xib; sourceTree = "<group>"; };
-		2803AF7F1D8A8F190032ACFB /* KSSettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSSettingsCell.h; sourceTree = "<group>"; };
-		2803AF801D8A8F190032ACFB /* KSSettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSSettingsCell.m; sourceTree = "<group>"; };
 		2803AF841D8AA0AC0032ACFB /* FormatDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FormatDateViewController.h; path = ../FormatDateViewController.h; sourceTree = "<group>"; };
 		2803AF851D8AA0AC0032ACFB /* FormatDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FormatDateViewController.m; path = ../FormatDateViewController.m; sourceTree = "<group>"; };
 		2803AF871D8AA4320032ACFB /* KSCheckSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KSCheckSettingsTableViewCell.xib; sourceTree = "<group>"; };
@@ -383,16 +378,6 @@
 			name = TaskTableViewCell;
 			sourceTree = "<group>";
 		};
-		2803AF821D8A8F1E0032ACFB /* SettingsCell */ = {
-			isa = PBXGroup;
-			children = (
-				2803AF7B1D8A8EBF0032ACFB /* KSSettingsCell.xib */,
-				2803AF7F1D8A8F190032ACFB /* KSSettingsCell.h */,
-				2803AF801D8A8F190032ACFB /* KSSettingsCell.m */,
-			);
-			name = SettingsCell;
-			sourceTree = "<group>";
-		};
 		2803AF951D8AB9A80032ACFB /* BaseViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -594,7 +579,6 @@
 				2803AFA71D8ABA580032ACFB /* CheckSettingsCell */,
 				2803AF7E1D8A8EE70032ACFB /* TaskTableViewCell */,
 				2803AF7D1D8A8EE20032ACFB /* PriorityCell */,
-				2803AF821D8A8F1E0032ACFB /* SettingsCell */,
 				3F6B255D1D9BCBA7007A7D70 /* SubTaskTableViewCell */,
 				270EB9591DB3796500DC8953 /* EditCategoryTableViewCell.h */,
 				270EB95A1DB3796500DC8953 /* EditCategoryTableViewCell.m */,
@@ -1124,7 +1108,6 @@
 				2786E7B21D883F4D009BDB2A /* KSTaskCell.xib in Resources */,
 				28A36BC01D81887B0092FEFD /* LaunchScreen.storyboard in Resources */,
 				2803AF881D8AA4320032ACFB /* KSCheckSettingsTableViewCell.xib in Resources */,
-				2803AF7C1D8A8EBF0032ACFB /* KSSettingsCell.xib in Resources */,
 				270EB9491DAFA9D500DC8953 /* IPad.storyboard in Resources */,
 				28A36BBD1D81887B0092FEFD /* Assets.xcassets in Resources */,
 				278BAA4F1D8977E4002D38CF /* PriorityCell.xib in Resources */,
@@ -1169,7 +1152,6 @@
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
 				28943CFA1D93032000BC8A69 /* TasksApiManager.m in Sources */,
 				270EB9581DB3752200DC8953 /* EditCategoryViewController.m in Sources */,
-				2803AF811D8A8F190032ACFB /* KSSettingsCell.m in Sources */,
 				278BAA581D89BB32002D38CF /* BaseTableViewController.m in Sources */,
 				28AB85671D8F486100D93AB7 /* UserCoreDataManager.m in Sources */,
 				287884071D8E07E600C17A4F /* KSCategory.m in Sources */,

@@ -58,6 +58,7 @@
         
         NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:cell.textLabel.text attributes:attributes];
         cell.textLabel.attributedText = attrText;
+        cell.textLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:0.5];
         cell.accessoryType=UITableViewCellAccessoryCheckmark;
         UILabel * label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 30)];
         label.textColor=[UIColor colorWithRed:39.0/255.0 green:174.0/255.0 blue:97.0/255.0 alpha:1.0];
@@ -68,6 +69,7 @@
     {
         NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:cell.textLabel.text attributes:@{}];
         cell.textLabel.attributedText = attrText;
+        cell.textLabel.textColor=[UIColor blackColor];
         cell.accessoryView=nil;
         cell.accessoryType=UITableViewCellAccessoryNone;
     }
@@ -100,6 +102,7 @@
         UITableViewCell * cell=[tableView cellForRowAtIndexPath:indexPath];
         NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:cell.textLabel.text attributes:attributes];
         cell.textLabel.attributedText = attrText;
+        cell.textLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:0.5];
         cell.accessoryType=UITableViewCellAccessoryCheckmark;
         UILabel * label=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 30)];
         label.textColor=[UIColor colorWithRed:39.0/255.0 green:174.0/255.0 blue:97.0/255.0 alpha:1.0];
@@ -113,6 +116,8 @@
         UITableViewCell * cell=[tableView cellForRowAtIndexPath:indexPath];
         NSAttributedString* attrText = [[NSAttributedString alloc] initWithString:cell.textLabel.text attributes:@{}];
         cell.textLabel.attributedText = attrText;
+        cell.textLabel.attributedText = attrText;
+        cell.textLabel.textColor=[UIColor blackColor];
         cell.accessoryView=nil;
         cell.accessoryType=UITableViewCellAccessoryNone;
         KSShortTask* subTask = self.subTasks[indexPath.row];

@@ -13,7 +13,6 @@
 #import "TaskListViewController.h"
 #import "DateAndTimeViewController.h"
 #import "ApplicationManager.h"
-#import "KSSettingsCell.h"
 #import "ApplicationManager.h"
 #import "AMSideBarViewController.h"
 
@@ -42,10 +41,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSSettingsCell"owner:self options:nil];
-    KSSettingsCell * cell=[nib objectAtIndex:0];
-    
+    UITableViewCell * cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     cell.textLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     
@@ -57,18 +53,18 @@
             break;
         case 1:
             cell.textLabel.text=NM_CATEGORY;
-            cell.paramValueLabel.text=self.category.name;
+            cell.detailTextLabel.text=self.category.name;
             break;
         case 3:
             if([self.task isKindOfClass:[KSTask class]])
             {
                 cell.textLabel.text=NM_DESCRIPTION;
-                cell.paramValueLabel.text = self.taskDesc;
+                cell.detailTextLabel.text = self.taskDesc;
             }
             else
             {
                 cell.textLabel.text=NM_EDIT_LIST;
-                cell.paramValueLabel.text = [NSString stringWithFormat:@"%lu tasks", (unsigned long)self.subTasks.count];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu tasks", (unsigned long)self.subTasks.count];
             }
             break;
         case 2:
@@ -91,7 +87,7 @@
             {
                 date=[NSString stringWithFormat:@"%li/%li/%li", (long)components.day, (long)components.month, (long)components.year];
             }
-            cell.paramValueLabel.text = [NSString stringWithFormat:@"%@ %li:%@%li", date, (long)[components hour],[components minute]<10?@"0":@"", (long)[components minute]];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %li:%@%li", date, (long)[components hour],[components minute]<10?@"0":@"", (long)[components minute]];
             break;
     }
     return cell;

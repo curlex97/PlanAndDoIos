@@ -8,7 +8,7 @@
         <!--Navigation Controller-->
         <scene sceneID="XD4-8y-8XC">
             <objects>
-                <navigationController id="F3k-3N-AQ9" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navigation" id="F3k-3N-AQ9" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="n3r-7R-6Ag">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -30,7 +30,7 @@
                         <viewControllerLayoutGuide type="bottom" id="uvw-Zc-EHY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KlL-IV-QBb">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xOx-jN-X4s">
@@ -141,7 +141,7 @@
                         <viewControllerLayoutGuide type="bottom" id="JQo-En-9SB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="V9d-6c-1fh">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0T-2t-IAW">
@@ -241,7 +241,7 @@
                         <viewControllerLayoutGuide type="bottom" id="TWS-tR-E9j"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="BVD-9w-NGJ">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCj-xP-76o">
@@ -302,7 +302,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ukN-C4-Uet"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KiB-QX-ICA">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0R9-dA-NyF">
