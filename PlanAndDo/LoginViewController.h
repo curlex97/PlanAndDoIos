@@ -14,5 +14,9 @@
 @property (weak, nonatomic) IBOutlet UIView *backTextFieldView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
+
+@property (strong, nonatomic) IBOutlet UIView *alertView;
+@property (strong, nonatomic) IBOutlet UILabel *alertMessage;
+
 @property (nonatomic)BOOL isViewPresented;
 @end

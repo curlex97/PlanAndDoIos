@@ -30,7 +30,7 @@
                         <viewControllerLayoutGuide type="bottom" id="uvw-Zc-EHY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KlL-IV-QBb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xOx-jN-X4s">
@@ -112,15 +112,37 @@
                                     <constraint firstAttribute="trailing" secondItem="DgL-rQ-BDN" secondAttribute="trailing" id="yBU-E7-mT7"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyS-MK-hZ4">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rsv-GF-c9c">
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Rsv-GF-c9c" secondAttribute="trailing" id="3U9-ap-aPJ"/>
+                                    <constraint firstAttribute="width" constant="320" id="9nF-SA-h0K"/>
+                                    <constraint firstItem="Rsv-GF-c9c" firstAttribute="leading" secondItem="fyS-MK-hZ4" secondAttribute="leading" id="Awz-sJ-WC8"/>
+                                    <constraint firstAttribute="bottom" secondItem="Rsv-GF-c9c" secondAttribute="bottom" id="IPr-vu-AjG"/>
+                                    <constraint firstItem="Rsv-GF-c9c" firstAttribute="top" secondItem="fyS-MK-hZ4" secondAttribute="top" id="QVX-cP-uPY"/>
+                                    <constraint firstAttribute="height" constant="44" id="zEz-Mz-kPt"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.20362311599999999" green="0.20362311599999999" blue="0.20362311599999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="xOx-jN-X4s" firstAttribute="top" secondItem="fyS-MK-hZ4" secondAttribute="bottom" constant="8" id="AUu-ey-q7r"/>
                             <constraint firstItem="xOx-jN-X4s" firstAttribute="centerX" secondItem="KlL-IV-QBb" secondAttribute="centerX" id="ggK-m4-JJZ"/>
                             <constraint firstItem="xOx-jN-X4s" firstAttribute="centerY" secondItem="KlL-IV-QBb" secondAttribute="centerY" id="l92-xd-oeY"/>
+                            <constraint firstItem="fyS-MK-hZ4" firstAttribute="centerX" secondItem="KlL-IV-QBb" secondAttribute="centerX" id="pPV-XM-GKG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="nRi-hn-kpS"/>
                     <connections>
+                        <outlet property="alertMessage" destination="Rsv-GF-c9c" id="LBz-PU-Mdn"/>
+                        <outlet property="alertView" destination="fyS-MK-hZ4" id="Hsn-fK-FRF"/>
                         <outlet property="backTextFieldView" destination="xOx-jN-X4s" id="f4T-S9-nLw"/>
                         <outlet property="centerConstraint" destination="l92-xd-oeY" id="ccJ-Fl-T0L"/>
                         <outlet property="loginTextField" destination="s9g-7z-Ssd" id="nvH-Ia-CkX"/>
@@ -141,7 +163,7 @@
                         <viewControllerLayoutGuide type="bottom" id="JQo-En-9SB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="V9d-6c-1fh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0T-2t-IAW">
@@ -241,7 +263,7 @@
                         <viewControllerLayoutGuide type="bottom" id="TWS-tR-E9j"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="BVD-9w-NGJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCj-xP-76o">
@@ -302,7 +324,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ukN-C4-Uet"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KiB-QX-ICA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0R9-dA-NyF">
