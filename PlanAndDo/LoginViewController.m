@@ -89,35 +89,15 @@
 -(void)showMainWindow:(NSNotification*)not
 {
     dispatch_async(dispatch_get_main_queue(), ^
-                   {
-                       [self dismissViewControllerAnimated:YES completion:nil];
-                   });
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 
 -(void)validateEnteredText:(UITextField *)sender
 {
-    BOOL isValid=NO;
-    if(self.loginTextField==sender && [self.emailRegex matchesInString:self.loginTextField.text options:0 range:NSMakeRange(0, self.loginTextField.text.length)].count>0)
-    {
-        isValid=YES;
-    }
-    else
-    {
-        isValid=NO;
-        self.loginTextField.clearButtonMode=UITextFieldViewModeAlways;
-    }
-    
-    if(self.passwordTextField==sender && [self.passRegex matchesInString:self.passwordTextField.text options:0 range:NSMakeRange(0, self.passwordTextField.text.length)].count>0)
-    {
-        isValid=YES;
-
-    }
-    else
-    {
-        isValid=NO;
-    }
-    
-    if(isValid)
+    if([self.emailRegex matchesInString:self.loginTextField.text options:0 range:NSMakeRange(0, self.loginTextField.text.length)].count>0 &&
+       [self.passRegex matchesInString:self.passwordTextField.text options:0 range:NSMakeRange(0, self.passwordTextField.text.length)].count>0)
     {
         self.signInButton.enabled=YES;
         [self.signInButton setHighlighted:NO];
@@ -126,8 +106,11 @@
     {
         [self.signInButton setHighlighted:YES];
         self.signInButton.enabled=NO;
+        if(sender==self.loginTextField)
+        {
+            self.loginTextField.clearButtonMode=UITextFieldViewModeAlways;
+        }
     }
-    
 }
 
 - (void)viewDidLoad
