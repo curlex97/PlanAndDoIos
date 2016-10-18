@@ -12,7 +12,6 @@
 #import "DescriptionViewController.h"
 #import "TaskListViewController.h"
 #import "DateAndTimeViewController.h"
-#import "ApplicationManager.h"
 #import "UIImage+ACScaleImage.h"
 
 @interface AddTaskViewController ()
@@ -29,9 +28,6 @@
 @end
 
 @implementation AddTaskViewController
-
-#define THUMB_WIDTH 40
-#define THUMB_HEIGHT 41
 
 -(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
@@ -172,7 +168,6 @@
         [self.slider setThumbImage:[UIImage imageWithImage:[UIImage imageNamed:@"red ball"] scaledToSize:CGSizeMake(THUMB_WIDTH, THUMB_HEIGHT)] forState:UIControlStateNormal];
         self.rightPriorityConstraint.constant=-16;
     }
-    self.priorityDescLabel.center=[self getThumbCenter:self.slider];
     [self.view layoutIfNeeded];
 }
 
@@ -332,7 +327,6 @@
     self.priorityDescLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     self.priorityDescLabel.textAlignment=NSTextAlignmentCenter;
     
-    footerPriorityView.autoresizingMask=UIViewAutoresizingFlexibleWidth;
     [footerPriorityView addSubview:priorityLable];
     [footerPriorityView addSubview:self.slider];
     [footerPriorityView addSubview:self.priorityDescLabel];
