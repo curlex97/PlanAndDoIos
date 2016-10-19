@@ -45,6 +45,10 @@
     {
         [self.alertView setHidden:YES];
     }
+    if(textField==self.passwordTextField)
+    {
+        self.passwordTextField.rightViewMode=UITextFieldViewModeNever;
+    }
     return YES;
 }
 
@@ -57,10 +61,31 @@
         {
             [self signInTapped:nil];
         }
+        if([self.passRegex matchesInString:self.passwordTextField.text options:0 range:NSMakeRange(0, self.passwordTextField.text.length)].count>0)
+        {
+            self.passwordTextField.rightViewMode=UITextFieldViewModeNever;
+        }
     }
     else
     {
         [self.passwordTextField becomeFirstResponder];
+        if([self.emailRegex matchesInString:self.loginTextField.text options:0 range:NSMakeRange(0, self.loginTextField.text.length)].count>0)
+        {
+            self.loginTextField.rightViewMode=UITextFieldViewModeNever;
+        }
+    }
+    
+    if(self.passwordTextField.text.length>1 && [self.passRegex matchesInString:self.passwordTextField.text options:0 range:NSMakeRange(0, self.passwordTextField.text.length)].count==0)
+    {
+        [self.alertView setHidden:NO];
+        self.alertMessage.text=@"Invalid password";
+        self.passwordTextField.rightViewMode=UITextFieldViewModeAlways;
+    }
+    else if(self.loginTextField.text.length>0 && [self.emailRegex matchesInString:self.loginTextField.text options:0 range:NSMakeRange(0, self.loginTextField.text.length)].count==0)
+    {
+        [self.alertView setHidden:NO];
+        self.alertMessage.text=@"Invalid email";
+        self.loginTextField.rightViewMode=UITextFieldViewModeAlways;
     }
     
     return YES;
@@ -106,26 +131,34 @@
     {
         [self.signInButton setHighlighted:YES];
         self.signInButton.enabled=NO;
-        if(sender==self.loginTextField)
-        {
-            self.loginTextField.clearButtonMode=UITextFieldViewModeAlways;
-        }
     }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIImageView * loginImageView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alertIcon"]];
+    
+    UIView * loginAlertView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 30.0, 20.0)];
+    [loginAlertView addSubview:loginImageView];
     
     UIView *loginPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.loginTextField.leftView = loginPaddingView;
     self.loginTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.loginTextField.rightView = loginAlertView;
+    self.loginTextField.rightViewMode=UITextFieldViewModeNever;
     self.loginTextField.delegate=self;
     [self.loginTextField addTarget:self action:@selector(validateEnteredText:) forControlEvents:UIControlEventEditingChanged];
+    
+    UIImageView * passImageView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alertIcon"]];
+    UIView * passAlertView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 30.0, 20.0)];
+    [passAlertView addSubview:passImageView];
     
     UIView *passwordPaddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CS_TEXTFIELD_PADDING_LEFT, 0)];
     self.passwordTextField.leftView = passwordPaddingView;
     self.passwordTextField.leftViewMode = UITextFieldViewModeAlways;
+    self.passwordTextField.rightView = passAlertView;
+    self.passwordTextField.rightViewMode=UITextFieldViewModeNever;
     self.passwordTextField.delegate=self;
     [self.passwordTextField addTarget:self action:@selector(validateEnteredText:) forControlEvents:UIControlEventEditingChanged];
     
