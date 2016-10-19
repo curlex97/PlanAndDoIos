@@ -34,4 +34,5 @@ typedef NS_ENUM(NSInteger, KSBaseMenuState)
 
 -(void)addCategoryDidTap;
 -(void)gestureRecognizerAction;
+-(void) refreshSearch;
 @end

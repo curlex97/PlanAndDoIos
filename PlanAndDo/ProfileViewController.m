@@ -194,6 +194,10 @@
     self.title=NM_PROFILE;
     self.items=[NSArray arrayWithObjects:@"Name",@"Password",@"Email",@"Delete all tasks and categories",@"Log out", nil];
     
+    if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
+    {
+        self.navigationItem.leftBarButtonItem=nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

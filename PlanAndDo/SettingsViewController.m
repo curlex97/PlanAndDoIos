@@ -41,7 +41,11 @@
     
     UIBarButtonItem * menuButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:TL_MENU] scaledToSize:CGSizeMake(40, 40)] style:UIBarButtonItemStyleDone target:self action:@selector(menuTapped)];
     self.navigationItem.leftBarButtonItem=menuButton;
-
+    
+    if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
+    {
+        self.navigationItem.leftBarButtonItem=nil;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated

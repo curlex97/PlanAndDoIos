@@ -189,35 +189,35 @@
             switch (indexPath.row)
             {
                 case 0:
-                    boxImage=[UIImage imageWithImage:[UIImage imageNamed:NM_TODAY] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH, BAR_BUTTON_SIZE_HEIGHT)];
+                    boxImage=[UIImage imageNamed:@"w1"];
                     boxImage = [boxImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
                     cell.textLabel.text=NM_TODAY;
                     cell.imageView.image=boxImage;
                     [cell.imageView setTintColor:[UIColor whiteColor]];
                     break;
                 case 1:
-                    boxImage=[UIImage imageWithImage:[UIImage imageNamed:NM_TOMORROW] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH+10, BAR_BUTTON_SIZE_HEIGHT)];
+                    boxImage=[UIImage imageNamed:@"w2"];
                     boxImage = [boxImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
                     cell.textLabel.text=NM_TOMORROW;
                     cell.imageView.image=boxImage;
                     [cell.imageView setTintColor:[UIColor whiteColor]];
                     break;
                 case 2:
-                    boxImage=[UIImage imageWithImage:[UIImage imageNamed:NM_WEEK] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH, BAR_BUTTON_SIZE_HEIGHT)];
+                    boxImage=[UIImage imageNamed:@"w3"];
                     boxImage = [boxImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
                     cell.textLabel.text=NM_WEEK;
                     cell.imageView.image=boxImage;
                     [cell.imageView setTintColor:[UIColor whiteColor]];
                     break;
                 case 3:
-                    boxImage=[UIImage imageWithImage:[UIImage imageNamed:NM_BACKLOG] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH, BAR_BUTTON_SIZE_HEIGHT)];
+                    boxImage=[UIImage imageNamed:@"w4"];
                     boxImage = [boxImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
                     cell.textLabel.text=NM_BACKLOG;
                     cell.imageView.image=boxImage;
                     [cell.imageView setTintColor:[UIColor whiteColor]];
                     break;
                 case 4:
-                    boxImage=[UIImage imageWithImage:[UIImage imageNamed:NM_ARCHIVE] scaledToSize:CGSizeMake(BAR_BUTTON_SIZE_WIDTH, BAR_BUTTON_SIZE_HEIGHT)];
+                    boxImage=[UIImage imageNamed:@"w5"];
                     boxImage = [boxImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
                     cell.textLabel.text=NM_ARCHIVE;
                     cell.imageView.image=boxImage;
@@ -313,6 +313,7 @@
         }
     }
 }
+
 
 - (void)viewDidLoad
 {

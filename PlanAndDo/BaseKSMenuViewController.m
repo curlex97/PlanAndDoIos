@@ -34,6 +34,12 @@
     [super refreshDidSwipe];
 }
 
+-(void)reloadMyData
+{
+    [self reloadData];
+    [self refreshSearch];
+}
+
 -(void)gestureRecognizerAction
 {
     if([self.searchBar isFirstResponder])
@@ -330,8 +336,13 @@
                               multiplier:1.0f
                               constant:20.f]];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMyData) name:NC_TASK_EDIT object:nil];
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning
 {
