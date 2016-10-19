@@ -25,13 +25,13 @@
 
 #define MAX_OFFSET 270.0
 
-//-(void)viewDidLayoutSubviews
-//{
-//    if(self.hiden)
-//    {
-//        self.hiden=YES;
-//    }
-//}
+-(void)viewDidLayoutSubviews
+{
+    if(self.hiden)
+    {
+        self.hiden=YES;
+    }
+}
 
 #pragma mark - Gesture delegate
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer

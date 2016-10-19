@@ -19,6 +19,19 @@
 
 @implementation KSIPhoneMenuViewController
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuSideRight) name:NC_SIDE_RIGHT object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuSideLeft) name:NC_SIDE_LEFT object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [super searchBarCancelButtonClicked:searchBar];
@@ -369,7 +382,7 @@
     CGPoint p = [gestureRecognizer locationInView:self.tableView];
     
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
-    if (indexPath != nil && gestureRecognizer.state == UIGestureRecognizerStateBegan)
+    if (indexPath != nil && gestureRecognizer.state == UIGestureRecognizerStateBegan && self.state==KSBaseMenuStateEdit)
     {
         self.isChangeCategory=YES;
         self.addCategoryTextField.text=[self.categories[indexPath.row] name];
@@ -517,10 +530,6 @@
                               attribute:NSLayoutAttributeLeading
                               multiplier:1.0f
                               constant:0.0]];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuSideRight) name:NC_SIDE_RIGHT object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuSideLeft) name:NC_SIDE_LEFT object:nil];
-
 }
 
 -(void)menuSideRight

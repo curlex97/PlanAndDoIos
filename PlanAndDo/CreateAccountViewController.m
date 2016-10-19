@@ -282,7 +282,7 @@
                                    self.reenterPasswordTextField.text=@"";
                                    [self.submitButton setHighlighted:YES];
                                    self.submitButton.enabled=NO;
-                                   self.alertMessage.text=@"Invalid email or password";
+                                   self.alertMessage.text=@"Email is already exist";
                                    [self.alertView setHidden:NO];
                                });
             }
