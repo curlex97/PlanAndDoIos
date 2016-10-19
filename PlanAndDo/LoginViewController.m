@@ -137,8 +137,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIImageView * loginImageView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alertIcon"]];
     
+    UIImageView * loginImageView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alertIcon"]];
     UIView * loginAlertView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 30.0, 20.0)];
     [loginAlertView addSubview:loginImageView];
     

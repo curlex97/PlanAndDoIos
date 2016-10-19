@@ -271,17 +271,39 @@
                                     <constraint firstAttribute="trailing" secondItem="FvR-vr-P6Q" secondAttribute="trailing" id="uz1-i9-zV0"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7UC-4a-qMt">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efy-aR-8pZ">
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="1Rq-ZK-3FY"/>
+                                    <constraint firstItem="efy-aR-8pZ" firstAttribute="leading" secondItem="7UC-4a-qMt" secondAttribute="leading" id="Gcm-VM-eA4"/>
+                                    <constraint firstItem="efy-aR-8pZ" firstAttribute="top" secondItem="7UC-4a-qMt" secondAttribute="top" id="Q4s-DF-txC"/>
+                                    <constraint firstAttribute="bottom" secondItem="efy-aR-8pZ" secondAttribute="bottom" id="Qwi-Ap-x0k"/>
+                                    <constraint firstAttribute="trailing" secondItem="efy-aR-8pZ" secondAttribute="trailing" id="hCp-jY-GoC"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.20362311601638794" green="0.20362311601638794" blue="0.20362311601638794" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="7UC-4a-qMt" firstAttribute="leading" secondItem="dyt-0Q-OET" secondAttribute="leading" id="892-PE-ERf"/>
+                            <constraint firstAttribute="trailing" secondItem="7UC-4a-qMt" secondAttribute="trailing" id="9S1-qQ-Emw"/>
                             <constraint firstItem="R0j-v9-yBM" firstAttribute="leading" secondItem="dyt-0Q-OET" secondAttribute="leading" id="YGR-by-b8c"/>
                             <constraint firstAttribute="trailing" secondItem="R0j-v9-yBM" secondAttribute="trailing" id="i1r-Lq-bMD"/>
                             <constraint firstItem="R0j-v9-yBM" firstAttribute="centerY" secondItem="dyt-0Q-OET" secondAttribute="centerY" id="l5K-c3-5CG"/>
                             <constraint firstItem="R0j-v9-yBM" firstAttribute="centerX" secondItem="dyt-0Q-OET" secondAttribute="centerX" id="sIU-yR-wF5"/>
+                            <constraint firstItem="R0j-v9-yBM" firstAttribute="top" secondItem="7UC-4a-qMt" secondAttribute="bottom" constant="8.5" id="vsY-c5-zfL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create account" id="O5Y-XK-fqj"/>
                     <connections>
+                        <outlet property="alertMessage" destination="efy-aR-8pZ" id="YEd-ph-tmg"/>
+                        <outlet property="alertView" destination="7UC-4a-qMt" id="X6F-r2-aNP"/>
                         <outlet property="backTextFieldView" destination="R0j-v9-yBM" id="iBB-ZC-FKf"/>
                         <outlet property="centerConstraint" destination="l5K-c3-5CG" id="WPz-KC-BA2"/>
                         <outlet property="emailTextField" destination="FvR-vr-P6Q" id="GD2-2L-jvD"/>
