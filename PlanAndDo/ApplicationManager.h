@@ -15,7 +15,7 @@
 #import "CategoryApplicationManager.h"
 #import "SyncApplicationManager.h"
 #import "ApplicationDefines.h"
-
+#import "KSNotificationManager.h"
 
 
 @interface ApplicationManager : NSObject
@@ -31,6 +31,8 @@
 +(CategoryApplicationManager*) categoryApplicationManager;
 
 +(SyncApplicationManager*) syncApplicationManager;
+
++(KSNotificationManager *) notificationManager;
 
 +(void) cleanLocalDataBase;
 

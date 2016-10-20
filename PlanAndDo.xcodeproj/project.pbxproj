@@ -17,6 +17,7 @@
 		270EB9551DB10FC100DC8953 /* KSSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB9541DB10FC100DC8953 /* KSSplitViewController.m */; };
 		270EB9581DB3752200DC8953 /* EditCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB9571DB3752200DC8953 /* EditCategoryViewController.m */; };
 		270EB95B1DB3796500DC8953 /* EditCategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB95A1DB3796500DC8953 /* EditCategoryTableViewCell.m */; };
+		270EB9811DB9008D00DC8953 /* KSNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EB9801DB9008D00DC8953 /* KSNotificationManager.m */; };
 		272F91C01D8A678800A0330B /* SelectCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91BF1D8A678800A0330B /* SelectCategoryViewController.m */; };
 		272F91C31D8A6C0C00A0330B /* DescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C21D8A6C0C00A0330B /* DescriptionViewController.m */; };
 		272F91C61D8A704500A0330B /* TaskListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C51D8A704500A0330B /* TaskListViewController.m */; };
@@ -121,6 +122,8 @@
 		270EB9571DB3752200DC8953 /* EditCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCategoryViewController.m; sourceTree = "<group>"; };
 		270EB9591DB3796500DC8953 /* EditCategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCategoryTableViewCell.h; sourceTree = "<group>"; };
 		270EB95A1DB3796500DC8953 /* EditCategoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCategoryTableViewCell.m; sourceTree = "<group>"; };
+		270EB97F1DB9008D00DC8953 /* KSNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSNotificationManager.h; sourceTree = "<group>"; };
+		270EB9801DB9008D00DC8953 /* KSNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSNotificationManager.m; sourceTree = "<group>"; };
 		272F91BE1D8A678800A0330B /* SelectCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCategoryViewController.h; sourceTree = "<group>"; };
 		272F91BF1D8A678800A0330B /* SelectCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCategoryViewController.m; sourceTree = "<group>"; };
 		272F91C11D8A6C0C00A0330B /* DescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionViewController.h; sourceTree = "<group>"; };
@@ -806,6 +809,8 @@
 				28943CF41D93017A00BC8A69 /* ApplicationManagers */,
 				28943CF31D93016600BC8A69 /* ApiManagers */,
 				2884ABFA1D8D437F00A2F7D9 /* CoreDataManagers */,
+				270EB97F1DB9008D00DC8953 /* KSNotificationManager.h */,
+				270EB9801DB9008D00DC8953 /* KSNotificationManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1151,6 +1156,7 @@
 				27494DE41D8D3ECE009BFC5F /* KSMenuViewController.m in Sources */,
 				27B1A0EF1D818C5B00D47FCD /* KSObject.m in Sources */,
 				28943CFA1D93032000BC8A69 /* TasksApiManager.m in Sources */,
+				270EB9811DB9008D00DC8953 /* KSNotificationManager.m in Sources */,
 				270EB9581DB3752200DC8953 /* EditCategoryViewController.m in Sources */,
 				278BAA581D89BB32002D38CF /* BaseTableViewController.m in Sources */,
 				28AB85671D8F486100D93AB7 /* UserCoreDataManager.m in Sources */,

@@ -55,6 +55,11 @@
     [FileManager writePassToFile:@""];
 }
 
++(KSNotificationManager *) notificationManager
+{
+    return [KSNotificationManager sharedManager];
+}
+
 +(void)registerUserNotifications
 {
     UIUserNotificationSettings * settings=[UIUserNotificationSettings settingsForTypes:
