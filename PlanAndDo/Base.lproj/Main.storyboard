@@ -460,17 +460,39 @@
                                     <constraint firstItem="CCN-cQ-LEv" firstAttribute="top" secondItem="L4K-ON-hur" secondAttribute="bottom" constant="1" id="tpO-By-bvA"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cun-IA-nfN">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gz3-M8-uch">
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="9wm-B1-6X9"/>
+                                    <constraint firstItem="Gz3-M8-uch" firstAttribute="leading" secondItem="Cun-IA-nfN" secondAttribute="leading" id="H7y-nJ-fWV"/>
+                                    <constraint firstAttribute="bottom" secondItem="Gz3-M8-uch" secondAttribute="bottom" id="Mmd-bp-Dt5"/>
+                                    <constraint firstItem="Gz3-M8-uch" firstAttribute="top" secondItem="Cun-IA-nfN" secondAttribute="top" id="eJP-o9-0Yb"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gz3-M8-uch" secondAttribute="trailing" id="opx-vi-jlI"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.20362311601638794" green="0.20362311601638794" blue="0.20362311601638794" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Cun-IA-nfN" firstAttribute="leading" secondItem="FmV-FZ-EBJ" secondAttribute="leading" id="2cZ-4N-Tjw"/>
+                            <constraint firstItem="ZBC-8T-OeI" firstAttribute="top" secondItem="Cun-IA-nfN" secondAttribute="bottom" constant="8" id="ENV-GC-Qu6"/>
                             <constraint firstItem="ZBC-8T-OeI" firstAttribute="centerX" secondItem="FmV-FZ-EBJ" secondAttribute="centerX" id="EPp-Xh-q4g"/>
                             <constraint firstItem="ZBC-8T-OeI" firstAttribute="leading" secondItem="FmV-FZ-EBJ" secondAttribute="leading" id="Fhf-WB-aVD"/>
+                            <constraint firstAttribute="trailing" secondItem="Cun-IA-nfN" secondAttribute="trailing" id="Gp9-Oc-Oig"/>
                             <constraint firstAttribute="trailing" secondItem="ZBC-8T-OeI" secondAttribute="trailing" id="IRL-ns-Gw9"/>
                             <constraint firstItem="ZBC-8T-OeI" firstAttribute="centerY" secondItem="FmV-FZ-EBJ" secondAttribute="centerY" id="Mnw-SD-vaY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Create account" id="kJy-4C-t96"/>
                     <connections>
+                        <outlet property="alertMessage" destination="Gz3-M8-uch" id="oZJ-bv-JOy"/>
+                        <outlet property="alertView" destination="Cun-IA-nfN" id="Qrb-lM-ZbE"/>
                         <outlet property="backTextFieldView" destination="ZBC-8T-OeI" id="fPF-C8-bqN"/>
                         <outlet property="centerConstraint" destination="Mnw-SD-vaY" id="ha5-xX-RXP"/>
                         <outlet property="emailTextField" destination="L4K-ON-hur" id="XnT-ov-9k4"/>

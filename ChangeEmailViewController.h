@@ -18,5 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerConstraint;
+@property (strong, nonatomic) IBOutlet UIView *alertView;
+@property (strong, nonatomic) IBOutlet UILabel *alertMessage;
 
 @end
