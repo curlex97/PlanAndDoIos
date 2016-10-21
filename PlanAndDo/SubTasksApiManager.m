@@ -35,22 +35,33 @@
         [data addObject:dataSubTask];
     }
     
-    [dic setValue:[NSNumber numberWithInteger:user.ID] forKey:@"user_id"];
-    [dic setValue:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"device_id"];
-    [dic setValue:[FileManager readTokenFromFile] forKey:@"token"];
-    [dic setValue:@"subtask" forKey:@"class"];
-    [dic setValue:method forKey:@"method"];
-    [dic setValue:data forKey:@"data"];
+    if(data.count)
+    {
+        [dic setValue:[NSNumber numberWithInteger:user.ID] forKey:@"user_id"];
+        [dic setValue:[[[UIDevice currentDevice] identifierForVendor] UUIDString] forKey:@"device_id"];
+        [dic setValue:[FileManager readTokenFromFile] forKey:@"token"];
+        [dic setValue:@"subtask" forKey:@"class"];
+        [dic setValue:method forKey:@"method"];
+        [dic setValue:data forKey:@"data"];
+        
+        [self dataByData:dic completion:^(NSData * data) {
+            
+            if(data)
+            {
+                NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+                if(completed) completed(json);
+                if(!json)
+                {
+                    NSString* str = [NSString stringWithUTF8String:[data bytes]];
+                    str = @"";
+                }
+            }
+            
+            
+        }];
+    }
     
-    [self dataByData:dic completion:^(NSData * data) {
-        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        if(completed) completed(json);
-        if(!json)
-        {
-            NSString* str = [NSString stringWithUTF8String:[data bytes]];
-            str = @"";
-        }
-    }];
+    
 }
 
 

@@ -40,13 +40,17 @@
     
     [self dataByData:dic completion:^(NSData * data)
     {
-        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        if(completed) completed(json);
-        if(!json)
+        if(data)
         {
-            NSString* str = [NSString stringWithUTF8String:[data bytes]];
-            str = @"";
+            NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+            if(completed) completed(json);
+            if(!json)
+            {
+                NSString* str = [NSString stringWithUTF8String:[data bytes]];
+                str = @"";
+            }
         }
+        
     }];
 }
 

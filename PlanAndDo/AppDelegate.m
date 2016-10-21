@@ -48,7 +48,7 @@
         [[ApplicationManager notificationManager] addLocalNotificationWithTitle:@"Reminde"
                                                                         andBody:task.name
                                                                        andImage:nil
-                                                                    andFireDate:[NSDate dateWithTimeIntervalSince1970:task.taskReminderTime.timeIntervalSince1970+10800]
+                                                                    andFireDate:[NSDate dateWithTimeIntervalSince1970:task.taskReminderTime.timeIntervalSince1970+900]
                                                                     andUserInfo:nil
                                                                          forKey:[NSString stringWithFormat:@"%d",task.ID]];
     }
