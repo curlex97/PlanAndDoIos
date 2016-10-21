@@ -71,8 +71,8 @@
             
             int settingsID = [[dictionary valueForKeyPath:@"data.settings.id"] intValue];
             NSString* startPage = [dictionary valueForKeyPath:@"data.settings.start_page"];
-            NSString* dateFormat = [[[dictionary valueForKeyPath:@"data.settings.date_format"] substringToIndex:1] isEqualToString:@"d"]?NM_DDMMYY:NM_MMDDYY;
-            NSString* timeFormat = [[dictionary valueForKeyPath:@"data.settings.time_format"] isEqualToString:@"24"]?@"HH:mm":@"hh:mm";
+            NSString* dateFormat = [dictionary valueForKeyPath:@"data.settings.date_format"];
+            NSString* timeFormat = [dictionary valueForKeyPath:@"data.settings.time_format"];
             NSString* pageType = [dictionary valueForKeyPath:@"data.settings.page_type"];
             NSString* startDay = [dictionary valueForKeyPath:@"data.settings.start_day"];
 

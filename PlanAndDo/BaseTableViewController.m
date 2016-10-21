@@ -136,6 +136,7 @@
     self.tableView.tableFooterView=[[UIView alloc] initWithFrame:CGRectZero];
     [self.tableView addSubview:self.refresh];
     [self.refresh addTarget:self action:@selector(refreshDidSwipeEvent) forControlEvents:UIControlEventValueChanged];
+    self.tableView.translatesAutoresizingMaskIntoConstraints=NO;
     [self.view addSubview:self.tableView];
     
     self.emptyTableHeader=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, [UIScreen mainScreen].bounds.size.height-100)];
@@ -164,6 +165,10 @@
                                           constant:0.f]];
     
     [self setConstraints];
+    if([self.tableView respondsToSelector:@selector(setCellLayoutMarginsFollowReadableWidth:)])
+    {
+        self.tableView.cellLayoutMarginsFollowReadableWidth=NO;
+    }
 }
 
 -(void)setConstraints
@@ -204,7 +209,7 @@
                multiplier:1.0f
                constant:0.f];
     
-    self.tableView.translatesAutoresizingMaskIntoConstraints=NO;
+    //self.tableView.translatesAutoresizingMaskIntoConstraints=NO;
     [self.view addConstraint:self.trailing];
     [self.view addConstraint:self.leading];
     [self.view addConstraint:self.bottom];

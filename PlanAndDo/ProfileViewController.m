@@ -9,7 +9,6 @@
 #import "ProfileViewController.h"
 #import "UIImage+ACScaleImage.h"
 #import "AMSideBarViewController.h"
-#import "KSSettingsCell.h"
 #import "ChangeEmailViewController.h"
 #import "ApplicationManager.h"
 #import "LoginViewController.h"
@@ -45,14 +44,15 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSSettingsCell"owner:self options:nil];
-    KSSettingsCell * cell=[nib objectAtIndex:0];
+//    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSSettingsCell"owner:self options:nil];
+//    KSSettingsCell * cell=[nib objectAtIndex:0];
+    UITableViewCell * cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     cell.textLabel.text=self.items[indexPath.row];
     cell.textLabel.textColor=[UIColor colorWithRed:CLR_PROFILE_TEXTLABEL green:CLR_PROFILE_TEXTLABEL blue:CLR_PROFILE_TEXTLABEL alpha:CLR_PROFILE_TEXTLABEL_ALPHA];
     
     if(indexPath.row==0)
     {
-        cell.paramValueLabel.text=self.user.userName;
+        cell.detailTextLabel.text=self.user.userName;
         cell.imageView.image=[UIImage imageNamed:@"name"];
     }
     else if(indexPath.row==1)
@@ -64,13 +64,13 @@
         {
             [stars appendFormat:@"*"];
         }
-        cell.paramValueLabel.text=stars;
+        cell.detailTextLabel.text=stars;
         cell.imageView.image=[UIImage imageNamed:@"password"];
     }
     else if(indexPath.row==2)
     {
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        cell.paramValueLabel.text=self.user.emailAdress;
+        cell.detailTextLabel.text=self.user.emailAdress;
         cell.imageView.image=[UIImage imageNamed:@"email"];
     }
     else if(indexPath.row==3)
@@ -194,6 +194,10 @@
     self.title=NM_PROFILE;
     self.items=[NSArray arrayWithObjects:@"Name",@"Password",@"Email",@"Delete all tasks and categories",@"Log out", nil];
     
+    if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
+    {
+        self.navigationItem.leftBarButtonItem=nil;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

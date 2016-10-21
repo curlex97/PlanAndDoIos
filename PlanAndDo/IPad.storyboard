@@ -8,7 +8,7 @@
         <!--Navigation Controller-->
         <scene sceneID="XD4-8y-8XC">
             <objects>
-                <navigationController id="F3k-3N-AQ9" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navigation" id="F3k-3N-AQ9" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="n3r-7R-6Ag">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -112,15 +112,37 @@
                                     <constraint firstAttribute="trailing" secondItem="DgL-rQ-BDN" secondAttribute="trailing" id="yBU-E7-mT7"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyS-MK-hZ4">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rsv-GF-c9c">
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Rsv-GF-c9c" secondAttribute="trailing" id="3U9-ap-aPJ"/>
+                                    <constraint firstAttribute="width" constant="320" id="9nF-SA-h0K"/>
+                                    <constraint firstItem="Rsv-GF-c9c" firstAttribute="leading" secondItem="fyS-MK-hZ4" secondAttribute="leading" id="Awz-sJ-WC8"/>
+                                    <constraint firstAttribute="bottom" secondItem="Rsv-GF-c9c" secondAttribute="bottom" id="IPr-vu-AjG"/>
+                                    <constraint firstItem="Rsv-GF-c9c" firstAttribute="top" secondItem="fyS-MK-hZ4" secondAttribute="top" id="QVX-cP-uPY"/>
+                                    <constraint firstAttribute="height" constant="44" id="zEz-Mz-kPt"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.20362311599999999" green="0.20362311599999999" blue="0.20362311599999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="xOx-jN-X4s" firstAttribute="top" secondItem="fyS-MK-hZ4" secondAttribute="bottom" constant="8" id="AUu-ey-q7r"/>
                             <constraint firstItem="xOx-jN-X4s" firstAttribute="centerX" secondItem="KlL-IV-QBb" secondAttribute="centerX" id="ggK-m4-JJZ"/>
                             <constraint firstItem="xOx-jN-X4s" firstAttribute="centerY" secondItem="KlL-IV-QBb" secondAttribute="centerY" id="l92-xd-oeY"/>
+                            <constraint firstItem="fyS-MK-hZ4" firstAttribute="centerX" secondItem="KlL-IV-QBb" secondAttribute="centerX" id="pPV-XM-GKG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="nRi-hn-kpS"/>
                     <connections>
+                        <outlet property="alertMessage" destination="Rsv-GF-c9c" id="LBz-PU-Mdn"/>
+                        <outlet property="alertView" destination="fyS-MK-hZ4" id="Hsn-fK-FRF"/>
                         <outlet property="backTextFieldView" destination="xOx-jN-X4s" id="f4T-S9-nLw"/>
                         <outlet property="centerConstraint" destination="l92-xd-oeY" id="ccJ-Fl-T0L"/>
                         <outlet property="loginTextField" destination="s9g-7z-Ssd" id="nvH-Ia-CkX"/>
@@ -211,14 +233,36 @@
                                     <constraint firstItem="CXn-mO-XFZ" firstAttribute="top" secondItem="dCU-oP-Yaa" secondAttribute="bottom" constant="1" id="zSZ-Qq-481"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OOZ-5d-5q6">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZ6-gS-e5o">
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="VZ6-gS-e5o" secondAttribute="bottom" id="Pgu-fm-6lX"/>
+                                    <constraint firstItem="VZ6-gS-e5o" firstAttribute="leading" secondItem="OOZ-5d-5q6" secondAttribute="leading" id="T9W-1c-Nso"/>
+                                    <constraint firstAttribute="trailing" secondItem="VZ6-gS-e5o" secondAttribute="trailing" id="i08-ZR-ZVd"/>
+                                    <constraint firstItem="VZ6-gS-e5o" firstAttribute="top" secondItem="OOZ-5d-5q6" secondAttribute="top" id="tXg-G7-Of2"/>
+                                    <constraint firstAttribute="width" constant="320" id="yjU-iU-ymX"/>
+                                    <constraint firstAttribute="height" constant="44" id="zNO-kA-m4z"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.20362311599999999" green="0.20362311599999999" blue="0.20362311599999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="OOZ-5d-5q6" firstAttribute="centerX" secondItem="V9d-6c-1fh" secondAttribute="centerX" id="HzO-zv-QzO"/>
                             <constraint firstItem="N0T-2t-IAW" firstAttribute="centerX" secondItem="V9d-6c-1fh" secondAttribute="centerX" id="avG-yy-SH8"/>
+                            <constraint firstItem="N0T-2t-IAW" firstAttribute="top" secondItem="OOZ-5d-5q6" secondAttribute="bottom" constant="8" id="fig-Hl-2ZP"/>
                             <constraint firstItem="N0T-2t-IAW" firstAttribute="centerY" secondItem="V9d-6c-1fh" secondAttribute="centerY" id="vPh-Cl-gss"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="alertMessage" destination="VZ6-gS-e5o" id="Gda-Ki-EDF"/>
+                        <outlet property="alertView" destination="OOZ-5d-5q6" id="LDM-LI-Y21"/>
                         <outlet property="backTextFieldView" destination="N0T-2t-IAW" id="KWT-eC-MMW"/>
                         <outlet property="centerConstraint" destination="vPh-Cl-gss" id="29B-s5-NUV"/>
                         <outlet property="emailTextField" destination="2Rk-ly-KeW" id="YNe-wo-abk"/>
@@ -358,14 +402,36 @@
                                     <constraint firstItem="PjL-KJ-fuF" firstAttribute="top" secondItem="yLK-8l-HvD" secondAttribute="bottom" constant="1" id="thK-1q-3I9"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZNx-vV-qR6">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiC-O0-6Af">
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="BiC-O0-6Af" firstAttribute="top" secondItem="ZNx-vV-qR6" secondAttribute="top" id="2f7-7y-0VD"/>
+                                    <constraint firstAttribute="bottom" secondItem="BiC-O0-6Af" secondAttribute="bottom" id="HQg-Ha-4c1"/>
+                                    <constraint firstAttribute="height" constant="44" id="VCr-QU-eRa"/>
+                                    <constraint firstAttribute="trailing" secondItem="BiC-O0-6Af" secondAttribute="trailing" id="mLt-TT-syq"/>
+                                    <constraint firstAttribute="width" constant="320" id="slB-DI-Xvh"/>
+                                    <constraint firstItem="BiC-O0-6Af" firstAttribute="leading" secondItem="ZNx-vV-qR6" secondAttribute="leading" id="uZR-0N-MoW"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.20362311599999999" green="0.20362311599999999" blue="0.20362311599999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="0R9-dA-NyF" firstAttribute="top" secondItem="ZNx-vV-qR6" secondAttribute="bottom" constant="8" id="4JI-dr-mvE"/>
                             <constraint firstItem="0R9-dA-NyF" firstAttribute="centerX" secondItem="KiB-QX-ICA" secondAttribute="centerX" id="JVF-Oc-8BV"/>
+                            <constraint firstItem="ZNx-vV-qR6" firstAttribute="centerX" secondItem="KiB-QX-ICA" secondAttribute="centerX" id="anR-ad-fFY"/>
                             <constraint firstItem="0R9-dA-NyF" firstAttribute="centerY" secondItem="KiB-QX-ICA" secondAttribute="centerY" id="eb0-ub-7BR"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="alertMessage" destination="BiC-O0-6Af" id="g5b-Xv-5cD"/>
+                        <outlet property="alertView" destination="ZNx-vV-qR6" id="ea3-jU-hBO"/>
                         <outlet property="backTextFieldView" destination="0R9-dA-NyF" id="mju-UD-i4t"/>
                         <outlet property="centerConstraint" destination="eb0-ub-7BR" id="1EF-7g-jzO"/>
                         <outlet property="emailTextField" destination="yLK-8l-HvD" id="aN5-Mw-gYp"/>

@@ -11,6 +11,8 @@
 #import "KSTask.h"
 #import "KSTaskCollection.h"
 #import "KSCategory.h"
+#import "ApplicationDefines.h"
+#import "UIImage+ACScaleImage.h"
 
 @interface EditTaskViewController : BaseTableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property BaseTask* task;

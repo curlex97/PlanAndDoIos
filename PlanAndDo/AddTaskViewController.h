@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseTableViewController.h"
 #import "ApplicationManager.h"
+#import "ApplicationDefines.h"
 
 @interface AddTaskViewController : BaseTableViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 -(instancetype)initWithCategory:(KSCategory *)category andDate:(NSDate *)date;

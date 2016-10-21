@@ -65,9 +65,13 @@
     NSLog(@"%@",inputData);
     [self dataByData:user completion:^(NSData * data)
     {
+        if(!data && completed)
+        {
+            completed(nil);
+            return;
+        }
         NSDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
         if(completed) completed(json);
-        NSLog(@"%@",json);
     }];
 }
 

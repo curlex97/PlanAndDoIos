@@ -13,7 +13,6 @@
 #import "TaskListViewController.h"
 #import "DateAndTimeViewController.h"
 #import "ApplicationManager.h"
-#import "KSSettingsCell.h"
 #import "ApplicationManager.h"
 #import "AMSideBarViewController.h"
 
@@ -26,6 +25,7 @@
 @property (nonatomic)NSArray * methods;
 @property (nonatomic)UITextField * textField;
 @property (nonatomic)NSString * headerText;
+@property (nonatomic)NSLayoutConstraint * rightPriorityConstraint;
 @end
 
 @implementation EditTaskViewController
@@ -42,10 +42,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"KSSettingsCell"owner:self options:nil];
-    KSSettingsCell * cell=[nib objectAtIndex:0];
-    
+    UITableViewCell * cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     cell.textLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     
@@ -57,18 +54,18 @@
             break;
         case 1:
             cell.textLabel.text=NM_CATEGORY;
-            cell.paramValueLabel.text=self.category.name;
+            cell.detailTextLabel.text=self.category.name;
             break;
         case 3:
             if([self.task isKindOfClass:[KSTask class]])
             {
                 cell.textLabel.text=NM_DESCRIPTION;
-                cell.paramValueLabel.text = self.taskDesc;
+                cell.detailTextLabel.text = self.taskDesc;
             }
             else
             {
                 cell.textLabel.text=NM_EDIT_LIST;
-                cell.paramValueLabel.text = [NSString stringWithFormat:@"%lu tasks", (unsigned long)self.subTasks.count];
+                cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu tasks", (unsigned long)self.subTasks.count];
             }
             break;
         case 2:
@@ -91,7 +88,7 @@
             {
                 date=[NSString stringWithFormat:@"%li/%li/%li", (long)components.day, (long)components.month, (long)components.year];
             }
-            cell.paramValueLabel.text = [NSString stringWithFormat:@"%@ %li:%@%li", date, (long)[components hour],[components minute]<10?@"0":@"", (long)[components minute]];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %li:%@%li", date, (long)[components hour],[components minute]<10?@"0":@"", (long)[components minute]];
             break;
     }
     return cell;
@@ -132,24 +129,26 @@
     if(self.slider.value<0.5)
     {
         self.slider.value=0.0;
-        self.priorityDescLabel.text=NM_PRIORITY_SHORT_LOW;
-        [self.slider setThumbImage:[UIImage imageNamed:@"white ball"] forState:UIControlStateNormal];
-        //self.slider.backgroundColor=[UIColor redColor];
+        self.priorityDescLabel.text=@"low";
+        UIImage * image=[UIImage imageNamed:@"white ball"];
+        [self.slider setThumbImage:[UIImage imageWithImage:image scaledToSize:CGSizeMake(THUMB_WIDTH, THUMB_HEIGHT)] forState:UIControlStateNormal];
+        self.rightPriorityConstraint.constant=-16-145;
     }
     else if(self.slider.value>=0.5 && self.slider.value<1.5)
     {
         self.slider.value=1.0;
-        self.priorityDescLabel.text=NM_PRIORITY_SHORT_MID;
-        [self.slider setThumbImage:[UIImage imageNamed:@"green ball"] forState:UIControlStateNormal];
+        self.priorityDescLabel.text=@"mid";
+        [self.slider setThumbImage:[UIImage imageWithImage:[UIImage imageNamed:@"green ball"] scaledToSize:CGSizeMake(THUMB_WIDTH, THUMB_HEIGHT)] forState:UIControlStateNormal];
+        self.rightPriorityConstraint.constant=-86;
     }
     else
     {
         self.slider.value=2.0;
-        self.priorityDescLabel.text=NM_PRIORITY_SHORT_HIGH;
-        [self.slider setThumbImage:[UIImage imageNamed:@"red ball"] forState:UIControlStateNormal];
+        self.priorityDescLabel.text=@"high";
+        [self.slider setThumbImage:[UIImage imageWithImage:[UIImage imageNamed:@"red ball"] scaledToSize:CGSizeMake(THUMB_WIDTH, THUMB_HEIGHT)] forState:UIControlStateNormal];
+        self.rightPriorityConstraint.constant=-16;
     }
-    self.priorityDescLabel.center=[self getThumbCenter:self.slider];
-    NSLog(@"%f",slider.value);
+    [self.view layoutIfNeeded];
 }
 
 -(void)segmentDidTap
@@ -306,24 +305,105 @@
     UILabel * priorityLable=[[UILabel alloc] initWithFrame:CGRectMake(15, 17, 62, 21)];
     priorityLable.text=NM_PRIORITY;
     priorityLable.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
-    self.slider=[[UISlider alloc] initWithFrame:CGRectMake(100, 12, self.view.bounds.size.width-110, 31)];
+    
+    self.slider=[[UISlider alloc] initWithFrame:CGRectMake(100, 12, 170, 31)];
     self.slider.minimumValue=0.0;
     self.slider.maximumValue=2.0;
     self.slider.value=0.0;
     self.slider.minimumTrackTintColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     [self.slider addTarget:self action:@selector(sliderDidSlide:) forControlEvents:UIControlEventValueChanged];
-    [self.slider setThumbImage:[UIImage imageNamed:@"white ball"] forState:UIControlStateNormal];
+    [self.slider setThumbImage:[UIImage imageWithImage:[UIImage imageNamed:@"white ball"] scaledToSize:CGSizeMake(THUMB_WIDTH, THUMB_HEIGHT)] forState:UIControlStateNormal];
+    
     self.lastValue=self.slider.value;
     
-    self.priorityDescLabel=[[UILabel alloc] initWithFrame:CGRectMake(100, 43, 23, 13)];
+    CGPoint center=[self getThumbCenter:self.slider];
+    self.priorityDescLabel=[[UILabel alloc] initWithFrame:CGRectMake(center.x, center.y, 40, 30)];
     self.priorityDescLabel.text=NM_PRIORITY_SHORT_LOW;
     self.priorityDescLabel.font=[UIFont systemFontOfSize:10.0];
-    self.priorityDescLabel.center=[self getThumbCenter:self.slider];
     self.priorityDescLabel.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
+    self.priorityDescLabel.textAlignment=NSTextAlignmentCenter;
+    
     [footerPriorityView addSubview:priorityLable];
     [footerPriorityView addSubview:self.slider];
     [footerPriorityView addSubview:self.priorityDescLabel];
+    
+    self.slider.translatesAutoresizingMaskIntoConstraints=NO;
+    [footerPriorityView addConstraint:[NSLayoutConstraint
+                                       constraintWithItem:self.slider
+                                       attribute:NSLayoutAttributeRight
+                                       relatedBy:NSLayoutRelationEqual
+                                       toItem:footerPriorityView
+                                       attribute:NSLayoutAttributeRight
+                                       multiplier:CO_MULTIPLER
+                                       constant:-16]];
+    
+    [footerPriorityView addConstraint:[NSLayoutConstraint
+                                       constraintWithItem:self.slider
+                                       attribute:NSLayoutAttributeTop
+                                       relatedBy:NSLayoutRelationEqual
+                                       toItem:footerPriorityView
+                                       attribute:NSLayoutAttributeTop
+                                       multiplier:CO_MULTIPLER
+                                       constant:8.0]];
+    
+    [footerPriorityView addConstraint:[NSLayoutConstraint
+                                       constraintWithItem:self.slider
+                                       attribute:NSLayoutAttributeWidth
+                                       relatedBy:NSLayoutRelationEqual
+                                       toItem:nil
+                                       attribute:NSLayoutAttributeNotAnAttribute
+                                       multiplier:CO_MULTIPLER
+                                       constant:180.0]];
+    
+    [footerPriorityView addConstraint:[NSLayoutConstraint
+                                       constraintWithItem:self.slider
+                                       attribute:NSLayoutAttributeHeight
+                                       relatedBy:NSLayoutRelationEqual
+                                       toItem:nil
+                                       attribute:NSLayoutAttributeNotAnAttribute
+                                       multiplier:CO_MULTIPLER
+                                       constant:30.0]];
+    
+    self.priorityDescLabel.translatesAutoresizingMaskIntoConstraints=NO;
+    self.rightPriorityConstraint=[NSLayoutConstraint
+                                  constraintWithItem:self.priorityDescLabel
+                                  attribute:NSLayoutAttributeRight
+                                  relatedBy:NSLayoutRelationEqual
+                                  toItem:footerPriorityView
+                                  attribute:NSLayoutAttributeRight
+                                  multiplier:CO_MULTIPLER
+                                  constant:-16-145];
+    
+    [footerPriorityView addConstraint:self.rightPriorityConstraint];    
+    [footerPriorityView addConstraint:[NSLayoutConstraint
+                                       constraintWithItem:self.priorityDescLabel
+                                       attribute:NSLayoutAttributeTop
+                                       relatedBy:NSLayoutRelationEqual
+                                       toItem:footerPriorityView
+                                       attribute:NSLayoutAttributeTop
+                                       multiplier:CO_MULTIPLER
+                                       constant:40.0]];
+    
+    [footerPriorityView addConstraint:[NSLayoutConstraint
+                                       constraintWithItem:self.priorityDescLabel
+                                       attribute:NSLayoutAttributeWidth
+                                       relatedBy:NSLayoutRelationEqual
+                                       toItem:nil
+                                       attribute:NSLayoutAttributeNotAnAttribute
+                                       multiplier:CO_MULTIPLER
+                                       constant:40.0]];
+    
+    [footerPriorityView addConstraint:[NSLayoutConstraint
+                                       constraintWithItem:self.priorityDescLabel
+                                       attribute:NSLayoutAttributeHeight
+                                       relatedBy:NSLayoutRelationEqual
+                                       toItem:nil
+                                       attribute:NSLayoutAttributeNotAnAttribute
+                                       multiplier:CO_MULTIPLER
+                                       constant:30.0]];
+    
     self.tableView.tableFooterView=footerPriorityView;
+    [self sliderDidSlide:self.slider];
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     

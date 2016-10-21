@@ -165,18 +165,6 @@
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     
-//    UIGraphicsBeginImageContextWithOptions(CGSizeMake(36, 36), NO, 0.0);
-//    UIImage *blank = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    
-//    [self.navigationController.navigationBar setBackgroundImage:blank forBarMetrics:UIBarMetricsDefault];
-//    self.navigationController.navigationBar.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
-//    UIBarButtonItem * addButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonDidTap)];
-//    self.navigationItem.leftBarButtonItem=addButton;
-//    
-//    UIBarButtonItem * cancelButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonDidTap)];
-//    self.navigationItem.rightBarButtonItem=cancelButton;
-    
     UIView * editView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50.0)];
     
     UIButton * addButton=[[UIButton alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
@@ -311,8 +299,19 @@
                               multiplier:1.0f
                               constant:0.0]];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShown:) name:UIKeyboardDidShowNotification object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)keyboardWillHide:(NSNotification*) not

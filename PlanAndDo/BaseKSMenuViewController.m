@@ -17,7 +17,15 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCategoriesInTable:) name:NC_SYNC_CATEGORIES object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMyData) name:NC_TASK_EDIT object:nil];
     [self reloadData];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)reloadData
@@ -32,6 +40,12 @@
     self.categories = [NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
     self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasks]];
     [super refreshDidSwipe];
+}
+
+-(void)reloadMyData
+{
+    [self reloadData];
+    [self refreshSearch];
 }
 
 -(void)gestureRecognizerAction
@@ -276,8 +290,6 @@
 {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshCategoriesInTable:) name:NC_SYNC_CATEGORIES object:nil];
-    
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.state=KSBaseMenuStateNormal;
@@ -332,6 +344,10 @@
     
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning
 {
