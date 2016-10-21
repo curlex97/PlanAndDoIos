@@ -177,7 +177,7 @@
             cell.taskDateLabel.text = [dateFormatter stringFromDate:task.completionTime];
         }
         
-        [dateFormatter setDateFormat:[ApplicationManager settingsApplicationManager].settings.timeFormat];
+        [dateFormatter setDateFormat:[[ApplicationManager settingsApplicationManager].settings.timeFormat isEqualToString:@"24"]?@"HH:mm":@"hh:mm"];
         cell.taskTimeLabel.text = [dateFormatter stringFromDate:task.completionTime];
         return cell;
     }
@@ -336,11 +336,6 @@
 {
     self.tap.enabled=NO;
     self.pan.enabled=NO;
-}
-
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning

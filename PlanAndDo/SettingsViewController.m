@@ -89,7 +89,7 @@
             break;
         case 2:
             cell.textLabel.text = NM_FORMAT_TIME;
-            cell.detailTextLabel.text = [self.settings.timeFormat isEqualToString:@"hh:mm"]?@"12H":@"24H";
+            cell.detailTextLabel.text = [self.settings.timeFormat isEqualToString:@"12"]?@"12H":@"24H";
             break;
         case 3:
             cell.textLabel.text = NM_START_DAY;

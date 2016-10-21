@@ -258,7 +258,6 @@
 
 - (IBAction)submitTapped:(id)sender
 {
-    [self.alertView setHidden:YES];
     if([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text])
     {
         [self.navigationController.view addSubview:self.loadContentView];
@@ -269,6 +268,7 @@
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
                 {
                     [self.loadContentView removeFromSuperview];
+                    [self.alertView removeFromSuperview];
                     [self dismissViewControllerAnimated:YES completion:nil];
                 });
             }

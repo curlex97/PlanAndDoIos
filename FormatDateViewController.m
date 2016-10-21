@@ -53,11 +53,11 @@
     switch (indexPath.row) {
         case 0:
             cell.paramNameLabel.text = NM_DDMMYY_H;
-            cell.accessoryType=[[self.settings.dateFormat substringToIndex:1] isEqualToString:@"M"] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+            cell.accessoryType=[self.settings.dateFormat isEqualToString:NM_DDMMYY_H] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         case 1:
             cell.paramNameLabel.text = NM_MMDDYY_H;
-            cell.accessoryType=[[self.settings.dateFormat substringToIndex:1] isEqualToString:@"d"] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+            cell.accessoryType=[self.settings.dateFormat isEqualToString:NM_MMDDYY_H] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
             break;
         default:
             break;
@@ -73,7 +73,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString* formatDate = indexPath.row ? NM_MMDDYY : NM_DDMMYY;
+    NSString* formatDate = indexPath.row ? NM_MMDDYY_H : NM_DDMMYY_H;
     
     UserSettings* updatedSettings = [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.settings.startPage andDateFormat:formatDate andPageType:self.settings.pageType andTimeFormat:self.settings.timeFormat andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]];
     

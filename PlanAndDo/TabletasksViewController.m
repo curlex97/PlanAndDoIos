@@ -133,11 +133,11 @@ static bool firstLoad = true;
     }
     else
     {
-        date=[ApplicationManager settingsApplicationManager].settings.dateFormat;
+        date=[[[ApplicationManager settingsApplicationManager].settings.dateFormat substringToIndex:1] isEqualToString:@"d"]?NM_DDMMYY:NM_MMDDYY;
         [dateFormatter setDateFormat:date];
         cell.taskDateLabel.text = [dateFormatter stringFromDate:task.completionTime];
     }
-    [dateFormatter setDateFormat:[ApplicationManager settingsApplicationManager].settings.timeFormat];
+    [dateFormatter setDateFormat:[[ApplicationManager settingsApplicationManager].settings.timeFormat isEqualToString:@"24"]?@"HH:mm":@"hh:mm"];
     cell.taskTimeLabel.text = [dateFormatter stringFromDate:task.completionTime];
     
     return cell;
