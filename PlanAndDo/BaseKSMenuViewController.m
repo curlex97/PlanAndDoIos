@@ -176,11 +176,11 @@
 {
     if(self.state==KSBaseMenuStateSearch)
     {
-        return 55;
+        return 56;
     }
     else
     {
-        return 45;
+        return 44;
     }
 }
 
