@@ -45,12 +45,15 @@
     NSArray * tasks=[[ApplicationManager tasksApplicationManager] allTasks];
     for(BaseTask * task in tasks)
     {
-        [[ApplicationManager notificationManager] addLocalNotificationWithTitle:@"Reminde"
+        if(task.taskReminderTime)
+        {
+            [[ApplicationManager notificationManager] addLocalNotificationWithTitle:@"Reminde"
                                                                         andBody:task.name
                                                                        andImage:nil
                                                                     andFireDate:[NSDate dateWithTimeIntervalSince1970:task.taskReminderTime.timeIntervalSince1970+900]
                                                                     andUserInfo:nil
                                                                          forKey:[NSString stringWithFormat:@"%d",task.ID]];
+        }
     }
     [[ApplicationManager notificationManager] sheduleAllNotifications];
     NSLog(@"%@",[[ApplicationManager categoryApplicationManager] allCategories]);

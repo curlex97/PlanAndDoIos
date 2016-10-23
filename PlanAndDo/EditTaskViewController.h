@@ -18,6 +18,7 @@
 @property BaseTask* task;
 @property KSCategory* category;
 @property NSDate* completionTime;
+@property NSDate * reminderTime;
 @property NSString* taskDesc;
 @property NSMutableArray* subTasks;
 @end

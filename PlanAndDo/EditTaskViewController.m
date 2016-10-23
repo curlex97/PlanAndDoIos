@@ -200,6 +200,7 @@
 {
     DateAndTimeViewController * controller = [[DateAndTimeViewController alloc] init];
     controller.completionTime = self.completionTime;
+    controller.completionReminderTime = self.reminderTime;
     controller.parentController = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -231,6 +232,7 @@
         realTask.priority = priority;
         realTask.name = self.headerText;
         realTask.syncStatus = [[NSDate date] timeIntervalSince1970];
+        realTask.taskReminderTime=self.reminderTime;
         
         [[ApplicationManager tasksApplicationManager] updateTask:realTask completion:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_EDIT object:realTask];
@@ -253,6 +255,7 @@
         realTask.priority = priority;
         realTask.name = self.headerText;
         realTask.syncStatus = [[NSDate date] timeIntervalSince1970];
+        realTask.taskReminderTime=self.reminderTime;
         
         for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask]) [[ApplicationManager subTasksApplicationManager] deleteSubTask:subTask forTask:realTask completion:nil];
         
@@ -277,6 +280,7 @@
    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subTasksChanged:) name:@"EditSubTasksChanged" object:nil];
     
     self.completionTime = self.task.completionTime;
+    self.reminderTime = self.task.taskReminderTime;
     if([self.task isKindOfClass:[KSTask class]]) self.taskDesc = ((KSTask*)self.task).taskDescription;
     self.category = [[ApplicationManager categoryApplicationManager] categoryWithId:self.task.categoryID];
     
