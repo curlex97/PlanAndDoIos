@@ -16,8 +16,6 @@
 #import "FileManager.h"
 #import "LoginViewController.h"
 
-static bool firstLoad = true;
-
 @interface TabletasksViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic)UISegmentedControl * segment;
 @property (nonatomic)UIBarButtonItem * currentBoxItem;
@@ -171,8 +169,7 @@ static bool firstLoad = true;
 
 -(void)setStartPageForLoad
 {
-    if(!firstLoad) return;
-    
+    //if(!firstLoad) return;
     int Id = [[[[[ApplicationManager sharedApplication].userApplicationManager authorisedUser] settings] startPage] intValue];
     NSString* startPage = [[ApplicationManager sharedApplication].categoryApplicationManager categoryWithId:Id].name;
     
@@ -198,7 +195,7 @@ static bool firstLoad = true;
             break;
         }
     }
-    firstLoad = false;
+    [ApplicationManager sharedApplication].userApplicationManager.firstLoad = NO;
 }
 
 -(void)refreshDidSwipe
@@ -220,7 +217,10 @@ static bool firstLoad = true;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setStartPageForLoad];
+    if( [ApplicationManager sharedApplication].userApplicationManager.firstLoad)
+    {
+        [self setStartPageForLoad];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTasksInTable:) name:NC_SYNC_TASKS object:nil];
     
@@ -289,6 +289,8 @@ static bool firstLoad = true;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NC_TASK_ADD object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NC_TASK_EDIT object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(categoryDeleted:) name:@"CategoryIsDeleted" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setStartPageForLoad) name:@"SetStartPage" object:nil];
+    
     if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
     {
         self.navigationController.toolbarHidden=YES;

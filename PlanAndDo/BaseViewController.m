@@ -45,6 +45,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 //    [self setBarImage];
     NSString * name=[[UIDevice currentDevice].model isEqualToString:@"iPad"]?@"IPad":@"Main";
     self.baseStoryboard=[UIStoryboard storyboardWithName:name bundle:nil];

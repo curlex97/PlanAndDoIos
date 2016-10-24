@@ -115,6 +115,7 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^
     {
+        [ApplicationManager sharedApplication].userApplicationManager.firstLoad=YES;
         [self dismissViewControllerAnimated:YES completion:nil];
     });
 }
@@ -246,6 +247,7 @@
              {
                  dispatch_async(dispatch_get_main_queue(), ^
                  {
+                     [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_EDIT object:nil];
                      [self.loadContentView removeFromSuperview];
                      [self showMainWindow:nil];
                  });

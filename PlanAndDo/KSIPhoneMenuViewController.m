@@ -184,10 +184,13 @@
     [textField resignFirstResponder];
     if(!self.isChangeCategory)
     {
-        [[ApplicationManager sharedApplication].categoryApplicationManager addCateroty:[[KSCategory alloc] initWithID:self.categories.lastObject.ID+1 andName:textField.text andSyncStatus:[NSDate date].timeIntervalSince1970] completion:nil];
-        self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
-        textField.text=@"";
-        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.categories.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        if(textField.text.length)
+        {
+            [[ApplicationManager sharedApplication].categoryApplicationManager addCateroty:[[KSCategory alloc] initWithID:self.categories.lastObject.ID+1 andName:textField.text andSyncStatus:[NSDate date].timeIntervalSince1970] completion:nil];
+            self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
+            textField.text=@"";
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.categories.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        }
     }
     else
     {

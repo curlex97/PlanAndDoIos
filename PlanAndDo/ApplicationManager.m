@@ -11,22 +11,51 @@
 #import "Reachability.h"
 
 @implementation ApplicationManager
+
 static ApplicationManager * applicationInstance;
+
 +(ApplicationManager *)sharedApplication
 {
     static dispatch_once_t predicate;
     dispatch_once(&predicate,^
                   {
                       applicationInstance=[[ApplicationManager alloc] init];
-                      applicationInstance.tasksApplicationManager=[[TasksApplicationManager alloc] init];
-                      applicationInstance.subTasksApplicationManager=[[SubTasksApplicationManager alloc] init];
-                      applicationInstance.userApplicationManager=[[UserApplicationManager alloc] init];
-                      applicationInstance.settingsApplicationManager=[[SettingsApplicationManager alloc] init];
-                      applicationInstance.categoryApplicationManager=[[CategoryApplicationManager alloc] init];
-                      applicationInstance.syncApplicationManager=[[SyncApplicationManager alloc] init];
-                      applicationInstance.notificationManager=[KSNotificationManager sharedManager];
+                      if(applicationInstance)
+                      {
+                          applicationInstance.tasksApplicationManager=[[TasksApplicationManager alloc] init];
+                          applicationInstance.subTasksApplicationManager=[[SubTasksApplicationManager alloc] init];
+                          applicationInstance.userApplicationManager=[[UserApplicationManager alloc] init];
+                          applicationInstance.settingsApplicationManager=[[SettingsApplicationManager alloc] init];
+                          applicationInstance.categoryApplicationManager=[[CategoryApplicationManager alloc] init];
+                          applicationInstance.syncApplicationManager=[[SyncApplicationManager alloc] init];
+                          applicationInstance.notificationManager=[KSNotificationManager sharedManager];
+                      }
                   });
     return applicationInstance;
+}
+
+-(instancetype)init
+{
+    if(applicationInstance)
+    {
+        return nil;
+    }
+    else
+    {
+        return [super init];
+    }
+}
+
++(instancetype)allocWithZone:(struct _NSZone *)zone
+{
+    if(applicationInstance)
+    {
+        return nil;
+    }
+    else
+    {
+        return [super allocWithZone:zone];
+    }
 }
 
 -(void)cleanLocalDataBase

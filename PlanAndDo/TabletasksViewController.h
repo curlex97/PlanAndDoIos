@@ -11,6 +11,7 @@
 #import "KSTask.h"
 #import "KSTaskCollection.h"
 #import "TasksCoreDataManager.h"
+#import "AppDelegate.h"
 
 typedef NS_ENUM(NSInteger, KSBoxType)
 {

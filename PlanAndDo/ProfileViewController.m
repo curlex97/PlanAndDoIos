@@ -91,12 +91,18 @@
     if(indexPath.row==0)
     {
         UIAlertController * alertController=[UIAlertController alertControllerWithTitle:TL_PROFILE_CHANGE_NAME_TITLE message:TL_PROFILE_CHANGE_NAME_MSG preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addTextFieldWithConfigurationHandler:nil];
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField)
+        {
+            textField.text=self.user.userName;
+        }];
         UIAlertAction * okAction=[UIAlertAction actionWithTitle:TL_OK style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
                                   {
-                                      self.user.userName=alertController.textFields.firstObject.text;
-                                      [[ApplicationManager sharedApplication].userApplicationManager updateUser:self.user completion:nil];
-                                      [self.tableView reloadData];
+                                      if(alertController.textFields.firstObject.text.length)
+                                      {
+                                          self.user.userName=alertController.textFields.firstObject.text;
+                                          [[ApplicationManager sharedApplication].userApplicationManager updateUser:self.user completion:nil];
+                                          [self.tableView reloadData];
+                                      }
                                   }];
         
         [alertController addAction:okAction];
@@ -107,6 +113,7 @@
         NewPasswordViewController * newPassViewController=[self.baseStoryboard instantiateViewControllerWithIdentifier:@"NewPasswordViewController"];
         if(newPassViewController)
         {
+            newPassViewController.title=@"New password";
             [self.navigationController pushViewController:newPassViewController animated:YES];
         }
     }
@@ -130,9 +137,42 @@
                                             UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:TL_CANCEL style:UIAlertActionStyleCancel handler:nil];
                                             UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:TL_DELETE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
                                                                           {
-                                                                              if(/* DISABLES CODE */ (NO))
+                                                                              if([alertController.textFields.firstObject.text isEqualToString:[FileManager readPassFromFile]])
                                                                               {
-                                                                                  [[ApplicationManager sharedApplication] cleanLocalDataBase];
+                                                                                  [self.navigationController.parentViewController.view addSubview:self.loadContentView];
+                                                                                  NSArray * tasks=[ApplicationManager sharedApplication].tasksApplicationManager.allTasks;
+                                                                                  for(BaseTask * task in tasks)
+                                                                                  {
+                                                                                      [[ApplicationManager sharedApplication].tasksApplicationManager deleteTask:task completion:nil];
+                                                                                  }
+                                                                                  
+                                                                                  __block NSUInteger categoryCount=0;
+                                                                                  NSArray * categories=[ApplicationManager sharedApplication].categoryApplicationManager.allCategories;
+                                                                                  for(KSCategory * category in categories)
+                                                                                  {
+                                                                                      
+                                                                                      [[NSNotificationCenter defaultCenter] postNotificationName:@"CategoryIsDeleted" object:category];
+                                                                                      [[ApplicationManager sharedApplication].categoryApplicationManager deleteCateroty:category completion:^(bool completed)
+                                                                                       {
+                                                                                           
+                                                                                           if(completed)
+                                                                                           {
+                                                                                              ++categoryCount;
+                                                                                              if(categoryCount==categories.count)
+                                                                                              {
+                                                                                                  dispatch_async(dispatch_get_main_queue(), ^
+                                                                                                  {                                                                                                  [self.loadContentView removeFromSuperview];
+                                                                                                  });
+                                                                                              }
+                                                                                           }
+                                                                                           else
+                                                                                           {
+                                                                                               dispatch_async(dispatch_get_main_queue(), ^
+                                                                                                {                                                                                                  [self.loadContentView removeFromSuperview];
+                                                                                                });
+                                                                                           }
+                                                                                       }];
+                                                                                  }
                                                                                   [self.tableView reloadData];
                                                                               }
                                                                                   
@@ -149,7 +189,6 @@
     else
     {
         [[ApplicationManager sharedApplication].userApplicationManager logout] ;
-
         LoginViewController * login=[self.baseStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:YES completion:^
          {

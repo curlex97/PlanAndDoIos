@@ -14,6 +14,7 @@
 @interface UserApplicationManager : NSObject
 
 @property (nonatomic)KSAuthorisedUser * authorisedUser;
+@property (nonatomic)BOOL firstLoad;
 
 -(void)setUser:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
 

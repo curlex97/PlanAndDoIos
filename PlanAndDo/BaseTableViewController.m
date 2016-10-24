@@ -50,7 +50,7 @@
             UIView * toolBarHidenView=[[UIView alloc] initWithFrame:self.navigationController.toolbar.frame];
             toolBarHidenView.backgroundColor=[UIColor colorWithWhite:0.0 alpha:0.5];
             [self.navigationController.toolbar addSubview:toolBarHidenView];
-            [self.navigationController.view addSubview:self.loadContentView];
+            [self.navigationController.parentViewController.view addSubview:self.loadContentView];
             [[ApplicationManager sharedApplication].syncApplicationManager syncWithCompletion:^(BOOL completed)
          {
              if(completed)
@@ -73,7 +73,7 @@
             UIView * toolBarHidenView=[[UIView alloc] initWithFrame:self.navigationController.toolbar.frame];
             toolBarHidenView.backgroundColor=[UIColor colorWithWhite:0.0 alpha:0.5];
             [self.navigationController.toolbar addSubview:toolBarHidenView];
-            [self.navigationController.view addSubview:self.loadContentView];
+            [self.navigationController.parentViewController.view addSubview:self.loadContentView];
             [[ApplicationManager sharedApplication].syncApplicationManager syncWithCompletion:^(BOOL completed)
              {
                  if(completed)
