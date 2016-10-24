@@ -60,7 +60,7 @@ static bool firstLoad = true;
         {
             NSLog(TL_COMPLETE);
             task.status = YES;
-            [[ApplicationManager tasksApplicationManager] updateTask:task completion:nil];
+            [[ApplicationManager sharedApplication].tasksApplicationManager updateTask:task completion:nil];
             [self.tasks removeObject:task];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -77,11 +77,11 @@ static bool firstLoad = true;
         if([task isKindOfClass:[KSTaskCollection class]])
         {
             KSTaskCollection* col = (KSTaskCollection*)task;
-            for(KSShortTask* sub in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:col])
-                [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:col completion:nil];
+            for(KSShortTask* sub in [[ApplicationManager sharedApplication].subTasksApplicationManager allSubTasksForTask:col])
+                [[ApplicationManager sharedApplication].subTasksApplicationManager deleteSubTask:sub forTask:col completion:nil];
         }
         
-        [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
+        [[ApplicationManager sharedApplication].tasksApplicationManager deleteTask:task completion:nil];
         [self.tasks removeObject:task];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
         if(!self.tasks.count && self.boxType!=KSBoxTypeArchive)
@@ -133,11 +133,11 @@ static bool firstLoad = true;
     }
     else
     {
-        date=[[[ApplicationManager settingsApplicationManager].settings.dateFormat substringToIndex:1] isEqualToString:@"d"]?NM_DDMMYY:NM_MMDDYY;
+        date=[[[ApplicationManager sharedApplication].settingsApplicationManager.settings.dateFormat substringToIndex:1] isEqualToString:@"d"]?NM_DDMMYY:NM_MMDDYY;
         [dateFormatter setDateFormat:date];
         cell.taskDateLabel.text = [dateFormatter stringFromDate:task.completionTime];
     }
-    [dateFormatter setDateFormat:[[ApplicationManager settingsApplicationManager].settings.timeFormat isEqualToString:@"24"]?@"HH:mm":@"hh:mm"];
+    [dateFormatter setDateFormat:[[ApplicationManager sharedApplication].settingsApplicationManager.settings.timeFormat isEqualToString:@"24"]?@"HH:mm":@"hh:mm"];
     cell.taskTimeLabel.text = [dateFormatter stringFromDate:task.completionTime];
     
     return cell;
@@ -173,8 +173,8 @@ static bool firstLoad = true;
 {
     if(!firstLoad) return;
     
-    int Id = [[[[[ApplicationManager userApplicationManager] authorisedUser] settings] startPage] intValue];
-    NSString* startPage = [[ApplicationManager categoryApplicationManager] categoryWithId:Id].name;
+    int Id = [[[[[ApplicationManager sharedApplication].userApplicationManager authorisedUser] settings] startPage] intValue];
+    NSString* startPage = [[ApplicationManager sharedApplication].categoryApplicationManager categoryWithId:Id].name;
     
     NSArray* boxes = [[NSArray alloc] initWithObjects:NM_TODAY, NM_TOMORROW, NM_WEEK, NM_BACKLOG, NM_ARCHIVE, nil];
     for(NSString* box in boxes)
@@ -190,7 +190,7 @@ static bool firstLoad = true;
         }
     }
     
-    for(KSCategory* cat in [[ApplicationManager categoryApplicationManager] allCategories])
+    for(KSCategory* cat in [[ApplicationManager sharedApplication].categoryApplicationManager allCategories])
     {
         if([cat.name isEqualToString:startPage])
         {
@@ -313,28 +313,28 @@ static bool firstLoad = true;
         switch (self.boxType)
         {
             case KSBoxTypeToday:
-                self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForToday]];
+                self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForToday]];
                 self.title = NM_TODAY;
                 self.currentBoxItem=self.toolbarItems[1];
                 break;
             case KSBoxTypeTomorrow:
-                self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForTomorrow]];
+                self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForTomorrow]];
                 self.title = NM_TOMORROW;
                 self.currentBoxItem=self.toolbarItems[3];
                 break;
             case KSBoxTypeWeek:
-                self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForWeek]];
+                self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForWeek]];
                 self.currentBoxItem=self.toolbarItems[5];
                 self.title = NM_WEEK;
                 break;
             case KSBoxTypeArchive:
-                self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForArchive]];
+                self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForArchive]];
                 self.currentBoxItem=self.toolbarItems[7];
                 self.title = NM_ARCHIVE;
                 self.navigationItem.rightBarButtonItem=nil;
                 break;
             case KSBoxTypeBacklog:
-                self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForBacklog]];
+                self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForBacklog]];
                 self.currentBoxItem=self.toolbarItems[9];
                 self.title = NM_BACKLOG;
                 break;
@@ -402,16 +402,16 @@ static bool firstLoad = true;
 -(void) segmentDidTap
 {
     if(self.segment.selectedSegmentIndex)
-        self.tasks = [NSMutableArray arrayWithArray:[self overdueTasks:[[ApplicationManager tasksApplicationManager] allTasksForArchive]]];
+        self.tasks = [NSMutableArray arrayWithArray:[self overdueTasks:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForArchive]]];
     else
-        self.tasks = [NSMutableArray arrayWithArray:[self completedTasks:[[ApplicationManager tasksApplicationManager] allTasksForArchive]]];
+        self.tasks = [NSMutableArray arrayWithArray:[self completedTasks:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForArchive]]];
     
     [self.tableView reloadData];
 }
 
 -(void)todayDidTap
 {
-    self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForToday]];;
+    self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForToday]];;
     self.title = NM_TODAY;
     self.boxType = KSBoxTypeToday;
     self.category=nil;
@@ -437,7 +437,7 @@ static bool firstLoad = true;
 
 -(void)tomorrowDidTap
 {
-    self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForTomorrow]];
+    self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForTomorrow]];
     self.title = NM_TOMORROW;
     self.boxType = KSBoxTypeTomorrow;
     self.category=nil;
@@ -463,7 +463,7 @@ static bool firstLoad = true;
 
 -(void)weekDidTap
 {
-    self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForWeek]];
+    self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForWeek]];
     self.title = NM_WEEK;
     self.category=nil;
     self.boxType = KSBoxTypeWeek;
@@ -505,7 +505,7 @@ static bool firstLoad = true;
 
 -(void)backLogDidTap
 {
-    self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasksForBacklog]];
+    self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForBacklog]];
     self.title = NM_BACKLOG;
     self.category=nil;
     self.boxType = KSBoxTypeBacklog;
@@ -531,7 +531,7 @@ static bool firstLoad = true;
 
 -(void)archiveDidTap
 {
-    self.tasks = [NSMutableArray arrayWithArray:[self completedTasks:[[ApplicationManager tasksApplicationManager] allTasksForArchive]]];
+    self.tasks = [NSMutableArray arrayWithArray:[self completedTasks:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForArchive]]];
     self.title = NM_ARCHIVE;
     self.category=nil;
     self.boxType = KSBoxTypeArchive;

@@ -27,7 +27,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if([ApplicationManager userApplicationManager].authorisedUser.emailAdress.length==0 && !self.isViewPresented)
+    if([ApplicationManager sharedApplication].userApplicationManager.authorisedUser.emailAdress.length==0 && !self.isViewPresented)
     {
         LoginViewController * login=[self.baseStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
         login.isViewPresented=YES;
@@ -238,11 +238,11 @@
 - (IBAction)signInTapped:(id)sender
 {
     [self.navigationController.view addSubview:self.loadContentView];
-    [[ApplicationManager userApplicationManager] loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool status)
+    [[ApplicationManager sharedApplication].userApplicationManager loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool status)
      {
          if(status)
          {
-             [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL status)
+             [[ApplicationManager sharedApplication].syncApplicationManager syncWithCompletion:^(BOOL status)
              {
                  dispatch_async(dispatch_get_main_queue(), ^
                  {

@@ -234,7 +234,7 @@
         realTask.syncStatus = [[NSDate date] timeIntervalSince1970];
         realTask.taskReminderTime=self.reminderTime;
         
-        [[ApplicationManager tasksApplicationManager] updateTask:realTask completion:nil];
+        [[ApplicationManager sharedApplication].tasksApplicationManager updateTask:realTask completion:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_EDIT object:realTask];
         
     }
@@ -257,12 +257,12 @@
         realTask.syncStatus = [[NSDate date] timeIntervalSince1970];
         realTask.taskReminderTime=self.reminderTime;
         
-        for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask]) [[ApplicationManager subTasksApplicationManager] deleteSubTask:subTask forTask:realTask completion:nil];
+        for(KSShortTask* subTask in [[ApplicationManager sharedApplication].subTasksApplicationManager allSubTasksForTask:realTask]) [[ApplicationManager sharedApplication].subTasksApplicationManager deleteSubTask:subTask forTask:realTask completion:nil];
         
-        for(KSShortTask* subTask in self.subTasks) [[ApplicationManager subTasksApplicationManager] addSubTask:subTask forTask:realTask completion:nil];
+        for(KSShortTask* subTask in self.subTasks) [[ApplicationManager sharedApplication].subTasksApplicationManager addSubTask:subTask forTask:realTask completion:nil];
         
         
-        [[ApplicationManager tasksApplicationManager] updateTask:realTask completion:nil];
+        [[ApplicationManager sharedApplication].tasksApplicationManager updateTask:realTask completion:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_EDIT object:realTask];
     }
     
@@ -282,12 +282,12 @@
     self.completionTime = self.task.completionTime;
     self.reminderTime = self.task.taskReminderTime;
     if([self.task isKindOfClass:[KSTask class]]) self.taskDesc = ((KSTask*)self.task).taskDescription;
-    self.category = [[ApplicationManager categoryApplicationManager] categoryWithId:self.task.categoryID];
+    self.category = [[ApplicationManager sharedApplication].categoryApplicationManager categoryWithId:self.task.categoryID];
     
     if([self.task isKindOfClass:[KSTaskCollection class]])
     {
         KSTaskCollection* realTask = (KSTaskCollection*)self.task;
-        self.subTasks = [NSMutableArray arrayWithArray:[[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask]];
+        self.subTasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].subTasksApplicationManager allSubTasksForTask:realTask]];
     }
     
     [self.refresh removeFromSuperview];

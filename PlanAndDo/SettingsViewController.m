@@ -23,13 +23,13 @@
 
 -(void)reloadData
 {
-        self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+        self.settings = [[[ApplicationManager sharedApplication].userApplicationManager authorisedUser] settings];
         [super reloadData];
 }
 
 -(void)refreshDidSwipe
 {
-    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+    self.settings = [[[ApplicationManager sharedApplication].userApplicationManager authorisedUser] settings];
     [super refreshDidSwipe];
 }
 
@@ -51,11 +51,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.settings = [[ApplicationManager settingsApplicationManager] settings];
+    self.settings = [[ApplicationManager sharedApplication].settingsApplicationManager settings];
     
-    KSAuthorisedUser* user = [[ApplicationManager userApplicationManager] authorisedUser];
+    KSAuthorisedUser* user = [[ApplicationManager sharedApplication].userApplicationManager authorisedUser];
     user.settings = self.settings;
-    [[ApplicationManager userApplicationManager] updateUser:user completion:nil];
+    [[ApplicationManager sharedApplication].userApplicationManager updateUser:user completion:nil];
     
     [self.tableView reloadData];
 }
@@ -81,7 +81,7 @@
     {
         case 0:
             cell.textLabel.text = NM_START_PAGE;
-            cell.detailTextLabel.text = [[ApplicationManager categoryApplicationManager] categoryWithId:[[[[[ApplicationManager userApplicationManager] authorisedUser] settings] startPage] intValue]].name.capitalizedString;
+            cell.detailTextLabel.text = [[ApplicationManager sharedApplication].categoryApplicationManager categoryWithId:[[[[[ApplicationManager sharedApplication].userApplicationManager authorisedUser] settings] startPage] intValue]].name.capitalizedString;
             break;
         case 1:
             cell.textLabel.text = NM_FORMAT_DATE;

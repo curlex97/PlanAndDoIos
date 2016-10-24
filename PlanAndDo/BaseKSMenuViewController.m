@@ -30,15 +30,15 @@
 
 -(void)reloadData
 {
-    self.categories = [NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
-    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasks]];
+    self.categories = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
+    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasks]];
     [super reloadData];
 }
 
 -(void)refreshDidSwipe
 {
-    self.categories = [NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
-    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasks]];
+    self.categories = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
+    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasks]];
     [super refreshDidSwipe];
 }
 
@@ -94,7 +94,7 @@
 {
     self.state=KSBaseMenuStateSearch;
     searchBar.showsCancelButton=YES;
-    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasks]];
+    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasks]];
     
     [self refreshSearch];
     
@@ -126,7 +126,7 @@
             else if([task isKindOfClass:[KSTaskCollection class]])
             {
                 KSTaskCollection* realTask = (KSTaskCollection*)task;
-                for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask])
+                for(KSShortTask* subTask in [[ApplicationManager sharedApplication].subTasksApplicationManager allSubTasksForTask:realTask])
                 {
                     if([subTask.name.lowercaseString containsString:self.searchBar.text.lowercaseString])
                     {
@@ -276,7 +276,7 @@
 
 -(void) refreshCategoriesInTable:(NSNotification*)not
 {
-    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
@@ -326,7 +326,7 @@
     [self.refresh removeFromSuperview];
     [self.tableView setSeparatorColor:[UIColor colorWithRed:163.0/255.0 green:167.0/255.0 blue:169.0/255.0 alpha:0.35]];
     
-    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
     
     
     self.view.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];

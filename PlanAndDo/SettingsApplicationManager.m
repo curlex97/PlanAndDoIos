@@ -21,7 +21,7 @@
 {
     [[[SettingsCoreDataManager alloc] init] setSettings:settings];
     [[[SyncApplicationManager alloc] init] syncSettingsWithCompletion:^(bool status) {
-        [[[SettingsApiManager alloc] init] updateSettingsAsync:[[[SettingsCoreDataManager alloc] init] settingsForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+        [[[SettingsApiManager alloc] init] updateSettingsAsync:[[[SettingsCoreDataManager alloc] init] settingsForSync] forUser:[[ApplicationManager sharedApplication].userApplicationManager authorisedUser]  completion:^(NSDictionary* dictionary){
             if(completed) completed(YES);
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
         }];
@@ -35,7 +35,7 @@
     {
         if(status)
         {
-            [[[SettingsApiManager alloc] init] updateSettingsAsync:[[[SettingsCoreDataManager alloc] init] settingsForSync] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+            [[[SettingsApiManager alloc] init] updateSettingsAsync:[[[SettingsCoreDataManager alloc] init] settingsForSync] forUser:[[ApplicationManager sharedApplication].userApplicationManager authorisedUser]  completion:^(NSDictionary* dictionary){
                 if(completed) completed(YES);
             [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_SETTINGS object:nil];
             }];
@@ -68,7 +68,10 @@
         if(!localSettings) [[[SettingsCoreDataManager alloc] init] syncSetSettings:settings];
         else if(localSettings.syncStatus < settings.syncStatus) [[[SettingsCoreDataManager alloc] init] syncUpdateSettings:settings];
         
-        if([KSAuthorisedUser currentUser]) KSAuthorisedUser.currentUser.settings = [[[SettingsCoreDataManager alloc] init] settings];
+        if([ApplicationManager sharedApplication].userApplicationManager.authorisedUser)
+        {
+            [ApplicationManager sharedApplication].userApplicationManager.authorisedUser.settings = [[[SettingsCoreDataManager alloc] init] settings];
+        }
 
     }
 }

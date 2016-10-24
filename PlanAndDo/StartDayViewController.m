@@ -19,13 +19,13 @@
 
 -(void)reloadData
 {
-    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+    self.settings = [[[ApplicationManager sharedApplication].userApplicationManager authorisedUser] settings];
     [super reloadData];
 }
 
 -(void)refreshDidSwipe
 {
-    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+    self.settings = [[[ApplicationManager sharedApplication].userApplicationManager authorisedUser] settings];
     [super refreshDidSwipe];
 }
 
@@ -36,7 +36,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+    self.settings = [[[ApplicationManager sharedApplication].userApplicationManager authorisedUser] settings];
 
 }
 
@@ -80,7 +80,7 @@
     
     UserSettings* updatedSettings = [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.settings.startPage andDateFormat:self.settings.dateFormat andPageType:self.settings.pageType andTimeFormat:self.settings.timeFormat andStartDay:day andSyncStatus:[[NSDate date] timeIntervalSince1970]];
     
-    [[ApplicationManager settingsApplicationManager] updateSettings:updatedSettings completion:nil];
+    [[ApplicationManager sharedApplication].settingsApplicationManager updateSettings:updatedSettings completion:nil];
     
     [self.navigationController popViewControllerAnimated:YES];
     

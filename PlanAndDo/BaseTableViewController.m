@@ -51,7 +51,7 @@
             toolBarHidenView.backgroundColor=[UIColor colorWithWhite:0.0 alpha:0.5];
             [self.navigationController.toolbar addSubview:toolBarHidenView];
             [self.navigationController.view addSubview:self.loadContentView];
-            [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
+            [[ApplicationManager sharedApplication].syncApplicationManager syncWithCompletion:^(BOOL completed)
          {
              if(completed)
              {
@@ -74,7 +74,7 @@
             toolBarHidenView.backgroundColor=[UIColor colorWithWhite:0.0 alpha:0.5];
             [self.navigationController.toolbar addSubview:toolBarHidenView];
             [self.navigationController.view addSubview:self.loadContentView];
-            [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
+            [[ApplicationManager sharedApplication].syncApplicationManager syncWithCompletion:^(BOOL completed)
              {
                  if(completed)
                  {
@@ -116,7 +116,7 @@
 
 -(void)refreshDidSwipeEvent
 {
-    [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
+    [[ApplicationManager sharedApplication].syncApplicationManager syncWithCompletion:^(BOOL completed)
      {
          if(completed)
          {

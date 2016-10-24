@@ -21,13 +21,13 @@
 
 -(void)reloadData
 {
-    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+    self.settings = [[[ApplicationManager sharedApplication].userApplicationManager authorisedUser] settings];
     [super reloadData];
 }
 
 -(void)refreshDidSwipe
 {
-    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+    self.settings = [[[ApplicationManager sharedApplication].userApplicationManager authorisedUser] settings];
     [super refreshDidSwipe];
 }
 
@@ -35,13 +35,13 @@
 {
     [super viewDidLoad];
     
-    self.settings = [[[ApplicationManager userApplicationManager] authorisedUser] settings];
+    self.settings = [[[ApplicationManager sharedApplication].userApplicationManager authorisedUser] settings];
     
     self.title=NM_START_PAGE;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.categories = [NSArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    self.categories = [NSArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
     self.boxes = [[NSArray alloc] initWithObjects:NM_TODAY, NM_TOMORROW, NM_WEEK, NM_BACKLOG, NM_ARCHIVE, nil];
     
     self.segment =[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:NM_CATEGORY,NM_BOX, nil]];
@@ -89,7 +89,7 @@
     [[UserSettings alloc] initWithID:self.settings.ID andStartPage:self.boxes[indexPath.row] andDateFormat:self.settings.dateFormat andPageType:NM_BOX.lowercaseString andTimeFormat:self.settings.timeFormat andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]] :
     [[UserSettings alloc] initWithID:self.settings.ID andStartPage:[NSString stringWithFormat:@"%i", ((KSCategory*)self.categories[indexPath.row]).ID] andDateFormat:self.settings.dateFormat andPageType:NM_CATEGORY.lowercaseString andTimeFormat:self.settings.timeFormat andStartDay:self.settings.startDay andSyncStatus:[[NSDate date] timeIntervalSince1970]];
     
-    [[ApplicationManager settingsApplicationManager] updateSettings:updatedSettings completion:nil];
+    [[ApplicationManager sharedApplication].settingsApplicationManager updateSettings:updatedSettings completion:nil];
  
     [self.navigationController popViewControllerAnimated:YES];
     

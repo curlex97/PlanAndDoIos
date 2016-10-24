@@ -33,7 +33,7 @@
     else if(self.oldEmailTextField.isFirstResponder)
     {
         [self.emailTextField becomeFirstResponder];
-        if([self.oldEmailTextField.text isEqualToString:[ApplicationManager userApplicationManager].authorisedUser.emailAdress])
+        if([self.oldEmailTextField.text isEqualToString:[ApplicationManager sharedApplication].userApplicationManager.authorisedUser.emailAdress])
         {
             self.oldEmailTextField.rightViewMode=UITextFieldViewModeNever;
         }
@@ -60,7 +60,7 @@
         }
     }
     
-    if(self.oldEmailTextField.text.length>0 && ![self.oldEmailTextField.text isEqualToString:[ApplicationManager userApplicationManager].authorisedUser.emailAdress])
+    if(self.oldEmailTextField.text.length>0 && ![self.oldEmailTextField.text isEqualToString:[ApplicationManager sharedApplication].userApplicationManager.authorisedUser.emailAdress])
     {
         [self.alertView setHidden:NO];
         self.alertMessage.text=@"Incorrect Email";
@@ -218,11 +218,11 @@
 }
 - (IBAction)submitDidTap:(UIButton *)sender
 {
-    KSAuthorisedUser* user = [[ApplicationManager userApplicationManager] authorisedUser];
+    KSAuthorisedUser* user = [[ApplicationManager sharedApplication].userApplicationManager authorisedUser];
     if([self.oldEmailTextField.text isEqualToString:user.emailAdress] && [self.emailTextField.text isEqualToString:self.reenterEmailTextField.text])
     {
         user.emailAdress = self.emailTextField.text;
-        [[ApplicationManager userApplicationManager] updateUser:user completion:nil];
+        [[ApplicationManager sharedApplication].userApplicationManager updateUser:user completion:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_EMAIL_CHANGED object:user];
     }
     [self.navigationController popViewControllerAnimated:YES];

@@ -20,21 +20,23 @@
 
 @interface ApplicationManager : NSObject
 
-+(TasksApplicationManager*) tasksApplicationManager;
++(ApplicationManager *)sharedApplication;
 
-+(SubTasksApplicationManager*) subTasksApplicationManager;
+@property (nonatomic)TasksApplicationManager * tasksApplicationManager;
 
-+(UserApplicationManager*) userApplicationManager;
+@property (nonatomic)SubTasksApplicationManager * subTasksApplicationManager;
 
-+(SettingsApplicationManager*) settingsApplicationManager;
+@property (nonatomic)UserApplicationManager * userApplicationManager;
 
-+(CategoryApplicationManager*) categoryApplicationManager;
+@property (nonatomic)SettingsApplicationManager * settingsApplicationManager;
 
-+(SyncApplicationManager*) syncApplicationManager;
+@property (nonatomic)CategoryApplicationManager * categoryApplicationManager;
 
-+(KSNotificationManager *) notificationManager;
+@property (nonatomic)SyncApplicationManager * syncApplicationManager;
 
-+(void) cleanLocalDataBase;
+@property (nonatomic)KSNotificationManager * notificationManager;
+
+-(void) cleanLocalDataBase;
 
 +(void)registerUserNotifications;
 

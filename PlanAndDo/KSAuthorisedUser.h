@@ -25,6 +25,4 @@
                andAccessToken:(NSString *)token
               andUserSettings:(UserSettings *)settings;
 
-+(KSAuthorisedUser*) currentUser;
-
 @end

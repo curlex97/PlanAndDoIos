@@ -35,7 +35,7 @@
     {
         if(status)
         {
-            [[[CategoryApiManager alloc] init] addCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncAdd] forUser:[[ApplicationManager userApplicationManager] authorisedUser] completion:^(NSDictionary* dictionary)
+            [[[CategoryApiManager alloc] init] addCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncAdd] forUser:[[ApplicationManager sharedApplication].userApplicationManager authorisedUser] completion:^(NSDictionary* dictionary)
             {
                 dispatch_async(dispatch_get_main_queue(), ^
                 {
@@ -67,7 +67,7 @@
     {
         if(status)
         {
-            [[[CategoryApiManager alloc] init] updateCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncUpdate] forUser:  [[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary)
+            [[[CategoryApiManager alloc] init] updateCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncUpdate] forUser:  [[ApplicationManager sharedApplication].userApplicationManager authorisedUser]  completion:^(NSDictionary* dictionary)
             {
                 if(completed) completed(YES);
                 [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];
@@ -78,10 +78,10 @@
 
 -(void)deleteCateroty:(KSCategory *)category completion:(void (^)(bool))completed
 {
-    NSArray * tasks=[[ApplicationManager tasksApplicationManager] allTasksForCategory:category];
+    NSArray * tasks=[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForCategory:category];
     for (BaseTask * task in tasks)
     {
-        [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
+        [[ApplicationManager sharedApplication].tasksApplicationManager deleteTask:task completion:nil];
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
     {
@@ -90,7 +90,7 @@
          {
              if(status)
              {
-                 [[[CategoryApiManager alloc] init] deleteCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncDelete] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary)
+                 [[[CategoryApiManager alloc] init] deleteCategoriesAsync:[[[CategoryCoreDataManager alloc] init] allCategoriesForSyncDelete] forUser:[[ApplicationManager sharedApplication].userApplicationManager authorisedUser]  completion:^(NSDictionary* dictionary)
                   {
                       if(completed) completed(YES);
                       [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_CATEGORIES object:nil];

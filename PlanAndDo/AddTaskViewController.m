@@ -431,7 +431,7 @@
         
         
         KSTask* task = [[KSTask alloc] initWithID:self.Id  andName:self.headerText andStatus:NO andTaskReminderTime:self.reminderTime andTaskPriority:priority andCategoryID:(int)self.category.ID andCreatedAt:[NSDate date] andCompletionTime:self.completionTime andSyncStatus:(int)(-1*self.Id) andTaskDescription:self.taskDesc];
-        [[ApplicationManager tasksApplicationManager] addTask: task completion:nil];
+        [[ApplicationManager sharedApplication].tasksApplicationManager addTask: task completion:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_ADD object:task];
     }
     
@@ -451,11 +451,11 @@
         KSTaskCollection* task = [[KSTaskCollection alloc] initWithID:self.Id andName:self.headerText andStatus:NO andTaskReminderTime:self.reminderTime andTaskPriority:priority andCategoryID:(int)self.category.ID andCreatedAt:[NSDate date] andCompletionTime:self.completionTime andSyncStatus:(int)self.Id andSubTasks:[NSMutableArray arrayWithArray:self.subTasks]];
         
         
-        for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:task]) [[ApplicationManager subTasksApplicationManager] deleteSubTask:subTask forTask:task completion:nil];
+        for(KSShortTask* subTask in [[ApplicationManager sharedApplication].subTasksApplicationManager allSubTasksForTask:task]) [[ApplicationManager sharedApplication].subTasksApplicationManager deleteSubTask:subTask forTask:task completion:nil];
         
-        for(KSShortTask* subTask in self.subTasks) [[ApplicationManager subTasksApplicationManager] addSubTask:subTask forTask:task completion:nil];
+        for(KSShortTask* subTask in self.subTasks) [[ApplicationManager sharedApplication].subTasksApplicationManager addSubTask:subTask forTask:task completion:nil];
         
-        [[ApplicationManager tasksApplicationManager] addTask: task completion:nil];
+        [[ApplicationManager sharedApplication].tasksApplicationManager addTask: task completion:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_ADD object:task];
     }
     

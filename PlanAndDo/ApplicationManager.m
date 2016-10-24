@@ -11,53 +11,35 @@
 #import "Reachability.h"
 
 @implementation ApplicationManager
-
-+(TasksApplicationManager *)tasksApplicationManager
+static ApplicationManager * applicationInstance;
++(ApplicationManager *)sharedApplication
 {
-    return [[TasksApplicationManager alloc] init];
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate,^
+                  {
+                      applicationInstance=[[ApplicationManager alloc] init];
+                      applicationInstance.tasksApplicationManager=[[TasksApplicationManager alloc] init];
+                      applicationInstance.subTasksApplicationManager=[[SubTasksApplicationManager alloc] init];
+                      applicationInstance.userApplicationManager=[[UserApplicationManager alloc] init];
+                      applicationInstance.settingsApplicationManager=[[SettingsApplicationManager alloc] init];
+                      applicationInstance.categoryApplicationManager=[[CategoryApplicationManager alloc] init];
+                      applicationInstance.syncApplicationManager=[[SyncApplicationManager alloc] init];
+                      applicationInstance.notificationManager=[KSNotificationManager sharedManager];
+                  });
+    return applicationInstance;
 }
 
-+(SubTasksApplicationManager *)subTasksApplicationManager
+-(void)cleanLocalDataBase
 {
-    return [[SubTasksApplicationManager alloc] init];
-}
-
-+(UserApplicationManager *)userApplicationManager
-{
-    return [[UserApplicationManager alloc] init];
-}
-
-+(SettingsApplicationManager *)settingsApplicationManager
-{
-    return [[SettingsApplicationManager alloc] init];
-}
-
-+(CategoryApplicationManager *)categoryApplicationManager
-{
-    return [[CategoryApplicationManager alloc] init];
-}
-
-+(SyncApplicationManager *)syncApplicationManager
-{
-    return [[SyncApplicationManager alloc] init];
-}
-
-+(void)cleanLocalDataBase
-{
-    [[[CategoryApplicationManager alloc] init] cleanTable];
-    [[[SettingsApplicationManager alloc] init] cleanTable];
-    [[[UserApplicationManager alloc] init] cleanTable];
-    [[[SubTasksApplicationManager alloc] init] cleanTable];
-    [[[TasksApplicationManager alloc] init] cleanTable];
+    [self.categoryApplicationManager cleanTable];
+    [self.settingsApplicationManager cleanTable];
+    [self.userApplicationManager cleanTable];
+    [self.subTasksApplicationManager cleanTable];
+    [self.tasksApplicationManager cleanTable];
     [FileManager writeTokenToFile:@""];
     [FileManager writeLastSyncTimeToFile:@""];
     [FileManager writeUserEmailToFile:@""];
     [FileManager writePassToFile:@""];
-}
-
-+(KSNotificationManager *) notificationManager
-{
-    return [KSNotificationManager sharedManager];
 }
 
 +(void)registerUserNotifications

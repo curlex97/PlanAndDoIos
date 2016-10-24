@@ -32,13 +32,13 @@
 
 -(void)reloadData
 {
-    self.user = [[ApplicationManager userApplicationManager] authorisedUser];
+    self.user = [ApplicationManager sharedApplication].userApplicationManager.authorisedUser;
     [super reloadData];
 }
 
 -(void)refreshDidSwipe
 {
-    self.user = [[ApplicationManager userApplicationManager] authorisedUser];
+    self.user = [ApplicationManager sharedApplication].userApplicationManager.authorisedUser;
     [super refreshDidSwipe];
 }
 
@@ -95,7 +95,7 @@
         UIAlertAction * okAction=[UIAlertAction actionWithTitle:TL_OK style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
                                   {
                                       self.user.userName=alertController.textFields.firstObject.text;
-                                      [[ApplicationManager userApplicationManager] updateUser:self.user completion:nil];
+                                      [[ApplicationManager sharedApplication].userApplicationManager updateUser:self.user completion:nil];
                                       [self.tableView reloadData];
                                   }];
         
@@ -132,7 +132,7 @@
                                                                           {
                                                                               if(/* DISABLES CODE */ (NO))
                                                                               {
-                                                                                  [ApplicationManager cleanLocalDataBase];
+                                                                                  [[ApplicationManager sharedApplication] cleanLocalDataBase];
                                                                                   [self.tableView reloadData];
                                                                               }
                                                                                   
@@ -148,7 +148,8 @@
     }
     else
     {
-        [[ApplicationManager userApplicationManager] logout];
+        [[ApplicationManager sharedApplication].userApplicationManager logout] ;
+
         LoginViewController * login=[self.baseStoryboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
         [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:YES completion:^
          {
@@ -187,7 +188,7 @@
     self.tableView.dataSource=self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData:) name:NC_EMAIL_CHANGED object:nil];
 
-    self.user = [[ApplicationManager userApplicationManager] authorisedUser];
+    self.user = [ApplicationManager sharedApplication].userApplicationManager.authorisedUser;
     UIBarButtonItem * menuButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageWithImage:[UIImage imageNamed:@"Menu"] scaledToSize:CGSizeMake(40, 40)] style:UIBarButtonItemStyleDone target:self action:@selector(menuTapped)];
     self.navigationItem.leftBarButtonItem=menuButton;
     

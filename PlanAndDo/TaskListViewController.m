@@ -129,7 +129,7 @@
 {
     [self.subTasks removeAllObjects];
     
-    self.subTasks=[NSMutableArray arrayWithArray:[[ApplicationManager subTasksApplicationManager] allSubTasksForTask:self.task]];
+    self.subTasks=[NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].subTasksApplicationManager allSubTasksForTask:self.task]];
     [self.tableView reloadData];
     [self.refresh endRefreshing];
 }

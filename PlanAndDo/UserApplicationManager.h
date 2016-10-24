@@ -13,7 +13,7 @@
 
 @interface UserApplicationManager : NSObject
 
--(KSAuthorisedUser*) authorisedUser;
+@property (nonatomic)KSAuthorisedUser * authorisedUser;
 
 -(void)setUser:(KSAuthorisedUser*)user completion:(void (^)(bool))completed;
 

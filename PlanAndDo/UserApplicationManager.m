@@ -17,13 +17,19 @@
 
 -(KSAuthorisedUser *)authorisedUser
 {
-    return [KSAuthorisedUser currentUser] ? [KSAuthorisedUser currentUser] : [[[UserCoreDataManager alloc] init] authorisedUser];
+    if(_authorisedUser)
+    {
+        return _authorisedUser;
+    }
+    else
+    {
+        _authorisedUser=[[[UserCoreDataManager alloc] init] authorisedUser];
+        return _authorisedUser;
+    }
 }
 
 -(void)setUser:(KSAuthorisedUser *)user completion:(void (^)(bool))completed
 {
-    
-    
     [[[UserCoreDataManager alloc] init] setUser:user];
     [[[SyncApplicationManager alloc] init] syncUserWithCompletion:^(bool status) {
         [[[UserApiManager alloc] init] updateUserAsync:[[[UserCoreDataManager alloc] init] authorisedUserForSync] completion:^(NSDictionary* dictionary){
@@ -56,7 +62,7 @@
         NSString* status = [dictionary valueForKeyPath:@"status"];
         if([status containsString:@"suc"])
         {
-            [ApplicationManager cleanLocalDataBase];
+            [[ApplicationManager sharedApplication] cleanLocalDataBase];
             
             int ID = [[dictionary valueForKeyPath:@"data.users.user_id"] intValue];
             int syncStatus = [[dictionary valueForKeyPath:@"data.users.user_sync_status"] intValue];
@@ -183,8 +189,9 @@
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
     {
-    [ApplicationManager cleanLocalDataBase];
-    [[[UserApiManager alloc] init] logout];
+        [[ApplicationManager sharedApplication] cleanLocalDataBase];
+        [[[UserApiManager alloc] init] logout];
+        _authorisedUser=nil;
     });
 }
 

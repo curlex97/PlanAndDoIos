@@ -29,11 +29,11 @@
     [super viewDidLoad];
 //            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
 //                           {
-                               [[ApplicationManager userApplicationManager] loginWithEmail:[FileManager readUserEmailFromFile] andPassword:[FileManager readPassFromFile] completion:^(bool status)
+                               [[ApplicationManager sharedApplication].userApplicationManager loginWithEmail:[FileManager readUserEmailFromFile] andPassword:[FileManager readPassFromFile] completion:^(bool status)
                                 {
                                     if(status)
                                     {
-                                        [[ApplicationManager syncApplicationManager] syncWithCompletion:^(BOOL completed)
+                                        [[ApplicationManager sharedApplication].syncApplicationManager syncWithCompletion:^(BOOL completed)
                                          {
                                              dispatch_async(dispatch_get_main_queue(), ^
                                                             {
@@ -74,7 +74,7 @@
     outputImage = [outputImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 1) resizingMode:UIImageResizingModeStretch];
     [[UINavigationBar appearance] setBackgroundImage:outputImage forBarMetrics:UIBarMetricsDefault];
     
-    if([ApplicationManager userApplicationManager].authorisedUser.emailAdress.length==0)
+    if([ApplicationManager sharedApplication].userApplicationManager.authorisedUser.emailAdress.length==0)
     {
         NSLog(@"%@",[UIDevice currentDevice].model);
         NSString * name=[[UIDevice currentDevice].model isEqualToString:@"iPad"]?@"IPad":@"Main";

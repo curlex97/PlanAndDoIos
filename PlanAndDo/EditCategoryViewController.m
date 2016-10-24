@@ -64,16 +64,16 @@
                                                      {                                                         
                                                          [[NSNotificationCenter defaultCenter] postNotificationName:@"CategoryIsDeleted" object:self.categories[indexPath.row]];
                                                          
-                                                         for(BaseTask* task in [[ApplicationManager tasksApplicationManager] allTasksForCategory:self.categories[indexPath.row]])
+                                                         for(BaseTask* task in [[ApplicationManager sharedApplication].tasksApplicationManager allTasksForCategory:self.categories[indexPath.row]])
                                                          {
-                                                             [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
+                                                             [[ApplicationManager sharedApplication].tasksApplicationManager deleteTask:task completion:nil];
                                                          }
                                                          
-                                                         [[ApplicationManager categoryApplicationManager] deleteCateroty:self.categories[indexPath.row] completion:^(bool completed)
+                                                         [[ApplicationManager sharedApplication].categoryApplicationManager deleteCateroty:self.categories[indexPath.row] completion:^(bool completed)
                                                           {
                                                               if(completed)
                                                               {
-                                                                  self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
+                                                                  self.categories=[NSMutableArray arrayWithArray:[ApplicationManager sharedApplication].categoryApplicationManager.allCategories];
                                                                   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
                                                                                  {
                                                                                      [self.tableView reloadData];
@@ -106,7 +106,7 @@
 {
     [self.categories removeAllObjects];
     
-    self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
+    self.categories=[NSMutableArray arrayWithArray:[ApplicationManager sharedApplication].categoryApplicationManager.allCategories];
     [super refreshDidSwipe];
 }
 
@@ -140,8 +140,8 @@
     [textField resignFirstResponder];
     if(!self.isChangeCategory)
     {
-        [[ApplicationManager categoryApplicationManager] addCateroty:[[KSCategory alloc] initWithID:self.categories.lastObject.ID+1 andName:textField.text andSyncStatus:[NSDate date].timeIntervalSince1970] completion:nil];
-        self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+        [[ApplicationManager sharedApplication].categoryApplicationManager addCateroty:[[KSCategory alloc] initWithID:self.categories.lastObject.ID+1 andName:textField.text andSyncStatus:[NSDate date].timeIntervalSince1970] completion:nil];
+        self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
         textField.text=@"";
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.categories.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     }
@@ -150,8 +150,8 @@
         //KSCategory* cat = self.categories[self.managedIndexPath.row];
         //cat.name=textField.text;
         self.categories[self.managedIndexPath.row].name=textField.text;
-        [[ApplicationManager categoryApplicationManager] updateCateroty:self.categories[self.managedIndexPath.row] completion:nil];
-        self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+        [[ApplicationManager sharedApplication].categoryApplicationManager updateCateroty:self.categories[self.managedIndexPath.row] completion:nil];
+        self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
         
         [self.tableView reloadData];
         textField.text=@"";

@@ -261,7 +261,7 @@
     if([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text])
     {
         [self.navigationController.view addSubview:self.loadContentView];
-        [[ApplicationManager userApplicationManager] registerAsyncWithEmail:self.emailTextField.text andUserName:self.usernameTextField.text andPassword:self.passwordTextField.text completion:^(bool fl)
+        [[ApplicationManager sharedApplication].userApplicationManager registerAsyncWithEmail:self.emailTextField.text andUserName:self.usernameTextField.text andPassword:self.passwordTextField.text completion:^(bool fl)
         {
             if(fl)
             {

@@ -42,15 +42,15 @@
 
 -(void)reloadData
 {
-    self.categories = [NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
-    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasks]];
+    self.categories = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
+    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasks]];
     [super reloadData];
 }
 
 -(void)refreshDidSwipe
 {
-    self.categories = [NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
-    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasks]];
+    self.categories = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
+    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasks]];
     [super refreshDidSwipe];
 }
 
@@ -226,7 +226,7 @@
         {
             NSLog(TL_COMPLETE);
             task.status = YES;
-            [[ApplicationManager tasksApplicationManager] updateTask:task completion:nil];
+            [[ApplicationManager sharedApplication].tasksApplicationManager updateTask:task completion:nil];
             [self.allTasks removeObject:task];
             [self.tableTasks removeObject:task];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
@@ -244,12 +244,12 @@
             if([task isKindOfClass:[KSTaskCollection class]])
             {
                 KSTaskCollection* col = (KSTaskCollection*)task;
-                for(KSShortTask* sub in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:col])
-                    [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:col completion:nil];
+                for(KSShortTask* sub in [[ApplicationManager sharedApplication].subTasksApplicationManager allSubTasksForTask:col])
+                    [[ApplicationManager sharedApplication].subTasksApplicationManager deleteSubTask:sub forTask:col completion:nil];
             }
             
             
-            [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
+            [[ApplicationManager sharedApplication].tasksApplicationManager deleteTask:task completion:nil];
             [self.allTasks removeObject:task];
             [self.tableTasks removeObject:task];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
@@ -300,12 +300,12 @@
         }
         else
         {
-            date=[ApplicationManager settingsApplicationManager].settings.dateFormat;
+            date=[ApplicationManager sharedApplication].settingsApplicationManager.settings.dateFormat;
             [dateFormatter setDateFormat:date];
             cell.taskDateLabel.text = [dateFormatter stringFromDate:task.completionTime];
         }
         
-        [dateFormatter setDateFormat:[ApplicationManager settingsApplicationManager].settings.timeFormat];
+        [dateFormatter setDateFormat:[ApplicationManager sharedApplication].settingsApplicationManager.settings.timeFormat];
         cell.taskTimeLabel.text = [dateFormatter stringFromDate:task.completionTime];        
         return cell;
     }
@@ -438,7 +438,7 @@
     self.parentController.hiden=YES;
     searchBar.frame=CGRectMake(searchBar.frame.origin.x, searchBar.frame.origin.y, [UIScreen mainScreen].bounds.size.width-searchBar.frame.origin.x*2, searchBar.frame.size.height);
     searchBar.showsCancelButton=YES;
-    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager tasksApplicationManager] allTasks]];
+    self.allTasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasks]];
     
     [self refreshSearch];
     
@@ -471,7 +471,7 @@
             else if([task isKindOfClass:[KSTaskCollection class]])
             {
                 KSTaskCollection* realTask = (KSTaskCollection*)task;
-                for(KSShortTask* subTask in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:realTask])
+                for(KSShortTask* subTask in [[ApplicationManager sharedApplication].subTasksApplicationManager allSubTasksForTask:realTask])
                 {
                     if([subTask.name.lowercaseString containsString:self.searchBar.text.lowercaseString])
                     {
@@ -505,8 +505,8 @@
     [textField resignFirstResponder];
     if(self.state!=KSMenuStateEdit)
     {
-        [[ApplicationManager categoryApplicationManager] addCateroty:[[KSCategory alloc] initWithID:self.categories.lastObject.ID+1 andName:textField.text andSyncStatus:[NSDate date].timeIntervalSince1970] completion:nil];
-        self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+        [[ApplicationManager sharedApplication].categoryApplicationManager addCateroty:[[KSCategory alloc] initWithID:self.categories.lastObject.ID+1 andName:textField.text andSyncStatus:[NSDate date].timeIntervalSince1970] completion:nil];
+        self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
         textField.text=@"";
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.categories.count-1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
     }
@@ -515,8 +515,8 @@
         //KSCategory* cat = self.categories[self.managedIndexPath.row];
         //cat.name=textField.text;
         self.categories[self.managedIndexPath.row].name=textField.text;
-        [[ApplicationManager categoryApplicationManager] updateCateroty:self.categories[self.managedIndexPath.row] completion:nil];
-        self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+        [[ApplicationManager sharedApplication].categoryApplicationManager updateCateroty:self.categories[self.managedIndexPath.row] completion:nil];
+        self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
 
         self.state=KSMenuStateNormal;
         [self.tableView reloadData];
@@ -553,16 +553,16 @@
                          TabletasksViewController * frontVC=frontNVC.viewControllers.firstObject;
                          
                          
-                         for(BaseTask* task in [[ApplicationManager tasksApplicationManager] allTasksForCategory:self.categories[indexPath.row]])
+                         for(BaseTask* task in [[ApplicationManager sharedApplication].tasksApplicationManager allTasksForCategory:self.categories[indexPath.row]])
                          {
-                             [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
+                             [[ApplicationManager sharedApplication].tasksApplicationManager deleteTask:task completion:nil];
                          }
                          
-                         [[ApplicationManager categoryApplicationManager] deleteCateroty:self.categories[indexPath.row] completion:^(bool completed)
+                         [[ApplicationManager sharedApplication].categoryApplicationManager deleteCateroty:self.categories[indexPath.row] completion:^(bool completed)
                           {
                               if(completed)
                               {
-                                  self.categories=[NSMutableArray arrayWithArray:[ApplicationManager categoryApplicationManager].allCategories];
+                                  self.categories=[NSMutableArray arrayWithArray:[ApplicationManager sharedApplication].categoryApplicationManager.allCategories];
                                   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
                                                  {
                                                      [self.tableView reloadData];
@@ -666,7 +666,7 @@
     [self.refresh removeFromSuperview];
     [self.tableView setSeparatorColor:[UIColor colorWithRed:163.0/255.0 green:167.0/255.0 blue:169.0/255.0 alpha:0.35]];
     
-    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
 
     
     self.view.backgroundColor=[UIColor colorWithRed:32.0/255.0 green:45.0/255.0 blue:52.0/255.0 alpha:1.0];
@@ -822,7 +822,7 @@
 
 -(void) refreshCategoriesInTable:(NSNotification*)not
 {
-    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
     dispatch_async(dispatch_get_main_queue(), ^
     {
         [self.tableView reloadData];

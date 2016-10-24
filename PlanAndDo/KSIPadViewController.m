@@ -98,7 +98,7 @@
                               {
                                   NSLog(TL_COMPLETE);
                                   task.status = YES;
-                                  [[ApplicationManager tasksApplicationManager] updateTask:task completion:nil];
+                                  [[ApplicationManager sharedApplication].tasksApplicationManager updateTask:task completion:nil];
                                   [self.allTasks removeObject:task];
                                   [self.tableTasks removeObject:task];
                                   [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
@@ -116,12 +116,12 @@
             if([task isKindOfClass:[KSTaskCollection class]])
             {
                 KSTaskCollection* col = (KSTaskCollection*)task;
-                for(KSShortTask* sub in [[ApplicationManager subTasksApplicationManager] allSubTasksForTask:col])
-                    [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:col completion:nil];
+                for(KSShortTask* sub in [[ApplicationManager sharedApplication].subTasksApplicationManager allSubTasksForTask:col])
+                    [[ApplicationManager sharedApplication].subTasksApplicationManager deleteSubTask:sub forTask:col completion:nil];
             }
             
             
-            [[ApplicationManager tasksApplicationManager] deleteTask:task completion:nil];
+            [[ApplicationManager sharedApplication].tasksApplicationManager deleteTask:task completion:nil];
             [self.allTasks removeObject:task];
             [self.tableTasks removeObject:task];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
@@ -172,12 +172,12 @@
         }
         else
         {
-            date=[ApplicationManager settingsApplicationManager].settings.dateFormat;
+            date=[ApplicationManager sharedApplication].settingsApplicationManager.settings.dateFormat;
             [dateFormatter setDateFormat:date];
             cell.taskDateLabel.text = [dateFormatter stringFromDate:task.completionTime];
         }
         
-        [dateFormatter setDateFormat:[[ApplicationManager settingsApplicationManager].settings.timeFormat isEqualToString:@"24"]?@"HH:mm":@"hh:mm"];
+        [dateFormatter setDateFormat:[[ApplicationManager sharedApplication].settingsApplicationManager.settings.timeFormat isEqualToString:@"24"]?@"HH:mm":@"hh:mm"];
         cell.taskTimeLabel.text = [dateFormatter stringFromDate:task.completionTime];
         return cell;
     }

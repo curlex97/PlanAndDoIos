@@ -8,8 +8,6 @@
 
 #import "KSAuthorisedUser.h"
 
-static KSAuthorisedUser* currentUser;
-
 @implementation KSAuthorisedUser
 
 -(instancetype)initWithUserID:(int)ID
@@ -23,22 +21,10 @@ static KSAuthorisedUser* currentUser;
 {
     if(self=[super initWithUserID:ID andUserName:userName andEmailAdress:email andCreatedDeate:date andLastVisitDate:visitDate andSyncStatus:syncStatus])
     {
-        static BOOL initialized = NO;
-        if(!initialized)
-        {
-            initialized = YES;
-            self.apiToken=token;
-            self.settings=settings;
-            currentUser = self;
-        }
-      
+        self.apiToken=token;
+        self.settings=settings;
     }
-    return currentUser;
-}
-
-+(KSAuthorisedUser *)currentUser
-{
-    return currentUser;
+    return self;
 }
 
 @end

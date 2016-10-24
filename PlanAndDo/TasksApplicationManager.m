@@ -65,7 +65,7 @@
             
             for(BaseTask* taskAdd in tasksForAdd)
             {
-                [[[TasksApiManager alloc] init] addTasksAsync:@[taskAdd] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+                [[[TasksApiManager alloc] init] addTasksAsync:@[taskAdd] forUser:[[ApplicationManager sharedApplication].userApplicationManager authorisedUser]  completion:^(NSDictionary* dictionary){
                     
                     if([[dictionary valueForKeyPath:@"status"] containsString:@"suc"])
                     {
@@ -79,7 +79,7 @@
                                // [[ApplicationManager subTasksApplicationManager] deleteSubTask:sub forTask:realTaskAdd completion:nil];
                                 KSTaskCollection* newRealTaskAdd = [[KSTaskCollection alloc] init];
                                 newRealTaskAdd.ID = taskAddID;
-                                [[ApplicationManager subTasksApplicationManager] addSubTask:sub forTask:newRealTaskAdd completion:nil];
+                                [[ApplicationManager sharedApplication].subTasksApplicationManager addSubTask:sub forTask:newRealTaskAdd completion:nil];
                             }
                         }
                         
@@ -104,7 +104,7 @@
     {
         if(status)
         {
-            [[[TasksApiManager alloc] init] updateTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncUpdate] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary)
+            [[[TasksApiManager alloc] init] updateTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncUpdate] forUser:[[ApplicationManager sharedApplication].userApplicationManager authorisedUser]  completion:^(NSDictionary* dictionary)
              {
                  [self recieveTasksFromDictionary:dictionary];
                  if(completed) completed(YES);
@@ -123,7 +123,8 @@
          {
              if(status)
              {
-                 [[[TasksApiManager alloc] init] deleteTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncDelete] forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+                 [[[TasksApiManager alloc] init] deleteTasksAsync:[[[TasksCoreDataManager alloc] init] allTasksForSyncDelete] forUser:[[ApplicationManager sharedApplication].userApplicationManager authorisedUser]  completion:^(NSDictionary* dictionary)
+                 {
                      [self recieveTasksFromDictionary:dictionary];
                      if(completed) completed(YES);
                      [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];

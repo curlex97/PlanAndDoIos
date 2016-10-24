@@ -26,10 +26,10 @@
     {
         if(status)
         {
-            [[[SubTasksApiManager alloc] init] addSubTasksAsync:@[subTask] toTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+            [[[SubTasksApiManager alloc] init] addSubTasksAsync:@[subTask] toTask:task forUser:[[ApplicationManager sharedApplication].userApplicationManager authorisedUser]  completion:^(NSDictionary* dictionary){
                 
                 if([[dictionary valueForKeyPath:@"status"] containsString:@"suc"])
-                        [[ApplicationManager subTasksApplicationManager] deleteSubTask:subTask forTask:task completion:nil];
+                        [[ApplicationManager sharedApplication].subTasksApplicationManager deleteSubTask:subTask forTask:task completion:nil];
                 
                 
             [self recieveSubTasksFromDictionary:dictionary];
@@ -48,7 +48,7 @@
      {
          if(status)
          {
-             [[[SubTasksApiManager alloc] init] updateSubTasksAsync:@[subTask] inTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+             [[[SubTasksApiManager alloc] init] updateSubTasksAsync:@[subTask] inTask:task forUser:[[ApplicationManager sharedApplication].userApplicationManager authorisedUser]  completion:^(NSDictionary* dictionary){
                  
                  [self recieveSubTasksFromDictionary:dictionary];
                  if(completed) completed(YES);
@@ -68,7 +68,8 @@
     {
         if(status)
         {
-            [[[SubTasksApiManager alloc] init] deleteSubTasksAsync:@[subTask] fromTask:task forUser:[[ApplicationManager userApplicationManager] authorisedUser]  completion:^(NSDictionary* dictionary){
+            [[[SubTasksApiManager alloc] init] deleteSubTasksAsync:@[subTask] fromTask:task forUser:[[ApplicationManager sharedApplication].userApplicationManager authorisedUser]  completion:^(NSDictionary* dictionary)
+            {
                 
                 [self recieveSubTasksFromDictionary:dictionary];
                 if(completed) completed(YES);

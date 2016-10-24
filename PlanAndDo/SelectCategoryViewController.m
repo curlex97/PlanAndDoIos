@@ -23,7 +23,7 @@
 
 -(void)refreshDidSwipe
 {
-    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
     [super refreshDidSwipe];
 }
 
@@ -75,7 +75,7 @@
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     self.title = NM_CATEGORY;
-    self.categories = [NSArray arrayWithArray:[[ApplicationManager categoryApplicationManager] allCategories]];
+    self.categories = [NSArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
 }
 
 - (void)didReceiveMemoryWarning
