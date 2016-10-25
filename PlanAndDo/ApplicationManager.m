@@ -20,18 +20,78 @@ static ApplicationManager * applicationInstance;
     dispatch_once(&predicate,^
                   {
                       applicationInstance=[[ApplicationManager alloc] init];
-                      if(applicationInstance)
-                      {
-                          applicationInstance.tasksApplicationManager=[[TasksApplicationManager alloc] init];
-                          applicationInstance.subTasksApplicationManager=[[SubTasksApplicationManager alloc] init];
-                          applicationInstance.userApplicationManager=[[UserApplicationManager alloc] init];
-                          applicationInstance.settingsApplicationManager=[[SettingsApplicationManager alloc] init];
-                          applicationInstance.categoryApplicationManager=[[CategoryApplicationManager alloc] init];
-                          applicationInstance.syncApplicationManager=[[SyncApplicationManager alloc] init];
-                          applicationInstance.notificationManager=[KSNotificationManager sharedManager];
-                      }
                   });
     return applicationInstance;
+}
+
+-(TasksApplicationManager *)tasksApplicationManager
+{
+    if(_tasksApplicationManager)
+    {
+        return _tasksApplicationManager;
+    }
+    _tasksApplicationManager=[[TasksApplicationManager alloc] init];
+    return _tasksApplicationManager;
+}
+
+-(SubTasksApplicationManager *)subTasksApplicationManager
+{
+    if(_subTasksApplicationManager)
+    {
+        return _subTasksApplicationManager;
+    }
+    _subTasksApplicationManager=[[SubTasksApplicationManager alloc] init];;
+    return _subTasksApplicationManager;
+}
+
+-(UserApplicationManager *)userApplicationManager
+{
+    if(_userApplicationManager)
+    {
+        return _userApplicationManager;
+    }
+    _userApplicationManager=[[UserApplicationManager alloc] init];
+    return _userApplicationManager;
+}
+
+-(SettingsApplicationManager *)settingsApplicationManager
+{
+    if(_settingsApplicationManager)
+    {
+        return _settingsApplicationManager;
+    }
+    _settingsApplicationManager=[[SettingsApplicationManager alloc] init];
+    return _settingsApplicationManager;
+}
+
+-(CategoryApplicationManager *)categoryApplicationManager
+{
+    if(_categoryApplicationManager)
+    {
+        return _categoryApplicationManager;
+    }
+    _categoryApplicationManager=[[CategoryApplicationManager alloc] init];
+    return _categoryApplicationManager;
+}
+
+-(SyncApplicationManager *)syncApplicationManager
+{
+    if(_syncApplicationManager)
+    {
+        return _syncApplicationManager;
+    }
+    _syncApplicationManager=[[SyncApplicationManager alloc] init];
+    return _syncApplicationManager;
+}
+
+-(KSNotificationManager *)notificationManager
+{
+    if(_notificationManager)
+    {
+        return _notificationManager;
+    }
+    _notificationManager=[[KSNotificationManager alloc] init];
+    return _notificationManager;
 }
 
 -(instancetype)init
@@ -74,9 +134,9 @@ static ApplicationManager * applicationInstance;
 +(void)registerUserNotifications
 {
     UIUserNotificationSettings * settings=[UIUserNotificationSettings settingsForTypes:
-                                                UIUserNotificationTypeBadge|
-                                                UIUserNotificationTypeSound|
-                                                UIUserNotificationTypeAlert
+                                                            UIUserNotificationTypeBadge|
+                                                            UIUserNotificationTypeSound|
+                                                            UIUserNotificationTypeAlert
                                                                             categories:nil];
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
 }

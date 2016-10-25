@@ -284,6 +284,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		277A6D4F1DBF79EB003295D5 /* NotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				270EB97F1DB9008D00DC8953 /* KSNotificationManager.h */,
+				270EB9801DB9008D00DC8953 /* KSNotificationManager.m */,
+			);
+			name = NotificationManager;
+			sourceTree = "<group>";
+		};
 		27B1A0F01D818C9900D47FCD /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,7 +393,6 @@
 		2803AF951D8AB9A80032ACFB /* BaseViewController */ = {
 			isa = PBXGroup;
 			children = (
-				28EF10131D915892005867C4 /* DateAndTime */,
 				2803AFA51D8ABA3E0032ACFB /* Description */,
 				2803AF961D8AB9B20032ACFB /* BaseAuthViewController */,
 				2803AF971D8AB9BC0032ACFB /* BaseTableViewController */,
@@ -410,6 +418,7 @@
 		2803AF971D8AB9BC0032ACFB /* BaseTableViewController */ = {
 			isa = PBXGroup;
 			children = (
+				28EF10131D915892005867C4 /* DateAndTime */,
 				3FCD89411D994D1D00A00377 /* Profile */,
 				28B9478A1D918D7F005A8E9A /* EditTask */,
 				280539261D90376900868ACF /* Menu */,
@@ -809,8 +818,6 @@
 				28943CF41D93017A00BC8A69 /* ApplicationManagers */,
 				28943CF31D93016600BC8A69 /* ApiManagers */,
 				2884ABFA1D8D437F00A2F7D9 /* CoreDataManagers */,
-				270EB97F1DB9008D00DC8953 /* KSNotificationManager.h */,
-				270EB9801DB9008D00DC8953 /* KSNotificationManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -833,6 +840,7 @@
 		28943CF41D93017A00BC8A69 /* ApplicationManagers */ = {
 			isa = PBXGroup;
 			children = (
+				277A6D4F1DBF79EB003295D5 /* NotificationManager */,
 				2801D1951D9E9C1E00A4D1FD /* FileManager */,
 				28616D4B1D93F91400BB2CCE /* ACNetworkManager */,
 				28214C7F1D93D29A0012B1C7 /* ApplicationManager */,
