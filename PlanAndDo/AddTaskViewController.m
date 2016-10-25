@@ -299,7 +299,7 @@
     {
         self.completionTime = [NSDate date];
     }
-    
+    self.reminderTime=[NSDate dateWithTimeIntervalSince1970:900];
     [self.refresh removeFromSuperview];
     
     UIBarButtonItem * doneItem=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneDidTap)];

@@ -137,7 +137,7 @@
 -(void) recieveTasksFromDictionary:(NSDictionary*)dictionary
 {
     NSString* status = [dictionary valueForKeyPath:@"status"];
-    
+    NSLog(@"%@",dictionary);
     if([status containsString:@"suc"])
     {
         

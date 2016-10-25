@@ -35,13 +35,16 @@
         [self.nilTextField setInputAccessoryView:self.toolBar];
         [self.view addSubview:self.nilTextField];
         self.state=DateAndTimeStateRecall;
-        self.dateTimePicker.datePickerMode=UIDatePickerModeTime;
+        self.dateTimePicker.datePickerMode=UIDatePickerModeCountDownTimer;
         self.dateTimePicker.minuteInterval=15;
+        self.dateTimePicker.minimumDate=[NSDate dateWithTimeIntervalSince1970:0];
+        self.dateTimePicker.timeZone=[NSTimeZone timeZoneWithAbbreviation:@"UTC"];
         self.dateTimePicker.date=self.reminderDate;
         [self.nilTextField becomeFirstResponder];
     }
     else
     {
+        self.reminderDate=[NSDate dateWithTimeIntervalSince1970:0];
         [self doneButtonDidTap];
     }
         [self.tableView reloadData];
@@ -82,7 +85,9 @@
         {
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour | NSCalendarUnitMinute fromDate:self.reminderDate];
+        NSCalendar * calendar=[NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+        calendar.timeZone=[NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+        NSDateComponents *components = [calendar components:NSCalendarUnitHour | NSCalendarUnitMinute fromDate:self.reminderDate];
         cell.textLabel.text=self.recallSwitch.on?@"Recall up to":@"Recall";
         cell.textLabel.textColor=self.recallSwitch.on?[UIColor colorWithRed:45.0/255.0 green:45.0/255.0 blue:45.0/255.0 alpha:1.0]:[UIColor colorWithRed:145.0/255.0 green:145.0/255.0 blue:145.0/255.0 alpha:1.0];
         
@@ -112,8 +117,10 @@
     else if(self.recallSwitch.on)
     {
         self.state=DateAndTimeStateRecall;
-        self.dateTimePicker.datePickerMode=UIDatePickerModeTime;
+        self.dateTimePicker.datePickerMode=UIDatePickerModeCountDownTimer;
         self.dateTimePicker.minuteInterval=15;
+        self.dateTimePicker.timeZone=[NSTimeZone timeZoneWithAbbreviation:@"UTC"];
+        self.dateTimePicker.minimumDate=[NSDate dateWithTimeIntervalSince1970:0];
         self.dateTimePicker.date=self.reminderDate;
         [self.nilTextField becomeFirstResponder];
     }
@@ -128,6 +135,10 @@
     else
     {
         self.reminderDate=self.dateTimePicker.date;
+        if(self.reminderDate.timeIntervalSince1970==0)
+        {
+            [self.recallSwitch setOn:NO];
+        }
     }
     [self.nilTextField resignFirstResponder];
     [self.nilTextField removeFromSuperview];
@@ -158,10 +169,10 @@
     [self.toolBar setItems:@[space, doneButton]];
     
     self.recallSwitch=[[UISwitch alloc] init];
-    [self.recallSwitch setOn:self.completionReminderTime?YES:NO];
+    [self.recallSwitch setOn:self.completionReminderTime.timeIntervalSince1970!=0?YES:NO];
     [self.recallSwitch addTarget:self action:@selector(swicthDidChanged) forControlEvents:UIControlEventValueChanged];
     
-    self.reminderDate=self.completionReminderTime?self.completionReminderTime:[NSDate dateWithTimeIntervalSince1970:0];
+    self.reminderDate=self.completionReminderTime;
 
     self.dateTimePicker.timeZone=[NSTimeZone systemTimeZone];
     //[self.dateTimePicker addTarget:self action:@selector(dateTimeValueChanged:) forControlEvents:UIControlEventValueChanged];
