@@ -140,6 +140,13 @@
             [self.recallSwitch setOn:NO];
         }
     }
+    if(self.taskDate.timeIntervalSince1970<[NSDate date].timeIntervalSince1970 || self.taskDate.timeIntervalSince1970-self.reminderDate.timeIntervalSince1970<[NSDate date].timeIntervalSince1970)
+    {
+        UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Warning" message:@"Date or reminder time that you select are installed at the past time, you will not notify about this task!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction * okAction=[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:okAction];
+        [self.navigationController.parentViewController presentViewController:alertController animated:YES completion:nil];
+    }
     [self.nilTextField resignFirstResponder];
     [self.nilTextField removeFromSuperview];
     self.nilTextField=nil;

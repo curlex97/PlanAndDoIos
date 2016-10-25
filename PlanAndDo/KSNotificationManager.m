@@ -101,7 +101,7 @@
         {
             if(notification)
             {
-                    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+                [[UIApplication sharedApplication] scheduleLocalNotification:notification];
             }
         }
         [self.sheduledNotificationKeys addObject:key];

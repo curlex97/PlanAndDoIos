@@ -470,9 +470,11 @@
         [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Complete your task"
                                                                                           andBody:self.headerText
                                                                                          andImage:nil
-                                                                                      andFireDate:[NSDate dateWithTimeIntervalSince1970:self.completionTime.timeIntervalSince1970]
+                                                                                      andFireDate:self.completionTime
                                                                                       andUserInfo:nil
                                                                                            forKey:[NSString stringWithFormat:@"%d",self.Id]];
+        NSLog(@"Task time: %f",self.completionTime.timeIntervalSince1970-[NSDate date].timeIntervalSince1970);
+        NSLog(@"Current time: %f",[NSDate date].timeIntervalSince1970);
         [[ApplicationManager sharedApplication].notificationManager shedulenotificationsForKey:[NSString stringWithFormat:@"%d",self.Id]];
     }
     
