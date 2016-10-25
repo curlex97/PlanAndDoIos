@@ -17,6 +17,7 @@
 #import "KSIPhoneMenuViewController.h"
 #import "KSSplitViewController.h"
 #import "KSIPadViewController.h"
+#import "EditTaskViewController.h"
 
 @interface LaunchScreenViewController ()
 
@@ -56,8 +57,6 @@
 
 -(void)showmainPage
 {
-    
-    
     TabletasksViewController * tasks=[[TabletasksViewController alloc] init];
     UINavigationController * navi=[[UINavigationController alloc] initWithRootViewController:tasks];
     
@@ -73,6 +72,32 @@
     UIGraphicsEndImageContext();
     outputImage = [outputImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 1) resizingMode:UIImageResizingModeStretch];
     [[UINavigationBar appearance] setBackgroundImage:outputImage forBarMetrics:UIBarMetricsDefault];
+    
+    if(self.options && [ApplicationManager sharedApplication].userApplicationManager.authorisedUser.emailAdress.length!=0)
+    {
+        EditTaskViewController * editTaskVC=[[EditTaskViewController alloc] init];
+        editTaskVC.title = TL_EDIT;
+        editTaskVC.task = [[ApplicationManager sharedApplication].tasksApplicationManager taskWithId:[[self.options valueForKey:@"ID"] intValue]];
+        [navi pushViewController:editTaskVC animated:NO];
+        if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
+        {
+            KSSplitViewController * split=[[KSSplitViewController alloc] initWithMenuVC:[[KSIPadViewController alloc] init] andDetailsVC:navi];
+            [self presentViewController:split animated:NO completion:^
+             {
+                 [ApplicationManager registerUserNotifications];
+             }];
+        }
+        else
+        {
+            AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:navi andBackVC:[[KSIPhoneMenuViewController alloc] init]];
+            
+            [self presentViewController:tableTaskViewController animated:NO completion:^
+             {
+                 [ApplicationManager registerUserNotifications];
+             }];
+        }
+        return;
+    }
     
     if([ApplicationManager sharedApplication].userApplicationManager.authorisedUser.emailAdress.length==0)
     {

@@ -431,7 +431,30 @@
         
         
         KSTask* task = [[KSTask alloc] initWithID:self.Id  andName:self.headerText andStatus:NO andTaskReminderTime:self.reminderTime andTaskPriority:priority andCategoryID:(int)self.category.ID andCreatedAt:[NSDate date] andCompletionTime:self.completionTime andSyncStatus:(int)(-1*self.Id) andTaskDescription:self.taskDesc];
-        [[ApplicationManager sharedApplication].tasksApplicationManager addTask: task completion:nil];
+        [[ApplicationManager sharedApplication].tasksApplicationManager addTask: task completion:^(bool completed)
+         {
+             if(completed)
+             {
+                 BaseTask * task=[[[ApplicationManager sharedApplication].tasksApplicationManager allTasks] lastObject];
+                 if(task.taskReminderTime!=0)
+                 {
+                     [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
+                                                                                                       andBody:task.name
+                                                                                                      andImage:nil
+                                                                                                   andFireDate:[NSDate dateWithTimeIntervalSince1970:task.completionTime.timeIntervalSince1970-task.taskReminderTime.timeIntervalSince1970]
+                                                                                                   andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",task.ID]}
+                                                                                                        forKey:[NSString stringWithFormat:@"%d",task.ID]];
+                     [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Complete your task"
+                                                                                                       andBody:task.name
+                                                                                                      andImage:nil
+                                                                                                   andFireDate:task.completionTime
+                                                                                                   andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",task.ID]}
+                                                                                                        forKey:[NSString stringWithFormat:@"%d",task.ID]];
+                     
+                     [[ApplicationManager sharedApplication].notificationManager shedulenotificationsForKey:[NSString stringWithFormat:@"%d",task.ID]];
+                 }
+             }
+         }];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_ADD object:task];
     }
     
@@ -455,27 +478,31 @@
         
         for(KSShortTask* subTask in self.subTasks) [[ApplicationManager sharedApplication].subTasksApplicationManager addSubTask:subTask forTask:task completion:nil];
         
-        [[ApplicationManager sharedApplication].tasksApplicationManager addTask: task completion:nil];
+        [[ApplicationManager sharedApplication].tasksApplicationManager addTask: task completion:^(bool completed)
+         {
+             if(completed)
+             {
+                 BaseTask * task=[[[ApplicationManager sharedApplication].tasksApplicationManager allTasks] lastObject];
+                 if(task.taskReminderTime!=0)
+                 {
+                     [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
+                                                                                                       andBody:task.name
+                                                                                                      andImage:nil
+                                                                                                   andFireDate:[NSDate dateWithTimeIntervalSince1970:task.completionTime.timeIntervalSince1970-task.taskReminderTime.timeIntervalSince1970]
+                                                                                                   andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",task.ID]}
+                                                                                                        forKey:[NSString stringWithFormat:@"%d",task.ID]];
+                     [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Complete your task"
+                                                                                                       andBody:task.name
+                                                                                                      andImage:nil
+                                                                                                   andFireDate:task.completionTime
+                                                                                                   andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",task.ID]}
+                                                                                                        forKey:[NSString stringWithFormat:@"%d",task.ID]];
+                     
+                     [[ApplicationManager sharedApplication].notificationManager shedulenotificationsForKey:[NSString stringWithFormat:@"%d",task.ID]];
+                 }
+             }
+         }];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_ADD object:task];
-    }
-    
-    if(self.reminderTime.timeIntervalSince1970!=0)
-    {
-        [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
-                                                                                          andBody:self.headerText
-                                                                                         andImage:nil
-                                                                                      andFireDate:[NSDate dateWithTimeIntervalSince1970:self.completionTime.timeIntervalSince1970-self.reminderTime.timeIntervalSince1970]
-                                                                                      andUserInfo:nil
-                                                                                           forKey:[NSString stringWithFormat:@"%d",self.Id]];
-        [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Complete your task"
-                                                                                          andBody:self.headerText
-                                                                                         andImage:nil
-                                                                                      andFireDate:self.completionTime
-                                                                                      andUserInfo:nil
-                                                                                           forKey:[NSString stringWithFormat:@"%d",self.Id]];
-        NSLog(@"Task time: %f",self.completionTime.timeIntervalSince1970-[NSDate date].timeIntervalSince1970);
-        NSLog(@"Current time: %f",[NSDate date].timeIntervalSince1970);
-        [[ApplicationManager sharedApplication].notificationManager shedulenotificationsForKey:[NSString stringWithFormat:@"%d",self.Id]];
     }
     
     [self.navigationController popViewControllerAnimated:YES];
