@@ -42,20 +42,6 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    NSArray * tasks=[[ApplicationManager sharedApplication].tasksApplicationManager allTasks];
-    for(BaseTask * task in tasks)
-    {
-        if(task.taskReminderTime.timeIntervalSince1970!=0)
-        {
-            [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
-                                                                        andBody:task.name
-                                                                       andImage:nil
-                                                                    andFireDate:[NSDate dateWithTimeIntervalSince1970:task.completionTime.timeIntervalSince1970-task.taskReminderTime.timeIntervalSince1970]
-                                                                    andUserInfo:nil
-                                                                         forKey:[NSString stringWithFormat:@"%d",task.ID]];
-        }
-    }
-    [[ApplicationManager sharedApplication].notificationManager sheduleAllNotifications];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -65,7 +51,6 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-      [[ApplicationManager sharedApplication].notificationManager cancelAllNotifications];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

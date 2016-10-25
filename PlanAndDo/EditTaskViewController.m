@@ -266,6 +266,24 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_EDIT object:realTask];
     }
     
+    [[ApplicationManager sharedApplication].notificationManager cancelNotificationsForKey:[NSString stringWithFormat:@"%d",self.task.ID]];
+    if(self.reminderTime.timeIntervalSince1970!=0)
+    {
+        [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
+                                                                                          andBody:self.headerText
+                                                                                         andImage:nil
+                                                                                      andFireDate:[NSDate dateWithTimeIntervalSince1970:self.completionTime.timeIntervalSince1970-self.reminderTime.timeIntervalSince1970]
+                                                                                      andUserInfo:nil
+                                                                                           forKey:[NSString stringWithFormat:@"%d",self.task.ID]];
+        [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Complete your task"
+                                                                                          andBody:self.headerText
+                                                                                         andImage:nil
+                                                                                      andFireDate:[NSDate dateWithTimeIntervalSince1970:self.completionTime.timeIntervalSince1970]
+                                                                                      andUserInfo:nil
+                                                                                           forKey:[NSString stringWithFormat:@"%d",self.task.ID]];
+        [[ApplicationManager sharedApplication].notificationManager shedulenotificationsForKey:[NSString stringWithFormat:@"%d",self.task.ID]];
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

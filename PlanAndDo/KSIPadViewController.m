@@ -96,7 +96,7 @@
         
         cell.leftButtons = @[[MGSwipeButton buttonWithTitle:TL_COMPLETE backgroundColor:[UIColor colorWithRed:39.0/255.0 green:174.0/255.0 blue:97.0/255.0 alpha:1.0] callback:^BOOL(MGSwipeTableCell *sender)
                               {
-                                  NSLog(TL_COMPLETE);
+                                  [[ApplicationManager sharedApplication].notificationManager cancelNotificationsForKey:[NSString stringWithFormat:@"%d",task.ID]];
                                   task.status = YES;
                                   [[ApplicationManager sharedApplication].tasksApplicationManager updateTask:task completion:nil];
                                   [self.allTasks removeObject:task];
@@ -109,8 +109,9 @@
                               }]];
         cell.leftSwipeSettings.transition = MGSwipeDirectionLeftToRight;
         
-        cell.rightButtons = @[[MGSwipeButton buttonWithTitle:TL_DELETE backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender) {
-            NSLog(TL_DELETE);
+        cell.rightButtons = @[[MGSwipeButton buttonWithTitle:TL_DELETE backgroundColor:[UIColor redColor] callback:^BOOL(MGSwipeTableCell *sender)
+        {
+            [[ApplicationManager sharedApplication].notificationManager cancelNotificationsForKey:[NSString stringWithFormat:@"%d",task.ID]];
             
             
             if([task isKindOfClass:[KSTaskCollection class]])
