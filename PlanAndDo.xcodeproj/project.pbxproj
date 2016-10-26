@@ -24,6 +24,7 @@
 		272F91C91D8B080700A0330B /* DateAndTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C81D8B080700A0330B /* DateAndTimeViewController.m */; };
 		27494DE41D8D3ECE009BFC5F /* KSMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27494DE31D8D3ECE009BFC5F /* KSMenuViewController.m */; };
 		274AA9421DA7C62100CB6B21 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 274AA9411DA7C62100CB6B21 /* Reachability.m */; };
+		277A6D521DBFE800003295D5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277A6D511DBFE800003295D5 /* ViewController.m */; };
 		2786E7AD1D881507009BDB2A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7AC1D881507009BDB2A /* LoginViewController.m */; };
 		2786E7B01D883692009BDB2A /* TabletasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7AF1D883692009BDB2A /* TabletasksViewController.m */; };
 		2786E7B21D883F4D009BDB2A /* KSTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2786E7B11D883F4D009BDB2A /* KSTaskCell.xib */; };
@@ -136,6 +137,8 @@
 		27494DE31D8D3ECE009BFC5F /* KSMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMenuViewController.m; sourceTree = "<group>"; };
 		274AA9401DA7C62100CB6B21 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		274AA9411DA7C62100CB6B21 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		277A6D501DBFE800003295D5 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		277A6D511DBFE800003295D5 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		2786E7AB1D881507009BDB2A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		2786E7AC1D881507009BDB2A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		2786E7AE1D883692009BDB2A /* TabletasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletasksViewController.h; sourceTree = "<group>"; };
@@ -933,6 +936,8 @@
 				282C28CB1D829C9C0061761E /* UI */,
 				2803AFA81D8ABA660032ACFB /* Cells */,
 				28A36BAD1D81887B0092FEFD /* Supporting Files */,
+				277A6D501DBFE800003295D5 /* ViewController.h */,
+				277A6D511DBFE800003295D5 /* ViewController.m */,
 			);
 			path = PlanAndDo;
 			sourceTree = "<group>";
@@ -1188,6 +1193,7 @@
 				28616D4A1D93F90D00BB2CCE /* ACNetworkManager.m in Sources */,
 				270EB95B1DB3796500DC8953 /* EditCategoryTableViewCell.m in Sources */,
 				28AB856B1D8F48A100D93AB7 /* SettingsCoreDataManager.m in Sources */,
+				277A6D521DBFE800003295D5 /* ViewController.m in Sources */,
 				280539241D900F2900868ACF /* MGSwipeButton.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
 				2801D1941D9E97DA00A4D1FD /* FileManager.m in Sources */,

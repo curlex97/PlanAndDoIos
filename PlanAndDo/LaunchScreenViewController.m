@@ -77,7 +77,7 @@
     {
         EditTaskViewController * editTaskVC=[[EditTaskViewController alloc] init];
         editTaskVC.title = TL_EDIT;
-        editTaskVC.task = [[ApplicationManager sharedApplication].tasksApplicationManager taskWithId:[[self.options valueForKey:@"ID"] intValue]];
+        editTaskVC.task = [[ApplicationManager sharedApplication].tasksApplicationManager taskWithId:[[self.options objectForKey:@"ID"] intValue]];
         [navi pushViewController:editTaskVC animated:NO];
         if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
         {

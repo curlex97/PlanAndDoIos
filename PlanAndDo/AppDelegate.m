@@ -17,6 +17,8 @@
 #import "TabletasksViewController.h"
 #import "KSMenuViewController.h"
 #import "LaunchScreenViewController.h"
+#import "ViewController.h"
+#import "KSSplitViewController.h"
 
 @interface AppDelegate ()
 @property AMSideBarViewController *sideBarViewController;
@@ -28,8 +30,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSDictionary * userInfo=nil;
+    if (launchOptions[UIApplicationLaunchOptionsLocalNotificationKey])
+    {
+        userInfo=[launchOptions[UIApplicationLaunchOptionsLocalNotificationKey] userInfo];
+    }
     LaunchScreenViewController * launch=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LaunchScreenViewController"];
-    launch.options=launchOptions;
+    launch.options=userInfo;
     self.window.rootViewController=launch;
     [self.window makeKeyAndVisible];
     
@@ -66,10 +73,24 @@
     {
         
     }
+    else if(state == UIApplicationStateInactive)
+    {
+        LaunchScreenViewController * launch=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LaunchScreenViewController"];
+            launch.options=notification.userInfo;
+            self.window.rootViewController=launch;
+            [self.window makeKeyAndVisible];
+    }
+    else
+    {
+        LaunchScreenViewController * launch=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LaunchScreenViewController"];
+        launch.options=notification.userInfo;
+        self.window.rootViewController=launch;
+        [self.window makeKeyAndVisible];
+    }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
     
-    application.applicationIconBadgeNumber = 0;
+    //application.applicationIconBadgeNumber = 0;
 }
 #pragma mark - Core Data stack
 

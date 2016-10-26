@@ -435,7 +435,16 @@
          {
              if(completed)
              {
-                 BaseTask * task=[[[ApplicationManager sharedApplication].tasksApplicationManager allTasks] lastObject];
+                 NSArray * tasks=[[ApplicationManager sharedApplication].tasksApplicationManager allTasks];
+                 BaseTask * newTask=[tasks firstObject];
+                 for(BaseTask * task in tasks)
+                 {
+                     if(task.ID>newTask.ID)
+                     {
+                         newTask=task;
+                     }
+                 }
+                 
                  if(task.taskReminderTime!=0)
                  {
                      [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
@@ -457,8 +466,6 @@
          }];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_ADD object:task];
     }
-    
-    
     else
     {
         KSTaskPriority priority = KSTaskDefaultPriority;

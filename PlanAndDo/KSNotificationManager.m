@@ -48,6 +48,7 @@
     localNotification.alertBody = body;
     localNotification.alertTitle = title;
     localNotification.userInfo=userInfo;
+    
     NSMutableArray * notificationForSinglKey=[self.localNotifications valueForKey:key];
     if(!notificationForSinglKey)
     {
