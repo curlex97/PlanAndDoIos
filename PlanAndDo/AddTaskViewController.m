@@ -423,7 +423,8 @@
     {
         KSTaskPriority priority = KSTaskDefaultPriority;
         
-        switch ((int)self.slider.value) {
+        switch ((int)self.slider.value)
+        {
             case 0:priority = KSTaskDefaultPriority; break;
             case 1: priority = KSTaskHighPriority; break;
             case 2: priority = KSTaskVeryHighPriority; break;

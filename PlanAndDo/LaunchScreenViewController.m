@@ -82,19 +82,17 @@
         if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
         {
             KSSplitViewController * split=[[KSSplitViewController alloc] initWithMenuVC:[[KSIPadViewController alloc] init] andDetailsVC:navi];
-            [self presentViewController:split animated:NO completion:^
-             {
-                 [ApplicationManager registerUserNotifications];
-             }];
+            [UIApplication sharedApplication].keyWindow.rootViewController=split;
+            [ApplicationManager registerUserNotifications];
+            [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
         }
         else
         {
             AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:navi andBackVC:[[KSIPhoneMenuViewController alloc] init]];
             
-            [self presentViewController:tableTaskViewController animated:NO completion:^
-             {
-                 [ApplicationManager registerUserNotifications];
-             }];
+            [UIApplication sharedApplication].keyWindow.rootViewController=tableTaskViewController;
+            [ApplicationManager registerUserNotifications];
+            [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
         }
         return;
     }
@@ -110,19 +108,17 @@
     if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
     {
         KSSplitViewController * split=[[KSSplitViewController alloc] initWithMenuVC:[[KSIPadViewController alloc] init] andDetailsVC:navi];
-        [self presentViewController:split animated:NO completion:^
-         {
-             [ApplicationManager registerUserNotifications];
-         }];
+        [UIApplication sharedApplication].keyWindow.rootViewController=split;
+        [ApplicationManager registerUserNotifications];
+        [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
     }
     else
     {
         AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:navi andBackVC:[[KSIPhoneMenuViewController alloc] init]];
     
-        [self presentViewController:tableTaskViewController animated:NO completion:^
-         {
-             [ApplicationManager registerUserNotifications];
-         }];
+        [UIApplication sharedApplication].keyWindow.rootViewController=tableTaskViewController;
+        [ApplicationManager registerUserNotifications];
+        [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
     }
 }
 

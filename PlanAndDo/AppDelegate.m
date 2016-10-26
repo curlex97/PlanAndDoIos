@@ -19,9 +19,14 @@
 #import "LaunchScreenViewController.h"
 #import "ViewController.h"
 #import "KSSplitViewController.h"
+#import "EditTaskViewController.h"
+#import "KSNotificationView.h"
 
 @interface AppDelegate ()
 @property AMSideBarViewController *sideBarViewController;
+@property (nonatomic)BaseTask * taskFromNotification;
+@property (nonatomic)KSNotificationView * notView;
+@property (nonatomic)NSLayoutConstraint * top;
 @end
 
 @implementation AppDelegate
@@ -39,6 +44,89 @@
     launch.options=userInfo;
     self.window.rootViewController=launch;
     [self.window makeKeyAndVisible];
+    
+    self.notView=[[[NSBundle mainBundle] loadNibNamed:@"NotificationView" owner:self options:nil] firstObject];
+    
+    UIButton * notificationButton=[[UIButton alloc] initWithFrame:self.notView.frame];
+    [notificationButton addTarget:self action:@selector(notificationDidTap) forControlEvents:UIControlEventTouchUpInside];
+    [self.notView addSubview:notificationButton];
+    notificationButton.translatesAutoresizingMaskIntoConstraints=NO;
+    [self.notView addConstraint:[NSLayoutConstraint
+                                 constraintWithItem:notificationButton
+                                 attribute:NSLayoutAttributeBottom
+                                 relatedBy:NSLayoutRelationEqual
+                                 toItem:self.notView
+                                 attribute:NSLayoutAttributeBottom
+                                 multiplier:1.0f
+                                 constant:0.0]];
+    
+    [self.notView addConstraint:[NSLayoutConstraint
+                                 constraintWithItem:notificationButton
+                                 attribute:NSLayoutAttributeTop
+                                 relatedBy:NSLayoutRelationEqual
+                                 toItem:self.notView
+                                 attribute:NSLayoutAttributeTop
+                                 multiplier:1.0f
+                                 constant:0.0]];
+    
+    [self.notView addConstraint:[NSLayoutConstraint
+                                 constraintWithItem:notificationButton
+                                 attribute:NSLayoutAttributeTrailing
+                                 relatedBy:NSLayoutRelationEqual
+                                 toItem:self.notView
+                                 attribute:NSLayoutAttributeTrailing
+                                 multiplier:1.0f
+                                 constant:0.0]];
+    
+    [self.notView addConstraint:[NSLayoutConstraint
+                                 constraintWithItem:notificationButton
+                                 attribute:NSLayoutAttributeLeading
+                                 relatedBy:NSLayoutRelationEqual
+                                 toItem:self.notView
+                                 attribute:NSLayoutAttributeLeading
+                                 multiplier:1.0f
+                                 constant:0.0]];
+    
+    UIButton * closeButton=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16.0, 16.0)];
+    [closeButton setBackgroundImage:[UIImage imageNamed:@"Сross"] forState:UIControlStateNormal];
+    //closeButton.backgroundColor=[UIColor whiteColor];
+    [closeButton addTarget:self action:@selector(notifiationDidClose) forControlEvents:UIControlEventTouchUpInside];
+    [self.notView addSubview:closeButton];
+    closeButton.translatesAutoresizingMaskIntoConstraints=NO;
+    [closeButton addConstraint:[NSLayoutConstraint
+                                constraintWithItem:closeButton
+                                attribute:NSLayoutAttributeWidth
+                                relatedBy:NSLayoutRelationEqual
+                                toItem:nil
+                                attribute:NSLayoutAttributeNotAnAttribute
+                                multiplier:1.0f
+                                constant:16.0]];
+    
+    [closeButton addConstraint:[NSLayoutConstraint
+                                constraintWithItem:closeButton
+                                attribute:NSLayoutAttributeHeight
+                                relatedBy:NSLayoutRelationEqual
+                                toItem:nil
+                                attribute:NSLayoutAttributeNotAnAttribute
+                                multiplier:1.0f
+                                constant:16.0]];
+    [self.notView addConstraint:[NSLayoutConstraint
+                                 constraintWithItem:closeButton
+                                 attribute:NSLayoutAttributeCenterY
+                                 relatedBy:NSLayoutRelationEqual
+                                 toItem:self.notView
+                                 attribute:NSLayoutAttributeCenterY
+                                 multiplier:1.0f
+                                 constant:0.0]];
+    
+    [self.notView addConstraint:[NSLayoutConstraint
+                                 constraintWithItem:closeButton
+                                 attribute:NSLayoutAttributeTrailing
+                                 relatedBy:NSLayoutRelationEqual
+                                 toItem:self.notView
+                                 attribute:NSLayoutAttributeTrailing
+                                 multiplier:1.0f
+                                 constant:-16.0]];
     
     return YES;
 }
@@ -66,26 +154,200 @@
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+
+-(void)notificationDidTap
 {
-    UIApplicationState state = [application applicationState];
-    if (state == UIApplicationStateActive)
+    UIView * rootView;
+    if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
     {
+        EditTaskViewController * editViewController=[[EditTaskViewController alloc] init];
+        editViewController.task=self.taskFromNotification;
+        KSSplitViewController * spliter=(KSSplitViewController *)self.window.rootViewController;
+        UINavigationController * naviVC=spliter.details;
+        rootView=naviVC.viewControllers.lastObject.view;
+        if([naviVC.viewControllers.lastObject isKindOfClass:[TabletasksViewController class]])
+        {
+            [naviVC pushViewController:editViewController animated:YES];
+        }
+        else
+        {
+            TabletasksViewController * tasksViewController=[[TabletasksViewController alloc] init];
         
-    }
-    else if(state == UIApplicationStateInactive)
-    {
-        LaunchScreenViewController * launch=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LaunchScreenViewController"];
-            launch.options=notification.userInfo;
-            self.window.rootViewController=launch;
-            [self.window makeKeyAndVisible];
+            tasksViewController.category=self.taskFromNotification.categoryID?[[ApplicationManager sharedApplication].categoryApplicationManager categoryWithId:self.taskFromNotification.categoryID]:nil;
+            naviVC = [[UINavigationController alloc] initWithRootViewController:tasksViewController];
+            [naviVC pushViewController:editViewController animated:YES];
+        
+            spliter.details=naviVC;
+        }
     }
     else
     {
-        LaunchScreenViewController * launch=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LaunchScreenViewController"];
-        launch.options=notification.userInfo;
-        self.window.rootViewController=launch;
-        [self.window makeKeyAndVisible];
+        EditTaskViewController * editViewController=[[EditTaskViewController alloc] init];
+        editViewController.task=self.taskFromNotification;
+        AMSideBarViewController * sider=(AMSideBarViewController *)self.window.rootViewController;
+        UINavigationController * frontVC=(UINavigationController *)sider.frontViewController;
+        rootView=frontVC.viewControllers.lastObject.view;
+        if([frontVC.viewControllers.lastObject isKindOfClass:[TabletasksViewController class]])
+        {
+            [frontVC pushViewController:editViewController animated:YES];
+        }
+        else
+        {
+            TabletasksViewController * tasksViewController=[[TabletasksViewController alloc] init];
+        
+            tasksViewController.category=self.taskFromNotification.categoryID?[[ApplicationManager sharedApplication].categoryApplicationManager categoryWithId:self.taskFromNotification.categoryID]:nil;
+            frontVC = [[UINavigationController alloc] initWithRootViewController:tasksViewController];
+            [frontVC pushViewController:editViewController animated:YES];
+        
+            [sider setNewFrontViewController:frontVC];
+        }
+    }
+    self.top.constant=-50.0;
+    [UIView animateWithDuration:0.5 animations:^
+     {
+         [rootView layoutIfNeeded];
+     } completion:^(BOOL finished)
+     {
+         if(finished)
+         {
+             [self.notView removeFromSuperview];
+         }
+     }];
+}
+
+-(void)notifiationDidClose
+{
+    UIView * rootView;
+    if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
+    {
+        EditTaskViewController * editViewController=[[EditTaskViewController alloc] init];
+        editViewController.task=self.taskFromNotification;
+        KSSplitViewController * spliter=(KSSplitViewController *)self.window.rootViewController;
+        UINavigationController * naviVC=spliter.details;
+        rootView=naviVC.viewControllers.lastObject.view;
+    }
+    else
+    {
+        EditTaskViewController * editViewController=[[EditTaskViewController alloc] init];
+        editViewController.task=self.taskFromNotification;
+        AMSideBarViewController * sider=(AMSideBarViewController *)self.window.rootViewController;
+        UINavigationController * frontVC=(UINavigationController *)sider.frontViewController;
+        rootView=frontVC.viewControllers.lastObject.view;
+    }
+    self.top.constant=-50.0;
+    [UIView animateWithDuration:0.5 animations:^
+     {
+         [rootView layoutIfNeeded];
+     } completion:^(BOOL finished)
+     {
+         if(finished)
+         {
+             [self.notView removeFromSuperview];
+         }
+     }];
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    UIApplicationState state = [application applicationState];
+    self.taskFromNotification=[[ApplicationManager sharedApplication].tasksApplicationManager taskWithId:[[notification.userInfo objectForKey:@"ID"] intValue]];
+    UIView * rootView;
+    if (state == UIApplicationStateActive)
+    {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.locale=[NSLocale systemLocale];
+        self.notView.headerLabel.text=self.taskFromNotification.name;
+        [dateFormatter setDateFormat:[[ApplicationManager sharedApplication].settingsApplicationManager.settings.timeFormat isEqualToString:@"24"]?@"HH:mm":@"hh:mm"];
+        self.notView.timeLabel.text = [dateFormatter stringFromDate:self.taskFromNotification.completionTime];
+
+        if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
+        {
+            KSSplitViewController * spliter=(KSSplitViewController *)self.window.rootViewController;
+            UINavigationController * naviVC=(UINavigationController *)spliter.details;
+            self.notView.translatesAutoresizingMaskIntoConstraints=NO;
+            [naviVC.viewControllers.lastObject.view addSubview:self.notView];
+            rootView=naviVC.viewControllers.lastObject.view;
+        }
+        else
+        {
+            AMSideBarViewController * sider=(AMSideBarViewController *)self.window.rootViewController;
+            UINavigationController * naviVC=(UINavigationController *)sider.frontViewController;
+            self.notView.translatesAutoresizingMaskIntoConstraints=NO;
+            [naviVC.viewControllers.lastObject.view addSubview:self.notView];
+            rootView=naviVC.viewControllers.lastObject.view;
+        }
+        [self.notView addConstraint:[NSLayoutConstraint
+                                     constraintWithItem:self.notView
+                                     attribute:NSLayoutAttributeHeight
+                                     relatedBy:NSLayoutRelationEqual
+                                     toItem:nil
+                                     attribute:NSLayoutAttributeNotAnAttribute
+                                     multiplier:1.0f
+                                     constant:50.0]];
+        
+        self.top=[NSLayoutConstraint
+                  constraintWithItem:self.notView
+                  attribute:NSLayoutAttributeTop
+                  relatedBy:NSLayoutRelationEqual
+                  toItem:rootView
+                  attribute:NSLayoutAttributeTop
+                  multiplier:1.0f
+                  constant:-50.0];
+        [rootView addConstraint:self.top];
+        
+        [rootView addConstraint:[NSLayoutConstraint
+                                                               constraintWithItem:self.notView
+                                                               attribute:NSLayoutAttributeTrailing
+                                                               relatedBy:NSLayoutRelationEqual
+                                                               toItem:rootView
+                                                               attribute:NSLayoutAttributeTrailing
+                                                               multiplier:1.0f
+                                                               constant:0.0]];
+        
+        [rootView addConstraint:[NSLayoutConstraint
+                                                               constraintWithItem:self.notView
+                                                               attribute:NSLayoutAttributeLeading
+                                                               relatedBy:NSLayoutRelationEqual
+                                                               toItem:rootView
+                                                               attribute:NSLayoutAttributeLeading
+                                                               multiplier:1.0f
+                                                               constant:0.0]];
+        [rootView layoutIfNeeded];
+        self.top.constant=0.0;
+        [UIView animateWithDuration:0.5 animations:^
+         {
+             [rootView layoutIfNeeded];
+         }];
+
+    }
+    else if(state == UIApplicationStateInactive)
+    {
+        if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
+        {
+            KSSplitViewController * spliter=(KSSplitViewController *)self.window.rootViewController;
+            TabletasksViewController * tasksViewController=[[TabletasksViewController alloc] init];
+            EditTaskViewController * editViewController=[[EditTaskViewController alloc] init];
+            editViewController.task=self.taskFromNotification;
+            
+            tasksViewController.category=self.taskFromNotification.categoryID?[[ApplicationManager sharedApplication].categoryApplicationManager categoryWithId:self.taskFromNotification.categoryID]:nil;
+            UINavigationController* tasksNav = [[UINavigationController alloc] initWithRootViewController:tasksViewController];
+            [tasksNav pushViewController:editViewController animated:YES];
+            
+            spliter.details=tasksNav;
+        }
+        else
+        {
+            AMSideBarViewController * sider=(AMSideBarViewController *)self.window.rootViewController;
+            TabletasksViewController * tasksViewController=[[TabletasksViewController alloc] init];
+            EditTaskViewController * editViewController=[[EditTaskViewController alloc] init];
+            editViewController.task=self.taskFromNotification;
+            
+            tasksViewController.category=self.taskFromNotification.categoryID?[[ApplicationManager sharedApplication].categoryApplicationManager categoryWithId:self.taskFromNotification.categoryID]:nil;
+            UINavigationController* tasksNav = [[UINavigationController alloc] initWithRootViewController:tasksViewController];
+            [tasksNav pushViewController:editViewController animated:YES];
+            
+            [sider setNewFrontViewController:tasksNav];
+        }
     }
     
     //[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
