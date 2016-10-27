@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface LaunchScreenViewController : UIViewController
-
+@property (nonatomic)NSDictionary * options;
 @end

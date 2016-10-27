@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @interface KSNotificationManager : NSObject
-+(KSNotificationManager *)sharedManager;
+//+(KSNotificationManager *)sharedManager;
 
 -(void)addLocalNotificationWithTitle:(NSString *)title
                              andBody:(NSString *)body
@@ -20,6 +20,6 @@
                               forKey:(NSString *)key;
 -(void)sheduleAllNotifications;
 -(void)cancelAllNotifications;
--(void)cancelNotificationForKey:(NSString *)key;
--(void)shedulenotificationForKey:(NSString *)key;
+-(void)cancelNotificationsForKey:(NSString *)key;
+-(void)shedulenotificationsForKey:(NSString *)key;
 @end

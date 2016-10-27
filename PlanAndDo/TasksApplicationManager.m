@@ -10,6 +10,9 @@
 #import "ApplicationManager.h"
 #import "SyncApplicationManager.h"
 
+@interface TasksApplicationManager()
+@end
+
 @implementation TasksApplicationManager
 
 -(NSArray<BaseTask *> *)allTasks
@@ -65,7 +68,8 @@
             
             for(BaseTask* taskAdd in tasksForAdd)
             {
-                [[[TasksApiManager alloc] init] addTasksAsync:@[taskAdd] forUser:[[ApplicationManager sharedApplication].userApplicationManager authorisedUser]  completion:^(NSDictionary* dictionary){
+                [[[TasksApiManager alloc] init] addTasksAsync:@[taskAdd] forUser:[[ApplicationManager sharedApplication].userApplicationManager authorisedUser]  completion:^(NSDictionary* dictionary)
+                {
                     
                     if([[dictionary valueForKeyPath:@"status"] containsString:@"suc"])
                     {
@@ -85,7 +89,6 @@
                         
                         [[[TasksCoreDataManager alloc] init] syncDeleteTask:taskAdd];
                     }
-                    
                     [self recieveTasksFromDictionary:dictionary];
                     if(completed) completed(YES);
                     [[NSNotificationCenter defaultCenter] postNotificationName:NC_SYNC_TASKS object:nil];
@@ -137,7 +140,7 @@
 -(void) recieveTasksFromDictionary:(NSDictionary*)dictionary
 {
     NSString* status = [dictionary valueForKeyPath:@"status"];
-    
+    NSLog(@"%@",dictionary);
     if([status containsString:@"suc"])
     {
         

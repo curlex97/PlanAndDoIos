@@ -27,7 +27,7 @@
         NSNumber* taskType = [task isKindOfClass:[KSTask class]] ? [NSNumber numberWithInt:0] : [NSNumber numberWithInt:1];
         NSString* taskDesc = [task isKindOfClass:[KSTask class]] ? ((KSTask*)task).taskDescription : @"";
         int createdAt = task.createdAt.timeIntervalSince1970 >= [NSDate date].timeIntervalSince1970 ? task.createdAt.timeIntervalSince1970 : [NSDate date].timeIntervalSince1970;
-        int taskRemTime = task.taskReminderTime.timeIntervalSince1970 >= [NSDate date].timeIntervalSince1970 ? task.taskReminderTime.timeIntervalSince1970 : [NSDate date].timeIntervalSince1970;
+        int taskRemTime = task.taskReminderTime.timeIntervalSince1970;
         int compTime = task.completionTime.timeIntervalSince1970 >= [NSDate date].timeIntervalSince1970 ? task.completionTime.timeIntervalSince1970 : [NSDate date].timeIntervalSince1970;
         int isDel = [method isEqualToString:@"deleteMany"];
         int isComp = task.status;

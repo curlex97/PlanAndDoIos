@@ -24,6 +24,9 @@
 		272F91C91D8B080700A0330B /* DateAndTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F91C81D8B080700A0330B /* DateAndTimeViewController.m */; };
 		27494DE41D8D3ECE009BFC5F /* KSMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27494DE31D8D3ECE009BFC5F /* KSMenuViewController.m */; };
 		274AA9421DA7C62100CB6B21 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 274AA9411DA7C62100CB6B21 /* Reachability.m */; };
+		277A6D521DBFE800003295D5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 277A6D511DBFE800003295D5 /* ViewController.m */; };
+		277A6D541DC0CE44003295D5 /* NotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 277A6D531DC0CE44003295D5 /* NotificationView.xib */; };
+		277A6D571DC0D622003295D5 /* KSNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 277A6D561DC0D622003295D5 /* KSNotificationView.m */; };
 		2786E7AD1D881507009BDB2A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7AC1D881507009BDB2A /* LoginViewController.m */; };
 		2786E7B01D883692009BDB2A /* TabletasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2786E7AF1D883692009BDB2A /* TabletasksViewController.m */; };
 		2786E7B21D883F4D009BDB2A /* KSTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2786E7B11D883F4D009BDB2A /* KSTaskCell.xib */; };
@@ -136,6 +139,11 @@
 		27494DE31D8D3ECE009BFC5F /* KSMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMenuViewController.m; sourceTree = "<group>"; };
 		274AA9401DA7C62100CB6B21 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		274AA9411DA7C62100CB6B21 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		277A6D501DBFE800003295D5 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		277A6D511DBFE800003295D5 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		277A6D531DC0CE44003295D5 /* NotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationView.xib; sourceTree = "<group>"; };
+		277A6D551DC0D622003295D5 /* KSNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSNotificationView.h; sourceTree = "<group>"; };
+		277A6D561DC0D622003295D5 /* KSNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSNotificationView.m; sourceTree = "<group>"; };
 		2786E7AB1D881507009BDB2A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		2786E7AC1D881507009BDB2A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		2786E7AE1D883692009BDB2A /* TabletasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletasksViewController.h; sourceTree = "<group>"; };
@@ -284,6 +292,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		277A6D4F1DBF79EB003295D5 /* NotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				270EB97F1DB9008D00DC8953 /* KSNotificationManager.h */,
+				270EB9801DB9008D00DC8953 /* KSNotificationManager.m */,
+			);
+			name = NotificationManager;
+			sourceTree = "<group>";
+		};
 		27B1A0F01D818C9900D47FCD /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,7 +401,6 @@
 		2803AF951D8AB9A80032ACFB /* BaseViewController */ = {
 			isa = PBXGroup;
 			children = (
-				28EF10131D915892005867C4 /* DateAndTime */,
 				2803AFA51D8ABA3E0032ACFB /* Description */,
 				2803AF961D8AB9B20032ACFB /* BaseAuthViewController */,
 				2803AF971D8AB9BC0032ACFB /* BaseTableViewController */,
@@ -410,6 +426,7 @@
 		2803AF971D8AB9BC0032ACFB /* BaseTableViewController */ = {
 			isa = PBXGroup;
 			children = (
+				28EF10131D915892005867C4 /* DateAndTime */,
 				3FCD89411D994D1D00A00377 /* Profile */,
 				28B9478A1D918D7F005A8E9A /* EditTask */,
 				280539261D90376900868ACF /* Menu */,
@@ -759,6 +776,9 @@
 				28A36BB61D81887B0092FEFD /* Main.storyboard */,
 				28A36BBE1D81887B0092FEFD /* LaunchScreen.storyboard */,
 				270EB9481DAFA9D500DC8953 /* IPad.storyboard */,
+				277A6D531DC0CE44003295D5 /* NotificationView.xib */,
+				277A6D551DC0D622003295D5 /* KSNotificationView.h */,
+				277A6D561DC0D622003295D5 /* KSNotificationView.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -809,8 +829,6 @@
 				28943CF41D93017A00BC8A69 /* ApplicationManagers */,
 				28943CF31D93016600BC8A69 /* ApiManagers */,
 				2884ABFA1D8D437F00A2F7D9 /* CoreDataManagers */,
-				270EB97F1DB9008D00DC8953 /* KSNotificationManager.h */,
-				270EB9801DB9008D00DC8953 /* KSNotificationManager.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -833,6 +851,7 @@
 		28943CF41D93017A00BC8A69 /* ApplicationManagers */ = {
 			isa = PBXGroup;
 			children = (
+				277A6D4F1DBF79EB003295D5 /* NotificationManager */,
 				2801D1951D9E9C1E00A4D1FD /* FileManager */,
 				28616D4B1D93F91400BB2CCE /* ACNetworkManager */,
 				28214C7F1D93D29A0012B1C7 /* ApplicationManager */,
@@ -925,6 +944,8 @@
 				282C28CB1D829C9C0061761E /* UI */,
 				2803AFA81D8ABA660032ACFB /* Cells */,
 				28A36BAD1D81887B0092FEFD /* Supporting Files */,
+				277A6D501DBFE800003295D5 /* ViewController.h */,
+				277A6D511DBFE800003295D5 /* ViewController.m */,
 			);
 			path = PlanAndDo;
 			sourceTree = "<group>";
@@ -1117,6 +1138,7 @@
 				28A36BBD1D81887B0092FEFD /* Assets.xcassets in Resources */,
 				278BAA4F1D8977E4002D38CF /* PriorityCell.xib in Resources */,
 				28A36BB81D81887B0092FEFD /* Main.storyboard in Resources */,
+				277A6D541DC0CE44003295D5 /* NotificationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1180,10 +1202,12 @@
 				28616D4A1D93F90D00BB2CCE /* ACNetworkManager.m in Sources */,
 				270EB95B1DB3796500DC8953 /* EditCategoryTableViewCell.m in Sources */,
 				28AB856B1D8F48A100D93AB7 /* SettingsCoreDataManager.m in Sources */,
+				277A6D521DBFE800003295D5 /* ViewController.m in Sources */,
 				280539241D900F2900868ACF /* MGSwipeButton.m in Sources */,
 				28A36BAF1D81887B0092FEFD /* main.m in Sources */,
 				2801D1941D9E97DA00A4D1FD /* FileManager.m in Sources */,
 				28943D061D9303A800BC8A69 /* CategoryApiManager.m in Sources */,
+				277A6D571DC0D622003295D5 /* KSNotificationView.m in Sources */,
 				270DF9E11D83E217004D3681 /* AMAndroidSideBarViewController.m in Sources */,
 				28943CFD1D93037500BC8A69 /* SubTasksApiManager.m in Sources */,
 				28943D001D93038600BC8A69 /* UserApiManager.m in Sources */,

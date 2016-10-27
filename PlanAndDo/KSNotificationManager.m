@@ -15,23 +15,25 @@
 
 @implementation KSNotificationManager
 
-static KSNotificationManager * notificationControllerInstance;
-+(KSNotificationManager *)sharedManager
-{
-    static dispatch_once_t predicate;
-    dispatch_once(&predicate,^
-                  {
-                      notificationControllerInstance=[[KSNotificationManager alloc] init];
-                  });
-    return notificationControllerInstance;
-}
-
+//static KSNotificationManager * notificationControllerInstance;
+//+(KSNotificationManager *)sharedManager
+//{
+//    static dispatch_once_t predicate;
+//    dispatch_once(&predicate,^
+//                  {
+//                      notificationControllerInstance=[[KSNotificationManager alloc] init];
+//                  });
+//    return notificationControllerInstance;
+//}
+//
 -(instancetype)init
 {
-    if(notificationControllerInstance)
-        return nil;
-    return [super init];
-    
+    if(self=[super init])
+    {
+        self.localNotifications=[[NSMutableDictionary alloc] init];
+        self.sheduledNotificationKeys=[[NSMutableArray alloc] init];
+    }
+    return self;
 }
 
 -(void)addLocalNotificationWithTitle:(NSString *)title
@@ -46,7 +48,14 @@ static KSNotificationManager * notificationControllerInstance;
     localNotification.alertBody = body;
     localNotification.alertTitle = title;
     localNotification.userInfo=userInfo;
-    [self.localNotifications setValue:localNotification forKey:key];
+    
+    NSMutableArray * notificationForSinglKey=[self.localNotifications valueForKey:key];
+    if(!notificationForSinglKey)
+    {
+        notificationForSinglKey=[[NSMutableArray alloc] init];
+    }
+    [notificationForSinglKey addObject:localNotification];
+    [self.localNotifications setValue:notificationForSinglKey forKey:key];
 }
 
 -(void)sheduleAllNotifications
@@ -57,16 +66,12 @@ static KSNotificationManager * notificationControllerInstance;
     {
         if(![self.sheduledNotificationKeys containsObject:keys[i]])
         {
-            UILocalNotification * notification=[self.localNotifications valueForKey:keys[i]];
-            if(notification.fireDate.timeIntervalSince1970<[NSDate date].timeIntervalSince1970)
+            NSMutableArray * notificationsForSinglKey=[self.localNotifications valueForKey:keys[i]];
+            for(UILocalNotification * notification in notificationsForSinglKey)
             {
-                [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+                    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
             }
-            else
-            {
-                [self.sheduledNotificationKeys addObject:keys[i]];
-                [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-            }
+            [self.sheduledNotificationKeys addObject:keys[i]];
         }
     }
 }
@@ -77,29 +82,30 @@ static KSNotificationManager * notificationControllerInstance;
     [self.sheduledNotificationKeys removeAllObjects];
 }
 
--(void)cancelNotificationForKey:(NSString *)key
+-(void)cancelNotificationsForKey:(NSString *)key
 {
-    [[UIApplication sharedApplication] cancelLocalNotification:[self.localNotifications objectForKey:key]];
+    NSMutableArray * notificationsForSinglKey=[self.localNotifications objectForKey:key];
+    for(UILocalNotification * notification in notificationsForSinglKey)
+    {
+         [[UIApplication sharedApplication] cancelLocalNotification:notification];
+    }
     [self.sheduledNotificationKeys removeObject:key];
 }
 
--(void)shedulenotificationForKey:(NSString *)key
+-(void)shedulenotificationsForKey:(NSString *)key
 {
+    
     if(![self.sheduledNotificationKeys containsObject:key])
     {
-        UILocalNotification * notification=[self.localNotifications valueForKey:key];
-        if(notification)
+        NSMutableArray * notificationsForSinglKey=[self.localNotifications valueForKey:key];
+        for(UILocalNotification * notification in notificationsForSinglKey)
         {
-            if(notification.fireDate.timeIntervalSince1970<[NSDate date].timeIntervalSince1970)
+            if(notification)
             {
-                [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-            }
-            else
-            {
-                [self.sheduledNotificationKeys addObject:key];
                 [[UIApplication sharedApplication] scheduleLocalNotification:notification];
             }
         }
+        [self.sheduledNotificationKeys addObject:key];
     }
 }
 
