@@ -437,31 +437,27 @@
              if(completed)
              {
                  NSArray * tasks=[[ApplicationManager sharedApplication].tasksApplicationManager allTasks];
-                 BaseTask * newTask=[tasks firstObject];
-                 for(BaseTask * task in tasks)
-                 {
-                     if(task.ID>newTask.ID)
-                     {
-                         newTask=task;
-                     }
-                 }
+                 BaseTask * newTask=[tasks lastObject];
                  
-                 if(task.taskReminderTime!=0)
+                 if(newTask.taskReminderTime!=0)
                  {
-                     [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
-                                                                                                       andBody:task.name
+                     if(newTask.completionTime.timeIntervalSince1970-newTask.taskReminderTime.timeIntervalSince1970>[NSDate date].timeIntervalSince1970)
+                     {
+                         [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
+                                                                                                       andBody:newTask.name
                                                                                                       andImage:nil
-                                                                                                   andFireDate:[NSDate dateWithTimeIntervalSince1970:task.completionTime.timeIntervalSince1970-task.taskReminderTime.timeIntervalSince1970]
-                                                                                                   andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",task.ID]}
-                                                                                                        forKey:[NSString stringWithFormat:@"%d",task.ID]];
+                                                                                                   andFireDate:[NSDate dateWithTimeIntervalSince1970:newTask.completionTime.timeIntervalSince1970-newTask.taskReminderTime.timeIntervalSince1970]
+                                                                                                   andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",newTask.ID]}
+                                                                                                        forKey:[NSString stringWithFormat:@"%d",newTask.ID]];
+                     }
                      [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Complete your task"
-                                                                                                       andBody:task.name
+                                                                                                       andBody:newTask.name
                                                                                                       andImage:nil
-                                                                                                   andFireDate:task.completionTime
-                                                                                                   andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",task.ID]}
-                                                                                                        forKey:[NSString stringWithFormat:@"%d",task.ID]];
+                                                                                                   andFireDate:newTask.completionTime
+                                                                                                   andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",newTask.ID]}
+                                                                                                        forKey:[NSString stringWithFormat:@"%d",newTask.ID]];
                      
-                     [[ApplicationManager sharedApplication].notificationManager shedulenotificationsForKey:[NSString stringWithFormat:@"%d",task.ID]];
+                     [[ApplicationManager sharedApplication].notificationManager shedulenotificationsForKey:[NSString stringWithFormat:@"%d",newTask.ID]];
                  }
              }
          }];

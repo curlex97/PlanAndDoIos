@@ -22,16 +22,134 @@
 #import "EditTaskViewController.h"
 #import "KSNotificationView.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<UIGestureRecognizerDelegate>
 @property AMSideBarViewController *sideBarViewController;
 @property (nonatomic)BaseTask * taskFromNotification;
 @property (nonatomic)KSNotificationView * notView;
 @property (nonatomic)NSLayoutConstraint * top;
+@property (nonatomic)NSLayoutConstraint * left;
+@property (nonatomic)NSLayoutConstraint * right;
+@property (nonatomic)UIPanGestureRecognizer * pan;
+@property (nonatomic)CGPoint tapPoint;
+@property (nonatomic)CGPoint startPoint;
+@property (nonatomic)NSTimer * timer;
+@property (nonatomic)double time;
+@property (nonatomic)BOOL direction;
 @end
 
 @implementation AppDelegate
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    self.tapPoint=[gestureRecognizer locationInView:self.window.rootViewController.view];
+    self.startPoint=CGPointMake(0, 0);
+    
+    self.timer=[NSTimer scheduledTimerWithTimeInterval:0.01
+                                                target:self
+                                              selector:@selector(timerTick)
+                                              userInfo:nil
+                                               repeats:YES];
+    self.time=0.0;
+    [self.timer fire];
+    
+    return YES;
+}
 
+-(void)timerTick
+{
+    self.time+=0.01;
+}
+
+-(void)moveFrontViewOnPosition:(double)xPos
+{
+    self.left.constant=xPos;
+    self.right.constant=xPos;
+    UIView * rootView;
+    if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
+    {
+        EditTaskViewController * editViewController=[[EditTaskViewController alloc] init];
+        editViewController.task=self.taskFromNotification;
+        KSSplitViewController * spliter=(KSSplitViewController *)self.window.rootViewController;
+        UINavigationController * naviVC=spliter.details;
+        rootView=naviVC.viewControllers.lastObject.view;
+    }
+    else
+    {
+        AMSideBarViewController * sider=(AMSideBarViewController *)self.window.rootViewController;
+        UINavigationController * naviVC=(UINavigationController *)sider.frontViewController;
+        [naviVC.viewControllers.lastObject.view addSubview:self.notView];
+        rootView=naviVC.viewControllers.lastObject.view;
+    }
+    [rootView layoutSubviews];
+}
+
+-(void)gesturePan
+{
+    CGPoint location=[self.pan locationInView:self.window.rootViewController.view];
+    
+    
+    [self moveFrontViewOnPosition:location.x-self.tapPoint.x];
+    
+    if(self.pan.state==UIGestureRecognizerStateEnded)
+    {
+        
+        if(location.x>self.tapPoint.x)
+        {
+            self.direction=YES;
+        }
+        else
+        {
+            self.direction=NO;
+        }
+        
+        if(self.time>=0.2)
+        {
+            if(self.left.constant<0)
+            {
+                self.direction=NO;
+            }
+            else
+            {
+                self.direction=YES;
+            }
+        }
+        
+        [self.timer invalidate];
+        [self gestureSwipe];
+    }
+    
+}
+
+-(void)gestureSwipe
+{
+    if(self.direction)
+    {
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+         {
+             [self moveFrontViewOnPosition:self.window.rootViewController.view.bounds.size.width];
+         } completion:^(BOOL end)
+         {
+            if(end)
+            {
+                [self.notView removeFromSuperview];
+            }
+         }];
+    }
+    else
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NC_FRONT_CONTROLLER_APPEARED object:nil];
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^
+         {
+             [self moveFrontViewOnPosition:-self.window.rootViewController.view.bounds.size.width];
+         } completion:^(BOOL end)
+         {
+             if(end)
+             {
+                 [self.notView removeFromSuperview];
+             }
+         }];
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -45,12 +163,15 @@
     self.window.rootViewController=launch;
     [self.window makeKeyAndVisible];
     
+    self.pan=[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gesturePan)];
+    self.pan.delegate=self;
     self.notView=[[[NSBundle mainBundle] loadNibNamed:@"NotificationView" owner:self options:nil] firstObject];
     
+    [self.notView addGestureRecognizer:self.pan];
     UIButton * notificationButton=[[UIButton alloc] initWithFrame:self.notView.frame];
     [notificationButton addTarget:self action:@selector(notificationDidTap) forControlEvents:UIControlEventTouchUpInside];
     [self.notView addSubview:notificationButton];
-    notificationButton.translatesAutoresizingMaskIntoConstraints=NO;
+    self.notView.translatesAutoresizingMaskIntoConstraints=NO;
     [self.notView addConstraint:[NSLayoutConstraint
                                  constraintWithItem:notificationButton
                                  attribute:NSLayoutAttributeBottom
@@ -249,6 +370,7 @@
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
+    [self.notView removeFromSuperview];
     UIApplicationState state = [application applicationState];
     self.taskFromNotification=[[ApplicationManager sharedApplication].tasksApplicationManager taskWithId:[[notification.userInfo objectForKey:@"ID"] intValue]];
     UIView * rootView;
@@ -295,23 +417,25 @@
                   constant:-50.0];
         [rootView addConstraint:self.top];
         
-        [rootView addConstraint:[NSLayoutConstraint
-                                                               constraintWithItem:self.notView
-                                                               attribute:NSLayoutAttributeTrailing
-                                                               relatedBy:NSLayoutRelationEqual
-                                                               toItem:rootView
-                                                               attribute:NSLayoutAttributeTrailing
-                                                               multiplier:1.0f
-                                                               constant:0.0]];
+        self.right=[NSLayoutConstraint
+                    constraintWithItem:self.notView
+                    attribute:NSLayoutAttributeTrailing
+                    relatedBy:NSLayoutRelationEqual
+                    toItem:rootView
+                    attribute:NSLayoutAttributeTrailing
+                    multiplier:1.0f
+                    constant:0.0];
+        [rootView addConstraint:self.right];
         
-        [rootView addConstraint:[NSLayoutConstraint
-                                                               constraintWithItem:self.notView
-                                                               attribute:NSLayoutAttributeLeading
-                                                               relatedBy:NSLayoutRelationEqual
-                                                               toItem:rootView
-                                                               attribute:NSLayoutAttributeLeading
-                                                               multiplier:1.0f
-                                                               constant:0.0]];
+        self.left=[NSLayoutConstraint
+                   constraintWithItem:self.notView
+                   attribute:NSLayoutAttributeLeading
+                   relatedBy:NSLayoutRelationEqual
+                   toItem:rootView
+                   attribute:NSLayoutAttributeLeading
+                   multiplier:1.0f
+                   constant:0.0];
+        [rootView addConstraint:self.left];
         [rootView layoutIfNeeded];
         self.top.constant=0.0;
         [UIView animateWithDuration:0.5 animations:^
