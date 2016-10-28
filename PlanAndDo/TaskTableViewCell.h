@@ -14,5 +14,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *taskPriorityLabel;
 @property (strong, nonatomic) IBOutlet UILabel *taskTimeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *taskDateLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *ringImageView;
 
 @end

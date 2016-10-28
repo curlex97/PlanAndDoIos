@@ -94,6 +94,15 @@
         
         BaseTask* task = self.tableTasks[indexPath.row];
         
+        if(task.taskReminderTime.timeIntervalSince1970>task.completionTime.timeIntervalSince1970-200)
+        {
+            [cell.ringImageView setHidden:YES];
+        }
+        else
+        {
+            [cell.ringImageView setHidden:NO];
+        }
+        
         cell.leftButtons = @[[MGSwipeButton buttonWithTitle:TL_COMPLETE backgroundColor:[UIColor colorWithRed:39.0/255.0 green:174.0/255.0 blue:97.0/255.0 alpha:1.0] callback:^BOOL(MGSwipeTableCell *sender)
                               {
                                   [[ApplicationManager sharedApplication].notificationManager cancelNotificationsForKey:[NSString stringWithFormat:@"%d",task.ID]];
@@ -245,8 +254,6 @@
                 cell.textLabel.text=NM_SETTINGS;
                 cell.imageView.image=[UIImage imageNamed:NM_SETTINGS];
             }
-            
-            cell.backgroundColor=[UIColor colorWithRed:38.0/255.0 green:53.0/255.0 blue:61.0/255.0 alpha:1.0];
         }
     }
     return cell;

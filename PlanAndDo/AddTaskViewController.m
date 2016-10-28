@@ -179,7 +179,7 @@
 -(void)headDidTap
 {
     UITableViewCell * cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    self.textField=[[UITextField alloc] initWithFrame:cell.textLabel.frame];
+    self.textField=[[UITextField alloc] initWithFrame:CGRectMake(cell.textLabel.frame.origin.x, cell.textLabel.frame.origin.y, 100, cell.textLabel.frame.size.height)];
     self.textField.backgroundColor=[UIColor whiteColor];
     self.textField.textColor=[UIColor colorWithRed:145.0/255.0 green:145.0/255.0  blue:145.0/255.0  alpha:1.0];
     self.textField.delegate=self;
@@ -187,6 +187,41 @@
     self.textField.text=[self.headerText isEqualToString:NM_TASK_HEAD]?@"":self.headerText;
     [self.textField becomeFirstResponder];
     [cell addSubview:self.textField];
+    self.textField.translatesAutoresizingMaskIntoConstraints=NO;
+    [cell addConstraint:[NSLayoutConstraint
+                                          constraintWithItem:self.textField
+                                          attribute:NSLayoutAttributeLeading
+                                          relatedBy:NSLayoutRelationEqual
+                                          toItem:cell
+                                          attribute:NSLayoutAttributeLeading
+                                          multiplier:CO_MULTIPLER
+                                          constant:cell.textLabel.frame.origin.x]];
+    
+    [cell addConstraint:[NSLayoutConstraint
+                                          constraintWithItem:self.textField
+                                          attribute:NSLayoutAttributeTop
+                                          relatedBy:NSLayoutRelationEqual
+                                          toItem:cell
+                                          attribute:NSLayoutAttributeTop
+                                          multiplier:CO_MULTIPLER
+                                          constant:cell.textLabel.frame.origin.y]];
+    
+    [self.textField addConstraint:[NSLayoutConstraint
+                                          constraintWithItem:self.textField
+                                          attribute:NSLayoutAttributeHeight
+                                          relatedBy:NSLayoutRelationEqual
+                                          toItem:nil
+                                          attribute:NSLayoutAttributeNotAnAttribute
+                                          multiplier:CO_MULTIPLER
+                                          constant:cell.textLabel.frame.size.height]];
+    [cell addConstraint:[NSLayoutConstraint
+                                          constraintWithItem:self.textField
+                                          attribute:NSLayoutAttributeTrailing
+                                          relatedBy:NSLayoutRelationEqual
+                                          toItem:cell
+                                          attribute:NSLayoutAttributeTrailing
+                                          multiplier:CO_MULTIPLER
+                                          constant:-16.0]];
 }
 
 -(void)categoryDidTap

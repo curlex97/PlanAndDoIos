@@ -92,6 +92,15 @@
         return YES;
     }]];
     
+    if(task.taskReminderTime.timeIntervalSince1970>task.completionTime.timeIntervalSince1970-200)
+    {
+        [cell.ringImageView setHidden:YES];
+    }
+    else
+    {
+        [cell.ringImageView setHidden:NO];
+    }
+    
     cell.rightSwipeSettings.transition = MGSwipeDirectionRightToLeft;
     cell.taskHeaderLabel.text = task.name;
     switch (task.priority) {

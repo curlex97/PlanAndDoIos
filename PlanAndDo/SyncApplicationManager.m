@@ -57,12 +57,12 @@
                         NSArray * tasks=[[ApplicationManager sharedApplication].tasksApplicationManager allTasks];
                         for(BaseTask * task in tasks)
                         {
-                                           if(task.taskReminderTime.timeIntervalSince1970!=task.completionTime.timeIntervalSince1970)
+                                           if(task.taskReminderTime.timeIntervalSince1970>[NSDate date].timeIntervalSince1970 && task.taskReminderTime.timeIntervalSince1970<task.completionTime.timeIntervalSince1970-200)
                                            {
                                                [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
                                                                                                                                  andBody:task.name
                                                                                                                                 andImage:nil
-                                                                                                                             andFireDate:[NSDate dateWithTimeIntervalSince1970:task.completionTime.timeIntervalSince1970-task.taskReminderTime.timeIntervalSince1970]
+                                                                                                                             andFireDate:[NSDate dateWithTimeIntervalSince1970:task.taskReminderTime.timeIntervalSince1970]
                                                                                                                              andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",task.ID]}
                                                                                                                                   forKey:[NSString stringWithFormat:@"%d",task.ID]];
                                            }

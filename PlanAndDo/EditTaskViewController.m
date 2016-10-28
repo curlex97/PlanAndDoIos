@@ -167,6 +167,41 @@
     self.textField.text=[self.headerText isEqualToString:NM_TASK_HEAD]?@"":self.headerText;
     [self.textField becomeFirstResponder];
     [cell addSubview:self.textField];
+    self.textField.translatesAutoresizingMaskIntoConstraints=NO;
+    [cell addConstraint:[NSLayoutConstraint
+                         constraintWithItem:self.textField
+                         attribute:NSLayoutAttributeLeading
+                         relatedBy:NSLayoutRelationEqual
+                         toItem:cell
+                         attribute:NSLayoutAttributeLeading
+                         multiplier:CO_MULTIPLER
+                         constant:cell.textLabel.frame.origin.x]];
+    
+    [cell addConstraint:[NSLayoutConstraint
+                         constraintWithItem:self.textField
+                         attribute:NSLayoutAttributeTop
+                         relatedBy:NSLayoutRelationEqual
+                         toItem:cell
+                         attribute:NSLayoutAttributeTop
+                         multiplier:CO_MULTIPLER
+                         constant:cell.textLabel.frame.origin.y]];
+    
+    [self.textField addConstraint:[NSLayoutConstraint
+                                   constraintWithItem:self.textField
+                                   attribute:NSLayoutAttributeHeight
+                                   relatedBy:NSLayoutRelationEqual
+                                   toItem:nil
+                                   attribute:NSLayoutAttributeNotAnAttribute
+                                   multiplier:CO_MULTIPLER
+                                   constant:cell.textLabel.frame.size.height]];
+    [cell addConstraint:[NSLayoutConstraint
+                         constraintWithItem:self.textField
+                         attribute:NSLayoutAttributeTrailing
+                         relatedBy:NSLayoutRelationEqual
+                         toItem:cell
+                         attribute:NSLayoutAttributeTrailing
+                         multiplier:CO_MULTIPLER
+                         constant:-16.0]];
 }
 
 -(void)categoryDidTap
@@ -268,12 +303,12 @@
     
     [[ApplicationManager sharedApplication].notificationManager cancelNotificationsForKey:[NSString stringWithFormat:@"%d",self.task.ID]];
     
-        if(self.reminderTime.timeIntervalSince1970<self.completionTime.timeIntervalSince1970 && self.reminderTime.timeIntervalSince1970>[NSDate date].timeIntervalSince1970)
+        if(self.reminderTime.timeIntervalSince1970>[NSDate date].timeIntervalSince1970 && self.reminderTime.timeIntervalSince1970<self.completionTime.timeIntervalSince1970-200)
         {
             [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
                                                                                               andBody:self.task.name
                                                                                              andImage:nil
-                                                                                          andFireDate:[NSDate dateWithTimeIntervalSince1970:self.completionTime.timeIntervalSince1970-self.reminderTime.timeIntervalSince1970]
+                                                                                          andFireDate:self.reminderTime
                                                                                           andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",self.task.ID]}
                                                                                                forKey:[NSString stringWithFormat:@"%d",self.task.ID]];
         }

@@ -140,7 +140,7 @@
             [self.recallSwitch setOn:NO];
         }
     }
-    if(self.taskDate.timeIntervalSince1970<[NSDate date].timeIntervalSince1970 || self.taskDate.timeIntervalSince1970-self.reminderDate.timeIntervalSince1970<[NSDate date].timeIntervalSince1970)
+    if(self.taskDate.timeIntervalSince1970<[NSDate date].timeIntervalSince1970 || (self.taskDate.timeIntervalSince1970-self.reminderDate.timeIntervalSince1970<[NSDate date].timeIntervalSince1970 && self.recallSwitch.on))
     {
         UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Warning" message:@"Date or reminder time that you select are installed at the past time, you will not notify about this task!" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * okAction=[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:nil];
@@ -176,10 +176,10 @@
     [self.toolBar setItems:@[space, doneButton]];
     
     self.recallSwitch=[[UISwitch alloc] init];
-    [self.recallSwitch setOn:self.completionTime.timeIntervalSince1970-self.completionReminderTime.timeIntervalSince1970>0?YES:NO];
+    [self.recallSwitch setOn:self.completionReminderTime.timeIntervalSince1970>self.completionTime.timeIntervalSince1970-200?NO:YES];
     [self.recallSwitch addTarget:self action:@selector(swicthDidChanged) forControlEvents:UIControlEventValueChanged];
     
-    self.reminderDate=self.completionTime.timeIntervalSince1970-self.completionReminderTime.timeIntervalSince1970>0?[NSDate dateWithTimeIntervalSince1970:self.completionTime.timeIntervalSince1970-self.completionReminderTime.timeIntervalSince1970]:[NSDate dateWithTimeIntervalSince1970:900];
+    self.reminderDate=self.completionReminderTime.timeIntervalSince1970<self.completionTime.timeIntervalSince1970-200?[NSDate dateWithTimeIntervalSince1970:self.completionTime.timeIntervalSince1970-self.completionReminderTime.timeIntervalSince1970]:[NSDate dateWithTimeIntervalSince1970:900];
 
     self.dateTimePicker.timeZone=[NSTimeZone systemTimeZone];
     //[self.dateTimePicker addTarget:self action:@selector(dateTimeValueChanged:) forControlEvents:UIControlEventValueChanged];
