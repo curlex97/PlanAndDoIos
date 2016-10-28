@@ -156,6 +156,7 @@
     NSDictionary * userInfo=nil;
     if (launchOptions[UIApplicationLaunchOptionsLocalNotificationKey])
     {
+        application.applicationIconBadgeNumber = 0;
         userInfo=[launchOptions[UIApplicationLaunchOptionsLocalNotificationKey] userInfo];
     }
     LaunchScreenViewController * launch=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LaunchScreenViewController"];
@@ -476,7 +477,7 @@
     
     //[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
     
-    //application.applicationIconBadgeNumber = 0;
+    application.applicationIconBadgeNumber = 0;
 }
 #pragma mark - Core Data stack
 

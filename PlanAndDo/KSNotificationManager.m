@@ -48,6 +48,8 @@
     localNotification.alertBody = body;
     localNotification.alertTitle = title;
     localNotification.userInfo=userInfo;
+    localNotification.timeZone=[NSTimeZone systemTimeZone];
+    localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
     
     NSMutableArray * notificationForSinglKey=[self.localNotifications valueForKey:key];
     if(!notificationForSinglKey)

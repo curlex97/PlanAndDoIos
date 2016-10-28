@@ -192,6 +192,7 @@
         [[ApplicationManager sharedApplication] cleanLocalDataBase];
         [[[UserApiManager alloc] init] logout];
         _authorisedUser=nil;
+        [[ApplicationManager sharedApplication].notificationManager cancelAllNotifications];
     });
 }
 

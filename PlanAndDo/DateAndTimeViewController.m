@@ -176,10 +176,10 @@
     [self.toolBar setItems:@[space, doneButton]];
     
     self.recallSwitch=[[UISwitch alloc] init];
-    [self.recallSwitch setOn:self.completionReminderTime.timeIntervalSince1970!=0?YES:NO];
+    [self.recallSwitch setOn:self.completionTime.timeIntervalSince1970-self.completionReminderTime.timeIntervalSince1970>0?YES:NO];
     [self.recallSwitch addTarget:self action:@selector(swicthDidChanged) forControlEvents:UIControlEventValueChanged];
     
-    self.reminderDate=self.completionReminderTime;
+    self.reminderDate=self.completionTime.timeIntervalSince1970-self.completionReminderTime.timeIntervalSince1970>0?[NSDate dateWithTimeIntervalSince1970:self.completionTime.timeIntervalSince1970-self.completionReminderTime.timeIntervalSince1970]:[NSDate dateWithTimeIntervalSince1970:900];
 
     self.dateTimePicker.timeZone=[NSTimeZone systemTimeZone];
     //[self.dateTimePicker addTarget:self action:@selector(dateTimeValueChanged:) forControlEvents:UIControlEventValueChanged];
@@ -189,7 +189,8 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -199,13 +200,13 @@
     if([self.parentController isKindOfClass:[AddTaskViewController class]])
     {
         ((AddTaskViewController*)self.parentController).completionTime = self.taskDate;
-        ((AddTaskViewController*)self.parentController).reminderTime = self.recallSwitch.on?self.reminderDate:nil;
+        ((AddTaskViewController*)self.parentController).reminderTime = self.recallSwitch.on?[NSDate dateWithTimeIntervalSince1970:self.taskDate.timeIntervalSince1970-self.reminderDate.timeIntervalSince1970]:self.taskDate;
     }
     
     if([self.parentController isKindOfClass:[EditTaskViewController class]])
     {
         ((EditTaskViewController*)self.parentController).completionTime = self.taskDate;
-        ((EditTaskViewController*)self.parentController).reminderTime = self.recallSwitch.on?self.reminderDate:nil;
+        ((EditTaskViewController*)self.parentController).reminderTime = self.recallSwitch.on?[NSDate dateWithTimeIntervalSince1970:self.taskDate.timeIntervalSince1970-self.reminderDate.timeIntervalSince1970]:self.taskDate;
     }
     
     [self.navigationController popViewControllerAnimated:YES];

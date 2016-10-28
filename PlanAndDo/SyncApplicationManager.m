@@ -6,7 +6,7 @@
 //  Copyright © 2016 TodoTeamGroup. All rights reserved.
 //
 
-#import "SyncApplicationManager.h"
+#import "ApplicationManager.h"
 #import "ApplicationDefines.h"
 #import "UserApplicationManager.h"
 #import "FileManager.h"
@@ -53,7 +53,32 @@
                     [FileManager writeLastSyncTimeToFile:[NSString stringWithFormat:@"%i", 1]];
                     
                     [self syncTasksWithCompletion:^(bool status) {
-                        
+                        [[ApplicationManager sharedApplication].notificationManager cancelAllNotifications];
+                        NSArray * tasks=[[ApplicationManager sharedApplication].tasksApplicationManager allTasks];
+                        for(BaseTask * task in tasks)
+                        {
+                                           if(task.taskReminderTime.timeIntervalSince1970!=task.completionTime.timeIntervalSince1970)
+                                           {
+                                               [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
+                                                                                                                                 andBody:task.name
+                                                                                                                                andImage:nil
+                                                                                                                             andFireDate:[NSDate dateWithTimeIntervalSince1970:task.completionTime.timeIntervalSince1970-task.taskReminderTime.timeIntervalSince1970]
+                                                                                                                             andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",task.ID]}
+                                                                                                                                  forKey:[NSString stringWithFormat:@"%d",task.ID]];
+                                           }
+
+                                           if(task.completionTime.timeIntervalSince1970>[NSDate date].timeIntervalSince1970)
+                                           {
+                                               [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Complete your task"
+                                                                                                                                 andBody:task.name
+                                                                                                                                andImage:nil
+                                                                                                                             andFireDate:task.completionTime
+                                                                                                                             andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",task.ID]}
+                                                                                                                                  forKey:[NSString stringWithFormat:@"%d",task.ID]];
+                                               
+                                               [[ApplicationManager sharedApplication].notificationManager shedulenotificationsForKey:[NSString stringWithFormat:@"%d",task.ID]];
+                                           }
+                        }
                         if([[FileManager readLastSyncTimeFromFile] intValue] > self.syncStat)
                         self.syncStat = [[FileManager readLastSyncTimeFromFile] intValue];
                         [FileManager writeLastSyncTimeToFile:[NSString stringWithFormat:@"%i", 1]];
