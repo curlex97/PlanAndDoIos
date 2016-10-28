@@ -133,7 +133,10 @@
         UIAlertAction * continueAction=[UIAlertAction actionWithTitle:TL_CONTINUE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
                                         {
                                             UIAlertController * alertController=[UIAlertController alertControllerWithTitle:TL_ENTER_PASSWORD message:@"" preferredStyle:UIAlertControllerStyleAlert];
-                                            [alertController addTextFieldWithConfigurationHandler:nil];
+                                            [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField)
+                                            {
+                                                textField.secureTextEntry=YES;
+                                            }];
                                             UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:TL_CANCEL style:UIAlertActionStyleCancel handler:nil];
                                             UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:TL_DELETE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
                                                                           {

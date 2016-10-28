@@ -64,22 +64,7 @@
 {
     self.left.constant=xPos;
     self.right.constant=xPos;
-    UIView * rootView;
-    if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
-    {
-        EditTaskViewController * editViewController=[[EditTaskViewController alloc] init];
-        editViewController.task=self.taskFromNotification;
-        KSSplitViewController * spliter=(KSSplitViewController *)self.window.rootViewController;
-        UINavigationController * naviVC=spliter.details;
-        rootView=naviVC.viewControllers.lastObject.view;
-    }
-    else
-    {
-        AMSideBarViewController * sider=(AMSideBarViewController *)self.window.rootViewController;
-        UINavigationController * naviVC=(UINavigationController *)sider.frontViewController;
-        [naviVC.viewControllers.lastObject.view addSubview:self.notView];
-        rootView=naviVC.viewControllers.lastObject.view;
-    }
+    UIView * rootView=self.notView.superview;
     [rootView layoutSubviews];
 }
 
@@ -287,20 +272,20 @@
         KSSplitViewController * spliter=(KSSplitViewController *)self.window.rootViewController;
         UINavigationController * naviVC=spliter.details;
         rootView=naviVC.viewControllers.lastObject.view;
-        if([naviVC.viewControllers.lastObject isKindOfClass:[TabletasksViewController class]])
-        {
+//        if([naviVC.viewControllers.lastObject isKindOfClass:[TabletasksViewController class]])
+//        {
             [naviVC pushViewController:editViewController animated:YES];
-        }
-        else
-        {
-            TabletasksViewController * tasksViewController=[[TabletasksViewController alloc] init];
-        
-            tasksViewController.category=self.taskFromNotification.categoryID?[[ApplicationManager sharedApplication].categoryApplicationManager categoryWithId:self.taskFromNotification.categoryID]:nil;
-            naviVC = [[UINavigationController alloc] initWithRootViewController:tasksViewController];
-            [naviVC pushViewController:editViewController animated:YES];
-        
-            spliter.details=naviVC;
-        }
+//        }
+//        else
+//        {
+//            TabletasksViewController * tasksViewController=[[TabletasksViewController alloc] init];
+//        
+//            tasksViewController.category=self.taskFromNotification.categoryID?[[ApplicationManager sharedApplication].categoryApplicationManager categoryWithId:self.taskFromNotification.categoryID]:nil;
+//            naviVC = [[UINavigationController alloc] initWithRootViewController:tasksViewController];
+//            [naviVC pushViewController:editViewController animated:YES];
+//        
+//            spliter.details=naviVC;
+//        }
     }
     else
     {
@@ -309,20 +294,20 @@
         AMSideBarViewController * sider=(AMSideBarViewController *)self.window.rootViewController;
         UINavigationController * frontVC=(UINavigationController *)sider.frontViewController;
         rootView=frontVC.viewControllers.lastObject.view;
-        if([frontVC.viewControllers.lastObject isKindOfClass:[TabletasksViewController class]])
-        {
+//        if([frontVC.viewControllers.lastObject isKindOfClass:[TabletasksViewController class]])
+//        {
             [frontVC pushViewController:editViewController animated:YES];
-        }
-        else
-        {
-            TabletasksViewController * tasksViewController=[[TabletasksViewController alloc] init];
-        
-            tasksViewController.category=self.taskFromNotification.categoryID?[[ApplicationManager sharedApplication].categoryApplicationManager categoryWithId:self.taskFromNotification.categoryID]:nil;
-            frontVC = [[UINavigationController alloc] initWithRootViewController:tasksViewController];
-            [frontVC pushViewController:editViewController animated:YES];
-        
-            [sider setNewFrontViewController:frontVC];
-        }
+//        }
+//        else
+//        {
+//            TabletasksViewController * tasksViewController=[[TabletasksViewController alloc] init];
+//        
+//            tasksViewController.category=self.taskFromNotification.categoryID?[[ApplicationManager sharedApplication].categoryApplicationManager categoryWithId:self.taskFromNotification.categoryID]:nil;
+//            frontVC = [[UINavigationController alloc] initWithRootViewController:tasksViewController];
+//            [frontVC pushViewController:editViewController animated:YES];
+//        
+//            [sider setNewFrontViewController:frontVC];
+//        }
     }
     self.top.constant=-50.0;
     [UIView animateWithDuration:0.5 animations:^
@@ -339,23 +324,7 @@
 
 -(void)notifiationDidClose
 {
-    UIView * rootView;
-    if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
-    {
-        EditTaskViewController * editViewController=[[EditTaskViewController alloc] init];
-        editViewController.task=self.taskFromNotification;
-        KSSplitViewController * spliter=(KSSplitViewController *)self.window.rootViewController;
-        UINavigationController * naviVC=spliter.details;
-        rootView=naviVC.viewControllers.lastObject.view;
-    }
-    else
-    {
-        EditTaskViewController * editViewController=[[EditTaskViewController alloc] init];
-        editViewController.task=self.taskFromNotification;
-        AMSideBarViewController * sider=(AMSideBarViewController *)self.window.rootViewController;
-        UINavigationController * frontVC=(UINavigationController *)sider.frontViewController;
-        rootView=frontVC.viewControllers.lastObject.view;
-    }
+    UIView * rootView=self.notView.superview;
     self.top.constant=-50.0;
     [UIView animateWithDuration:0.5 animations:^
      {

@@ -182,7 +182,7 @@
     self.reminderDate=self.completionReminderTime.timeIntervalSince1970<self.completionTime.timeIntervalSince1970-200?[NSDate dateWithTimeIntervalSince1970:self.completionTime.timeIntervalSince1970-self.completionReminderTime.timeIntervalSince1970]:[NSDate dateWithTimeIntervalSince1970:900];
 
     self.dateTimePicker.timeZone=[NSTimeZone systemTimeZone];
-    //[self.dateTimePicker addTarget:self action:@selector(dateTimeValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.refresh removeFromSuperview];
     self.dateTimePicker.date = self.completionTime;
     self.taskDate=self.completionTime;
     [self.tableView reloadData];
