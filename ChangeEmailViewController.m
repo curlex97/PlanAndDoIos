@@ -16,9 +16,17 @@
 @interface ChangeEmailViewController ()<UIGestureRecognizerDelegate, UITextFieldDelegate>
 @property (nonatomic)UITapGestureRecognizer * tap;
 @property (nonatomic)NSRegularExpression * regex;
+@property (nonatomic)CGFloat focusedTextFieldY;
 @end
 
 @implementation ChangeEmailViewController
+
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.oldEmailTextField resignFirstResponder];
+    [self.emailTextField resignFirstResponder];
+    [self.reenterEmailTextField resignFirstResponder];
+}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -132,6 +140,8 @@
     {
         [self.alertView setHidden:YES];
     }
+    CGPoint cords=[textField convertPoint:textField.bounds.origin toView:self.navigationController.view];
+    self.focusedTextFieldY=cords.y+45;
     return YES;
 }
 
@@ -210,7 +220,9 @@
     self.tap.enabled=YES;
     NSDictionary * info=[not userInfo];
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-    self.centerConstraint.constant-=self.backTextFieldView.frame.origin.y+self.backTextFieldView.frame.size.height-(self.view.bounds.size.height-[aValue CGRectValue].size.height);
+    CGSize keySize=[aValue CGRectValue].size;
+    CGFloat offset=self.navigationController.view.bounds.size.height-(keySize.height+self.focusedTextFieldY);
+    self.centerConstraint.constant+=offset;
     [UIView animateWithDuration:1 animations:^
      {
          [self.view layoutIfNeeded];

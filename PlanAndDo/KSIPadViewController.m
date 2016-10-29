@@ -101,6 +101,7 @@
         else
         {
             [cell.ringImageView setHidden:NO];
+            cell.ringImageView.image=[UIImage imageNamed:@"Ring_w"];
         }
         
         cell.leftButtons = @[[MGSwipeButton buttonWithTitle:TL_COMPLETE backgroundColor:[UIColor colorWithRed:39.0/255.0 green:174.0/255.0 blue:97.0/255.0 alpha:1.0] callback:^BOOL(MGSwipeTableCell *sender)

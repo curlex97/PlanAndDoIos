@@ -18,9 +18,20 @@
 @property (nonatomic)UITapGestureRecognizer * tap;
 @property (nonatomic)NSRegularExpression * emailRegex;
 @property (nonatomic)NSRegularExpression * passRegex;
+@property (nonatomic)CGFloat focusedTextFieldY;
+@property (nonatomic)BOOL isUserNameFieldTap;
+@property (nonatomic)UITextField * temp;
 @end
 
 @implementation CreateAccountViewController
+
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.emailTextField resignFirstResponder];
+    [self.reenterPasswordTextField resignFirstResponder];
+    [self.usernameTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+}
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
@@ -37,6 +48,8 @@
     {
         self.reenterPasswordTextField.rightViewMode=UITextFieldViewModeNever;
     }
+    CGPoint cords=[textField convertPoint:textField.bounds.origin toView:self.navigationController.view];
+    self.focusedTextFieldY=cords.y+45;
     return YES;
 }
 
@@ -153,7 +166,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     CAGradientLayer * gradient=[KSApplicationColor sharedColor].rootGradient;
     gradient.frame=self.view.bounds;
     self.view.backgroundColor=[UIColor whiteColor];
@@ -175,6 +188,7 @@
     self.usernameTextField.leftViewMode = UITextFieldViewModeAlways;
     self.usernameTextField.delegate=self;
     [self.usernameTextField addTarget:self action:@selector(validateEnteredText) forControlEvents:UIControlEventEditingChanged];
+    
     
     UIImageView * passImageView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alertIcon"]];
     UIView * passAlertView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 30.0, 20.0)];
@@ -244,7 +258,21 @@
     self.tap.enabled=YES;
     NSDictionary * info=[not userInfo];
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-    self.centerConstraint.constant-=self.backTextFieldView.frame.origin.y+self.backTextFieldView.frame.size.height-(self.view.bounds.size.height-[aValue CGRectValue].size.height);
+    CGSize keySize=[aValue CGRectValue].size;
+    CGFloat offset=self.navigationController.view.bounds.size.height-(keySize.height+self.focusedTextFieldY);
+    if(!self.isUserNameFieldTap)
+    {
+        self.centerConstraint.constant+=offset;
+    }
+    
+    if([self.usernameTextField isFirstResponder])
+    {
+        self.isUserNameFieldTap=YES;
+    }
+    else
+    {
+        self.isUserNameFieldTap=NO;
+    }
     [UIView animateWithDuration:1 animations:^
      {
          [self.view layoutIfNeeded];

@@ -20,9 +20,16 @@
 @property (nonatomic)UITapGestureRecognizer * tap;
 @property (nonatomic)NSRegularExpression * emailRegex;
 @property (nonatomic)NSRegularExpression * passRegex;
+@property (nonatomic)CGFloat focusedTextFieldY;
 @end
 
 @implementation LoginViewController
+
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [self.loginTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -49,6 +56,8 @@
     {
         self.passwordTextField.rightViewMode=UITextFieldViewModeNever;
     }
+    CGPoint cords=[textField convertPoint:textField.bounds.origin toView:self.navigationController.view];
+    self.focusedTextFieldY=cords.y+45;
     return YES;
 }
 
@@ -151,6 +160,7 @@
     self.loginTextField.delegate=self;
     [self.loginTextField addTarget:self action:@selector(validateEnteredText:) forControlEvents:UIControlEventEditingChanged];
     
+    
     UIImageView * passImageView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alertIcon"]];
     UIView * passAlertView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 30.0, 20.0)];
     [passAlertView addSubview:passImageView];
@@ -209,7 +219,9 @@
     self.tap.enabled=YES;
     NSDictionary * info=[not userInfo];
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-    self.centerConstraint.constant-=self.backTextFieldView.frame.origin.y+self.backTextFieldView.frame.size.height-(self.view.bounds.size.height-[aValue CGRectValue].size.height);
+    CGSize keySize=[aValue CGRectValue].size;
+    CGFloat offset=self.navigationController.view.bounds.size.height-(keySize.height+self.focusedTextFieldY);
+    self.centerConstraint.constant+=offset;
     [UIView animateWithDuration:1 animations:^
      {
          [self.view layoutIfNeeded];
@@ -226,6 +238,7 @@
         [self.navigationController pushViewController:cavc animated:YES];
     }
 }
+
 - (IBAction)newPasswordTapped:(id)sender {
     NewPasswordViewController* cavc = [self.storyboard instantiateViewControllerWithIdentifier:@"NewPasswordViewController"];
     
