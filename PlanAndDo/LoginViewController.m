@@ -15,7 +15,6 @@
 #import "KSMenuViewController.h"
 #import "ApplicationManager.h"
 
-
 @interface LoginViewController ()<UIGestureRecognizerDelegate, UITextFieldDelegate>
 @property (nonatomic)UITapGestureRecognizer * tap;
 @property (nonatomic)NSRegularExpression * emailRegex;
@@ -43,6 +42,24 @@
              [self.navigationController popViewControllerAnimated:NO];
          }];
         self.navigationItem.hidesBackButton=YES;
+    }
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(range.length + range.location > textField.text.length)
+    {
+        return NO;
+    }
+    
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    if(self.loginTextField==textField)
+    {
+        return newLength < 255;
+    }
+    else
+    {
+        return newLength < 32;
     }
 }
 
@@ -251,7 +268,7 @@
 
 - (IBAction)signInTapped:(id)sender
 {
-    [self.navigationController.view addSubview:self.loadContentView];
+    [self presentViewController:self.loadController animated:YES completion:nil];
     [[ApplicationManager sharedApplication].userApplicationManager loginWithEmail:self.loginTextField.text andPassword:self.passwordTextField.text completion:^(bool status)
      {
          if(status)
@@ -261,8 +278,11 @@
                  dispatch_async(dispatch_get_main_queue(), ^
                  {
                      [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_EDIT object:nil];
-                     [self.loadContentView removeFromSuperview];
-                     [self showMainWindow:nil];
+                     [self.presentedViewController dismissViewControllerAnimated:NO completion:^
+                      {
+                          [self showMainWindow:nil];
+                      }];
+                     
                  });
              }];
          }
@@ -270,7 +290,7 @@
          {
              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
                             {
-                                [self.loadContentView removeFromSuperview];
+                                [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
                                 self.loginTextField.text=@"";
                                 self.passwordTextField.text=@"";
                                 [self.signInButton setHighlighted:YES];

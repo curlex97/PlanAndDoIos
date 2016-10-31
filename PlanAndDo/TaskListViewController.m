@@ -23,6 +23,11 @@
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    NSString * text=[textField.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
+    if(!text.length)
+    {
+        return NO;
+    }
     int subID = -1*[[NSDate date] timeIntervalSince1970];
     KSShortTask* sub = [[KSShortTask alloc] initWithID:subID andName:textField.text andStatus:NO andSyncStatus:[[NSDate date] timeIntervalSince1970]];
     [self.subTasks insertObject:sub atIndex:0];
@@ -32,6 +37,16 @@
     return YES;
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(range.length + range.location > textField.text.length)
+    {
+        return NO;
+    }
+    
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return newLength < 32;
+}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

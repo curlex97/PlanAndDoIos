@@ -142,8 +142,20 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-
-    return YES;
+    if(range.length + range.location > textField.text.length)
+    {
+        return NO;
+    }
+    
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    if(self.emailTextField==textField)
+    {
+        return newLength < 255;
+    }
+    else
+    {
+        return newLength < 32;
+    }
 }
 
 -(void)validateEnteredText
@@ -260,7 +272,7 @@
     NSValue* aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGSize keySize=[aValue CGRectValue].size;
     CGFloat offset=self.navigationController.view.bounds.size.height-(keySize.height+self.focusedTextFieldY);
-    if(!self.isUserNameFieldTap)
+    if(!self.isUserNameFieldTap || [[UIDevice currentDevice].model isEqualToString:@"iPad"])
     {
         self.centerConstraint.constant+=offset;
     }
@@ -288,14 +300,14 @@
 {
     if([self.passwordTextField.text isEqualToString:self.reenterPasswordTextField.text])
     {
-        [self.navigationController.view addSubview:self.loadContentView];
+        [self presentViewController:self.loadController animated:YES completion:nil];
         [[ApplicationManager sharedApplication].userApplicationManager registerAsyncWithEmail:self.emailTextField.text andUserName:self.usernameTextField.text andPassword:self.passwordTextField.text completion:^(bool fl)
         {
             if(fl)
             {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
                 {
-                    [self.loadContentView removeFromSuperview];
+                    [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
                     [self.alertView removeFromSuperview];
                     [self dismissViewControllerAnimated:YES completion:nil];
                 });
@@ -304,7 +316,7 @@
             {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC), dispatch_get_main_queue(), ^
                                {
-                                   [self.loadContentView removeFromSuperview];
+                                   [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
                                    self.emailTextField.text=@"";
                                    self.passwordTextField.text=@"";
                                    self.reenterPasswordTextField.text=@"";

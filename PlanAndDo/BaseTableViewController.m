@@ -42,15 +42,16 @@
 -(void)reachabilityChanged:(NSNotification *)not
 {
     Reachability* reach=[not object];
-    
+    static BOOL isPresented=NO;
     if(reach.isReachableViaWiFi)
     {
         if(!self.currentReachStatus)
         {
-            UIView * toolBarHidenView=[[UIView alloc] initWithFrame:self.navigationController.toolbar.frame];
-            toolBarHidenView.backgroundColor=[UIColor colorWithWhite:0.0 alpha:0.5];
-            [self.navigationController.toolbar addSubview:toolBarHidenView];
-            [self.navigationController.parentViewController.view addSubview:self.loadContentView];
+            if(!isPresented)
+            {
+                [self presentViewController:self.loadController animated:YES completion:nil];
+                isPresented=YES;
+            }
             [[ApplicationManager sharedApplication].syncApplicationManager syncWithCompletion:^(BOOL completed)
          {
              if(completed)
@@ -58,8 +59,8 @@
                  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                  {
                      [self reloadData];
-                     [self.loadContentView removeFromSuperview];
-                     [toolBarHidenView removeFromSuperview];
+                     [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                     isPresented=NO;
                      self.currentReachStatus=YES;
                  });
              }
@@ -68,12 +69,11 @@
     }
     else if(reach.isReachableViaWWAN && !self.currentReachStatus)
     {
-        if(!self.currentReachStatus)
-        {
-            UIView * toolBarHidenView=[[UIView alloc] initWithFrame:self.navigationController.toolbar.frame];
-            toolBarHidenView.backgroundColor=[UIColor colorWithWhite:0.0 alpha:0.5];
-            [self.navigationController.toolbar addSubview:toolBarHidenView];
-            [self.navigationController.parentViewController.view addSubview:self.loadContentView];
+            if(!isPresented)
+            {
+                [self presentViewController:self.loadController animated:YES completion:nil];
+                isPresented=YES;
+            }
             [[ApplicationManager sharedApplication].syncApplicationManager syncWithCompletion:^(BOOL completed)
              {
                  if(completed)
@@ -81,13 +81,12 @@
                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                                     {
                                         [self reloadData];
-                                        [self.loadContentView removeFromSuperview];
-                                        [toolBarHidenView removeFromSuperview];
+                                        [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+                                        isPresented=NO;
                                         self.currentReachStatus=YES;
                                     });
                  }
              }];
-        }
     }
     else
     {

@@ -135,18 +135,29 @@
     }
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(range.length + range.location > textField.text.length)
+    {
+        return NO;
+    }
+    
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return newLength < 32;
+}
+
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    NSString * text=[textField.text stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]];
+    if(text.length)
+    {
     [textField resignFirstResponder];
     if(!self.isChangeCategory)
     {
-        if(textField.text.length)
-        {
             [[ApplicationManager sharedApplication].categoryApplicationManager addCateroty:[[KSCategory alloc] initWithID:self.categories.lastObject.ID+1 andName:textField.text andSyncStatus:[NSDate date].timeIntervalSince1970] completion:nil];
             self.categories=[NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].categoryApplicationManager allCategories]];
             textField.text=@"";
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.categories.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-        }
     }
     else
     {
@@ -156,6 +167,11 @@
         
         [self.tableView reloadData];
         textField.text=@"";
+    }
+    }
+    else
+    {
+        return NO;
     }
     return YES;
 }

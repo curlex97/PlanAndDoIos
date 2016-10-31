@@ -22,6 +22,17 @@
     }
 }
 
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if(range.length + range.location > searchBar.text.length)
+    {
+        return NO;
+    }
+    
+    NSUInteger newLength = [searchBar.text length] + [text length] - range.length;
+    return newLength<32;
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

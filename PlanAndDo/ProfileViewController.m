@@ -16,7 +16,7 @@
 #import "FileManager.h"
 #import "NewPasswordViewController.h"
 
-@interface ProfileViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface ProfileViewController ()<UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (nonatomic)NSArray<NSString *> * items;
 @property (nonatomic)KSAuthorisedUser * user;
 @property (nonatomic)KSProfileState state;
@@ -85,6 +85,17 @@
     return cell;
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(range.length + range.location > textField.text.length)
+    {
+        return NO;
+    }
+    
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return newLength<32;
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -94,6 +105,7 @@
         [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField)
         {
             textField.text=self.user.userName;
+            textField.delegate=self;
         }];
         UIAlertAction * okAction=[UIAlertAction actionWithTitle:TL_OK style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
                                   {
@@ -136,6 +148,7 @@
                                             [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField)
                                             {
                                                 textField.secureTextEntry=YES;
+                                                textField.delegate=self;
                                             }];
                                             UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:TL_CANCEL style:UIAlertActionStyleCancel handler:nil];
                                             UIAlertAction * deleteAction=[UIAlertAction actionWithTitle:TL_DELETE style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action)
@@ -143,7 +156,7 @@
                                                                               if([alertController.textFields.firstObject.text isEqualToString:[FileManager readPassFromFile]])
                                                                               {
                                                                                   [[ApplicationManager sharedApplication].notificationManager cancelAllNotifications];
-                                                                                  [self.navigationController.parentViewController.view addSubview:self.loadContentView];
+                                                                                  [self presentViewController:self.loadController animated:YES completion:nil];
                                                                                   NSArray * tasks=[ApplicationManager sharedApplication].tasksApplicationManager.allTasks;
                                                                                   for(BaseTask * task in tasks)
                                                                                   {
@@ -169,14 +182,14 @@
                                                                                               if(categoryCount==categories.count-3)
                                                                                               {
                                                                                                   dispatch_async(dispatch_get_main_queue(), ^
-                                                                                                  {                                                                                                  [self.loadContentView removeFromSuperview];
+                                                                                                  {                                                                                                  [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
                                                                                                   });
                                                                                               }
                                                                                            }
                                                                                            else
                                                                                            {
                                                                                                dispatch_async(dispatch_get_main_queue(), ^
-                                                                                                {                                                                                                  [self.loadContentView removeFromSuperview];
+                                                                                                {                                                                                                  [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
                                                                                                 });
                                                                                            }
                                                                                        }];
@@ -184,9 +197,9 @@
                                                                                   }
                                                                                   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                                                                                   {
-                                                                                      if(self.loadContentView.superview)
+                                                                                      if(self.presentedViewController)
                                                                                       {
-                                                                                          [self.loadContentView removeFromSuperview];
+                                                                                          [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
                                                                                       }
                                                                                   });
                                                                                   [self.tableView reloadData];

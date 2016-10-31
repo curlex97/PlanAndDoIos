@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface BaseViewController : UIViewController
-@property (nonatomic)UIView * loadContentView;
+@property (nonatomic)UIAlertController * loadController;
 @property (nonatomic)UIStoryboard * baseStoryboard;
 @end
