@@ -8,11 +8,19 @@
 
 #import "BaseKSMenuViewController.h"
 
-@interface BaseKSMenuViewController ()
+@interface BaseKSMenuViewController () 
 
 @end
 
 @implementation BaseKSMenuViewController
+
+-(void)deselectActiveSelection
+{
+    if(self.tableView.indexPathForSelectedRow)
+    {
+        [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:NO];
+    }
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {

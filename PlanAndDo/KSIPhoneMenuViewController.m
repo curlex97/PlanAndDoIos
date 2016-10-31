@@ -8,7 +8,7 @@
 
 #import "KSIPhoneMenuViewController.h"
 
-@interface KSIPhoneMenuViewController ()
+@interface KSIPhoneMenuViewController () 
 @property (nonatomic)AMSideBarViewController * parentController;
 @property (nonatomic)UITextField * addCategoryTextField;
 @property (nonatomic)UIView * addCategoryAccessoryView;
@@ -101,6 +101,7 @@
         
         if(categoryTasksViewController)
         {
+            categoryTasksViewController.delegate=self;
             categoryTasksViewController.title=[category name];
             categoryTasksViewController.category = category;
             UINavigationController* categoryTasksNav = [[UINavigationController alloc] initWithRootViewController:categoryTasksViewController];

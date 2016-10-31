@@ -176,6 +176,17 @@
     [self.tableView reloadData];
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(range.length + range.location > textField.text.length)
+    {
+        return NO;
+    }
+    
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    return newLength < 64;
+}
+
 -(void)headDidTap
 {
     UITableViewCell * cell=[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
@@ -482,7 +493,7 @@
                          [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
                                                                                                            andBody:newTask.name
                                                                                                           andImage:nil
-                                                                                                       andFireDate:[NSDate dateWithTimeIntervalSince1970:newTask.completionTime.timeIntervalSince1970-newTask.taskReminderTime.timeIntervalSince1970]
+                                                                                                       andFireDate:newTask.taskReminderTime
                                                                                                        andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",newTask.ID]}
                                                                                                             forKey:[NSString stringWithFormat:@"%d",newTask.ID]];
                      }
@@ -526,18 +537,17 @@
              {
                  NSArray * tasks=[[ApplicationManager sharedApplication].tasksApplicationManager allTasks];
                  BaseTask * newTask=[tasks lastObject];
-                 
-                 if(newTask.taskReminderTime!=0)
+                 if(newTask.taskReminderTime.timeIntervalSince1970<newTask.completionTime.timeIntervalSince1970 && newTask.taskReminderTime.timeIntervalSince1970>[NSDate date].timeIntervalSince1970)
                  {
-                     if(newTask.completionTime.timeIntervalSince1970-newTask.taskReminderTime.timeIntervalSince1970>[NSDate date].timeIntervalSince1970)
-                     {
-                         [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
-                                                                                                           andBody:newTask.name
-                                                                                                          andImage:nil
-                                                                                                       andFireDate:[NSDate dateWithTimeIntervalSince1970:newTask.completionTime.timeIntervalSince1970-newTask.taskReminderTime.timeIntervalSince1970]
-                                                                                                       andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",newTask.ID]}
-                                                                                                            forKey:[NSString stringWithFormat:@"%d",newTask.ID]];
-                     }
+                     [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
+                                                                                                       andBody:newTask.name
+                                                                                                      andImage:nil
+                                                                                                   andFireDate:newTask.taskReminderTime
+                                                                                                   andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",newTask.ID]}
+                                                                                                        forKey:[NSString stringWithFormat:@"%d",newTask.ID]];
+                 }
+                 if(newTask.completionTime.timeIntervalSince1970>[NSDate date].timeIntervalSince1970)
+                 {
                      [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Complete your task"
                                                                                                        andBody:newTask.name
                                                                                                       andImage:nil
@@ -547,8 +557,7 @@
                      
                      [[ApplicationManager sharedApplication].notificationManager shedulenotificationsForKey:[NSString stringWithFormat:@"%d",newTask.ID]];
                  }
-             }
-         }];
+             }         }];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_ADD object:task];
     }
     

@@ -293,6 +293,7 @@
         
         if(categoryTasksViewController)
         {
+            categoryTasksViewController.delegate=self;
             categoryTasksViewController.title=[category name];
             categoryTasksViewController.category = category;
             UINavigationController* categoryTasksNav = [[UINavigationController alloc] initWithRootViewController:categoryTasksViewController];

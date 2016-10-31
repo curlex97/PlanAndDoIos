@@ -81,15 +81,18 @@
         [navi pushViewController:editTaskVC animated:NO];
         if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
         {
-            KSSplitViewController * split=[[KSSplitViewController alloc] initWithMenuVC:[[KSIPadViewController alloc] init] andDetailsVC:navi];
+            KSIPadViewController * menu=[[KSIPadViewController alloc] init];
+            tasks.delegate=menu;
+            KSSplitViewController * split=[[KSSplitViewController alloc] initWithMenuVC:menu andDetailsVC:navi];
             [UIApplication sharedApplication].keyWindow.rootViewController=split;
             [ApplicationManager registerUserNotifications];
             [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
         }
         else
         {
-            AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:navi andBackVC:[[KSIPhoneMenuViewController alloc] init]];
-            
+            KSIPhoneMenuViewController * menu=[[KSIPhoneMenuViewController alloc] init];
+            tasks.delegate=menu;
+            AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:navi andBackVC:menu];
             [UIApplication sharedApplication].keyWindow.rootViewController=tableTaskViewController;
             [ApplicationManager registerUserNotifications];
             [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
@@ -99,7 +102,6 @@
     
     if([ApplicationManager sharedApplication].userApplicationManager.authorisedUser.emailAdress.length==0)
     {
-        NSLog(@"%@",[UIDevice currentDevice].model);
         NSString * name=[[UIDevice currentDevice].model isEqualToString:@"iPad"]?@"IPad":@"Main";
         LoginViewController * login=[[UIStoryboard storyboardWithName:name bundle:nil] instantiateViewControllerWithIdentifier:@"LoginViewController"];
         [navi pushViewController:login animated:NO];
@@ -107,14 +109,18 @@
     
     if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
     {
-        KSSplitViewController * split=[[KSSplitViewController alloc] initWithMenuVC:[[KSIPadViewController alloc] init] andDetailsVC:navi];
+        KSIPadViewController * menu=[[KSIPadViewController alloc] init];
+        tasks.delegate=menu;
+        KSSplitViewController * split=[[KSSplitViewController alloc] initWithMenuVC:menu andDetailsVC:navi];
         [UIApplication sharedApplication].keyWindow.rootViewController=split;
         [ApplicationManager registerUserNotifications];
         [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
     }
     else
     {
-        AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:navi andBackVC:[[KSIPhoneMenuViewController alloc] init]];
+        KSIPhoneMenuViewController * menu=[[KSIPhoneMenuViewController alloc] init];
+        tasks.delegate=menu;
+        AMSideBarViewController * tableTaskViewController=[AMSideBarViewController sideBarWithFrontVC:navi andBackVC:menu];
     
         [UIApplication sharedApplication].keyWindow.rootViewController=tableTaskViewController;
         [ApplicationManager registerUserNotifications];

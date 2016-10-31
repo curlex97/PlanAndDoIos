@@ -112,6 +112,8 @@
         self.dateTimePicker.datePickerMode=UIDatePickerModeDateAndTime;
         self.dateTimePicker.minuteInterval=1;
         self.dateTimePicker.date=self.taskDate;
+        self.dateTimePicker.minimumDate=[NSDate date];
+        self.dateTimePicker.timeZone=[NSTimeZone systemTimeZone];
         [self.nilTextField becomeFirstResponder];
     }
     else if(self.recallSwitch.on)
@@ -184,6 +186,7 @@
     self.dateTimePicker.timeZone=[NSTimeZone systemTimeZone];
     [self.refresh removeFromSuperview];
     self.dateTimePicker.date = self.completionTime;
+    self.dateTimePicker.minimumDate=[NSDate date];
     self.taskDate=self.completionTime;
     [self.tableView reloadData];
 }

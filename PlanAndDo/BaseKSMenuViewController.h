@@ -11,7 +11,7 @@
 #import "KSCategory.h"
 #import "ApplicationManager.h"
 #import "TaskTableViewCell.h"
-
+#import "TabletasksViewController.h"
 typedef NS_ENUM(NSInteger, KSBaseMenuState)
 {
     KSBaseMenuStateNormal,
@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, KSBaseMenuState)
     KSBaseMenuStateEdit
 };
 
-@interface BaseKSMenuViewController : BaseTableViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate>
+@interface BaseKSMenuViewController : BaseTableViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate, KSMenuDelegate>
 @property (nonatomic)NSMutableArray<KSCategory *> * categories;
 @property (nonatomic)UISearchBar * searchBar;
 @property (nonatomic)UILongPressGestureRecognizer * longPress;

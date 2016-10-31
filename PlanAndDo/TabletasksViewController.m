@@ -420,6 +420,7 @@
 
 -(void)todayDidTap
 {
+    [self.delegate deselectActiveSelection];
     self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForToday]];;
     self.title = NM_TODAY;
     self.boxType = KSBoxTypeToday;
@@ -446,6 +447,7 @@
 
 -(void)tomorrowDidTap
 {
+    [self.delegate deselectActiveSelection];
     self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForTomorrow]];
     self.title = NM_TOMORROW;
     self.boxType = KSBoxTypeTomorrow;
@@ -472,6 +474,7 @@
 
 -(void)weekDidTap
 {
+    [self.delegate deselectActiveSelection];
     self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForWeek]];
     self.title = NM_WEEK;
     self.category=nil;
@@ -514,6 +517,7 @@
 
 -(void)backLogDidTap
 {
+    [self.delegate deselectActiveSelection];
     self.tasks = [NSMutableArray arrayWithArray:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForBacklog]];
     self.title = NM_BACKLOG;
     self.category=nil;
@@ -540,6 +544,7 @@
 
 -(void)archiveDidTap
 {
+    [self.delegate deselectActiveSelection];
     self.tasks = [NSMutableArray arrayWithArray:[self completedTasks:[[ApplicationManager sharedApplication].tasksApplicationManager allTasksForArchive]]];
     self.title = NM_ARCHIVE;
     self.category=nil;

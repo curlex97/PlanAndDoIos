@@ -142,6 +142,7 @@
                                                                           {
                                                                               if([alertController.textFields.firstObject.text isEqualToString:[FileManager readPassFromFile]])
                                                                               {
+                                                                                  [[ApplicationManager sharedApplication].notificationManager cancelAllNotifications];
                                                                                   [self.navigationController.parentViewController.view addSubview:self.loadContentView];
                                                                                   NSArray * tasks=[ApplicationManager sharedApplication].tasksApplicationManager.allTasks;
                                                                                   for(BaseTask * task in tasks)
@@ -153,15 +154,19 @@
                                                                                   NSArray * categories=[ApplicationManager sharedApplication].categoryApplicationManager.allCategories;
                                                                                   for(KSCategory * category in categories)
                                                                                   {
-                                                                                      
-                                                                                      [[NSNotificationCenter defaultCenter] postNotificationName:@"CategoryIsDeleted" object:category];
+                                                                                     if(![category.name isEqualToString:@"Personal"] &&
+                                                                                        ![category.name isEqualToString:@"Shopping"] &&
+                                                                                        ![category.name isEqualToString:@"Work"])
+                                                                                     {
+                                                                                         
+                                                                                        [[NSNotificationCenter defaultCenter] postNotificationName:@"CategoryIsDeleted" object:category];
                                                                                       [[ApplicationManager sharedApplication].categoryApplicationManager deleteCateroty:category completion:^(bool completed)
                                                                                        {
                                                                                            
                                                                                            if(completed)
                                                                                            {
                                                                                               ++categoryCount;
-                                                                                              if(categoryCount==categories.count)
+                                                                                              if(categoryCount==categories.count-3)
                                                                                               {
                                                                                                   dispatch_async(dispatch_get_main_queue(), ^
                                                                                                   {                                                                                                  [self.loadContentView removeFromSuperview];
@@ -175,8 +180,23 @@
                                                                                                 });
                                                                                            }
                                                                                        }];
+                                                                                     }
                                                                                   }
+                                                                                  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+                                                                                  {
+                                                                                      if(self.loadContentView.superview)
+                                                                                      {
+                                                                                          [self.loadContentView removeFromSuperview];
+                                                                                      }
+                                                                                  });
                                                                                   [self.tableView reloadData];
+                                                                              }
+                                                                              else
+                                                                              {
+                                                                                  UIAlertController * alertController=[UIAlertController alertControllerWithTitle:@"Error" message:@"Incorrect password" preferredStyle:UIAlertControllerStyleAlert];
+                                                                                  UIAlertAction * cancelAction=[UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:nil];
+                                                                                  [alertController addAction:cancelAction];
+                                                                                  [self.parentViewController presentViewController:alertController animated:YES completion:nil];
                                                                               }
                                                                                   
                                                                           }];

@@ -22,8 +22,14 @@ typedef NS_ENUM(NSInteger, KSBoxType)
     KSBoxTypeArchive
 };
 
+@protocol KSMenuDelegate <NSObject>
+@required
+-(void)deselectActiveSelection;
+@end
+
 @interface TabletasksViewController : BaseTableViewController
 @property KSBoxType boxType;
 @property NSMutableArray<BaseTask*>* tasks;
 @property KSCategory* category;
+@property id<KSMenuDelegate> delegate;
 @end
