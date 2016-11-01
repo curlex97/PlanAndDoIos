@@ -92,6 +92,11 @@
     {
         //no internet
         self.currentReachStatus=NO;
+//        if(self.presentedViewController)
+//        {
+//            [self.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+//        }
+        isPresented=NO;
         NSLog(@"%@",reach);
     }
     
@@ -121,6 +126,7 @@
          {
              dispatch_async(dispatch_get_main_queue(), ^
              {
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadMenu" object:nil];
                     [self refreshDidSwipe];
              });
          }

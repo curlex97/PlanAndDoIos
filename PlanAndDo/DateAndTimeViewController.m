@@ -204,6 +204,8 @@
     {
         ((AddTaskViewController*)self.parentController).completionTime = self.taskDate;
         ((AddTaskViewController*)self.parentController).reminderTime = self.recallSwitch.on?[NSDate dateWithTimeIntervalSince1970:self.taskDate.timeIntervalSince1970-self.reminderDate.timeIntervalSince1970]:self.taskDate;
+        NSLog(@"%f",self.taskDate.timeIntervalSince1970);
+        NSLog(@"%f",((AddTaskViewController*)self.parentController).reminderTime.timeIntervalSince1970);
     }
     
     if([self.parentController isKindOfClass:[EditTaskViewController class]])

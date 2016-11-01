@@ -49,10 +49,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebt-UK-0d5">
-                        <rect key="frame" x="369" y="29" width="73" height="20"/>
+                        <rect key="frame" x="302" y="29" width="140" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="An2-nL-CdB"/>
-                            <constraint firstAttribute="width" constant="73" id="rbK-08-cLj"/>
+                            <constraint firstAttribute="width" constant="140" id="rbK-08-cLj"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" red="0.56862745098039214" green="0.56862745098039214" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -82,15 +82,20 @@
 {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     [self.sheduledNotificationKeys removeAllObjects];
+    [self.localNotifications removeAllObjects];
 }
 
 -(void)cancelNotificationsForKey:(NSString *)key
 {
-    NSMutableArray * notificationsForSinglKey=[self.localNotifications objectForKey:key];
-    for(UILocalNotification * notification in notificationsForSinglKey)
+    NSArray * sheduledNotifications=[UIApplication sharedApplication].scheduledLocalNotifications;;
+    for(UILocalNotification * notification in sheduledNotifications)
     {
-         [[UIApplication sharedApplication] cancelLocalNotification:notification];
+        if([[notification.userInfo objectForKey:@"ID"] isEqualToString:key])
+        {
+            [[UIApplication sharedApplication] cancelLocalNotification:notification];
+        }
     }
+    [self.localNotifications removeObjectForKey:key];
     [self.sheduledNotificationKeys removeObject:key];
 }
 

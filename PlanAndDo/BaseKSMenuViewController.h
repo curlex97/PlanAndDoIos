@@ -12,6 +12,8 @@
 #import "ApplicationManager.h"
 #import "TaskTableViewCell.h"
 #import "TabletasksViewController.h"
+#import "Reachability.h"
+
 typedef NS_ENUM(NSInteger, KSBaseMenuState)
 {
     KSBaseMenuStateNormal,

@@ -302,8 +302,7 @@
     }
     
     [[ApplicationManager sharedApplication].notificationManager cancelNotificationsForKey:[NSString stringWithFormat:@"%d",self.task.ID]];
-    
-        if(self.reminderTime.timeIntervalSince1970>[NSDate date].timeIntervalSince1970 && self.reminderTime.timeIntervalSince1970<self.completionTime.timeIntervalSince1970-200)
+        if(self.reminderTime.timeIntervalSince1970<self.completionTime.timeIntervalSince1970-200 && self.reminderTime.timeIntervalSince1970>[NSDate date].timeIntervalSince1970)
         {
             [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
                                                                                               andBody:self.task.name
@@ -317,7 +316,7 @@
             [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Complete your task"
                                                                                               andBody:self.task.name
                                                                                              andImage:nil
-                                                                                          andFireDate:self.completionTime
+                                                                                          andFireDate:self.task.completionTime
                                                                                           andUserInfo:@{@"ID":[NSString stringWithFormat:@"%d",self.task.ID]}
                                                                                                forKey:[NSString stringWithFormat:@"%d",self.task.ID]];
             

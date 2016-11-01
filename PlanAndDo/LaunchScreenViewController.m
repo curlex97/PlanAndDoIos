@@ -79,6 +79,7 @@
         editTaskVC.title = TL_EDIT;
         editTaskVC.task = [[ApplicationManager sharedApplication].tasksApplicationManager taskWithId:[[self.options objectForKey:@"ID"] intValue]];
         [navi pushViewController:editTaskVC animated:NO];
+
         if([[UIDevice currentDevice].model isEqualToString:@"iPad"])
         {
             KSIPadViewController * menu=[[KSIPadViewController alloc] init];

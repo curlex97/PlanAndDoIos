@@ -171,23 +171,23 @@
         NSString * date;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.locale=[NSLocale systemLocale];
+        
         if(currentComponents.day==components.day&&currentComponents.month==components.month&&currentComponents.year==components.year)
         {
             date=@"Today";
             cell.taskDateLabel.text = date;
         }
-        else if(tomorrowComponents.day==components.day && tomorrowComponents.month==components.month && tomorrowComponents.year==components.year)
+        else if(tomorrowComponents.day==components.day&&tomorrowComponents.month==components.month&&tomorrowComponents.year==components.year)
         {
             date=@"Tomorrow";
             cell.taskDateLabel.text = date;
         }
         else
         {
-            date=[ApplicationManager sharedApplication].settingsApplicationManager.settings.dateFormat;
+            date=[[[ApplicationManager sharedApplication].settingsApplicationManager.settings.dateFormat substringToIndex:1] isEqualToString:@"d"]?NM_DDMMYY:NM_MMDDYY;
             [dateFormatter setDateFormat:date];
             cell.taskDateLabel.text = [dateFormatter stringFromDate:task.completionTime];
         }
-        
         [dateFormatter setDateFormat:[[ApplicationManager sharedApplication].settingsApplicationManager.settings.timeFormat isEqualToString:@"24"]?@"HH:mm":@"hh:mm"];
         cell.taskTimeLabel.text = [dateFormatter stringFromDate:task.completionTime];
         return cell;

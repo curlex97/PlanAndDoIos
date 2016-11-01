@@ -537,7 +537,7 @@
              {
                  NSArray * tasks=[[ApplicationManager sharedApplication].tasksApplicationManager allTasks];
                  BaseTask * newTask=[tasks lastObject];
-                 if(newTask.taskReminderTime.timeIntervalSince1970<newTask.completionTime.timeIntervalSince1970 && newTask.taskReminderTime.timeIntervalSince1970>[NSDate date].timeIntervalSince1970)
+                 if(newTask.taskReminderTime.timeIntervalSince1970<newTask.completionTime.timeIntervalSince1970-200 && newTask.taskReminderTime.timeIntervalSince1970>[NSDate date].timeIntervalSince1970)
                  {
                      [[ApplicationManager sharedApplication].notificationManager addLocalNotificationWithTitle:@"Reminde"
                                                                                                        andBody:newTask.name
@@ -557,7 +557,8 @@
                      
                      [[ApplicationManager sharedApplication].notificationManager shedulenotificationsForKey:[NSString stringWithFormat:@"%d",newTask.ID]];
                  }
-             }         }];
+             }
+         }];
         [[NSNotificationCenter defaultCenter] postNotificationName:NC_TASK_ADD object:task];
     }
     
